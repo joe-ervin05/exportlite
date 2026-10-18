@@ -1,0 +1,21 @@
+# Local project mirror and dependency caches.
+/AGENTS.md
+/sources/
+/.pnpm-store/
+**/node_modules/
+**/dist/
+**/build/
+**/__pycache__/
+*.pyc
+*.cpuprofile
+*.tgz
+*.sqlite*
+*.db
+*.db-*
+.env
+.env.*
+!.env.example
+/exportlite/examples/output/
+
+# Benchmark evidence is curated explicitly; other generated work stays local.
+/outputs/
