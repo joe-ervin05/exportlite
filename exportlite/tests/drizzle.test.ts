@@ -315,22 +315,26 @@ it("uses a single-column table-level primary key even when omitted from output",
   expect(trace.batches).toEqual([256, 256, 1]);
 });
 
-it.each(["timestamp", "timestamp_ms", "blob", "custom", "numeric"])(
+it.each([
+  ["timestamp", integer({ mode: "timestamp" })],
+  ["timestamp_ms", integer({ mode: "timestamp_ms" })],
+  ["blob", blob({ mode: "buffer" })],
+  ["blob bigint", blob({ mode: "bigint" })],
+  ["blob JSON", blob({ mode: "json" })],
+  [
+    "custom",
+    customType<{ data: string }>({
+      dataType: () => "text",
+      fromDriver: (value) => String(value).toUpperCase(),
+    })(),
+  ],
+  ["numeric", numeric()],
+  ["numeric number", numeric({ mode: "number" })],
+  ["numeric bigint", numeric({ mode: "bigint" })],
+] as const)(
   "rejects %s JavaScript decoding before running an export",
-  async (mode) => {
-    const table = sqliteTable("unsupported", {
-      field:
-        mode === "timestamp" || mode === "timestamp_ms"
-          ? integer({ mode })
-          : mode === "blob"
-            ? blob({ mode: "buffer" })
-            : mode === "numeric"
-              ? numeric()
-              : customType<{ data: string }>({
-                  dataType: () => "text",
-                  fromDriver: (value) => String(value).toUpperCase(),
-                })(),
-    });
+  async (_mode, field) => {
+    const table = sqliteTable("unsupported", { field });
     const trace = traced();
     await expect(exportTable(trace.db, table)).rejects.toMatchObject({
       code: "INVALID_OPTIONS",

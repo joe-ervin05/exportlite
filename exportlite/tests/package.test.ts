@@ -11,6 +11,13 @@ import Database from "better-sqlite3";
 import { expect, it } from "vitest";
 import { fromBufferPromise } from "yauzl";
 
+it("runs the documented data conversion recipes against the built package", async () => {
+  const { stdout } = await promisify(execFile)(process.execPath, [
+    fileURLToPath(new URL("../examples/data-contracts.mjs", import.meta.url)),
+  ]);
+  expect(stdout.trim()).toBe("Data contracts verified.");
+});
+
 it.each([
   ["Turso", ["@libsql/client"]],
   ["Drizzle", ["drizzle-orm"]],
