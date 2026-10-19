@@ -379,6 +379,8 @@ The [CSV comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportl
 
 CSV also has a dedicated `pnpm bench:csv` command with ten fixtures, including typed booleans, JSON cells, NULL-heavy data and quote-heavy data. The [CSV performance investigation](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/CSV-PERFORMANCE.md) records profiling, matched comparisons, rejected approaches and remaining query/compression limits.
 
+The [CSV memory follow-up](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/CSV-MEMORY-FOLLOWUP.md) separates Drizzle setup and module formats from CSV batch allocation, corrects the manual JSON-cell comparison, and measures one export versus repeated exports. The default CSV benchmark now matches Drizzle setup between encoders and records setup memory separately.
+
 The [phase 2 regression checks](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/PHASE-2.md) cover the shared delivery refactor, plain/ZIP output hashes, targeted timing rechecks and the observed wide-query peak-RSS shift.
 
 Build first, then compare the public table/query APIs with JS object streaming and full SQLite aggregation:

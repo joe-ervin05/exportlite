@@ -1,0 +1,1460 @@
+{
+  "node": "v26.12.0",
+  "natural": {
+    "peaks": {
+      "rss": 212107264,
+      "heapTotal": 83787776,
+      "heapUsed": 42586344,
+      "external": 9181463,
+      "arrayBuffers": 6392396
+    },
+    "allocations": {
+      "nativeBatches": 0,
+      "nativeBytes": 0,
+      "nativeMaxBytes": 0,
+      "nativeBackingBytes": 0,
+      "nativeFinalizedBytes": 0,
+      "concatBuffers": 0,
+      "concatBytes": 0,
+      "encodedBuffers": 1629,
+      "encodedBytes": 107122950
+    },
+    "gc": [
+      {
+        "startTime": 39.740458,
+        "duration": 0.39395809173583984,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 50.830666,
+        "duration": 0.36916637420654297,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 69.1525,
+        "duration": 0.24174976348876953,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 76.254416,
+        "duration": 0.4747915267944336,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 85.355833,
+        "duration": 1.0400419235229492,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 101.405541,
+        "duration": 1.4376249313354492,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 133.226791,
+        "duration": 3.5486669540405273,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 136.781375,
+        "duration": 0.17708301544189453,
+        "kind": 8,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 139.043041,
+        "duration": 2.178250312805176,
+        "kind": 4,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 225.73675,
+        "duration": 8.349540710449219,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 236.834916,
+        "duration": 4.190667152404785,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 318.472458,
+        "duration": 5.350333213806152,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 323.8285,
+        "duration": 0.24154186248779297,
+        "kind": 8,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 326.74975,
+        "duration": 4.30049991607666,
+        "kind": 4,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 367.611125,
+        "duration": 0.2589578628540039,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 394.301291,
+        "duration": 0.3885841369628906,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 419.966791,
+        "duration": 0.3140840530395508,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 447.217208,
+        "duration": 0.35141754150390625,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 477.427041,
+        "duration": 0.30795955657958984,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 502.895791,
+        "duration": 0.2900838851928711,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 528.363125,
+        "duration": 0.3632087707519531,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 557.833375,
+        "duration": 0.27962493896484375,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 583.393208,
+        "duration": 0.38220787048339844,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 608.98525,
+        "duration": 0.2862081527709961,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 634.368708,
+        "duration": 0.2897491455078125,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 659.269541,
+        "duration": 0.21020984649658203,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 684.395375,
+        "duration": 0.22762489318847656,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 708.887958,
+        "duration": 0.2385416030883789,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 733.313166,
+        "duration": 0.3075838088989258,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 758.916833,
+        "duration": 0.31879234313964844,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 783.847291,
+        "duration": 0.30608463287353516,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 808.47275,
+        "duration": 0.29370784759521484,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 833.9835,
+        "duration": 0.2729158401489258,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 859.480916,
+        "duration": 0.16241741180419922,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 884.367125,
+        "duration": 0.21370792388916016,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 909.130333,
+        "duration": 0.2315835952758789,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 933.359166,
+        "duration": 0.27204227447509766,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 959.189083,
+        "duration": 0.24870777130126953,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 983.313833,
+        "duration": 0.25687503814697266,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 1007.442708,
+        "duration": 0.24733352661132812,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 1031.650666,
+        "duration": 0.30500030517578125,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 1055.928875,
+        "duration": 0.20533370971679688,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 1080.198333,
+        "duration": 0.202667236328125,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 1104.2135,
+        "duration": 0.27870845794677734,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 1128.980916,
+        "duration": 0.2879171371459961,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 3
+      },
+      {
+        "startTime": 1154.35275,
+        "duration": 0.22970867156982422,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1178.58075,
+        "duration": 0.28387451171875,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1202.871458,
+        "duration": 0.25841712951660156,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1227.122708,
+        "duration": 0.25504207611083984,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1251.281041,
+        "duration": 0.1850423812866211,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1275.132083,
+        "duration": 0.25070858001708984,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1299.077458,
+        "duration": 0.3086252212524414,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1322.895583,
+        "duration": 0.2202920913696289,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 4
+      },
+      {
+        "startTime": 1348.377291,
+        "duration": 0.2657499313354492,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1372.37825,
+        "duration": 0.25116634368896484,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1396.447875,
+        "duration": 0.2414999008178711,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1420.927333,
+        "duration": 0.3131256103515625,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1446.499375,
+        "duration": 0.2537078857421875,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1471.851291,
+        "duration": 0.2741661071777344,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1495.77025,
+        "duration": 0.3933744430541992,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1526.236791,
+        "duration": 0.3387918472290039,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 5
+      },
+      {
+        "startTime": 1551.736083,
+        "duration": 0.26633358001708984,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 1576.151666,
+        "duration": 0.2746248245239258,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 1600.455666,
+        "duration": 0.2818746566772461,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 1624.65,
+        "duration": 0.199249267578125,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 1648.903333,
+        "duration": 0.22595787048339844,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 1672.740416,
+        "duration": 0.2795839309692383,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 1696.690625,
+        "duration": 0.3010826110839844,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 1721.85975,
+        "duration": 0.26537513732910156,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1747.375041,
+        "duration": 0.2813749313354492,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1772.106833,
+        "duration": 0.3530416488647461,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1797.267916,
+        "duration": 0.2945833206176758,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1821.595041,
+        "duration": 0.2167501449584961,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1846.704083,
+        "duration": 0.20091724395751953,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1870.579958,
+        "duration": 0.22504234313964844,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1894.494166,
+        "duration": 0.2802085876464844,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 7
+      },
+      {
+        "startTime": 1919.618916,
+        "duration": 0.2710418701171875,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      },
+      {
+        "startTime": 1943.855708,
+        "duration": 0.26787471771240234,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      },
+      {
+        "startTime": 1968.069583,
+        "duration": 0.24391746520996094,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      },
+      {
+        "startTime": 1992.098541,
+        "duration": 0.25487518310546875,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      },
+      {
+        "startTime": 2017.132666,
+        "duration": 0.17999935150146484,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      },
+      {
+        "startTime": 2041.24725,
+        "duration": 0.2003326416015625,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      },
+      {
+        "startTime": 2064.993875,
+        "duration": 0.2753744125366211,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      },
+      {
+        "startTime": 2088.731333,
+        "duration": 0.25766754150390625,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 8
+      }
+    ]
+  },
+  "snapshots": [
+    {
+      "label": "bootstrap",
+      "exportIndex": -1,
+      "rss": 57245696,
+      "heapTotal": 6176768,
+      "heapUsed": 4846688,
+      "external": 2217487,
+      "arrayBuffers": 137939,
+      "maxRssBytes": 57262080,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "worker-start",
+      "exportIndex": -1,
+      "rss": 62783488,
+      "heapTotal": 9322496,
+      "heapUsed": 5819248,
+      "external": 2648117,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 62783488,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "driver-loaded",
+      "exportIndex": -1,
+      "rss": 62783488,
+      "heapTotal": 9322496,
+      "heapUsed": 5826712,
+      "external": 2648117,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 62783488,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "connection-open",
+      "exportIndex": -1,
+      "rss": 63619072,
+      "heapTotal": 9322496,
+      "heapUsed": 5898848,
+      "external": 2648117,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 63619072,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "core-loaded",
+      "exportIndex": -1,
+      "rss": 63619072,
+      "heapTotal": 9322496,
+      "heapUsed": 5900904,
+      "external": 2648117,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 63619072,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "drizzle-loaded",
+      "exportIndex": -1,
+      "rss": 180125696,
+      "heapTotal": 81952768,
+      "heapUsed": 9647704,
+      "external": 3149342,
+      "arrayBuffers": 229075,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "drizzle-created",
+      "exportIndex": -1,
+      "rss": 180142080,
+      "heapTotal": 81952768,
+      "heapUsed": 9746048,
+      "external": 3149342,
+      "arrayBuffers": 229075,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "adapter-loaded",
+      "exportIndex": -1,
+      "rss": 180142080,
+      "heapTotal": 81952768,
+      "heapUsed": 9747800,
+      "external": 3149342,
+      "arrayBuffers": 229075,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "setup-ready",
+      "exportIndex": -1,
+      "rss": 180142080,
+      "heapTotal": 81952768,
+      "heapUsed": 9750632,
+      "external": 3149342,
+      "arrayBuffers": 229075,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 0,
+      "rss": 180142080,
+      "heapTotal": 81952768,
+      "heapUsed": 9765224,
+      "external": 3149342,
+      "arrayBuffers": 229075,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0,
+      "exportPeaks": {
+        "rss": 180142080,
+        "heapTotal": 81952768,
+        "heapUsed": 9765224,
+        "external": 3149342,
+        "arrayBuffers": 229075
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 0,
+      "rss": 203472896,
+      "heapTotal": 82739200,
+      "heapUsed": 34482304,
+      "external": 4988842,
+      "arrayBuffers": 2199775,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 181,
+        "encodedBytes": 11902550
+      },
+      "gcCount": 21,
+      "exportPeaks": {
+        "rss": 203472896,
+        "heapTotal": 82739200,
+        "heapUsed": 37916888,
+        "external": 4988842,
+        "arrayBuffers": 2199775
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 1,
+      "rss": 203489280,
+      "heapTotal": 82739200,
+      "heapUsed": 34486376,
+      "external": 4988842,
+      "arrayBuffers": 2199775,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 181,
+        "encodedBytes": 11902550
+      },
+      "gcCount": 21,
+      "exportPeaks": {
+        "rss": 203489280,
+        "heapTotal": 82739200,
+        "heapUsed": 34486376,
+        "external": 4988842,
+        "arrayBuffers": 2199775
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 1,
+      "rss": 204668928,
+      "heapTotal": 82739200,
+      "heapUsed": 31382624,
+      "external": 5315181,
+      "arrayBuffers": 2526114,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 362,
+        "encodedBytes": 23805100
+      },
+      "gcCount": 29,
+      "exportPeaks": {
+        "rss": 204668928,
+        "heapTotal": 82739200,
+        "heapUsed": 38550984,
+        "external": 5453415,
+        "arrayBuffers": 2664348
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 2,
+      "rss": 204668928,
+      "heapTotal": 82739200,
+      "heapUsed": 31386744,
+      "external": 5315181,
+      "arrayBuffers": 2526114,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 362,
+        "encodedBytes": 23805100
+      },
+      "gcCount": 29,
+      "exportPeaks": {
+        "rss": 204668928,
+        "heapTotal": 82739200,
+        "heapUsed": 31386744,
+        "external": 5315181,
+        "arrayBuffers": 2526114
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 2,
+      "rss": 205504512,
+      "heapTotal": 83001344,
+      "heapUsed": 25495656,
+      "external": 5443767,
+      "arrayBuffers": 2654700,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 543,
+        "encodedBytes": 35707650
+      },
+      "gcCount": 37,
+      "exportPeaks": {
+        "rss": 205504512,
+        "heapTotal": 83001344,
+        "heapUsed": 40068816,
+        "external": 6035675,
+        "arrayBuffers": 3246608
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 3,
+      "rss": 205504512,
+      "heapTotal": 83001344,
+      "heapUsed": 25545600,
+      "external": 5443783,
+      "arrayBuffers": 2654716,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 543,
+        "encodedBytes": 35707650
+      },
+      "gcCount": 37,
+      "exportPeaks": {
+        "rss": 205504512,
+        "heapTotal": 83001344,
+        "heapUsed": 25545600,
+        "external": 5443783,
+        "arrayBuffers": 2654716
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 3,
+      "rss": 206258176,
+      "heapTotal": 83001344,
+      "heapUsed": 20604704,
+      "external": 5704210,
+      "arrayBuffers": 2915143,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 724,
+        "encodedBytes": 47610200
+      },
+      "gcCount": 45,
+      "exportPeaks": {
+        "rss": 206258176,
+        "heapTotal": 83001344,
+        "heapUsed": 40614832,
+        "external": 6567903,
+        "arrayBuffers": 3778836
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 4,
+      "rss": 206258176,
+      "heapTotal": 83001344,
+      "heapUsed": 20607640,
+      "external": 5704210,
+      "arrayBuffers": 2915143,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 724,
+        "encodedBytes": 47610200
+      },
+      "gcCount": 45,
+      "exportPeaks": {
+        "rss": 206258176,
+        "heapTotal": 83001344,
+        "heapUsed": 20607640,
+        "external": 5704210,
+        "arrayBuffers": 2915143
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 4,
+      "rss": 206454784,
+      "heapTotal": 83001344,
+      "heapUsed": 17583936,
+      "external": 6030695,
+      "arrayBuffers": 3241628,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 905,
+        "encodedBytes": 59512750
+      },
+      "gcCount": 53,
+      "exportPeaks": {
+        "rss": 206454784,
+        "heapTotal": 83001344,
+        "heapUsed": 39845312,
+        "external": 7026315,
+        "arrayBuffers": 4237248
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 5,
+      "rss": 206471168,
+      "heapTotal": 83001344,
+      "heapUsed": 18062208,
+      "external": 6030695,
+      "arrayBuffers": 3241628,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 905,
+        "encodedBytes": 59512750
+      },
+      "gcCount": 53,
+      "exportPeaks": {
+        "rss": 206471168,
+        "heapTotal": 83001344,
+        "heapUsed": 18062208,
+        "external": 6030695,
+        "arrayBuffers": 3241628
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 5,
+      "rss": 207618048,
+      "heapTotal": 83001344,
+      "heapUsed": 14376848,
+      "external": 6357088,
+      "arrayBuffers": 3568021,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1086,
+        "encodedBytes": 71415300
+      },
+      "gcCount": 61,
+      "exportPeaks": {
+        "rss": 207618048,
+        "heapTotal": 83001344,
+        "heapUsed": 40258144,
+        "external": 7550615,
+        "arrayBuffers": 4761548
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 6,
+      "rss": 207618048,
+      "heapTotal": 83001344,
+      "heapUsed": 14379784,
+      "external": 6357088,
+      "arrayBuffers": 3568021,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1086,
+        "encodedBytes": 71415300
+      },
+      "gcCount": 61,
+      "exportPeaks": {
+        "rss": 207618048,
+        "heapTotal": 83001344,
+        "heapUsed": 14379784,
+        "external": 6357088,
+        "arrayBuffers": 3568021
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 6,
+      "rss": 211435520,
+      "heapTotal": 83263488,
+      "heapUsed": 38294568,
+      "external": 8200458,
+      "arrayBuffers": 5411391,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1267,
+        "encodedBytes": 83317850
+      },
+      "gcCount": 68,
+      "exportPeaks": {
+        "rss": 211435520,
+        "heapTotal": 83263488,
+        "heapUsed": 40715624,
+        "external": 8200458,
+        "arrayBuffers": 5411391
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 7,
+      "rss": 211435520,
+      "heapTotal": 83263488,
+      "heapUsed": 38298096,
+      "external": 8200458,
+      "arrayBuffers": 5411391,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1267,
+        "encodedBytes": 83317850
+      },
+      "gcCount": 68,
+      "exportPeaks": {
+        "rss": 211435520,
+        "heapTotal": 83263488,
+        "heapUsed": 38298096,
+        "external": 8200458,
+        "arrayBuffers": 5411391
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 7,
+      "rss": 211468288,
+      "heapTotal": 83263488,
+      "heapUsed": 32865440,
+      "external": 8395006,
+      "arrayBuffers": 5605939,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1448,
+        "encodedBytes": 95220400
+      },
+      "gcCount": 76,
+      "exportPeaks": {
+        "rss": 211468288,
+        "heapTotal": 83263488,
+        "heapUsed": 42125712,
+        "external": 8664094,
+        "arrayBuffers": 5875027
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 8,
+      "rss": 211468288,
+      "heapTotal": 83263488,
+      "heapUsed": 32868376,
+      "external": 8395006,
+      "arrayBuffers": 5605939,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1448,
+        "encodedBytes": 95220400
+      },
+      "gcCount": 76,
+      "exportPeaks": {
+        "rss": 211468288,
+        "heapTotal": 83263488,
+        "heapUsed": 32868376,
+        "external": 8395006,
+        "arrayBuffers": 5605939
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 8,
+      "rss": 212025344,
+      "heapTotal": 83525632,
+      "heapUsed": 29583408,
+      "external": 8655440,
+      "arrayBuffers": 5866373,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1629,
+        "encodedBytes": 107122950
+      },
+      "gcCount": 84,
+      "exportPeaks": {
+        "rss": 212025344,
+        "heapTotal": 83525632,
+        "heapUsed": 42586344,
+        "external": 9181463,
+        "arrayBuffers": 6392396
+      }
+    },
+    {
+      "label": "connection-closed",
+      "exportIndex": 8,
+      "rss": 212107264,
+      "heapTotal": 83787776,
+      "heapUsed": 28807664,
+      "external": 8655440,
+      "arrayBuffers": 5866373,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1629,
+        "encodedBytes": 107122950
+      },
+      "gcCount": 84
+    },
+    {
+      "label": "end-natural",
+      "exportIndex": 8,
+      "rss": 212107264,
+      "heapTotal": 83787776,
+      "heapUsed": 28813592,
+      "external": 8655440,
+      "arrayBuffers": 5866373,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1629,
+        "encodedBytes": 107122950
+      },
+      "gcCount": 84
+    },
+    {
+      "label": "end-after-diagnostic-gc",
+      "exportIndex": 8,
+      "rss": 211566592,
+      "heapTotal": 76431360,
+      "heapUsed": 9141304,
+      "external": 3018158,
+      "arrayBuffers": 229091,
+      "maxRssBytes": 233455616,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 1629,
+        "encodedBytes": 107122950
+      },
+      "gcCount": 86
+    }
+  ],
+  "streams": [
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    },
+    {
+      "name": "Writable",
+      "writes": 61,
+      "pendingBytes": 0,
+      "peakPendingBytes": 56349
+    }
+  ],
+  "statements": [
+    "SELECT \"id\",\"name\",\"note\",\"active\" FROM data ORDER BY id"
+  ]
+}

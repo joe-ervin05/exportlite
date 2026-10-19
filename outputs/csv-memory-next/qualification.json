@@ -1,0 +1,43 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "baselineCommit": "62ef56d498e945a3cd720f79edad8097ac293b78",
+  "productionRuntimeUnchanged": true,
+  "identicalRuntimeFilesAfterNormalizingBuildLocation": 14,
+  "normalization": "Only chunk hash filenames and bundler region/source-map comments differ between source locations. All 14 JS files otherwise match exactly.",
+  "acceptedChanges": [
+    "Match Drizzle setup between package and manual JSON-mode workers.",
+    "Match ESM/CJS module formats by default and report chosen formats.",
+    "Record pre-export setup memory and its high-water mark separately.",
+    "Support isolated single-export/diagnostic workers without changing the package API."
+  ],
+  "adoptedRuntimeCandidates": [],
+  "workers": {
+    "initialCandidateScreen": 126,
+    "additionalSizeScreen": 72,
+    "fiveRoundMatchedSetup": 140,
+    "fiveRoundSingleExport": 90,
+    "diagnosticProfiles": 28,
+    "repeated99ExportProfiles": 4,
+    "queueProfiles": 4,
+    "maintainedRunnerSmoke": 24
+  },
+  "validation": {
+    "build": true,
+    "typecheck": true,
+    "lint": true,
+    "tests": 469,
+    "testFiles": 12,
+    "unchangedPublicDeclarations": 12,
+    "defaultRunnerEsmAndCjsSmokes": true,
+    "outputChecks": "All variants/manual/module formats in each cohort match plain CSV and ZIP hashes. Plain hashes also match independently generated fixture CSV."
+  },
+  "reliabilityNote": "An initial suite run alongside fixture preparation failed the existing Turso early-abort session-count assertion. The isolated 84-test Turso run and full 469-test rerun passed with no runtime/test changes. Both initial and rerun logs are retained.",
+  "limits": [
+    "All performance measurements use local SQLite and counting Node destinations, not live Turso or HTTP delivery.",
+    "Whole-process RSS includes startup and repeated exports; setup peaks cannot simply be subtracted to obtain precise incremental CSV memory.",
+    "Profiles are diagnostic and are not the release timing comparison.",
+    "The three-round candidate screens are exploratory; only the 128-row candidate received the five-round matched recheck.",
+    "No global GC hooks, buffer detachment/reuse, adaptive sizing or extra SQL requests were introduced."
+  ]
+}

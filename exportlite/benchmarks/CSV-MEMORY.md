@@ -1,5 +1,7 @@
 # Wide CSV memory investigation
 
+The [October 19 follow-up](CSV-MEMORY-FOLLOWUP.md) separates Drizzle setup and module formats from native CSV buffer allocation, including matched manual controls and one-export versus repeated-export measurements. This report retains the earlier redundant-copy fix and its original measurements.
+
 Measured October 18, 2026 on Apple M1 Pro and the same Node 26.12.0 executable, SQLite 3.53.4 and seeded fixtures as the [initial CSV comparison](CSV.md). Registry versions were rechecked: better-sqlite3 13.0.3, zip-stream 7.0.5, csv-stringify 6.9.0 and csv-parse 7.0.3 remain current. Pins are unchanged.
 
 The implemented fix removes redundant wide-batch copies. Median worker peak RSS falls about 6% for plain CSV and 18% for CSV ZIP, with comparable speed and identical output hashes. It adds no API options, dependencies, sizing policy or changes to the callback/drain handling.

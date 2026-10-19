@@ -1,0 +1,32 @@
+
+ RUN  v5.0.5 /Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite
+
+ ❯ tests/turso.test.ts (84 tests | 1 failed) 1834ms
+   × aborts while awaiting remote body and keeps the client reusable 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/turso.test.ts > aborts while awaiting remote body and keeps the client reusable
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/turso.test.ts:724:29
+    722|     await expect(stream.result).rejects.toMatchObject({ code: "ABORTED…
+    723|     expect(client.closed).toBe(false);
+    724|     expect(server.sessions).toBe(0);
+       |                             ^
+    725|     delete server.mode.hold;
+    726|     const again = await exportTable(client, "users", { columns });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 11 passed (12)
+      Tests  1 failed | 468 passed (469)
+   Start at  15:18:16
+   Duration  7.72s (tests 83%, import 13%, transform 3%)

@@ -1,0 +1,108 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "baselineCommit": "62ef56d498e945a3cd720f79edad8097ac293b78",
+  "rounds": 3,
+  "variants": [
+    "baseline",
+    "yield256",
+    "yield512",
+    "batch128",
+    "batch64",
+    "text",
+    "zip128k",
+    "zip64k"
+  ],
+  "fixtures": [
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2634697,
+      "csvSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14619815,
+      "csvSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "json",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text",
+          "mode": "json"
+        },
+        {
+          "key": "note",
+          "type": "text",
+          "mode": "json"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "drizzle": true,
+      "databaseSha256": "321e50492b61d0df5504a7f4d67e9b6beba968add6654a361b6327931ff3fed4",
+      "bytes": 11902550,
+      "csvSha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "protocol": "Exploratory, sequential fresh-worker table-export screen using the maintained worker, natural GC and matched ESM Drizzle setup. One verification, two warmups, three timed batches of two exports. No instrumentation, forced GC or concurrent benchmarks/builds/tests. Hashes agree across candidates. These screens reject tradeoffs; no candidate is shipped or fully reliability-qualified."
+}

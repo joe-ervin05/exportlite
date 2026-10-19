@@ -1,0 +1,410 @@
+[
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 153,
+    "setupMemory": {
+      "rss": 61997056,
+      "heapTotal": 8536064,
+      "heapUsed": 5831872,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 59.125,
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.25994499999999987,
+      0.23907666000000005,
+      0.24226249999999994
+    ],
+    "medianMs": 0.24226249999999994,
+    "cpuSamplesMs": [
+      0.31318,
+      0.26144,
+      0.28162
+    ],
+    "medianCpuMs": 0.28162,
+    "peakRssMiB": 69.375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 153,
+    "setupMemory": {
+      "rss": 62046208,
+      "heapTotal": 8273920,
+      "heapUsed": 5830024,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 59.171875,
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28240418000000006,
+      0.24251167999999992,
+      0.23287581999999987
+    ],
+    "medianMs": 0.24251167999999992,
+    "cpuSamplesMs": [
+      0.37956,
+      0.31348,
+      0.27628
+    ],
+    "medianCpuMs": 0.31348,
+    "peakRssMiB": 71.125
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "manual-tuned",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 153,
+    "setupMemory": {
+      "rss": 61112320,
+      "heapTotal": 9060352,
+      "heapUsed": 5416632,
+      "external": 2345019,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 58.28125,
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.23343084000000006,
+      0.2140158199999999,
+      0.19625
+    ],
+    "medianMs": 0.2140158199999999,
+    "cpuSamplesMs": [
+      0.29928,
+      0.24367999999999998,
+      0.23934
+    ],
+    "medianCpuMs": 0.24367999999999998,
+    "peakRssMiB": 65.015625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 153,
+    "setupMemory": {
+      "rss": 61800448,
+      "heapTotal": 8798208,
+      "heapUsed": 5840896,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 58.9375,
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.75034582,
+      0.5389058399999999,
+      0.5880749999999998
+    ],
+    "medianMs": 0.5880749999999998,
+    "cpuSamplesMs": [
+      1.28834,
+      0.7548999999999999,
+      1.08224
+    ],
+    "medianCpuMs": 1.08224,
+    "peakRssMiB": 94.0625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 153,
+    "setupMemory": {
+      "rss": 61915136,
+      "heapTotal": 8536064,
+      "heapUsed": 5831872,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 59.046875,
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.76408834,
+      0.5814041800000002,
+      0.6067766600000002
+    ],
+    "medianMs": 0.6067766600000002,
+    "cpuSamplesMs": [
+      1.3815799999999998,
+      0.7635200000000001,
+      1.18912
+    ],
+    "medianCpuMs": 1.18912,
+    "peakRssMiB": 96.6875
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "manual-tuned",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 153,
+    "setupMemory": {
+      "rss": 69730304,
+      "heapTotal": 10371072,
+      "heapUsed": 7650936,
+      "external": 2649641,
+      "arrayBuffers": 163672
+    },
+    "setupPeakRssMiB": 66.515625,
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.6797074999999998,
+      0.49571249999999994,
+      0.49007583999999954
+    ],
+    "medianMs": 0.49571249999999994,
+    "cpuSamplesMs": [
+      1.16428,
+      0.71396,
+      0.8207599999999999
+    ],
+    "medianCpuMs": 0.8207599999999999,
+    "peakRssMiB": 96.1875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 9,
+    "setupMemory": {
+      "rss": 78266368,
+      "heapTotal": 17022976,
+      "heapUsed": 13286504,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 74.640625,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      46.9822915,
+      45.35887500000001,
+      46.04214550000003
+    ],
+    "medianMs": 46.04214550000003,
+    "cpuSamplesMs": [
+      51.6855,
+      50.315,
+      55.7675
+    ],
+    "medianCpuMs": 51.6855,
+    "peakRssMiB": 150.140625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "json",
+    "method": "query",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 9,
+    "setupMemory": {
+      "rss": 78233600,
+      "heapTotal": 16760832,
+      "heapUsed": 13278504,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 74.625,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      74.52856249999999,
+      74.26268749999997,
+      77.33418750000004
+    ],
+    "medianMs": 74.52856249999999,
+    "cpuSamplesMs": [
+      76.061,
+      81.423,
+      80.553
+    ],
+    "medianCpuMs": 80.553,
+    "peakRssMiB": 124.1875
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "json",
+    "method": "manual-tuned",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 9,
+    "setupMemory": {
+      "rss": 76546048,
+      "heapTotal": 15613952,
+      "heapUsed": 11635664,
+      "external": 2345019,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 73,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      177.257479,
+      183.5925835,
+      179.14889600000004
+    ],
+    "medianMs": 179.14889600000004,
+    "cpuSamplesMs": [
+      187.6345,
+      189.7585,
+      185.1815
+    ],
+    "medianCpuMs": 187.6345,
+    "peakRssMiB": 165.75
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 9,
+    "setupMemory": {
+      "rss": 78315520,
+      "heapTotal": 17022976,
+      "heapUsed": 13275672,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 74.6875,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      48.165625000000006,
+      48.563646000000006,
+      49.41327050000001
+    ],
+    "medianMs": 48.563646000000006,
+    "cpuSamplesMs": [
+      61.196,
+      73.4155,
+      73.363
+    ],
+    "medianCpuMs": 73.363,
+    "peakRssMiB": 138.140625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "json",
+    "method": "query",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 9,
+    "setupMemory": {
+      "rss": 78036992,
+      "heapTotal": 17022976,
+      "heapUsed": 13258912,
+      "external": 2533676,
+      "arrayBuffers": 144083
+    },
+    "setupPeakRssMiB": 74.421875,
+    "bytes": 284088,
+    "sha256": "180668d78ff2fe7f7637a11226b36a3c72471e6ba81b8a582b17cd286ef8f2b6",
+    "samplesMs": [
+      81.80852100000001,
+      81.82220800000005,
+      80.2139795
+    ],
+    "medianMs": 81.80852100000001,
+    "cpuSamplesMs": [
+      94.9695,
+      98.82,
+      92.5545
+    ],
+    "medianCpuMs": 94.9695,
+    "peakRssMiB": 116.0625
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "json",
+    "method": "manual-tuned",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "cjs",
+    "packageFormat": "cjs",
+    "exportCount": 9,
+    "setupMemory": {
+      "rss": 80035840,
+      "heapTotal": 17711104,
+      "heapUsed": 14307664,
+      "external": 2649480,
+      "arrayBuffers": 163511
+    },
+    "setupPeakRssMiB": 76.328125,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      196.8741665,
+      201.766167,
+      209.54310399999997
+    ],
+    "medianMs": 201.766167,
+    "cpuSamplesMs": [
+      219.762,
+      216.969,
+      213.1675
+    ],
+    "medianCpuMs": 216.969,
+    "peakRssMiB": 115.984375
+  }
+]

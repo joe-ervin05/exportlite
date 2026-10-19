@@ -1,5 +1,7 @@
 # Native CRC32 for streaming ZIP
 
+Memory follow-up: the historical JSON-cell manual reference below skipped Drizzle setup. The [matched-setup investigation](CSV-MEMORY-FOLLOWUP.md) corrects that package/manual comparison and separates module loading from CSV allocation. Within-package before/after CRC measurements remain unchanged.
+
 October 19, 2026. The ZIP checksum now uses Node's native `zlib.crc32` rather than the JavaScript loop in `crc-32`. The public API, SQLite plans, 256-row batches, writer buffers, compression settings, backpressure and cancellation behavior are unchanged. This applies to JSON, JSONL and CSV through all three adapters.
 
 ## Implementation

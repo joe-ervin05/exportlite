@@ -1,0 +1,198 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "baselineCommit": "62ef56d498e945a3cd720f79edad8097ac293b78",
+  "rounds": 5,
+  "single": true,
+  "cases": [
+    {
+      "fixture": "wide",
+      "scenario": "wide-native",
+      "variant": "baseline",
+      "orm": false,
+      "format": "esm"
+    },
+    {
+      "fixture": "wide",
+      "scenario": "wide-native",
+      "variant": "manual",
+      "orm": false,
+      "format": "esm"
+    },
+    {
+      "fixture": "wide",
+      "scenario": "wide-drizzle-esm",
+      "variant": "baseline",
+      "orm": true,
+      "format": "esm"
+    },
+    {
+      "fixture": "wide",
+      "scenario": "wide-drizzle-esm",
+      "variant": "manual",
+      "orm": true,
+      "format": "esm"
+    },
+    {
+      "fixture": "json",
+      "scenario": "json-drizzle-esm",
+      "variant": "baseline",
+      "orm": true,
+      "format": "esm"
+    },
+    {
+      "fixture": "json",
+      "scenario": "json-drizzle-esm",
+      "variant": "manual",
+      "orm": true,
+      "format": "esm"
+    },
+    {
+      "fixture": "json",
+      "scenario": "json-drizzle-cjs",
+      "variant": "baseline",
+      "orm": true,
+      "format": "cjs"
+    },
+    {
+      "fixture": "json",
+      "scenario": "json-drizzle-cjs",
+      "variant": "manual",
+      "orm": true,
+      "format": "cjs"
+    },
+    {
+      "fixture": "json",
+      "scenario": "json-manual-no-orm",
+      "variant": "manual",
+      "orm": false,
+      "format": "esm"
+    }
+  ],
+  "builds": {
+    "baseline": {
+      "cache-BE62GRUl.mjs": "27141deba3341d053200486fe99905a1c135e30365c448a0d1acd47744e140b1",
+      "cache-K6b6zaNi.cjs": "c60900a778fa2104e5930e424bdb175250c92161d056f34bf8c753c81a8030e2",
+      "drizzle.cjs": "05896337640a8ffbdb634303250ff504501833d4a8feb8d6c161723dfa5d8626",
+      "drizzle.mjs": "2285796e23778058ffada264125e677a702131522f28db0a6827432865cc5aae",
+      "export-turso-BcxDm2BQ.cjs": "a3250c3e961254e3a4241f55cadc864a980e62996878129f9dd169f71307c4ae",
+      "export-turso-BxpQF-QO.mjs": "957b85b6f7150007af7f29b5ad6d2bbed43907e48247b5c51bebb221ead44f05",
+      "index.cjs": "c077cd856f9ea224d6816d5056ab02f4e3080da79042f19da8551f85e6462217",
+      "index.mjs": "239b29a482af29bed587fd73d699e964fd4a746636a83805ea302903e7db7ff1",
+      "turso.cjs": "80f2fecf627008226d7b2a53486fccfbb69b9a790a77901043bb0d0e6aa780d4",
+      "turso.mjs": "dcffac83b475622193550da6f9913553db5ffcb14730baa35ddcd48859b87fa5",
+      "zip-BKawjb7b.cjs": "dbfeebc038a1d4aff98febeaec211fef7f609ff5d79590288e3e254807e79681",
+      "zip-EADINBtn.mjs": "95061a481a4d356877ccae1f603f7d3d7eb86a5b832c0fa70a4966ced4b4060b",
+      "zip-stream-DercyR3a.cjs": "7522569011d60b72145e4cd0d35f4ae520e0e7b0ee5b75cf8be4406fab32c4ef",
+      "zip-stream-Dwn-vZDc.mjs": "466ef5dfdfc9d1be61090376b18af12ff556f5c35a91a0f8382406dc0d5f8247"
+    },
+    "batch128": {
+      "cache-CJQHkyH6.mjs": "cfdc22c1073a54fca27d404a0bd34a1a46793a762f525f15dccc63837395c69a",
+      "cache-Cqv4KV4t.cjs": "2e04310d6aa8abf1cc542741f9576525afe45196f43dcdcd681d644f66327fda",
+      "drizzle.cjs": "7b9e11281cba1ac4c536d6a5388a7678371a0f66a8bd4416849b5dd936f8b209",
+      "drizzle.mjs": "98ec9c0a3dc9c6b9e310b7e4519955c7a8c42feaf2b30a97f0d66794bcd818f1",
+      "export-turso-DRBHPt8o.cjs": "0e22b93778813f62577ffe7af2c82de731539a99cce6db866586f374a7d5dc95",
+      "export-turso-DTKhC1WM.mjs": "bbb536c569a38904b478c369996e12b4142040d91c59911dc013556f342a9727",
+      "index.cjs": "264645ca1971868080053a52c4497128da9ff0e015b3d48558f196aa60238d1d",
+      "index.mjs": "2f2d53fdb1e91ae87bd5349874768120f2bde2559d385b4ca49238d7e1bd1802",
+      "turso.cjs": "6fbc2e2197e47275dcfa3716689af27225ad81f69aa75b90127c4e621e4091c9",
+      "turso.mjs": "9834787a861dbec1c8d66b32558b1f549551e31c49b1b9839fa19f5cd08ff04c",
+      "zip-67h9X3ix.mjs": "d21b98ad3e4fcd688ee7803e9e0123ee906bab7a74853bc2fe3a53115f6725ff",
+      "zip-C1JU4ziv.cjs": "54d901249bd31d0b988b67e7be4240f261b73e857fc9423ceebf4fee4eeafbff",
+      "zip-stream-DercyR3a.cjs": "7522569011d60b72145e4cd0d35f4ae520e0e7b0ee5b75cf8be4406fab32c4ef",
+      "zip-stream-Dwn-vZDc.mjs": "466ef5dfdfc9d1be61090376b18af12ff556f5c35a91a0f8382406dc0d5f8247"
+    }
+  },
+  "fixtures": [
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2634697,
+      "csvSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14619815,
+      "csvSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "json",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text",
+          "mode": "json"
+        },
+        {
+          "key": "note",
+          "type": "text",
+          "mode": "json"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "drizzle": true,
+      "databaseSha256": "321e50492b61d0df5504a7f4d67e9b6beba968add6654a361b6327931ff3fed4",
+      "bytes": 11902550,
+      "csvSha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "protocol": "Sequential fresh workers; one hash-verified export each, no warmups or timing claims. Lifetime peak RSS and pre-export setup RSS/peak are recorded separately, without forcing GC or profiling hooks. Same module format and ORM setup for matched package/manual cases."
+}

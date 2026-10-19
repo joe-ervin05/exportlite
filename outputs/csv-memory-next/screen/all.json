@@ -1,0 +1,4034 @@
+[
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62259200,
+      "heapTotal": 8798208,
+      "heapUsed": 5886752,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.375,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.300458000000006,
+      40.718312499999996,
+      42.8168125
+    ],
+    "medianMs": 42.300458000000006,
+    "cpuSamplesMs": [
+      42.992,
+      41.492,
+      42.4095
+    ],
+    "medianCpuMs": 42.4095,
+    "peakRssMiB": 100.734375
+  },
+  {
+    "round": 0,
+    "variant": "yield256",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62259200,
+      "heapTotal": 9060352,
+      "heapUsed": 5877952,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.375,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      46.3475,
+      43.79975000000002,
+      45.91681249999999
+    ],
+    "medianMs": 45.91681249999999,
+    "cpuSamplesMs": [
+      43.4555,
+      41.766,
+      43.231
+    ],
+    "medianCpuMs": 43.231,
+    "peakRssMiB": 91.375
+  },
+  {
+    "round": 0,
+    "variant": "yield512",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62095360,
+      "heapTotal": 9322496,
+      "heapUsed": 5897016,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.234375,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.83031249999999,
+      42.198583499999984,
+      41.99293749999998
+    ],
+    "medianMs": 42.198583499999984,
+    "cpuSamplesMs": [
+      43.601,
+      41.924,
+      41.4245
+    ],
+    "medianCpuMs": 41.924,
+    "peakRssMiB": 95.765625
+  },
+  {
+    "round": 0,
+    "variant": "batch128",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62078976,
+      "heapTotal": 8536064,
+      "heapUsed": 5896984,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.21875,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.1891875,
+      42.80333350000001,
+      43.26064600000001
+    ],
+    "medianMs": 43.1891875,
+    "cpuSamplesMs": [
+      43.2095,
+      43.412,
+      43.347
+    ],
+    "medianCpuMs": 43.347,
+    "peakRssMiB": 94.59375
+  },
+  {
+    "round": 0,
+    "variant": "batch64",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62308352,
+      "heapTotal": 8536064,
+      "heapUsed": 5900312,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.421875,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.663250000000005,
+      43.28812499999998,
+      42.62379150000001
+    ],
+    "medianMs": 43.28812499999998,
+    "cpuSamplesMs": [
+      43.539,
+      43.2065,
+      43.778
+    ],
+    "medianCpuMs": 43.539,
+    "peakRssMiB": 89.25
+  },
+  {
+    "round": 0,
+    "variant": "text",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61947904,
+      "heapTotal": 8536064,
+      "heapUsed": 5897008,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.09375,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.57927050000001,
+      44.8862915,
+      44.156875000000014
+    ],
+    "medianMs": 44.156875000000014,
+    "cpuSamplesMs": [
+      44.365,
+      44.9365,
+      44.8535
+    ],
+    "medianCpuMs": 44.8535,
+    "peakRssMiB": 69.296875
+  },
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62259200,
+      "heapTotal": 9322496,
+      "heapUsed": 5887208,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      43.86025000000001,
+      43.560437500000006,
+      44.21447900000001
+    ],
+    "medianMs": 43.86025000000001,
+    "cpuSamplesMs": [
+      67.647,
+      65.8915,
+      70.1805
+    ],
+    "medianCpuMs": 67.647,
+    "peakRssMiB": 92.28125
+  },
+  {
+    "round": 0,
+    "variant": "yield256",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61915136,
+      "heapTotal": 8536064,
+      "heapUsed": 5887184,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.046875,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.628708,
+      47.74422900000002,
+      45.400542
+    ],
+    "medianMs": 46.628708,
+    "cpuSamplesMs": [
+      68.8965,
+      70.8495,
+      67.408
+    ],
+    "medianCpuMs": 68.8965,
+    "peakRssMiB": 89.203125
+  },
+  {
+    "round": 0,
+    "variant": "yield512",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62275584,
+      "heapTotal": 9060352,
+      "heapUsed": 5887192,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.390625,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.17189549999999,
+      44.080979499999984,
+      45.1421455
+    ],
+    "medianMs": 44.17189549999999,
+    "cpuSamplesMs": [
+      67.3435,
+      70.646,
+      66.3435
+    ],
+    "medianCpuMs": 67.3435,
+    "peakRssMiB": 89.640625
+  },
+  {
+    "round": 0,
+    "variant": "batch128",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62046208,
+      "heapTotal": 8536064,
+      "heapUsed": 5887136,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.171875,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.1664375,
+      44.384832999999986,
+      44.21531250000001
+    ],
+    "medianMs": 44.21531250000001,
+    "cpuSamplesMs": [
+      66.954,
+      67.98,
+      71.9515
+    ],
+    "medianCpuMs": 67.98,
+    "peakRssMiB": 95.5625
+  },
+  {
+    "round": 0,
+    "variant": "batch64",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61882368,
+      "heapTotal": 9322496,
+      "heapUsed": 5890752,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.015625,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      45.89114549999999,
+      45.270666500000004,
+      45.235896
+    ],
+    "medianMs": 45.270666500000004,
+    "cpuSamplesMs": [
+      70.176,
+      67.9945,
+      72.5565
+    ],
+    "medianCpuMs": 70.176,
+    "peakRssMiB": 93.9375
+  },
+  {
+    "round": 0,
+    "variant": "text",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62095360,
+      "heapTotal": 8536064,
+      "heapUsed": 5896792,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.234375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      49.01335449999999,
+      47.19499999999999,
+      46.686542
+    ],
+    "medianMs": 47.19499999999999,
+    "cpuSamplesMs": [
+      71.7405,
+      70.2635,
+      70.0645
+    ],
+    "medianCpuMs": 70.2635,
+    "peakRssMiB": 76.921875
+  },
+  {
+    "round": 0,
+    "variant": "zip128k",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62177280,
+      "heapTotal": 8536064,
+      "heapUsed": 5882592,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.296875,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.79493749999999,
+      45.007271,
+      44.505187500000005
+    ],
+    "medianMs": 44.79493749999999,
+    "cpuSamplesMs": [
+      67.673,
+      70.631,
+      66.795
+    ],
+    "medianCpuMs": 67.673,
+    "peakRssMiB": 92.71875
+  },
+  {
+    "round": 0,
+    "variant": "zip64k",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62324736,
+      "heapTotal": 9322496,
+      "heapUsed": 5887280,
+      "external": 2567018,
+      "arrayBuffers": 177425
+    },
+    "setupPeakRssMiB": 59.4375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      47.63264600000001,
+      46.56008349999999,
+      46.91681250000002
+    ],
+    "medianMs": 46.91681250000002,
+    "cpuSamplesMs": [
+      68.591,
+      66.8855,
+      69.8545
+    ],
+    "medianCpuMs": 68.591,
+    "peakRssMiB": 91
+  },
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62341120,
+      "heapTotal": 8536064,
+      "heapUsed": 5890024,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.453125,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.3758955,
+      37.019375,
+      38.605354000000005
+    ],
+    "medianMs": 38.3758955,
+    "cpuSamplesMs": [
+      42.015,
+      37.846,
+      45.268
+    ],
+    "medianCpuMs": 42.015,
+    "peakRssMiB": 162.0625
+  },
+  {
+    "round": 0,
+    "variant": "yield256",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62291968,
+      "heapTotal": 8536064,
+      "heapUsed": 5892384,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.40625,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      41.778375,
+      38.408208500000015,
+      38.80158350000002
+    ],
+    "medianMs": 38.80158350000002,
+    "cpuSamplesMs": [
+      43.2955,
+      38.492,
+      42.191
+    ],
+    "medianCpuMs": 42.191,
+    "peakRssMiB": 160.71875
+  },
+  {
+    "round": 0,
+    "variant": "yield512",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62357504,
+      "heapTotal": 8536064,
+      "heapUsed": 5887000,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.46875,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.177083499999995,
+      37.95189599999999,
+      37.20583350000001
+    ],
+    "medianMs": 37.95189599999999,
+    "cpuSamplesMs": [
+      42.1555,
+      38.5385,
+      38.1505
+    ],
+    "medianCpuMs": 38.5385,
+    "peakRssMiB": 166.3125
+  },
+  {
+    "round": 0,
+    "variant": "batch128",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61947904,
+      "heapTotal": 8536064,
+      "heapUsed": 5915600,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.078125,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.255416499999995,
+      37.44829200000001,
+      37.980458
+    ],
+    "medianMs": 37.980458,
+    "cpuSamplesMs": [
+      41.1985,
+      38.6805,
+      38.181
+    ],
+    "medianCpuMs": 38.6805,
+    "peakRssMiB": 156.078125
+  },
+  {
+    "round": 0,
+    "variant": "batch64",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62013440,
+      "heapTotal": 8536064,
+      "heapUsed": 5896840,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.15625,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      40.092708,
+      46.61379149999999,
+      43.15145849999999
+    ],
+    "medianMs": 43.15145849999999,
+    "cpuSamplesMs": [
+      43.457,
+      44.3175,
+      45.62
+    ],
+    "medianCpuMs": 44.3175,
+    "peakRssMiB": 203.8125
+  },
+  {
+    "round": 0,
+    "variant": "text",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62324736,
+      "heapTotal": 9322496,
+      "heapUsed": 5881088,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.453125,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      60.96449999999999,
+      63.422229000000016,
+      61.99187499999999
+    ],
+    "medianMs": 61.99187499999999,
+    "cpuSamplesMs": [
+      61.009,
+      67.8625,
+      65.8855
+    ],
+    "medianCpuMs": 65.8855,
+    "peakRssMiB": 170.140625
+  },
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62111744,
+      "heapTotal": 8536064,
+      "heapUsed": 5889848,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.234375,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      93.88158349999998,
+      96.57358349999998,
+      104.73002099999997
+    ],
+    "medianMs": 96.57358349999998,
+    "cpuSamplesMs": [
+      137.94,
+      134.372,
+      133.3265
+    ],
+    "medianCpuMs": 134.372,
+    "peakRssMiB": 136.25
+  },
+  {
+    "round": 0,
+    "variant": "yield256",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62177280,
+      "heapTotal": 8536064,
+      "heapUsed": 5877976,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.296875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      99.04654149999996,
+      96.97670849999997,
+      94.08720849999997
+    ],
+    "medianMs": 96.97670849999997,
+    "cpuSamplesMs": [
+      143.1075,
+      133.6275,
+      132.44
+    ],
+    "medianCpuMs": 133.6275,
+    "peakRssMiB": 148.09375
+  },
+  {
+    "round": 0,
+    "variant": "yield512",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61947904,
+      "heapTotal": 9322496,
+      "heapUsed": 6360384,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.078125,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      102.14922900000002,
+      101.97258299999999,
+      99.93541699999997
+    ],
+    "medianMs": 101.97258299999999,
+    "cpuSamplesMs": [
+      146.532,
+      137.154,
+      136.5835
+    ],
+    "medianCpuMs": 137.154,
+    "peakRssMiB": 148.890625
+  },
+  {
+    "round": 0,
+    "variant": "batch128",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62291968,
+      "heapTotal": 8798208,
+      "heapUsed": 5897040,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.421875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      95.9985,
+      95.42335450000002,
+      96.45781249999999
+    ],
+    "medianMs": 95.9985,
+    "cpuSamplesMs": [
+      137.541,
+      132.74,
+      133.861
+    ],
+    "medianCpuMs": 133.861,
+    "peakRssMiB": 131.25
+  },
+  {
+    "round": 0,
+    "variant": "batch64",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62210048,
+      "heapTotal": 9060352,
+      "heapUsed": 5882896,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.328125,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      100.72672899999998,
+      98.68975,
+      103.45093750000001
+    ],
+    "medianMs": 100.72672899999998,
+    "cpuSamplesMs": [
+      148.26,
+      136.2535,
+      144.599
+    ],
+    "medianCpuMs": 144.599,
+    "peakRssMiB": 139.390625
+  },
+  {
+    "round": 0,
+    "variant": "text",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62095360,
+      "heapTotal": 8536064,
+      "heapUsed": 5887272,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.21875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      98.83993749999999,
+      98.54120799999998,
+      104.56797899999998
+    ],
+    "medianMs": 98.83993749999999,
+    "cpuSamplesMs": [
+      161.8275,
+      162.6185,
+      164.407
+    ],
+    "medianCpuMs": 162.6185,
+    "peakRssMiB": 128.703125
+  },
+  {
+    "round": 0,
+    "variant": "zip128k",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62078976,
+      "heapTotal": 8536064,
+      "heapUsed": 5886648,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.203125,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      95.80312500000002,
+      94.9751875,
+      93.04206249999999
+    ],
+    "medianMs": 94.9751875,
+    "cpuSamplesMs": [
+      139.376,
+      130.225,
+      129.3655
+    ],
+    "medianCpuMs": 130.225,
+    "peakRssMiB": 134.875
+  },
+  {
+    "round": 0,
+    "variant": "zip64k",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62357504,
+      "heapTotal": 8273920,
+      "heapUsed": 5887368,
+      "external": 2567018,
+      "arrayBuffers": 177425
+    },
+    "setupPeakRssMiB": 59.46875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      103.102,
+      100.40145850000005,
+      99.64356250000003
+    ],
+    "medianMs": 100.40145850000005,
+    "cpuSamplesMs": [
+      144.487,
+      132.8185,
+      132.951
+    ],
+    "medianCpuMs": 132.951,
+    "peakRssMiB": 134.6875
+  },
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185073664,
+      "heapTotal": 91537408,
+      "heapUsed": 32490464,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.890625,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      46.7961665,
+      46.361812499999985,
+      44.70489600000002
+    ],
+    "medianMs": 46.361812499999985,
+    "cpuSamplesMs": [
+      46.8705,
+      50.971,
+      46.038
+    ],
+    "medianCpuMs": 46.8705,
+    "peakRssMiB": 275.234375
+  },
+  {
+    "round": 0,
+    "variant": "yield256",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185335808,
+      "heapTotal": 91111424,
+      "heapUsed": 33312528,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.953125,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      49.743375000000015,
+      47.63775000000004,
+      48.23516649999999
+    ],
+    "medianMs": 48.23516649999999,
+    "cpuSamplesMs": [
+      47.9675,
+      47.1935,
+      52.261
+    ],
+    "medianCpuMs": 47.9675,
+    "peakRssMiB": 275.25
+  },
+  {
+    "round": 0,
+    "variant": "yield512",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184942592,
+      "heapTotal": 90570752,
+      "heapUsed": 32029848,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.390625,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      47.38012500000002,
+      46.9511875,
+      45.928312500000004
+    ],
+    "medianMs": 46.9511875,
+    "cpuSamplesMs": [
+      46.9835,
+      47.146,
+      50.6215
+    ],
+    "medianCpuMs": 47.146,
+    "peakRssMiB": 274.125
+  },
+  {
+    "round": 0,
+    "variant": "batch128",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184926208,
+      "heapTotal": 90308608,
+      "heapUsed": 32053552,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.25,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      47.96570799999998,
+      46.446916999999985,
+      46.55989549999998
+    ],
+    "medianMs": 46.55989549999998,
+    "cpuSamplesMs": [
+      48.9975,
+      47.201,
+      50.8005
+    ],
+    "medianCpuMs": 48.9975,
+    "peakRssMiB": 276.484375
+  },
+  {
+    "round": 0,
+    "variant": "batch64",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185155584,
+      "heapTotal": 91979776,
+      "heapUsed": 32919960,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.9375,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      47.713062500000035,
+      47.76568750000001,
+      49.03483349999999
+    ],
+    "medianMs": 47.76568750000001,
+    "cpuSamplesMs": [
+      50.2755,
+      52.6575,
+      54.232
+    ],
+    "medianCpuMs": 52.6575,
+    "peakRssMiB": 294.984375
+  },
+  {
+    "round": 0,
+    "variant": "text",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184975360,
+      "heapTotal": 93110272,
+      "heapUsed": 32481592,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.875,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      68.41452100000004,
+      66.49289550000003,
+      67.81297899999998
+    ],
+    "medianMs": 67.81297899999998,
+    "cpuSamplesMs": [
+      68.228,
+      67.367,
+      77.0025
+    ],
+    "medianCpuMs": 68.228,
+    "peakRssMiB": 258.453125
+  },
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185368576,
+      "heapTotal": 90570752,
+      "heapUsed": 32086360,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.515625,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      47.791833500000024,
+      47.278291499999966,
+      48.30737499999998
+    ],
+    "medianMs": 47.791833500000024,
+    "cpuSamplesMs": [
+      64.7025,
+      61.9505,
+      67.6595
+    ],
+    "medianCpuMs": 64.7025,
+    "peakRssMiB": 250.484375
+  },
+  {
+    "round": 0,
+    "variant": "yield256",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184926208,
+      "heapTotal": 92143616,
+      "heapUsed": 32086408,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.28125,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      47.932770500000004,
+      47.050374999999974,
+      47.47835450000002
+    ],
+    "medianMs": 47.47835450000002,
+    "cpuSamplesMs": [
+      65.063,
+      62.3845,
+      66.227
+    ],
+    "medianCpuMs": 65.063,
+    "peakRssMiB": 242.703125
+  },
+  {
+    "round": 0,
+    "variant": "yield512",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185024512,
+      "heapTotal": 91013120,
+      "heapUsed": 32490504,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.984375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      47.41366649999998,
+      47.07831249999998,
+      47.92022899999995
+    ],
+    "medianMs": 47.41366649999998,
+    "cpuSamplesMs": [
+      64.216,
+      62.2545,
+      65.974
+    ],
+    "medianCpuMs": 64.216,
+    "peakRssMiB": 243.046875
+  },
+  {
+    "round": 0,
+    "variant": "batch128",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185516032,
+      "heapTotal": 91193344,
+      "heapUsed": 32919888,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.15625,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      54.537000000000006,
+      53.63741700000003,
+      50.82802099999998
+    ],
+    "medianMs": 53.63741700000003,
+    "cpuSamplesMs": [
+      72.59,
+      69.9185,
+      61.611
+    ],
+    "medianCpuMs": 69.9185,
+    "peakRssMiB": 241.25
+  },
+  {
+    "round": 0,
+    "variant": "batch64",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185286656,
+      "heapTotal": 93470720,
+      "heapUsed": 33282216,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.640625,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      54.855771000000004,
+      52.95891649999999,
+      52.79252050000002
+    ],
+    "medianMs": 52.95891649999999,
+    "cpuSamplesMs": [
+      77.4705,
+      65.702,
+      74.4755
+    ],
+    "medianCpuMs": 74.4755,
+    "peakRssMiB": 290.015625
+  },
+  {
+    "round": 0,
+    "variant": "text",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185286656,
+      "heapTotal": 90914816,
+      "heapUsed": 31636824,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 193.203125,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      70.63454149999995,
+      73.32397950000001,
+      74.41789549999999
+    ],
+    "medianMs": 73.32397950000001,
+    "cpuSamplesMs": [
+      83.454,
+      85.731,
+      99.059
+    ],
+    "medianCpuMs": 85.731,
+    "peakRssMiB": 254.546875
+  },
+  {
+    "round": 0,
+    "variant": "zip128k",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185106432,
+      "heapTotal": 91455488,
+      "heapUsed": 32919720,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.796875,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      49.459292000000005,
+      48.770541500000036,
+      48.726417000000026
+    ],
+    "medianMs": 48.770541500000036,
+    "cpuSamplesMs": [
+      65.7465,
+      63.891,
+      67.0895
+    ],
+    "medianCpuMs": 65.7465,
+    "peakRssMiB": 238.828125
+  },
+  {
+    "round": 0,
+    "variant": "zip64k",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185008128,
+      "heapTotal": 90669056,
+      "heapUsed": 32920208,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.546875,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      47.941708000000006,
+      48.70743749999997,
+      51.361312500000054
+    ],
+    "medianMs": 48.70743749999997,
+    "cpuSamplesMs": [
+      64.6205,
+      63.0655,
+      67.992
+    ],
+    "medianCpuMs": 64.6205,
+    "peakRssMiB": 243.578125
+  },
+  {
+    "round": 1,
+    "variant": "yield256",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61980672,
+      "heapTotal": 8536064,
+      "heapUsed": 5889096,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.109375,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.63620849999998,
+      43.86085400000002,
+      44.76277049999999
+    ],
+    "medianMs": 44.63620849999998,
+    "cpuSamplesMs": [
+      43.159,
+      41.763,
+      42.7145
+    ],
+    "medianCpuMs": 42.7145,
+    "peakRssMiB": 91.96875
+  },
+  {
+    "round": 1,
+    "variant": "yield512",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61931520,
+      "heapTotal": 9322496,
+      "heapUsed": 5892784,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.0625,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.366229000000004,
+      41.83324999999999,
+      44.2311665
+    ],
+    "medianMs": 43.366229000000004,
+    "cpuSamplesMs": [
+      43.8495,
+      41.797,
+      41.9645
+    ],
+    "medianCpuMs": 41.9645,
+    "peakRssMiB": 95.859375
+  },
+  {
+    "round": 1,
+    "variant": "batch128",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62275584,
+      "heapTotal": 8798208,
+      "heapUsed": 5889888,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.390625,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      103.16843750000001,
+      60.113166500000005,
+      41.71308350000004
+    ],
+    "medianMs": 60.113166500000005,
+    "cpuSamplesMs": [
+      62.34,
+      52.6005,
+      42.5825
+    ],
+    "medianCpuMs": 52.6005,
+    "peakRssMiB": 96.96875
+  },
+  {
+    "round": 1,
+    "variant": "batch64",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62177280,
+      "heapTotal": 8536064,
+      "heapUsed": 5887040,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.296875,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.96383349999999,
+      43.90237499999998,
+      44.972687500000006
+    ],
+    "medianMs": 43.90237499999998,
+    "cpuSamplesMs": [
+      43.857,
+      43.23,
+      47.7175
+    ],
+    "medianCpuMs": 43.857,
+    "peakRssMiB": 91.875
+  },
+  {
+    "round": 1,
+    "variant": "text",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62144512,
+      "heapTotal": 8536064,
+      "heapUsed": 5896792,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.28125,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.26754150000001,
+      43.68714600000001,
+      44.265187499999996
+    ],
+    "medianMs": 44.265187499999996,
+    "cpuSamplesMs": [
+      44.8695,
+      43.83,
+      44.9745
+    ],
+    "medianCpuMs": 44.8695,
+    "peakRssMiB": 69.390625
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62144512,
+      "heapTotal": 8536064,
+      "heapUsed": 5897048,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.28125,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.387,
+      41.00268750000001,
+      41.3997085
+    ],
+    "medianMs": 41.3997085,
+    "cpuSamplesMs": [
+      43.117,
+      41.591,
+      41.9315
+    ],
+    "medianCpuMs": 41.9315,
+    "peakRssMiB": 100.453125
+  },
+  {
+    "round": 1,
+    "variant": "yield256",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62078976,
+      "heapTotal": 8536064,
+      "heapUsed": 5888856,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.203125,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.9423125,
+      45.62062500000002,
+      44.95922949999999
+    ],
+    "medianMs": 45.62062500000002,
+    "cpuSamplesMs": [
+      68.8785,
+      70.052,
+      66.4105
+    ],
+    "medianCpuMs": 68.8785,
+    "peakRssMiB": 89.109375
+  },
+  {
+    "round": 1,
+    "variant": "yield512",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62177280,
+      "heapTotal": 9060352,
+      "heapUsed": 5887504,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.296875,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.30024999999999,
+      43.750062499999984,
+      76.97977049999997
+    ],
+    "medianMs": 44.30024999999999,
+    "cpuSamplesMs": [
+      68.008,
+      66.674,
+      80.026
+    ],
+    "medianCpuMs": 68.008,
+    "peakRssMiB": 90.796875
+  },
+  {
+    "round": 1,
+    "variant": "batch128",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62226432,
+      "heapTotal": 8536064,
+      "heapUsed": 5887200,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.34375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      45.138604,
+      44.681083,
+      43.7121875
+    ],
+    "medianMs": 44.681083,
+    "cpuSamplesMs": [
+      67.6165,
+      71.347,
+      71.209
+    ],
+    "medianCpuMs": 71.209,
+    "peakRssMiB": 93.828125
+  },
+  {
+    "round": 1,
+    "variant": "batch64",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62111744,
+      "heapTotal": 8536064,
+      "heapUsed": 5903608,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.234375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      45.17197899999999,
+      45.10152050000002,
+      46.09589600000001
+    ],
+    "medianMs": 45.17197899999999,
+    "cpuSamplesMs": [
+      69.724,
+      68.4015,
+      73.621
+    ],
+    "medianCpuMs": 69.724,
+    "peakRssMiB": 94.3125
+  },
+  {
+    "round": 1,
+    "variant": "text",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62013440,
+      "heapTotal": 8536064,
+      "heapUsed": 5887992,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.140625,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.84047899999999,
+      46.199937500000004,
+      46.05656250000001
+    ],
+    "medianMs": 46.199937500000004,
+    "cpuSamplesMs": [
+      70.618,
+      68.435,
+      69.338
+    ],
+    "medianCpuMs": 69.338,
+    "peakRssMiB": 77.53125
+  },
+  {
+    "round": 1,
+    "variant": "zip128k",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61800448,
+      "heapTotal": 9322496,
+      "heapUsed": 5887616,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 58.9375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.557770500000004,
+      44.674353999999994,
+      45.18014600000001
+    ],
+    "medianMs": 44.674353999999994,
+    "cpuSamplesMs": [
+      67.382,
+      70.475,
+      67.0785
+    ],
+    "medianCpuMs": 67.382,
+    "peakRssMiB": 92.953125
+  },
+  {
+    "round": 1,
+    "variant": "zip64k",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62144512,
+      "heapTotal": 8536064,
+      "heapUsed": 5892624,
+      "external": 2567018,
+      "arrayBuffers": 177425
+    },
+    "setupPeakRssMiB": 59.265625,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.177083499999995,
+      45.635729,
+      46.646562500000016
+    ],
+    "medianMs": 46.177083499999995,
+    "cpuSamplesMs": [
+      67.471,
+      66.113,
+      67.833
+    ],
+    "medianCpuMs": 67.471,
+    "peakRssMiB": 94.359375
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62046208,
+      "heapTotal": 9322496,
+      "heapUsed": 5889888,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.171875,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.59495799999999,
+      43.2818125,
+      43.164646000000005
+    ],
+    "medianMs": 43.2818125,
+    "cpuSamplesMs": [
+      67.3235,
+      65.9415,
+      69.019
+    ],
+    "medianCpuMs": 67.3235,
+    "peakRssMiB": 91.75
+  },
+  {
+    "round": 1,
+    "variant": "yield256",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61800448,
+      "heapTotal": 8536064,
+      "heapUsed": 5887336,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 58.9375,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.20706249999999,
+      38.292542,
+      38.5675205
+    ],
+    "medianMs": 38.5675205,
+    "cpuSamplesMs": [
+      42.7455,
+      38.543,
+      42.314
+    ],
+    "medianCpuMs": 42.314,
+    "peakRssMiB": 166.609375
+  },
+  {
+    "round": 1,
+    "variant": "yield512",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62160896,
+      "heapTotal": 8536064,
+      "heapUsed": 5900480,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.28125,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.81931250000001,
+      37.233979000000005,
+      39.386416499999996
+    ],
+    "medianMs": 38.81931250000001,
+    "cpuSamplesMs": [
+      42.115,
+      37.8235,
+      39.326
+    ],
+    "medianCpuMs": 39.326,
+    "peakRssMiB": 164.234375
+  },
+  {
+    "round": 1,
+    "variant": "batch128",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61980672,
+      "heapTotal": 8536064,
+      "heapUsed": 5892512,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.109375,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.993042,
+      38.1544375,
+      37.67195850000002
+    ],
+    "medianMs": 38.1544375,
+    "cpuSamplesMs": [
+      41.7835,
+      39.3245,
+      38.154
+    ],
+    "medianCpuMs": 39.3245,
+    "peakRssMiB": 159.453125
+  },
+  {
+    "round": 1,
+    "variant": "batch64",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62111744,
+      "heapTotal": 8536064,
+      "heapUsed": 5900336,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.234375,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.457291999999995,
+      39.161103999999995,
+      38.0198125
+    ],
+    "medianMs": 39.161103999999995,
+    "cpuSamplesMs": [
+      42.818,
+      41.9965,
+      38.9605
+    ],
+    "medianCpuMs": 41.9965,
+    "peakRssMiB": 171.859375
+  },
+  {
+    "round": 1,
+    "variant": "text",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62128128,
+      "heapTotal": 8536064,
+      "heapUsed": 5896816,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.265625,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      60.10924999999999,
+      63.79777050000001,
+      60.33083350000001
+    ],
+    "medianMs": 60.33083350000001,
+    "cpuSamplesMs": [
+      60.568,
+      68.209,
+      64.775
+    ],
+    "medianCpuMs": 64.775,
+    "peakRssMiB": 167.734375
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62062592,
+      "heapTotal": 8536064,
+      "heapUsed": 5889912,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.1875,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.689021,
+      37.303458000000006,
+      37.5843955
+    ],
+    "medianMs": 37.5843955,
+    "cpuSamplesMs": [
+      42.121,
+      37.709,
+      39.1895
+    ],
+    "medianCpuMs": 39.1895,
+    "peakRssMiB": 168.75
+  },
+  {
+    "round": 1,
+    "variant": "yield256",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62111744,
+      "heapTotal": 8536064,
+      "heapUsed": 5889960,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.234375,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      92.93470849999997,
+      93.67347899999999,
+      93.64387500000004
+    ],
+    "medianMs": 93.64387500000004,
+    "cpuSamplesMs": [
+      137.293,
+      132.1955,
+      130.558
+    ],
+    "medianCpuMs": 132.1955,
+    "peakRssMiB": 136.390625
+  },
+  {
+    "round": 1,
+    "variant": "yield512",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61882368,
+      "heapTotal": 8536064,
+      "heapUsed": 5885968,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.015625,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      93.29879199999999,
+      92.37233349999997,
+      92.4269165
+    ],
+    "medianMs": 92.4269165,
+    "cpuSamplesMs": [
+      137.7865,
+      128.1935,
+      130.3495
+    ],
+    "medianCpuMs": 130.3495,
+    "peakRssMiB": 142.828125
+  },
+  {
+    "round": 1,
+    "variant": "batch128",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62095360,
+      "heapTotal": 8536064,
+      "heapUsed": 5896968,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.234375,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      95.47877099999997,
+      92.36808299999996,
+      95.92152099999998
+    ],
+    "medianMs": 95.47877099999997,
+    "cpuSamplesMs": [
+      138.2785,
+      129.666,
+      140.5145
+    ],
+    "medianCpuMs": 138.2785,
+    "peakRssMiB": 127.09375
+  },
+  {
+    "round": 1,
+    "variant": "batch64",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62357504,
+      "heapTotal": 9322496,
+      "heapUsed": 5877896,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.46875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      94.6615625,
+      93.6760835,
+      96.34868749999998
+    ],
+    "medianMs": 94.6615625,
+    "cpuSamplesMs": [
+      141.926,
+      131.6745,
+      137.9715
+    ],
+    "medianCpuMs": 137.9715,
+    "peakRssMiB": 139.59375
+  },
+  {
+    "round": 1,
+    "variant": "text",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62062592,
+      "heapTotal": 9322496,
+      "heapUsed": 5900288,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.1875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      96.3084375,
+      96.72595800000005,
+      95.62064599999997
+    ],
+    "medianMs": 96.3084375,
+    "cpuSamplesMs": [
+      155.6135,
+      156.9525,
+      152.578
+    ],
+    "medianCpuMs": 155.6135,
+    "peakRssMiB": 127.703125
+  },
+  {
+    "round": 1,
+    "variant": "zip128k",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61767680,
+      "heapTotal": 8536064,
+      "heapUsed": 5889752,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 58.90625,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      94.94525000000002,
+      94.34052050000003,
+      93.86093750000003
+    ],
+    "medianMs": 94.34052050000003,
+    "cpuSamplesMs": [
+      137.99,
+      129.1925,
+      132.235
+    ],
+    "medianCpuMs": 132.235,
+    "peakRssMiB": 137.59375
+  },
+  {
+    "round": 1,
+    "variant": "zip64k",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62160896,
+      "heapTotal": 9322496,
+      "heapUsed": 5887792,
+      "external": 2567018,
+      "arrayBuffers": 177425
+    },
+    "setupPeakRssMiB": 59.28125,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      97.9877295,
+      101.8792085,
+      96.81156249999998
+    ],
+    "medianMs": 97.9877295,
+    "cpuSamplesMs": [
+      139.4705,
+      132.1255,
+      130.711
+    ],
+    "medianCpuMs": 132.1255,
+    "peakRssMiB": 135.359375
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61734912,
+      "heapTotal": 8536064,
+      "heapUsed": 5885920,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 58.875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      93.458167,
+      92.08914599999997,
+      93.42733350000003
+    ],
+    "medianMs": 93.42733350000003,
+    "cpuSamplesMs": [
+      137.501,
+      127.639,
+      130.924
+    ],
+    "medianCpuMs": 130.924,
+    "peakRssMiB": 140.171875
+  },
+  {
+    "round": 1,
+    "variant": "yield256",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184975360,
+      "heapTotal": 91979776,
+      "heapUsed": 32919840,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.546875,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      49.28854150000001,
+      47.79981249999997,
+      46.79235399999999
+    ],
+    "medianMs": 47.79981249999997,
+    "cpuSamplesMs": [
+      48.8215,
+      51.959,
+      47.906
+    ],
+    "medianCpuMs": 48.8215,
+    "peakRssMiB": 271.3125
+  },
+  {
+    "round": 1,
+    "variant": "yield512",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184893440,
+      "heapTotal": 91619328,
+      "heapUsed": 32071472,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.59375,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      46.00631250000001,
+      47.168875000000014,
+      45.94625000000002
+    ],
+    "medianMs": 46.00631250000001,
+    "cpuSamplesMs": [
+      46.263,
+      47.561,
+      50.7415
+    ],
+    "medianCpuMs": 47.561,
+    "peakRssMiB": 274.703125
+  },
+  {
+    "round": 1,
+    "variant": "batch128",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185253888,
+      "heapTotal": 89178112,
+      "heapUsed": 32490432,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.09375,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      50.7780415,
+      47.97920800000003,
+      46.22735449999999
+    ],
+    "medianMs": 47.97920800000003,
+    "cpuSamplesMs": [
+      51.7005,
+      55.519,
+      46.1175
+    ],
+    "medianCpuMs": 51.7005,
+    "peakRssMiB": 271.625
+  },
+  {
+    "round": 1,
+    "variant": "batch64",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184778752,
+      "heapTotal": 90488832,
+      "heapUsed": 32481624,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.78125,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      49.61029149999999,
+      48.71133349999997,
+      49.31816700000002
+    ],
+    "medianMs": 49.31816700000002,
+    "cpuSamplesMs": [
+      52.079,
+      53.397,
+      53.6385
+    ],
+    "medianCpuMs": 53.397,
+    "peakRssMiB": 291.96875
+  },
+  {
+    "round": 1,
+    "variant": "text",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185073664,
+      "heapTotal": 92143616,
+      "heapUsed": 31832296,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.734375,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      67.1177295,
+      66.40643749999998,
+      67.41202099999998
+    ],
+    "medianMs": 67.1177295,
+    "cpuSamplesMs": [
+      67.466,
+      67.235,
+      73.5715
+    ],
+    "medianCpuMs": 67.466,
+    "peakRssMiB": 254.234375
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184909824,
+      "heapTotal": 92061696,
+      "heapUsed": 32481008,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.984375,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      45.788895999999994,
+      45.60725000000002,
+      45.615208499999994
+    ],
+    "medianMs": 45.615208499999994,
+    "cpuSamplesMs": [
+      46.016,
+      46.295,
+      51.001
+    ],
+    "medianCpuMs": 46.295,
+    "peakRssMiB": 277.1875
+  },
+  {
+    "round": 1,
+    "variant": "yield256",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184369152,
+      "heapTotal": 92667904,
+      "heapUsed": 32086376,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.859375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      49.203937499999995,
+      47.21802100000002,
+      47.729791999999975
+    ],
+    "medianMs": 47.729791999999975,
+    "cpuSamplesMs": [
+      66.2795,
+      62.517,
+      66.522
+    ],
+    "medianCpuMs": 66.2795,
+    "peakRssMiB": 242.125
+  },
+  {
+    "round": 1,
+    "variant": "yield512",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185253888,
+      "heapTotal": 91799552,
+      "heapUsed": 32490504,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.40625,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      49.366896,
+      47.268208500000014,
+      47.56258300000002
+    ],
+    "medianMs": 47.56258300000002,
+    "cpuSamplesMs": [
+      66.3825,
+      62.716,
+      65.4505
+    ],
+    "medianCpuMs": 65.4505,
+    "peakRssMiB": 249.359375
+  },
+  {
+    "round": 1,
+    "variant": "batch128",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185008128,
+      "heapTotal": 91095040,
+      "heapUsed": 32086376,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.1875,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      49.704646000000025,
+      48.69404149999997,
+      47.81504149999995
+    ],
+    "medianMs": 48.69404149999997,
+    "cpuSamplesMs": [
+      68.2545,
+      65.577,
+      59.952
+    ],
+    "medianCpuMs": 65.577,
+    "peakRssMiB": 245
+  },
+  {
+    "round": 1,
+    "variant": "batch64",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185303040,
+      "heapTotal": 93372416,
+      "heapUsed": 32266048,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.96875,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      62.63522949999998,
+      52.784062500000005,
+      56.008062499999994
+    ],
+    "medianMs": 56.008062499999994,
+    "cpuSamplesMs": [
+      82.642,
+      64.12,
+      76.21
+    ],
+    "medianCpuMs": 76.21,
+    "peakRssMiB": 290.65625
+  },
+  {
+    "round": 1,
+    "variant": "text",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185040896,
+      "heapTotal": 91881472,
+      "heapUsed": 32071344,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.609375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      73.54652099999998,
+      71.33025000000004,
+      74.29608350000001
+    ],
+    "medianMs": 73.54652099999998,
+    "cpuSamplesMs": [
+      86.104,
+      84.6615,
+      98.3035
+    ],
+    "medianCpuMs": 86.104,
+    "peakRssMiB": 250.875
+  },
+  {
+    "round": 1,
+    "variant": "zip128k",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185450496,
+      "heapTotal": 92061696,
+      "heapUsed": 32481616,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      48.40081249999997,
+      47.62560400000001,
+      48.299999999999955
+    ],
+    "medianMs": 48.299999999999955,
+    "cpuSamplesMs": [
+      65.6385,
+      63.1615,
+      67.1055
+    ],
+    "medianCpuMs": 65.6385,
+    "peakRssMiB": 249.859375
+  },
+  {
+    "round": 1,
+    "variant": "zip64k",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184844288,
+      "heapTotal": 91357184,
+      "heapUsed": 32071344,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.46875,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      49.782333499999964,
+      47.858000000000004,
+      48.38918749999999
+    ],
+    "medianMs": 48.38918749999999,
+    "cpuSamplesMs": [
+      66.222,
+      63.0915,
+      67.36
+    ],
+    "medianCpuMs": 66.222,
+    "peakRssMiB": 239.09375
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185073664,
+      "heapTotal": 91275264,
+      "heapUsed": 32490464,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.828125,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      51.50772949999998,
+      50.94387499999999,
+      49.123812499999985
+    ],
+    "medianMs": 50.94387499999999,
+    "cpuSamplesMs": [
+      70.343,
+      65.929,
+      68.3395
+    ],
+    "medianCpuMs": 68.3395,
+    "peakRssMiB": 238.796875
+  },
+  {
+    "round": 2,
+    "variant": "yield512",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61997056,
+      "heapTotal": 8536064,
+      "heapUsed": 5889976,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.125,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.64589600000001,
+      42.50268750000001,
+      45.580208500000026
+    ],
+    "medianMs": 44.64589600000001,
+    "cpuSamplesMs": [
+      45.3945,
+      42.27,
+      42.984
+    ],
+    "medianCpuMs": 42.984,
+    "peakRssMiB": 97.21875
+  },
+  {
+    "round": 2,
+    "variant": "batch128",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62259200,
+      "heapTotal": 8536064,
+      "heapUsed": 5929784,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.390625,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.6337085,
+      42.35439599999998,
+      46.03895800000001
+    ],
+    "medianMs": 42.6337085,
+    "cpuSamplesMs": [
+      42.75,
+      43.2275,
+      44.5605
+    ],
+    "medianCpuMs": 43.2275,
+    "peakRssMiB": 94.5625
+  },
+  {
+    "round": 2,
+    "variant": "batch64",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62029824,
+      "heapTotal": 8536064,
+      "heapUsed": 5877808,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.15625,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.51127100000001,
+      44.33602100000002,
+      43.4979165
+    ],
+    "medianMs": 44.33602100000002,
+    "cpuSamplesMs": [
+      44.5645,
+      44.2205,
+      44.3095
+    ],
+    "medianCpuMs": 44.3095,
+    "peakRssMiB": 90.21875
+  },
+  {
+    "round": 2,
+    "variant": "text",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62160896,
+      "heapTotal": 8798208,
+      "heapUsed": 5900296,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.28125,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      46.667437500000005,
+      47.11895850000002,
+      43.983542
+    ],
+    "medianMs": 46.667437500000005,
+    "cpuSamplesMs": [
+      46.367,
+      45.6955,
+      44.685
+    ],
+    "medianCpuMs": 45.6955,
+    "peakRssMiB": 69.46875
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61767680,
+      "heapTotal": 8536064,
+      "heapUsed": 5888808,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 58.90625,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.3665415,
+      40.7781875,
+      40.715937499999995
+    ],
+    "medianMs": 40.7781875,
+    "cpuSamplesMs": [
+      43.158,
+      41.2195,
+      41.2955
+    ],
+    "medianCpuMs": 41.2955,
+    "peakRssMiB": 102.296875
+  },
+  {
+    "round": 2,
+    "variant": "yield256",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61997056,
+      "heapTotal": 9322496,
+      "heapUsed": 5882736,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.125,
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      47.133083499999984,
+      44.060708500000004,
+      44.63583349999999
+    ],
+    "medianMs": 44.63583349999999,
+    "cpuSamplesMs": [
+      44.837,
+      41.9625,
+      42.891
+    ],
+    "medianCpuMs": 42.891,
+    "peakRssMiB": 91.953125
+  },
+  {
+    "round": 2,
+    "variant": "yield512",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62177280,
+      "heapTotal": 8536064,
+      "heapUsed": 5897088,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.3125,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.91681249999999,
+      44.51052099999998,
+      45.75637500000002
+    ],
+    "medianMs": 44.91681249999999,
+    "cpuSamplesMs": [
+      68.7235,
+      67.7605,
+      71.657
+    ],
+    "medianCpuMs": 68.7235,
+    "peakRssMiB": 90.4375
+  },
+  {
+    "round": 2,
+    "variant": "batch128",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62439424,
+      "heapTotal": 8798208,
+      "heapUsed": 5889888,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.546875,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.34079150000001,
+      44.515041499999995,
+      43.4906455
+    ],
+    "medianMs": 44.34079150000001,
+    "cpuSamplesMs": [
+      67.054,
+      72.4705,
+      67.11
+    ],
+    "medianCpuMs": 67.11,
+    "peakRssMiB": 92.984375
+  },
+  {
+    "round": 2,
+    "variant": "batch64",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61816832,
+      "heapTotal": 8536064,
+      "heapUsed": 5884176,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 58.953125,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.08497949999999,
+      45.00135450000002,
+      46.969979499999994
+    ],
+    "medianMs": 46.08497949999999,
+    "cpuSamplesMs": [
+      69.796,
+      68.0035,
+      77.8485
+    ],
+    "medianCpuMs": 69.796,
+    "peakRssMiB": 92.9375
+  },
+  {
+    "round": 2,
+    "variant": "text",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61964288,
+      "heapTotal": 8536064,
+      "heapUsed": 5896832,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.109375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      51.01487499999999,
+      46.6760625,
+      46.387103999999994
+    ],
+    "medianMs": 46.6760625,
+    "cpuSamplesMs": [
+      74.505,
+      68.9175,
+      69.226
+    ],
+    "medianCpuMs": 69.226,
+    "peakRssMiB": 77.703125
+  },
+  {
+    "round": 2,
+    "variant": "zip128k",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61980672,
+      "heapTotal": 8536064,
+      "heapUsed": 5887232,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.109375,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      45.90760400000002,
+      45.29793749999999,
+      45.094021
+    ],
+    "medianMs": 45.29793749999999,
+    "cpuSamplesMs": [
+      69.15,
+      71.4335,
+      67.442
+    ],
+    "medianCpuMs": 69.15,
+    "peakRssMiB": 93.484375
+  },
+  {
+    "round": 2,
+    "variant": "zip64k",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61882368,
+      "heapTotal": 8798208,
+      "heapUsed": 5887768,
+      "external": 2567018,
+      "arrayBuffers": 177425
+    },
+    "setupPeakRssMiB": 59.015625,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.897479000000004,
+      46.060125,
+      46.84397900000002
+    ],
+    "medianMs": 46.84397900000002,
+    "cpuSamplesMs": [
+      68.708,
+      66.7535,
+      68.731
+    ],
+    "medianCpuMs": 68.708,
+    "peakRssMiB": 94.28125
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61898752,
+      "heapTotal": 8273920,
+      "heapUsed": 5888048,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.03125,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      44.40668749999999,
+      43.799125000000004,
+      44.026375
+    ],
+    "medianMs": 44.026375,
+    "cpuSamplesMs": [
+      67.829,
+      66.634,
+      70.0505
+    ],
+    "medianCpuMs": 67.829,
+    "peakRssMiB": 91.5
+  },
+  {
+    "round": 2,
+    "variant": "yield256",
+    "fixture": "narrow",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62341120,
+      "heapTotal": 9322496,
+      "heapUsed": 5900600,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.453125,
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.2179165,
+      55.8225415,
+      45.59643749999998
+    ],
+    "medianMs": 46.2179165,
+    "cpuSamplesMs": [
+      67.9915,
+      74.4425,
+      67.198
+    ],
+    "medianCpuMs": 67.9915,
+    "peakRssMiB": 89.78125
+  },
+  {
+    "round": 2,
+    "variant": "yield512",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61997056,
+      "heapTotal": 9322496,
+      "heapUsed": 5891360,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.125,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.81566649999999,
+      37.50329149999999,
+      37.03052100000002
+    ],
+    "medianMs": 37.50329149999999,
+    "cpuSamplesMs": [
+      42.3875,
+      38.2485,
+      37.9515
+    ],
+    "medianCpuMs": 38.2485,
+    "peakRssMiB": 162.6875
+  },
+  {
+    "round": 2,
+    "variant": "batch128",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62226432,
+      "heapTotal": 8536064,
+      "heapUsed": 5889880,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.34375,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.2733125,
+      37.3824795,
+      37.0244165
+    ],
+    "medianMs": 37.3824795,
+    "cpuSamplesMs": [
+      40.642,
+      38.651,
+      37.5905
+    ],
+    "medianCpuMs": 38.651,
+    "peakRssMiB": 155.21875
+  },
+  {
+    "round": 2,
+    "variant": "batch64",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61915136,
+      "heapTotal": 8536064,
+      "heapUsed": 5900408,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59.046875,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      40.8474375,
+      39.106187500000004,
+      38.8238125
+    ],
+    "medianMs": 39.106187500000004,
+    "cpuSamplesMs": [
+      43.5585,
+      42.6335,
+      39.675
+    ],
+    "medianCpuMs": 42.6335,
+    "peakRssMiB": 187.8125
+  },
+  {
+    "round": 2,
+    "variant": "text",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61898752,
+      "heapTotal": 8798208,
+      "heapUsed": 5887304,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.03125,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      61.74870849999999,
+      64.40677099999999,
+      59.83339600000002
+    ],
+    "medianMs": 61.74870849999999,
+    "cpuSamplesMs": [
+      61.609,
+      68.5585,
+      64.575
+    ],
+    "medianCpuMs": 64.575,
+    "peakRssMiB": 167.59375
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62177280,
+      "heapTotal": 8536064,
+      "heapUsed": 5912376,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.296875,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.17185450000001,
+      37.50339600000001,
+      37.73512499999998
+    ],
+    "medianMs": 37.73512499999998,
+    "cpuSamplesMs": [
+      42.6515,
+      38.283,
+      39.278
+    ],
+    "medianCpuMs": 39.278,
+    "peakRssMiB": 169.875
+  },
+  {
+    "round": 2,
+    "variant": "yield256",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62078976,
+      "heapTotal": 8536064,
+      "heapUsed": 5904256,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.203125,
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.05358350000002,
+      50.804895499999986,
+      44.71158299999999
+    ],
+    "medianMs": 50.804895499999986,
+    "cpuSamplesMs": [
+      49.444,
+      43.688,
+      43.723
+    ],
+    "medianCpuMs": 43.723,
+    "peakRssMiB": 175.453125
+  },
+  {
+    "round": 2,
+    "variant": "yield512",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62521344,
+      "heapTotal": 9322496,
+      "heapUsed": 5881464,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.640625,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      106.80474999999998,
+      100.122771,
+      97.1774375
+    ],
+    "medianMs": 100.122771,
+    "cpuSamplesMs": [
+      145.811,
+      139.004,
+      134.5375
+    ],
+    "medianCpuMs": 139.004,
+    "peakRssMiB": 140.015625
+  },
+  {
+    "round": 2,
+    "variant": "batch128",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62177280,
+      "heapTotal": 8536064,
+      "heapUsed": 5887552,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.296875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      93.27981249999999,
+      93.80764599999998,
+      101.19381249999998
+    ],
+    "medianMs": 93.80764599999998,
+    "cpuSamplesMs": [
+      135.341,
+      131.1565,
+      142.8825
+    ],
+    "medianCpuMs": 135.341,
+    "peakRssMiB": 127.203125
+  },
+  {
+    "round": 2,
+    "variant": "batch64",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61849600,
+      "heapTotal": 9322496,
+      "heapUsed": 5896872,
+      "external": 2567016,
+      "arrayBuffers": 177423
+    },
+    "setupPeakRssMiB": 59,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      95.69,
+      102.97610400000002,
+      94.93514549999998
+    ],
+    "medianMs": 95.69,
+    "cpuSamplesMs": [
+      144.9905,
+      139.3135,
+      136.1555
+    ],
+    "medianCpuMs": 139.3135,
+    "peakRssMiB": 147.953125
+  },
+  {
+    "round": 2,
+    "variant": "text",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62095360,
+      "heapTotal": 8536064,
+      "heapUsed": 5909512,
+      "external": 2567047,
+      "arrayBuffers": 177454
+    },
+    "setupPeakRssMiB": 59.21875,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      104.38160400000001,
+      101.26043750000002,
+      104.87602100000004
+    ],
+    "medianMs": 104.38160400000001,
+    "cpuSamplesMs": [
+      168.4215,
+      166.4895,
+      168.654
+    ],
+    "medianCpuMs": 168.4215,
+    "peakRssMiB": 126.03125
+  },
+  {
+    "round": 2,
+    "variant": "zip128k",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62210048,
+      "heapTotal": 8536064,
+      "heapUsed": 5900304,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.328125,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      98.18645850000001,
+      94.1378335,
+      94.418542
+    ],
+    "medianMs": 94.418542,
+    "cpuSamplesMs": [
+      135.449,
+      129.6595,
+      134.493
+    ],
+    "medianCpuMs": 134.493,
+    "peakRssMiB": 142.984375
+  },
+  {
+    "round": 2,
+    "variant": "zip64k",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61964288,
+      "heapTotal": 9322496,
+      "heapUsed": 5896752,
+      "external": 2567018,
+      "arrayBuffers": 177425
+    },
+    "setupPeakRssMiB": 59.109375,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      97.35995799999998,
+      95.65360450000003,
+      95.5870625
+    ],
+    "medianMs": 95.65360450000003,
+    "cpuSamplesMs": [
+      140.7965,
+      127.9905,
+      132.8835
+    ],
+    "medianCpuMs": 132.8835,
+    "peakRssMiB": 131.5
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 61800448,
+      "heapTotal": 8536064,
+      "heapUsed": 5897144,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 58.953125,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      94.4319375,
+      94.09060399999998,
+      91.70768749999996
+    ],
+    "medianMs": 94.09060399999998,
+    "cpuSamplesMs": [
+      138.7745,
+      129.4175,
+      128.3045
+    ],
+    "medianCpuMs": 129.4175,
+    "peakRssMiB": 137.46875
+  },
+  {
+    "round": 2,
+    "variant": "yield256",
+    "fixture": "wide",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": false,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 62341120,
+      "heapTotal": 8536064,
+      "heapUsed": 6485656,
+      "external": 2567019,
+      "arrayBuffers": 177426
+    },
+    "setupPeakRssMiB": 59.453125,
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      93.53283299999998,
+      91.84720850000002,
+      92.0625
+    ],
+    "medianMs": 92.0625,
+    "cpuSamplesMs": [
+      138.0645,
+      128.9225,
+      134.013
+    ],
+    "medianCpuMs": 134.013,
+    "peakRssMiB": 140.09375
+  },
+  {
+    "round": 2,
+    "variant": "yield512",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184451072,
+      "heapTotal": 91176960,
+      "heapUsed": 31678736,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.78125,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      46.61764599999998,
+      46.14422900000005,
+      45.59812499999998
+    ],
+    "medianMs": 46.14422900000005,
+    "cpuSamplesMs": [
+      46.881,
+      50.9295,
+      46.521
+    ],
+    "medianCpuMs": 46.881,
+    "peakRssMiB": 272.859375
+  },
+  {
+    "round": 2,
+    "variant": "batch128",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185548800,
+      "heapTotal": 92323840,
+      "heapUsed": 32490488,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.59375,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      47.9853545,
+      46.90141700000004,
+      45.367729
+    ],
+    "medianMs": 46.90141700000004,
+    "cpuSamplesMs": [
+      49.5355,
+      52.443,
+      45.433
+    ],
+    "medianCpuMs": 49.5355,
+    "peakRssMiB": 271.921875
+  },
+  {
+    "round": 2,
+    "variant": "batch64",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185532416,
+      "heapTotal": 90931200,
+      "heapUsed": 32920216,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.140625,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      49.12212500000001,
+      47.904854,
+      48.21141650000004
+    ],
+    "medianMs": 48.21141650000004,
+    "cpuSamplesMs": [
+      51.309,
+      52.1155,
+      52.799
+    ],
+    "medianCpuMs": 52.1155,
+    "peakRssMiB": 305.140625
+  },
+  {
+    "round": 2,
+    "variant": "text",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184893440,
+      "heapTotal": 92061696,
+      "heapUsed": 32266848,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.953125,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      67.41806250000002,
+      68.199771,
+      68.90883300000002
+    ],
+    "medianMs": 68.199771,
+    "cpuSamplesMs": [
+      67.8035,
+      69.054,
+      74.8275
+    ],
+    "medianCpuMs": 69.054,
+    "peakRssMiB": 248.625
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185286656,
+      "heapTotal": 91537408,
+      "heapUsed": 32265160,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.484375,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      45.56600000000003,
+      48.8409585,
+      47.75800000000004
+    ],
+    "medianMs": 47.75800000000004,
+    "cpuSamplesMs": [
+      45.461,
+      47.8065,
+      52.2965
+    ],
+    "medianCpuMs": 47.8065,
+    "peakRssMiB": 279.21875
+  },
+  {
+    "round": 2,
+    "variant": "yield256",
+    "fixture": "json",
+    "method": "table",
+    "compression": "none",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185204736,
+      "heapTotal": 90308608,
+      "heapUsed": 32053328,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.625,
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      47.12154149999998,
+      49.88466650000004,
+      49.35762500000004
+    ],
+    "medianMs": 49.35762500000004,
+    "cpuSamplesMs": [
+      47.149,
+      48.9885,
+      53.338
+    ],
+    "medianCpuMs": 48.9885,
+    "peakRssMiB": 278.046875
+  },
+  {
+    "round": 2,
+    "variant": "yield512",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185368576,
+      "heapTotal": 91979776,
+      "heapUsed": 32919928,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.9375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      48.85112499999997,
+      47.611687500000016,
+      49.05585400000001
+    ],
+    "medianMs": 48.85112499999997,
+    "cpuSamplesMs": [
+      65.794,
+      63.1105,
+      66.091
+    ],
+    "medianCpuMs": 65.794,
+    "peakRssMiB": 243.390625
+  },
+  {
+    "round": 2,
+    "variant": "batch128",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185204736,
+      "heapTotal": 89784320,
+      "heapUsed": 32071616,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.734375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      52.946124999999995,
+      54.20866700000005,
+      49.94958300000002
+    ],
+    "medianMs": 52.946124999999995,
+    "cpuSamplesMs": [
+      71.12,
+      69.157,
+      60.729
+    ],
+    "medianCpuMs": 69.157,
+    "peakRssMiB": 242.9375
+  },
+  {
+    "round": 2,
+    "variant": "batch64",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 184893440,
+      "heapTotal": 90390528,
+      "heapUsed": 31678824,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.625,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      54.69093750000002,
+      51.635895500000004,
+      52.685416499999974
+    ],
+    "medianMs": 52.685416499999974,
+    "cpuSamplesMs": [
+      78.72,
+      63.1175,
+      74.1475
+    ],
+    "medianCpuMs": 74.1475,
+    "peakRssMiB": 285.875
+  },
+  {
+    "round": 2,
+    "variant": "text",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185548800,
+      "heapTotal": 89882624,
+      "heapUsed": 32876208,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.359375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      73.34560400000004,
+      70.2026045,
+      71.49381249999999
+    ],
+    "medianMs": 71.49381249999999,
+    "cpuSamplesMs": [
+      85.55,
+      83.6945,
+      98.944
+    ],
+    "medianCpuMs": 85.55,
+    "peakRssMiB": 260.0625
+  },
+  {
+    "round": 2,
+    "variant": "zip128k",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185171968,
+      "heapTotal": 92241920,
+      "heapUsed": 32919912,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.765625,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      51.68066650000003,
+      89.50258300000002,
+      48.783833500000014
+    ],
+    "medianMs": 51.68066650000003,
+    "cpuSamplesMs": [
+      68.1265,
+      69.9055,
+      70.6585
+    ],
+    "medianCpuMs": 69.9055,
+    "peakRssMiB": 241.03125
+  },
+  {
+    "round": 2,
+    "variant": "zip64k",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185532416,
+      "heapTotal": 89702400,
+      "heapUsed": 32481496,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.28125,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      49.06256250000001,
+      48.752478999999994,
+      50.2003335
+    ],
+    "medianMs": 49.06256250000001,
+    "cpuSamplesMs": [
+      65.4565,
+      63.839,
+      68.685
+    ],
+    "medianCpuMs": 65.4565,
+    "peakRssMiB": 242.75
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185237504,
+      "heapTotal": 92061696,
+      "heapUsed": 32466280,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 192.734375,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      54.96543750000001,
+      52.35439599999995,
+      49.777354
+    ],
+    "medianMs": 52.35439599999995,
+    "cpuSamplesMs": [
+      71.529,
+      66.368,
+      68.2005
+    ],
+    "medianCpuMs": 68.2005,
+    "peakRssMiB": 242.9375
+  },
+  {
+    "round": 2,
+    "variant": "yield256",
+    "fixture": "json",
+    "method": "table",
+    "compression": "zip",
+    "drizzleSetup": true,
+    "drizzleModules": "esm",
+    "setupMemory": {
+      "rss": 185139200,
+      "heapTotal": 91193344,
+      "heapUsed": 32919968,
+      "external": 2664840,
+      "arrayBuffers": 275247
+    },
+    "setupPeakRssMiB": 191.796875,
+    "bytes": 284084,
+    "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+    "samplesMs": [
+      49.30431250000001,
+      52.25131249999998,
+      50.73712500000005
+    ],
+    "medianMs": 50.73712500000005,
+    "cpuSamplesMs": [
+      66.4115,
+      66.588,
+      69.9275
+    ],
+    "medianCpuMs": 66.588,
+    "peakRssMiB": 247.296875
+  }
+]

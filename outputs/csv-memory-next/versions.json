@@ -1,0 +1,11 @@
+{
+  "checkedOn": "2026-10-19",
+  "source": "https://registry.npmjs.org/<package>/latest",
+  "packages": {
+    "better-sqlite3": "13.0.3",
+    "drizzle-orm": "0.45.4",
+    "zip-stream": "7.0.5",
+    "tsdown": "0.23.1"
+  },
+  "changes": "No dependency changes."
+}

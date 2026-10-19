@@ -1,0 +1,991 @@
+{
+  "node": "v26.12.0",
+  "natural": {
+    "peaks": {
+      "rss": 298270720,
+      "heapTotal": 92340224,
+      "heapUsed": 34710096,
+      "external": 75158847,
+      "arrayBuffers": 72654740
+    },
+    "allocations": {
+      "nativeBatches": 531,
+      "nativeBytes": 131579136,
+      "nativeMaxBytes": 295918,
+      "nativeBackingBytes": 131579136,
+      "nativeFinalizedBytes": 93987527,
+      "concatBuffers": 9,
+      "concatBytes": 2471796,
+      "encodedBuffers": 0,
+      "encodedBytes": 0
+    },
+    "gc": [
+      {
+        "startTime": 36.085,
+        "duration": 0.36270904541015625,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 47.385125,
+        "duration": 0.3711252212524414,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 54.216959,
+        "duration": 1.1500005722045898,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 62.74975,
+        "duration": 0.692500114440918,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 80.430334,
+        "duration": 1.7618331909179688,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 111.211125,
+        "duration": 3.1192502975463867,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 173.551167,
+        "duration": 5.34304141998291,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 178.899417,
+        "duration": 0.18800067901611328,
+        "kind": 8,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 180.840417,
+        "duration": 3.3676252365112305,
+        "kind": 4,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 264.829042,
+        "duration": 6.101707458496094,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 273.412834,
+        "duration": 4.688416481018066,
+        "kind": 1,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 278.106167,
+        "duration": 0.1932506561279297,
+        "kind": 8,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 279.987625,
+        "duration": 2.5205841064453125,
+        "kind": 4,
+        "phase": "export-start",
+        "exportIndex": 0
+      },
+      {
+        "startTime": 402.440584,
+        "duration": 0.19216632843017578,
+        "kind": 8,
+        "phase": "export-start",
+        "exportIndex": 1
+      },
+      {
+        "startTime": 413.650417,
+        "duration": 1.2337923049926758,
+        "kind": 4,
+        "phase": "export-start",
+        "exportIndex": 2
+      },
+      {
+        "startTime": 591.425459,
+        "duration": 0.13266658782958984,
+        "kind": 8,
+        "phase": "export-start",
+        "exportIndex": 6
+      },
+      {
+        "startTime": 595.57575,
+        "duration": 0.6906251907348633,
+        "kind": 4,
+        "phase": "export-start",
+        "exportIndex": 6
+      }
+    ]
+  },
+  "snapshots": [
+    {
+      "label": "bootstrap",
+      "exportIndex": -1,
+      "rss": 56541184,
+      "heapTotal": 6176768,
+      "heapUsed": 4845672,
+      "external": 2217487,
+      "arrayBuffers": 137939,
+      "maxRssBytes": 56557568,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "worker-start",
+      "exportIndex": -1,
+      "rss": 62046208,
+      "heapTotal": 9060352,
+      "heapUsed": 5861576,
+      "external": 2648117,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 62046208,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "driver-loaded",
+      "exportIndex": -1,
+      "rss": 62062592,
+      "heapTotal": 9060352,
+      "heapUsed": 5868816,
+      "external": 2648117,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 62062592,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "connection-open",
+      "exportIndex": -1,
+      "rss": 62881792,
+      "heapTotal": 9060352,
+      "heapUsed": 5940952,
+      "external": 2648117,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 62881792,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "core-loaded",
+      "exportIndex": -1,
+      "rss": 63897600,
+      "heapTotal": 9846784,
+      "heapUsed": 5849824,
+      "external": 2681533,
+      "arrayBuffers": 144083,
+      "maxRssBytes": 63897600,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "drizzle-loaded",
+      "exportIndex": -1,
+      "rss": 183255040,
+      "heapTotal": 89096192,
+      "heapUsed": 26319664,
+      "external": 2779354,
+      "arrayBuffers": 275247,
+      "maxRssBytes": 202833920,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "drizzle-created",
+      "exportIndex": -1,
+      "rss": 183255040,
+      "heapTotal": 89096192,
+      "heapUsed": 26410872,
+      "external": 2779354,
+      "arrayBuffers": 275247,
+      "maxRssBytes": 202833920,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "adapter-loaded",
+      "exportIndex": -1,
+      "rss": 186548224,
+      "heapTotal": 92340224,
+      "heapUsed": 33817176,
+      "external": 2779354,
+      "arrayBuffers": 275247,
+      "maxRssBytes": 202833920,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "setup-ready",
+      "exportIndex": -1,
+      "rss": 186548224,
+      "heapTotal": 92340224,
+      "heapUsed": 33825256,
+      "external": 2779354,
+      "arrayBuffers": 275247,
+      "maxRssBytes": 202833920,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 0,
+      "rss": 186564608,
+      "heapTotal": 92340224,
+      "heapUsed": 33838800,
+      "external": 2779354,
+      "arrayBuffers": 275247,
+      "maxRssBytes": 202833920,
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "nativeMaxBytes": 0,
+        "nativeBackingBytes": 0,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 0,
+        "concatBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 0,
+      "exportPeaks": {
+        "rss": 186564608,
+        "heapTotal": 92340224,
+        "heapUsed": 33838800,
+        "external": 2779354,
+        "arrayBuffers": 275247
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 0,
+      "rss": 228163584,
+      "heapTotal": 92340224,
+      "heapUsed": 34406992,
+      "external": 17673902,
+      "arrayBuffers": 15169795,
+      "maxRssBytes": 228163584,
+      "allocations": {
+        "nativeBatches": 59,
+        "nativeBytes": 14619904,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 14619904,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 1,
+        "concatBytes": 274644,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 13,
+      "exportPeaks": {
+        "rss": 228163584,
+        "heapTotal": 92340224,
+        "heapUsed": 34406992,
+        "external": 17673902,
+        "arrayBuffers": 15169795
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 1,
+      "rss": 228179968,
+      "heapTotal": 92340224,
+      "heapUsed": 34411208,
+      "external": 17673902,
+      "arrayBuffers": 15169795,
+      "maxRssBytes": 228179968,
+      "allocations": {
+        "nativeBatches": 59,
+        "nativeBytes": 14619904,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 14619904,
+        "nativeFinalizedBytes": 0,
+        "concatBuffers": 1,
+        "concatBytes": 274644,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 13,
+      "exportPeaks": {
+        "rss": 228179968,
+        "heapTotal": 92340224,
+        "heapUsed": 34411208,
+        "external": 17673902,
+        "arrayBuffers": 15169795
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 1,
+      "rss": 244269056,
+      "heapTotal": 75120640,
+      "heapUsed": 7538552,
+      "external": 7276222,
+      "arrayBuffers": 4772115,
+      "maxRssBytes": 244695040,
+      "allocations": {
+        "nativeBatches": 118,
+        "nativeBytes": 29239808,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 29239808,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 2,
+        "concatBytes": 549288,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 14,
+      "exportPeaks": {
+        "rss": 244678656,
+        "heapTotal": 92340224,
+        "heapUsed": 34710096,
+        "external": 31665974,
+        "arrayBuffers": 29161867
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 2,
+      "rss": 244269056,
+      "heapTotal": 75120640,
+      "heapUsed": 7541648,
+      "external": 7276222,
+      "arrayBuffers": 4772115,
+      "maxRssBytes": 244695040,
+      "allocations": {
+        "nativeBatches": 118,
+        "nativeBytes": 29239808,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 29239808,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 2,
+        "concatBytes": 549288,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 14,
+      "exportPeaks": {
+        "rss": 244269056,
+        "heapTotal": 75120640,
+        "heapUsed": 7541648,
+        "external": 7276222,
+        "arrayBuffers": 4772115
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 2,
+      "rss": 247316480,
+      "heapTotal": 75120640,
+      "heapUsed": 7852232,
+      "external": 22170770,
+      "arrayBuffers": 19666663,
+      "maxRssBytes": 247316480,
+      "allocations": {
+        "nativeBatches": 177,
+        "nativeBytes": 43859712,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 43859712,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 3,
+        "concatBytes": 823932,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 247316480,
+        "heapTotal": 75120640,
+        "heapUsed": 7852232,
+        "external": 22170770,
+        "arrayBuffers": 19666663
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 3,
+      "rss": 247316480,
+      "heapTotal": 75120640,
+      "heapUsed": 8143640,
+      "external": 22170786,
+      "arrayBuffers": 19666679,
+      "maxRssBytes": 247316480,
+      "allocations": {
+        "nativeBatches": 177,
+        "nativeBytes": 43859712,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 43859712,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 3,
+        "concatBytes": 823932,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 247316480,
+        "heapTotal": 75120640,
+        "heapUsed": 8143640,
+        "external": 22170786,
+        "arrayBuffers": 19666679
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 3,
+      "rss": 250822656,
+      "heapTotal": 75120640,
+      "heapUsed": 8165352,
+      "external": 37065334,
+      "arrayBuffers": 34561227,
+      "maxRssBytes": 250822656,
+      "allocations": {
+        "nativeBatches": 236,
+        "nativeBytes": 58479616,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 58479616,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 4,
+        "concatBytes": 1098576,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 250822656,
+        "heapTotal": 75120640,
+        "heapUsed": 8165352,
+        "external": 37065334,
+        "arrayBuffers": 34561227
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 4,
+      "rss": 250822656,
+      "heapTotal": 75120640,
+      "heapUsed": 8168288,
+      "external": 37065334,
+      "arrayBuffers": 34561227,
+      "maxRssBytes": 250822656,
+      "allocations": {
+        "nativeBatches": 236,
+        "nativeBytes": 58479616,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 58479616,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 4,
+        "concatBytes": 1098576,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 250822656,
+        "heapTotal": 75120640,
+        "heapUsed": 8168288,
+        "external": 37065334,
+        "arrayBuffers": 34561227
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 4,
+      "rss": 267763712,
+      "heapTotal": 75120640,
+      "heapUsed": 8471544,
+      "external": 51959882,
+      "arrayBuffers": 49455775,
+      "maxRssBytes": 267763712,
+      "allocations": {
+        "nativeBatches": 295,
+        "nativeBytes": 73099520,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 73099520,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 5,
+        "concatBytes": 1373220,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 267763712,
+        "heapTotal": 75120640,
+        "heapUsed": 8471544,
+        "external": 51959882,
+        "arrayBuffers": 49455775
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 5,
+      "rss": 267763712,
+      "heapTotal": 75120640,
+      "heapUsed": 8475680,
+      "external": 51959882,
+      "arrayBuffers": 49455775,
+      "maxRssBytes": 267763712,
+      "allocations": {
+        "nativeBatches": 295,
+        "nativeBytes": 73099520,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 73099520,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 5,
+        "concatBytes": 1373220,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 267763712,
+        "heapTotal": 75120640,
+        "heapUsed": 8475680,
+        "external": 51959882,
+        "arrayBuffers": 49455775
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 5,
+      "rss": 284934144,
+      "heapTotal": 75120640,
+      "heapUsed": 8784832,
+      "external": 66854430,
+      "arrayBuffers": 64350323,
+      "maxRssBytes": 284934144,
+      "allocations": {
+        "nativeBatches": 354,
+        "nativeBytes": 87719424,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 87719424,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 6,
+        "concatBytes": 1647864,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 284934144,
+        "heapTotal": 75120640,
+        "heapUsed": 8784832,
+        "external": 66854430,
+        "arrayBuffers": 64350323
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 6,
+      "rss": 284934144,
+      "heapTotal": 75120640,
+      "heapUsed": 8787768,
+      "external": 66854430,
+      "arrayBuffers": 64350323,
+      "maxRssBytes": 284934144,
+      "allocations": {
+        "nativeBatches": 354,
+        "nativeBytes": 87719424,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 87719424,
+        "nativeFinalizedBytes": 24611740,
+        "concatBuffers": 6,
+        "concatBytes": 1647864,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 15,
+      "exportPeaks": {
+        "rss": 284934144,
+        "heapTotal": 75120640,
+        "heapUsed": 8787768,
+        "external": 66854430,
+        "arrayBuffers": 64350323
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 6,
+      "rss": 295436288,
+      "heapTotal": 75382784,
+      "heapUsed": 7734352,
+      "external": 10999971,
+      "arrayBuffers": 8495864,
+      "maxRssBytes": 295436288,
+      "allocations": {
+        "nativeBatches": 413,
+        "nativeBytes": 102339328,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 102339328,
+        "nativeFinalizedBytes": 93987527,
+        "concatBuffers": 7,
+        "concatBytes": 1922508,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 17,
+      "exportPeaks": {
+        "rss": 295436288,
+        "heapTotal": 75382784,
+        "heapUsed": 8946328,
+        "external": 75158847,
+        "arrayBuffers": 72654740
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 7,
+      "rss": 295436288,
+      "heapTotal": 75382784,
+      "heapUsed": 7737880,
+      "external": 10999971,
+      "arrayBuffers": 8495864,
+      "maxRssBytes": 295436288,
+      "allocations": {
+        "nativeBatches": 413,
+        "nativeBytes": 102339328,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 102339328,
+        "nativeFinalizedBytes": 93987527,
+        "concatBuffers": 7,
+        "concatBytes": 1922508,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 17,
+      "exportPeaks": {
+        "rss": 295436288,
+        "heapTotal": 75382784,
+        "heapUsed": 7737880,
+        "external": 10999971,
+        "arrayBuffers": 8495864
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 7,
+      "rss": 295731200,
+      "heapTotal": 75382784,
+      "heapUsed": 8034496,
+      "external": 25894519,
+      "arrayBuffers": 23390412,
+      "maxRssBytes": 295731200,
+      "allocations": {
+        "nativeBatches": 472,
+        "nativeBytes": 116959232,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 116959232,
+        "nativeFinalizedBytes": 93987527,
+        "concatBuffers": 8,
+        "concatBytes": 2197152,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 17,
+      "exportPeaks": {
+        "rss": 295731200,
+        "heapTotal": 75382784,
+        "heapUsed": 8034496,
+        "external": 25894519,
+        "arrayBuffers": 23390412
+      }
+    },
+    {
+      "label": "export-start",
+      "exportIndex": 8,
+      "rss": 295731200,
+      "heapTotal": 75382784,
+      "heapUsed": 8037432,
+      "external": 25894519,
+      "arrayBuffers": 23390412,
+      "maxRssBytes": 295731200,
+      "allocations": {
+        "nativeBatches": 472,
+        "nativeBytes": 116959232,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 116959232,
+        "nativeFinalizedBytes": 93987527,
+        "concatBuffers": 8,
+        "concatBytes": 2197152,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 17,
+      "exportPeaks": {
+        "rss": 295731200,
+        "heapTotal": 75382784,
+        "heapUsed": 8037432,
+        "external": 25894519,
+        "arrayBuffers": 23390412
+      }
+    },
+    {
+      "label": "export-complete",
+      "exportIndex": 8,
+      "rss": 298237952,
+      "heapTotal": 75644928,
+      "heapUsed": 8903512,
+      "external": 40789067,
+      "arrayBuffers": 38284960,
+      "maxRssBytes": 298237952,
+      "allocations": {
+        "nativeBatches": 531,
+        "nativeBytes": 131579136,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 131579136,
+        "nativeFinalizedBytes": 93987527,
+        "concatBuffers": 9,
+        "concatBytes": 2471796,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 17,
+      "exportPeaks": {
+        "rss": 298237952,
+        "heapTotal": 75644928,
+        "heapUsed": 8903512,
+        "external": 40789067,
+        "arrayBuffers": 38284960
+      }
+    },
+    {
+      "label": "connection-closed",
+      "exportIndex": 8,
+      "rss": 298270720,
+      "heapTotal": 75644928,
+      "heapUsed": 8468216,
+      "external": 40789067,
+      "arrayBuffers": 38284960,
+      "maxRssBytes": 298270720,
+      "allocations": {
+        "nativeBatches": 531,
+        "nativeBytes": 131579136,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 131579136,
+        "nativeFinalizedBytes": 93987527,
+        "concatBuffers": 9,
+        "concatBytes": 2471796,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 17
+    },
+    {
+      "label": "end-natural",
+      "exportIndex": 8,
+      "rss": 298270720,
+      "heapTotal": 75644928,
+      "heapUsed": 8474488,
+      "external": 40789067,
+      "arrayBuffers": 38284960,
+      "maxRssBytes": 298270720,
+      "allocations": {
+        "nativeBatches": 531,
+        "nativeBytes": 131579136,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 131579136,
+        "nativeFinalizedBytes": 93987527,
+        "concatBuffers": 9,
+        "concatBytes": 2471796,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 17
+    },
+    {
+      "label": "end-after-diagnostic-gc",
+      "exportIndex": 8,
+      "rss": 298237952,
+      "heapTotal": 75382784,
+      "heapUsed": 7678128,
+      "external": 2648170,
+      "arrayBuffers": 144063,
+      "maxRssBytes": 298352640,
+      "allocations": {
+        "nativeBatches": 531,
+        "nativeBytes": 131579136,
+        "nativeMaxBytes": 295918,
+        "nativeBackingBytes": 131579136,
+        "nativeFinalizedBytes": 131579136,
+        "concatBuffers": 9,
+        "concatBytes": 2471796,
+        "encodedBuffers": 0,
+        "encodedBytes": 0
+      },
+      "gcCount": 19
+    }
+  ],
+  "streams": [
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    },
+    {
+      "name": "Writable",
+      "writes": 59,
+      "pendingBytes": 0,
+      "peakPendingBytes": 295916
+    }
+  ],
+  "statements": [
+    "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(char(13, 10) || group_concat(concat_ws(',', CASE typeof(\"__exportlite_c0\") WHEN 'null' THEN '' WHEN 'integer' THEN CAST(\"__exportlite_c0\" AS TEXT) WHEN 'text' THEN '\"' || replace(\"__exportlite_c0\", '\"', '\"\"') || '\"' WHEN 'blob' THEN json_quote(\"__exportlite_c0\") ELSE CAST(\"__exportlite_c0\" AS TEXT) END, CASE typeof(\"__exportlite_c1\") WHEN 'null' THEN '' WHEN 'text' THEN '\"' || replace(\"__exportlite_c1\", '\"', '\"\"') || '\"' WHEN 'blob' THEN json_quote(\"__exportlite_c1\") ELSE CAST(\"__exportlite_c1\" AS TEXT) END, CASE typeof(\"__exportlite_c2\") WHEN 'null' THEN '' WHEN 'text' THEN '\"' || replace(\"__exportlite_c2\", '\"', '\"\"') || '\"' WHEN 'blob' THEN json_quote(\"__exportlite_c2\") ELSE CAST(\"__exportlite_c2\" AS TEXT) END, CASE typeof(\"__exportlite_c3\") WHEN 'null' THEN '' WHEN 'integer' THEN CAST(\"__exportlite_c3\" AS TEXT) WHEN 'text' THEN '\"' || replace(\"__exportlite_c3\", '\"', '\"\"') || '\"' WHEN 'blob' THEN json_quote(\"__exportlite_c3\") ELSE CAST(\"__exportlite_c3\" AS TEXT) END), char(13, 10)) || char(13, 10) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL"
+  ]
+}
