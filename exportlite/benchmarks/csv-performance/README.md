@@ -57,6 +57,9 @@ Keep the 256-row SQL batches, 64 KiB writer target, 2,048-row yields and ZIP
 level 1 / memLevel 9 / 256 KiB compression output chunks fixed when comparing
 encoders. Record the Node executable, fixture and build hashes. Do not run CPU
 profiles, forced GC, builds or another benchmark alongside a timing comparison.
+Each ExportLite build uses its own ZIP/checksum implementation. The manual JS
+control uses the installed, unmodified `zip-stream`; it is loaded only in manual
+ZIP workers so package workers do not retain an extra unused ZIP implementation.
 
 Whole-process RSS is not incremental memory for one export and is not a memory
 limit. Check both median and highest process peaks. Compare table and query paths

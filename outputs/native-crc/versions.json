@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-10-19T16:34:36.943Z",
+  "versions": [
+    {
+      "name": "zip-stream",
+      "latest": "7.0.5"
+    },
+    {
+      "name": "compress-commons",
+      "latest": "7.0.1"
+    },
+    {
+      "name": "crc32-stream",
+      "latest": "7.0.1"
+    },
+    {
+      "name": "crc-32",
+      "latest": "1.2.2"
+    },
+    {
+      "name": "normalize-path",
+      "latest": "3.0.0"
+    },
+    {
+      "name": "is-stream",
+      "latest": "4.0.1"
+    },
+    {
+      "name": "readable-stream",
+      "latest": "4.8.0"
+    },
+    {
+      "name": "event-target-shim",
+      "latest": "6.0.2"
+    },
+    {
+      "name": "abort-controller",
+      "latest": "3.0.0"
+    },
+    {
+      "name": "process",
+      "latest": "0.11.10"
+    },
+    {
+      "name": "safe-buffer",
+      "latest": "5.2.1"
+    },
+    {
+      "name": "string_decoder",
+      "latest": "1.3.0"
+    },
+    {
+      "name": "tsdown",
+      "latest": "0.23.1"
+    }
+  ]
+}

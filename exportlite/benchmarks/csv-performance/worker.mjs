@@ -25,9 +25,10 @@ if (process.argv[2] === "worker") {
     ? undefined
     : await import(pathToFileURL(join(build, "index.mjs")));
   const zip = compression === "zip";
-  const ZipStream = zip
-    ? (await import(pathToFileURL(require.resolve("zip-stream")))).default
-    : undefined;
+  const ZipStream =
+    zip && method.startsWith("manual")
+      ? (await import(pathToFileURL(require.resolve("zip-stream")))).default
+      : undefined;
   const hasModes = fixture.columns.some((c) => c.mode);
   const names = fixture.columns.map((c) => c.key);
   const sql = `SELECT ${names.map((n) => `"${n}"`).join(",")} FROM data ORDER BY id`;

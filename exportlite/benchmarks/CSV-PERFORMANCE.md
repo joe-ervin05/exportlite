@@ -1,5 +1,7 @@
 # CSV performance investigation
 
+Follow-up, October 19, 2026: the native ZIP checksum opportunity described below is now implemented and qualified in the [native CRC32 comparison](NATIVE-CRC.md). This report retains its original pre-CRC measurements and investigation context.
+
 There are worthwhile CSV improvements without changing the public API or streaming model. This change removes redundant boolean/JSON work and reduces common type-branch work in SQLite. With one boolean declaration on the existing business fixtures, table time falls **24% narrow / 10% wide** for plain output and **24% / 1%** with ZIP. Boolean-heavy and JSON-mode exports improve more. Ordinary untyped wide text is essentially unchanged.
 
 Eligible table exports have lower median time than the manual controls across the nine bulk fixtures measured here. That is not a universal guarantee: tiny exports favor manual JS, simple query fallbacks still have a throughput gap, and wide ZIP differences are small enough to overlap ordinary run variation. The current package should not claim every CSV export is faster than well-written JS.

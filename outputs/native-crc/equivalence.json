@@ -1,0 +1,1940 @@
+{
+  "node": "v26.12.0",
+  "beforeCommit": "fcca5563d82ab7b6c607779ef59db360f7bba307",
+  "declarationsIdentical": [
+    "adapter-DfuRNeZV.d.cts",
+    "adapter-DfuRNeZV.d.mts",
+    "drizzle.d.cts",
+    "drizzle.d.mts",
+    "index.d.cts",
+    "index.d.mts",
+    "turso-DCSfWAWR.d.cts",
+    "turso-DCSfWAWR.d.mts",
+    "turso.d.cts",
+    "turso.d.mts",
+    "types-DVeygu9-.d.cts",
+    "types-DVeygu9-.d.mts"
+  ],
+  "cases": [
+    {
+      "fixture": "tiny",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 9721,
+      "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "tiny",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 910,
+      "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+        "bytes": 9721,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 702,
+          "uncompressedSize": 9721,
+          "crc32": 2879936778,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "tiny",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 9720,
+      "sha256": "8f9e27b21d65ea1456d3b97850619dc09008c11fcf262d2646d9aa2a0bab2a99",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "tiny",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 912,
+      "sha256": "651eb896d94d7d05b06c8e53505c2e205523ddbfb46d481ca2f65ac08b9e5529",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "8f9e27b21d65ea1456d3b97850619dc09008c11fcf262d2646d9aa2a0bab2a99",
+        "bytes": 9720,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 702,
+          "uncompressedSize": 9720,
+          "crc32": 734105658,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "tiny",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 6535,
+      "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "tiny",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 793,
+      "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+        "bytes": 6535,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 587,
+          "uncompressedSize": 6535,
+          "crc32": 682613721,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "tiny",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 9721,
+      "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "tiny",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 914,
+      "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+        "bytes": 9721,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 702,
+          "uncompressedSize": 9721,
+          "crc32": 2879936778,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "tiny",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 9720,
+      "sha256": "8f9e27b21d65ea1456d3b97850619dc09008c11fcf262d2646d9aa2a0bab2a99",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "tiny",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 916,
+      "sha256": "17cd9d07ab44cbdb27c60b1d2e8c0e6ce951a52e204fabd0c41a6a435345dd33",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "8f9e27b21d65ea1456d3b97850619dc09008c11fcf262d2646d9aa2a0bab2a99",
+        "bytes": 9720,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 702,
+          "uncompressedSize": 9720,
+          "crc32": 734105658,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "tiny",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 6535,
+      "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "tiny",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 797,
+      "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+        "bytes": 6535,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 587,
+          "uncompressedSize": 6535,
+          "crc32": 682613721,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 4113237,
+      "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 1065312,
+      "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+        "bytes": 4113237,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 1065104,
+          "uncompressedSize": 4113237,
+          "crc32": 3652267991,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 4113236,
+      "sha256": "c0d30989a5b652feec96b0e7998aea49e583bf1f755c911be6e99126a78cf0bf",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 1065310,
+      "sha256": "b1c7541d9152601b0b22e5d2de0a170380cdd1429514ceb0385465449caa1152",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "c0d30989a5b652feec96b0e7998aea49e583bf1f755c911be6e99126a78cf0bf",
+        "bytes": 4113236,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 1065100,
+          "uncompressedSize": 4113236,
+          "crc32": 2909096138,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 2634697,
+      "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 968376,
+      "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+        "bytes": 2634697,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 968170,
+          "uncompressedSize": 2634697,
+          "crc32": 893596531,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 4113237,
+      "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 1065316,
+      "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+        "bytes": 4113237,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 1065104,
+          "uncompressedSize": 4113237,
+          "crc32": 3652267991,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 4113236,
+      "sha256": "c0d30989a5b652feec96b0e7998aea49e583bf1f755c911be6e99126a78cf0bf",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 1065314,
+      "sha256": "bea8936fbc2112629712d1a5c5413791978ea0d32fe710c3d1e4ce67538b5a0d",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "c0d30989a5b652feec96b0e7998aea49e583bf1f755c911be6e99126a78cf0bf",
+        "bytes": 4113236,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 1065100,
+          "uncompressedSize": 4113236,
+          "crc32": 2909096138,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 2634697,
+      "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 968380,
+      "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+        "bytes": 2634697,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 968170,
+          "uncompressedSize": 2634697,
+          "crc32": 893596531,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 15094262,
+      "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 4053325,
+      "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+        "bytes": 15094262,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 4053117,
+          "uncompressedSize": 15094262,
+          "crc32": 212372357,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 15094261,
+      "sha256": "34e2471f1587608a91d8262739cddf6983f2501191850cfc6a554a053683b3d3",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 4053327,
+      "sha256": "c1595c0fc1b2375524f350d9e5e3d12f75bd3913d49b4070d95bd6561da320ea",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "34e2471f1587608a91d8262739cddf6983f2501191850cfc6a554a053683b3d3",
+        "bytes": 15094261,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 4053117,
+          "uncompressedSize": 15094261,
+          "crc32": 1994603584,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 14619815,
+      "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 3999471,
+      "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+        "bytes": 14619815,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 3999265,
+          "uncompressedSize": 14619815,
+          "crc32": 1962519192,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 15094262,
+      "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 4053329,
+      "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+        "bytes": 15094262,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 4053117,
+          "uncompressedSize": 15094262,
+          "crc32": 212372357,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 15094261,
+      "sha256": "34e2471f1587608a91d8262739cddf6983f2501191850cfc6a554a053683b3d3",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 4053331,
+      "sha256": "02b2d3077ff45827c738cdc1bce40b90c5235a3c434273f088dcb0311ba09463",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "34e2471f1587608a91d8262739cddf6983f2501191850cfc6a554a053683b3d3",
+        "bytes": 15094261,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 4053117,
+          "uncompressedSize": 15094261,
+          "crc32": 1994603584,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 14619815,
+      "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 3999475,
+      "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+        "bytes": 14619815,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 3999265,
+          "uncompressedSize": 14619815,
+          "crc32": 1962519192,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 4277290,
+      "sha256": "28806f9be5c3025eec5c1f65cc671c0cf0b06c7ede97d002be3680c2b1729e0a",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 1071117,
+      "sha256": "dd16ba23040a2007c30837f664a109512a3e73274b83500f763431011619b4e6",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "28806f9be5c3025eec5c1f65cc671c0cf0b06c7ede97d002be3680c2b1729e0a",
+        "bytes": 4277290,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 1070909,
+          "uncompressedSize": 4277290,
+          "crc32": 1298779635,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 4277289,
+      "sha256": "ad9a8a2fb2d6984c2ed8d9a9b9c1f550627abe24ddfc72ecb2020333797cdab9",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 1071118,
+      "sha256": "6c664f26288a069adb67a001a7b365649e5e3ce188cfade17c7f15a9764d95de",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "ad9a8a2fb2d6984c2ed8d9a9b9c1f550627abe24ddfc72ecb2020333797cdab9",
+        "bytes": 4277289,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 1070908,
+          "uncompressedSize": 4277289,
+          "crc32": 366499092,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 2898750,
+      "sha256": "c4aca5daee319d261c89c9eb05e44dcc074485f790c62a91f8779db31281361c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 986927,
+      "sha256": "97bdd118ce38e57745af62a8272657e83d56c6a2362098332fb1a713b8e9d1f5",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "c4aca5daee319d261c89c9eb05e44dcc074485f790c62a91f8779db31281361c",
+        "bytes": 2898750,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 986721,
+          "uncompressedSize": 2898750,
+          "crc32": 156863431,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 4277290,
+      "sha256": "28806f9be5c3025eec5c1f65cc671c0cf0b06c7ede97d002be3680c2b1729e0a",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 1071121,
+      "sha256": "138767395a047af5f6ef2b15c477501a0a2caa9a5826db27e0c71344bcb2c0ec",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "28806f9be5c3025eec5c1f65cc671c0cf0b06c7ede97d002be3680c2b1729e0a",
+        "bytes": 4277290,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 1070909,
+          "uncompressedSize": 4277290,
+          "crc32": 1298779635,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 4277289,
+      "sha256": "ad9a8a2fb2d6984c2ed8d9a9b9c1f550627abe24ddfc72ecb2020333797cdab9",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 1071122,
+      "sha256": "c8a4f13ca7e7b50d962f80d4c226a8a0dec01a5d6ff5f0493c3219626515c625",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "ad9a8a2fb2d6984c2ed8d9a9b9c1f550627abe24ddfc72ecb2020333797cdab9",
+        "bytes": 4277289,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 1070908,
+          "uncompressedSize": 4277289,
+          "crc32": 366499092,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 2898750,
+      "sha256": "c4aca5daee319d261c89c9eb05e44dcc074485f790c62a91f8779db31281361c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "narrow-typed",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 986931,
+      "sha256": "54ae6c9b63137be5a0aef295a0e70ed4772c8bfd81aee2dd24b4670248896643",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "c4aca5daee319d261c89c9eb05e44dcc074485f790c62a91f8779db31281361c",
+        "bytes": 2898750,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 986721,
+          "uncompressedSize": 2898750,
+          "crc32": 156863431,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 15143543,
+      "sha256": "b0f1745b8f9b92a47bb980140d3110bfc9ed3eb1251220adb853c83c8c0b1577",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 4055934,
+      "sha256": "3df246906f63a91ce99c068c52df7de009dadcb32f0381d584c637d942d809b5",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b0f1745b8f9b92a47bb980140d3110bfc9ed3eb1251220adb853c83c8c0b1577",
+        "bytes": 15143543,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 4055726,
+          "uncompressedSize": 15143543,
+          "crc32": 2280484050,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 15143542,
+      "sha256": "6e34b12312ae55549ae74bc0e8b8c54ded1fe36d51e808225ddbb58c1ea5c749",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 4055939,
+      "sha256": "b81b4bec7343df6d90af1d25a86828749c5d7bd8e9cc05acf728a241a0afd9a1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "6e34b12312ae55549ae74bc0e8b8c54ded1fe36d51e808225ddbb58c1ea5c749",
+        "bytes": 15143542,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 4055729,
+          "uncompressedSize": 15143542,
+          "crc32": 2840923989,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 14699096,
+      "sha256": "fcc01dab8d9a42fc7ce3535214480cd2e65b7a2f6f66437e28e4165b2fdf8b4c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 4006543,
+      "sha256": "8da5b0a401e4fa6b9541d072d0114476dfa162f6a2e59cf4ac86cdf330330f07",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "fcc01dab8d9a42fc7ce3535214480cd2e65b7a2f6f66437e28e4165b2fdf8b4c",
+        "bytes": 14699096,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 4006337,
+          "uncompressedSize": 14699096,
+          "crc32": 2541170970,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 15143543,
+      "sha256": "b0f1745b8f9b92a47bb980140d3110bfc9ed3eb1251220adb853c83c8c0b1577",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 4055938,
+      "sha256": "e85b17c0d898f1e7ef3cbe88c8a328d336f0560610f01a80d087e97a4a7b9b29",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b0f1745b8f9b92a47bb980140d3110bfc9ed3eb1251220adb853c83c8c0b1577",
+        "bytes": 15143543,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 4055726,
+          "uncompressedSize": 15143543,
+          "crc32": 2280484050,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 15143542,
+      "sha256": "6e34b12312ae55549ae74bc0e8b8c54ded1fe36d51e808225ddbb58c1ea5c749",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 4055943,
+      "sha256": "795f8b6a6520e4aa8db4a2ca78d0f058f05d6f5eb2b0ef36a8a49eaf035b0afc",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "6e34b12312ae55549ae74bc0e8b8c54ded1fe36d51e808225ddbb58c1ea5c749",
+        "bytes": 15143542,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 4055729,
+          "uncompressedSize": 15143542,
+          "crc32": 2840923989,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 14699096,
+      "sha256": "fcc01dab8d9a42fc7ce3535214480cd2e65b7a2f6f66437e28e4165b2fdf8b4c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "wide-typed",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 4006547,
+      "sha256": "01420b1a58bcfc5160116574265ff95e30a8307a0d0f5daf80c1b97b1cac8445",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "fcc01dab8d9a42fc7ce3535214480cd2e65b7a2f6f66437e28e4165b2fdf8b4c",
+        "bytes": 14699096,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 4006337,
+          "uncompressedSize": 14699096,
+          "crc32": 2541170970,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 2601681,
+      "sha256": "e5527111a224ebea40fead6b123510be7b7532f3ee25989fed77888da65b3353",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 164761,
+      "sha256": "4d35ffea97e825c23720801b31f21e9aba9e93b2f320ec3a2199c34c070b1298",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "e5527111a224ebea40fead6b123510be7b7532f3ee25989fed77888da65b3353",
+        "bytes": 2601681,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 164553,
+          "uncompressedSize": 2601681,
+          "crc32": 1009566737,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 2601680,
+      "sha256": "0ed01d642bcdf7361a86824d1d9017ab84cece31e7aa6fde502529c717cfa215",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 164763,
+      "sha256": "5893a59039a551eff21a2b6a4e028ec8a84abe45ddd4f2b7676e94023a51952c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "0ed01d642bcdf7361a86824d1d9017ab84cece31e7aa6fde502529c717cfa215",
+        "bytes": 2601680,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 164553,
+          "uncompressedSize": 2601680,
+          "crc32": 1509498494,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 611709,
+      "sha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 146748,
+      "sha256": "1ae83c621e68be61394030f105478c765266d4b4f7cbf346cf5b036464686cc2",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+        "bytes": 611709,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 146542,
+          "uncompressedSize": 611709,
+          "crc32": 2371130254,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 2601681,
+      "sha256": "e5527111a224ebea40fead6b123510be7b7532f3ee25989fed77888da65b3353",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 164765,
+      "sha256": "9261279835c85743dfb17687439fa16d35628e2bb33ad655103d27d5a57f7f0d",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "e5527111a224ebea40fead6b123510be7b7532f3ee25989fed77888da65b3353",
+        "bytes": 2601681,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 164553,
+          "uncompressedSize": 2601681,
+          "crc32": 1009566737,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 2601680,
+      "sha256": "0ed01d642bcdf7361a86824d1d9017ab84cece31e7aa6fde502529c717cfa215",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 164767,
+      "sha256": "7b5bc3272eb400d88df2a8c7998195d69b97a84dd270113ae74def28aa6f55d2",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "0ed01d642bcdf7361a86824d1d9017ab84cece31e7aa6fde502529c717cfa215",
+        "bytes": 2601680,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 164553,
+          "uncompressedSize": 2601680,
+          "crc32": 1509498494,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 611709,
+      "sha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "null-heavy",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 146752,
+      "sha256": "0fe6438476676be0b45466fd4f2d9180bbadfc141ced0322bcf33b3c9ba783f8",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+        "bytes": 611709,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 146542,
+          "uncompressedSize": 611709,
+          "crc32": 2371130254,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 25347758,
+      "sha256": "7143521ad7c0fc6172db36acdcab810e1ed8d93eff69bf5e08b6a02653cf6638",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 380026,
+      "sha256": "6e8c618e1885c3aa9e612d4fa3d0833cfb5e15117155a96c5099b2d8ec7840d0",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "7143521ad7c0fc6172db36acdcab810e1ed8d93eff69bf5e08b6a02653cf6638",
+        "bytes": 25347758,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 379818,
+          "uncompressedSize": 25347758,
+          "crc32": 534141331,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 25347757,
+      "sha256": "d21a36387e08d79c13573494dfc5d2b690fc662232ae924436a3eb02bd59cb0e",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 380030,
+      "sha256": "7053ec6bc6c655189a1fb1ab4b71acef2b4fa29f878dda6beb51cb79e013ee47",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "d21a36387e08d79c13573494dfc5d2b690fc662232ae924436a3eb02bd59cb0e",
+        "bytes": 25347757,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 379820,
+          "uncompressedSize": 25347757,
+          "crc32": 2634863700,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 15903618,
+      "sha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 251392,
+      "sha256": "e0337248d50a48426b6e6a676f566df37b8da7cb7507759542fc886023e8f2f1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+        "bytes": 15903618,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 251186,
+          "uncompressedSize": 15903618,
+          "crc32": 429770923,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 25347758,
+      "sha256": "7143521ad7c0fc6172db36acdcab810e1ed8d93eff69bf5e08b6a02653cf6638",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 380030,
+      "sha256": "eed9c6063d151a1af1ed2b802bfd41296074e082f73928a8f5c4bd9bc87a827d",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "7143521ad7c0fc6172db36acdcab810e1ed8d93eff69bf5e08b6a02653cf6638",
+        "bytes": 25347758,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 379818,
+          "uncompressedSize": 25347758,
+          "crc32": 534141331,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 25347757,
+      "sha256": "d21a36387e08d79c13573494dfc5d2b690fc662232ae924436a3eb02bd59cb0e",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 380034,
+      "sha256": "ab9e9e81749ff18b70fccdbe2dd20fcbce0a9fca0f98e034e6906ece6491890c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "d21a36387e08d79c13573494dfc5d2b690fc662232ae924436a3eb02bd59cb0e",
+        "bytes": 25347757,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 379820,
+          "uncompressedSize": 25347757,
+          "crc32": 2634863700,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 15903618,
+      "sha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "quote-heavy",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 251396,
+      "sha256": "795e5fe55a188881cc7ce740706e91e8f625db242cfd06edd0f5355ebf3c7859",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+        "bytes": 15903618,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 251186,
+          "uncompressedSize": 15903618,
+          "crc32": 429770923,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "boolean",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 2597229,
+      "sha256": "ba8df436ed581fc396d13a88af2fb477ce72445ed30305ac3fdaa9084bb10a7c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "boolean",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 207252,
+      "sha256": "8daff3e34be7e60f1696eb6fda080be46397ab0e9172a8139f8d0ea9f788afd3",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "ba8df436ed581fc396d13a88af2fb477ce72445ed30305ac3fdaa9084bb10a7c",
+        "bytes": 2597229,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 207044,
+          "uncompressedSize": 2597229,
+          "crc32": 3662618959,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "boolean",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 2597228,
+      "sha256": "b2192265993b566cf3fe133ea6a41fd1ce319085d60103603e178184b45f39a6",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "boolean",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 207252,
+      "sha256": "2724f1b6609ba8b8c40fcd0b9e01c1506bb7512fd4781a0ca5e852dd0bc3e3b4",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b2192265993b566cf3fe133ea6a41fd1ce319085d60103603e178184b45f39a6",
+        "bytes": 2597228,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 207042,
+          "uncompressedSize": 2597228,
+          "crc32": 3257113284,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "boolean",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 1304409,
+      "sha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "boolean",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 181354,
+      "sha256": "4b0b61799cc436f9b520d37b076a02cdf4aaa09a98f14545360e54da74b1d057",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+        "bytes": 1304409,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 181148,
+          "uncompressedSize": 1304409,
+          "crc32": 2685534189,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "boolean",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 2597229,
+      "sha256": "ba8df436ed581fc396d13a88af2fb477ce72445ed30305ac3fdaa9084bb10a7c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "boolean",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 207256,
+      "sha256": "6f07c9f4da36503aa9fd2bc84bc7161fcc0c97250ad8a58516fa2433913a45f9",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "ba8df436ed581fc396d13a88af2fb477ce72445ed30305ac3fdaa9084bb10a7c",
+        "bytes": 2597229,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 207044,
+          "uncompressedSize": 2597229,
+          "crc32": 3662618959,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "boolean",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 2597228,
+      "sha256": "b2192265993b566cf3fe133ea6a41fd1ce319085d60103603e178184b45f39a6",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "boolean",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 207256,
+      "sha256": "3d0fc90b315520539b82d7f16f2672bffb3efce41f6d6036c091501e3563b9bd",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b2192265993b566cf3fe133ea6a41fd1ce319085d60103603e178184b45f39a6",
+        "bytes": 2597228,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 207042,
+          "uncompressedSize": 2597228,
+          "crc32": 3257113284,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "boolean",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 1304409,
+      "sha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "boolean",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 181358,
+      "sha256": "82e912bc733b74c8b97067d6e3b1acf774ea15629c08045572dc645910467521",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+        "bytes": 1304409,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 181148,
+          "uncompressedSize": 1304409,
+          "crc32": 2685534189,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "json",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 11173882,
+      "sha256": "b5fff44ae3bb1bdb4048d88c14744fc8b4bf5870d3be18b07b54087851cb345a",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "json",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 276325,
+      "sha256": "fc1ca93478c0a53fb4afdfdd3d715fd5890019c7fea09f72c9d5e1a467ba7b85",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b5fff44ae3bb1bdb4048d88c14744fc8b4bf5870d3be18b07b54087851cb345a",
+        "bytes": 11173882,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 276117,
+          "uncompressedSize": 11173882,
+          "crc32": 2181786398,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "json",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 11173881,
+      "sha256": "1c4963a1d2673a03ae965af734ec17756e82608cb4950bee962e8c4e44e51cf1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "json",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 276328,
+      "sha256": "9c646f68a3fa7bf18dd0682e9a89231d911484af49c208d2276287506979a7eb",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "1c4963a1d2673a03ae965af734ec17756e82608cb4950bee962e8c4e44e51cf1",
+        "bytes": 11173881,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 276118,
+          "uncompressedSize": 11173881,
+          "crc32": 3517897125,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "json",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 11902550,
+      "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "json",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 284084,
+      "sha256": "34d2401db26c38258a61699f4114f7988d04853886704250dab51f2d3f532de1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+        "bytes": 11902550,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 283878,
+          "uncompressedSize": 11902550,
+          "crc32": 1124097554,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "json",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 11173882,
+      "sha256": "b5fff44ae3bb1bdb4048d88c14744fc8b4bf5870d3be18b07b54087851cb345a",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "json",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 276329,
+      "sha256": "bd1778362d81ebe8fd432b3577c36220f496dfaacf0e13d1b23cb2d6b56d2be2",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "b5fff44ae3bb1bdb4048d88c14744fc8b4bf5870d3be18b07b54087851cb345a",
+        "bytes": 11173882,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 276117,
+          "uncompressedSize": 11173882,
+          "crc32": 2181786398,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "json",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 11173881,
+      "sha256": "1c4963a1d2673a03ae965af734ec17756e82608cb4950bee962e8c4e44e51cf1",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "json",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 276332,
+      "sha256": "3177215377bd312cea7a08ad3a47c15a4bccb618dc7ec80cae16d250085d25b8",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "1c4963a1d2673a03ae965af734ec17756e82608cb4950bee962e8c4e44e51cf1",
+        "bytes": 11173881,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 276118,
+          "uncompressedSize": 11173881,
+          "crc32": 3517897125,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "json",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 11902550,
+      "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "json",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 284088,
+      "sha256": "180668d78ff2fe7f7637a11226b36a3c72471e6ba81b8a582b17cd286ef8f2b6",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+        "bytes": 11902550,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 283878,
+          "uncompressedSize": 11902550,
+          "crc32": 1124097554,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "many-columns",
+      "method": "table",
+      "format": "json",
+      "zip": false,
+      "bytes": 12284140,
+      "sha256": "4aa625b55077f3f161e4aa047ca34778e4f2d90401bf21d1dd7770df15011daf",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "many-columns",
+      "method": "table",
+      "format": "json",
+      "zip": true,
+      "bytes": 1888061,
+      "sha256": "9de7af1f4295add389c32df18f1ce4160ed2c0612d751e7720a0e93b8770e56f",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "4aa625b55077f3f161e4aa047ca34778e4f2d90401bf21d1dd7770df15011daf",
+        "bytes": 12284140,
+        "entry": {
+          "fileName": "data.json",
+          "compressedSize": 1887853,
+          "uncompressedSize": 12284140,
+          "crc32": 2786459893,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "many-columns",
+      "method": "table",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 12284139,
+      "sha256": "9a2e3497af444ffc61332d11ceaa823bee6235b0fc3fdd70e7dd9427156fbc4a",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "many-columns",
+      "method": "table",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 1888085,
+      "sha256": "fc7827cc541945e9dbad31772f6b1d224ebce9a9ee68d83692ba641a2e96996c",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "9a2e3497af444ffc61332d11ceaa823bee6235b0fc3fdd70e7dd9427156fbc4a",
+        "bytes": 12284139,
+        "entry": {
+          "fileName": "data.jsonl",
+          "compressedSize": 1887875,
+          "uncompressedSize": 12284139,
+          "crc32": 3265874818,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "many-columns",
+      "method": "table",
+      "format": "csv",
+      "zip": false,
+      "bytes": 9288713,
+      "sha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "many-columns",
+      "method": "table",
+      "format": "csv",
+      "zip": true,
+      "bytes": 1476634,
+      "sha256": "67e5dbe9f825047f3567bb6c2f7540ed997c49a1970f9c2f4a2e0033049df5c9",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+        "bytes": 9288713,
+        "entry": {
+          "fileName": "data.csv",
+          "compressedSize": 1476428,
+          "uncompressedSize": 9288713,
+          "crc32": 134401827,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "many-columns",
+      "method": "query",
+      "format": "json",
+      "zip": false,
+      "bytes": 12284140,
+      "sha256": "4aa625b55077f3f161e4aa047ca34778e4f2d90401bf21d1dd7770df15011daf",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "many-columns",
+      "method": "query",
+      "format": "json",
+      "zip": true,
+      "bytes": 1888065,
+      "sha256": "b651c050735b3684a935026eb9326cb8a64dcf4f4818b189b5a3dee1328200f8",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "4aa625b55077f3f161e4aa047ca34778e4f2d90401bf21d1dd7770df15011daf",
+        "bytes": 12284140,
+        "entry": {
+          "fileName": "export.json",
+          "compressedSize": 1887853,
+          "uncompressedSize": 12284140,
+          "crc32": 2786459893,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "many-columns",
+      "method": "query",
+      "format": "jsonl",
+      "zip": false,
+      "bytes": 12284139,
+      "sha256": "9a2e3497af444ffc61332d11ceaa823bee6235b0fc3fdd70e7dd9427156fbc4a",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "many-columns",
+      "method": "query",
+      "format": "jsonl",
+      "zip": true,
+      "bytes": 1888089,
+      "sha256": "19760472a299b78ac4eef65b41b0996cd8e6209d582de3460f8d10537fe4fdb7",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "9a2e3497af444ffc61332d11ceaa823bee6235b0fc3fdd70e7dd9427156fbc4a",
+        "bytes": 12284139,
+        "entry": {
+          "fileName": "export.jsonl",
+          "compressedSize": 1887875,
+          "uncompressedSize": 12284139,
+          "crc32": 3265874818,
+          "versionNeededToExtract": 20
+        }
+      }
+    },
+    {
+      "fixture": "many-columns",
+      "method": "query",
+      "format": "csv",
+      "zip": false,
+      "bytes": 9288713,
+      "sha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "chunkBoundariesIdentical": true
+    },
+    {
+      "fixture": "many-columns",
+      "method": "query",
+      "format": "csv",
+      "zip": true,
+      "bytes": 1476638,
+      "sha256": "fc9c1c192b58e5372805bdac1962847395d3a7c39537147afda84ca53bb05d32",
+      "preparedStatements": 1,
+      "sqlIdentical": true,
+      "decoded": {
+        "sha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+        "bytes": 9288713,
+        "entry": {
+          "fileName": "export.csv",
+          "compressedSize": 1476428,
+          "uncompressedSize": 9288713,
+          "crc32": 134401827,
+          "versionNeededToExtract": 20
+        }
+      }
+    }
+  ]
+}

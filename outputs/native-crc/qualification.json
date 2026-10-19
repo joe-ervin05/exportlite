@@ -1,0 +1,32 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "baselineCommit": "fcca5563d82ab7b6c607779ef59db360f7bba307",
+  "implementationCommit": "8c657d6",
+  "checks": {
+    "build": true,
+    "typecheck": true,
+    "lint": true,
+    "reliabilityTests": 469,
+    "testFiles": 12,
+    "byteEquivalenceCases": 120,
+    "unchangedDeclarations": 12,
+    "cleanInstalledConsumers": 5,
+    "builtESMandCJS": true,
+    "finalESMmatchesTimedBuild": true,
+    "bundleControlDiffersOnlyByChecksumAlias": true,
+    "actualZip64Bytes": 4296065036,
+    "zip64CRC": 3066974917
+  },
+  "timing": {
+    "matchedWorkers": 500,
+    "checksumControlWorkers": 60,
+    "rounds": 5
+  },
+  "limits": [
+    "No new JSON/JSONL timing claims.",
+    "Memory is whole-process peak, including imports, warmup and repeated exports.",
+    "Turso verification uses local protocol tests.",
+    "CI result is recorded separately against the final pushed commit."
+  ]
+}

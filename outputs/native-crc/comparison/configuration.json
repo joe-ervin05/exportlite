@@ -1,0 +1,454 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "beforeSourceCommit": "fcca5563d82ab7b6c607779ef59db360f7bba307",
+  "rounds": 5,
+  "cases": [
+    [
+      "before",
+      "table"
+    ],
+    [
+      "after",
+      "table"
+    ],
+    [
+      "before",
+      "query"
+    ],
+    [
+      "after",
+      "query"
+    ],
+    [
+      "control",
+      "manual-tuned"
+    ]
+  ],
+  "fixtures": [
+    {
+      "name": "tiny",
+      "rows": 100,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 50,
+      "databaseSha256": "9597a3e2e489aa1b206272471819640a7981da8d03edb8be517b4a0dd41ecbc2",
+      "bytes": 6535,
+      "csvSha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2634697,
+      "csvSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14619815,
+      "csvSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "narrow-typed",
+      "source": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2898750,
+      "csvSha256": "c4aca5daee319d261c89c9eb05e44dcc074485f790c62a91f8779db31281361c",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide-typed",
+      "source": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14699096,
+      "csvSha256": "fcc01dab8d9a42fc7ce3535214480cd2e65b7a2f6f66437e28e4165b2fdf8b4c",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "null-heavy",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "6efe6651baa30e7790c95bfb87a4fec3697e52a7a571c5f814c9332dec9ad593",
+      "bytes": 611709,
+      "csvSha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "quote-heavy",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "720f805c246fd94d49ef7023ec0e78beb1fd3478dfaa3cdcb0ccaad811e9add9",
+      "bytes": 15903618,
+      "csvSha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "boolean",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "integer",
+          "mode": "boolean"
+        },
+        {
+          "key": "note",
+          "type": "integer",
+          "mode": "boolean"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "f2719abff0cf7981ae1eaf64f6af08145493bed14985b721f31822eff850c97d",
+      "bytes": 1304409,
+      "csvSha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "json",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text",
+          "mode": "json"
+        },
+        {
+          "key": "note",
+          "type": "text",
+          "mode": "json"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "drizzle": true,
+      "databaseSha256": "321e50492b61d0df5504a7f4d67e9b6beba968add6654a361b6327931ff3fed4",
+      "bytes": 11902550,
+      "csvSha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "many-columns",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "c0",
+          "type": "integer"
+        },
+        {
+          "key": "c1",
+          "type": "text"
+        },
+        {
+          "key": "c2",
+          "type": "text"
+        },
+        {
+          "key": "c3",
+          "type": "integer"
+        },
+        {
+          "key": "c4",
+          "type": "text"
+        },
+        {
+          "key": "c5",
+          "type": "text"
+        },
+        {
+          "key": "c6",
+          "type": "integer"
+        },
+        {
+          "key": "c7",
+          "type": "text"
+        },
+        {
+          "key": "c8",
+          "type": "text"
+        },
+        {
+          "key": "c9",
+          "type": "integer"
+        },
+        {
+          "key": "c10",
+          "type": "text"
+        },
+        {
+          "key": "c11",
+          "type": "text"
+        },
+        {
+          "key": "c12",
+          "type": "integer"
+        },
+        {
+          "key": "c13",
+          "type": "text"
+        },
+        {
+          "key": "c14",
+          "type": "text"
+        },
+        {
+          "key": "c15",
+          "type": "integer"
+        },
+        {
+          "key": "c16",
+          "type": "text"
+        },
+        {
+          "key": "c17",
+          "type": "text"
+        },
+        {
+          "key": "c18",
+          "type": "integer"
+        },
+        {
+          "key": "c19",
+          "type": "text"
+        },
+        {
+          "key": "c20",
+          "type": "text"
+        },
+        {
+          "key": "c21",
+          "type": "integer"
+        },
+        {
+          "key": "c22",
+          "type": "text"
+        },
+        {
+          "key": "c23",
+          "type": "text"
+        },
+        {
+          "key": "c24",
+          "type": "integer"
+        },
+        {
+          "key": "c25",
+          "type": "text"
+        },
+        {
+          "key": "c26",
+          "type": "text"
+        },
+        {
+          "key": "c27",
+          "type": "integer"
+        },
+        {
+          "key": "c28",
+          "type": "text"
+        },
+        {
+          "key": "c29",
+          "type": "text"
+        },
+        {
+          "key": "c30",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "ca3ac59e0c76a0af488f107d2005342d83886c345e1f0affe0b7d00e126683d8",
+      "bytes": 9288713,
+      "csvSha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "builds": {
+    "after": {
+      "cache-BnaEVKnc.mjs": "9f184eba0c42610a072e0052357c5ce94eb5da18f14ada950057b3893389ad81",
+      "drizzle.mjs": "66c6cda7740123b8bb32f6e8af9d1ee20efd8f29feda7052762e1af4d2c67953",
+      "export-turso-DwJiY3TK.mjs": "e8a258ad2f930ca7aa72b108c68f0e1dde83ac26db27d0b465d005086c4fe4aa",
+      "index.mjs": "e35b9d4c7dc68e9507adc71832e7ab3fc83df75eb6683b1141f252a8e7335237",
+      "turso.mjs": "23169c83f7010fdd740e2bda61427750a8469e317d7bbb55fc6dbf11d872f327",
+      "zip-stream-BC0ajz0_.mjs": "877e6cf9bb1ade9131dd8d667e188f92768264b5b32ddc374c3d32e26fbdf88d",
+      "zip-zEC71qRI.mjs": "bc81d60b3fd0ba8d922033fc0d14d83b8c0f410953505fe765d5809d072b794c"
+    },
+    "before": {
+      "cache-BBnKhIys.mjs": "833a6a383e7b77711abbad5edc1d8a5731efc4e1d7298fea3a7e72bb007a675b",
+      "drizzle.mjs": "bf31a69237998c76ce1f66d21e38f018d8e22f5bd8c45cf81fe2039759cf141e",
+      "export-turso-D9ZYLNcT.mjs": "5daba04f90718e300d31fb312979e211668f4886323c7f4b139c9d41e3009ec8",
+      "index.mjs": "21afeb704ead0423d28518ee94a417cdfe69fec91e81715590d52a0e51016160",
+      "turso.mjs": "68a784ee7337a6d5c37839518b648c72d237611ee8f101b6dd7892ff652c1bfd",
+      "zip-Lf1sKYUH.mjs": "00238818647441a87108be9f9b7c3b7e4a7431e33f498b7c0b7a60c9a419814b"
+    }
+  },
+  "protocol": "Sequential fresh workers, rotating case order. One output verification, two warmups, three timed batches; two exports per bulk batch, 50 tiny. Natural GC, no profiling/forced GC. Counting Node writable; planning, generation, encoding/ZIP and completion included; imports/connection excluded from time. Peak RSS is whole-process including imports/warmups/repeated exports. Fixed 256-row SQL batches, 64 KiB writer and yields every 2048 rows. ZIP level 1, memLevel 9, 256 KiB compression output chunks. Each package build uses its own ZIP/checksum implementation; manual JS uses the installed zip-stream. Plain bytes independently match csv-stringify and parse to original fixture values. All before/after and same-name manual archive hashes match. JSON-mode uses Drizzle metadata and manual JS parses/stringifies JSON to match native canonical cells. CPU usage includes process threads."
+}

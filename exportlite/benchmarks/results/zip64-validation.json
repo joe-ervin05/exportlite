@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-19T02:20:13.570Z",
+  "generatedAt": "2026-10-19T16:37:16.299Z",
   "node": "v26.12.0",
   "result": {
     "rowsExported": 4097,
     "bytesWritten": 18778156,
-    "durationMs": 6429.0332499999995
+    "durationMs": 3433.228834
   },
   "decoded": {
     "sha256": "1506550c44dc773a5c88ef45a30fea4b707cbd28535938bf9fde699b513d0916",
@@ -17,6 +17,6 @@
       "versionNeededToExtract": 45
     }
   },
-  "peakRssMiB": 257.765625,
+  "peakRssMiB": 245.78125,
   "verification": "An actual entry larger than 4 GiB was streamed, then fully decoded with yauzl; declared sizes and CRC-32 matched. The complete export was never retained in memory."
 }

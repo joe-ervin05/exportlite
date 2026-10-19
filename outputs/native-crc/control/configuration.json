@@ -1,0 +1,150 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "rounds": 5,
+  "beforeCommit": "fcca5563d82ab7b6c607779ef59db360f7bba307",
+  "builds": {
+    "before": {
+      "cache-BBnKhIys.mjs": "833a6a383e7b77711abbad5edc1d8a5731efc4e1d7298fea3a7e72bb007a675b",
+      "drizzle.mjs": "bf31a69237998c76ce1f66d21e38f018d8e22f5bd8c45cf81fe2039759cf141e",
+      "export-turso-D9ZYLNcT.mjs": "5daba04f90718e300d31fb312979e211668f4886323c7f4b139c9d41e3009ec8",
+      "index.mjs": "21afeb704ead0423d28518ee94a417cdfe69fec91e81715590d52a0e51016160",
+      "turso.mjs": "68a784ee7337a6d5c37839518b648c72d237611ee8f101b6dd7892ff652c1bfd",
+      "zip-Lf1sKYUH.mjs": "00238818647441a87108be9f9b7c3b7e4a7431e33f498b7c0b7a60c9a419814b"
+    },
+    "bundled-js": {
+      "cache-p-GDnlrC.mjs": "192c3777485b732a9ef2e82b8e8852d5b578150d16fbec49d18f88abc43e93a0",
+      "drizzle.mjs": "cf3176aa70fd467939c22cffa5be1638ed7a8a3e7c59b6d26ea98adc4a6326b2",
+      "export-turso-BuTqOUp6.mjs": "c0199b258bda0fdbdfd9f3001059ff5fb648dc180703f60fbd0169d95f2a3b61",
+      "index.mjs": "293f4686c0e7c6bcf248b60c7013af4e65c2db30e72c543d29450043e2ae6206",
+      "turso.mjs": "b4e7cc3a76c4e2a7107326d5fadeeb6af5b1f4d660c1d5800b3c19b2697496aa",
+      "zip-DA35aXda.mjs": "2841ed632e656be2a7084c2d6bf94d7bc5b4aeb5ef0ec04cceaec8a8ce752473",
+      "zip-stream-Cppzohbq.mjs": "92f36bb15447cfbfd54452ff9f0fd37908cd89d7430dee85a6a991c469ba1839"
+    },
+    "native": {
+      "cache-BnaEVKnc.mjs": "9f184eba0c42610a072e0052357c5ce94eb5da18f14ada950057b3893389ad81",
+      "drizzle.mjs": "66c6cda7740123b8bb32f6e8af9d1ee20efd8f29feda7052762e1af4d2c67953",
+      "export-turso-DwJiY3TK.mjs": "e8a258ad2f930ca7aa72b108c68f0e1dde83ac26db27d0b465d005086c4fe4aa",
+      "index.mjs": "e35b9d4c7dc68e9507adc71832e7ab3fc83df75eb6683b1141f252a8e7335237",
+      "turso.mjs": "23169c83f7010fdd740e2bda61427750a8469e317d7bbb55fc6dbf11d872f327",
+      "zip-stream-BC0ajz0_.mjs": "877e6cf9bb1ade9131dd8d667e188f92768264b5b32ddc374c3d32e26fbdf88d",
+      "zip-zEC71qRI.mjs": "bc81d60b3fd0ba8d922033fc0d14d83b8c0f410953505fe765d5809d072b794c"
+    }
+  },
+  "fixtures": [
+    {
+      "name": "tiny",
+      "rows": 100,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 50,
+      "databaseSha256": "9597a3e2e489aa1b206272471819640a7981da8d03edb8be517b4a0dd41ecbc2",
+      "bytes": 6535,
+      "csvSha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2634697,
+      "csvSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14619815,
+      "csvSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "quote-heavy",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "720f805c246fd94d49ef7023ec0e78beb1fd3478dfaa3cdcb0ccaad811e9add9",
+      "bytes": 15903618,
+      "csvSha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "protocol": "60 sequential fresh workers, rotating baseline/bundled-JS/native order. Same CSV worker and settings as the 500-worker comparison. Bundled-JS is the current configuration with only the crc-32 alias removed, retaining the original checksum implementation. Natural GC; no concurrent profiles, builds or tests. Time includes planning, encoding, ZIP and completion to a counting Node writable; imports/connections excluded from time but included in whole-process peak RSS. Archive hashes must match across all builds."
+}
