@@ -58,7 +58,12 @@ export async function streamExport(
   let success = false;
   try {
     const json = options.format === "json";
-    const suffix = json ? "" : options.format === "csv" ? "\r\n" : "\n";
+    const suffix =
+      json || (batched && options.format === "csv")
+        ? ""
+        : options.format === "csv"
+          ? "\r\n"
+          : "\n";
     if (header !== undefined) {
       const wait = output.write(header);
       if (wait) await wait;

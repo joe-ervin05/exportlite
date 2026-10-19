@@ -86,12 +86,16 @@ export function batchedTableSql(options: BatchedTableOptions): string {
     options.format === "json"
       ? `json_group_array(${object})`
       : `group_concat(${object}, ${options.format === "csv" ? "char(13, 10)" : "char(10)"})`;
+  // Complete CSV records in SQLite so a wide byte batch needs no writer copy
+  // just to append its final record separator.
+  const content =
+    options.format === "csv" ? `${aggregate} || char(13, 10)` : aggregate;
   // CAST uses the database encoding. CSV's temporary ASCII prefix makes a
   // wrong UTF-8 claim distinguishable from a valid record beginning with NUL.
   // The adapter removes the prefix without copying the native buffer.
   const binaryValue =
-    options.format === "csv" ? `char(13, 10) || ${aggregate}` : aggregate;
-  const payload = options.binary ? `CAST(${binaryValue} AS BLOB)` : aggregate;
+    options.format === "csv" ? `char(13, 10) || ${content}` : content;
+  const payload = options.binary ? `CAST(${binaryValue} AS BLOB)` : content;
   const first = '"__exportlite_batches"."first"';
   const last = '"__exportlite_batches"."last"';
   // A declared key must be non-null. Empty tables still return no boundary.

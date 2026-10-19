@@ -536,3 +536,77 @@ it("writes exact UTF-8 file statistics and cancels an unused CSV stream without 
   expect(stats.bytesWritten).toBe(bytes.length);
   expect(parse(bytes, { columns: true })).toEqual(expected);
 });
+
+it.each([false, true])(
+  "waits for a later wide CSV batch write and cancels without closing the caller's output (zip=%s)",
+  async (zip) => {
+    db.exec("DELETE FROM users");
+    const values = Array.from({ length: 16 }, () =>
+      randomBytes(3_000).toString("base64"),
+    );
+    const insert = db.prepare("INSERT INTO users VALUES(?,NULL,?,NULL)");
+    db.transaction(() => {
+      for (let id = 1; id <= 2048; id++)
+        insert.run(id, values[id % values.length]);
+    })();
+    let batches = 0;
+    const traced = {
+      prepare(sql: string) {
+        const statement = db.prepare(sql);
+        const iterate = statement.iterate.bind(statement);
+        statement.iterate = function* (...args) {
+          for (const row of iterate(...args)) {
+            batches++;
+            yield row;
+          }
+        };
+        return statement;
+      },
+    };
+    let release: (() => void) | undefined;
+    const output = new Writable({
+      highWaterMark: 1,
+      write(_chunk, _encoding, callback) {
+        if (batches >= 2) release = callback;
+        else setImmediate(callback);
+      },
+    });
+    const signal = new AbortController();
+    const pending = exportTable(traced, "users", {
+      columns: selection,
+      format: "csv",
+      zip,
+      output,
+      signal: signal.signal,
+    });
+    const failed = expect(pending).rejects.toMatchObject({ code: "ABORTED" });
+    try {
+      const stopped = await stalledProduction(() =>
+        batches >= 2 ? batches : 0,
+      );
+      expect(stopped).toBeGreaterThanOrEqual(2);
+      expect(stopped).toBeLessThan(8);
+    } finally {
+      signal.abort();
+      release?.();
+      await failed;
+    }
+    expect(output.destroyed).toBe(false);
+    expect(output.writableEnded).toBe(false);
+    db.prepare("SELECT 1").get();
+  },
+);
+
+it("keeps one empty CSV cell per NULL row across batch boundaries", async () => {
+  db.exec(
+    "DELETE FROM users; WITH RECURSIVE n(x) AS(VALUES(1) UNION ALL SELECT x+1 FROM n WHERE x<257) INSERT INTO users SELECT x,NULL,NULL,NULL FROM n",
+  );
+  const stream = await exportTable(db, "users", {
+    format: "csv",
+    columns: ["note"],
+  });
+  const content = await new Response(stream).text();
+  expect(content).toBe(`"note"\r\n${"\r\n".repeat(257)}`);
+  expect(parse(content, { columns: true })).toHaveLength(257);
+  expect((await stream.result).rowsExported).toBe(257);
+});
