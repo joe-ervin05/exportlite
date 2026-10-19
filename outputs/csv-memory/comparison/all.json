@@ -1,0 +1,2402 @@
+[
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.26679665999999996,
+      0.25610749999999993,
+      0.24047583999999972
+    ],
+    "medianMs": 0.25610749999999993,
+    "peakRssMiB": 69.515625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.245745,
+      0.2652891600000001,
+      0.25417918000000017
+    ],
+    "medianMs": 0.25417918000000017,
+    "peakRssMiB": 69.375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2974966599999999,
+      0.24121417999999992,
+      0.23668667999999995
+    ],
+    "medianMs": 0.24121417999999992,
+    "peakRssMiB": 71.28125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2908725000000001,
+      0.2454716599999999,
+      0.2347466800000001
+    ],
+    "medianMs": 0.2454716599999999,
+    "peakRssMiB": 71.46875
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.22129667999999994,
+      0.19025583999999995,
+      0.1871683399999999
+    ],
+    "medianMs": 0.19025583999999995,
+    "peakRssMiB": 65.6875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7548766600000002,
+      0.9612775000000002,
+      0.6262491600000004
+    ],
+    "medianMs": 0.7548766600000002,
+    "peakRssMiB": 104.90625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7715000000000001,
+      0.5783266599999999,
+      0.5860866600000003
+    ],
+    "medianMs": 0.5860866600000003,
+    "peakRssMiB": 98.203125
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.80067668,
+      0.54622084,
+      0.5791958399999999
+    ],
+    "medianMs": 0.5791958399999999,
+    "peakRssMiB": 102.53125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.7795616599999999,
+      0.5659799999999998,
+      0.5869066600000002
+    ],
+    "medianMs": 0.5869066600000002,
+    "peakRssMiB": 105.359375
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.55261834,
+      0.40008499999999997,
+      0.4194083200000003
+    ],
+    "medianMs": 0.4194083200000003,
+    "peakRssMiB": 95.4375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.102791499999995,
+      42.59747899999999,
+      42.434687499999995
+    ],
+    "medianMs": 42.59747899999999,
+    "peakRssMiB": 96.625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      52.365416499999995,
+      42.8876875,
+      42.764083
+    ],
+    "medianMs": 42.8876875,
+    "peakRssMiB": 98.390625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      61.683374999999984,
+      61.95052099999998,
+      62.16597899999999
+    ],
+    "medianMs": 61.95052099999998,
+    "peakRssMiB": 78.84375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      61.337104,
+      61.79077049999998,
+      61.75881250000003
+    ],
+    "medianMs": 61.75881250000003,
+    "peakRssMiB": 79.4375
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.70662500000002,
+      44.586333499999995,
+      43.92741649999999
+    ],
+    "medianMs": 44.586333499999995,
+    "peakRssMiB": 89.6875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.33654200000001,
+      46.628937500000006,
+      46.297833500000024
+    ],
+    "medianMs": 46.628937500000006,
+    "peakRssMiB": 98.34375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      54.93962500000001,
+      52.28824999999998,
+      63.73335450000002
+    ],
+    "medianMs": 54.93962500000001,
+    "peakRssMiB": 100.765625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      72.8106875,
+      68.59739549999998,
+      68.5722915
+    ],
+    "medianMs": 68.59739549999998,
+    "peakRssMiB": 89.625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      69.70372900000001,
+      73.13620850000001,
+      71.88097900000002
+    ],
+    "medianMs": 71.88097900000002,
+    "peakRssMiB": 89.84375
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      50.2655415,
+      63.09662500000002,
+      55.38708299999999
+    ],
+    "medianMs": 55.38708299999999,
+    "peakRssMiB": 97.53125
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.60881250000001,
+      38.98931250000001,
+      39.23508349999997
+    ],
+    "medianMs": 39.23508349999997,
+    "peakRssMiB": 182.328125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.70087500000001,
+      37.28385399999999,
+      38.63666650000002
+    ],
+    "medianMs": 38.63666650000002,
+    "peakRssMiB": 162.90625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      63.80806249999999,
+      66.231875,
+      62.32581250000001
+    ],
+    "medianMs": 63.80806249999999,
+    "peakRssMiB": 116.859375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      62.958624999999984,
+      63.224687500000016,
+      62.853875000000016
+    ],
+    "medianMs": 62.958624999999984,
+    "peakRssMiB": 117.640625
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      46.1648125,
+      45.17922899999999,
+      49.014854499999984
+    ],
+    "medianMs": 46.1648125,
+    "peakRssMiB": 139.34375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      126.0725625,
+      106.37464600000004,
+      115.11575000000005
+    ],
+    "medianMs": 115.11575000000005,
+    "peakRssMiB": 178.90625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      104.94614550000003,
+      106.58318750000001,
+      117.1679375
+    ],
+    "medianMs": 106.58318750000001,
+    "peakRssMiB": 149.90625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      111.444625,
+      107.17422900000003,
+      106.8211665
+    ],
+    "medianMs": 107.17422900000003,
+    "peakRssMiB": 110.828125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      106.72956250000001,
+      119.575875,
+      108.94958350000007
+    ],
+    "medianMs": 108.94958350000007,
+    "peakRssMiB": 111.765625
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      105.45783300000002,
+      105.14108349999998,
+      107.72191699999996
+    ],
+    "medianMs": 105.45783300000002,
+    "peakRssMiB": 120.671875
+  },
+  {
+    "round": 1,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.22141999999999995,
+      0.18718916000000008,
+      0.18924500000000008
+    ],
+    "medianMs": 0.18924500000000008,
+    "peakRssMiB": 65.625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2986141600000001,
+      0.2572750000000001,
+      0.2381366600000001
+    ],
+    "medianMs": 0.2572750000000001,
+    "peakRssMiB": 71.375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28112583999999996,
+      0.2377799999999999,
+      0.23221333999999985
+    ],
+    "medianMs": 0.2377799999999999,
+    "peakRssMiB": 71.4375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.25435084,
+      0.2499266800000001,
+      0.24421999999999996
+    ],
+    "medianMs": 0.2499266800000001,
+    "peakRssMiB": 69.5625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2695100000000001,
+      0.25293334,
+      0.25247084000000003
+    ],
+    "medianMs": 0.25293334,
+    "peakRssMiB": 68.984375
+  },
+  {
+    "round": 1,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.6140174999999999,
+      0.4295949999999999,
+      0.5130149999999998
+    ],
+    "medianMs": 0.5130149999999998,
+    "peakRssMiB": 98.859375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.92922584,
+      0.6777349999999999,
+      0.7048899999999998
+    ],
+    "medianMs": 0.7048899999999998,
+    "peakRssMiB": 99.578125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.91065584,
+      0.7057391599999999,
+      0.6730391600000002
+    ],
+    "medianMs": 0.7057391599999999,
+    "peakRssMiB": 99.296875
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8136716799999999,
+      0.6240791599999997,
+      0.6349824999999999
+    ],
+    "medianMs": 0.6349824999999999,
+    "peakRssMiB": 101.953125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.76281834,
+      0.5655224999999996,
+      0.6578300000000001
+    ],
+    "medianMs": 0.6578300000000001,
+    "peakRssMiB": 106.828125
+  },
+  {
+    "round": 1,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.65575000000001,
+      44.763458499999984,
+      44.553604500000006
+    ],
+    "medianMs": 44.65575000000001,
+    "peakRssMiB": 89
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      62.25547900000001,
+      62.536146,
+      72.18429150000003
+    ],
+    "medianMs": 62.536146,
+    "peakRssMiB": 79.421875
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      63.13858349999998,
+      64.0884375,
+      68.21979149999999
+    ],
+    "medianMs": 64.0884375,
+    "peakRssMiB": 79.5
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.51695849999999,
+      41.809854,
+      41.73754149999999
+    ],
+    "medianMs": 41.809854,
+    "peakRssMiB": 99
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.20043750000001,
+      41.781375,
+      41.8035625
+    ],
+    "medianMs": 41.8035625,
+    "peakRssMiB": 99.890625
+  },
+  {
+    "round": 1,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.845520500000006,
+      46.732541499999996,
+      47.80820800000001
+    ],
+    "medianMs": 46.845520500000006,
+    "peakRssMiB": 102.359375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      69.74339550000002,
+      67.56224999999998,
+      67.820833
+    ],
+    "medianMs": 67.820833,
+    "peakRssMiB": 90.078125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      68.55799999999999,
+      68.7409585,
+      68.3393125
+    ],
+    "medianMs": 68.55799999999999,
+    "peakRssMiB": 89.8125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      59.722854,
+      46.38470849999999,
+      45.949104000000034
+    ],
+    "medianMs": 46.38470849999999,
+    "peakRssMiB": 103.234375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      51.970457999999994,
+      46.775228999999996,
+      46.600145499999996
+    ],
+    "medianMs": 46.775228999999996,
+    "peakRssMiB": 99.140625
+  },
+  {
+    "round": 1,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      47.52172900000001,
+      45.99437499999999,
+      52.46131249999999
+    ],
+    "medianMs": 47.52172900000001,
+    "peakRssMiB": 137.484375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      63.24887500000001,
+      64.53177100000002,
+      62.4153335
+    ],
+    "medianMs": 63.24887500000001,
+    "peakRssMiB": 118.03125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      63.003874999999994,
+      63.059792000000016,
+      61.47758349999998
+    ],
+    "medianMs": 63.003874999999994,
+    "peakRssMiB": 117.703125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.09266649999999,
+      37.6955835,
+      37.706125000000014
+    ],
+    "medianMs": 37.706125000000014,
+    "peakRssMiB": 168.59375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.76989549999999,
+      36.829521,
+      39.91777099999999
+    ],
+    "medianMs": 38.76989549999999,
+    "peakRssMiB": 178.59375
+  },
+  {
+    "round": 1,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      110.40125,
+      109.17975000000001,
+      109.0479585
+    ],
+    "medianMs": 109.17975000000001,
+    "peakRssMiB": 119.53125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      108.6109375,
+      112.40368749999999,
+      109.41331250000007
+    ],
+    "medianMs": 109.41331250000007,
+    "peakRssMiB": 110.96875
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      112.80831250000003,
+      114.69225,
+      105.84689600000002
+    ],
+    "medianMs": 112.80831250000003,
+    "peakRssMiB": 110.296875
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      108.74945800000003,
+      108.27777099999997,
+      103.09220849999997
+    ],
+    "medianMs": 108.27777099999997,
+    "peakRssMiB": 146.015625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      117.05281249999999,
+      108.8838955,
+      103.29514600000005
+    ],
+    "medianMs": 108.8838955,
+    "peakRssMiB": 170.484375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2516441599999999,
+      0.23552415999999993,
+      0.2447066799999999
+    ],
+    "medianMs": 0.2447066799999999,
+    "peakRssMiB": 69.5625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.23984000000000008,
+      0.23055668000000012,
+      0.25121418000000006
+    ],
+    "medianMs": 0.23984000000000008,
+    "peakRssMiB": 69.84375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2872024999999999,
+      0.2564541799999999,
+      0.23657331999999998
+    ],
+    "medianMs": 0.2564541799999999,
+    "peakRssMiB": 71.34375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28296999999999994,
+      0.24787499999999996,
+      0.23566750000000014
+    ],
+    "medianMs": 0.24787499999999996,
+    "peakRssMiB": 71.453125
+  },
+  {
+    "round": 2,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.21607333999999995,
+      0.18742168000000006,
+      0.18606250000000002
+    ],
+    "medianMs": 0.18742168000000006,
+    "peakRssMiB": 65.28125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8154575,
+      0.59269,
+      0.8212158399999998
+    ],
+    "medianMs": 0.8154575,
+    "peakRssMiB": 106.703125
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.77460834,
+      0.64125416,
+      0.6210458399999998
+    ],
+    "medianMs": 0.64125416,
+    "peakRssMiB": 105.765625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.7990625,
+      0.59373918,
+      0.5781075000000004
+    ],
+    "medianMs": 0.59373918,
+    "peakRssMiB": 98.0625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.8984241800000001,
+      0.6594108400000002,
+      0.6095749999999999
+    ],
+    "medianMs": 0.6594108400000002,
+    "peakRssMiB": 100.46875
+  },
+  {
+    "round": 2,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.5675466800000001,
+      0.42271081999999977,
+      0.4494300000000001
+    ],
+    "medianMs": 0.4494300000000001,
+    "peakRssMiB": 96.90625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.68189600000001,
+      43.45768749999999,
+      42.835542000000004
+    ],
+    "medianMs": 43.45768749999999,
+    "peakRssMiB": 97.609375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.3600625,
+      43.479375000000005,
+      43.494979
+    ],
+    "medianMs": 43.479375000000005,
+    "peakRssMiB": 103.484375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      63.36637499999999,
+      64.13022949999998,
+      62.869166999999976
+    ],
+    "medianMs": 63.36637499999999,
+    "peakRssMiB": 79.5
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      65.05508349999998,
+      63.95379200000002,
+      67.46366650000002
+    ],
+    "medianMs": 65.05508349999998,
+    "peakRssMiB": 79.625
+  },
+  {
+    "round": 2,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      48.071832999999984,
+      44.329271000000006,
+      45.32975000000002
+    ],
+    "medianMs": 45.32975000000002,
+    "peakRssMiB": 89.03125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      53.97833299999999,
+      47.441333499999985,
+      46.534812500000015
+    ],
+    "medianMs": 47.441333499999985,
+    "peakRssMiB": 99.015625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.92133350000002,
+      47.37006249999999,
+      47.152229000000005
+    ],
+    "medianMs": 47.37006249999999,
+    "peakRssMiB": 100.28125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      69.50220850000002,
+      69.67847899999998,
+      69.40556249999997
+    ],
+    "medianMs": 69.50220850000002,
+    "peakRssMiB": 90.28125
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      73.42837499999999,
+      70.30635400000003,
+      71.42204149999998
+    ],
+    "medianMs": 71.42204149999998,
+    "peakRssMiB": 89.6875
+  },
+  {
+    "round": 2,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      50.25291700000001,
+      50.989562500000005,
+      49.39939599999997
+    ],
+    "medianMs": 50.25291700000001,
+    "peakRssMiB": 99.515625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.525437499999995,
+      39.06929199999999,
+      40.135395999999986
+    ],
+    "medianMs": 39.525437499999995,
+    "peakRssMiB": 174.6875
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.95637500000001,
+      37.66381249999999,
+      38.4587085
+    ],
+    "medianMs": 38.4587085,
+    "peakRssMiB": 168.25
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      62.92720800000001,
+      63.8900625,
+      61.69599999999997
+    ],
+    "medianMs": 62.92720800000001,
+    "peakRssMiB": 118.140625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      63.80591650000001,
+      64.066396,
+      71.37714549999998
+    ],
+    "medianMs": 64.066396,
+    "peakRssMiB": 117.359375
+  },
+  {
+    "round": 2,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      49.76637500000001,
+      45.890562500000016,
+      48.962771000000004
+    ],
+    "medianMs": 48.962771000000004,
+    "peakRssMiB": 139.671875
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      112.35645850000003,
+      104.67091699999997,
+      104.46285449999999
+    ],
+    "medianMs": 104.67091699999997,
+    "peakRssMiB": 177.8125
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      114.13320800000002,
+      105.10666649999996,
+      112.22843749999998
+    ],
+    "medianMs": 112.22843749999998,
+    "peakRssMiB": 146.0625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      111.14020800000003,
+      108.65743750000001,
+      147.90783299999998
+    ],
+    "medianMs": 111.14020800000003,
+    "peakRssMiB": 110.859375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      177.88993749999997,
+      146.77145800000005,
+      242.54935449999994
+    ],
+    "medianMs": 177.88993749999997,
+    "peakRssMiB": 110.96875
+  },
+  {
+    "round": 2,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      219.834333,
+      116.00054150000005,
+      117.20066650000001
+    ],
+    "medianMs": 117.20066650000001,
+    "peakRssMiB": 116.875
+  },
+  {
+    "round": 3,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.22022749999999988,
+      0.20475250000000003,
+      0.19729000000000013
+    ],
+    "medianMs": 0.20475250000000003,
+    "peakRssMiB": 65.609375
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28881084,
+      0.2591208399999999,
+      0.24494834
+    ],
+    "medianMs": 0.2591208399999999,
+    "peakRssMiB": 71.5625
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28701415999999996,
+      0.25388831999999995,
+      0.24341917999999993
+    ],
+    "medianMs": 0.25388831999999995,
+    "peakRssMiB": 71.578125
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.25173333999999997,
+      0.24435584000000005,
+      0.23608332000000018
+    ],
+    "medianMs": 0.24435584000000005,
+    "peakRssMiB": 69.296875
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.24247584000000003,
+      0.2609616600000001,
+      0.23822000000000002
+    ],
+    "medianMs": 0.24247584000000003,
+    "peakRssMiB": 69.46875
+  },
+  {
+    "round": 3,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.5843791800000001,
+      0.4140299999999999,
+      0.42278249999999984
+    ],
+    "medianMs": 0.42278249999999984,
+    "peakRssMiB": 98.328125
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.8151691600000001,
+      0.62368166,
+      0.6451933400000002
+    ],
+    "medianMs": 0.6451933400000002,
+    "peakRssMiB": 100.046875
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.8205933400000001,
+      0.5791408199999998,
+      0.6624549999999999
+    ],
+    "medianMs": 0.6624549999999999,
+    "peakRssMiB": 105.375
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8938833400000001,
+      0.6030350000000001,
+      0.6082025000000004
+    ],
+    "medianMs": 0.6082025000000004,
+    "peakRssMiB": 108.609375
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7467675,
+      0.5804716799999997,
+      0.6248424999999997
+    ],
+    "medianMs": 0.6248424999999997,
+    "peakRssMiB": 107.5625
+  },
+  {
+    "round": 3,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.97885400000001,
+      42.92993750000002,
+      42.98920799999999
+    ],
+    "medianMs": 42.97885400000001,
+    "peakRssMiB": 89.4375
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      61.83039600000001,
+      61.91568749999999,
+      61.673854000000006
+    ],
+    "medianMs": 61.83039600000001,
+    "peakRssMiB": 79.390625
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      64.03343750000002,
+      67.229375,
+      67.92683350000001
+    ],
+    "medianMs": 67.229375,
+    "peakRssMiB": 79
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      45.53518749999999,
+      46.85970799999998,
+      43.49625
+    ],
+    "medianMs": 45.53518749999999,
+    "peakRssMiB": 99.4375
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.76899999999999,
+      49.85870800000001,
+      42.85647900000001
+    ],
+    "medianMs": 43.76899999999999,
+    "peakRssMiB": 99.796875
+  },
+  {
+    "round": 3,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.62852049999999,
+      49.32804149999998,
+      49.005499999999984
+    ],
+    "medianMs": 49.005499999999984,
+    "peakRssMiB": 98.90625
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      68.5439375,
+      68.17374999999998,
+      68.03047900000001
+    ],
+    "medianMs": 68.17374999999998,
+    "peakRssMiB": 90.21875
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      68.78549999999998,
+      68.71712500000001,
+      70.0176045
+    ],
+    "medianMs": 68.78549999999998,
+    "peakRssMiB": 89.984375
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      49.095895999999996,
+      47.98249999999999,
+      47.1845835
+    ],
+    "medianMs": 47.98249999999999,
+    "peakRssMiB": 99.0625
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.92247950000001,
+      47.556375,
+      46.79685399999997
+    ],
+    "medianMs": 47.556375,
+    "peakRssMiB": 100.875
+  },
+  {
+    "round": 3,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      46.725416499999994,
+      48.835646,
+      50.6413125
+    ],
+    "medianMs": 48.835646,
+    "peakRssMiB": 138.90625
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      62.997000000000014,
+      63.4705625,
+      61.2767915
+    ],
+    "medianMs": 62.997000000000014,
+    "peakRssMiB": 116.875
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      63.2435835,
+      64.2876455,
+      61.209833
+    ],
+    "medianMs": 63.2435835,
+    "peakRssMiB": 117.640625
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.0635415,
+      37.24297899999999,
+      37.1886045
+    ],
+    "medianMs": 37.24297899999999,
+    "peakRssMiB": 163.109375
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.23991699999999,
+      38.473457999999994,
+      39.672500000000014
+    ],
+    "medianMs": 39.23991699999999,
+    "peakRssMiB": 186.3125
+  },
+  {
+    "round": 3,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      105.50014550000003,
+      107.24287499999997,
+      111.80485400000003
+    ],
+    "medianMs": 107.24287499999997,
+    "peakRssMiB": 123.0625
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      113.25908349999997,
+      112.5566455,
+      119.08216650000003
+    ],
+    "medianMs": 113.25908349999997,
+    "peakRssMiB": 109.65625
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      125.47529149999997,
+      110.15681249999994,
+      106.59574999999995
+    ],
+    "medianMs": 110.15681249999994,
+    "peakRssMiB": 111.390625
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      108.387104,
+      111.30145799999997,
+      107.05547950000005
+    ],
+    "medianMs": 108.387104,
+    "peakRssMiB": 144.515625
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      114.41145850000004,
+      110.72093749999999,
+      114.0968125
+    ],
+    "medianMs": 114.0968125,
+    "peakRssMiB": 185.109375
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.34611581999999996,
+      0.2540491599999999,
+      0.26317000000000007
+    ],
+    "medianMs": 0.26317000000000007,
+    "peakRssMiB": 69.59375
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.26211,
+      0.25882831999999995,
+      0.28089916000000015
+    ],
+    "medianMs": 0.26211,
+    "peakRssMiB": 69.296875
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.47497249999999996,
+      0.36363665999999994,
+      0.24766081999999984
+    ],
+    "medianMs": 0.36363665999999994,
+    "peakRssMiB": 71.484375
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28617750000000003,
+      0.24223668000000018,
+      0.2427891599999998
+    ],
+    "medianMs": 0.2427891599999998,
+    "peakRssMiB": 71.5625
+  },
+  {
+    "round": 4,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.21615418000000006,
+      0.19545333999999998,
+      0.19104832000000002
+    ],
+    "medianMs": 0.19545333999999998,
+    "peakRssMiB": 65.328125
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8540625,
+      0.6566116799999997,
+      0.68811082
+    ],
+    "medianMs": 0.68811082,
+    "peakRssMiB": 100.421875
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8251191600000002,
+      0.60479334,
+      0.61815832
+    ],
+    "medianMs": 0.61815832,
+    "peakRssMiB": 104.703125
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.9188341799999997,
+      0.6447008399999998,
+      0.6638749999999999
+    ],
+    "medianMs": 0.6638749999999999,
+    "peakRssMiB": 94.984375
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.7921875,
+      0.6138291600000002,
+      0.6985749999999996
+    ],
+    "medianMs": 0.6985749999999996,
+    "peakRssMiB": 102.828125
+  },
+  {
+    "round": 4,
+    "variant": "control",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.75645082,
+      0.5535191599999999,
+      0.5691941600000001
+    ],
+    "medianMs": 0.5691941600000001,
+    "peakRssMiB": 95.125
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      47.73381250000001,
+      75.335396,
+      45.86225000000002
+    ],
+    "medianMs": 47.73381250000001,
+    "peakRssMiB": 99.265625
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.9440625,
+      42.7311455,
+      41.93102050000002
+    ],
+    "medianMs": 42.7311455,
+    "peakRssMiB": 100.078125
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      71.93995849999999,
+      71.80649999999997,
+      63.32608350000004
+    ],
+    "medianMs": 71.80649999999997,
+    "peakRssMiB": 79.15625
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      88.80066649999999,
+      64.24724999999998,
+      63.69833349999999
+    ],
+    "medianMs": 64.24724999999998,
+    "peakRssMiB": 79.78125
+  },
+  {
+    "round": 4,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.86658349999999,
+      44.85625000000002,
+      45.2878125
+    ],
+    "medianMs": 44.86658349999999,
+    "peakRssMiB": 89
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.87741649999998,
+      47.794667000000004,
+      47.755708500000026
+    ],
+    "medianMs": 47.794667000000004,
+    "peakRssMiB": 98.46875
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      51.635999999999996,
+      50.05477099999999,
+      54.84593750000002
+    ],
+    "medianMs": 51.635999999999996,
+    "peakRssMiB": 101.359375
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      80.26225000000002,
+      69.48791649999998,
+      70.01208299999996
+    ],
+    "medianMs": 70.01208299999996,
+    "peakRssMiB": 90.3125
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      76.19002099999997,
+      83.41299999999998,
+      71.93572950000004
+    ],
+    "medianMs": 76.19002099999997,
+    "peakRssMiB": 90.671875
+  },
+  {
+    "round": 4,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      51.151521,
+      82.26877100000002,
+      50.7765
+    ],
+    "medianMs": 51.151521,
+    "peakRssMiB": 97.34375
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      42.093374999999995,
+      40.99772899999999,
+      40.863833
+    ],
+    "medianMs": 40.99772899999999,
+    "peakRssMiB": 178.5
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.64224999999999,
+      37.23545850000001,
+      38.203708500000005
+    ],
+    "medianMs": 38.203708500000005,
+    "peakRssMiB": 168.765625
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.0636045,
+      64.81574999999998,
+      63.248853999999994
+    ],
+    "medianMs": 64.0636045,
+    "peakRssMiB": 117.5
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.09714600000001,
+      65.90147899999997,
+      63.0027705
+    ],
+    "medianMs": 64.09714600000001,
+    "peakRssMiB": 116.59375
+  },
+  {
+    "round": 4,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      48.448333500000004,
+      46.9872915,
+      51.96445800000001
+    ],
+    "medianMs": 48.448333500000004,
+    "peakRssMiB": 138.71875
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      104.52279199999998,
+      103.32797899999997,
+      101.67824999999999
+    ],
+    "medianMs": 103.32797899999997,
+    "peakRssMiB": 173.53125
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      106.531396,
+      105.09285449999999,
+      109.04806250000001
+    ],
+    "medianMs": 106.531396,
+    "peakRssMiB": 143.203125
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      118.55316649999997,
+      112.01304149999999,
+      109.67825000000005
+    ],
+    "medianMs": 112.01304149999999,
+    "peakRssMiB": 110.0625
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      111.55710400000004,
+      108.44627050000003,
+      107.772875
+    ],
+    "medianMs": 108.44627050000003,
+    "peakRssMiB": 109.859375
+  },
+  {
+    "round": 4,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      112.25358300000002,
+      108.8393125,
+      105.52083349999998
+    ],
+    "medianMs": 108.8393125,
+    "peakRssMiB": 117.28125
+  }
+]

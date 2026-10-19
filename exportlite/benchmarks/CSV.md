@@ -4,6 +4,8 @@ Measured October 18, 2026 on Apple M1 Pro, Node 26.12.0, better-sqlite3 13.0.3. 
 
 SQLite escapes cells and joins eligible table records into the existing 256-row batches. Custom queries and fallback tables stream records. The existing 64 KiB writer, Web/file/Node output, ZIP settings, ownership, cancellation and backpressure remain in use. Declared exports still execute one data statement without metadata preflights. CSV headers use output aliases and are not included in row counts.
 
+The subsequent [wide CSV memory investigation](CSV-MEMORY.md) removes redundant batch copies and updates the wide-record figures. This report preserves the initial comparison.
+
 ## Comparison
 
 Same seeded varied fixture generator and Node executable as the existing JSON comparisons: narrow = 50,000 records with short notes; wide = 15,000 records with approximately 1 KiB notes, variable lengths and occasional larger notes. Both have four columns, Unicode and NULLs. “Wide” here describes record size. The tiny 100-record fixture remains in the raw data.

@@ -1,0 +1,66 @@
+{
+  "node": "v26.12.0",
+  "allocations": {
+    "nativeBatches": 531,
+    "nativeBytes": 131579136,
+    "concatBuffers": 9,
+    "concatBytes": 2471796,
+    "encodedBuffers": 0,
+    "encodedBytes": 0,
+    "firstConcatStacks": [
+      "Error\n    at Buffer.concat (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/probe.mjs:50:86)\n    at OutputWriter.flush (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:155:197)\n    at OutputWriter.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:149:72)\n    at streamExport (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/cache-B_CjOPl_.mjs:34:108)",
+      "Error\n    at Buffer.concat (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/probe.mjs:50:86)\n    at OutputWriter.flush (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:155:197)\n    at OutputWriter.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:149:72)\n    at streamExport (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/cache-B_CjOPl_.mjs:34:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+    ]
+  },
+  "peaks": {
+    "rss": 177242112,
+    "heapUsed": 7478144,
+    "external": 70631750,
+    "arrayBuffers": 68026692
+  },
+  "snapshots": [
+    {
+      "label": "start",
+      "rss": 59293696,
+      "heapTotal": 7749632,
+      "heapUsed": 5351160,
+      "external": 2217488,
+      "arrayBuffers": 137939
+    },
+    {
+      "label": "end-natural",
+      "rss": 177192960,
+      "heapTotal": 10108928,
+      "heapUsed": 7211912,
+      "external": 69922376,
+      "arrayBuffers": 67317318
+    },
+    {
+      "label": "end-after-diagnostic-gc",
+      "rss": 177242112,
+      "heapTotal": 10108928,
+      "heapUsed": 5954976,
+      "external": 2749105,
+      "arrayBuffers": 144047
+    }
+  ],
+  "naturalGc": {
+    "count": 4,
+    "durationMs": 1.7302513122558594,
+    "kinds": {
+      "1": 2,
+      "4": 1,
+      "8": 1
+    }
+  },
+  "gcIncludingDiagnostic": {
+    "count": 6,
+    "durationMs": 8.008459091186523,
+    "kinds": {
+      "1": 2,
+      "4": 3,
+      "8": 1
+    }
+  },
+  "maxRssMiB": 169.03125
+}

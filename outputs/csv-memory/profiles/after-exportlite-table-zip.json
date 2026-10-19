@@ -1,0 +1,66 @@
+{
+  "node": "v26.12.0",
+  "allocations": {
+    "nativeBatches": 531,
+    "nativeBytes": 131579136,
+    "concatBuffers": 9,
+    "concatBytes": 2471796,
+    "encodedBuffers": 0,
+    "encodedBytes": 0,
+    "firstConcatStacks": [
+      "Error\n    at Buffer.concat (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/probe.mjs:50:86)\n    at OutputWriter.flush (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:155:197)\n    at OutputWriter.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:149:72)\n    at ZipOutput.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:795:20)\n    at streamExport (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/cache-B_CjOPl_.mjs:34:108)\n    at async consume (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv/compare.mjs:87:53)\n    at async file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv/compare.mjs:102:22",
+      "Error\n    at Buffer.concat (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/probe.mjs:50:86)\n    at OutputWriter.flush (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:155:197)\n    at OutputWriter.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:149:72)\n    at ZipOutput.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/zip-B0YRWi0I.mjs:795:20)\n    at streamExport (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite/dist/cache-B_CjOPl_.mjs:34:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async consume (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv/compare.mjs:87:53)\n    at async file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv/compare.mjs:103:33"
+    ]
+  },
+  "peaks": {
+    "rss": 171884544,
+    "heapUsed": 11189728,
+    "external": 62239534,
+    "arrayBuffers": 59349443
+  },
+  "snapshots": [
+    {
+      "label": "start",
+      "rss": 59195392,
+      "heapTotal": 7487488,
+      "heapUsed": 5351128,
+      "external": 2217488,
+      "arrayBuffers": 137939
+    },
+    {
+      "label": "end-natural",
+      "rss": 171819008,
+      "heapTotal": 14303232,
+      "heapUsed": 8284360,
+      "external": 62239534,
+      "arrayBuffers": 1369404
+    },
+    {
+      "label": "end-after-diagnostic-gc",
+      "rss": 171884544,
+      "heapTotal": 14303232,
+      "heapUsed": 7807992,
+      "external": 3053566,
+      "arrayBuffers": 163475
+    }
+  ],
+  "naturalGc": {
+    "count": 13,
+    "durationMs": 4.7437520027160645,
+    "kinds": {
+      "1": 7,
+      "4": 3,
+      "8": 3
+    }
+  },
+  "gcIncludingDiagnostic": {
+    "count": 15,
+    "durationMs": 8.801959991455078,
+    "kinds": {
+      "1": 7,
+      "4": 5,
+      "8": 3
+    }
+  },
+  "maxRssMiB": 163.921875
+}

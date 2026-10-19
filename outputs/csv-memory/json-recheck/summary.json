@@ -1,0 +1,32 @@
+[
+  {
+    "fixture": "tiny",
+    "method": "query",
+    "compression": "zip",
+    "beforeMs": 0.6216704199999998,
+    "afterMs": 0.6067525,
+    "timeChangePercent": -2.3996509275766797,
+    "beforeRssMiB": 130.546875,
+    "afterRssMiB": 132.6875,
+    "rssChangePercent": 1.6397366846199857,
+    "maxBeforeRssMiB": 140.65625,
+    "maxAfterRssMiB": 139.390625,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35"
+  },
+  {
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "compression": "zip",
+    "beforeMs": 0.6514958300000001,
+    "afterMs": 0.6559887500000002,
+    "timeChangePercent": 0.689631428646309,
+    "beforeRssMiB": 229.421875,
+    "afterRssMiB": 227,
+    "rssChangePercent": -1.0556425798542546,
+    "maxBeforeRssMiB": 236.25,
+    "maxAfterRssMiB": 236.09375,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35"
+  }
+]

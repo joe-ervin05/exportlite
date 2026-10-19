@@ -1,0 +1,57 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "beforeCommit": "09404fd2dcd880590dbf22010bc2cbad1adfc4a5",
+  "rounds": 5,
+  "methods": [
+    "exportlite-table",
+    "exportlite-query",
+    "js-stream"
+  ],
+  "fixtures": [
+    {
+      "name": "tiny",
+      "rows": 100,
+      "width": 32,
+      "profile": "repeated",
+      "iterations": 50,
+      "databaseSha256": "9597a3e2e489aa1b206272471819640a7981da8d03edb8be517b4a0dd41ecbc2"
+    },
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "width": 32,
+      "profile": "varied",
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "width": 1024,
+      "profile": "varied",
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149"
+    }
+  ],
+  "builds": {
+    "before": {
+      "cache-B4w5UP3z.mjs": "efb13da06ed206368ed7a52df585bba4f3712ff6757813c984545d8e5561179b",
+      "drizzle.mjs": "019000886d91e281922fe436925b9d6bd4dbbfa02bcb2ad981f4397c1c15811d",
+      "export-turso-ZnFZGoI2.mjs": "5a89fa2e51ed23cf196e48ddae2c15e46753084dfb7ea4195fbd1cf34ae79656",
+      "index.mjs": "bee5a962773975ffe0aec66093de31f5a289c64405d5154f4b808b194cc9b195",
+      "turso.mjs": "b12c315b50534a36031da9a95601e59c758f6ed1dc5e1e5720556a9b27b9eed1",
+      "zip-Cg-WVAA8.mjs": "9ab37db0528f8031b67a8cd5a8db8aa8dc3fc3f94380ea68566ef0760fb44ce8"
+    },
+    "after": {
+      "cache-B_CjOPl_.mjs": "954efa9e712b85aa226a84d0c2ee313b5a84115143e7540c3f16be8bbcc0c3e6",
+      "drizzle.mjs": "8f4da1d07d347ac1c8e3cd0ffe7aebdcea77f3b36bdbf8cd83d605970d063108",
+      "export-turso-BniKjpsc.mjs": "beb286dbef86d4bd8af261c3cbbdc76f724d5fe0c427780000103957972de1fc",
+      "index.mjs": "accc7751b044d7fc3522a9cd9b48c24d83ee41cf20394871ca71be979837ff0a",
+      "turso.mjs": "2eab0bb37adf22d4aa5837f7973d98f04a148b6cf9db7a85e422451cb773a2d5",
+      "zip-B0YRWi0I.mjs": "754c2bad844af7500b8fd7c68011e1fc7c7e9df5125d41a3522323308e917cf5"
+    }
+  },
+  "protocol": "Sequential fresh workers; before/after order alternates by round. Same immutable varied fixtures/seed 20261017 and worker as CSV comparison. One hash verification, two warmups, then three timed batches, natural GC. Bulk=two exports per batch; tiny=50. No instrumentation or forced GC. Includes query construction, CSV generation, UTF-8/ZIP delivery and completion to counting Node writable. Process peak RSS includes setup/imports, verification and warmups. Before/after output bytes and SHA-256 must match; JS control CSV/table ZIP also match. Query ZIP uses a different entry name."
+}

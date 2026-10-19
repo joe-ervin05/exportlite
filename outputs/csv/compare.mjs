@@ -13,6 +13,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const pkg = join(here, "../../exportlite");
 const require = createRequire(join(pkg, "package.json"));
+const buildDirectory = process.env.EXPORTLITE_BUILD ?? join(pkg, "dist");
 const columns = ["id", "name", "note", "active"];
 const sql = `SELECT ${columns.join(",")} FROM data ORDER BY id`;
 const median = (values) => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
@@ -25,7 +26,7 @@ if (process.argv[2] === "worker") {
   const Database = require("better-sqlite3");
   const db = new Database(fixture.path, { readonly: true });
   const api = method.startsWith("exportlite")
-    ? await import(pathToFileURL(join(pkg, "dist/index.mjs"))) : undefined;
+    ? await import(pathToFileURL(join(buildDirectory, "index.mjs"))) : undefined;
   const stringify = method === "csv-stringify" ? require("csv-stringify").stringify : undefined;
   const ZipStream = zip ? (await import(pathToFileURL(require.resolve("zip-stream")))).default : undefined;
   const declared = api && { id: api.integer().primaryKey(), name: api.text(), note: api.text(), active: api.integer() };
@@ -167,8 +168,8 @@ if (process.argv[2] === "worker") {
     await writeFile(join(here, "summary.json"), `${JSON.stringify(summary, null, 2)}\n`);
     const manifest = JSON.parse(await readFile(join(pkg, "package.json"), "utf8"));
     const build = {};
-    for (const file of (await readdir(join(pkg, "dist"))).filter((name) => name.endsWith(".mjs")).sort())
-      build[file] = createHash("sha256").update(await readFile(join(pkg, "dist", file))).digest("hex");
+    for (const file of (await readdir(buildDirectory)).filter((name) => name.endsWith(".mjs")).sort())
+      build[file] = createHash("sha256").update(await readFile(join(buildDirectory, file))).digest("hex");
     await writeFile(join(here, "configuration.json"), `${JSON.stringify({ node: process.version, nodeSha256: createHash("sha256").update(await readFile(process.execPath)).digest("hex"), cpu: cpus()[0]?.model, rounds, methods, build, sourceCommitBeforeCsv: "a22c0105e49429b18ac4a3881f4fdfb38e253b08", fixtures: fixtures.map(({ path, ...rest }) => rest), versions: Object.fromEntries(["better-sqlite3", "csv-stringify", "csv-parse", "zip-stream"].map((name) => [name, manifest.devDependencies[name] ?? manifest.dependencies[name]])), protocol: "Sequential fresh workers, rotating method order. One hash verification, two warmups, three timed request batches per worker. Median of worker medians, natural GC. Counting Node writable; no disk or HTTP delivery. Whole-process peak RSS includes imports, connection setup, verification and warmups. Same 64 KiB flush target and 2048-row yields. ZIP level 1, memLevel 9, 256 KiB chunks. Plain CSV matches csv-stringify exactly and independently parses to fixture values. ZIP hashes match table/manual/library methods; query ZIP differs by entry name. Query planning and statement preparation included in time; connection/import setup excluded. Full SQLite aggregation is deliberately excluded because CSV production must remain streaming." }, null, 2)}\n`);
     console.log(JSON.stringify({ workers: results.length, cases: summary.length }));
   } finally { await rm(temporary, { recursive: true, force: true }); }

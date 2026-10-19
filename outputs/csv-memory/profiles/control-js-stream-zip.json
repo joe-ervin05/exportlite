@@ -1,0 +1,63 @@
+{
+  "node": "v26.12.0",
+  "allocations": {
+    "nativeBatches": 0,
+    "nativeBytes": 0,
+    "concatBuffers": 0,
+    "concatBytes": 0,
+    "encodedBuffers": 1980,
+    "encodedBytes": 131578335,
+    "firstConcatStacks": []
+  },
+  "peaks": {
+    "rss": 127320064,
+    "heapUsed": 19626680,
+    "external": 10346498,
+    "arrayBuffers": 7456407
+  },
+  "snapshots": [
+    {
+      "label": "start",
+      "rss": 58966016,
+      "heapTotal": 7749632,
+      "heapUsed": 5351192,
+      "external": 2217488,
+      "arrayBuffers": 137939
+    },
+    {
+      "label": "end-natural",
+      "rss": 127320064,
+      "heapTotal": 27443200,
+      "heapUsed": 11821040,
+      "external": 5670089,
+      "arrayBuffers": 2779998
+    },
+    {
+      "label": "end-after-diagnostic-gc",
+      "rss": 127254528,
+      "heapTotal": 25051136,
+      "heapUsed": 7615128,
+      "external": 3053566,
+      "arrayBuffers": 163475
+    }
+  ],
+  "naturalGc": {
+    "count": 151,
+    "durationMs": 23.890074729919434,
+    "kinds": {
+      "1": 147,
+      "4": 2,
+      "8": 2
+    }
+  },
+  "gcIncludingDiagnostic": {
+    "count": 153,
+    "durationMs": 28.183491230010986,
+    "kinds": {
+      "1": 147,
+      "4": 4,
+      "8": 2
+    }
+  },
+  "maxRssMiB": 121.5
+}

@@ -1,0 +1,322 @@
+[
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.81072333,
+      0.7045662500000003,
+      0.5905891600000001
+    ],
+    "medianMs": 0.7045662500000003,
+    "peakRssMiB": 130.546875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.7912633399999999,
+      0.6615575000000001,
+      1.19566375
+    ],
+    "medianMs": 0.7912633399999999,
+    "peakRssMiB": 132.6875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8608320800000001,
+      0.6591637500000002,
+      0.6215933299999995
+    ],
+    "medianMs": 0.6591637500000002,
+    "peakRssMiB": 226.375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.86764792,
+      0.6330145800000002,
+      0.61422417
+    ],
+    "medianMs": 0.6330145800000002,
+    "peakRssMiB": 230.21875
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.83506709,
+      0.6067525,
+      0.5525904200000002
+    ],
+    "medianMs": 0.6067525,
+    "peakRssMiB": 134.734375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.82985875,
+      0.68852292,
+      0.60059708
+    ],
+    "medianMs": 0.68852292,
+    "peakRssMiB": 124.046875
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.9018483300000003,
+      0.9544829099999993,
+      0.7824841700000001
+    ],
+    "medianMs": 0.9018483300000003,
+    "peakRssMiB": 223.671875
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8535704200000004,
+      0.6592279100000001,
+      0.6209158300000002
+    ],
+    "medianMs": 0.6592279100000001,
+    "peakRssMiB": 227.109375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.76247708,
+      0.6216704199999998,
+      0.5420429199999998
+    ],
+    "medianMs": 0.6216704199999998,
+    "peakRssMiB": 128.640625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.76149375,
+      0.5974812500000002,
+      0.5647812500000003
+    ],
+    "medianMs": 0.5974812500000002,
+    "peakRssMiB": 130.34375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8649841700000002,
+      0.6500962500000003,
+      0.6275029199999994
+    ],
+    "medianMs": 0.6500962500000003,
+    "peakRssMiB": 236.25
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8811454199999997,
+      0.6683687499999996,
+      0.6263162499999999
+    ],
+    "medianMs": 0.6683687499999996,
+    "peakRssMiB": 236.09375
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.77067292,
+      0.58718625,
+      0.5565483300000003
+    ],
+    "medianMs": 0.58718625,
+    "peakRssMiB": 132.1875
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8450079199999999,
+      0.605435,
+      0.5358849999999998
+    ],
+    "medianMs": 0.605435,
+    "peakRssMiB": 133.34375
+  },
+  {
+    "round": 3,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8698849999999999,
+      0.6449083299999995,
+      0.6283662500000002
+    ],
+    "medianMs": 0.6449083299999995,
+    "peakRssMiB": 227
+  },
+  {
+    "round": 3,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8456383299999999,
+      0.6466845899999999,
+      0.6132174999999995
+    ],
+    "medianMs": 0.6466845899999999,
+    "peakRssMiB": 229.65625
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.7722049999999999,
+      0.5937875000000002,
+      0.5542120799999998
+    ],
+    "medianMs": 0.5937875000000002,
+    "peakRssMiB": 140.65625
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      1.05684291,
+      0.6095529200000002,
+      0.5578970799999999
+    ],
+    "medianMs": 0.6095529200000002,
+    "peakRssMiB": 139.390625
+  },
+  {
+    "round": 4,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8580654199999997,
+      0.6514958300000001,
+      0.6180374999999992
+    ],
+    "medianMs": 0.6514958300000001,
+    "peakRssMiB": 229.421875
+  },
+  {
+    "round": 4,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      1.0577758300000004,
+      0.6559887500000002,
+      0.6208083299999998
+    ],
+    "medianMs": 0.6559887500000002,
+    "peakRssMiB": 226.828125
+  }
+]

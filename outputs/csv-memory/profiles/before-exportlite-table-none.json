@@ -1,0 +1,66 @@
+{
+  "node": "v26.12.0",
+  "allocations": {
+    "nativeBatches": 531,
+    "nativeBytes": 131578074,
+    "concatBuffers": 531,
+    "concatBytes": 131578335,
+    "encodedBuffers": 0,
+    "encodedBytes": 0,
+    "firstConcatStacks": [
+      "Error\n    at Buffer.concat (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/probe.mjs:50:86)\n    at OutputWriter.flush (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/baseline/dist/zip-Cg-WVAA8.mjs:155:121)\n    at OutputWriter.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/baseline/dist/zip-Cg-WVAA8.mjs:149:72)\n    at streamExport (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/baseline/dist/cache-B4w5UP3z.mjs:34:108)",
+      "Error\n    at Buffer.concat (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/probe.mjs:50:86)\n    at OutputWriter.flush (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/baseline/dist/zip-Cg-WVAA8.mjs:155:121)\n    at OutputWriter.write (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/baseline/dist/zip-Cg-WVAA8.mjs:149:72)\n    at streamExport (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-memory/baseline/dist/cache-B4w5UP3z.mjs:34:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async consume (file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv/compare.mjs:87:53)\n    at async file:///Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv/compare.mjs:102:22"
+    ]
+  },
+  "peaks": {
+    "rss": 205832192,
+    "heapUsed": 7071120,
+    "external": 73206569,
+    "arrayBuffers": 70601511
+  },
+  "snapshots": [
+    {
+      "label": "start",
+      "rss": 58916864,
+      "heapTotal": 7487488,
+      "heapUsed": 5351192,
+      "external": 2217488,
+      "arrayBuffers": 137939
+    },
+    {
+      "label": "end-natural",
+      "rss": 205783040,
+      "heapTotal": 9060352,
+      "heapUsed": 6204496,
+      "external": 13247925,
+      "arrayBuffers": 10642867
+    },
+    {
+      "label": "end-after-diagnostic-gc",
+      "rss": 205832192,
+      "heapTotal": 9060352,
+      "heapUsed": 5989784,
+      "external": 2749105,
+      "arrayBuffers": 144047
+    }
+  ],
+  "naturalGc": {
+    "count": 8,
+    "durationMs": 6.128705978393555,
+    "kinds": {
+      "1": 2,
+      "4": 4,
+      "8": 2
+    }
+  },
+  "gcIncludingDiagnostic": {
+    "count": 10,
+    "durationMs": 9.42845630645752,
+    "kinds": {
+      "1": 2,
+      "4": 6,
+      "8": 2
+    }
+  },
+  "maxRssMiB": 196.296875
+}
