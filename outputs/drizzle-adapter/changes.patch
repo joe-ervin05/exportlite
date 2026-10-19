@@ -1,0 +1,1655 @@
+--- a/README.md
++++ b/README.md
+@@ -96,6 +96,57 @@
+ 
+ Declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Remote database adapters are not implemented. Run `node examples/declared-columns.mjs` for a working example.
+ 
++## Drizzle adapter
++
++The optional `exportlite/drizzle` entry point accepts a Drizzle database and existing SQLite schemas. It supports **Drizzle ORM 0.45.x, tested with 0.45.4**, using `drizzle-orm/better-sqlite3`. Drizzle is an optional peer dependency; the main `exportlite` entry does not import it. Stable-version documentation uses `getTableColumns()`; the newer `getColumns()` name belongs to Drizzle v1.
++
++```ts
++import { eq, sql } from "drizzle-orm";
++import { exportTable, exportQuery } from "exportlite/drizzle";
++import type { ExportRow } from "exportlite";
++import { db } from "./db";       // drizzle(client), better-sqlite3 driver
++import { users } from "./schema"; // an existing sqliteTable declaration
++
++const stream = await exportTable(db, users, {
++  columns: { userId: users.id, displayName: users.name, email: users.email },
++  format: "json",
++});
++type User = ExportRow<typeof stream>; // types and nullability from Drizzle
++return new Response(stream, {
++  headers: { "Content-Type": "application/json" },
++});
++```
++
++Omitting `columns` exports the table's declared Drizzle columns with its JavaScript property names as JSON keys. An object selection renames or repeats fields without duplicating type declarations. The adapter respects Drizzle's configured column casing. A single integer primary key from either `.primaryKey()` or table-level `primaryKey({ columns: [...] })` enables the existing 256-row batches, even when that key is excluded from the JSON projection. Composite, text and missing keys use row streaming. Both paths prepare and execute one data statement with no schema or capability preflight queries. The Drizzle schema must match the database; fresh preparation catches missing fields, and extra database columns do not change the export.
++
++Pass an unexecuted Drizzle select to reuse its filters, parameter encoders, aliases, flat joins, ordering, limits, grouping and CTEs:
++
++```ts
++const query = db.select({ id: users.id, label: users.name })
++  .from(users).where(eq(users.active, true));
++const stream = await exportQuery(db, query, { format: "json", zip: true });
++```
++
++The adapter compiles `.toSQL()` and reads selection metadata; it never awaits the query or calls Drizzle's `.all()`. Select queries retain their inferred row contract, including nullable columns from flat left joins. Give computed SQL expressions an `.as("alias")` alias. Ordinary select queries use the existing row-streaming query path; the integer-key table batching optimization applies to `exportTable()`. Drizzle's built-in query-result cache and row logging/mapping hooks are bypassed because ExportLite executes the generated JSON statement through the same native `$client` cursor. No export result is cached.
++
++Raw Drizzle `sql` templates also work. Supply the schema columns corresponding to the raw query's result column names; these fields supply output names and decoding metadata without a discovery query:
++
++```ts
++const stream = await exportQuery(
++  db,
++  sql`SELECT * FROM ${users} WHERE ${users.id} > ${100}`,
++  { columns: { id: users.id, displayName: users.name }, format: "json" },
++);
++```
++
++Supported schema values are plain `integer`, `real`, `text` (including enums), boolean integers and JSON-mode text. JSON-mode text becomes nested JSON rather than an escaped string. Boolean fields use ExportLite's strict 0/1 representation. A generic `sql<T>` annotation or `$type<T>()` is a caller-supplied type contract, not runtime validation; computed SQL selections should return JSON scalar values. To embed stored JSON objects/arrays, select the JSON-mode schema column itself. Nested selection objects and Drizzle's relational query API are outside this first adapter.
++
++Date/timestamp modes, numeric modes, BLOB/bigint columns, custom column decoders and `.mapWith()` are rejected explicitly rather than silently skipping their conversions. Convert such fields to a supported scalar in an aliased SQL expression when appropriate. Unbound `sql.placeholder()` values are not supported; bind actual values in the query before exporting. The adapter reads a few runtime metadata properties that Drizzle marks internal, including configured casing, selection fields and SQL decoders; compatibility tests cover the pinned version and upgrades should rerun them.
++
++`zip`, `signal`, `output`, `end`, `bufferSize`, table `encoding` and `.result` work as in the core API, using the same writer and ZIP implementation. The caller owns the connection and any surrounding native transaction. Drizzle transaction-wrapper objects do not expose the required `$client`; pass the original database while its native transaction remains open for the entire export consumption.
++
++Remote libSQL/Turso and other Drizzle drivers are not supported by this adapter. Drizzle's libSQL execution path returns a buffered result, so using its raw execution API alone would not preserve bounded streaming. A remote adapter needs a streaming transport in addition to Drizzle's schema/compiler support. Run `node examples/drizzle.mjs` for table, select and raw SQL examples.
++
+ ## Readable streams and API responses
+ 
+ Omitting `output` returns a `Promise<ExportStream>`. The resolved value is a Web `ReadableStream<Uint8Array>` that works directly as a `Response` body, with `.result` for completion statistics. It supports plain JSON/JSONL and `zip: true` with the same options as destination exports. There is no `toWeb()` helper.
+@@ -234,7 +285,7 @@
+ pnpm example
+ ```
+ 
+-Local checks cover 249 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
++Local checks cover 283 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+ 
+ ## Benchmarks
+ 
+--- a/examples/drizzle.mjs
++++ b/examples/drizzle.mjs
+@@ -0,0 +1,52 @@
++import Database from "better-sqlite3";
++import { eq, sql } from "drizzle-orm";
++import { drizzle } from "drizzle-orm/better-sqlite3";
++import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
++import { exportQuery, exportTable } from "../dist/drizzle.mjs";
++
++const users = sqliteTable("users", {
++  id: integer().primaryKey(),
++  displayName: text("name").notNull(),
++  active: integer({ mode: "boolean" }).notNull(),
++});
++const client = new Database(":memory:");
++const db = drizzle(client);
++try {
++  client.exec(
++    "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT NOT NULL,active INTEGER NOT NULL)",
++  );
++  db.insert(users)
++    .values([
++      { id: 1, displayName: "Joe", active: true },
++      { id: 2, displayName: "雪", active: false },
++    ])
++    .run();
++
++  // Reuse the existing schema, including its primary key and boolean mode.
++  const table = await exportTable(db, users, { format: "json" });
++  console.log(await new Response(table).text());
++  await table.result;
++
++  // Compile this query without fetching or mapping Drizzle row objects.
++  const query = db
++    .select({ userId: users.id, label: users.displayName })
++    .from(users)
++    .where(eq(users.active, true));
++  const selected = await exportQuery(db, query, { format: "json" });
++  console.log(await new Response(selected).text());
++  await selected.result;
++
++  // Raw SQL templates retain parameter binding; reuse columns as metadata.
++  const raw = await exportQuery(
++    db,
++    sql`SELECT * FROM ${users} WHERE ${users.id} = ${2}`,
++    {
++      columns: { label: users.displayName, enabled: users.active },
++      format: "json",
++    },
++  );
++  console.log(await new Response(raw).text());
++  await raw.result;
++} finally {
++  client.close();
++}
+--- a/package.json
++++ b/package.json
+@@ -17,6 +17,16 @@
+       "require": {
+         "types": "./dist/index.d.cts",
+         "default": "./dist/index.cjs"
++      }
++    },
++    "./drizzle": {
++      "import": {
++        "types": "./dist/drizzle.d.mts",
++        "default": "./dist/drizzle.mjs"
++      },
++      "require": {
++        "types": "./dist/drizzle.d.cts",
++        "default": "./dist/drizzle.cjs"
+       }
+     }
+   },
+@@ -40,7 +50,13 @@
+     "example": "node examples/basic.mjs"
+   },
+   "peerDependencies": {
+-    "better-sqlite3": "^13.0.3"
++    "better-sqlite3": "^13.0.3",
++    "drizzle-orm": "^0.45.4"
++  },
++  "peerDependenciesMeta": {
++    "drizzle-orm": {
++      "optional": true
++    }
+   },
+   "devDependencies": {
+     "@biomejs/biome": "2.5.15",
+@@ -49,6 +65,7 @@
+     "@types/yauzl": "3.4.0",
+     "@types/zip-stream": "7.0.0",
+     "better-sqlite3": "13.0.3",
++    "drizzle-orm": "0.45.4",
+     "tsdown": "0.23.1",
+     "typescript": "7.0.2",
+     "vitest": "5.0.5",
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -6,9 +6,6 @@
+   .:
+     configDependencies: {}
+     packageManagerDependencies:
+-      '@pnpm/exe':
+-        specifier: 12.14.0
+-        version: 12.14.0
+       pnpm:
+         specifier: 12.14.0
+         version: 12.14.0
+@@ -91,11 +88,6 @@
+     resolution: {integrity: sha512-/LSX6mew/sLf08XqcjemuklNKf1K/Ftpgj4//hK/HKzI2dKbmxDB27a/2OaQ5a0O3/3OFzlssXDziZsi+yVBwQ==}
+     cpu: [x64]
+     os: [win32]
+-
+-  '@pnpm/exe@12.14.0':
+-    resolution: {integrity: sha512-iZCbiKegYUapNVkZY4O8vjXt9EF/j34LbDvew6qUM5g/HrxMY38cFJaoE8+5ZWQfbt2YCsLfufI5TTh+GxUbWw==}
+-    engines: {node: '>=18.*'}
+-    hasBin: true
+ 
+   pnpm@12.14.0:
+     resolution: {integrity: sha512-wYum2HmT09Fky16JSPMrLAbuhUSH4GzY2GeBNC+z5btGNDZwNHEehoArqpw3vqkGzhkprQjXCITJfYAd8TOJpg==}
+@@ -145,23 +137,6 @@
+ 
+   '@pnpm/exe.win32-x64@12.14.0':
+     optional: true
+-
+-  '@pnpm/exe@12.14.0':
+-    optionalDependencies:
+-      '@pnpm/exe.android-arm64': 12.14.0
+-      '@pnpm/exe.android-x64': 12.14.0
+-      '@pnpm/exe.darwin-arm64': 12.14.0
+-      '@pnpm/exe.darwin-x64': 12.14.0
+-      '@pnpm/exe.freebsd-x64': 12.14.0
+-      '@pnpm/exe.linux-arm64': 12.14.0
+-      '@pnpm/exe.linux-arm64-musl': 12.14.0
+-      '@pnpm/exe.linux-ppc64': 12.14.0
+-      '@pnpm/exe.linux-riscv64': 12.14.0
+-      '@pnpm/exe.linux-s390x': 12.14.0
+-      '@pnpm/exe.linux-x64': 12.14.0
+-      '@pnpm/exe.linux-x64-musl': 12.14.0
+-      '@pnpm/exe.win32-arm64': 12.14.0
+-      '@pnpm/exe.win32-x64': 12.14.0
+ 
+   pnpm@12.14.0:
+     optionalDependencies:
+@@ -213,6 +188,9 @@
+       better-sqlite3:
+         specifier: 13.0.3
+         version: 13.0.3
++      drizzle-orm:
++        specifier: 0.45.4
++        version: 0.45.4(@types/better-sqlite3@9.6.0)(better-sqlite3@13.0.3)
+       tsdown:
+         specifier: 0.23.1
+         version: 0.23.1(typescript@7.0.2)
+@@ -678,6 +656,101 @@
+   detect-libc@2.1.2:
+     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
+     engines: {node: '>=8'}
++
++  drizzle-orm@0.45.4:
++    resolution: {integrity: sha512-NiM1YZpJ2UxyeE67DpDDZ+Tsw4YLX3trSlkNT7Tm9eKoUNb1LvaAaQzXgYQsWs+AQ9TUmmwMmBOCXuqqxUWKKQ==}
++    peerDependencies:
++      '@aws-sdk/client-rds-data': '>=3'
++      '@cloudflare/workers-types': '>=4'
++      '@electric-sql/pglite': '>=0.2.0'
++      '@libsql/client': '>=0.10.0'
++      '@libsql/client-wasm': '>=0.10.0'
++      '@neondatabase/serverless': '>=0.10.0'
++      '@netlify/db': '>=0.4.0'
++      '@op-engineering/op-sqlite': '>=2'
++      '@opentelemetry/api': ^1.4.1
++      '@planetscale/database': '>=1.13'
++      '@prisma/client': '*'
++      '@tidbcloud/serverless': '*'
++      '@types/better-sqlite3': '*'
++      '@types/pg': '*'
++      '@types/sql.js': '*'
++      '@upstash/redis': '>=1.34.7'
++      '@vercel/postgres': '>=0.8.0'
++      '@xata.io/client': '*'
++      better-sqlite3: '>=7'
++      bun-types: '*'
++      expo-sqlite: '>=14.0.0'
++      gel: '>=2'
++      knex: '*'
++      kysely: '*'
++      mysql2: '>=2'
++      pg: '>=8'
++      postgres: '>=3'
++      prisma: '*'
++      sql.js: '>=1'
++      sqlite3: '>=5'
++    peerDependenciesMeta:
++      '@aws-sdk/client-rds-data':
++        optional: true
++      '@cloudflare/workers-types':
++        optional: true
++      '@electric-sql/pglite':
++        optional: true
++      '@libsql/client':
++        optional: true
++      '@libsql/client-wasm':
++        optional: true
++      '@neondatabase/serverless':
++        optional: true
++      '@netlify/db':
++        optional: true
++      '@op-engineering/op-sqlite':
++        optional: true
++      '@opentelemetry/api':
++        optional: true
++      '@planetscale/database':
++        optional: true
++      '@prisma/client':
++        optional: true
++      '@tidbcloud/serverless':
++        optional: true
++      '@types/better-sqlite3':
++        optional: true
++      '@types/pg':
++        optional: true
++      '@types/sql.js':
++        optional: true
++      '@upstash/redis':
++        optional: true
++      '@vercel/postgres':
++        optional: true
++      '@xata.io/client':
++        optional: true
++      better-sqlite3:
++        optional: true
++      bun-types:
++        optional: true
++      expo-sqlite:
++        optional: true
++      gel:
++        optional: true
++      knex:
++        optional: true
++      kysely:
++        optional: true
++      mysql2:
++        optional: true
++      pg:
++        optional: true
++      postgres:
++        optional: true
++      prisma:
++        optional: true
++      sql.js:
++        optional: true
++      sqlite3:
++        optional: true
+ 
+   dts-resolver@3.0.0:
+     resolution: {integrity: sha512-1T1f+z+4tl9XD+m+0HBgWoL/nm0bOIffyWaUuUSBlFg/86IWvfx+wjNaO/ybU0AJzG9/Mi5hBUgGV6zCmWEN7Q==}
+@@ -1370,6 +1443,11 @@
+   defu@6.1.7: {}
+ 
+   detect-libc@2.1.2: {}
++
++  drizzle-orm@0.45.4(@types/better-sqlite3@9.6.0)(better-sqlite3@13.0.3):
++    optionalDependencies:
++      '@types/better-sqlite3': 9.6.0
++      better-sqlite3: 13.0.3
+ 
+   dts-resolver@3.0.0: {}
+ 
+--- a/src/drizzle.ts
++++ b/src/drizzle.ts
+@@ -0,0 +1,315 @@
++import type Database from "better-sqlite3";
++import {
++  type GetColumnData,
++  getTableColumns,
++  is,
++  type Query,
++  SQL,
++} from "drizzle-orm";
++import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
++import {
++  getTableConfig,
++  SQLiteColumn,
++  type SQLiteSyncDialect,
++  SQLiteTable,
++} from "drizzle-orm/sqlite-core";
++import { streamExport } from "./api/export.js";
++import type { ReadStatement } from "./database/adapter.js";
++import { ExportLiteError } from "./errors.js";
++import { createReadableExport } from "./output/readable.js";
++import { checkAborted, validateOptions } from "./output/writer.js";
++import { cachedSelectedTablePlan } from "./planner/cache.js";
++import type { SelectedField } from "./planner/columns.js";
++import { identifier, uniqueColumns } from "./planner/identifiers.js";
++import { planSelectedQuery } from "./planner/json.js";
++import type {
++  ExportOptions,
++  ExportResult,
++  ExportStream,
++  StreamExportOptions,
++  TableExportOptions,
++  TableStreamOptions,
++} from "./types.js";
++
++/** The $client exposed by drizzle-orm/better-sqlite3. Caller retains ownership. */
++export interface DrizzleSQLiteDatabase {
++  readonly $client: Database.Database;
++}
++
++export type DrizzleColumns = Readonly<Record<string, SQLiteColumn>>;
++export type InferDrizzleColumns<C extends DrizzleColumns> = {
++  -readonly [K in keyof C]: GetColumnData<C[K]>;
++};
++type TableDestination<C extends DrizzleColumns = DrizzleColumns> = Omit<
++  TableExportOptions,
++  "columns"
++> & { columns?: C };
++type TableReadable<C extends DrizzleColumns> = Omit<
++  TableStreamOptions,
++  "columns"
++> & { columns?: C };
++
++/** Flat SQLite selects, including filters, joins, ordering, limits and CTEs. */
++export interface DrizzleSelectQuery {
++  toSQL(): Query;
++  readonly _: { readonly dialect: "sqlite"; readonly result: unknown[] };
++}
++
++export function exportTable(
++  db: DrizzleSQLiteDatabase,
++  table: SQLiteTable,
++  options: TableDestination,
++): Promise<ExportResult>;
++export function exportTable<
++  T extends SQLiteTable,
++  const C extends DrizzleColumns = T["_"]["columns"],
++>(
++  db: DrizzleSQLiteDatabase,
++  table: T,
++  options?: TableReadable<C>,
++): Promise<ExportStream<InferDrizzleColumns<C>>>;
++export function exportTable<
++  T extends SQLiteTable,
++  const C extends DrizzleColumns = T["_"]["columns"],
++>(
++  db: DrizzleSQLiteDatabase,
++  table: T,
++  options: TableReadable<C> | TableDestination<C>,
++): Promise<ExportResult | ExportStream<InferDrizzleColumns<C>>>;
++export async function exportTable(
++  db: DrizzleSQLiteDatabase,
++  table: SQLiteTable,
++  options: TableDestination | TableReadable<DrizzleColumns> = {},
++): Promise<ExportResult | ExportStream> {
++  const started = performance.now();
++  validateOptions(options);
++  checkAborted(options.signal);
++  const { client, dialect } = connection(db);
++  if (!is(table, SQLiteTable)) invalid("Pass a Drizzle SQLite table.");
++  if (
++    options.encoding !== undefined &&
++    !["utf8", "utf16le", "utf16be"].includes(options.encoding)
++  )
++    invalid("encoding must be utf8, utf16le or utf16be.");
++  const available = Object.values(getTableColumns(table));
++  const selected = options.columns ?? getTableColumns(table);
++  const fields = entries(selected).map(([key, column]) => {
++    if (!is(column, SQLiteColumn) || !available.includes(column))
++      invalid("Table selections must contain columns from that table.");
++    return field(key, column, dialect.casing.getColumnCasing(column));
++  });
++  // A table-level key can be composite. Never batch on just one member of it.
++  const config = getTableConfig(table);
++  const primary = [
++    ...available.filter((column) => column.primary),
++    ...config.primaryKeys.flatMap((key) => key.columns),
++  ];
++  const keys = [...new Set(primary)];
++  const key =
++    keys.length === 1 && keys[0]?.columnType === "SQLiteInteger"
++      ? dialect.casing.getColumnCasing(keys[0])
++      : undefined;
++  const plan = cachedSelectedTablePlan(
++    client,
++    config.name,
++    fields,
++    options.format ?? "jsonl",
++    options.encoding ?? "utf8",
++    key,
++  );
++  return deliver(
++    plan.statement,
++    [],
++    options,
++    started,
++    plan.batched,
++    config.name,
++  );
++}
++
++export function exportQuery<Q extends DrizzleSelectQuery>(
++  db: DrizzleSQLiteDatabase,
++  query: Q,
++  options: ExportOptions,
++): Promise<ExportResult>;
++export function exportQuery<Q extends DrizzleSelectQuery>(
++  db: DrizzleSQLiteDatabase,
++  query: Q,
++  options?: StreamExportOptions,
++): Promise<ExportStream<Q["_"]["result"][number]>>;
++export function exportQuery<Q extends DrizzleSelectQuery>(
++  db: DrizzleSQLiteDatabase,
++  query: Q,
++  options: ExportOptions | StreamExportOptions,
++): Promise<ExportResult | ExportStream<Q["_"]["result"][number]>>;
++export function exportQuery(
++  db: DrizzleSQLiteDatabase,
++  query: SQL,
++  options: ExportOptions & { columns: DrizzleColumns },
++): Promise<ExportResult>;
++export function exportQuery<const C extends DrizzleColumns>(
++  db: DrizzleSQLiteDatabase,
++  query: SQL,
++  options: StreamExportOptions & { columns: C },
++): Promise<ExportStream<InferDrizzleColumns<C>>>;
++export function exportQuery<const C extends DrizzleColumns>(
++  db: DrizzleSQLiteDatabase,
++  query: SQL,
++  options: (StreamExportOptions | ExportOptions) & { columns: C },
++): Promise<ExportResult | ExportStream<InferDrizzleColumns<C>>>;
++export async function exportQuery(
++  db: DrizzleSQLiteDatabase,
++  query: DrizzleSelectQuery | SQL,
++  options: (ExportOptions | StreamExportOptions) & {
++    columns?: DrizzleColumns;
++  } = {},
++): Promise<ExportResult | ExportStream> {
++  const started = performance.now();
++  validateOptions(options);
++  checkAborted(options.signal);
++  const { client, dialect } = connection(db);
++  const raw = is(query, SQL);
++  let compiled: Query;
++  let selection: Record<string, unknown>;
++  if (raw) {
++    if (!options.columns) invalid("Raw Drizzle SQL requires columns metadata.");
++    compiled = dialect.sqlToQuery(query);
++    selection = options.columns;
++  } else {
++    const metadata = query as DrizzleSelectQuery & {
++      getSelectedFields?: () => Record<string, unknown>;
++    };
++    if (
++      typeof query?.toSQL !== "function" ||
++      typeof metadata.getSelectedFields !== "function"
++    )
++      invalid("Pass a Drizzle SQLite select query or sql template.");
++    if (options.columns !== undefined)
++      invalid("Select queries already supply their columns metadata.");
++    compiled = query.toSQL();
++    try {
++      selection = Object.fromEntries(
++        Object.entries(metadata.getSelectedFields()),
++      );
++    } catch (cause) {
++      throw new ExportLiteError(
++        "INVALID_OPTIONS",
++        "Give SQL expressions an .as(...) alias before exporting a Drizzle select.",
++        { cause },
++      );
++    }
++  }
++  const fields = entries(selection).map(([key, value]) =>
++    field(
++      key,
++      value,
++      is(value, SQLiteColumn) ? dialect.casing.getColumnCasing(value) : key,
++    ),
++  );
++  // Positional CTE names preserve repeated sources and Drizzle's JS aliases.
++  const statement = planSelectedQuery(client, compiled.sql, fields, !raw);
++  return deliver(statement, compiled.params, options, started);
++}
++
++function field(key: string, value: unknown, name: string): SelectedField {
++  let kind: SelectedField["kind"] = "value";
++  let dataType: SelectedField["dataType"] = "text";
++  if (is(value, SQLiteColumn)) {
++    switch (value.columnType) {
++      case "SQLiteInteger":
++        dataType = "integer";
++        break;
++      case "SQLiteReal":
++        dataType = "real";
++        break;
++      case "SQLiteText":
++        break;
++      case "SQLiteBoolean":
++        dataType = "integer";
++        kind = "boolean";
++        break;
++      case "SQLiteTextJson":
++        kind = "json";
++        break;
++      default:
++        invalid(
++          `Drizzle column ${JSON.stringify(key)} uses ${value.columnType}, which requires a JavaScript decoder. Select a SQL text/number expression instead.`,
++        );
++    }
++  } else if (is(value, SQL.Aliased) || is(value, SQL)) {
++    const expression = is(value, SQL.Aliased) ? value.sql : value;
++    // Use the expression's own SQL class so mixed ESM/CJS imports and multiple
++    // Drizzle installations compare against the correct default decoder.
++    const SQLClass = expression.constructor as typeof SQL;
++    const decoder = (item: SQL) =>
++      (item as unknown as { decoder: unknown }).decoder;
++    if (decoder(expression) !== decoder(new SQLClass([])))
++      invalid(
++        "Drizzle .mapWith() decoders cannot run inside SQLite JSON generation.",
++      );
++  } else {
++    invalid("Only flat Drizzle column/SQL selections are supported.");
++  }
++  identifier(name);
++  return { key, column: name, kind, dataType, primary: false };
++}
++
++function entries(value: unknown): [string, unknown][] {
++  if (
++    !value ||
++    typeof value !== "object" ||
++    ![Object.prototype, null].includes(Object.getPrototypeOf(value))
++  )
++    invalid("columns must be a flat object of Drizzle columns.");
++  const result = Object.entries(value);
++  uniqueColumns(result.map(([key]) => key));
++  return result;
++}
++
++function connection(db: DrizzleSQLiteDatabase) {
++  if (
++    !is(db, BetterSQLite3Database) ||
++    typeof db.$client?.prepare !== "function"
++  )
++    invalid(
++      "The Drizzle adapter requires drizzle-orm/better-sqlite3 with a live $client; buffered/remote drivers are not supported.",
++    );
++  // Drizzle does not expose its configured casing/dialect in public typings.
++  // Reuse it so automatic casing and sql template bindings match the caller.
++  const dialect = (
++    db as unknown as {
++      dialect: SQLiteSyncDialect & {
++        casing: { getColumnCasing(column: SQLiteColumn): string };
++      };
++    }
++  ).dialect;
++  if (!dialect?.casing || typeof dialect.sqlToQuery !== "function")
++    invalid(
++      "Unsupported Drizzle dialect. This adapter supports Drizzle 0.45.x.",
++    );
++  return { client: db.$client, dialect };
++}
++
++function deliver(
++  statement: ReadStatement,
++  args: unknown[],
++  options: ExportOptions | StreamExportOptions,
++  started: number,
++  batched = false,
++  name = "export",
++): Promise<ExportResult | ExportStream> {
++  if (options.output === undefined)
++    return Promise.resolve(
++      createReadableExport(
++        options,
++        (destination) =>
++          streamExport(statement, args, destination, started, batched, name),
++        started,
++      ),
++    );
++  return streamExport(statement, args, options, started, batched, name);
++}
++
++function invalid(message: string): never {
++  throw new ExportLiteError("INVALID_OPTIONS", message);
++}
+--- a/src/planner/cache.ts
++++ b/src/planner/cache.ts
+@@ -3,7 +3,8 @@
+ import { readStatement } from "../database/better-sqlite3.js";
+ import { sqliteError } from "../errors.js";
+ import type { DatabaseEncoding, TableColumns } from "../types.js";
+-import { planDeclaredTable } from "./declared.js";
++import type { SelectedField } from "./columns.js";
++import { planDeclaredTable, planSelectedTable } from "./declared.js";
+ import { identifier } from "./identifiers.js";
+ import { planTable } from "./json.js";
+ 
+@@ -88,3 +89,24 @@
+     throw sqliteError(error);
+   }
+ }
++
++export function cachedSelectedTablePlan(
++  db: SQLiteConnection,
++  table: string,
++  fields: SelectedField[],
++  format: "json" | "jsonl",
++  encoding: DatabaseEncoding,
++  primaryKey?: string,
++): ReturnType<typeof planTable> {
++  identifier(table);
++  try {
++    return cachedPlan(
++      db,
++      cacheFor(db),
++      JSON.stringify(["selected", table, fields, format, encoding, primaryKey]),
++      () => planSelectedTable(db, table, fields, format, encoding, primaryKey),
++    );
++  } catch (error) {
++    throw sqliteError(error);
++  }
++}
+--- a/src/planner/columns.ts
++++ b/src/planner/columns.ts
+@@ -5,7 +5,7 @@
+ export interface SelectedField {
+   key: string;
+   column: string;
+-  kind: "value" | "boolean";
++  kind: "value" | "boolean" | "json";
+   dataType: "text" | "integer" | "real";
+   primary: boolean;
+ }
+@@ -52,7 +52,9 @@
+     const jsonValue =
+       field.kind === "boolean"
+         ? `json(CASE ${value} WHEN 0 THEN 'false' WHEN 1 THEN 'true' ELSE CASE WHEN ${value} IS NULL THEN NULL ELSE 'ExportLite: expected boolean 0 or 1' END END)`
+-        : value;
++        : field.kind === "json"
++          ? `json(${value})`
++          : value;
+     return `${literal(field.key)}, ${jsonValue}`;
+   });
+   return `json_object(${pairs.join(", ")})`;
+--- a/src/planner/declared.ts
++++ b/src/planner/declared.ts
+@@ -3,7 +3,11 @@
+ import { readStatement } from "../database/better-sqlite3.js";
+ import type { DatabaseEncoding } from "../types.js";
+ import { prepareBatchedTable } from "./batches.js";
+-import { selectedFields, selectedObject } from "./columns.js";
++import {
++  type SelectedField,
++  selectedFields,
++  selectedObject,
++} from "./columns.js";
+ import { identifier } from "./identifiers.js";
+ 
+ /** The request supplies the projection and key; no database metadata is read. */
+@@ -14,17 +18,31 @@
+   format: "json" | "jsonl",
+   encoding: DatabaseEncoding,
+ ) {
+-  const name = identifier(table);
+   const fields = selectedFields(columns);
+   const keys = fields.filter((field) => field.primary);
+-  if (
++  const key =
+     keys.length === 1 &&
+     keys[0]?.dataType === "integer" &&
+     keys[0].kind === "value"
+-  ) {
++      ? keys[0].column
++      : undefined;
++  return planSelectedTable(db, table, fields, format, encoding, key);
++}
++
++/** Shared schema-driven path; the key need not be included in the projection. */
++export function planSelectedTable(
++  db: SQLiteConnection,
++  table: string,
++  fields: SelectedField[],
++  format: "json" | "jsonl",
++  encoding: DatabaseEncoding,
++  key?: string,
++) {
++  const name = identifier(table);
++  if (key !== undefined) {
+     const batch = prepareBatchedTable(db, {
+       table,
+-      key: `"__exportlite_source".${identifier(keys[0].column)}`,
++      key: `"__exportlite_source".${identifier(key)}`,
+       columns: fields.map((field) => field.column),
+       fields,
+       format,
+--- a/src/planner/json.ts
++++ b/src/planner/json.ts
+@@ -4,7 +4,11 @@
+ import { ExportLiteError, sqliteError } from "../errors.js";
+ import type { TableColumns } from "../types.js";
+ import { planBatchedTable } from "./batches.js";
+-import { selectedFields, selectedObject } from "./columns.js";
++import {
++  type SelectedField,
++  selectedFields,
++  selectedObject,
++} from "./columns.js";
+ import {
+   identifier,
+   literal,
+@@ -82,20 +86,7 @@
+   sql: string,
+   declared?: SelectedColumns,
+ ) {
+-  if (typeof sql !== "string" || !sql.trim())
+-    throw new ExportLiteError(
+-      "INVALID_QUERY",
+-      "sql must be a nonempty SELECT/CTE string.",
+-    );
+-  // Some PRAGMAs take effect at prepare time. Reject non-queries before preparing.
+-  if (
+-    !/^(?:\s|--[^\n]*(?:\n|$)|\/\*[\s\S]*?\*\/)*(?:SELECT|WITH)\b/i.test(sql)
+-  ) {
+-    throw new ExportLiteError(
+-      "INVALID_QUERY",
+-      "Only SELECT and WITH queries are supported.",
+-    );
+-  }
++  validateQuery(sql);
+   let name = "__exportlite_source";
+   while (sql.toLowerCase().includes(name)) name += "_";
+   const sourceName = identifier(name);
+@@ -123,3 +114,45 @@
+     `WITH ${sourceName}(${aliases.join(", ")}) AS (\n${subquerySource(sql)}\n) SELECT json_object(${pairs}) FROM ${sourceName}`,
+   );
+ }
++
++/** Drizzle supplies selection order; no result metadata or rows are fetched. */
++export function planSelectedQuery(
++  db: SQLiteConnection,
++  sql: string,
++  fields: SelectedField[],
++  positional: boolean,
++) {
++  validateQuery(sql);
++  let name = "__exportlite_source";
++  while (sql.toLowerCase().includes(name)) name += "_";
++  const source = identifier(name);
++  const aliases = positional
++    ? `(${fields.map((_, i) => identifier(`c${i}`)).join(", ")})`
++    : "";
++  const object = selectedObject(
++    fields,
++    (field, i) =>
++      `${source}.${identifier(positional ? `c${i}` : field.column)}`,
++  );
++  return readStatement(
++    db,
++    `WITH ${source}${aliases} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${source}`,
++  );
++}
++
++function validateQuery(sql: string) {
++  if (typeof sql !== "string" || !sql.trim())
++    throw new ExportLiteError(
++      "INVALID_QUERY",
++      "sql must be a nonempty SELECT/CTE string.",
++    );
++  // Some PRAGMAs take effect at prepare time. Reject non-queries before preparing.
++  if (
++    !/^(?:\s|--[^\n]*(?:\n|$)|\/\*[\s\S]*?\*\/)*(?:SELECT|WITH)\b/i.test(sql)
++  ) {
++    throw new ExportLiteError(
++      "INVALID_QUERY",
++      "Only SELECT and WITH queries are supported.",
++    );
++  }
++}
+--- a/tests/drizzle-consumer.cts
++++ b/tests/drizzle-consumer.cts
+@@ -0,0 +1,81 @@
++import type { Writable } from "node:stream";
++
++import orm = require("drizzle-orm");
++const { eq, sql } = orm;
++
++import type { drizzle } from "drizzle-orm/better-sqlite3";
++
++import sqlite = require("drizzle-orm/sqlite-core");
++const { integer, sqliteTable, text } = sqlite;
++
++import type { ExportResult, ExportRow, ExportStream } from "exportlite";
++
++import adapter = require("exportlite/drizzle");
++const { exportQuery, exportTable } = adapter;
++import vitest = require("vitest");
++const { expectTypeOf } = vitest;
++
++declare const db: ReturnType<typeof drizzle>;
++declare const output: Writable;
++const users = sqliteTable("users", {
++  id: integer().primaryKey(),
++  displayName: text("name").notNull(),
++  email: text(),
++  active: integer({ mode: "boolean" }).notNull(),
++  metadata: text({ mode: "json" }).$type<{ tags: string[] }>(),
++});
++const all = exportTable(db, users, { format: "json" });
++expectTypeOf<ExportRow<typeof all>>().toEqualTypeOf<
++  typeof users.$inferSelect
++>();
++const selected = exportTable(db, users, {
++  columns: { userId: users.id, label: users.displayName, email: users.email },
++});
++type Selected = { userId: number; label: string; email: string | null };
++expectTypeOf<ExportRow<typeof selected>>().toEqualTypeOf<Selected>();
++const saved = exportTable(db, users, { output, zip: true });
++expectTypeOf(saved).toEqualTypeOf<Promise<ExportResult>>();
++const query = db
++  .select({ userId: users.id, label: users.displayName, email: users.email })
++  .from(users)
++  .where(eq(users.active, true));
++const response = exportQuery(db, query, { format: "json" });
++expectTypeOf<ExportRow<typeof response>>().toEqualTypeOf<Selected>();
++const raw = exportQuery(db, sql`SELECT * FROM ${users}`, {
++  columns: { userId: users.id, label: users.displayName, email: users.email },
++});
++expectTypeOf<ExportRow<typeof raw>>().toEqualTypeOf<Selected>();
++expectTypeOf(exportQuery(db, query, { output })).toEqualTypeOf<
++  Promise<ExportResult>
++>();
++expectTypeOf(
++  exportQuery(db, sql`SELECT * FROM ${users}`, {
++    columns: { id: users.id },
++    output,
++  }),
++).toEqualTypeOf<Promise<ExportResult>>();
++const pets = sqliteTable("pets", {
++  id: integer().primaryKey(),
++  owner: integer(),
++});
++const joined = db
++  .select({ id: users.id, petId: pets.id })
++  .from(users)
++  .leftJoin(pets, eq(users.id, pets.owner));
++const joinedExport = exportQuery(db, joined);
++expectTypeOf<ExportRow<typeof joinedExport>>().toEqualTypeOf<{
++  id: number;
++  petId: number | null;
++}>();
++const joinedStream: Promise<
++  ExportStream<{ id: number; petId: number | null }>
++> = exportQuery(db, joined);
++void joinedStream;
++// @ts-expect-error Raw SQL needs column metadata; generic SQL annotations are not runtime decoders.
++exportQuery(db, sql`SELECT 1`);
++// @ts-expect-error Drizzle column declarations are reused rather than strings.
++exportTable(db, users, { columns: { id: "number" } });
++// @ts-expect-error SQLite encodings are constrained.
++exportTable(db, users, { encoding: "latin1" });
++// @ts-expect-error The adapter needs a Drizzle database with a native streaming cursor.
++exportTable({ $client: { execute: async () => ({ rows: [] }) } }, users);
+--- a/tests/drizzle-consumer.mts
++++ b/tests/drizzle-consumer.mts
+@@ -0,0 +1,72 @@
++import type { Writable } from "node:stream";
++import { eq, sql } from "drizzle-orm";
++import type { drizzle } from "drizzle-orm/better-sqlite3";
++import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
++import type { ExportResult, ExportRow, ExportStream } from "exportlite";
++import { exportQuery, exportTable } from "exportlite/drizzle";
++import { expectTypeOf } from "vitest";
++
++declare const db: ReturnType<typeof drizzle>;
++declare const output: Writable;
++const users = sqliteTable("users", {
++  id: integer().primaryKey(),
++  displayName: text("name").notNull(),
++  email: text(),
++  active: integer({ mode: "boolean" }).notNull(),
++  metadata: text({ mode: "json" }).$type<{ tags: string[] }>(),
++});
++const all = exportTable(db, users, { format: "json" });
++expectTypeOf<ExportRow<typeof all>>().toEqualTypeOf<
++  typeof users.$inferSelect
++>();
++const selected = exportTable(db, users, {
++  columns: { userId: users.id, label: users.displayName, email: users.email },
++});
++type Selected = { userId: number; label: string; email: string | null };
++expectTypeOf<ExportRow<typeof selected>>().toEqualTypeOf<Selected>();
++const saved = exportTable(db, users, { output, zip: true });
++expectTypeOf(saved).toEqualTypeOf<Promise<ExportResult>>();
++const query = db
++  .select({ userId: users.id, label: users.displayName, email: users.email })
++  .from(users)
++  .where(eq(users.active, true));
++const response = exportQuery(db, query, { format: "json" });
++expectTypeOf<ExportRow<typeof response>>().toEqualTypeOf<Selected>();
++const raw = exportQuery(db, sql`SELECT * FROM ${users}`, {
++  columns: { userId: users.id, label: users.displayName, email: users.email },
++});
++expectTypeOf<ExportRow<typeof raw>>().toEqualTypeOf<Selected>();
++expectTypeOf(exportQuery(db, query, { output })).toEqualTypeOf<
++  Promise<ExportResult>
++>();
++expectTypeOf(
++  exportQuery(db, sql`SELECT * FROM ${users}`, {
++    columns: { id: users.id },
++    output,
++  }),
++).toEqualTypeOf<Promise<ExportResult>>();
++const pets = sqliteTable("pets", {
++  id: integer().primaryKey(),
++  owner: integer(),
++});
++const joined = db
++  .select({ id: users.id, petId: pets.id })
++  .from(users)
++  .leftJoin(pets, eq(users.id, pets.owner));
++const joinedExport = exportQuery(db, joined);
++expectTypeOf<ExportRow<typeof joinedExport>>().toEqualTypeOf<{
++  id: number;
++  petId: number | null;
++}>();
++const joinedStream: Promise<
++  ExportStream<{ id: number; petId: number | null }>
++> = exportQuery(db, joined);
++void joinedStream;
++// @ts-expect-error Raw SQL needs column metadata; generic SQL annotations are not runtime decoders.
++exportQuery(db, sql`SELECT 1`);
++// @ts-expect-error Drizzle column declarations are reused rather than strings.
++exportTable(db, users, { columns: { id: "number" } });
++// @ts-expect-error SQLite encodings are constrained.
++exportTable(db, users, { encoding: "latin1" });
++// @ts-expect-error The adapter needs a Drizzle database with a native streaming cursor.
++exportTable({ $client: { execute: async () => ({ rows: [] }) } }, users);
+--- a/tests/drizzle.test.ts
++++ b/tests/drizzle.test.ts
+@@ -0,0 +1,633 @@
++import { execFile } from "node:child_process";
++import { cp, mkdir, mkdtemp, readdir, rm, symlink } from "node:fs/promises";
++import { createRequire } from "node:module";
++import { tmpdir } from "node:os";
++import { dirname, join } from "node:path";
++import { Writable } from "node:stream";
++import { fileURLToPath, pathToFileURL } from "node:url";
++import { promisify } from "node:util";
++import Database from "better-sqlite3";
++import { eq, gt, sql } from "drizzle-orm";
++import { drizzle } from "drizzle-orm/better-sqlite3";
++import {
++  blob,
++  customType,
++  integer,
++  numeric,
++  primaryKey,
++  real,
++  sqliteTable,
++  text,
++} from "drizzle-orm/sqlite-core";
++import { afterEach, beforeEach, expect, it } from "vitest";
++import { fromBufferPromise } from "yauzl";
++import { exportQuery, exportTable } from "../src/drizzle.js";
++
++const users = sqliteTable("users", {
++  id: integer().primaryKey(),
++  displayName: text("name").notNull(),
++  email: text(),
++  active: integer({ mode: "boolean" }).notNull(),
++  score: real(),
++  metadata: text({ mode: "json" }).$type<{ tags: string[] }>(),
++});
++let client: Database.Database;
++let db: ReturnType<typeof drizzle>;
++beforeEach(() => {
++  client = new Database(":memory:");
++  client.exec(
++    "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT NOT NULL,email TEXT,active INTEGER NOT NULL,score REAL,metadata TEXT)",
++  );
++  db = drizzle(client);
++  db.transaction((tx) => {
++    for (let i = 1; i <= 513; i++)
++      tx.insert(users)
++        .values({
++          id: i * 3,
++          displayName: `雪 "${i}"`,
++          active: i % 2 === 1,
++          metadata: i % 2 ? { tags: ["one", "雪"] } : null,
++        })
++        .run();
++  });
++});
++afterEach(() => client.close());
++
++function traced() {
++  const prepared: string[] = [];
++  const batches: number[] = [];
++  let rows = 0;
++  const proxy = new Proxy(client, {
++    get(target, property) {
++      if (property === "prepare")
++        return (query: string) => {
++          prepared.push(query);
++          const statement = target.prepare(query);
++          const iterate = statement.iterate.bind(statement);
++          statement.iterate = function* (...params) {
++            for (const value of iterate(...params)) {
++              rows++;
++              if (Array.isArray(value)) batches.push(Number(value[1]));
++              yield value;
++            }
++          };
++          for (const method of ["get", "all", "columns"] as const)
++            statement[method] = () => {
++              throw new Error("No metadata or materialized rows permitted");
++            };
++          return statement;
++        };
++      const value = Reflect.get(target, property, target);
++      return typeof value === "function" ? value.bind(target) : value;
++    },
++  });
++  return { db: drizzle(proxy), prepared, batches, rows: () => rows };
++}
++
++it.each(["json", "jsonl"] as const)(
++  "reuses schema keys, modes and an unselected primary key in %s batches",
++  async (format) => {
++    const trace = traced();
++    const columns = {
++      label: users.displayName,
++      again: users.displayName,
++      enabled: users.active,
++      metadata: users.metadata,
++    };
++    for (let round = 0; round < 2; round++) {
++      const stream = await exportTable(trace.db, users, { columns, format });
++      expect(trace.rows()).toBe(round * 3);
++      const body = await new Response(stream).text();
++      const rows =
++        format === "json"
++          ? JSON.parse(body)
++          : body
++              .trimEnd()
++              .split("\n")
++              .map((line) => JSON.parse(line));
++      expect(rows).toHaveLength(513);
++      expect(rows[0]).toEqual({
++        label: '雪 "1"',
++        again: '雪 "1"',
++        enabled: true,
++        metadata: { tags: ["one", "雪"] },
++      });
++      expect(rows[1].metadata).toBeNull();
++      expect((await stream.result).rowsExported).toBe(513);
++    }
++    expect(trace.prepared).toHaveLength(2);
++    expect(trace.batches).toEqual([256, 256, 1, 256, 256, 1]);
++    expect(trace.prepared.join("\n")).not.toMatch(
++      /pragma|sqlite_schema|sqlite_version/i,
++    );
++  },
++);
++
++it("exports every Drizzle field by default, using property keys as JSON keys", async () => {
++  const stream = await exportTable(db, users, { format: "json" });
++  const rows = (await new Response(stream).json()) as unknown[];
++  expect(rows[0]).toEqual({
++    id: 3,
++    displayName: '雪 "1"',
++    email: null,
++    active: true,
++    score: null,
++    metadata: { tags: ["one", "雪"] },
++  });
++  await stream.result;
++});
++
++it("compiles a select without executing Drizzle or probing its result metadata", async () => {
++  const trace = traced();
++  const query = trace.db
++    .select({
++      renamed: users.displayName,
++      id: users.id,
++      active: users.active,
++      metadata: users.metadata,
++      upper: sql<string>`upper(${users.displayName})`.as("uppercase"),
++    })
++    .from(users)
++    .where(gt(users.id, 3))
++    .orderBy(users.id)
++    .limit(2);
++  query.all = () => {
++    throw new Error("Must not execute the Drizzle row mapper");
++  };
++  const stream = await exportQuery(trace.db, query, { format: "json" });
++  expect(trace.prepared).toHaveLength(1);
++  expect(trace.rows()).toBe(0);
++  expect(await new Response(stream).json()).toEqual([
++    {
++      renamed: '雪 "2"',
++      id: 6,
++      active: false,
++      metadata: null,
++      upper: '雪 "2"',
++    },
++    {
++      renamed: '雪 "3"',
++      id: 9,
++      active: true,
++      metadata: { tags: ["one", "雪"] },
++      upper: '雪 "3"',
++    },
++  ]);
++  await stream.result;
++  expect(trace.rows()).toBe(2);
++});
++
++it("keeps bindings parameterized, including Drizzle's parameter encoders", async () => {
++  const attack = "x'); DROP TABLE users;--";
++  const query = db
++    .select({ id: users.id })
++    .from(users)
++    .where(eq(users.displayName, attack));
++  const stream = await exportQuery(db, query, { format: "json" });
++  expect(await new Response(stream).json()).toEqual([]);
++  await stream.result;
++  const booleans = await exportQuery(
++    db,
++    db
++      .select({ id: users.id })
++      .from(users)
++      .where(eq(users.active, true))
++      .limit(1),
++    { format: "json" },
++  );
++  expect(await new Response(booleans).json()).toEqual([{ id: 3 }]);
++  await booleans.result;
++  expect(client.prepare("SELECT count(*) AS n FROM users").get()).toEqual({
++    n: 513,
++  });
++});
++
++it("supports raw sql templates with schema columns and output aliases", async () => {
++  const trace = traced();
++  const stream = await exportQuery(
++    trace.db,
++    sql`SELECT * FROM ${users} WHERE ${users.id} > ${3} ORDER BY ${users.id} LIMIT ${1}`,
++    {
++      columns: {
++        userId: users.id,
++        enabled: users.active,
++        data: users.metadata,
++      },
++      format: "json",
++    },
++  );
++  expect(await new Response(stream).json()).toEqual([
++    { userId: 6, enabled: false, data: null },
++  ]);
++  await stream.result;
++  expect(trace.prepared).toHaveLength(1);
++});
++
++it("preserves flat left joins and repeated column names positionally", async () => {
++  const pets = sqliteTable("pets", {
++    id: integer().primaryKey(),
++    owner: integer(),
++    name: text(),
++  });
++  client.exec(
++    "CREATE TABLE pets(id INTEGER PRIMARY KEY,owner INTEGER,name TEXT); INSERT INTO pets VALUES(7,3,'cat')",
++  );
++  const query = db
++    .select({ id: users.id, petId: pets.id, label: pets.name })
++    .from(users)
++    .leftJoin(pets, eq(users.id, pets.owner))
++    .orderBy(users.id)
++    .limit(2);
++  const stream = await exportQuery(db, query, { format: "json" });
++  expect(await new Response(stream).json()).toEqual([
++    { id: 3, petId: 7, label: "cat" },
++    { id: 6, petId: null, label: null },
++  ]);
++  await stream.result;
++});
++
++it("reuses Drizzle's configured snake_case names for tables, selects and raw SQL", async () => {
++  const table = sqliteTable("cased", {
++    rowId: integer().primaryKey(),
++    displayName: text().notNull(),
++  });
++  client.exec(
++    "CREATE TABLE cased(row_id INTEGER PRIMARY KEY,display_name TEXT); INSERT INTO cased VALUES(1,'snake')",
++  );
++  const cased = drizzle(client, { casing: "snake_case" });
++  for (const stream of [
++    await exportTable(cased, table, { format: "json" }),
++    await exportQuery(cased, cased.select().from(table), { format: "json" }),
++    await exportQuery(cased, sql`SELECT * FROM ${table}`, {
++      columns: { rowId: table.rowId, displayName: table.displayName },
++      format: "json",
++    }),
++  ]) {
++    expect(await new Response(stream).json()).toEqual([
++      { rowId: 1, displayName: "snake" },
++    ]);
++    await stream.result;
++  }
++});
++
++it.each(["composite", "text", "missing"])(
++  "streams without integer-key batching for a %s primary key",
++  async (kind) => {
++    const table =
++      kind === "composite"
++        ? sqliteTable("other", { id: integer(), part: integer() }, (t) => [
++            primaryKey({ columns: [t.id, t.part] }),
++          ])
++        : kind === "text"
++          ? sqliteTable("other", { id: text().primaryKey(), part: integer() })
++          : sqliteTable("other", { id: integer(), part: integer() });
++    client.exec(
++      `CREATE TABLE other(id ${kind === "text" ? "TEXT" : "INTEGER"},part INTEGER); INSERT INTO other VALUES(1,1),(1,2)`,
++    );
++    const trace = traced();
++    const stream = await exportTable(trace.db, table, {
++      columns: { part: table.part },
++      format: "json",
++    });
++    expect(await new Response(stream).json()).toEqual([
++      { part: 1 },
++      { part: 2 },
++    ]);
++    await stream.result;
++    expect(trace.prepared).toHaveLength(1);
++    expect(trace.prepared[0]).not.toMatch(/RECURSIVE/i);
++    expect(trace.batches).toEqual([]);
++  },
++);
++
++it("uses a single-column table-level primary key even when omitted from output", async () => {
++  const table = sqliteTable(
++    "users",
++    { key: integer("id"), name: text() },
++    (t) => [primaryKey({ columns: [t.key] })],
++  );
++  const trace = traced();
++  const stream = await exportTable(trace.db, table, {
++    columns: { label: table.name },
++  });
++  await new Response(stream).arrayBuffer();
++  await stream.result;
++  expect(trace.batches).toEqual([256, 256, 1]);
++});
++
++it.each(["timestamp", "timestamp_ms", "blob", "custom", "numeric"])(
++  "rejects %s JavaScript decoding before running an export",
++  async (mode) => {
++    const table = sqliteTable("unsupported", {
++      field:
++        mode === "timestamp" || mode === "timestamp_ms"
++          ? integer({ mode })
++          : mode === "blob"
++            ? blob({ mode: "buffer" })
++            : mode === "numeric"
++              ? numeric()
++              : customType<{ data: string }>({
++                  dataType: () => "text",
++                  fromDriver: (value) => String(value).toUpperCase(),
++                })(),
++    });
++    const trace = traced();
++    await expect(exportTable(trace.db, table)).rejects.toMatchObject({
++      code: "INVALID_OPTIONS",
++      message: expect.stringContaining("JavaScript decoder"),
++    });
++    await expect(
++      exportQuery(trace.db, trace.db.select().from(table)),
++    ).rejects.toMatchObject({ code: "INVALID_OPTIONS" });
++    expect(trace.prepared).toEqual([]);
++  },
++);
++
++it("rejects nested selections, .mapWith() and unaliased expressions explicitly", async () => {
++  const trace = traced();
++  const nested = trace.db.select({ user: { id: users.id } }).from(users);
++  await expect(exportQuery(trace.db, nested)).rejects.toMatchObject({
++    code: "INVALID_OPTIONS",
++    message: expect.stringContaining("flat"),
++  });
++  const mapped = trace.db
++    .select({
++      name: sql`${users.displayName}`
++        .mapWith((x) => String(x).toUpperCase())
++        .as("name"),
++    })
++    .from(users);
++  await expect(exportQuery(trace.db, mapped)).rejects.toMatchObject({
++    code: "INVALID_OPTIONS",
++    message: expect.stringContaining(".mapWith()"),
++  });
++  const unaliased = trace.db
++    .select({ upper: sql<string>`upper(${users.displayName})` })
++    .from(users);
++  await expect(exportQuery(trace.db, unaliased)).rejects.toMatchObject({
++    code: "INVALID_OPTIONS",
++    message: expect.stringContaining(".as(...)"),
++  });
++  expect(trace.prepared).toEqual([]);
++});
++
++it("rejects unsupported drivers, foreign table columns and missing raw metadata", async () => {
++  const foreign = sqliteTable("foreign", { id: integer() });
++  await expect(
++    exportTable(db, users, { columns: { id: foreign.id } }),
++  ).rejects.toMatchObject({ code: "INVALID_OPTIONS" });
++  // @ts-expect-error Raw SQL needs schema metadata rather than trusting a TS cast.
++  await expect(exportQuery(db, sql`SELECT 1`)).rejects.toMatchObject({
++    code: "INVALID_OPTIONS",
++  });
++  await expect(exportTable({ $client: client }, users)).rejects.toMatchObject({
++    code: "INVALID_OPTIONS",
++    message: expect.stringContaining("better-sqlite3"),
++  });
++});
++
++it.each([sql`DELETE FROM users RETURNING id`, sql`PRAGMA user_version=42`])(
++  "rejects raw writes without changing caller data",
++  async (query) => {
++    await expect(
++      exportQuery(db, query, { columns: { id: users.id } }),
++    ).rejects.toMatchObject({ code: "INVALID_QUERY" });
++    expect(client.prepare("SELECT count(*) AS n FROM users").get()).toEqual({
++      n: 513,
++    });
++    expect(client.pragma("user_version", { simple: true })).toBe(0);
++  },
++);
++
++it.each(["esm", "cjs"])(
++  "decodes a ZIP from the built %s adapter",
++  async (kind) => {
++    const built: typeof import("../src/drizzle.js") =
++      kind === "esm"
++        ? await import("../dist/drizzle.mjs")
++        : createRequire(import.meta.url)("../dist/drizzle.cjs");
++    const stream = await built.exportTable(db, users, {
++      columns: { id: users.id, enabled: users.active },
++      format: "json",
++      zip: true,
++    });
++    const bytes = Buffer.from(await new Response(stream).arrayBuffer());
++    const archive = await fromBufferPromise(bytes);
++    try {
++      for await (const entry of archive.eachEntry()) {
++        expect(entry.fileName).toBe("users.json");
++        const parts: Buffer[] = [];
++        for await (const chunk of await archive.openReadStreamPromise(entry))
++          parts.push(chunk);
++        const rows = JSON.parse(Buffer.concat(parts).toString("utf8"));
++        expect(rows).toHaveLength(513);
++        expect(rows[0]).toEqual({ id: 3, enabled: true });
++      }
++    } finally {
++      archive.close();
++    }
++    expect((await stream.result).bytesWritten).toBe(bytes.length);
++    const query = db
++      .select({ label: sql<string>`upper(${users.displayName})`.as("upper") })
++      .from(users)
++      .limit(1);
++    const response = await built.exportQuery(db, query, { format: "json" });
++    expect(await new Response(response).json()).toEqual([{ label: '雪 "1"' }]);
++    await response.result;
++    const mapped = db
++      .select({ label: sql`${users.displayName}`.mapWith(String).as("label") })
++      .from(users);
++    await expect(built.exportQuery(db, mapped)).rejects.toMatchObject({
++      code: "INVALID_OPTIONS",
++    });
++  },
++);
++
++it.each([false, true])(
++  "cancels a lazy stream (zip=%s) and keeps the database reusable",
++  async (zip) => {
++    const trace = traced();
++    const first = await exportTable(trace.db, users, { zip });
++    const second = await exportTable(trace.db, users);
++    expect(trace.rows()).toBe(0);
++    await first.cancel("unused");
++    await expect(first.result).rejects.toMatchObject({ code: "ABORTED" });
++    await new Response(second).arrayBuffer();
++    expect((await second.result).rowsExported).toBe(513);
++    expect(client.open).toBe(true);
++  },
++);
++
++it.each([false, true])(
++  "honors slow writable backpressure and abort cleanup (zip=%s)",
++  async (zip) => {
++    client.exec(
++      "WITH RECURSIVE n(x) AS (VALUES(514) UNION ALL SELECT x+1 FROM n WHERE x<8192) INSERT INTO users(id,name,active) SELECT x*3,hex(randomblob(512)),1 FROM n",
++    );
++    const trace = traced();
++    const controller = new AbortController();
++    let release: ((error?: Error | null) => void) | undefined;
++    let wrote!: () => void;
++    const blocked = new Promise<void>((resolve) => {
++      wrote = resolve;
++    });
++    const output = new Writable({
++      highWaterMark: 1,
++      write(_chunk, _encoding, callback) {
++        release = callback;
++        wrote();
++      },
++    });
++    const pending = exportTable(trace.db, users, {
++      output,
++      bufferSize: 1,
++      zip,
++      signal: controller.signal,
++    });
++    const rejection = expect(pending).rejects.toMatchObject({
++      code: "ABORTED",
++    });
++    await blocked;
++    try {
++      // ZIP may emit its header before filling the bounded compression buffers.
++      await new Promise((resolve) => setTimeout(resolve, 30));
++      const produced = trace.rows();
++      await new Promise((resolve) => setTimeout(resolve, 30));
++      expect(trace.rows()).toBe(produced);
++      expect(produced).toBeLessThan(32);
++    } finally {
++      controller.abort();
++      release?.();
++      await rejection;
++    }
++    expect(output.destroyed).toBe(false);
++    client.prepare("SELECT 1").get();
++  },
++);
++
++it("removes an owned partial ZIP after invalid JSON fails during iteration", async () => {
++  const folder = await mkdtemp(join(tmpdir(), "exportlite-drizzle-"));
++  client.exec("UPDATE users SET metadata='invalid json' WHERE id=1539");
++  try {
++    await expect(
++      exportTable(db, users, { output: join(folder, "users.zip"), zip: true }),
++    ).rejects.toMatchObject({ code: "SQLITE_ERROR" });
++    expect(await readdir(folder)).toEqual([]);
++    expect(client.open).toBe(true);
++  } finally {
++    await rm(folder, { recursive: true, force: true });
++  }
++});
++
++it.each(["utf16le", "utf16be"] as const)(
++  "preserves UTF-8 output from a declared %s database without probes",
++  async (encoding) => {
++    const native = new Database(":memory:");
++    try {
++      native.pragma(
++        `encoding='${encoding === "utf16le" ? "UTF-16le" : "UTF-16be"}'`,
++      );
++      native.exec(
++        "CREATE TABLE encoded(id INTEGER PRIMARY KEY,name TEXT); INSERT INTO encoded VALUES(1,'雪 😀')",
++      );
++      const encoded = sqliteTable("encoded", {
++        id: integer().primaryKey(),
++        name: text(),
++      });
++      const wrapped = drizzle(native);
++      const stream = await exportTable(wrapped, encoded, {
++        encoding,
++        format: "json",
++      });
++      expect(await new Response(stream).json()).toEqual([
++        { id: 1, name: "雪 😀" },
++      ]);
++      await stream.result;
++      const wrong = await exportTable(wrapped, encoded);
++      await expect(new Response(wrong).text()).rejects.toMatchObject({
++        code: "INVALID_OPTIONS",
++      });
++      await expect(wrong.result).rejects.toMatchObject({
++        code: "INVALID_OPTIONS",
++      });
++    } finally {
++      native.close();
++    }
++  },
++);
++
++it.each(["table", "query"])(
++  "cancels an active %s cursor and releases the caller connection",
++  async (kind) => {
++    const stream =
++      kind === "table"
++        ? await exportTable(db, users, { bufferSize: 1 })
++        : await exportQuery(db, db.select({ id: users.id }).from(users), {
++            bufferSize: 1,
++          });
++    const reader = stream.getReader();
++    expect((await reader.read()).done).toBe(false);
++    await reader.cancel("client disconnected");
++    await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
++    client.exec("UPDATE users SET name='reusable' WHERE id=3");
++  },
++);
++
++it("prepares a fresh statement after schema changes, using only declared fields", async () => {
++  const selection = { label: users.displayName };
++  const first = await exportTable(db, users, { columns: selection });
++  await first.cancel();
++  client.exec(
++    "ALTER TABLE users ADD COLUMN extra TEXT; UPDATE users SET name='fresh' WHERE id=3",
++  );
++  const second = await exportTable(db, users, {
++    columns: selection,
++    format: "json",
++  });
++  expect(((await new Response(second).json()) as unknown[])[0]).toEqual({
++    label: "fresh",
++  });
++  await second.result;
++  client.exec("ALTER TABLE users RENAME COLUMN name TO renamed");
++  await expect(
++    exportTable(db, users, { columns: selection }),
++  ).rejects.toMatchObject({ code: "INVALID_QUERY" });
++});
++
++it("loads both core entry points without installing the optional Drizzle peer", async () => {
++  const folder = await mkdtemp(join(tmpdir(), "exportlite-optional-peer-"));
++  try {
++    await cp(
++      fileURLToPath(new URL("../dist", import.meta.url)),
++      join(folder, "dist"),
++      { recursive: true },
++    );
++    await mkdir(join(folder, "node_modules"));
++    const require = createRequire(import.meta.url);
++    await symlink(
++      dirname(require.resolve("zip-stream")),
++      join(folder, "node_modules/zip-stream"),
++    );
++    const esm = pathToFileURL(join(folder, "dist/index.mjs")).href;
++    const cjs = join(folder, "dist/index.cjs");
++    const script = `
++      import { createRequire } from 'node:module';
++      const require = createRequire(${JSON.stringify(esm)});
++      let missing = false;
++      try { require.resolve('drizzle-orm'); } catch { missing = true; }
++      if (!missing) throw Error('Test fixture must not contain Drizzle');
++      for (const entry of [await import(${JSON.stringify(esm)}), require(${JSON.stringify(cjs)})]) {
++        if (typeof entry.exportTable !== 'function') throw Error('Missing export');
++      }
++      process.stdout.write('ok');
++    `;
++    const { stdout } = await promisify(execFile)(process.execPath, [
++      "--input-type=module",
++      "--eval",
++      script,
++    ]);
++    expect(stdout).toBe("ok");
++  } finally {
++    await rm(folder, { recursive: true, force: true });
++  }
++});
+--- a/tsdown.config.ts
++++ b/tsdown.config.ts
+@@ -1,7 +1,7 @@
+ import { defineConfig } from "tsdown";
+ 
+ export default defineConfig({
+-  entry: ["src/index.ts"],
++  entry: ["src/index.ts", "src/drizzle.ts"],
+   format: ["esm", "cjs"],
+   platform: "node",
+   target: "node22",

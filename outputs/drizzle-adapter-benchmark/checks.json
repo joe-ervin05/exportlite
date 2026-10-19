@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "workers": 120,
+  "validationPasses": 120,
+  "timedExports": 22680,
+  "node": "v26.12.0",
+  "sqlite": "3.53.4",
+  "drizzle": "0.45.4",
+  "driver": "13.0.3",
+  "identicalTableSql": true,
+  "sourceAndBuildFingerprintsUnchanged": true,
+  "memory": "Whole-process RSS high-water including imports, validation, warmup and timed exports. Report both median and maximum of five worker peaks.",
+  "scope": "Uncompressed JSON, six original fixtures, five workers per method; bulk query and Drizzle-host controls. No implementation changes.",
+  "workspace": "<workspace>/exportlite",
+  "gitRepository": false,
+  "packageLint": "75 files passed",
+  "report": "<workspace>/exportlite/benchmarks/DRIZZLE-ADAPTER.md"
+}

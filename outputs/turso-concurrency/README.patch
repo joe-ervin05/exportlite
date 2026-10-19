@@ -1,0 +1,11 @@
+--- README.before.md
++++ README.md
+@@ -357,6 +357,8 @@
+ 
+ The [reusable Turso session comparison](benchmarks/TURSO-SESSIONS.md) repeats the same varied fixtures, Node 26.12.0 and 0/25/100 ms simulated latency after adding serialized session reuse. It compares export time and client-process peak memory across all four methods, measures awaited client shutdown separately, and compares with the [previous per-export close implementation](benchmarks/TURSO.md). Both runs use a local protocol server with SQLite; live Turso Cloud performance remains unverified.
+ 
++The [concurrent Turso comparison](benchmarks/TURSO-CONCURRENCY.md) measures one shared client versus separate clients at concurrency 1, 2 and 4, using those same fixtures, runtime and latency settings. It covers the direct API and Drizzle adapter, reporting throughput, per-export latency including queue wait, and whole-client-process peak memory. The report explains the local fixture server's limits on large-export parallelism.
++
+ The [matched API comparison](benchmarks/MATCHED-API.md) reruns the original users/posts/comments fixture on Node 26.12.0, separating JSON generation/pipeline work from UTF-8 response-body encoding for full SQLite aggregation, ExportLite batching, manual JS and Drizzle. It includes actual public Node writable/Web stream controls. Nested and limited-root cases use a benchmark-only adapter around the existing planner/producer; they do not add public relationship support.
+ 
+ The earlier [streaming gzip comparison](benchmarks/COMPRESSION.md) measures ExportLite and JS object streaming with no compression, gzip level 1 and default gzip, including total file-completion time, encoded size and peak memory. Gzip lives entirely in that benchmark harness and uses Node's built-in `createGzip()`. Reproduction commands and raw runs are linked in that report.

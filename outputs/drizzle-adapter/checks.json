@@ -1,0 +1,45 @@
+{
+  "workspace": "<workspace>/exportlite",
+  "gitRepository": false,
+  "drizzleVersion": "0.45.4",
+  "versionSource": "https://www.npmjs.com/package/drizzle-orm?activeTab=versions",
+  "node": "24.19.0",
+  "tests": {
+    "passed": 283,
+    "files": 9
+  },
+  "typescript": "pass (ESM and CommonJS consumers)",
+  "build": "pass (ESM and CommonJS)",
+  "biome": {
+    "passed": true,
+    "files": 75
+  },
+  "example": "node examples/drizzle.mjs passed",
+  "coreLoadsWithoutDrizzle": "tested both ESM and CommonJS in isolated directory with only zip-stream installed",
+  "statementProof": "cold and warm table exports each prepare and execute exactly one statement; forbid columns/get/all; batch sizes [256,256,1] for 513 rows, including unselected primary key",
+  "queryProof": "one final JSON statement; no Drizzle all() execution; parameter binding and boolean parameter encoding verified",
+  "unchangedReliabilityFiles": {
+    "src/api/export.ts": true,
+    "src/output/readable.ts": true,
+    "src/output/writer.ts": true,
+    "src/output/zip.ts": true,
+    "src/database/better-sqlite3.ts": true
+  },
+  "changedFiles": [
+    "README.md",
+    "examples/drizzle.mjs",
+    "package.json",
+    "pnpm-lock.yaml",
+    "src/drizzle.ts",
+    "src/planner/cache.ts",
+    "src/planner/columns.ts",
+    "src/planner/declared.ts",
+    "src/planner/json.ts",
+    "tests/drizzle-consumer.cts",
+    "tests/drizzle-consumer.mts",
+    "tests/drizzle.test.ts",
+    "tsdown.config.ts"
+  ],
+  "dependencies": "optional Drizzle peer and pinned dev dependency; lockfile refreshed using pnpm 12.14.0 with scripts disabled",
+  "scope": "Local better-sqlite3 Drizzle adapter; remote libSQL/Turso, relational/nested selections and JavaScript value decoders are not supported."
+}

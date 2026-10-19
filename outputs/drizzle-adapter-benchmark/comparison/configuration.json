@@ -1,0 +1,806 @@
+{
+  "date": "2026-10-18T04:58:30.258Z",
+  "node": "<node-26.12.0>",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "totalMemoryGiB": 32,
+  "loadavg": [
+    4.98974609375,
+    5.357421875,
+    5.75390625
+  ],
+  "fixtures": {
+    "smallFixtureSha256": "dc969db78afcb2b1ed394345ec51879ad618b2732df0c80857d7be7ba78afb43",
+    "cases": [
+      {
+        "name": "table-1",
+        "api": "table",
+        "rows": 1,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1",
+        "expected": {
+          "bytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "iterations": 200,
+        "warmups": 20,
+        "cold": false,
+        "zip": false,
+        "methods": [
+          "exportlite-table",
+          "drizzle-adapter-table",
+          "drizzle-stringify"
+        ]
+      },
+      {
+        "name": "cold-table-1",
+        "api": "table",
+        "rows": 1,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1",
+        "expected": {
+          "bytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "iterations": 50,
+        "warmups": 2,
+        "cold": true,
+        "zip": false,
+        "methods": [
+          "exportlite-table",
+          "drizzle-adapter-table",
+          "drizzle-stringify"
+        ]
+      },
+      {
+        "name": "table-10",
+        "api": "table",
+        "rows": 10,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data10",
+        "expected": {
+          "bytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "iterations": 200,
+        "warmups": 20,
+        "cold": false,
+        "zip": false,
+        "methods": [
+          "exportlite-table",
+          "drizzle-adapter-table",
+          "drizzle-stringify"
+        ]
+      },
+      {
+        "name": "table-1000",
+        "api": "table",
+        "rows": 1000,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1000",
+        "expected": {
+          "bytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "iterations": 50,
+        "warmups": 20,
+        "cold": false,
+        "zip": false,
+        "methods": [
+          "exportlite-table",
+          "drizzle-adapter-table",
+          "drizzle-stringify"
+        ]
+      },
+      {
+        "name": "narrow-plain",
+        "api": "table",
+        "rows": 1000000,
+        "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+        "table": "data",
+        "expected": {
+          "bytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "iterations": 1,
+        "warmups": 1,
+        "cold": false,
+        "zip": false,
+        "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+        "methods": [
+          "exportlite-table",
+          "drizzle-adapter-table",
+          "drizzle-stringify",
+          "exportlite-query",
+          "drizzle-adapter-query",
+          "exportlite-table-drizzle-host"
+        ]
+      },
+      {
+        "name": "wide-plain",
+        "api": "table",
+        "rows": 100000,
+        "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+        "table": "data",
+        "expected": {
+          "bytes": 100920480,
+          "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+        },
+        "iterations": 1,
+        "warmups": 1,
+        "cold": false,
+        "zip": false,
+        "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+        "methods": [
+          "exportlite-table",
+          "drizzle-adapter-table",
+          "drizzle-stringify",
+          "exportlite-query",
+          "drizzle-adapter-query",
+          "exportlite-table-drizzle-host"
+        ]
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "name": "table-1",
+      "method": "exportlite-table",
+      "repeat": 0
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 0
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "repeat": 0
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 0
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-stringify",
+      "repeat": 0
+    },
+    {
+      "name": "cold-table-1",
+      "method": "exportlite-table",
+      "repeat": 0
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "repeat": 0
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-table",
+      "repeat": 0
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-adapter-table",
+      "repeat": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-table",
+      "repeat": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-adapter-table",
+      "repeat": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "repeat": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "repeat": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table",
+      "repeat": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-query",
+      "repeat": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "repeat": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table",
+      "repeat": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-query",
+      "repeat": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 0
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 1
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "repeat": 1
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-table",
+      "repeat": 1
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-stringify",
+      "repeat": 1
+    },
+    {
+      "name": "cold-table-1",
+      "method": "exportlite-table",
+      "repeat": 1
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 1
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-table",
+      "repeat": 1
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-adapter-table",
+      "repeat": 1
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "repeat": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-adapter-table",
+      "repeat": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "repeat": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-table",
+      "repeat": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "repeat": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table",
+      "repeat": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-query",
+      "repeat": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table",
+      "repeat": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "repeat": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-query",
+      "repeat": 1
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "repeat": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-table",
+      "repeat": 2
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 2
+    },
+    {
+      "name": "cold-table-1",
+      "method": "exportlite-table",
+      "repeat": 2
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 2
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-stringify",
+      "repeat": 2
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-adapter-table",
+      "repeat": 2
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "repeat": 2
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-table",
+      "repeat": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "repeat": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-table",
+      "repeat": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-adapter-table",
+      "repeat": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table",
+      "repeat": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "repeat": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-query",
+      "repeat": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "repeat": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table",
+      "repeat": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-query",
+      "repeat": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-table",
+      "repeat": 3
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 3
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "repeat": 3
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 3
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-stringify",
+      "repeat": 3
+    },
+    {
+      "name": "cold-table-1",
+      "method": "exportlite-table",
+      "repeat": 3
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "repeat": 3
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-table",
+      "repeat": 3
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-adapter-table",
+      "repeat": 3
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-table",
+      "repeat": 3
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-adapter-table",
+      "repeat": 3
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "repeat": 3
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 3
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "repeat": 3
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table",
+      "repeat": 3
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 3
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 3
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-query",
+      "repeat": 3
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "repeat": 3
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table",
+      "repeat": 3
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 3
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 3
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 3
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-query",
+      "repeat": 3
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 4
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "repeat": 4
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-table",
+      "repeat": 4
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-stringify",
+      "repeat": 4
+    },
+    {
+      "name": "cold-table-1",
+      "method": "exportlite-table",
+      "repeat": 4
+    },
+    {
+      "name": "cold-table-1",
+      "method": "drizzle-adapter-table",
+      "repeat": 4
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-table",
+      "repeat": 4
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-adapter-table",
+      "repeat": 4
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "repeat": 4
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-adapter-table",
+      "repeat": 4
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "repeat": 4
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-table",
+      "repeat": 4
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "repeat": 4
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table",
+      "repeat": 4
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 4
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-query",
+      "repeat": 4
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 4
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 4
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table",
+      "repeat": 4
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-table",
+      "repeat": 4
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "repeat": 4
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-query",
+      "repeat": 4
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-adapter-query",
+      "repeat": 4
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-table-drizzle-host",
+      "repeat": 4
+    }
+  ],
+  "fingerprints": {
+    "exportlite/package.json": "0001abd0c834c46dd023e5e5d70452de28608ae9d4c67c469642fe75dc1a045d",
+    "exportlite/pnpm-lock.yaml": "50442b261f4d5be3135b2f9694a9a64448baccde0d10cf5b2869ca6dfc48b29e",
+    "exportlite/tsdown.config.ts": "3962b6ddff5ffdc3c7aa412fbb146ccd794d15fda41093cc23c2b9e5be528f47",
+    "exportlite/benchmarks/matched-api/package.json": "5f93dd48d320a5de169c44a9e7fdb55b8033ed968fe417600055dd41a846bc1a",
+    "exportlite/benchmarks/matched-api/package-lock.json": "991252bb6312b2f88148d9527876ad11ee614489e3784584fca9d00fa78e5f31",
+    "outputs/drizzle-adapter-benchmark/worker.mjs": "488d3800380483816904515872f5c7fd6bfeddd2d191f549ddd1cd429e7af2c4",
+    "outputs/drizzle-adapter-benchmark/run.mjs": "18e60c745c2e464319ce0363554af193da4a69513876210a9cf46d6137e1971e",
+    "outputs/drizzle-adapter-benchmark/fixtures.json": "4ae56f8ddaa408866fb8f3d59782a1a42e7689543fff1780d0d18da38cd4d276",
+    "exportlite/src/api/export-query.ts": "6b5172dc859b94c7394d05a877881038df50fbe3e98c7ef776f1adc8c9b702b8",
+    "exportlite/src/api/export-table.ts": "0d32c48953aeaad5152106779ef35d6358ad4966dbf91f6be8ebda4f33f32113",
+    "exportlite/src/api/export.ts": "c0aefb40f5008f70c6e1f0831db3774e974db90103596cddf6428e7b705951fc",
+    "exportlite/src/columns.ts": "d7911c1f1a2885ad49a549d7babe431dbcf937acde0770816fad41b6dd951e72",
+    "exportlite/src/database/adapter.ts": "2698794cf15a8451cec1d5e5b1259dd0044af384abe42e28832f8a32f53885b4",
+    "exportlite/src/database/better-sqlite3.ts": "f04918f627065fe60d9a07e306023112172b20bb33f734264f6430b81c452a44",
+    "exportlite/src/drizzle.ts": "2d0f8d8eabd2e7f8932376a234a551c2002bda2c146147b32d221643936a6590",
+    "exportlite/src/errors.ts": "67cddb492b23f4f83b67558cbbee0f48720197d753d61557596e2a6d5dfc561f",
+    "exportlite/src/index.ts": "165cfd8b50950d780c1ce3baa308666b5e257a8172f3d44d6b44dbdcaeaccea0",
+    "exportlite/src/output/readable.ts": "ba147d73004283d33606450d62a613cc37aa3c53ee48d8ea54d60f11121a0ffc",
+    "exportlite/src/output/writer.ts": "3154845387d523ea134752d60864d26e81bccae8503d9df17aaad4a3d7fc87cb",
+    "exportlite/src/output/zip.ts": "17166eed24440dfc6a0ec48a31ec65d5c854eaf47612a48b2010e02970e60cfb",
+    "exportlite/src/planner/batches.ts": "ccb0939e9d493b8e961602a953d7aaac0b365271243a1cafa784ea9c63039c31",
+    "exportlite/src/planner/cache.ts": "0ddde54b0625251e257c80ab8eb37f11a60de030f27585c9718287b357ce8eb5",
+    "exportlite/src/planner/columns.ts": "c659aff772ce0eaaac973a6629290ce3524eea4f378a3536562f894dc1d78734",
+    "exportlite/src/planner/declared.ts": "77107105d39a427efd4c9caeb1e76f9732a76eaa034bc3a4515204d70e3dbec9",
+    "exportlite/src/planner/identifiers.ts": "0e299324ee95ddeca97ba7705aea3392dd917b81774a45e81fc52255e01d557f",
+    "exportlite/src/planner/json.ts": "2c88409cf6092ad333451c2000dc42496c8eb130e48c521a287aaadfe2067154",
+    "exportlite/src/types.ts": "f8147e1e800c304c10562ad13f9c7546768b170c5789b9f14f108e34142629cb",
+    "exportlite/dist/cache-BoKSpyqj.cjs": "4d2bc10b77fc6ad9847a92fac26fb21068d34163373cb6e6d354f039ca5e1c62",
+    "exportlite/dist/cache-BoKSpyqj.cjs.map": "c50ceb22e4e960fae72b116a33560d83a17e42768366f71ccdbd93475635d745",
+    "exportlite/dist/cache-DdkJD_Fy.mjs": "f01ff9e0870c21c34dfebcc47a3e168ea832c1dd12a7ed898cbe799338e840f8",
+    "exportlite/dist/cache-DdkJD_Fy.mjs.map": "091a8f05e9ea18060c77dc9695343103b586bb9f07b8a28848913cadcb4f987f",
+    "exportlite/dist/drizzle.cjs": "6538d160b2b2f00e8715e36fd2bce26183e2eab87c0347edbc9729b48df185cb",
+    "exportlite/dist/drizzle.cjs.map": "2db74fe450505cf7bfd072b630a308ce444cc9b89955bc51bb8d266ed3d098ca",
+    "exportlite/dist/drizzle.d.cts": "dea95b50285d22b1c320338504b965be33d22397394ab3b7a3d15fe728fe9298",
+    "exportlite/dist/drizzle.d.mts": "f30fc447090f2a975b76ccfa7aa890c7ee2b6b60ad82c37eca57c20f304e3894",
+    "exportlite/dist/drizzle.mjs": "3a34311d60692a0e658c5230fac22a81c887b9d1aeced1de0912a5e30fb5fc1d",
+    "exportlite/dist/drizzle.mjs.map": "413a1afa33ca2f0963a5bda84aa7fe71a6022bf31b0e5e6028bda9db622ff1cc",
+    "exportlite/dist/index.cjs": "5359fa419c7730a7b1e7a5a35930a8efb11d6b9a0f8a477cfba31cd4045c59ef",
+    "exportlite/dist/index.cjs.map": "f3aa59f8e5e9ca4f0032f58f6ef4687d1aa55b4ca87763ab4da22025f49fe00a",
+    "exportlite/dist/index.d.cts": "8989f0e682f3127ead5073acc8911e300b0ee23ca2799634428711c415e86968",
+    "exportlite/dist/index.d.mts": "86e005a561256eb99f16bf79fb84b71b4547ad6b021441c15d661b168891c47f",
+    "exportlite/dist/index.mjs": "a01f2dbc3535893fdb6ee46ce730b5c35b4e55dc4c897f46b638ba77f9a16b14",
+    "exportlite/dist/index.mjs.map": "df4de8a7d502e2218132b77e4ac77e24f6ee7c01a2865330e08f012ee4543648",
+    "exportlite/dist/types-CEdCnVeZ.d.cts": "2643c635aead1372c915675cde427c3212f99a49c456fe7aa2d563f26f5517f4",
+    "exportlite/dist/types-CEdCnVeZ.d.mts": "36419fef8e05ce3d1c2420dfdf5a7d29b0498614e17b1e6a149c55c2bfce14ec"
+  },
+  "versionsChecked": {
+    "date": "2026-10-18",
+    "drizzle": {
+      "version": "0.45.4",
+      "source": "https://www.npmjs.com/package/drizzle-orm?activeTab=versions"
+    },
+    "betterSqlite3": {
+      "version": "13.0.3",
+      "source": "https://www.npmjs.com/package/better-sqlite3?activeTab=versions"
+    }
+  },
+  "schedule": "Sequential fresh worker processes; rotate the three main methods per case and round, alternate the additional controls. Five workers per case/method, each verifies bytes/SHA-256, warms, then measures three request batches. Same fixture files and exact Node 26.12.0. Small cases use Response.arrayBuffer; bulk cases drain to a counting Node writable. All methods include JSON generation and UTF-8 output. Normal Drizzle constructs a query per request, calls all(), JSON.stringify(), and encodes the full text. Source schema/column declaration and connection/Drizzle initialization are outside timing. Fixed 256-row table batching and 64 KiB buffering are unchanged. Both query-export controls use row streaming. The drizzle-host control imports Drizzle, declares the same schema and wraps the native connection, then calls direct ExportLite on that connection. Natural GC, no forced collection. Peak RSS is whole-worker high-water including imports, validation, warmup and timed requests. No ZIP, HTTP, disk output or remote latency."
+}

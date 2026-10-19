@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "date": "2026-10-18",
+  "workspace": "<workspace>",
+  "gitRepository": false,
+  "benchmarkNode": "26.12.0",
+  "samePriorNodeBinary": true,
+  "pinnedVersions": {
+    "@libsql/client": "0.18.0",
+    "drizzle-orm": "0.45.4",
+    "better-sqlite3": "13.0.3"
+  },
+  "latestVersionsChecked": "npm registry, 2026-10-18",
+  "tests": {
+    "passed": 363,
+    "failed": 0,
+    "node": "26.12.0"
+  },
+  "build": "passed ESM/CJS with declarations",
+  "types": "passed public ESM/CJS consumers including awaitable close and SDK compatibility",
+  "biome": "passed",
+  "benchmark": {
+    "passed": true,
+    "workers": 180,
+    "verifiedBytes": 180,
+    "fixtureFingerprintsUnchanged": true,
+    "packageFingerprintsUnchanged": true,
+    "totalTimedExports": 1188,
+    "allSessionsClosed": true
+  },
+  "shutdownMeasuredSeparately": true,
+  "httpRequestsPerHealthyExport": 1,
+  "sqlStatementsPerHealthyExport": 1,
+  "preflightQueries": 0,
+  "clientSessions": 1,
+  "explicitCloseRequestsPerClient": 1,
+  "liveTursoCloudVerified": false,
+  "nativeProducerBatchingWriterZipUnchanged": true,
+  "packageAndLockfileUnchanged": true,
+  "unchangedProtectedFiles": [
+    "src/api/export.ts",
+    "src/output/writer.ts",
+    "src/output/readable.ts",
+    "src/output/zip.ts",
+    "src/database/better-sqlite3.ts",
+    "src/planner/batches.ts",
+    "package.json",
+    "pnpm-lock.yaml",
+    "tsconfig.json",
+    "tsdown.config.ts",
+    "dist/index.mjs",
+    "dist/index.cjs"
+  ],
+  "changedFiles": [
+    "src/turso.ts",
+    "src/database/turso.ts",
+    "src/api/export-turso.ts",
+    "tests/turso-consumer.cts",
+    "tests/turso-consumer.mts",
+    "tests/turso.test.ts",
+    "tests/helpers/turso-server.ts",
+    "examples/turso.mjs",
+    "README.md",
+    "benchmarks/TURSO-SESSIONS.md"
+  ],
+  "report": "exportlite/benchmarks/TURSO-SESSIONS.md"
+}

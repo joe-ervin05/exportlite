@@ -1,0 +1,21 @@
+--- a/src/database/turso.ts
++++ b/src/database/turso.ts
+@@ -235,7 +235,7 @@
+           }
+           yield [payload.value, count];
+         } else if (entry.type === "step_end") {
+-          if (!began || ended || entry.step !== 0)
++          if (!began || ended || (entry.step !== undefined && entry.step !== 0))
+             remote("Invalid Turso cursor completion.");
+           ended = true;
+         } else remote("Unexpected Turso cursor entry.");
+--- a/tests/helpers/turso-server.ts
++++ b/tests/helpers/turso-server.ts
+@@ -154,7 +154,6 @@
+         if (!mode.truncate && !stopped)
+           await write({
+             type: "step_end",
+-            step: 0,
+             affected_row_count: 0,
+             last_insert_rowid: null,
+           });

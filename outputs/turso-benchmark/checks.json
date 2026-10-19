@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "date": "2026-10-18",
+  "benchmarkNode": "26.12.0",
+  "reliabilityTestsNode": "24.19.0",
+  "workers": 180,
+  "timedExports": 1188,
+  "summaryRows": 60,
+  "latencyMsPerHttpRequest": [
+    0,
+    25,
+    100
+  ],
+  "localProtocolOnly": true,
+  "liveCloudVerified": false,
+  "allWorkerOutputHashesMatch": true,
+  "allFixtureHashesUnchanged": true,
+  "allSessionsClosed": true,
+  "packageConfigAndNativeEntryBytesUnchanged": true,
+  "sourceChanges": {
+    "src/database/turso.ts": "Accept documented step_end frames without a step field; no batching, writer or compression changes"
+  },
+  "tests": {
+    "passed": 338,
+    "failed": 0,
+    "build": "passed ESM and CJS",
+    "types": "passed",
+    "biome": "passed"
+  },
+  "report": "exportlite/benchmarks/TURSO.md",
+  "excludedRun": "comparison-initial (interrupted by fixture keep-alive timeout)"
+}

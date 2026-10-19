@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-18T22:38:29.413332+00:00",
+  "passed": true,
+  "settings": 150,
+  "freshWorkers": 450,
+  "timedExports": 2340,
+  "hashVerifiedExports": 1170,
+  "independentlyRecomputedSummary": true,
+  "fixtureAndSourceAndBuildAndHarnessFingerprintsUnchanged": true,
+  "allSessionsClosed": true,
+  "readmeChangeOnlyBenchmarkLink": true
+}

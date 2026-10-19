@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "workers": 450,
+  "timedExports": 2340,
+  "hashVerifiedExports": 1170,
+  "fixtureFingerprintsUnchanged": true,
+  "packageFingerprintsUnchanged": true,
+  "harnessFingerprintsUnchanged": true,
+  "allSessionsClosed": true,
+  "oneSessionPerClient": true,
+  "oneSelectPerExport": true,
+  "noPreflights": true,
+  "sharedSerializes": true,
+  "separateClientsOverlapAt100ms": true
+}

@@ -1,0 +1,1082 @@
+[
+  {
+    "name": "table-1",
+    "method": "exportlite-table",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.416333,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.980666999999983,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-stringify",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 31.357709,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.802874999999972,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-stringify",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 20.351959000000022,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "exportlite-table",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.685707999999998,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-stringify",
+    "repeat": 0,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 21.924666000000002,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "exportlite-table",
+    "repeat": 0,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 18.006750000000004,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-adapter-table",
+    "repeat": 0,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 17.526999999999987,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "exportlite-table",
+    "repeat": 0,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 18.396417,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-adapter-table",
+    "repeat": 0,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 17.320208000000036,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-stringify",
+    "repeat": 0,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 31.873333000000002,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 0,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 442.19504200000006,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-stringify",
+    "repeat": 0,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 1217.030959,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table",
+    "repeat": 0,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 429.541042,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-query",
+    "repeat": 0,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 841.9076249999999,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 0,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 847.9184580000001,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 0,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 468.95220900000004,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-stringify",
+    "repeat": 0,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 667.807833,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table",
+    "repeat": 0,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 212.000542,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 0,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 213.76024999999998,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-query",
+    "repeat": 0,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 392.411041,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 0,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 388.2300000000001,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 0,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 224.369916,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.208041999999978,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-stringify",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 20.138291000000038,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "exportlite-table",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 18.195,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-stringify",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 20.538250000000005,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "exportlite-table",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.714916,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.74687499999999,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "exportlite-table",
+    "repeat": 1,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 17.057041000000005,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-adapter-table",
+    "repeat": 1,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 16.978875000000016,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-stringify",
+    "repeat": 1,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 20.78020799999996,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-adapter-table",
+    "repeat": 1,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 18.667584000000033,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-stringify",
+    "repeat": 1,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 30.303457999999978,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "exportlite-table",
+    "repeat": 1,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 18.258625000000002,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-stringify",
+    "repeat": 1,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 1086.791125,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table",
+    "repeat": 1,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 431.975375,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 1,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 455.74912500000005,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 1,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 441.18525,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 1,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 844.383208,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-query",
+    "repeat": 1,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 842.995,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table",
+    "repeat": 1,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 212.71325,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 1,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 238.501709,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-stringify",
+    "repeat": 1,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 599.4730420000001,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 1,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 223.866917,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 1,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 384.65541699999994,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-query",
+    "repeat": 1,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 390.767959,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-stringify",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 20.209750000000042,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "exportlite-table",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.343625000000003,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.142207999999982,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "exportlite-table",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.840333,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.673917000000017,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-stringify",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 24.63499999999999,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-adapter-table",
+    "repeat": 2,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 16.80054199999995,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-stringify",
+    "repeat": 2,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 20.553750000000036,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "exportlite-table",
+    "repeat": 2,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 17.633834,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-stringify",
+    "repeat": 2,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 40.02258399999994,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "exportlite-table",
+    "repeat": 2,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 19.030124999999998,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-adapter-table",
+    "repeat": 2,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 17.01249999999999,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table",
+    "repeat": 2,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 446.608292,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 2,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 471.182292,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-stringify",
+    "repeat": 2,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 1135.393708,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-query",
+    "repeat": 2,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 909.6504170000001,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 2,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 868.923792,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 2,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 467.681875,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 2,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 395.08758400000005,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-stringify",
+    "repeat": 2,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 629.3868749999999,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table",
+    "repeat": 2,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 219.534041,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-query",
+    "repeat": 2,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 406.519083,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 2,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 421.18670899999995,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 2,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 319.844542,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "exportlite-table",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 18.075708999999996,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.45270800000003,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-stringify",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 23.69345900000002,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.563042000000053,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-stringify",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 21.533833000000016,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "exportlite-table",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.738666000000002,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-stringify",
+    "repeat": 3,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 22.872208,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "exportlite-table",
+    "repeat": 3,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 18.028958,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-adapter-table",
+    "repeat": 3,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 17.97912500000001,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "exportlite-table",
+    "repeat": 3,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 20.266666999999998,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-adapter-table",
+    "repeat": 3,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 17.163999999999987,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-stringify",
+    "repeat": 3,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 31.673249999999996,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 3,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 490.84104199999996,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-stringify",
+    "repeat": 3,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 1121.5172499999999,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table",
+    "repeat": 3,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 464.23725,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 3,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 472.50129100000004,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 3,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 839.655833,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-query",
+    "repeat": 3,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 838.455667,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-stringify",
+    "repeat": 3,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 681.2626250000001,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table",
+    "repeat": 3,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 229.496083,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 3,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 225.67083299999996,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 3,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 224.04275,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 3,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 391.73795799999994,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-query",
+    "repeat": 3,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 400.538792,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 16.162666,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "drizzle-stringify",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 22.066374999999994,
+    "passed": true
+  },
+  {
+    "name": "table-1",
+    "method": "exportlite-table",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.555833,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-stringify",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 21.70191699999998,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "exportlite-table",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 17.207750000000004,
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "drizzle-adapter-table",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "totalMs": 41.83504199999999,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "exportlite-table",
+    "repeat": 4,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 17.5255,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-adapter-table",
+    "repeat": 4,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 16.837582999999995,
+    "passed": true
+  },
+  {
+    "name": "table-10",
+    "method": "drizzle-stringify",
+    "repeat": 4,
+    "bytes": 820,
+    "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+    "totalMs": 21.550624999999968,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-adapter-table",
+    "repeat": 4,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 18.71554100000003,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "drizzle-stringify",
+    "repeat": 4,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 30.084249999999997,
+    "passed": true
+  },
+  {
+    "name": "table-1000",
+    "method": "exportlite-table",
+    "repeat": 4,
+    "bytes": 80422,
+    "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+    "totalMs": 18.046374999999998,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-stringify",
+    "repeat": 4,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 1102.265666,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table",
+    "repeat": 4,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 428.596667,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 4,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 432.292208,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-query",
+    "repeat": 4,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 834.022333,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 4,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 849.517,
+    "passed": true
+  },
+  {
+    "name": "narrow-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 4,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+    "totalMs": 468.361208,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table",
+    "repeat": 4,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 234.49029099999998,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-table",
+    "repeat": 4,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 213.685,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-stringify",
+    "repeat": 4,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 626.7597920000001,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-query",
+    "repeat": 4,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 392.534375,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "drizzle-adapter-query",
+    "repeat": 4,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 390.5425000000001,
+    "passed": true
+  },
+  {
+    "name": "wide-plain",
+    "method": "exportlite-table-drizzle-host",
+    "repeat": 4,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+    "totalMs": 235.1375,
+    "passed": true
+  }
+]

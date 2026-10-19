@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-18",
+  "node": "24.19.0",
+  "sqlite": "3.53.4",
+  "versions": {
+    "@libsql/client": "0.18.0",
+    "drizzle-orm": "0.45.4",
+    "better-sqlite3": "13.0.3"
+  },
+  "tests": {
+    "passed": 338,
+    "failed": 0,
+    "files": 10
+  },
+  "build": "passed ESM and CommonJS with declarations",
+  "typecheck": "passed public ESM and CommonJS consumers",
+  "biome": "passed",
+  "protocolScope": "Localhost HTTP endpoint backed by actual SQLite; no live Turso Cloud verification",
+  "exportQueries": 1,
+  "preflightQueries": 0,
+  "normalHttpRequests": [
+    "POST /v3/cursor",
+    "POST /v3/pipeline (close only; no SQL)"
+  ],
+  "optionalPeerIsolation": "Turso-only, Drizzle-only and Turso+Drizzle built ESM/CommonJS entry points load without better-sqlite3 installed",
+  "nativeSqlValidation": "65efaace3914bf88b4f9eb70e8621d368d3b4fa44fe48b531d6e07839876e824",
+  "unchangedLocalSource": [
+    "src/api/export.ts",
+    "src/output/readable.ts",
+    "src/output/writer.ts",
+    "src/output/zip.ts",
+    "src/database/better-sqlite3.ts"
+  ],
+  "changedFiles": [
+    "README.md",
+    "examples/turso.mjs",
+    "package.json",
+    "pnpm-lock.yaml",
+    "src/api/export-turso.ts",
+    "src/database/turso.ts",
+    "src/drizzle.ts",
+    "src/errors.ts",
+    "src/planner/batches.ts",
+    "src/planner/declared.ts",
+    "src/planner/json.ts",
+    "src/turso.ts",
+    "tests/helpers/turso-server.ts",
+    "tests/package.test.ts",
+    "tests/turso-consumer.cts",
+    "tests/turso-consumer.mts",
+    "tests/turso.test.ts",
+    "tsdown.config.ts"
+  ]
+}

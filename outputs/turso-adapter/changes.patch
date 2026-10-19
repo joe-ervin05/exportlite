@@ -1,0 +1,2738 @@
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,6 @@
+ # ExportLite — v0
+ 
+-Export SQLite tables and read-only queries to JSON or JSONL through an existing `better-sqlite3` connection. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes JSON fragments without parsing them or constructing row objects. This is a local, private prototype.
++Export SQLite tables and read-only queries to JSON or JSONL through `better-sqlite3` or Turso/libSQL HTTP, directly or using a Drizzle schema. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes JSON fragments without parsing the exported records or constructing row objects. This is a private prototype.
+ 
+ ## Usage
+ 
+@@ -27,7 +27,7 @@
+ }
+ ```
+ 
+-The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (CommonJS), with declarations for both formats. It uses `zip-stream` for ZIP output; the caller supplies `better-sqlite3` as a peer dependency. Nothing has been published to npm.
++The local checkout builds ESM and CommonJS entry points with declarations for both formats. It uses `zip-stream` for ZIP output. Install `better-sqlite3` for local connections, `@libsql/client` for Turso, and `drizzle-orm` when using the Drizzle adapter; these driver peers are optional so unused drivers need not be installed. Nothing has been published to npm.
+ 
+ ## Small API
+ 
+@@ -37,7 +37,7 @@
+ | `format` | `"jsonl"` (default) or `"json"` |
+ | `zip` | `true` streams a ZIP containing one exported file; default `false` |
+ | `columns` | Optional column-name list for tables, or an object of typed column selections for tables and queries |
+-| `encoding` | Declared table database encoding: `"utf8"` (default), `"utf16le"` or `"utf16be"`; output remains UTF-8 |
++| `encoding` | Local declared table database encoding: `"utf8"` (default), `"utf16le"` or `"utf16be"`; output remains UTF-8 |
+ | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
+ | `signal` | Optional `AbortSignal` |
+ | `end` | With `output` only: end a caller-provided writable when done; default `false` |
+@@ -94,11 +94,11 @@
+ 
+ With declared query columns, ExportLite prepares only the final JSON SELECT. There are no separate schema, schema-version, capability or output-column-discovery queries. SQLite validates the statement and its named result columns; a missing field fails during preparation. Query result aliases should be unique under SQLite's case-insensitive name resolution. Added, unselected columns do not change the projection. Renaming happens inside `json_object()`, with no JavaScript row objects or JSON parsing.
+ 
+-Declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Remote database adapters are not implemented. Run `node examples/declared-columns.mjs` for a working example.
++Local declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original local table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Run `node examples/declared-columns.mjs` for a working example.
+ 
+ ## Drizzle adapter
+ 
+-The optional `exportlite/drizzle` entry point accepts a Drizzle database and existing SQLite schemas. It supports **Drizzle ORM 0.45.x, tested with 0.45.4**, using `drizzle-orm/better-sqlite3`. Drizzle is an optional peer dependency; the main `exportlite` entry does not import it. Stable-version documentation uses `getTableColumns()`; the newer `getColumns()` name belongs to Drizzle v1.
++The optional `exportlite/drizzle` entry point accepts a Drizzle database and existing SQLite schemas. It supports **Drizzle ORM 0.45.x, tested with 0.45.4**, using `drizzle-orm/better-sqlite3` or a registered Turso client with `drizzle-orm/libsql/http` (also usable with `drizzle-orm/libsql`). Drizzle is an optional peer dependency; the main `exportlite` entry does not import it. Stable-version documentation uses `getTableColumns()`; the newer `getColumns()` name belongs to Drizzle v1.
+ 
+ ```ts
+ import { eq, sql } from "drizzle-orm";
+@@ -127,7 +127,7 @@
+ const stream = await exportQuery(db, query, { format: "json", zip: true });
+ ```
+ 
+-The adapter compiles `.toSQL()` and reads selection metadata; it never awaits the query or calls Drizzle's `.all()`. Select queries retain their inferred row contract, including nullable columns from flat left joins. Give computed SQL expressions an `.as("alias")` alias. Ordinary select queries use the existing row-streaming query path; the integer-key table batching optimization applies to `exportTable()`. Drizzle's built-in query-result cache and row logging/mapping hooks are bypassed because ExportLite executes the generated JSON statement through the same native `$client` cursor. No export result is cached.
++The adapter compiles `.toSQL()` and reads selection metadata; it never awaits the query or calls Drizzle's `.all()`. Select queries retain their inferred row contract, including nullable columns from flat left joins. Give computed SQL expressions an `.as("alias")` alias. Ordinary select queries use the existing row-streaming query path; the integer-key table batching optimization applies to `exportTable()`. Drizzle's built-in query-result cache and row logging/mapping hooks are bypassed because ExportLite executes the generated JSON statement through a native cursor or the Turso streaming transport. No export result is cached.
+ 
+ Raw Drizzle `sql` templates also work. Supply the schema columns corresponding to the raw query's result column names; these fields supply output names and decoding metadata without a discovery query:
+ 
+@@ -143,11 +143,59 @@
+ 
+ Date/timestamp modes, numeric modes, BLOB/bigint columns, custom column decoders and `.mapWith()` are rejected explicitly rather than silently skipping their conversions. Convert such fields to a supported scalar in an aliased SQL expression when appropriate. Unbound `sql.placeholder()` values are not supported; bind actual values in the query before exporting. The adapter reads a few runtime metadata properties that Drizzle marks internal, including configured casing, selection fields and SQL decoders; compatibility tests cover the pinned version and upgrades should rerun them.
+ 
+-`zip`, `signal`, `output`, `end`, `bufferSize`, table `encoding` and `.result` work as in the core API, using the same writer and ZIP implementation. The caller owns the connection and any surrounding native transaction. Drizzle transaction-wrapper objects do not expose the required `$client`; pass the original database while its native transaction remains open for the entire export consumption.
+-
+-Remote libSQL/Turso and other Drizzle drivers are not supported by this adapter. Drizzle's libSQL execution path returns a buffered result, so using its raw execution API alone would not preserve bounded streaming. A remote adapter needs a streaming transport in addition to Drizzle's schema/compiler support. Run `node examples/drizzle.mjs` for table, select and raw SQL examples.
++`zip`, `signal`, `output`, `end`, `bufferSize` and `.result` work as in the core API, using the same writer and ZIP implementation. Table `encoding` applies to native connections; remote exports always receive UTF-8 protocol text. The caller owns the connection. Drizzle transaction-wrapper objects do not expose the required `$client`; for local connections, pass the original database while its native transaction remains open for the entire export consumption. Remote exports use independent read sessions and cannot join a caller's transaction.
++
++For Turso, create the client using `exportlite/turso` as shown below. Other Drizzle drivers are not supported. Run `node examples/drizzle.mjs` for local table, select and raw SQL examples.
+ 
+ The [Drizzle adapter benchmark](benchmarks/DRIZZLE-ADAPTER.md) compares total JSON generation/UTF-8 output time and whole-process peak memory against direct ExportLite and normal Drizzle queries plus `JSON.stringify()`, using the existing fixtures and Node 26.12.0. It includes separate select-builder and Drizzle-loaded application controls.
++
++## Turso / libSQL HTTP
++
++Use the `exportlite/turso` client factory for both direct exports and Drizzle. It returns an ordinary official `@libsql/client/http` client, retaining the transport configuration needed for streaming exports. Existing applications can change their client factory import; an already-created SDK client does not expose that configuration publicly.
++
++```ts
++import { integer, text } from "exportlite";
++import { createClient, exportTable, exportQuery } from "exportlite/turso";
++
++const client = createClient({
++  url: process.env.TURSO_DATABASE_URL!,
++  authToken: process.env.TURSO_AUTH_TOKEN,
++});
++
++const stream = await exportTable(client, "users", {
++  columns: { id: integer().primaryKey(), displayName: text("name") },
++  format: "json",
++  zip: true,
++});
++// Keep client open until consumption and stream.result have completed.
++return new Response(stream, { headers: { "Content-Type": "application/zip" } });
++```
++
++Direct remote exports require a typed `columns` object, for both tables and queries. Queries accept the same `sql` and positional/named `params` as local exports. A single declared integer primary key enables 256-row table batches; other keys and queries use row streaming. Files and Node writable destinations work with `output` as usual.
++
++Drizzle supplies the column declarations and primary-key metadata:
++
++```ts
++import { drizzle } from "drizzle-orm/libsql/http";
++import { exportTable, exportQuery } from "exportlite/drizzle";
++import { createClient } from "exportlite/turso";
++import { users } from "./schema";
++
++const client = createClient(config);
++const db = drizzle(client);
++const stream = await exportTable(db, users, { format: "json" });
++// exportQuery(db, db.select(...).from(users), options) also works.
++```
++
++Each export sends **one SQL statement, with no schema, version, column-discovery or capability preflight**. It uses a streaming [`/v3/cursor` request](https://github.com/tursodatabase/libsql/blob/main/docs/HRANA_3_SPEC.md), then a separate `/v3/pipeline` request to close the server session. The close request runs no SQL; it is awaited before completion and has a five-second timeout. This is normally two HTTP requests, with no extra round trip before the first data request. An execution failure never retries the query. SDK `execute()` and Drizzle result buffering are bypassed.
++
++Every export owns an independent remote read session. Backpressure pauses cursor consumption; cancellation aborts pending HTTP reads, cancels the response body and attempts session cleanup. Closing or reconnecting the caller's SDK client cancels its active exports. ExportLite does not close that client automatically. A failed cleanup after otherwise successful streaming is reported as a handled failure; owned partial files are removed. On a broken network, server-side session expiry remains the final cleanup mechanism.
++
++Protocol JSON is decoded one frame at a time; exported JSON fragments are not parsed into records. The remote path uses text rather than base64-encoded SQLite BLOBs, so no database-encoding probe or hint is needed, including for UTF-16 source databases. Output is always UTF-8. As with local batches, unusually large records can require substantial memory; network, server and stream buffers also contribute. SDK `intMode` changes ordinary SDK reads, not SQLite's JSON integer literals.
++
++Remote options and bindings are checked before returning a readable. SQLite validates the actual statement when consumption starts, so missing columns and SQL errors reach the body and `.result` with `SQLITE_ERROR`. HTTP, malformed-protocol and session-close failures use `REMOTE_ERROR`; cancellation uses `ABORTED`. The shared ZIP settings, output ownership and failure cleanup apply unchanged. This adapter runs in Node; it does not add browser or edge-runtime support.
++
++Tested with `@libsql/client` **0.18.0**, the current npm version checked October 18, 2026. Local protocol tests use a real HTTP server backed by SQLite and cover both direct and Drizzle exports. **Live Turso Cloud compatibility and remote performance have not been verified.** Run `node examples/turso.mjs` against an existing database containing `users(id, name, active)`, with `TURSO_DATABASE_URL` and optional `TURSO_AUTH_TOKEN` in its environment. The example only reads that database.
+ 
+ ## Readable streams and API responses
+ 
+@@ -197,7 +245,7 @@
+ await exportTable(db, "users", { output: "users.jsonl" });
+ ```
+ 
+-Options, schema and SQL are validated before the readable is returned. The export data statement starts when reading begins, and backpressure pauses further rows/batches. The read snapshot starts with consumption. Cancelling the stream or its reader, stopping async iteration, or aborting `signal` cancels production and releases the statement and owned ZIP stages. `await stream.cancel()` waits for that cleanup. For a Node pipeline, use Node's built-in `Readable.fromWeb(stream)` adapter; it forwards failures and cancellation between the two stream interfaces. The caller retains ownership of the SQLite connection.
++Options are validated before the readable is returned. Local connections also prepare and validate SQL at that point; remote SQLite validation occurs when consumption starts. The export data statement starts when reading begins, and backpressure pauses further rows/batches. The read snapshot starts with consumption. Cancelling the stream or its reader, stopping async iteration, or aborting `signal` cancels production and releases the statement or remote cursor and owned ZIP stages. `await stream.cancel()` waits for that cleanup. For a Node pipeline, use Node's built-in `Readable.fromWeb(stream)` adapter; it forwards failures and cancellation between the two stream interfaces. The caller retains ownership of the database client.
+ 
+ Keep that connection open until `stream.result` settles. Read or pipe the stream before awaiting `.result`; the promise waits for consumption and export cleanup. Statistics count the exported bytes, including ZIP headers/trailer when enabled, and do not mean an HTTP client has received them. For readables, `durationMs` includes elapsed time waiting for consumption. If using a connection per request, close it from the completion callbacks rather than immediately after returning the `Response`.
+ 
+@@ -230,13 +278,13 @@
+ 
+ ## Fixed batching and streaming fallbacks
+ 
+-Automatically discovered tables use 256-row batches when a usable rowid exists. Declared tables use the same batching algorithm when one integer primary key is supplied. One recursive export statement finds indexed key ranges and builds a JSON array or LF-separated objects per range. JavaScript joins those fragments directly. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. For exports using discovery, SQLite version and JSON capability checks run once after the first successful check per connection. Declared tables and queries rely on preparing the final JSON statement, without preflight probes.
++Automatically discovered local tables use 256-row batches when a usable rowid exists. Declared tables use the same batching algorithm when one integer primary key is supplied. One recursive export statement finds indexed key ranges and builds a JSON array or LF-separated objects per range. JavaScript joins those fragments directly. There are no SQL callbacks, sizing estimators or pagination queries. Native exports use the supplied connection; Turso exports open independent remote read sessions. For local exports using discovery, SQLite version and JSON capability checks run once after the first successful check per connection. Declared tables and queries rely on the final JSON statement, without preflight probes.
+ 
+ Repeated table exports reuse generated SQL, with at most 16 cached plans per connection shared by declared and discovered plans. A schema-version check invalidates discovered plans after schema changes; declared plans depend only on the request. Each export prepares an independent statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are generated afresh. Custom queries discover their output columns unless `columns` is declared.
+ 
+ Each range starts with an indexed seek and locates its 256th existing key using a constant `OFFSET 255`. That offset stays fixed for every batch; it does not grow with the export. Bounds remain SQLite integers, and only a short final batch needs a separate count inside the same statement.
+ 
+-For UTF-8 databases, batch JSON stays as UTF-8 bytes from SQLite through the writer, avoiding conversion to JavaScript text and back. UTF-16 databases retain the text path and still produce UTF-8 output. This is internal; the stream and file APIs are unchanged.
++For local UTF-8 databases, batch JSON stays as UTF-8 bytes from SQLite through the writer, avoiding conversion to JavaScript text and back. Local UTF-16 databases and remote connections use text and still produce UTF-8 output. This is internal; the stream and file APIs are unchanged.
+ 
+ With automatic discovery, views, virtual tables, WITHOUT ROWID tables and tables shadowing all three rowid aliases use row streaming. Declared selections choose batching from the declared key, without storage discovery. Custom queries always stream individual SQLite-generated JSON records. Both paths share the output loop, backpressure, cancellation and cleanup. An execution failure never retries another path after writing partial data.
+ 
+@@ -267,16 +315,16 @@
+ ## Data and query behavior
+ 
+ - Main-schema tables/views are validated and identifiers quoted. Ordinary non-hidden columns are selected by default; generated columns can be selected explicitly.
+-- Query parameters are bound. Writes, PRAGMAs, multiple statements and duplicate output aliases are rejected before opening output. Query SQL is trusted application code, not a sandbox for functions with side effects.
++- Query parameters are bound. Local writes, PRAGMAs, multiple statements and duplicate output aliases are rejected before opening output. Remote queries wrap the supplied SELECT/CTE inside the final JSON SELECT; server-side validation happens during consumption. Query SQL is trusted application code, not a sandbox for functions with side effects.
+ - SQLite constructs strings, NULLs and numeric literals. JSON stored as TEXT stays a string. Exact signed 64-bit integer literals are preserved, including with a BigInt-configured connection; ordinary `JSON.parse()` consumers can still lose precision. REAL formatting remains SQLite's own.
+ - BLOBs fail with a descriptive error. Select other columns or use an explicit query with `hex()`/`CAST()`.
+ - Empty JSON is `[]`; empty JSONL is zero bytes. Export failures are `ExportLiteError` instances with a `code` and original cause where available.
+ 
+-SQLite >=3.45.1 with JSON support is checked on the first export for each connection; failed checks are retried on later calls. Do not close or mutate the same connection while an export is running. Queries may sort/materialize data within SQLite; long read snapshots can affect writers and WAL growth.
++SQLite >=3.45.1 with JSON support is required. Automatic local discovery checks this on the first export per connection; declared and remote exports skip capability probes and rely on the final statement. Do not close or mutate the same connection while an export is running. Queries may sort/materialize data within SQLite; long read snapshots can affect writers and WAL growth.
+ 
+ ## Development and validation
+ 
+-Use Node.js 22.18+, 24.11+, or 26+ for the development tools and pnpm 12.14.0. Tested on Node 24.19.0. Dependency versions were checked on October 17, 2026; `better-sqlite3` remains 13.0.3. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
++Use Node.js 22.18+, 24.11+, or 26+ for the development tools and pnpm 12.14.0. Tested on Node 24.19.0. Existing dependency versions were checked on October 17, 2026; `better-sqlite3` remains 13.0.3 and Drizzle remains 0.45.4. The added `@libsql/client` 0.18.0 was checked October 18. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
+ 
+ ```sh
+ pnpm install --frozen-lockfile
+@@ -287,7 +335,7 @@
+ pnpm example
+ ```
+ 
+-Local checks cover 283 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
++Local checks cover 338 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session cleanup, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+ 
+ ## Benchmarks
+ 
+--- /dev/null
++++ b/examples/turso.mjs
+@@ -0,0 +1,47 @@
++import { eq } from "drizzle-orm";
++import { drizzle } from "drizzle-orm/libsql/http";
++import {
++  integer as int,
++  sqliteTable,
++  text as str,
++} from "drizzle-orm/sqlite-core";
++import { integer, text } from "exportlite";
++import { exportQuery as exportDrizzleQuery } from "exportlite/drizzle";
++import { createClient, exportTable } from "exportlite/turso";
++
++// Point at an existing database with users(id INTEGER PRIMARY KEY, name TEXT,
++// active INTEGER). This example reads it; it does not create or modify tables.
++const url = process.env.TURSO_DATABASE_URL;
++if (!url)
++  throw new Error("Set TURSO_DATABASE_URL to an existing database URL.");
++const client = createClient({ url, authToken: process.env.TURSO_AUTH_TOKEN });
++try {
++  const stream = await exportTable(client, "users", {
++    columns: {
++      id: integer().primaryKey(),
++      name: text(),
++      active: integer({ mode: "boolean" }),
++    },
++    format: "json",
++  });
++  console.log(await new Response(stream).text());
++  await stream.result;
++
++  const users = sqliteTable("users", {
++    id: int().primaryKey(),
++    name: str(),
++    active: int({ mode: "boolean" }),
++  });
++  const db = drizzle(client);
++  const query = db
++    .select({ id: users.id, label: users.name })
++    .from(users)
++    .where(eq(users.active, true))
++    .orderBy(users.id)
++    .limit(2);
++  const selected = await exportDrizzleQuery(db, query, { format: "json" });
++  console.log(await new Response(selected).text());
++  await selected.result;
++} finally {
++  client.close();
++}
+--- a/package.json
++++ b/package.json
+@@ -17,6 +17,16 @@
+       "require": {
+         "types": "./dist/index.d.cts",
+         "default": "./dist/index.cjs"
++      }
++    },
++    "./turso": {
++      "import": {
++        "types": "./dist/turso.d.mts",
++        "default": "./dist/turso.mjs"
++      },
++      "require": {
++        "types": "./dist/turso.d.cts",
++        "default": "./dist/turso.cjs"
+       }
+     },
+     "./drizzle": {
+@@ -50,15 +60,23 @@
+     "example": "node examples/basic.mjs"
+   },
+   "peerDependencies": {
++    "@libsql/client": "^0.18.0",
+     "better-sqlite3": "^13.0.3",
+     "drizzle-orm": "^0.45.4"
+   },
+   "peerDependenciesMeta": {
++    "@libsql/client": {
++      "optional": true
++    },
++    "better-sqlite3": {
++      "optional": true
++    },
+     "drizzle-orm": {
+       "optional": true
+     }
+   },
+   "devDependencies": {
++    "@libsql/client": "0.18.0",
+     "@biomejs/biome": "2.5.15",
+     "@types/better-sqlite3": "9.6.0",
+     "@types/node": "22.20.5",
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -173,6 +173,9 @@
+       '@biomejs/biome':
+         specifier: 2.5.15
+         version: 2.5.15
++      '@libsql/client':
++        specifier: 0.18.0
++        version: 0.18.0
+       '@types/better-sqlite3':
+         specifier: 9.6.0
+         version: 9.6.0
+@@ -190,7 +193,7 @@
+         version: 13.0.3
+       drizzle-orm:
+         specifier: 0.45.4
+-        version: 0.45.4(@types/better-sqlite3@9.6.0)(better-sqlite3@13.0.3)
++        version: 0.45.4(@libsql/client@0.18.0)(@types/better-sqlite3@9.6.0)(better-sqlite3@13.0.3)
+       tsdown:
+         specifier: 0.23.1
+         version: 0.23.1(typescript@7.0.2)
+@@ -273,6 +276,66 @@
+   '@jridgewell/trace-mapping@0.3.31':
+     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+ 
++  '@libsql/client@0.18.0':
++    resolution: {integrity: sha512-zMCCo58vv7w27j7+cnt/GW+X6/Rih6cHZ86PKi0AxCMOqMfrVgG9OZ5lW2bDMJhSeOjsv2szH2nJF3A9l36UmA==}
++
++  '@libsql/core@0.18.0':
++    resolution: {integrity: sha512-N8RR2CIpcgtbKZnXs2KVpw2lJQfinUj3I56e7qRDRpK18Hty0Rr8nr00VmFb4R/DsqOanPB/TaP3+QAQLZeXMg==}
++
++  '@libsql/darwin-arm64@0.5.29':
++    resolution: {integrity: sha512-K+2RIB1OGFPYQbfay48GakLhqf3ArcbHqPFu7EZiaUcRgFcdw8RoltsMyvbj5ix2fY0HV3Q3Ioa/ByvQdaSM0A==}
++    cpu: [arm64]
++    os: [darwin]
++
++  '@libsql/darwin-x64@0.5.29':
++    resolution: {integrity: sha512-OtT+KFHsKFy1R5FVadr8FJ2Bb1mghtXTyJkxv0trocq7NuHntSki1eUbxpO5ezJesDvBlqFjnWaYYY516QNLhQ==}
++    cpu: [x64]
++    os: [darwin]
++
++  '@libsql/hrana-client@0.10.0':
++    resolution: {integrity: sha512-OoA4EMqRAC7kn7V2P6EQqRcpZf2W+AjsNIyCizBg339Tq/aMC7sRnzs3SklderhmQWAqEzvv8A2vhxVmWpkVvw==}
++
++  '@libsql/isomorphic-ws@0.1.5':
++    resolution: {integrity: sha512-DtLWIH29onUYR00i0GlQ3UdcTRC6EP4u9w/h9LxpUZJWRMARk6dQwZ6Jkd+QdwVpuAOrdxt18v0K2uIYR3fwFg==}
++
++  '@libsql/linux-arm-gnueabihf@0.5.29':
++    resolution: {integrity: sha512-CD4n4zj7SJTHso4nf5cuMoWoMSS7asn5hHygsDuhRl8jjjCTT3yE+xdUvI4J7zsyb53VO5ISh4cwwOtf6k2UhQ==}
++    cpu: [arm]
++    os: [linux]
++
++  '@libsql/linux-arm-musleabihf@0.5.29':
++    resolution: {integrity: sha512-2Z9qBVpEJV7OeflzIR3+l5yAd4uTOLxklScYTwpZnkm2vDSGlC1PRlueLaufc4EFITkLKXK2MWBpexuNJfMVcg==}
++    cpu: [arm]
++    os: [linux]
++
++  '@libsql/linux-arm64-gnu@0.5.29':
++    resolution: {integrity: sha512-gURBqaiXIGGwFNEaUj8Ldk7Hps4STtG+31aEidCk5evMMdtsdfL3HPCpvys+ZF/tkOs2MWlRWoSq7SOuCE9k3w==}
++    cpu: [arm64]
++    os: [linux]
++
++  '@libsql/linux-arm64-musl@0.5.29':
++    resolution: {integrity: sha512-fwgYZ0H8mUkyVqXZHF3mT/92iIh1N94Owi/f66cPVNsk9BdGKq5gVpoKO+7UxaNzuEH1roJp2QEwsCZMvBLpqg==}
++    cpu: [arm64]
++    os: [linux]
++
++  '@libsql/linux-x64-gnu@0.5.29':
++    resolution: {integrity: sha512-y14V0vY0nmMC6G0pHeJcEarcnGU2H6cm21ZceRkacWHvQAEhAG0latQkCtoS2njFOXiYIg+JYPfAoWKbi82rkg==}
++    cpu: [x64]
++    os: [linux]
++
++  '@libsql/linux-x64-musl@0.5.29':
++    resolution: {integrity: sha512-gquqwA/39tH4pFl+J9n3SOMSymjX+6kZ3kWgY3b94nXFTwac9bnFNMffIomgvlFaC4ArVqMnOZD3nuJ3H3VO1w==}
++    cpu: [x64]
++    os: [linux]
++
++  '@libsql/win32-x64-msvc@0.5.29':
++    resolution: {integrity: sha512-4/0CvEdhi6+KjMxMaVbFM2n2Z44escBRoEYpR+gZg64DdetzGnYm8mcNLcoySaDJZNaBd6wz5DNdgRmcI4hXcg==}
++    cpu: [x64]
++    os: [win32]
++
++  '@neon-rs/load@0.0.4':
++    resolution: {integrity: sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw==}
++
+   '@oxc-project/types@0.154.0':
+     resolution: {integrity: sha512-KYOUGQFlLWR+s4QMV2Q9ko38TZm7EdO87Qm7rvZLqk/webse/cDjtyxKhg/47l0byCbs/k46LT8qc4PKjAikzA==}
+ 
+@@ -401,6 +464,9 @@
+ 
+   '@types/readable-stream@4.0.25':
+     resolution: {integrity: sha512-7GsxL8Wd5X3jh73/qgW7WCnbBvGSdD8U3E4Jiuus3/8I+PN20DtlkJtwFhr/sImXfDDQ2Z03i/9wNiIF3TVSsw==}
++
++  '@types/ws@8.18.2':
++    resolution: {integrity: sha512-67MQl+fpWKVTT1NYdnmo3U4sc/xPo/zQBncVnI74qmQa0z/b+1g6iYqNmGCPbxO+zz2aklb08a0oHfegiVd0/w==}
+ 
+   '@types/yauzl@3.4.0':
+     resolution: {integrity: sha512-NRPn5w6h8dhcnmx3YIRQcqMywY/+nND/uOkJessedcrowO3C0AssHp3tMJpxKAwOhFOo0OV1y9VtsC5hbKKBAw==}
+@@ -652,6 +718,10 @@
+ 
+   defu@6.1.7:
+     resolution: {integrity: sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==}
++
++  detect-libc@2.0.2:
++    resolution: {integrity: sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw==}
++    engines: {node: '>=8'}
+ 
+   detect-libc@2.1.2:
+     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
+@@ -815,6 +885,14 @@
+     resolution: {integrity: sha512-Dnz92NInDqYckGEUJv689RbRiTSEHCQ7wOVeALbkOz999YpqT46yMRIGtSNl2iCL1waAZSx40+h59NV/EwzV/A==}
+     engines: {node: '>=18'}
+ 
++  js-base64@3.9.4:
++    resolution: {integrity: sha512-PtOMXpEGuP0RRiRXsjzHzl44dMHxSu2CPvAhinupR1tBa88me+1DPqsobl7eupn5UukjLkln1ZnAOAOXOrYG0Q==}
++
++  libsql@0.5.29:
++    resolution: {integrity: sha512-8lMP8iMgiBzzoNbAPQ59qdVcj6UaE/Vnm+fiwX4doX4Narook0a4GPKWBEv+CR8a1OwbfkgL18uBfBjWdF0Fzg==}
++    cpu: [x64, arm64, wasm32, arm]
++    os: [darwin, linux, win32]
++
+   lightningcss-android-arm64@1.33.0:
+     resolution: {integrity: sha512-gEpRTalKdosp4Bb8qWtc2iOgE5SeIHlpS1up9bFq2wAyYhl1UdTObYiHe98zEM9SQvSoqQZ1IQD0JNpg3Ml5pg==}
+     engines: {node: '>= 12.0.0'}
+@@ -926,6 +1004,9 @@
+   process@0.11.10:
+     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+     engines: {node: '>= 0.6.0'}
++
++  promise-limit@2.7.0:
++    resolution: {integrity: sha512-7nJ6v5lnJsXwGprnGXga4wx6d1POjvi5Qmf1ivTRxTjH4Z/9Czja/UCMLVmB9N93GeWOU93XaFaEt6jbuoagNw==}
+ 
+   quansync@1.0.0:
+     resolution: {integrity: sha512-5xZacEEufv3HSTPQuchrvV6soaiACMFnq1H8wkVioctoH3TRha9Sz66lOxRwPK/qZj7HPiSveih9yAyh98gvqA==}
+@@ -1131,6 +1212,18 @@
+     engines: {node: '>=20.11'}
+     hasBin: true
+ 
++  ws@8.22.0:
++    resolution: {integrity: sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg==}
++    engines: {node: '>=10.0.0'}
++    peerDependencies:
++      bufferutil: ^4.0.1
++      utf-8-validate: '>=5.0.2'
++    peerDependenciesMeta:
++      bufferutil:
++        optional: true
++      utf-8-validate:
++        optional: true
++
+   yauzl@3.4.0:
+     resolution: {integrity: sha512-jIH9yLR9wqr0wOS0TpBvo/g/2UgZH5qePVbjgRliiF0BYvOZyaBknKsF+x9Iht0O6sqgnB93rCICdOZFecJuDw==}
+     engines: {node: '>=12'}
+@@ -1201,6 +1294,66 @@
+       '@jridgewell/resolve-uri': 3.1.2
+       '@jridgewell/sourcemap-codec': 1.6.0
+ 
++  '@libsql/client@0.18.0':
++    dependencies:
++      '@libsql/core': 0.18.0
++      '@libsql/hrana-client': 0.10.0
++      js-base64: 3.9.4
++      libsql: 0.5.29
++      promise-limit: 2.7.0
++    transitivePeerDependencies:
++      - bufferutil
++      - utf-8-validate
++
++  '@libsql/core@0.18.0':
++    dependencies:
++      js-base64: 3.9.4
++
++  '@libsql/darwin-arm64@0.5.29':
++    optional: true
++
++  '@libsql/darwin-x64@0.5.29':
++    optional: true
++
++  '@libsql/hrana-client@0.10.0':
++    dependencies:
++      '@libsql/isomorphic-ws': 0.1.5
++      js-base64: 3.9.4
++    transitivePeerDependencies:
++      - bufferutil
++      - utf-8-validate
++
++  '@libsql/isomorphic-ws@0.1.5':
++    dependencies:
++      '@types/ws': 8.18.2
++      ws: 8.22.0
++    transitivePeerDependencies:
++      - bufferutil
++      - utf-8-validate
++
++  '@libsql/linux-arm-gnueabihf@0.5.29':
++    optional: true
++
++  '@libsql/linux-arm-musleabihf@0.5.29':
++    optional: true
++
++  '@libsql/linux-arm64-gnu@0.5.29':
++    optional: true
++
++  '@libsql/linux-arm64-musl@0.5.29':
++    optional: true
++
++  '@libsql/linux-x64-gnu@0.5.29':
++    optional: true
++
++  '@libsql/linux-x64-musl@0.5.29':
++    optional: true
++
++  '@libsql/win32-x64-msvc@0.5.29':
++    optional: true
++
++  '@neon-rs/load@0.0.4': {}
++
+   '@oxc-project/types@0.154.0': {}
+ 
+   '@quansync/fs@1.1.0':
+@@ -1282,6 +1435,10 @@
+       undici-types: 6.21.0
+ 
+   '@types/readable-stream@4.0.25':
++    dependencies:
++      '@types/node': 22.20.5
++
++  '@types/ws@8.18.2':
+     dependencies:
+       '@types/node': 22.20.5
+ 
+@@ -1442,10 +1599,13 @@
+ 
+   defu@6.1.7: {}
+ 
++  detect-libc@2.0.2: {}
++
+   detect-libc@2.1.2: {}
+ 
+-  drizzle-orm@0.45.4(@types/better-sqlite3@9.6.0)(better-sqlite3@13.0.3):
++  drizzle-orm@0.45.4(@libsql/client@0.18.0)(@types/better-sqlite3@9.6.0)(better-sqlite3@13.0.3):
+     optionalDependencies:
++      '@libsql/client': 0.18.0
+       '@types/better-sqlite3': 9.6.0
+       better-sqlite3: 13.0.3
+ 
+@@ -1483,6 +1643,23 @@
+   import-without-cache@0.4.1: {}
+ 
+   is-stream@4.0.1: {}
++
++  js-base64@3.9.4: {}
++
++  libsql@0.5.29:
++    dependencies:
++      '@neon-rs/load': 0.0.4
++      detect-libc: 2.0.2
++    optionalDependencies:
++      '@libsql/darwin-arm64': 0.5.29
++      '@libsql/darwin-x64': 0.5.29
++      '@libsql/linux-arm-gnueabihf': 0.5.29
++      '@libsql/linux-arm-musleabihf': 0.5.29
++      '@libsql/linux-arm64-gnu': 0.5.29
++      '@libsql/linux-arm64-musl': 0.5.29
++      '@libsql/linux-x64-gnu': 0.5.29
++      '@libsql/linux-x64-musl': 0.5.29
++      '@libsql/win32-x64-msvc': 0.5.29
+ 
+   lightningcss-android-arm64@1.33.0:
+     optional: true
+@@ -1558,6 +1735,8 @@
+       source-map-js: 1.2.2
+ 
+   process@0.11.10: {}
++
++  promise-limit@2.7.0: {}
+ 
+   quansync@1.0.0: {}
+ 
+@@ -1718,6 +1897,8 @@
+ 
+   why-is-node-running@3.2.1: {}
+ 
++  ws@8.22.0: {}
++
+   yauzl@3.4.0:
+     dependencies:
+       pend: 1.2.0
+--- /dev/null
++++ b/src/api/export-turso.ts
+@@ -0,0 +1,125 @@
++import {
++  getTurso,
++  type TursoConnection,
++  tursoStatement,
++} from "../database/turso.js";
++import { ExportLiteError } from "../errors.js";
++import { createReadableExport } from "../output/readable.js";
++import {
++  checkAborted,
++  OutputWriter,
++  validateOptions,
++} from "../output/writer.js";
++import { ZipOutput } from "../output/zip.js";
++import type {
++  ExportOptions,
++  ExportResult,
++  ExportStream,
++  QueryParameters,
++  StreamExportOptions,
++} from "../types.js";
++
++/** Remote producer leaves the local synchronous loop and fast paths untouched. */
++export function deliverTursoExport(
++  client: TursoConnection,
++  sql: string,
++  params: QueryParameters | readonly unknown[] | undefined,
++  options: ExportOptions | StreamExportOptions,
++  started: number,
++  batched = false,
++  name = "export",
++): Promise<ExportResult | ExportStream> {
++  validateOptions(options);
++  checkAborted(options.signal);
++  const transport = getTurso(client);
++  if (!transport)
++    throw new ExportLiteError(
++      "INVALID_OPTIONS",
++      "Create the client with createClient() from exportlite/turso.",
++    );
++  // Validate bindings before creating a file, returning a stream or doing I/O.
++  const statement = tursoStatement(sql, params);
++  const produce = async (destination: ExportOptions): Promise<ExportResult> => {
++    const controller = new AbortController();
++    const signal = destination.signal
++      ? AbortSignal.any([destination.signal, controller.signal])
++      : controller.signal;
++    const outputError = (cause: Error) =>
++      controller.abort(
++        new ExportLiteError(
++          "OUTPUT_ERROR",
++          "Output failed during Turso export.",
++          { cause },
++        ),
++      );
++    const outputClose = () => {
++      if (
++        typeof destination.output !== "string" &&
++        !destination.output.writableFinished
++      )
++        outputError(new Error("Output closed before completion."));
++    };
++    if (typeof destination.output !== "string") {
++      destination.output.on("error", outputError);
++      destination.output.on("close", outputClose);
++    }
++    let output: OutputWriter | ZipOutput | undefined;
++    let rowsExported = 0;
++    let success = false;
++    try {
++      const settings = { ...destination, signal };
++      output = settings.zip
++        ? await ZipOutput.create(settings, name)
++        : await OutputWriter.create(settings);
++      const json = options.format === "json";
++      if (json) {
++        const wait = output.write("[");
++        if (wait) await wait;
++      }
++      output.check();
++      for await (const [text, count] of transport.iterate(
++        statement,
++        batched,
++        options.format ?? "jsonl",
++        signal,
++      )) {
++        output.check();
++        const content = json && batched ? text.slice(1, -1) : text;
++        const prefix = json && rowsExported > 0 ? "," : "";
++        const suffix = json ? "" : "\n";
++        const wait = output.write(`${prefix}${content}${suffix}`);
++        if (wait) await wait;
++        rowsExported += count;
++      }
++      if (json) {
++        const wait = output.write("]");
++        if (wait) await wait;
++      }
++      await output.complete();
++      success = true;
++      return {
++        rowsExported,
++        bytesWritten: output.bytesWritten,
++        durationMs: performance.now() - started,
++      };
++    } catch (cause) {
++      // Aborting a pending read also wakes the writer; preserve the original
++      // destination failure rather than reporting that wake-up as cancellation.
++      if (controller.signal.aborted) throw controller.signal.reason;
++      throw cause;
++    } finally {
++      controller.abort();
++      try {
++        await output?.dispose(success);
++      } finally {
++        if (typeof destination.output !== "string") {
++          destination.output.off("error", outputError);
++          destination.output.off("close", outputClose);
++        }
++      }
++    }
++  };
++  return options.output === undefined
++    ? Promise.resolve(createReadableExport(options, produce, started))
++    : produce(options);
++}
+--- /dev/null
++++ b/src/database/turso.ts
+@@ -0,0 +1,362 @@
++import { ExportLiteError } from "../errors.js";
++import type { QueryParameters } from "../types.js";
++
++declare const tursoConnection: unique symbol;
++/** Registered by exportlite/turso.createClient(); no native driver is required. */
++export interface TursoConnection {
++  readonly [tursoConnection]: true;
++}
++
++export interface TursoConfig {
++  url: string;
++  authToken?: string;
++  remoteEncryptionKey?: string;
++  tls?: boolean;
++  fetch?: typeof globalThis.fetch;
++}
++
++interface Value {
++  type: "null" | "integer" | "float" | "text" | "blob";
++  value?: string | number;
++  base64?: string;
++}
++export interface TursoStatement {
++  sql: string;
++  args: Value[];
++  named_args: { name: string; value: Value }[];
++  want_rows: true;
++}
++export type JsonFragment = readonly [json: string, rows: number];
++
++// Share only a weak registry across the package's ESM and CommonJS entries.
++const scope = globalThis as typeof globalThis & {
++  [key: symbol]: WeakMap<object, TursoTransport> | undefined;
++};
++const registry = Symbol.for("exportlite.turso.v0");
++const connections = scope[registry] ?? new WeakMap<object, TursoTransport>();
++scope[registry] = connections;
++
++export function registerTurso(
++  client: object,
++  config: TursoConfig,
++  closed: () => boolean,
++): TursoTransport {
++  const transport = new TursoTransport(config, closed);
++  connections.set(client, transport);
++  return transport;
++}
++
++export function getTurso(client: unknown): TursoTransport | undefined {
++  return client !== null && typeof client === "object"
++    ? connections.get(client)
++    : undefined;
++}
++
++export function tursoStatement(
++  sql: string,
++  params: QueryParameters | readonly unknown[] | undefined,
++): TursoStatement {
++  return {
++    sql,
++    args: Array.isArray(params) ? params.map(encodeValue) : [],
++    named_args:
++      params !== undefined && !Array.isArray(params)
++        ? Object.entries(params).map(([name, value]) => ({
++            name,
++            value: encodeValue(value),
++          }))
++        : [],
++    want_rows: true,
++  };
++}
++
++function encodeValue(value: unknown): Value {
++  if (value === null) return { type: "null" };
++  if (typeof value === "string") return { type: "text", value };
++  if (typeof value === "boolean")
++    return { type: "integer", value: value ? "1" : "0" };
++  if (typeof value === "bigint") {
++    if (value >= -(1n << 63n) && value <= (1n << 63n) - 1n)
++      return { type: "integer", value: String(value) };
++  } else if (typeof value === "number" && Number.isFinite(value)) {
++    return Number.isSafeInteger(value)
++      ? { type: "integer", value: String(value) }
++      : { type: "float", value };
++  } else if (value instanceof Uint8Array) {
++    return { type: "blob", base64: Buffer.from(value).toString("base64") };
++  } else if (value instanceof ArrayBuffer) {
++    return { type: "blob", base64: Buffer.from(value).toString("base64") };
++  }
++  throw new ExportLiteError(
++    "INVALID_OPTIONS",
++    "Invalid Turso parameter: use null, text, finite numbers, signed 64-bit integers or binary values.",
++  );
++}
++
++/** One independent read cursor per export; never shares the SDK's transaction. */
++export class TursoTransport {
++  private readonly base: string;
++  private readonly fetch: typeof globalThis.fetch;
++  private readonly headers: Headers;
++  private readonly active = new Set<AbortController>();
++
++  constructor(
++    config: TursoConfig,
++    private readonly closed: () => boolean,
++  ) {
++    try {
++      let url = new URL(config.url);
++      const tls = config.tls ?? url.searchParams.get("tls") !== "0";
++      if (url.protocol === "libsql:")
++        url = new URL(`${tls ? "https:" : "http:"}${url.href.slice(7)}`);
++      if ([...url.searchParams.keys()].some((key) => key !== "tls"))
++        throw new Error("query");
++      url.search = "";
++      this.base = baseUrl(url);
++      this.fetch = config.fetch ?? globalThis.fetch.bind(globalThis);
++      this.headers = new Headers({ "Content-Type": "application/json" });
++      if (config.authToken)
++        this.headers.set("Authorization", `Bearer ${config.authToken}`);
++      if (config.remoteEncryptionKey)
++        this.headers.set("x-turso-encryption-key", config.remoteEncryptionKey);
++    } catch {
++      throw new ExportLiteError(
++        "INVALID_OPTIONS",
++        "Turso requires a valid libsql:, https: or http: database URL and valid request headers.",
++      );
++    }
++  }
++
++  cancel(): void {
++    for (const request of this.active)
++      request.abort(
++        new ExportLiteError("ABORTED", "Turso client closed or reconnected."),
++      );
++  }
++
++  async *iterate(
++    statement: TursoStatement,
++    batched: boolean,
++    format: "json" | "jsonl",
++    signal: AbortSignal,
++  ): AsyncGenerator<JsonFragment> {
++    if (this.closed())
++      throw new ExportLiteError(
++        "INVALID_OPTIONS",
++        "The Turso client is closed.",
++      );
++    const request = new AbortController();
++    this.active.add(request);
++    const combined = AbortSignal.any([signal, request.signal]);
++    let baton: string | null = null;
++    let closeUrl = this.base;
++    let response: Response | undefined;
++    let entries: AsyncGenerator<Record<string, unknown>> | undefined;
++    let completed = false;
++    let failure: unknown;
++    try {
++      combined.throwIfAborted();
++      response = await this.fetch(`${this.base}/v3/cursor`, {
++        method: "POST",
++        headers: this.headers,
++        redirect: "error",
++        signal: combined,
++        body: JSON.stringify({
++          baton: null,
++          batch: { steps: [{ stmt: statement }] },
++        }),
++      });
++      if (!response.ok)
++        remote(`Turso cursor request failed (HTTP ${response.status}).`);
++      if (!response.body) remote("Turso returned no cursor body.");
++      entries = cursorLines(response.body);
++      const first = await entries.next();
++      if (first.done) remote("Turso returned no cursor header.");
++      const header = first.value;
++      if (header.baton !== null && typeof header.baton !== "string")
++        remote("Invalid Turso cursor header.");
++      baton = header.baton;
++      if (header.base_url !== undefined && header.base_url !== null) {
++        if (typeof header.base_url !== "string")
++          remote("Invalid Turso cursor base URL.");
++        const redirected = new URL(header.base_url, this.base);
++        if (this.base.startsWith("https:") && redirected.protocol !== "https:")
++          remote("Turso cursor attempted to downgrade HTTPS.");
++        closeUrl = baseUrl(redirected);
++      }
++      let began = false;
++      let ended = false;
++      for await (const entry of entries) {
++        if (entry.type === "error" || entry.type === "step_error") {
++          const detail = record(entry.error);
++          throw new ExportLiteError(
++            "SQLITE_ERROR",
++            `Turso SQL execution failed (${typeof detail.code === "string" ? detail.code : "SQLITE_ERROR"}).`,
++          );
++        }
++        if (entry.type === "step_begin") {
++          if (
++            began ||
++            ended ||
++            entry.step !== 0 ||
++            !Array.isArray(entry.cols) ||
++            entry.cols.length !== (batched ? 2 : 1)
++          )
++            remote("Invalid Turso result columns or statement count.");
++          began = true;
++        } else if (entry.type === "row") {
++          if (
++            !began ||
++            ended ||
++            !Array.isArray(entry.row) ||
++            entry.row.length !== (batched ? 2 : 1)
++          )
++            remote("Invalid Turso cursor row.");
++          const payload = record(entry.row[0]);
++          if (payload.type !== "text" || typeof payload.value !== "string")
++            remote("Expected JSON text from Turso.");
++          let count = 1;
++          if (batched) {
++            const value = record(entry.row[1]);
++            if (
++              value.type !== "integer" ||
++              typeof value.value !== "string" ||
++              !/^\d+$/.test(value.value)
++            )
++              remote("Invalid Turso batch count.");
++            count = Number(value.value);
++            if (!Number.isSafeInteger(count) || count < 1 || count > 256)
++              remote("Invalid Turso batch count.");
++            if (
++              format === "json" &&
++              (!payload.value.startsWith("[") || !payload.value.endsWith("]"))
++            )
++              remote("Invalid Turso JSON batch framing.");
++          }
++          yield [payload.value, count];
++        } else if (entry.type === "step_end") {
++          if (!began || ended || entry.step !== 0)
++            remote("Invalid Turso cursor completion.");
++          ended = true;
++        } else remote("Unexpected Turso cursor entry.");
++      }
++      if (!ended) remote("Turso cursor ended before statement completion.");
++      completed = true;
++    } catch (cause) {
++      if (combined.aborted)
++        failure = isExportError(combined.reason)
++          ? combined.reason
++          : new ExportLiteError("ABORTED", "Export aborted.", {
++              cause: combined.reason,
++            });
++      else if (isExportError(cause)) failure = cause;
++      else
++        failure = new ExportLiteError(
++          "REMOTE_ERROR",
++          "Turso cursor request or protocol failed.",
++        );
++    } finally {
++      request.abort();
++      await entries?.return(undefined).catch(() => {});
++      if (response?.body && !response.body.locked)
++        await response.body.cancel().catch(() => {});
++      try {
++        if (baton !== null) await this.closeCursor(closeUrl, baton);
++      } catch (cause) {
++        // Preserve an original cancellation/query/output failure. A close error
++        // after an otherwise successful export is still a handled failure.
++        if (completed && !signal.aborted) failure ??= cause;
++      } finally {
++        this.active.delete(request);
++      }
++    }
++    if (failure !== undefined) throw failure;
++  }
++
++  private async closeCursor(base: string, baton: string): Promise<void> {
++    try {
++      const response = await this.fetch(`${base}/v3/pipeline`, {
++        method: "POST",
++        headers: this.headers,
++        redirect: "error",
++        signal: AbortSignal.timeout(5_000),
++        body: JSON.stringify({ baton, requests: [{ type: "close" }] }),
++      });
++      if (!response.ok) {
++        await response.body?.cancel();
++        remote("Could not close the Turso export session.");
++      }
++      const body = record(await response.json());
++      if (!Array.isArray(body.results) || body.results.length !== 1)
++        remote("Invalid Turso session close response.");
++      const result = record(body.results[0]);
++      if (result.type !== "ok" || record(result.response).type !== "close")
++        remote("Could not close the Turso export session.");
++    } catch {
++      remote("Could not close the Turso export session.");
++    }
++  }
++}
++
++function baseUrl(url: URL): string {
++  if (
++    !["https:", "http:"].includes(url.protocol) ||
++    url.username ||
++    url.password ||
++    url.search ||
++    url.hash
++  )
++    remote("Invalid Turso HTTP base URL.");
++  return url.href.replace(/\/+$/, "");
++}
++
++async function* cursorLines(
++  body: ReadableStream<Uint8Array>,
++): AsyncGenerator<Record<string, unknown>> {
++  const reader = body.getReader();
++  const decoder = new TextDecoder("utf-8", { fatal: true });
++  const parts: string[] = [];
++  try {
++    while (true) {
++      const { value, done } = await reader.read();
++      const text = done
++        ? decoder.decode()
++        : decoder.decode(value, { stream: true });
++      let start = 0;
++      let end = text.indexOf("\n", start);
++      while (end !== -1) {
++        parts.push(text.slice(start, end));
++        const line = parts.join("").trim();
++        parts.length = 0;
++        if (line) yield record(JSON.parse(line));
++        start = end + 1;
++        end = text.indexOf("\n", start);
++      }
++      if (start < text.length) parts.push(text.slice(start));
++      if (done) break;
++    }
++    const last = parts.join("").trim();
++    if (last) yield record(JSON.parse(last));
++  } finally {
++    await reader.cancel().catch(() => {});
++    reader.releaseLock();
++  }
++}
++
++function record(value: unknown): Record<string, unknown> {
++  if (!value || typeof value !== "object" || Array.isArray(value))
++    remote("Invalid Turso protocol object.");
++  return value as Record<string, unknown>;
++}
++
++function remote(message: string): never {
++  throw new ExportLiteError("REMOTE_ERROR", message);
++}
++
++function isExportError(value: unknown): value is ExportLiteError {
++  return (
++    value instanceof Error &&
++    value.name === "ExportLiteError" &&
++    typeof Reflect.get(value, "code") === "string"
++  );
++}
+--- a/src/drizzle.ts
++++ b/src/drizzle.ts
+@@ -1,4 +1,3 @@
+-import type Database from "better-sqlite3";
+ import {
+   type GetColumnData,
+   getTableColumns,
+@@ -6,22 +5,25 @@
+   type Query,
+   SQL,
+ } from "drizzle-orm";
+-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+ import {
++  BaseSQLiteDatabase,
+   getTableConfig,
+   SQLiteColumn,
+   type SQLiteSyncDialect,
+   SQLiteTable,
+ } from "drizzle-orm/sqlite-core";
+ import { streamExport } from "./api/export.js";
+-import type { ReadStatement } from "./database/adapter.js";
++import { deliverTursoExport } from "./api/export-turso.js";
++import type { ReadStatement, SQLiteConnection } from "./database/adapter.js";
++import { getTurso, type TursoConnection } from "./database/turso.js";
+ import { ExportLiteError } from "./errors.js";
+ import { createReadableExport } from "./output/readable.js";
+ import { checkAborted, validateOptions } from "./output/writer.js";
+ import { cachedSelectedTablePlan } from "./planner/cache.js";
+ import type { SelectedField } from "./planner/columns.js";
++import { selectedTableSql } from "./planner/declared.js";
+ import { identifier, uniqueColumns } from "./planner/identifiers.js";
+-import { planSelectedQuery } from "./planner/json.js";
++import { planSelectedQuery, selectedQuerySql } from "./planner/json.js";
+ import type {
+   ExportOptions,
+   ExportResult,
+@@ -31,9 +33,9 @@
+   TableStreamOptions,
+ } from "./types.js";
+ 
+-/** The $client exposed by drizzle-orm/better-sqlite3. Caller retains ownership. */
++/** A native or registered Turso $client. Caller retains ownership. */
+ export interface DrizzleSQLiteDatabase {
+-  readonly $client: Database.Database;
++  readonly $client: SQLiteConnection | TursoConnection;
+ }
+ 
+ export type DrizzleColumns = Readonly<Record<string, SQLiteColumn>>;
+@@ -84,7 +86,7 @@
+   const started = performance.now();
+   validateOptions(options);
+   checkAborted(options.signal);
+-  const { client, dialect } = connection(db);
++  const { client, dialect, remote } = connection(db);
+   if (!is(table, SQLiteTable)) invalid("Pass a Drizzle SQLite table.");
+   if (
+     options.encoding !== undefined &&
+@@ -109,8 +111,26 @@
+     keys.length === 1 && keys[0]?.columnType === "SQLiteInteger"
+       ? dialect.casing.getColumnCasing(keys[0])
+       : undefined;
++  if (remote) {
++    const plan = selectedTableSql(
++      config.name,
++      fields,
++      options.format ?? "jsonl",
++      false,
++      key,
++    );
++    return deliverTursoExport(
++      client as TursoConnection,
++      plan.sql,
++      undefined,
++      options,
++      started,
++      plan.batched,
++      config.name,
++    );
++  }
+   const plan = cachedSelectedTablePlan(
+-    client,
++    client as SQLiteConnection,
+     config.name,
+     fields,
+     options.format ?? "jsonl",
+@@ -167,7 +187,7 @@
+   const started = performance.now();
+   validateOptions(options);
+   checkAborted(options.signal);
+-  const { client, dialect } = connection(db);
++  const { client, dialect, remote } = connection(db);
+   const raw = is(query, SQL);
+   let compiled: Query;
+   let selection: Record<string, unknown>;
+@@ -207,7 +227,20 @@
+     ),
+   );
+   // Positional CTE names preserve repeated sources and Drizzle's JS aliases.
+-  const statement = planSelectedQuery(client, compiled.sql, fields, !raw);
++  if (remote)
++    return deliverTursoExport(
++      client as TursoConnection,
++      selectedQuerySql(compiled.sql, fields, !raw),
++      compiled.params,
++      options,
++      started,
++    );
++  const statement = planSelectedQuery(
++    client as SQLiteConnection,
++    compiled.sql,
++    fields,
++    !raw,
++  );
+   return deliver(statement, compiled.params, options, started);
+ }
+ 
+@@ -267,18 +300,24 @@
+ }
+ 
+ function connection(db: DrizzleSQLiteDatabase) {
++  const remote = getTurso(db?.$client);
+   if (
+-    !is(db, BetterSQLite3Database) ||
+-    typeof db.$client?.prepare !== "function"
++    !is(db, BaseSQLiteDatabase) ||
++    (!remote &&
++      !(
++        db.$client &&
++        "prepare" in db.$client &&
++        typeof db.$client.prepare === "function"
++      ))
+   )
+     invalid(
+-      "The Drizzle adapter requires drizzle-orm/better-sqlite3 with a live $client; buffered/remote drivers are not supported.",
++      "The Drizzle adapter requires drizzle-orm/better-sqlite3 with a live $client, or a Turso client created by exportlite/turso.",
+     );
+   // Drizzle does not expose its configured casing/dialect in public typings.
+   // Reuse it so automatic casing and sql template bindings match the caller.
+   const dialect = (
+     db as unknown as {
+-      dialect: SQLiteSyncDialect & {
++      dialect: Pick<SQLiteSyncDialect, "sqlToQuery"> & {
+         casing: { getColumnCasing(column: SQLiteColumn): string };
+       };
+     }
+@@ -287,7 +326,7 @@
+     invalid(
+       "Unsupported Drizzle dialect. This adapter supports Drizzle 0.45.x.",
+     );
+-  return { client: db.$client, dialect };
++  return { client: db.$client, dialect, remote: remote !== undefined };
+ }
+ 
+ function deliver(
+--- a/src/errors.ts
++++ b/src/errors.ts
+@@ -4,6 +4,7 @@
+   | "INVALID_SCHEMA"
+   | "UNSUPPORTED_SQLITE"
+   | "SQLITE_ERROR"
++  | "REMOTE_ERROR"
+   | "OUTPUT_ERROR"
+   | "ABORTED";
+ 
+--- a/src/planner/batches.ts
++++ b/src/planner/batches.ts
+@@ -34,16 +34,24 @@
+ /** Both planners share the same fixed-size, indexed-seek export statement. */
+ export function prepareBatchedTable(
+   db: SQLiteConnection,
+-  options: {
+-    table: string;
+-    key: string;
+-    columns: readonly string[];
+-    fields?: readonly SelectedField[];
+-    format: "json" | "jsonl";
+-    binary: boolean;
+-    declared?: boolean;
+-  },
++  options: BatchedTableOptions,
+ ) {
++  const sql = batchedTableSql(options);
++  return { statement: readStatement(db, sql), sql };
++}
++
++interface BatchedTableOptions {
++  table: string;
++  key: string;
++  columns: readonly string[];
++  fields?: readonly SelectedField[];
++  format: "json" | "jsonl";
++  binary: boolean;
++  declared?: boolean;
++}
++
++/** SQL construction is shared by local prepared statements and remote cursors. */
++export function batchedTableSql(options: BatchedTableOptions): string {
+   const key = options.key;
+   const table = `main.${identifier(options.table)} AS "__exportlite_source"`;
+   const columns = options.fields
+@@ -100,5 +108,5 @@
+     (SELECT count(*) FROM ${table} WHERE ${key} >= ${first}) END
+   FROM "__exportlite_batches"
+   WHERE ${first} IS NOT NULL`;
+-  return { statement: readStatement(db, sql), sql };
++  return sql;
+ }
+--- a/src/planner/declared.ts
++++ b/src/planner/declared.ts
+@@ -2,7 +2,7 @@
+ import type { SQLiteConnection } from "../database/adapter.js";
+ import { readStatement } from "../database/better-sqlite3.js";
+ import type { DatabaseEncoding } from "../types.js";
+-import { prepareBatchedTable } from "./batches.js";
++import { batchedTableSql } from "./batches.js";
+ import {
+   type SelectedField,
+   selectedFields,
+@@ -18,6 +18,16 @@
+   format: "json" | "jsonl",
+   encoding: DatabaseEncoding,
+ ) {
++  const plan = declaredTableSql(table, columns, format, encoding === "utf8");
++  return { ...plan, statement: readStatement(db, plan.sql) };
++}
++
++export function declaredTableSql(
++  table: string,
++  columns: SelectedColumns,
++  format: "json" | "jsonl",
++  binary: boolean,
++) {
+   const fields = selectedFields(columns);
+   const keys = fields.filter((field) => field.primary);
+   const key =
+@@ -26,7 +36,7 @@
+     keys[0].kind === "value"
+       ? keys[0].column
+       : undefined;
+-  return planSelectedTable(db, table, fields, format, encoding, key);
++  return selectedTableSql(table, fields, format, binary, key);
+ }
+ 
+ /** Shared schema-driven path; the key need not be included in the projection. */
+@@ -38,23 +48,40 @@
+   encoding: DatabaseEncoding,
+   key?: string,
+ ) {
++  const plan = selectedTableSql(
++    table,
++    fields,
++    format,
++    encoding === "utf8",
++    key,
++  );
++  return { ...plan, statement: readStatement(db, plan.sql) };
++}
++
++export function selectedTableSql(
++  table: string,
++  fields: SelectedField[],
++  format: "json" | "jsonl",
++  binary: boolean,
++  key?: string,
++) {
+   const name = identifier(table);
+   if (key !== undefined) {
+-    const batch = prepareBatchedTable(db, {
++    const sql = batchedTableSql({
+       table,
+       key: `"__exportlite_source".${identifier(key)}`,
+       columns: fields.map((field) => field.column),
+       fields,
+       format,
+-      binary: encoding === "utf8",
++      binary,
+       declared: true,
+     });
+-    return { ...batch, batched: true };
++    return { sql, batched: true };
+   }
+   const object = selectedObject(
+     fields,
+     (field) => `"__exportlite_source".${identifier(field.column)}`,
+   );
+   const sql = `SELECT ${object} FROM main.${name} AS "__exportlite_source"`;
+-  return { sql, statement: readStatement(db, sql), batched: false };
++  return { sql, batched: false };
+ }
+--- a/src/planner/json.ts
++++ b/src/planner/json.ts
+@@ -122,6 +122,14 @@
+   fields: SelectedField[],
+   positional: boolean,
+ ) {
++  return readStatement(db, selectedQuerySql(sql, fields, positional));
++}
++
++export function selectedQuerySql(
++  sql: string,
++  fields: SelectedField[],
++  positional: boolean,
++): string {
+   validateQuery(sql);
+   let name = "__exportlite_source";
+   while (sql.toLowerCase().includes(name)) name += "_";
+@@ -134,10 +142,7 @@
+     (field, i) =>
+       `${source}.${identifier(positional ? `c${i}` : field.column)}`,
+   );
+-  return readStatement(
+-    db,
+-    `WITH ${source}${aliases} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${source}`,
+-  );
++  return `WITH ${source}${aliases} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${source}`;
+ }
+ 
+ function validateQuery(sql: string) {
+--- /dev/null
++++ b/src/turso.ts
+@@ -0,0 +1,145 @@
++import {
++  type Client,
++  type Config,
++  createClient as createLibsqlClient,
++} from "@libsql/client/http";
++import { deliverTursoExport } from "./api/export-turso.js";
++import type { InferColumns, SelectedColumns } from "./columns.js";
++import { registerTurso, type TursoConnection } from "./database/turso.js";
++import { ExportLiteError } from "./errors.js";
++import { checkAborted, validateOptions } from "./output/writer.js";
++import { selectedFields } from "./planner/columns.js";
++import { declaredTableSql } from "./planner/declared.js";
++import { selectedQuerySql } from "./planner/json.js";
++import type {
++  ExportResult,
++  ExportStream,
++  QueryExportOptions,
++  QueryStreamOptions,
++  TableExportOptions,
++  TableStreamOptions,
++} from "./types.js";
++
++export type { TursoConnection } from "./database/turso.js";
++export interface TursoClientConfig extends Omit<Config, "fetch"> {
++  fetch?: typeof globalThis.fetch;
++}
++export type TursoClient = Client & TursoConnection;
++
++/** An ordinary official HTTP client, also registered for streaming exports. */
++export function createClient(config: TursoClientConfig): TursoClient {
++  let client: Client;
++  try {
++    client = createLibsqlClient(config);
++  } catch {
++    throw new ExportLiteError(
++      "INVALID_OPTIONS",
++      "Invalid Turso HTTP client configuration.",
++    );
++  }
++  const transport = registerTurso(client, config, () => client.closed);
++  const close = client.close.bind(client);
++  client.close = () => {
++    transport.cancel();
++    close();
++  };
++  const reconnect = client.reconnect.bind(client);
++  client.reconnect = async () => {
++    transport.cancel();
++    await reconnect();
++  };
++  return client as TursoClient;
++}
++
++type TableDestination<C extends SelectedColumns = SelectedColumns> = Omit<
++  TableExportOptions,
++  "columns" | "encoding"
++> & { columns: C };
++type TableReadable<C extends SelectedColumns> = Omit<
++  TableStreamOptions,
++  "columns" | "encoding"
++> & { columns: C };
++type QueryDestination<C extends SelectedColumns = SelectedColumns> =
++  QueryExportOptions & { columns: C };
++type QueryReadable<C extends SelectedColumns> = QueryStreamOptions & {
++  columns: C;
++};
++
++export function exportTable(
++  client: TursoConnection,
++  table: string,
++  options: TableDestination,
++): Promise<ExportResult>;
++export function exportTable<const C extends SelectedColumns>(
++  client: TursoConnection,
++  table: string,
++  options: TableReadable<C>,
++): Promise<ExportStream<InferColumns<C>>>;
++export function exportTable<const C extends SelectedColumns>(
++  client: TursoConnection,
++  table: string,
++  options: TableDestination<C> | TableReadable<C>,
++): Promise<ExportResult | ExportStream<InferColumns<C>>>;
++export async function exportTable(
++  client: TursoConnection,
++  table: string,
++  options: TableDestination | TableReadable<SelectedColumns>,
++): Promise<ExportResult | ExportStream> {
++  const started = performance.now();
++  validateOptions(options);
++  checkAborted(options.signal);
++  requireColumns(options.columns);
++  const plan = declaredTableSql(
++    table,
++    options.columns,
++    options.format ?? "jsonl",
++    false,
++  );
++  return deliverTursoExport(
++    client,
++    plan.sql,
++    undefined,
++    options,
++    started,
++    plan.batched,
++    table,
++  );
++}
++
++export function exportQuery(
++  client: TursoConnection,
++  options: QueryDestination,
++): Promise<ExportResult>;
++export function exportQuery<const C extends SelectedColumns>(
++  client: TursoConnection,
++  options: QueryReadable<C>,
++): Promise<ExportStream<InferColumns<C>>>;
++export function exportQuery<const C extends SelectedColumns>(
++  client: TursoConnection,
++  options: QueryDestination<C> | QueryReadable<C>,
++): Promise<ExportResult | ExportStream<InferColumns<C>>>;
++export async function exportQuery(
++  client: TursoConnection,
++  options: QueryDestination | QueryReadable<SelectedColumns>,
++): Promise<ExportResult | ExportStream> {
++  const started = performance.now();
++  validateOptions(options);
++  checkAborted(options.signal);
++  requireColumns(options.columns);
++  const sql = selectedQuerySql(
++    options.sql,
++    selectedFields(options.columns),
++    false,
++  );
++  return deliverTursoExport(client, sql, options.params, options, started);
++}
++
++function requireColumns(
++  columns: SelectedColumns | undefined,
++): asserts columns is SelectedColumns {
++  if (columns === undefined || Array.isArray(columns))
++    throw new ExportLiteError(
++      "INVALID_OPTIONS",
++      "Turso exports require declared columns to avoid metadata requests.",
++    );
++}
+--- /dev/null
++++ b/tests/helpers/turso-server.ts
+@@ -0,0 +1,236 @@
++import { randomUUID } from "node:crypto";
++import { once } from "node:events";
++import { createServer } from "node:http";
++import { setImmediate as tick } from "node:timers/promises";
++import type Database from "better-sqlite3";
++
++interface Value {
++  type: string;
++  value?: string | number;
++  base64?: string;
++}
++interface Statement {
++  sql: string;
++  args: Value[];
++  named_args: { name: string; value: Value }[];
++}
++export interface ServerMode {
++  status?: number;
++  hold?: "headers" | "body";
++  truncate?: boolean;
++  closeError?: boolean;
++  fragment?: number;
++  rowError?: number;
++}
++
++/** Real HTTP, actual SQLite execution, and explicit v3 cursor/session framing. */
++export async function tursoServer(db: Database.Database) {
++  const requests: {
++    path: string;
++    body: Record<string, unknown>;
++    authorization: string | undefined;
++    encryption: string | string[] | undefined;
++  }[] = [];
++  const statements: string[] = [];
++  const batches: number[] = [];
++  const sessions = new Map<string, () => void>();
++  const mode: ServerMode = {};
++  let produced = 0;
++  let cursors = 0;
++  const server = createServer(async (req, res) => {
++    try {
++      let text = "";
++      for await (const chunk of req) text += chunk.toString();
++      const body = JSON.parse(text) as Record<string, unknown>;
++      requests.push({
++        path: req.url ?? "",
++        body,
++        authorization: req.headers.authorization,
++        encryption: req.headers["x-turso-encryption-key"],
++      });
++      if (req.url === "/v3/pipeline") {
++        if (mode.closeError) {
++          res.writeHead(500).end("close failed");
++          return;
++        }
++        const close = sessions.get(String(body.baton));
++        close?.();
++        sessions.delete(String(body.baton));
++        res.setHeader("Content-Type", "application/json");
++        res.end(
++          JSON.stringify({
++            baton: null,
++            base_url: null,
++            results: [{ type: "ok", response: { type: "close" } }],
++          }),
++        );
++        return;
++      }
++      if (req.url !== "/v3/cursor") {
++        res.writeHead(404).end();
++        return;
++      }
++      cursors++;
++      if (mode.status) {
++        res.writeHead(mode.status).end("sensitive-token-in-error-body");
++        return;
++      }
++      if (mode.hold === "headers") {
++        await once(res, "close");
++        return;
++      }
++      const steps = (body.batch as { steps: { stmt: Statement }[] }).steps;
++      if (steps.length !== 1)
++        throw new Error("Exactly one export statement expected");
++      const stmt = steps[0]?.stmt;
++      if (!stmt) throw new Error("Missing statement");
++      statements.push(stmt.sql);
++      res.setHeader("Content-Type", "application/json");
++      const baton = randomUUID();
++      let stopped = false;
++      let iterator: IterableIterator<unknown> | undefined;
++      const close = () => {
++        stopped = true;
++        iterator?.return?.();
++      };
++      sessions.set(baton, close);
++      res.on("close", close);
++      const write = async (value: unknown) => {
++        if (stopped) return;
++        const bytes = Buffer.from(`${JSON.stringify(value)}\n`);
++        const size = mode.fragment ?? bytes.length;
++        for (let start = 0; start < bytes.length && !stopped; start += size) {
++          if (!res.write(bytes.subarray(start, start + size))) {
++            await new Promise<void>((resolve) => {
++              const done = () => {
++                res.off("drain", done);
++                res.off("close", done);
++                resolve();
++              };
++              res.once("drain", done);
++              res.once("close", done);
++            });
++          }
++          await tick();
++        }
++      };
++      try {
++        await write({ baton, base_url: null });
++        const native = db.prepare(stmt.sql);
++        if (!native.reader || !native.readonly)
++          throw new Error("Expected a single read-only statement");
++        const cols = native
++          .columns()
++          .map((column) => ({ name: column.name, decltype: column.type }));
++        await write({ type: "step_begin", step: 0, cols });
++        if (mode.hold === "body") {
++          await once(res, "close");
++          return;
++        }
++        const args = stmt.named_args.length
++          ? [
++              Object.fromEntries(
++                stmt.named_args.map(({ name, value }) => [name, decode(value)]),
++              ),
++            ]
++          : stmt.args.map(decode);
++        iterator = native.raw().iterate(...args);
++        let emitted = 0;
++        for (const raw of iterator) {
++          if (stopped) break;
++          const row = raw as unknown[];
++          produced++;
++          emitted++;
++          if (
++            row.length === 2 &&
++            typeof row[0] === "string" &&
++            typeof row[1] === "number"
++          )
++            batches.push(row[1]);
++          await write({ type: "row", row: row.map(encode) });
++          if (mode.rowError && emitted >= mode.rowError)
++            throw new Error("Injected SQL error");
++        }
++        if (!mode.truncate && !stopped)
++          await write({
++            type: "step_end",
++            step: 0,
++            affected_row_count: 0,
++            last_insert_rowid: null,
++          });
++      } catch {
++        if (!stopped)
++          await write({
++            type: "step_error",
++            step: 0,
++            error: { message: "Fixture SQL failed", code: "SQLITE_ERROR" },
++          });
++      } finally {
++        iterator?.return?.();
++        res.end();
++      }
++    } catch {
++      res.writeHead(500).end("Fixture request failed");
++    }
++  });
++  server.listen(0, "127.0.0.1");
++  await once(server, "listening");
++  const address = server.address();
++  if (!address || typeof address === "string")
++    throw new Error("Missing server address");
++  return {
++    url: `http://127.0.0.1:${address.port}`,
++    mode,
++    requests,
++    statements,
++    batches,
++    get produced() {
++      return produced;
++    },
++    get cursors() {
++      return cursors;
++    },
++    get sessions() {
++      return sessions.size;
++    },
++    async close() {
++      for (const close of sessions.values()) close();
++      sessions.clear();
++      server.closeAllConnections();
++      await new Promise<void>((resolve, reject) =>
++        server.close((error) => (error ? reject(error) : resolve())),
++      );
++    },
++  };
++}
++
++function decode(value: Value): null | string | number | bigint | Buffer {
++  switch (value.type) {
++    case "null":
++      return null;
++    case "integer":
++      return BigInt(value.value ?? "0");
++    case "float":
++      return Number(value.value);
++    case "text":
++      return String(value.value);
++    case "blob":
++      return Buffer.from(value.base64 ?? "", "base64");
++    default:
++      throw new Error("Unknown parameter");
++  }
++}
++
++function encode(value: unknown): Value {
++  if (value === null) return { type: "null" };
++  if (typeof value === "number")
++    return Number.isInteger(value)
++      ? { type: "integer", value: String(value) }
++      : { type: "float", value };
++  if (typeof value === "bigint")
++    return { type: "integer", value: String(value) };
++  if (typeof value === "string") return { type: "text", value };
++  if (Buffer.isBuffer(value))
++    return { type: "blob", base64: value.toString("base64") };
++  throw new Error("Unknown result value");
++}
+--- a/tests/package.test.ts
++++ b/tests/package.test.ts
+@@ -1,9 +1,79 @@
++import { execFile } from "node:child_process";
++import { cp, mkdir, mkdtemp, realpath, rm, symlink } from "node:fs/promises";
+ import { createRequire } from "node:module";
++import { tmpdir } from "node:os";
++import { dirname, join } from "node:path";
+ import { Writable } from "node:stream";
++import { fileURLToPath, pathToFileURL } from "node:url";
++import { promisify } from "node:util";
+ import { crc32 } from "node:zlib";
+ import Database from "better-sqlite3";
+ import { expect, it } from "vitest";
+ import { fromBufferPromise } from "yauzl";
++
++it.each([
++  ["Turso", ["@libsql/client"]],
++  ["Drizzle", ["drizzle-orm"]],
++  ["Turso with Drizzle", ["@libsql/client", "drizzle-orm"]],
++] as const)(
++  "loads %s entries without the native SQLite peer",
++  async (_, peers) => {
++    const folder = await mkdtemp(join(tmpdir(), "exportlite-remote-peers-"));
++    try {
++      await cp(
++        fileURLToPath(new URL("../dist", import.meta.url)),
++        join(folder, "dist"),
++        {
++          recursive: true,
++        },
++      );
++      for (const name of ["zip-stream", ...peers]) {
++        const target = join(folder, "node_modules", name);
++        await mkdir(dirname(target), { recursive: true });
++        await symlink(
++          await realpath(
++            fileURLToPath(new URL(`../node_modules/${name}`, import.meta.url)),
++          ),
++          target,
++        );
++      }
++      const entries = [
++        "index",
++        ...(peers.some((name) => name === "@libsql/client") ? ["turso"] : []),
++        ...(peers.some((name) => name === "drizzle-orm") ? ["drizzle"] : []),
++      ];
++      const esm = pathToFileURL(join(folder, "dist/index.mjs")).href;
++      const script = `
++      import { createRequire } from 'node:module';
++      const require = createRequire(${JSON.stringify(esm)});
++      for (const peer of ${JSON.stringify(["better-sqlite3", ...["@libsql/client", "drizzle-orm"].filter((name) => !peers.some((peer) => peer === name))])}) {
++        let missing = false;
++        try { require.resolve(peer); } catch { missing = true; }
++        if (!missing) throw Error('Unexpected installed peer: ' + peer);
++      }
++      for (const name of ${JSON.stringify(entries)}) {
++        for (const entry of [await import(new URL(name + '.mjs', ${JSON.stringify(esm)})), require('./' + name + '.cjs')]) {
++          if (typeof entry.exportTable !== 'function') throw Error('Missing export');
++          if (name === 'turso') {
++            const client = entry.createClient({url: 'https://example.invalid'});
++            if (client.closed) throw Error('Unexpected closed client');
++            client.close();
++          }
++        }
++      }
++      process.stdout.write('ok');
++    `;
++      const { stdout } = await promisify(execFile)(process.execPath, [
++        "--input-type=module",
++        "--eval",
++        script,
++      ]);
++      expect(stdout).toBe("ok");
++    } finally {
++      await rm(folder, { recursive: true, force: true });
++    }
++  },
++);
+ 
+ it.each(["esm", "cjs"])(
+   "decodes a ZIP from the built %s entry point",
+--- /dev/null
++++ b/tests/turso-consumer.cts
+@@ -0,0 +1,81 @@
++import type { Writable } from "node:stream";
++import type { Client } from "@libsql/client/http";
++
++import orm = require("drizzle-orm");
++const { eq } = orm;
++import driver = require("drizzle-orm/libsql/http");
++const { drizzle } = driver;
++import sqlite = require("drizzle-orm/sqlite-core");
++const { integer: int, sqliteTable, text: str } = sqlite;
++
++import type { ExportResult, ExportRow } from "exportlite";
++
++import core = require("exportlite");
++const { integer, text } = core;
++import adapter = require("exportlite/drizzle");
++const { exportQuery: drizzleQuery, exportTable: drizzleTable } = adapter;
++import remote = require("exportlite/turso");
++const { createClient, exportQuery, exportTable } = remote;
++import vitest = require("vitest");
++const { expectTypeOf } = vitest;
++
++declare const output: Writable;
++const client = createClient({
++  url: "libsql://test.turso.io",
++  intMode: "bigint",
++});
++const ordinary: Client = client;
++void ordinary;
++const direct = exportTable(client, "users", {
++  columns: { id: integer().primaryKey(), name: text() },
++  format: "json",
++});
++expectTypeOf<ExportRow<typeof direct>>().toEqualTypeOf<{
++  id: number;
++  name: string | null;
++}>();
++const raw = exportQuery(client, {
++  sql: "SELECT id,name FROM users WHERE id>?",
++  params: [1n],
++  columns: { id: integer().notNull(), label: text("name") },
++});
++expectTypeOf<ExportRow<typeof raw>>().toEqualTypeOf<{
++  id: number;
++  label: string | null;
++}>();
++expectTypeOf(
++  exportTable(client, "users", {
++    columns: { id: integer() },
++    output,
++    zip: true,
++  }),
++).toEqualTypeOf<Promise<ExportResult>>();
++const users = sqliteTable("users", {
++  id: int().primaryKey(),
++  name: str(),
++  active: int({ mode: "boolean" }).notNull(),
++});
++const db = drizzle(client);
++const table = drizzleTable(db, users, { format: "json", zip: true });
++expectTypeOf<ExportRow<typeof table>>().toEqualTypeOf<
++  typeof users.$inferSelect
++>();
++const selected = drizzleQuery(
++  db,
++  db
++    .select({ userId: users.id, label: users.name })
++    .from(users)
++    .where(eq(users.active, true)),
++);
++expectTypeOf<ExportRow<typeof selected>>().toEqualTypeOf<{
++  userId: number;
++  label: string | null;
++}>();
++// @ts-expect-error Remote schemas are declared to avoid preflight queries.
++exportTable(client, "users");
++// @ts-expect-error Remote queries need result metadata.
++exportQuery(client, { sql: "SELECT 1" });
++// @ts-expect-error Discovery arrays are not remote column declarations.
++exportTable(client, "users", { columns: ["id"] });
++// @ts-expect-error Turso transmits JSON text, so SQLite byte-encoding hints are unnecessary.
++exportTable(client, "users", { columns: { id: integer() }, encoding: "utf8" });
+--- /dev/null
++++ b/tests/turso-consumer.mts
+@@ -0,0 +1,77 @@
++import type { Writable } from "node:stream";
++import type { Client } from "@libsql/client/http";
++import { eq } from "drizzle-orm";
++import { drizzle } from "drizzle-orm/libsql/http";
++import {
++  integer as int,
++  sqliteTable,
++  text as str,
++} from "drizzle-orm/sqlite-core";
++import { type ExportResult, type ExportRow, integer, text } from "exportlite";
++import {
++  exportQuery as drizzleQuery,
++  exportTable as drizzleTable,
++} from "exportlite/drizzle";
++import { createClient, exportQuery, exportTable } from "exportlite/turso";
++import { expectTypeOf } from "vitest";
++
++declare const output: Writable;
++const client = createClient({
++  url: "libsql://test.turso.io",
++  intMode: "bigint",
++});
++const ordinary: Client = client;
++void ordinary;
++const direct = exportTable(client, "users", {
++  columns: { id: integer().primaryKey(), name: text() },
++  format: "json",
++});
++expectTypeOf<ExportRow<typeof direct>>().toEqualTypeOf<{
++  id: number;
++  name: string | null;
++}>();
++const raw = exportQuery(client, {
++  sql: "SELECT id,name FROM users WHERE id>?",
++  params: [1n],
++  columns: { id: integer().notNull(), label: text("name") },
++});
++expectTypeOf<ExportRow<typeof raw>>().toEqualTypeOf<{
++  id: number;
++  label: string | null;
++}>();
++expectTypeOf(
++  exportTable(client, "users", {
++    columns: { id: integer() },
++    output,
++    zip: true,
++  }),
++).toEqualTypeOf<Promise<ExportResult>>();
++const users = sqliteTable("users", {
++  id: int().primaryKey(),
++  name: str(),
++  active: int({ mode: "boolean" }).notNull(),
++});
++const db = drizzle(client);
++const table = drizzleTable(db, users, { format: "json", zip: true });
++expectTypeOf<ExportRow<typeof table>>().toEqualTypeOf<
++  typeof users.$inferSelect
++>();
++const selected = drizzleQuery(
++  db,
++  db
++    .select({ userId: users.id, label: users.name })
++    .from(users)
++    .where(eq(users.active, true)),
++);
++expectTypeOf<ExportRow<typeof selected>>().toEqualTypeOf<{
++  userId: number;
++  label: string | null;
++}>();
++// @ts-expect-error Remote schemas are declared to avoid preflight queries.
++exportTable(client, "users");
++// @ts-expect-error Remote queries need result metadata.
++exportQuery(client, { sql: "SELECT 1" });
++// @ts-expect-error Discovery arrays are not remote column declarations.
++exportTable(client, "users", { columns: ["id"] });
++// @ts-expect-error Turso transmits JSON text, so SQLite byte-encoding hints are unnecessary.
++exportTable(client, "users", { columns: { id: integer() }, encoding: "utf8" });
+--- /dev/null
++++ b/tests/turso.test.ts
+@@ -0,0 +1,731 @@
++import { execFile } from "node:child_process";
++import { mkdtemp, readdir, rm } from "node:fs/promises";
++import { createRequire } from "node:module";
++import { tmpdir } from "node:os";
++import { join } from "node:path";
++import { Writable } from "node:stream";
++import { fileURLToPath } from "node:url";
++import { promisify } from "node:util";
++import Database from "better-sqlite3";
++import { eq, gt, sql } from "drizzle-orm";
++import { drizzle } from "drizzle-orm/libsql/http";
++import {
++  integer as int,
++  primaryKey,
++  sqliteTable,
++  text as str,
++} from "drizzle-orm/sqlite-core";
++import { afterEach, beforeEach, expect, it } from "vitest";
++import { fromBufferPromise } from "yauzl";
++import {
++  exportQuery as drizzleQuery,
++  exportTable as drizzleTable,
++} from "../src/drizzle.js";
++import { integer, exportTable as localTable, text } from "../src/index.js";
++import {
++  createClient,
++  exportQuery,
++  exportTable,
++  type TursoClient,
++} from "../src/turso.js";
++import { tursoServer } from "./helpers/turso-server.js";
++
++const table = sqliteTable("users", {
++  id: int().primaryKey(),
++  name: str().notNull(),
++  active: int({ mode: "boolean" }),
++  metadata: str({ mode: "json" }).$type<{ tags: string[] }>(),
++});
++const columns = {
++  id: integer().primaryKey(),
++  label: text("name").notNull(),
++  enabled: integer("active", { mode: "boolean" }),
++};
++let native: Database.Database;
++let server: Awaited<ReturnType<typeof tursoServer>>;
++let client: TursoClient;
++beforeEach(async () => {
++  native = new Database(":memory:");
++  native.exec(
++    "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT NOT NULL,active INTEGER,metadata TEXT)",
++  );
++  const insert = native.prepare("INSERT INTO users VALUES(?,?,?,?)");
++  native.transaction(() => {
++    for (let i = 1; i <= 513; i++)
++      insert.run(
++        i * 3,
++        `雪 😀 "${i}"`,
++        i % 2,
++        i % 2 ? '{"tags":["雪","one"]}' : null,
++      );
++  })();
++  server = await tursoServer(native);
++  client = createClient({
++    url: server.url,
++    authToken: "test-token",
++    remoteEncryptionKey: "test-encryption-key",
++  });
++});
++afterEach(async () => {
++  client?.close();
++  await server?.close();
++  native?.close();
++});
++
++it.each(["json", "jsonl"] as const)(
++  "streams fixed %s batches over one cursor query, with no preflight",
++  async (format) => {
++    const stream = await exportTable(client, "users", { columns, format });
++    expect(server.requests).toEqual([]);
++    const body = await new Response(stream).text();
++    const rows =
++      format === "json"
++        ? JSON.parse(body)
++        : body
++            .trimEnd()
++            .split("\n")
++            .map((line) => JSON.parse(line));
++    expect(rows).toHaveLength(513);
++    expect(rows[0]).toEqual({ id: 3, label: '雪 😀 "1"', enabled: true });
++    expect(server.batches).toEqual([256, 256, 1]);
++    expect((await stream.result).rowsExported).toBe(513);
++    expect(server.requests.map((request) => request.path)).toEqual([
++      "/v3/cursor",
++      "/v3/pipeline",
++    ]);
++    expect(server.statements).toHaveLength(1);
++    expect(server.statements[0]).not.toMatch(
++      /pragma|sqlite_schema|sqlite_version/i,
++    );
++    expect(server.statements[0]).not.toMatch(/AS BLOB/i);
++    expect(server.requests[0]?.authorization).toBe("Bearer test-token");
++    expect(server.requests[0]?.encryption).toBe("test-encryption-key");
++    expect(server.sessions).toBe(0);
++    expect(client.closed).toBe(false);
++  },
++);
++
++it.each([0, 1, 255, 256, 257, 512, 513])(
++  "matches local bytes for %i records",
++  async (size) => {
++    native.exec(`DELETE FROM users WHERE id>${size * 3}`);
++    const local = await localTable(native, "users", {
++      columns,
++      format: "json",
++    });
++    const expected = await new Response(local).text();
++    await local.result;
++    const remote = await exportTable(client, "users", {
++      columns,
++      format: "json",
++    });
++    expect(await new Response(remote).text()).toBe(expected);
++    expect((await remote.result).rowsExported).toBe(size);
++  },
++);
++
++it("reuses Drizzle schema JSON/boolean modes and an unselected primary key", async () => {
++  const db = drizzle(client);
++  const stream = await drizzleTable(db, table, {
++    columns: { label: table.name, enabled: table.active, data: table.metadata },
++    format: "json",
++  });
++  expect(server.requests).toHaveLength(0);
++  const rows = (await new Response(stream).json()) as unknown[];
++  expect(rows[0]).toEqual({
++    label: '雪 😀 "1"',
++    enabled: true,
++    data: { tags: ["雪", "one"] },
++  });
++  expect(rows[1]).toEqual({ label: '雪 😀 "2"', enabled: false, data: null });
++  await stream.result;
++  expect(server.batches).toEqual([256, 256, 1]);
++  expect(server.statements).toHaveLength(1);
++});
++
++it("compiles Drizzle selects with bindings without running its buffered executor", async () => {
++  const db = drizzle(client);
++  const query = db
++    .select({ userId: table.id, label: table.name, enabled: table.active })
++    .from(table)
++    .where(gt(table.id, 3))
++    .orderBy(table.id)
++    .limit(2);
++  query.all = () => {
++    throw new Error("Do not execute buffered Drizzle results");
++  };
++  const stream = await drizzleQuery(db, query, { format: "json" });
++  expect(await new Response(stream).json()).toEqual([
++    { userId: 6, label: '雪 😀 "2"', enabled: false },
++    { userId: 9, label: '雪 😀 "3"', enabled: true },
++  ]);
++  await stream.result;
++  expect(server.statements).toHaveLength(1);
++  expect(server.batches).toEqual([]);
++  const bool = await drizzleQuery(
++    db,
++    db
++      .select({ id: table.id })
++      .from(table)
++      .where(eq(table.active, true))
++      .limit(1),
++    { format: "json" },
++  );
++  expect(await new Response(bool).json()).toEqual([{ id: 3 }]);
++  await bool.result;
++});
++
++it("supports Drizzle raw SQL and the same schema-based output aliases", async () => {
++  const stream = await drizzleQuery(
++    drizzle(client),
++    sql`SELECT * FROM ${table} WHERE ${table.id}=${3}`,
++    {
++      columns: { label: table.name, enabled: table.active },
++      format: "json",
++    },
++  );
++  expect(await new Response(stream).json()).toEqual([
++    { label: '雪 😀 "1"', enabled: true },
++  ]);
++  await stream.result;
++});
++
++it("binds named arguments, signed integers, floating point values and binary data", async () => {
++  const stream = await exportQuery(client, {
++    sql: "SELECT @id id, @name name, @enabled active, hex(@bytes) encoded, @score score",
++    params: {
++      id: 9223372036854775807n,
++      name: "x'); DROP TABLE users;--",
++      enabled: 1,
++      bytes: Buffer.from([0, 255]),
++      score: 1.25,
++    },
++    columns: {
++      id: integer(),
++      name: text(),
++      active: integer(),
++      encoded: text(),
++      score: integer(),
++    },
++    format: "json",
++  });
++  const body = await new Response(stream).text();
++  expect(body).toContain('"id":9223372036854775807');
++  expect(JSON.parse(body)[0]).toMatchObject({
++    name: "x'); DROP TABLE users;--",
++    encoded: "00FF",
++    score: 1.25,
++  });
++  await stream.result;
++  expect(native.prepare("SELECT count(*) n FROM users").get()).toEqual({
++    n: 513,
++  });
++});
++
++it.each(["missing", "composite", "text"])(
++  "keeps the row fallback with a %s key",
++  async (kind) => {
++    native.exec(
++      "CREATE TABLE fallback(id INTEGER,part INTEGER,name TEXT); INSERT INTO fallback VALUES(1,1,'a'),(1,2,'b')",
++    );
++    const schema =
++      kind === "composite"
++        ? sqliteTable(
++            "fallback",
++            { id: int(), part: int(), name: str() },
++            (t) => [primaryKey({ columns: [t.id, t.part] })],
++          )
++        : kind === "text"
++          ? sqliteTable("fallback", {
++              id: str().primaryKey(),
++              part: int(),
++              name: str(),
++            })
++          : sqliteTable("fallback", { id: int(), part: int(), name: str() });
++    const stream = await drizzleTable(drizzle(client), schema, {
++      columns: { label: schema.name },
++      format: "json",
++    });
++    expect(await new Response(stream).json()).toEqual([
++      { label: "a" },
++      { label: "b" },
++    ]);
++    await stream.result;
++    expect(server.statements).toHaveLength(1);
++    expect(server.statements[0]).not.toMatch(/RECURSIVE/);
++  },
++);
++
++it.each([false, true])(
++  "streams and independently decodes ZIP output (Drizzle=%s)",
++  async (useDrizzle) => {
++    const stream = useDrizzle
++      ? await drizzleTable(drizzle(client), table, {
++          columns: { id: table.id, label: table.name },
++          format: "json",
++          zip: true,
++        })
++      : await exportTable(client, "users", {
++          columns: { id: columns.id, label: columns.label },
++          format: "json",
++          zip: true,
++        });
++    const bytes = Buffer.from(await new Response(stream).arrayBuffer());
++    const archive = await fromBufferPromise(bytes);
++    try {
++      expect(archive.entryCount).toBe(1);
++      for await (const entry of archive.eachEntry()) {
++        expect(entry.fileName).toBe("users.json");
++        const parts: Buffer[] = [];
++        for await (const chunk of await archive.openReadStreamPromise(entry))
++          parts.push(chunk);
++        expect(JSON.parse(Buffer.concat(parts).toString("utf8"))).toHaveLength(
++          513,
++        );
++      }
++    } finally {
++      archive.close();
++    }
++    expect((await stream.result).bytesWritten).toBe(bytes.length);
++    expect(server.sessions).toBe(0);
++  },
++);
++
++it("decodes fragmented UTF-8 cursor frames", async () => {
++  server.mode.fragment = 1;
++  const stream = await exportQuery(client, {
++    sql: "SELECT name FROM users LIMIT 1",
++    columns: { label: text("name") },
++    format: "json",
++  });
++  expect(await new Response(stream).json()).toEqual([{ label: '雪 😀 "1"' }]);
++  await stream.result;
++});
++
++it.each([false, true])(
++  "cancels an unused stream without issuing a request (zip=%s)",
++  async (zip) => {
++    const stream = await exportTable(client, "users", { columns, zip });
++    await stream.cancel();
++    await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
++    expect(server.requests).toEqual([]);
++  },
++);
++
++it.each(["headers", "body"] as const)(
++  "aborts while awaiting remote %s and keeps the client reusable",
++  async (hold) => {
++    server.mode.hold = hold;
++    const controller = new AbortController();
++    const stream = await exportTable(client, "users", {
++      columns,
++      signal: controller.signal,
++    });
++    const pending = new Response(stream).text();
++    const error = expect(pending).rejects.toMatchObject({ code: "ABORTED" });
++    await until(() => server.cursors === 1);
++    controller.abort();
++    await error;
++    await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
++    expect(client.closed).toBe(false);
++    expect(server.sessions).toBe(0);
++    delete server.mode.hold;
++    const again = await exportTable(client, "users", { columns });
++    await new Response(again).arrayBuffer();
++    await again.result;
++  },
++);
++
++it.each([false, true])(
++  "stops an active read when its reader is cancelled (zip=%s)",
++  async (zip) => {
++    const stream = await exportTable(client, "users", {
++      columns,
++      zip,
++      bufferSize: 1,
++    });
++    const reader = stream.getReader();
++    expect((await reader.read()).done).toBe(false);
++    await reader.cancel("disconnected");
++    await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
++    expect(client.closed).toBe(false);
++    expect(server.sessions).toBe(0);
++  },
++);
++
++it.each([false, true])(
++  "preserves backpressure and aborts a blocked destination (zip=%s)",
++  async (zip) => {
++    native.exec(
++      "WITH RECURSIVE n(x) AS(VALUES(514) UNION ALL SELECT x+1 FROM n WHERE x<16384) INSERT INTO users(id,name,active) SELECT x*3,hex(randomblob(512)),1 FROM n",
++    );
++    const controller = new AbortController();
++    let release: (() => void) | undefined;
++    const output = new Writable({
++      highWaterMark: 1,
++      write(_chunk, _encoding, callback) {
++        release = callback;
++      },
++    });
++    const pending = exportTable(client, "users", {
++      columns,
++      output,
++      bufferSize: 1,
++      zip,
++      signal: controller.signal,
++    });
++    const failure = expect(pending).rejects.toMatchObject({ code: "ABORTED" });
++    try {
++      await until(() => release !== undefined);
++      await new Promise((resolve) => setTimeout(resolve, 80));
++      const produced = server.produced;
++      await new Promise((resolve) => setTimeout(resolve, 40));
++      expect(server.produced).toBe(produced);
++      expect(produced).toBeLessThan(64);
++    } finally {
++      controller.abort();
++      release?.();
++      await failure;
++    }
++    expect(output.destroyed).toBe(false);
++    expect(server.sessions).toBe(0);
++  },
++);
++
++it("interrupts a pending remote read when the destination fails", async () => {
++  server.mode.hold = "body";
++  const output = new Writable({
++    write(_chunk, _encoding, callback) {
++      callback();
++    },
++  });
++  const pending = exportTable(client, "users", { columns, output });
++  const failure = expect(pending).rejects.toMatchObject({
++    code: "OUTPUT_ERROR",
++  });
++  await until(() => server.cursors === 1);
++  output.emit("error", new Error("connection lost"));
++  await failure;
++  expect(server.sessions).toBe(0);
++});
++
++it("cancels active exports when the caller closes the official client", async () => {
++  server.mode.hold = "body";
++  const stream = await exportTable(client, "users", { columns });
++  const failure = expect(new Response(stream).text()).rejects.toMatchObject({
++    code: "ABORTED",
++  });
++  await until(() => server.cursors === 1);
++  client.close();
++  await failure;
++  await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
++});
++
++it.each(["truncate", "close-error", "sql-error", "http-error"])(
++  "cleans up owned files on %s",
++  async (kind) => {
++    const folder = await mkdtemp(join(tmpdir(), "exportlite-turso-"));
++    if (kind === "truncate") server.mode.truncate = true;
++    if (kind === "close-error") server.mode.closeError = true;
++    if (kind === "sql-error") server.mode.rowError = 1;
++    if (kind === "http-error") server.mode.status = 401;
++    try {
++      const failure = exportTable(client, "users", {
++        columns,
++        zip: true,
++        output: join(folder, "users.zip"),
++      });
++      await expect(failure).rejects.toMatchObject({
++        code: kind === "sql-error" ? "SQLITE_ERROR" : "REMOTE_ERROR",
++      });
++      expect(await readdir(folder)).toEqual([]);
++      expect(client.closed).toBe(false);
++    } finally {
++      await rm(folder, { recursive: true, force: true });
++    }
++  },
++);
++
++it("does not reflect authentication error response bodies in exceptions", async () => {
++  server.mode.status = 401;
++  const stream = await exportTable(client, "users", { columns });
++  await expect(new Response(stream).text()).rejects.toMatchObject({
++    code: "REMOTE_ERROR",
++    message: "Turso cursor request failed (HTTP 401).",
++  });
++  await expect(stream.result).rejects.toMatchObject({ code: "REMOTE_ERROR" });
++});
++
++it("rejects invalid bindings and undeclared projections before network I/O", async () => {
++  // @ts-expect-error Remote exports need declarations, avoiding schema queries.
++  await expect(exportTable(client, "users", {})).rejects.toMatchObject({
++    code: "INVALID_OPTIONS",
++  });
++  await expect(
++    exportQuery(client, {
++      sql: "SELECT ? n",
++      params: [NaN],
++      columns: { n: integer() },
++    }),
++  ).rejects.toMatchObject({ code: "INVALID_OPTIONS" });
++  await expect(
++    exportQuery(client, {
++      sql: "SELECT ? n",
++      params: [1n << 63n],
++      columns: { n: integer() },
++    }),
++  ).rejects.toMatchObject({ code: "INVALID_OPTIONS" });
++  expect(server.requests).toEqual([]);
++});
++
++it.each([
++  "DELETE FROM users RETURNING id",
++  "PRAGMA user_version=99",
++  "WITH x AS (SELECT 1) DELETE FROM users RETURNING id",
++])("rejects non-read queries: %s", async (query) => {
++  try {
++    const stream = await exportQuery(client, {
++      sql: query,
++      columns: { id: integer() },
++      format: "json",
++    });
++    await expect(new Response(stream).text()).rejects.toMatchObject({
++      code: "SQLITE_ERROR",
++    });
++    await expect(stream.result).rejects.toMatchObject({ code: "SQLITE_ERROR" });
++  } catch (cause) {
++    expect(cause).toMatchObject({ code: "INVALID_QUERY" });
++  }
++  expect(native.prepare("SELECT count(*) n FROM users").get()).toEqual({
++    n: 513,
++  });
++  expect(native.pragma("user_version", { simple: true })).toBe(0);
++});
++
++it.each(["esm", "cjs"])(
++  "uses built %s direct and Drizzle entries",
++  async (kind) => {
++    const require = createRequire(import.meta.url);
++    const built: typeof import("../src/turso.js") =
++      kind === "esm"
++        ? await import("../dist/turso.mjs")
++        : require("../dist/turso.cjs");
++    const core: typeof import("../src/index.js") =
++      kind === "esm"
++        ? await import("../dist/index.mjs")
++        : require("../dist/index.cjs");
++    const adapter: typeof import("../src/drizzle.js") =
++      kind === "esm"
++        ? await import("../dist/drizzle.mjs")
++        : require("../dist/drizzle.cjs");
++    const peer = built.createClient({ url: server.url });
++    try {
++      const direct = await built.exportTable(peer, "users", {
++        columns: { id: core.integer().primaryKey() },
++        format: "json",
++      });
++      expect((await new Response(direct).json()) as unknown[]).toHaveLength(
++        513,
++      );
++      await direct.result;
++      // The client and schema cross module formats; the registry remains shared.
++      const remote = await adapter.exportTable(drizzle(client), table, {
++        columns: { id: table.id },
++        format: "json",
++      });
++      expect((await new Response(remote).json()) as unknown[]).toHaveLength(
++        513,
++      );
++      await remote.result;
++    } finally {
++      peer.close();
++    }
++  },
++);
++
++async function until(condition: () => boolean) {
++  const deadline = Date.now() + 2_000;
++  while (!condition()) {
++    if (Date.now() > deadline)
++      throw new Error("Timed out waiting for local protocol state");
++    await new Promise((resolve) => setTimeout(resolve, 5));
++  }
++}
++
++it.each([false, true])(
++  "preserves destination callback errors (zip=%s)",
++  async (zip) => {
++    const output = new Writable({
++      write(_chunk, _encoding, callback) {
++        callback(new Error("disk full"));
++      },
++    });
++    await expect(
++      exportTable(client, "users", { columns, output, bufferSize: 1, zip }),
++    ).rejects.toMatchObject({ code: "OUTPUT_ERROR" });
++    expect(client.closed).toBe(false);
++  },
++);
++
++it("cancels active exports on reconnect and then accepts a fresh export", async () => {
++  server.mode.hold = "body";
++  const stream = await exportTable(client, "users", { columns });
++  const failure = expect(new Response(stream).text()).rejects.toMatchObject({
++    code: "ABORTED",
++  });
++  await until(() => server.cursors === 1);
++  await client.reconnect();
++  await failure;
++  await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
++  delete server.mode.hold;
++  const next = await exportTable(client, "users", { columns });
++  await new Response(next).arrayBuffer();
++  expect((await next.result).rowsExported).toBe(513);
++});
++
++it("normalizes libsql URLs with tls=0 for the local HTTP endpoint", async () => {
++  const peer = createClient({
++    url: `${server.url.replace("http:", "libsql:")}?tls=0`,
++  });
++  try {
++    const stream = await exportTable(peer, "users", { columns });
++    await new Response(stream).arrayBuffer();
++    await stream.result;
++    expect(server.statements).toHaveLength(1);
++  } finally {
++    peer.close();
++  }
++});
++
++it("runs the public API example against the local protocol server", async () => {
++  const { stdout } = await promisify(execFile)(
++    process.execPath,
++    [fileURLToPath(new URL("../examples/turso.mjs", import.meta.url))],
++    {
++      env: {
++        ...process.env,
++        TURSO_DATABASE_URL: server.url,
++        TURSO_AUTH_TOKEN: "local-fixture-token",
++      },
++    },
++  );
++  const results = stdout
++    .trim()
++    .split("\n")
++    .map((line) => JSON.parse(line));
++  expect(results[0]).toHaveLength(513);
++  expect(results[1]).toEqual([
++    { id: 3, label: '雪 😀 "1"' },
++    { id: 9, label: '雪 😀 "3"' },
++  ]);
++  expect(server.statements).toHaveLength(2);
++  expect(server.sessions).toBe(0);
++});
++
++it.each(["UTF-16le", "UTF-16be"])(
++  "exports a %s source through UTF-8 protocol text without probing encoding",
++  async (encoding) => {
++    client.close();
++    await server.close();
++    native.close();
++    native = new Database(":memory:");
++    native.pragma(`encoding='${encoding}'`);
++    native.exec(
++      "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT,active INTEGER); INSERT INTO users VALUES(1,'雪 😀',1)",
++    );
++    server = await tursoServer(native);
++    client = createClient({ url: server.url });
++    const stream = await exportTable(client, "users", {
++      columns,
++      format: "json",
++    });
++    expect(await new Response(stream).json()).toEqual([
++      { id: 1, label: "雪 😀", enabled: true },
++    ]);
++    await stream.result;
++    expect(server.statements).toHaveLength(1);
++    expect(server.statements[0]).not.toMatch(/pragma|AS BLOB/i);
++  },
++);
++
++it.each(["duplicate-step", "bad-count", "invalid-utf8", "row-after-end"])(
++  "rejects malformed protocol data: %s",
++  async (kind) => {
++    const head = { baton: "fixture-baton", base_url: null };
++    const begin = {
++      type: "step_begin",
++      step: 0,
++      cols: [{ name: "json" }, { name: "count" }],
++    };
++    const row = {
++      type: "row",
++      row: [
++        { type: "text", value: '[{"id":1}]' },
++        { type: "integer", value: kind === "bad-count" ? "257" : "1" },
++      ],
++    };
++    const end = { type: "step_end", step: 0 };
++    const frames =
++      kind === "duplicate-step"
++        ? [head, begin, begin, row, end]
++        : kind === "row-after-end"
++          ? [head, begin, row, end, row]
++          : [head, begin, row, end];
++    const bytes =
++      kind === "invalid-utf8"
++        ? new Uint8Array([0xff])
++        : Buffer.from(
++            `${frames.map((frame) => JSON.stringify(frame)).join("\n")}\n`,
++          );
++    const peer = createClient({
++      url: server.url,
++      fetch: async (input, init) => {
++        const request = new Request(input, init);
++        return request.url.endsWith("/v3/cursor")
++          ? new Response(bytes)
++          : Response.json({
++              baton: null,
++              results: [{ type: "ok", response: { type: "close" } }],
++            });
++      },
++    });
++    try {
++      const stream = await exportTable(peer, "users", {
++        columns,
++        format: "json",
++      });
++      await expect(new Response(stream).text()).rejects.toMatchObject({
++        code: "REMOTE_ERROR",
++      });
++      await expect(stream.result).rejects.toMatchObject({
++        code: "REMOTE_ERROR",
++      });
++    } finally {
++      peer.close();
++    }
++  },
++);
++
++it("prepares current data and schema on the server without metadata checks", async () => {
++  const first = await exportTable(client, "users", { columns });
++  await new Response(first).arrayBuffer();
++  await first.result;
++  native.exec(
++    "ALTER TABLE users ADD COLUMN extra TEXT; UPDATE users SET name='fresh' WHERE id=3",
++  );
++  const second = await drizzleTable(drizzle(client), table, {
++    columns: { label: table.name },
++    format: "json",
++  });
++  expect(((await new Response(second).json()) as unknown[])[0]).toEqual({
++    label: "fresh",
++  });
++  await second.result;
++  native.exec("ALTER TABLE users RENAME COLUMN name TO renamed");
++  const broken = await exportTable(client, "users", { columns });
++  await expect(new Response(broken).text()).rejects.toMatchObject({
++    code: "SQLITE_ERROR",
++  });
++  await expect(broken.result).rejects.toMatchObject({ code: "SQLITE_ERROR" });
++  expect(server.statements).toHaveLength(3);
++});
+--- a/tsdown.config.ts
++++ b/tsdown.config.ts
+@@ -1,7 +1,7 @@
+ import { defineConfig } from "tsdown";
+ 
+ export default defineConfig({
+-  entry: ["src/index.ts", "src/drizzle.ts"],
++  entry: ["src/index.ts", "src/drizzle.ts", "src/turso.ts"],
+   format: ["esm", "cjs"],
+   platform: "node",
+   target: "node22",

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "workers": 180,
+  "verifiedBytes": 180,
+  "fixtureFingerprintsUnchanged": true,
+  "packageFingerprintsUnchanged": true,
+  "totalTimedExports": 1188,
+  "allSessionsClosed": true
+}

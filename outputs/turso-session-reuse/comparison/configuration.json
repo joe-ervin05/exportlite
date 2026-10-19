@@ -1,0 +1,1244 @@
+{
+  "date": "2026-10-18T16:51:35.963Z",
+  "node": "<node-26.12.0>",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "totalMemoryGiB": 32,
+  "loadavg": [
+    5.0595703125,
+    5.7177734375,
+    7.0322265625
+  ],
+  "fixtures": {
+    "cases": [
+      {
+        "name": "table-1",
+        "rows": 1,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1",
+        "expected": {
+          "bytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "iterations": 3,
+        "fixtureSha256": "dc969db78afcb2b1ed394345ec51879ad618b2732df0c80857d7be7ba78afb43"
+      },
+      {
+        "name": "table-10",
+        "rows": 10,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data10",
+        "expected": {
+          "bytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "iterations": 3,
+        "fixtureSha256": "dc969db78afcb2b1ed394345ec51879ad618b2732df0c80857d7be7ba78afb43"
+      },
+      {
+        "name": "table-1000",
+        "rows": 1000,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1000",
+        "expected": {
+          "bytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "iterations": 3,
+        "fixtureSha256": "dc969db78afcb2b1ed394345ec51879ad618b2732df0c80857d7be7ba78afb43"
+      },
+      {
+        "name": "narrow-plain",
+        "rows": 1000000,
+        "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+        "table": "data",
+        "expected": {
+          "bytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "iterations": 1,
+        "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+      },
+      {
+        "name": "wide-plain",
+        "rows": 100000,
+        "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+        "table": "data",
+        "expected": {
+          "bytes": 100920480,
+          "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+        },
+        "iterations": 1,
+        "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+      }
+    ]
+  },
+  "methods": [
+    "exportlite-turso",
+    "exportlite-drizzle",
+    "turso-stringify",
+    "drizzle-stringify"
+  ],
+  "latencies": [
+    0,
+    25,
+    100
+  ],
+  "rounds": 3,
+  "jobs": [
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 0
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 1
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-1",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-10",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "narrow-plain",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 0,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 25,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-turso",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "exportlite-drizzle",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "turso-stringify",
+      "latency": 100,
+      "round": 2
+    },
+    {
+      "name": "wide-plain",
+      "method": "drizzle-stringify",
+      "latency": 100,
+      "round": 2
+    }
+  ],
+  "fingerprints": {
+    "exportlite/package.json": "dea1558267a9577bb759fe224f96a78f98fef7e655a6ec3a2030d2c887902af3",
+    "exportlite/pnpm-lock.yaml": "e52909d2816b631f0c4a4c77a65c793905f3cbbcfa9f5959ae663b28e0412d13",
+    "outputs/turso-session-reuse/server.mjs": "fb1a0d638e5768ff5100e29494abf009e8d7ebf5e65320cc4116d6c47b67b071",
+    "outputs/turso-session-reuse/worker.mjs": "5b0814425929d21e40de28602ba111ca79d0bb6f477d66ca64a5cd4a427af598",
+    "outputs/turso-session-reuse/run.mjs": "c6475eff809e3b6f7f7e6db954e693f6454425e5bee5bcbe8314dfe70f36371a",
+    "outputs/turso-session-reuse/fixtures.json": "1b482d0b3dfb56f684a193b5b41029d18cadd6c1aab8c8cddc5025fce0f1c011",
+    "exportlite/src/api/export-query.ts": "6b5172dc859b94c7394d05a877881038df50fbe3e98c7ef776f1adc8c9b702b8",
+    "exportlite/src/api/export-table.ts": "0d32c48953aeaad5152106779ef35d6358ad4966dbf91f6be8ebda4f33f32113",
+    "exportlite/src/api/export-turso.ts": "4799f480e4ab5a893002612f11741d774d7de393b9a51dee63b48ecc69008996",
+    "exportlite/src/api/export.ts": "c0aefb40f5008f70c6e1f0831db3774e974db90103596cddf6428e7b705951fc",
+    "exportlite/src/columns.ts": "d7911c1f1a2885ad49a549d7babe431dbcf937acde0770816fad41b6dd951e72",
+    "exportlite/src/database/adapter.ts": "2698794cf15a8451cec1d5e5b1259dd0044af384abe42e28832f8a32f53885b4",
+    "exportlite/src/database/better-sqlite3.ts": "f04918f627065fe60d9a07e306023112172b20bb33f734264f6430b81c452a44",
+    "exportlite/src/database/turso.ts": "f87feda3eec100b8b8cbbafa4c445af9d065a149f1e950cbfc1725c656030c2c",
+    "exportlite/src/drizzle.ts": "dac92149afa9cc6551d5c41a8e5dcd9bfaf019b48f77fcac6828f407418bcaf7",
+    "exportlite/src/errors.ts": "9f5f2ae17017b08b5fd364ce0f43fc1454ced93acc28ebe7d3d502807c42eed9",
+    "exportlite/src/index.ts": "165cfd8b50950d780c1ce3baa308666b5e257a8172f3d44d6b44dbdcaeaccea0",
+    "exportlite/src/output/readable.ts": "ba147d73004283d33606450d62a613cc37aa3c53ee48d8ea54d60f11121a0ffc",
+    "exportlite/src/output/writer.ts": "3154845387d523ea134752d60864d26e81bccae8503d9df17aaad4a3d7fc87cb",
+    "exportlite/src/output/zip.ts": "17166eed24440dfc6a0ec48a31ec65d5c854eaf47612a48b2010e02970e60cfb",
+    "exportlite/src/planner/batches.ts": "5d68ff208aafbf0319777c46e9c7d85c780b4f23d691b5fef92cd73007d8a6cf",
+    "exportlite/src/planner/cache.ts": "0ddde54b0625251e257c80ab8eb37f11a60de030f27585c9718287b357ce8eb5",
+    "exportlite/src/planner/columns.ts": "c659aff772ce0eaaac973a6629290ce3524eea4f378a3536562f894dc1d78734",
+    "exportlite/src/planner/declared.ts": "08d66ab37459e2a030b6f26cb668e161531414d2c37d3a4725d80b159724e2f3",
+    "exportlite/src/planner/identifiers.ts": "0e299324ee95ddeca97ba7705aea3392dd917b81774a45e81fc52255e01d557f",
+    "exportlite/src/planner/json.ts": "281b4c54e66c632fd9f96f9dbdcee3cbb4ca3113cfba76e10c6d6dbf531be258",
+    "exportlite/src/turso.ts": "f5518238ccb6a697271fb38da6700621cd51f62f064517beea8c47510045c9af",
+    "exportlite/src/types.ts": "f8147e1e800c304c10562ad13f9c7546768b170c5789b9f14f108e34142629cb",
+    "exportlite/dist/adapter-DfuRNeZV.d.cts": "5e71e55b3cad9aaf9c2a58aea26b8b0ebfa67e37c88d690a45203cdef048833e",
+    "exportlite/dist/adapter-DfuRNeZV.d.mts": "d4e56a66af0d49c3eba9e9b311d67489642961c48162e0cfcd88c5227930b78c",
+    "exportlite/dist/cache-0RJZwYMz.cjs": "734578a3eb2025cdab66db32c55e4ea2bd4d9fe56aa25391f382d9970d913c97",
+    "exportlite/dist/cache-0RJZwYMz.cjs.map": "1b4c8d7edcff1ddbe64cd6a17f4281434c58dfbbb575c9f0fe4fa89d4e80ed3f",
+    "exportlite/dist/cache-COwSZIiy.mjs": "3c89f9c70b63ebbbfd274831a78ea620b45194bb734fe8691315767945d74dc5",
+    "exportlite/dist/cache-COwSZIiy.mjs.map": "44970bcab96e6d8514f11841739ba32b3e2f694698b1d5f479f2c3fbb35768dd",
+    "exportlite/dist/declared-CAOG7Yu1.cjs": "0409c9ab76ee77c551b2b6de8bcbe7751ccfcaa8f1e1554d7e858eaa05f1bb17",
+    "exportlite/dist/declared-CAOG7Yu1.cjs.map": "550889cbcdc95dcc3899b5cc1290c9cd625898e999fb07cbef46eacf6551576c",
+    "exportlite/dist/declared-D9i0zhVy.mjs": "1c69f1b5cc959fb4b4ae6cfb1431a8960b1b1cf5af595bd1a999195c0502fbc0",
+    "exportlite/dist/declared-D9i0zhVy.mjs.map": "0915d8785ebca5df8a2237ecb2537dc30dde24c71915d181f4ed34e978a43304",
+    "exportlite/dist/drizzle.cjs": "eb2052a48e21174131102d91f61dfc70d15330f1366e4008990cba85929ce0e4",
+    "exportlite/dist/drizzle.cjs.map": "42044a6660cc3228a8c81cc95b687263b58602023c0f1d365591b59820fa38e8",
+    "exportlite/dist/drizzle.d.cts": "56e688db25d8a46c0158b99eece30d0d10461ea545169de4b0b8aa716a2d9a05",
+    "exportlite/dist/drizzle.d.mts": "b16d4792fcea6f3b703093f7dbdf49390f70f204efd53b51b1eac87e1d65cd9f",
+    "exportlite/dist/drizzle.mjs": "9df8e60fd2a3452dffc15936702d5bf15f28b5a457b462217b92e5f19dbd17f4",
+    "exportlite/dist/drizzle.mjs.map": "0cfec2d512f8e8652341879427758f8b2307e881660bbde842888e06abdd3bb3",
+    "exportlite/dist/export-turso-BHV5-4Rg.cjs": "66741a979882f7a411619015d95480f2b7384d4b6d7549335bc2cc6c952cad7f",
+    "exportlite/dist/export-turso-BHV5-4Rg.cjs.map": "04da8ce47ac4e0933bbcd491d48a08c3121c23f7a430540ab4215cd2ae5f0af8",
+    "exportlite/dist/export-turso-BkzamWHZ.mjs": "f1cdf854a7eb312a690016f0de93150453905b51014661dccd756de7415d5d4d",
+    "exportlite/dist/export-turso-BkzamWHZ.mjs.map": "91b45de44fa3eb585a0feedec48565c90d830cb79f6e8261e714f238fdb46767",
+    "exportlite/dist/index.cjs": "fd9cdde1798e1ffdc8171a6a93be5b503402e784446f63f5fecab4e10375fa8f",
+    "exportlite/dist/index.cjs.map": "f9e8b67d12f53cf53a77d2c8779615e2e52bae86c4325ea8cbb82453f561bc85",
+    "exportlite/dist/index.d.cts": "4399dfba68ed7d250c205c12f44572c8c6a01d5fd208304e34d5d3a1e99b0ad3",
+    "exportlite/dist/index.d.mts": "6481fbf48e5549cb4cc68a400d881225f0d8babe4a103ae08f100b1b0c5ea217",
+    "exportlite/dist/index.mjs": "ea3123498711dda7e2862cfc169da6ebfce93063177a05518acd2437dcc0c74c",
+    "exportlite/dist/index.mjs.map": "e075f68547a48fdd38ca5f9454f1ed3ff3c0070d0cd5cd470138b7f66dcc1c43",
+    "exportlite/dist/turso-DCSfWAWR.d.cts": "9f30ad45b6387eb659f377c231d611368f2e7245355c11a3fbb881bc702fd5bb",
+    "exportlite/dist/turso-DCSfWAWR.d.mts": "ed8ff3ba4c46047403313901fcd2119a652e6d0d411ebb7394564ce1e1152e96",
+    "exportlite/dist/turso.cjs": "9d316f43dbbdb9d4c578a315c68d4472e23f70644b79656237e8df3288c42d08",
+    "exportlite/dist/turso.cjs.map": "95c3bea2f824a44ad449acc664b4520899f0a01f8690aa1984fc6c05cb5448e1",
+    "exportlite/dist/turso.d.cts": "7dfd004d4bfacdc22bb4ebbc4858372d06d5cd8094f59ccc2aa1f804e84e5f4e",
+    "exportlite/dist/turso.d.mts": "60f71c515db8051d2a7a52c26401bc1f97c0440d5be35697f05cdb27c4c21df2",
+    "exportlite/dist/turso.mjs": "db93d4e59c9835b99f6de52ea8bc5518f48cdefb9c2484795fac1b3a0231720b",
+    "exportlite/dist/turso.mjs.map": "a03068d229516bbf411e075632f0d318c92102b7f93b198f93f9d5da915e72e3",
+    "exportlite/dist/types-CEdCnVeZ.d.cts": "2643c635aead1372c915675cde427c3212f99a49c456fe7aa2d563f26f5517f4",
+    "exportlite/dist/types-CEdCnVeZ.d.mts": "36419fef8e05ce3d1c2420dfdf5a7d29b0498614e17b1e6a149c55c2bfce14ec"
+  },
+  "versionsChecked": {
+    "date": "2026-10-18",
+    "@libsql/client": "0.18.0",
+    "drizzle-orm": "0.45.4",
+    "better-sqlite3": "13.0.3",
+    "source": "npm registry latest metadata; existing pinned versions retained"
+  },
+  "methodology": "Sequential fresh client workers with a separate fresh HTTP/SQLite server process per worker. Whole-client-process maxRSS excludes database server and coordinator. Each worker verifies output SHA-256, performs one warmup, then takes three timed samples (three requests/sample for 1/10/1000 rows; one request/sample for bulk). Natural GC, no forced collection. Time includes query construction, one cursor HTTP request per healthy ExportLite export, protocol decode, JSON generation, UTF-8 encoding and completed drain to matching destinations. One reusable export session per client. Awaitable client close is measured separately after all exports; its single cleanup HTTP request is excluded from individual export times but included in client peak RSS. Creating and closing a client per export still pays both round trips. Imports, client/schema/Drizzle initialization and server startup are outside timing but client imports are included in RSS. Fixed 256-row batches and 64KiB buffering. No compression, disk output, TLS, bandwidth cap, jitter or packet loss. Fixed latency is added once to every HTTP request on the server, not per record or SQL batch. Protocol responses are written incrementally in 64KiB chunks for both cursor and ordinary pipeline requests. This JS fixture endpoint is not an actual Turso server; its response framing/serialization CPU can affect total time."
+}
