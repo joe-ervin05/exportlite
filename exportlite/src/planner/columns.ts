@@ -48,6 +48,11 @@ export function selectedObject(
   reference: (field: SelectedField, index: number) => string,
   format: ExportFormat = "json",
 ): string {
+  if (format === "csv")
+    return csvRecord(
+      fields.map((field, index) => reference(field, index)),
+      fields,
+    );
   const values = fields.map((field, index) => {
     const value = reference(field, index);
     // Keep booleans native JSON. Reject values outside the declared SQLite 0/1
@@ -60,7 +65,6 @@ export function selectedObject(
           : value;
     return jsonValue;
   });
-  if (format === "csv") return csvRecord(values);
   const pairs = fields.map(
     (field, index) => `${literal(field.key)}, ${values[index]}`,
   );

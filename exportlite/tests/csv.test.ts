@@ -22,6 +22,7 @@ import {
   exportQuery,
   exportTable,
   integer,
+  real,
   text,
 } from "../src/index.js";
 import * as remote from "../src/turso.js";
@@ -610,3 +611,91 @@ it("keeps one empty CSV cell per NULL row across batch boundaries", async () => 
   expect(parse(content, { columns: true })).toHaveLength(257);
   expect((await stream.result).rowsExported).toBe(257);
 });
+
+it.each([text, integer, real])(
+  "uses storage types rather than declaration hints for CSV cells (%#)",
+  async (declare) => {
+    db.defaultSafeIntegers(false);
+    db.exec(
+      "CREATE TABLE scalars(id INTEGER PRIMARY KEY,value); INSERT INTO scalars VALUES(1,9007199254740993),(2,9223372036854775807),(3,-9223372036854775808),(4,1.0),(5,1e100),(6,'1.0'),(7,NULL),(8,''),(9,9e999),(10,-9e999)",
+    );
+    const expected =
+      '"id","value"\r\n1,9007199254740993\r\n2,9223372036854775807\r\n3,-9223372036854775808\r\n4,1.0\r\n5,1.0e+100\r\n6,"1.0"\r\n7,\r\n8,""\r\n9,Inf\r\n10,-Inf\r\n';
+    for (const zip of [false, true])
+      for (const query of [false, true]) {
+        const options = {
+          format: "csv" as const,
+          zip,
+          columns: { id: integer().primaryKey(), value: declare() },
+        };
+        const stream = query
+          ? await exportQuery(db, {
+              ...options,
+              sql: "SELECT * FROM scalars ORDER BY id",
+            })
+          : await exportTable(db, "scalars", options);
+        const bytes = Buffer.from(await new Response(stream).arrayBuffer());
+        const content = zip
+          ? await decodeZip(bytes, query ? "export.csv" : "scalars.csv")
+          : bytes.toString("utf8");
+        expect(content).toBe(expected);
+        expect((await stream.result).rowsExported).toBe(10);
+      }
+  },
+);
+
+it("keeps JSON-mode CSV cells canonical for NULL, scalars, JSONB and exact JSON integers", async () => {
+  db.exec(
+    `CREATE TABLE documents(id INTEGER PRIMARY KEY,metadata);
+     INSERT INTO documents VALUES(1,NULL),(2,'null'),(3,'true'),(4,' { "n": 9007199254740993, "a" : [1,2] } '),(5,jsonb('{"ok":"雪"}')),(6,'"a\\u0000b"')`,
+  );
+  const schema = sqliteTable("documents", {
+    id: int().primaryKey(),
+    metadata: str({ mode: "json" }),
+  });
+  const orm = drizzle(db);
+  for (const zip of [false, true])
+    for (const query of [false, true]) {
+      const options = { format: "csv" as const, zip };
+      const stream = query
+        ? await adapter.exportQuery(
+            orm,
+            orm.select().from(schema).orderBy(schema.id),
+            options,
+          )
+        : await adapter.exportTable(orm, schema, options);
+      const bytes = Buffer.from(await new Response(stream).arrayBuffer());
+      const content = zip
+        ? await decodeZip(bytes, query ? "export.csv" : "documents.csv")
+        : bytes.toString("utf8");
+      expect(parse(content, { columns: true })).toEqual([
+        { id: "1", metadata: "" },
+        { id: "2", metadata: "null" },
+        { id: "3", metadata: "true" },
+        { id: "4", metadata: '{"n":9007199254740993,"a":[1,2]}' },
+        { id: "5", metadata: '{"ok":"雪"}' },
+        { id: "6", metadata: '"a\\u0000b"' },
+      ]);
+      expect((await stream.result).rowsExported).toBe(6);
+    }
+});
+
+it.each([false, true])(
+  "cleans owned CSV output after invalid JSON-mode values (zip=%s)",
+  async (zip) => {
+    const schema = sqliteTable("users", {
+      id: int().primaryKey(),
+      note: str({ mode: "json" }),
+    });
+    await expect(
+      adapter.exportTable(drizzle(db), schema, {
+        format: "csv",
+        output: join(directory, "failed.csv"),
+        bufferSize: 1,
+        zip,
+      }),
+    ).rejects.toMatchObject({ code: "SQLITE_ERROR" });
+    expect(await readdir(directory)).toEqual([]);
+    db.prepare("SELECT 1").get();
+  },
+);
