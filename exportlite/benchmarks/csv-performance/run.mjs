@@ -69,6 +69,10 @@ for (let round = 0; round < rounds; round++) {
         );
         assert.equal(c.status, 0, c.stderr);
         const row = { round, variant, ...JSON.parse(c.stdout) };
+        assert(
+          Number.isFinite(row.medianMs),
+          "Single-export diagnostics do not produce benchmark timings.",
+        );
         if (compression === "none") {
           assert.equal(row.sha256, f.csvSha256);
           assert.equal(row.bytes, f.bytes);
@@ -112,6 +116,8 @@ for (const f of fixtures)
         medianCpuMs: median(rows.map((r) => r.medianCpuMs)),
         medianPeakRssMiB: median(rows.map((r) => r.peakRssMiB)),
         maxPeakRssMiB: Math.max(...rows.map((r) => r.peakRssMiB)),
+        medianSetupRssMiB: median(rows.map((r) => r.setupMemory.rss / 1048576)),
+        medianSetupPeakRssMiB: median(rows.map((r) => r.setupPeakRssMiB)),
         bytes: rows[0].bytes,
         sha256: rows[0].sha256,
       });
@@ -131,6 +137,6 @@ await writeFile(
 );
 await writeFile(
   `${output}/configuration.json`,
-  `${JSON.stringify({ node: process.version, nodeSha256: hash(await readFile(process.execPath)), cpu: cpus()[0]?.model, beforeSourceCommit: process.env.BEFORE_COMMIT ?? null, rounds, cases, fixtures: fixtures.map(({ path, ...f }) => f), builds: buildHashes, protocol: "Sequential fresh workers, rotating case order. One output verification, two warmups, three timed batches; two exports per bulk batch, 50 tiny. Natural GC, no profiling/forced GC. Counting Node writable; planning, generation, encoding/ZIP and completion included; imports/connection excluded from time. Peak RSS is whole-process including imports/warmups/repeated exports. Fixed 256-row SQL batches, 64 KiB writer and yields every 2048 rows. ZIP level 1, memLevel 9, 256 KiB compression output chunks. Each package build uses its own ZIP/checksum implementation; manual JS uses the installed zip-stream. Plain bytes independently match csv-stringify and parse to original fixture values. All before/after and same-name manual archive hashes match. JSON-mode uses Drizzle metadata and manual JS parses/stringifies JSON to match native canonical cells. CPU usage includes process threads." }, null, 2)}\n`,
+  `${JSON.stringify({ node: process.version, nodeSha256: hash(await readFile(process.execPath)), cpu: cpus()[0]?.model, beforeSourceCommit: process.env.BEFORE_COMMIT ?? null, rounds, cases, packageFormat: process.env.CSV_BENCH_PACKAGE_FORMAT ?? "esm", drizzleModules: process.env.CSV_BENCH_DRIZZLE_MODULES ?? process.env.CSV_BENCH_PACKAGE_FORMAT ?? "esm", drizzleSetup: process.env.CSV_BENCH_DRIZZLE_SETUP ?? "matched", fixtures: fixtures.map(({ path, ...f }) => f), builds: buildHashes, protocol: "Sequential fresh workers, rotating case order. One output verification, two warmups, three timed batches; two exports per bulk batch, 50 tiny. Natural GC, no profiling/forced GC. Counting Node writable; planning, generation, encoding/ZIP and completion included; imports/connection excluded from time. Peak RSS is whole-process including imports/warmups/repeated exports. Fixed 256-row SQL batches, 64 KiB writer and yields every 2048 rows. ZIP level 1, memLevel 9, 256 KiB compression output chunks. Each package build uses its own ZIP/checksum implementation; manual JS uses the installed zip-stream. Plain bytes independently match csv-stringify and parse to original fixture values. All before/after and same-name manual archive hashes match. JSON-mode initializes the same Drizzle driver/schema for package and manual workers; manual JS still reads driver rows directly and parses/stringifies JSON to match native canonical cells. ESM is the default for both package and schema imports. Pre-export setup RSS and its high-water mark are recorded separately. CPU usage includes process threads." }, null, 2)}\n`,
 );
 console.log(JSON.stringify({ workers: all.length, cases: summary.length }));

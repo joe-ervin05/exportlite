@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { PassThrough, Writable } from "node:stream";
 import { finished, pipeline } from "node:stream/promises";
 import { setImmediate as tick } from "node:timers/promises";
@@ -10,6 +10,9 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const root = fileURLToPath(new URL("../../../", import.meta.url));
 const require = createRequire(`${root}exportlite/package.json`);
 const median = (a) => [...a].sort((a, b) => a - b)[Math.floor(a.length / 2)];
+// Optional profiling is kept outside the per-record encoding loop.
+const profile = globalThis.exportliteCsvProfile;
+profile?.("worker-start");
 assert.equal(
   process.argv[2],
   "worker",
@@ -19,11 +22,32 @@ if (process.argv[2] === "worker") {
   const [fixtureText, method, compression] = process.argv.slice(3);
   const fixture = JSON.parse(fixtureText);
   const Database = require("better-sqlite3");
+  profile?.("driver-loaded");
   const db = new Database(fixture.path, { readonly: true });
-  const build = process.env.EXPORTLITE_BUILD ?? `${root}exportlite/dist`;
+  profile?.("connection-open");
+  const build = resolve(
+    process.env.EXPORTLITE_BUILD ?? `${root}exportlite/dist`,
+  );
+  const packageFormat = process.env.CSV_BENCH_PACKAGE_FORMAT ?? "esm";
+  assert(["esm", "cjs"].includes(packageFormat));
+  const drizzleModules = process.env.CSV_BENCH_DRIZZLE_MODULES ?? packageFormat;
+  assert(["esm", "cjs", "dual"].includes(drizzleModules));
+  assert(
+    !(
+      !method.startsWith("manual") &&
+      fixture.drizzle &&
+      process.env.CSV_BENCH_DRIZZLE_SETUP === "none"
+    ),
+    "Only a manual JS reference can skip Drizzle setup for a JSON-mode fixture.",
+  );
+  const loadBuild = (entry) =>
+    packageFormat === "cjs"
+      ? require(join(build, `${entry}.cjs`))
+      : import(pathToFileURL(join(build, `${entry}.mjs`)));
   const api = method.startsWith("manual")
     ? undefined
-    : await import(pathToFileURL(join(build, "index.mjs")));
+    : await loadBuild("index");
+  profile?.("core-loaded");
   const zip = compression === "zip";
   const ZipStream =
     zip && method.startsWith("manual")
@@ -33,9 +57,13 @@ if (process.argv[2] === "worker") {
   const names = fixture.columns.map((c) => c.key);
   const sql = `SELECT ${names.map((n) => `"${n}"`).join(",")} FROM data ORDER BY id`;
   let orm, table, adapter;
-  if (fixture.drizzle && api) {
-    const { drizzle } = require("drizzle-orm/better-sqlite3");
-    const schema = require("drizzle-orm/sqlite-core");
+  if (fixture.drizzle && process.env.CSV_BENCH_DRIZZLE_SETUP !== "none") {
+    const load = ["dual", "cjs"].includes(drizzleModules)
+      ? (name) => require(name)
+      : (name) => import(name);
+    const { drizzle } = await load("drizzle-orm/better-sqlite3");
+    const schema = await load("drizzle-orm/sqlite-core");
+    profile?.("drizzle-loaded");
     table = schema.sqliteTable(
       "data",
       Object.fromEntries(
@@ -50,7 +78,9 @@ if (process.argv[2] === "worker") {
       ),
     );
     orm = drizzle(db);
-    adapter = await import(pathToFileURL(join(build, "drizzle.mjs")));
+    profile?.("drizzle-created");
+    if (api) adapter = await loadBuild("drizzle");
+    profile?.("adapter-loaded");
   }
   const columns =
     api &&
@@ -157,6 +187,7 @@ if (process.argv[2] === "worker") {
     await done;
   }
   async function consume(verify) {
+    profile?.("export-start");
     let bytes = 0;
     const digest = verify ? createHash("sha256") : undefined;
     const sink = new Writable({
@@ -209,14 +240,19 @@ if (process.argv[2] === "worker") {
         throw e;
       }
     } else await generate(sink);
+    profile?.("export-complete");
     return { bytes, ...(digest ? { sha256: digest.digest("hex") } : {}) };
   }
   try {
+    profile?.("setup-ready");
+    const setupMemory = process.memoryUsage();
+    const setupPeakRssMiB = process.resourceUsage().maxRSS / 1024;
+    const single = process.env.CSV_BENCH_SINGLE === "1";
     const verified = await consume(true);
-    for (let i = 0; i < 2; i++) await consume(false);
+    for (let i = 0; i < (single ? 0 : 2); i++) await consume(false);
     const samplesMs = [],
       cpuMs = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < (single ? 0 : 3); i++) {
       const cpu = process.cpuUsage();
       const t = performance.now();
       for (let j = 0; j < fixture.iterations; j++) await consume(false);
@@ -229,15 +265,23 @@ if (process.argv[2] === "worker") {
         fixture: fixture.name,
         method,
         compression,
+        drizzleSetup:
+          !!fixture.drizzle && process.env.CSV_BENCH_DRIZZLE_SETUP !== "none",
+        drizzleModules,
+        packageFormat,
+        exportCount: single ? 1 : 3 + 3 * fixture.iterations,
+        setupMemory,
+        setupPeakRssMiB,
         ...verified,
         samplesMs,
-        medianMs: median(samplesMs),
+        medianMs: single ? null : median(samplesMs),
         cpuSamplesMs: cpuMs,
-        medianCpuMs: median(cpuMs),
+        medianCpuMs: single ? null : median(cpuMs),
         peakRssMiB: process.resourceUsage().maxRSS / 1024,
       }),
     );
   } finally {
     db.close();
+    profile?.("connection-closed");
   }
 }

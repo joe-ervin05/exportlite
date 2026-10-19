@@ -20,6 +20,10 @@ text, three boolean fields, Drizzle JSON-mode fields and 32 selected columns.
 The manual control chooses its cell encoders once, emits boolean CSV literals
 directly and canonicalizes JSON in JS. All outputs must match independently
 generated `csv-stringify` bytes and parse back to fixture values.
+For the JSON-mode fixture, both package and manual workers initialize the same
+Drizzle driver and schema; the manual encoder continues reading driver rows
+directly. Package, driver and schema imports use ESM by default. Set
+`CSV_BENCH_PACKAGE_FORMAT=cjs` to match all three to CommonJS instead.
 
 Use `BENCH_FIXTURES=tiny,narrow` or `BENCH_ROUNDS=1` for a functional smoke run.
 Performance claims need the full five rounds. `CSV_BENCH_DIR` selects a new
@@ -49,6 +53,10 @@ previous/current query and manual JS. Without one, it rotates three cases.
 Each worker verifies output, warms twice and times three batches, using natural
 GC. Bulk batches contain two exports; tiny batches contain 50. Connection/import
 setup is excluded from elapsed time but included in whole-process peak RSS.
+Workers also record current memory and lifetime peak RSS immediately before the
+first export. Summaries include median setup RSS and setup peak RSS. Subtracting
+these from a later peak does not isolate CSV memory precisely: GC timing and
+reuse of already allocated memory differ between encoders.
 Time includes planning, CSV generation, UTF-8/ZIP delivery and completion to a
 counting Node writable, without disk or HTTP timing. Process CPU usage includes
 compression threads.
@@ -73,3 +81,8 @@ The [investigation report](../CSV-PERFORMANCE.md) records the adopted changes,
 rejected experiments, profiling limits and remaining work. Archived experiment
 scripts and worker measurements are linked there; diagnostic timings are kept
 separate from the matched comparison.
+
+The [memory follow-up](../CSV-MEMORY-FOLLOWUP.md) separates Drizzle setup,
+module formats, one export versus repeated exports, native batch allocations
+and stream queues. Its profiling/single-export controls are diagnostic only;
+the normal runner rejects missing timing results from single-export workers.
