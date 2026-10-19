@@ -1,0 +1,72 @@
+{
+  "node": "v26.12.0",
+  "buildNode": "v24.19.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "sourceCommit": "6cedfe09ff9853116906a62426cfccc237bac0a8",
+  "candidatePatchSha256": "e76a0951786c38131b53316bd6401fb48ed6d6de8fa085e7a4cb6d1683a8e417",
+  "candidate": {
+    "build": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "testFiles": 11,
+    "testsPassed": 410,
+    "isolatedPatchReproductionTestsPassed": 410
+  },
+  "unchangedProduction": {
+    "build": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "testFiles": 11,
+    "testsPassed": 408,
+    "runtimeSourceDiff": "none"
+  },
+  "publicDeclarations": {
+    "byteIdentical": true,
+    "files": [
+      "adapter-DfuRNeZV.d.cts",
+      "adapter-DfuRNeZV.d.mts",
+      "drizzle.d.cts",
+      "drizzle.d.mts",
+      "index.d.cts",
+      "index.d.mts",
+      "turso-DCSfWAWR.d.cts",
+      "turso-DCSfWAWR.d.mts",
+      "turso.d.cts",
+      "turso.d.mts",
+      "types-DVeygu9-.d.cts",
+      "types-DVeygu9-.d.mts"
+    ]
+  },
+  "packedCandidateConsumers": {
+    "passed": [
+      "bare",
+      "native",
+      "turso",
+      "drizzle-native",
+      "drizzle-turso"
+    ],
+    "node": "v26.12.0",
+    "esmAndCommonJS": true,
+    "runtimeAndTypes": true,
+    "temporaryTarballSha256": "a3d51db4d0325eb654c1b8c241d5ca11d2f57f057b3e6c83bfcfbff8f2502cea",
+    "tarballDeletedByCheck": true
+  },
+  "csvCoverage": [
+    "Plain and ZIP independently parsed; ZIP CRC and entry name",
+    "Native and Drizzle tables/queries; remote remains SQLite",
+    "Single export statement and no declared metadata preflight",
+    "Backpressure sustained stall; awaitable cancellation; database reusable",
+    "Caller writable ownership; owned-file failure cleanup",
+    "Unicode, NUL, aliases, empty and NULL cells",
+    "Exact signed 64-bit and REAL spellings without safe-integer mode",
+    "BLOB and invalid boolean rejection; Drizzle JSON conversion",
+    "UTF-16 encoding declaration guard"
+  ],
+  "limits": "Candidate qualified locally on macOS arm64 / Node 26.12.0. Remote paths use local protocol tests; no live Turso or cloud performance claim. Timings are recorded separately without instrumentation. Compatibility CI tests the unchanged production runtime, not this opt-in experiment patch.",
+  "reproducibleBuilds": {
+    "passed": true,
+    "sqliteAndCandidateEsmByteIdenticalToTimedBuilds": true,
+    "freshDestinationRequired": true
+  }
+}

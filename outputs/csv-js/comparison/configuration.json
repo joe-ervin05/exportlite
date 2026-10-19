@@ -1,0 +1,87 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "sourceCommit": "6cedfe09ff9853116906a62426cfccc237bac0a8",
+  "rounds": 5,
+  "methods": [
+    "exportlite-table",
+    "exportlite-query",
+    "js-stream"
+  ],
+  "cases": [
+    {
+      "method": "exportlite-table",
+      "variant": "sqlite"
+    },
+    {
+      "method": "exportlite-table",
+      "variant": "javascript"
+    },
+    {
+      "method": "exportlite-query",
+      "variant": "sqlite"
+    },
+    {
+      "method": "exportlite-query",
+      "variant": "javascript"
+    },
+    {
+      "method": "js-stream",
+      "variant": "manual"
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "tiny",
+      "rows": 100,
+      "width": 32,
+      "profile": "repeated",
+      "iterations": 50,
+      "databaseSha256": "9597a3e2e489aa1b206272471819640a7981da8d03edb8be517b4a0dd41ecbc2"
+    },
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "width": 32,
+      "profile": "varied",
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "width": 1024,
+      "profile": "varied",
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149"
+    }
+  ],
+  "workerSha256": "0bd57112dea4ff386a045914ae473498dbe817217906de12d4441d1fa62f68ab",
+  "candidatePatchSha256": "e76a0951786c38131b53316bd6401fb48ed6d6de8fa085e7a4cb6d1683a8e417",
+  "builds": {
+    "sqlite": {
+      "cache-B_CjOPl_.mjs": "954efa9e712b85aa226a84d0c2ee313b5a84115143e7540c3f16be8bbcc0c3e6",
+      "drizzle.mjs": "8f4da1d07d347ac1c8e3cd0ffe7aebdcea77f3b36bdbf8cd83d605970d063108",
+      "export-turso-BniKjpsc.mjs": "beb286dbef86d4bd8af261c3cbbdc76f724d5fe0c427780000103957972de1fc",
+      "index.mjs": "accc7751b044d7fc3522a9cd9b48c24d83ee41cf20394871ca71be979837ff0a",
+      "turso.mjs": "2eab0bb37adf22d4aa5837f7973d98f04a148b6cf9db7a85e422451cb773a2d5",
+      "zip-B0YRWi0I.mjs": "754c2bad844af7500b8fd7c68011e1fc7c7e9df5125d41a3522323308e917cf5"
+    },
+    "javascript": {
+      "cache-M7EOabFZ.mjs": "122b4b6f27cf3e5e51f86828c60e55d062e6c3632643226d756a6fdd3e83ad51",
+      "drizzle.mjs": "83f2482f84f9d30c7699a70451373456b0133908d4891cc17fadf498f22bfbde",
+      "export-turso-yxSClsQ6.mjs": "5212039c512673f60d66f789c2f363e533a9dcf7743c2cba3b3c344ebb70e3e7",
+      "index.mjs": "23d39d9f8ba3a342650e6e33cdf460b6836b347c699abf1dcfd28398a4742478",
+      "turso.mjs": "6fd52f3ce5823ee41d0a9936590d99189315f443ced1854f1253b01353a84969",
+      "zip-jDDY5ChR.mjs": "73f52ab10784a71849ddedce62baecc698b1dbfe4a8a124d2eafe8aad67fbd75"
+    }
+  },
+  "versions": {
+    "better-sqlite3": "13.0.3",
+    "zip-stream": "7.0.5",
+    "csv-stringify": "6.9.0",
+    "csv-parse": "7.0.3"
+  },
+  "protocol": "Sequential fresh workers with rotating five-case order. Same immutable fixtures/seed 20261017 and unchanged CSV worker. One hash verification, two warmups, three timed batches; bulk two exports per batch, tiny 50. Natural GC, no instrumentation. Time includes planning, CSV generation, UTF-8/ZIP writes and completion to a counting Node writable; excludes connection/imports and HTTP/network. Whole-process peak RSS includes setup, verification and warmups. 64 KiB buffers, 2048-row yields; ZIP level 1, memLevel 9, 256 KiB compression output chunks. All plain outputs and table/manual ZIP bytes and hashes must match. Query ZIP matches both implementations but uses another entry name. Local native CSV candidate only; Turso remains SQLite."
+}

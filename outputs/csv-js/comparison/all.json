@@ -1,0 +1,2402 @@
+[
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.25905165999999996,
+      0.23879667999999996,
+      0.26905667999999994
+    ],
+    "medianMs": 0.25905165999999996,
+    "peakRssMiB": 69.21875
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.4135325000000002,
+      1.8298975,
+      0.52861584
+    ],
+    "medianMs": 0.52861584,
+    "peakRssMiB": 71.828125
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2966050000000001,
+      0.27058834000000004,
+      0.2515916600000003
+    ],
+    "medianMs": 0.27058834000000004,
+    "peakRssMiB": 71.375
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.3838750000000002,
+      0.3386266599999999,
+      0.3192574999999999
+    ],
+    "medianMs": 0.3386266599999999,
+    "peakRssMiB": 71.921875
+  },
+  {
+    "round": 0,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.24057000000000003,
+      0.20166833999999995,
+      0.19820084000000007
+    ],
+    "medianMs": 0.20166833999999995,
+    "peakRssMiB": 65.359375
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.83852668,
+      0.6611333400000001,
+      0.6886500000000001
+    ],
+    "medianMs": 0.6886500000000001,
+    "peakRssMiB": 103.8125
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      1.1337675000000003,
+      0.7310608200000002,
+      0.7452850000000001
+    ],
+    "medianMs": 0.7452850000000001,
+    "peakRssMiB": 97.671875
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.8819341600000001,
+      0.6502949999999998,
+      0.77587334
+    ],
+    "medianMs": 0.77587334,
+    "peakRssMiB": 102.171875
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      2.63055834,
+      0.8997050000000002,
+      0.8659474999999998
+    ],
+    "medianMs": 0.8997050000000002,
+    "peakRssMiB": 98.75
+  },
+  {
+    "round": 0,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.6492474999999999,
+      0.47295249999999983,
+      0.4822966600000001
+    ],
+    "medianMs": 0.4822966600000001,
+    "peakRssMiB": 101.234375
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      80.968729,
+      45.57983300000001,
+      47.014625000000024
+    ],
+    "medianMs": 47.014625000000024,
+    "peakRssMiB": 99.984375
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      80.43912500000002,
+      79.65060450000001,
+      98.42589550000002
+    ],
+    "medianMs": 80.43912500000002,
+    "peakRssMiB": 88.109375
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      69.64252100000002,
+      68.85145800000001,
+      67.46508349999999
+    ],
+    "medianMs": 68.85145800000001,
+    "peakRssMiB": 79.515625
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      79.91816650000001,
+      86.36714600000002,
+      79.28612499999997
+    ],
+    "medianMs": 79.91816650000001,
+    "peakRssMiB": 87.796875
+  },
+  {
+    "round": 0,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.537396,
+      44.69595850000002,
+      46.48750000000001
+    ],
+    "medianMs": 44.69595850000002,
+    "peakRssMiB": 89.21875
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      51.66883299999999,
+      50.045270999999985,
+      47.44874999999999
+    ],
+    "medianMs": 50.045270999999985,
+    "peakRssMiB": 100.140625
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      86.54050000000001,
+      89.27437499999996,
+      88.2480835
+    ],
+    "medianMs": 88.2480835,
+    "peakRssMiB": 98.703125
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      73.67406249999999,
+      72.06941650000002,
+      77.34412500000002
+    ],
+    "medianMs": 73.67406249999999,
+    "peakRssMiB": 89.421875
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      87.30272899999997,
+      87.12214600000004,
+      85.63489600000003
+    ],
+    "medianMs": 87.12214600000004,
+    "peakRssMiB": 99.5
+  },
+  {
+    "round": 0,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      53.62068749999999,
+      47.050104000000005,
+      49.13187499999998
+    ],
+    "medianMs": 49.13187499999998,
+    "peakRssMiB": 98.546875
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      41.87147950000001,
+      37.925375,
+      38.63693749999999
+    ],
+    "medianMs": 38.63693749999999,
+    "peakRssMiB": 168.03125
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      62.17818749999999,
+      59.08785449999999,
+      62.896479
+    ],
+    "medianMs": 62.17818749999999,
+    "peakRssMiB": 113.765625
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.1302085,
+      63.945978999999994,
+      63.134645499999976
+    ],
+    "medianMs": 63.945978999999994,
+    "peakRssMiB": 117.609375
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      61.10556250000002,
+      60.064145499999995,
+      58.49558350000001
+    ],
+    "medianMs": 60.064145499999995,
+    "peakRssMiB": 113.078125
+  },
+  {
+    "round": 0,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      47.13702049999999,
+      50.154832999999996,
+      49.961895999999996
+    ],
+    "medianMs": 49.961895999999996,
+    "peakRssMiB": 139.21875
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      113.2380205,
+      114.52045849999996,
+      107.56095849999997
+    ],
+    "medianMs": 113.2380205,
+    "peakRssMiB": 151.375
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      119.20049999999998,
+      108.7360625,
+      115.06029200000006
+    ],
+    "medianMs": 115.06029200000006,
+    "peakRssMiB": 116.703125
+  },
+  {
+    "round": 0,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      121.13622900000001,
+      126.34033349999999,
+      155.16489599999994
+    ],
+    "medianMs": 126.34033349999999,
+    "peakRssMiB": 112.1875
+  },
+  {
+    "round": 0,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      147.163646,
+      127.49295799999999,
+      159.78139599999997
+    ],
+    "medianMs": 147.163646,
+    "peakRssMiB": 118.828125
+  },
+  {
+    "round": 0,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      120.30572949999998,
+      161.378396,
+      111.12260399999991
+    ],
+    "medianMs": 120.30572949999998,
+    "peakRssMiB": 120.703125
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.35067831999999993,
+      0.29708666000000006,
+      0.30965000000000004
+    ],
+    "medianMs": 0.30965000000000004,
+    "peakRssMiB": 72.234375
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.3214874999999999,
+      0.25687832,
+      0.24078165999999981
+    ],
+    "medianMs": 0.25687832,
+    "peakRssMiB": 70.984375
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.38993834000000005,
+      0.32923834000000013,
+      0.30314082000000014
+    ],
+    "medianMs": 0.32923834000000013,
+    "peakRssMiB": 72.15625
+  },
+  {
+    "round": 1,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.22362250000000003,
+      0.1945491600000001,
+      0.18111750000000001
+    ],
+    "medianMs": 0.1945491600000001,
+    "peakRssMiB": 65.609375
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.26572834,
+      0.2566550000000001,
+      0.261455
+    ],
+    "medianMs": 0.261455,
+    "peakRssMiB": 69.40625
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.87385332,
+      0.6213491600000003,
+      0.6469458399999997
+    ],
+    "medianMs": 0.6469458399999997,
+    "peakRssMiB": 104.84375
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.7618716800000002,
+      0.6011883200000002,
+      0.5881616600000001
+    ],
+    "medianMs": 0.6011883200000002,
+    "peakRssMiB": 105.46875
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.87797166,
+      0.6352974999999997,
+      0.6771841799999998
+    ],
+    "medianMs": 0.6771841799999998,
+    "peakRssMiB": 100.703125
+  },
+  {
+    "round": 1,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.5917349999999999,
+      0.5705625000000001,
+      0.5935100000000003
+    ],
+    "medianMs": 0.5917349999999999,
+    "peakRssMiB": 100.625
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7622475,
+      0.5606749999999999,
+      0.5865549999999996
+    ],
+    "medianMs": 0.5865549999999996,
+    "peakRssMiB": 106.28125
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      78.52908349999998,
+      77.76797900000003,
+      76.6531665
+    ],
+    "medianMs": 77.76797900000003,
+    "peakRssMiB": 88
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      62.5770625,
+      62.129479499999974,
+      62.2557295
+    ],
+    "medianMs": 62.2557295,
+    "peakRssMiB": 79.515625
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      76.8415,
+      77.32302100000001,
+      76.58783300000005
+    ],
+    "medianMs": 76.8415,
+    "peakRssMiB": 87.828125
+  },
+  {
+    "round": 1,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.499354,
+      43.06162499999999,
+      43.55758349999999
+    ],
+    "medianMs": 43.499354,
+    "peakRssMiB": 89.515625
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.22387499999999,
+      42.464854,
+      42.70764550000001
+    ],
+    "medianMs": 42.70764550000001,
+    "peakRssMiB": 101.390625
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      83.08345800000001,
+      86.01231250000001,
+      83.56297899999998
+    ],
+    "medianMs": 83.56297899999998,
+    "peakRssMiB": 100.203125
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      76.02156249999999,
+      71.58729149999999,
+      69.9503125
+    ],
+    "medianMs": 71.58729149999999,
+    "peakRssMiB": 91
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      85.99470850000003,
+      85.2000205,
+      83.09322900000001
+    ],
+    "medianMs": 85.2000205,
+    "peakRssMiB": 99.796875
+  },
+  {
+    "round": 1,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      50.60852050000001,
+      51.03400000000002,
+      48.64397899999997
+    ],
+    "medianMs": 50.60852050000001,
+    "peakRssMiB": 99.15625
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      49.43374999999999,
+      48.2433125,
+      46.33699999999999
+    ],
+    "medianMs": 48.2433125,
+    "peakRssMiB": 99.71875
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      61.604979,
+      59.27783299999999,
+      61.062457999999964
+    ],
+    "medianMs": 61.062457999999964,
+    "peakRssMiB": 112.578125
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.66993749999999,
+      65.7798335,
+      62.63050000000001
+    ],
+    "medianMs": 64.66993749999999,
+    "peakRssMiB": 117.25
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      61.29462500000001,
+      64.47429199999999,
+      59.41787499999998
+    ],
+    "medianMs": 61.29462500000001,
+    "peakRssMiB": 114.171875
+  },
+  {
+    "round": 1,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      47.261666500000004,
+      46.194312500000024,
+      50.10666649999999
+    ],
+    "medianMs": 47.261666500000004,
+    "peakRssMiB": 139
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      40.8185625,
+      38.238271,
+      39.812354
+    ],
+    "medianMs": 39.812354,
+    "peakRssMiB": 161.09375
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      107.56195799999998,
+      107.13433300000003,
+      110.06879149999997
+    ],
+    "medianMs": 107.56195799999998,
+    "peakRssMiB": 122.984375
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      108.89893750000002,
+      148.13599999999997,
+      115.19916649999999
+    ],
+    "medianMs": 115.19916649999999,
+    "peakRssMiB": 110.28125
+  },
+  {
+    "round": 1,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      112.41912499999998,
+      115.28072899999995,
+      105.01233300000001
+    ],
+    "medianMs": 112.41912499999998,
+    "peakRssMiB": 115.265625
+  },
+  {
+    "round": 1,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      107.11108299999998,
+      105.79345850000004,
+      107.49887499999994
+    ],
+    "medianMs": 107.11108299999998,
+    "peakRssMiB": 123.25
+  },
+  {
+    "round": 1,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      105.89825000000002,
+      106.45502100000004,
+      101.6944795
+    ],
+    "medianMs": 105.89825000000002,
+    "peakRssMiB": 144.890625
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28292,
+      0.24284415999999992,
+      0.24152918
+    ],
+    "medianMs": 0.24284415999999992,
+    "peakRssMiB": 71.578125
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.35006084000000004,
+      0.30011750000000004,
+      0.30328666
+    ],
+    "medianMs": 0.30328666,
+    "peakRssMiB": 71.96875
+  },
+  {
+    "round": 2,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2238891799999999,
+      0.18647165999999998,
+      0.18257084000000007
+    ],
+    "medianMs": 0.18647165999999998,
+    "peakRssMiB": 65.6875
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.23403000000000007,
+      0.24159081999999998,
+      0.2568100000000001
+    ],
+    "medianMs": 0.24159081999999998,
+    "peakRssMiB": 69.390625
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.33998834,
+      0.29921166000000016,
+      0.29464665999999995
+    ],
+    "medianMs": 0.29921166000000016,
+    "peakRssMiB": 72.046875
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.7570675,
+      0.6167266600000002,
+      0.5798775
+    ],
+    "medianMs": 0.6167266600000002,
+    "peakRssMiB": 99.0625
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.83480166,
+      0.6015041600000001,
+      0.7149824999999999
+    ],
+    "medianMs": 0.7149824999999999,
+    "peakRssMiB": 103.8125
+  },
+  {
+    "round": 2,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.5944450000000002,
+      0.4263241599999998,
+      0.40254499999999976
+    ],
+    "medianMs": 0.4263241599999998,
+    "peakRssMiB": 100.03125
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.78994834,
+      0.55744666,
+      0.6171608400000003
+    ],
+    "medianMs": 0.6171608400000003,
+    "peakRssMiB": 105.015625
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8316091600000002,
+      0.6867083200000001,
+      0.7030225000000001
+    ],
+    "medianMs": 0.7030225000000001,
+    "peakRssMiB": 102.609375
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      62.75177099999999,
+      62.7374585,
+      62.947978999999975
+    ],
+    "medianMs": 62.75177099999999,
+    "peakRssMiB": 78.953125
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      77.21085450000001,
+      77.21449999999999,
+      75.72620849999998
+    ],
+    "medianMs": 77.21085450000001,
+    "peakRssMiB": 88.09375
+  },
+  {
+    "round": 2,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.18745800000001,
+      44.683937499999985,
+      44.51502099999999
+    ],
+    "medianMs": 44.51502099999999,
+    "peakRssMiB": 89.421875
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.057103999999995,
+      42.474687500000016,
+      42.183708499999995
+    ],
+    "medianMs": 42.474687500000016,
+    "peakRssMiB": 101.703125
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      75.882229,
+      78.49641650000001,
+      77.72495800000002
+    ],
+    "medianMs": 77.72495800000002,
+    "peakRssMiB": 88.046875
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      69.4077915,
+      68.92754149999999,
+      68.83389549999998
+    ],
+    "medianMs": 68.92754149999999,
+    "peakRssMiB": 90.09375
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      85.5016875,
+      86.02295849999996,
+      85.52833349999997
+    ],
+    "medianMs": 85.52833349999997,
+    "peakRssMiB": 98.734375
+  },
+  {
+    "round": 2,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.5041665,
+      49.956771,
+      47.439291499999996
+    ],
+    "medianMs": 48.5041665,
+    "peakRssMiB": 98.203125
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.13237499999998,
+      48.321312500000005,
+      46.640562500000016
+    ],
+    "medianMs": 48.13237499999998,
+    "peakRssMiB": 100.25
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      89.65118749999999,
+      83.62202100000002,
+      83.92139600000002
+    ],
+    "medianMs": 83.92139600000002,
+    "peakRssMiB": 100.546875
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.1110625,
+      63.932083500000005,
+      63.88068749999999
+    ],
+    "medianMs": 63.932083500000005,
+    "peakRssMiB": 116.828125
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      59.574625,
+      58.593812499999984,
+      59.31472900000003
+    ],
+    "medianMs": 59.31472900000003,
+    "peakRssMiB": 113.609375
+  },
+  {
+    "round": 2,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      46.588166499999986,
+      45.756958,
+      50.85733300000001
+    ],
+    "medianMs": 46.588166499999986,
+    "peakRssMiB": 138.53125
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      39.5871875,
+      38.0431665,
+      37.83325000000002
+    ],
+    "medianMs": 38.0431665,
+    "peakRssMiB": 171.421875
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      65.0276875,
+      67.11347950000001,
+      60.51814599999997
+    ],
+    "medianMs": 65.0276875,
+    "peakRssMiB": 112.5
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      110.11764600000001,
+      142.09060449999998,
+      107.92781250000007
+    ],
+    "medianMs": 110.11764600000001,
+    "peakRssMiB": 110.53125
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      233.48845849999998,
+      117.2321665,
+      139.6986875
+    ],
+    "medianMs": 139.6986875,
+    "peakRssMiB": 120.96875
+  },
+  {
+    "round": 2,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      119.7746875,
+      117.08270800000003,
+      106.27797949999996
+    ],
+    "medianMs": 117.08270800000003,
+    "peakRssMiB": 120.734375
+  },
+  {
+    "round": 2,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      104.30629150000001,
+      102.57777050000004,
+      103.11427099999997
+    ],
+    "medianMs": 103.11427099999997,
+    "peakRssMiB": 149.546875
+  },
+  {
+    "round": 2,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      108.96216650000002,
+      106.09664550000002,
+      105.53654150000006
+    ],
+    "medianMs": 106.09664550000002,
+    "peakRssMiB": 120
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.4124275,
+      0.3031916800000001,
+      0.2929358400000001
+    ],
+    "medianMs": 0.3031916800000001,
+    "peakRssMiB": 71.71875
+  },
+  {
+    "round": 3,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.21466165999999987,
+      0.18317166000000001,
+      0.18281749999999988
+    ],
+    "medianMs": 0.18317166000000001,
+    "peakRssMiB": 65.484375
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.24941834,
+      0.24120999999999995,
+      0.23595082000000006
+    ],
+    "medianMs": 0.24120999999999995,
+    "peakRssMiB": 69.4375
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.32202,
+      0.29636750000000006,
+      0.28938084000000003
+    ],
+    "medianMs": 0.29636750000000006,
+    "peakRssMiB": 71.90625
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.280475,
+      0.24182416000000004,
+      0.2491116600000001
+    ],
+    "medianMs": 0.2491116600000001,
+    "peakRssMiB": 71.625
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.9974475000000002,
+      0.7695741599999997,
+      0.8775075000000004
+    ],
+    "medianMs": 0.8775075000000004,
+    "peakRssMiB": 101.28125
+  },
+  {
+    "round": 3,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      1.92388416,
+      0.80947,
+      0.7973116600000003
+    ],
+    "medianMs": 0.80947,
+    "peakRssMiB": 98.625
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.89279582,
+      0.6652791600000001,
+      0.7430541599999998
+    ],
+    "medianMs": 0.7430541599999998,
+    "peakRssMiB": 99.453125
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.9189916799999998,
+      0.6804374999999999,
+      0.8012041800000003
+    ],
+    "medianMs": 0.8012041800000003,
+    "peakRssMiB": 94.234375
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.977465,
+      0.8758233400000003,
+      0.6020449999999999
+    ],
+    "medianMs": 0.8758233400000003,
+    "peakRssMiB": 104.5
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      83.393271,
+      83.79897900000003,
+      84.16456249999999
+    ],
+    "medianMs": 83.79897900000003,
+    "peakRssMiB": 88.390625
+  },
+  {
+    "round": 3,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      46.08347900000001,
+      44.91291699999999,
+      43.842791499999976
+    ],
+    "medianMs": 44.91291699999999,
+    "peakRssMiB": 89.09375
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.8632915,
+      42.9795,
+      42.807207999999974
+    ],
+    "medianMs": 42.9795,
+    "peakRssMiB": 99.171875
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      78.09364550000001,
+      77.97975000000002,
+      77.80668750000001
+    ],
+    "medianMs": 77.97975000000002,
+    "peakRssMiB": 87.578125
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      66.9967295,
+      64.56679199999999,
+      63.74241649999999
+    ],
+    "medianMs": 64.56679199999999,
+    "peakRssMiB": 79.359375
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      92.12452099999999,
+      84.23325,
+      82.95991699999996
+    ],
+    "medianMs": 84.23325,
+    "peakRssMiB": 99.734375
+  },
+  {
+    "round": 3,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.25818749999999,
+      47.61527050000001,
+      47.845354499999985
+    ],
+    "medianMs": 47.845354499999985,
+    "peakRssMiB": 98.25
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.388291499999994,
+      46.51056250000002,
+      46.5453335
+    ],
+    "medianMs": 46.5453335,
+    "peakRssMiB": 101.953125
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      89.36839549999996,
+      118.76639600000004,
+      135.4958125
+    ],
+    "medianMs": 118.76639600000004,
+    "peakRssMiB": 99.8125
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      70.31162499999999,
+      79.42568750000004,
+      69.25549999999998
+    ],
+    "medianMs": 70.31162499999999,
+    "peakRssMiB": 90.40625
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      61.937749999999994,
+      60.28037499999999,
+      64.75018749999998
+    ],
+    "medianMs": 61.937749999999994,
+    "peakRssMiB": 113.640625
+  },
+  {
+    "round": 3,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      46.61110450000001,
+      46.87310450000001,
+      48.9492085
+    ],
+    "medianMs": 46.87310450000001,
+    "peakRssMiB": 139.125
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.340520999999995,
+      37.2551045,
+      36.876125
+    ],
+    "medianMs": 37.2551045,
+    "peakRssMiB": 170.28125
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      59.268,
+      58.476124999999996,
+      58.423812500000025
+    ],
+    "medianMs": 58.476124999999996,
+    "peakRssMiB": 112.21875
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.05843750000001,
+      67.4500835,
+      64.21989599999998
+    ],
+    "medianMs": 64.21989599999998,
+    "peakRssMiB": 117.5625
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      113.22554149999999,
+      121.52758349999999,
+      114.11441699999995
+    ],
+    "medianMs": 114.11441699999995,
+    "peakRssMiB": 114.15625
+  },
+  {
+    "round": 3,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      108.3325625,
+      124.93841650000002,
+      105.99956250000002
+    ],
+    "medianMs": 108.3325625,
+    "peakRssMiB": 123.40625
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      102.89816699999997,
+      102.438333,
+      102.31824999999998
+    ],
+    "medianMs": 102.438333,
+    "peakRssMiB": 141.859375
+  },
+  {
+    "round": 3,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      106.754354,
+      106.769229,
+      139.08139550000004
+    ],
+    "medianMs": 106.769229,
+    "peakRssMiB": 119.609375
+  },
+  {
+    "round": 3,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      105.86606250000003,
+      106.99325000000005,
+      105.18962499999998
+    ],
+    "medianMs": 105.86606250000003,
+    "peakRssMiB": 109.671875
+  },
+  {
+    "round": 4,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2158099999999999,
+      0.18766084000000005,
+      0.18606750000000005
+    ],
+    "medianMs": 0.18766084000000005,
+    "peakRssMiB": 65.40625
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.24329918000000006,
+      0.26435000000000014,
+      0.25168165999999986
+    ],
+    "medianMs": 0.25168165999999986,
+    "peakRssMiB": 69.546875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.33000918,
+      0.29899165999999994,
+      0.2886208399999998
+    ],
+    "medianMs": 0.29899165999999994,
+    "peakRssMiB": 71.78125
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2848616600000001,
+      0.24420081999999993,
+      0.23273499999999983
+    ],
+    "medianMs": 0.24420081999999993,
+    "peakRssMiB": 71.296875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.3381283400000001,
+      0.2920025000000001,
+      0.2889866599999999
+    ],
+    "medianMs": 0.2920025000000001,
+    "peakRssMiB": 71.78125
+  },
+  {
+    "round": 4,
+    "variant": "manual",
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.5766116800000001,
+      0.39963583999999996,
+      0.40185666
+    ],
+    "medianMs": 0.40185666,
+    "peakRssMiB": 99.296875
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7477391800000001,
+      0.5403366599999998,
+      0.5967458199999999
+    ],
+    "medianMs": 0.5967458199999999,
+    "peakRssMiB": 105.546875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.9192599999999999,
+      0.6119558400000003,
+      0.7018625000000003
+    ],
+    "medianMs": 0.7018625000000003,
+    "peakRssMiB": 96.625
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.79319168,
+      0.5602016599999999,
+      0.59993
+    ],
+    "medianMs": 0.59993,
+    "peakRssMiB": 103.46875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.8137116600000002,
+      0.5960741599999997,
+      0.6608099999999996
+    ],
+    "medianMs": 0.6608099999999996,
+    "peakRssMiB": 113.953125
+  },
+  {
+    "round": 4,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      78.23322950000001,
+      43.90285399999999,
+      44.15293750000001
+    ],
+    "medianMs": 44.15293750000001,
+    "peakRssMiB": 90.046875
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      42.733000000000004,
+      43.08116699999999,
+      42.42866649999999
+    ],
+    "medianMs": 42.733000000000004,
+    "peakRssMiB": 101.171875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      77.9562085,
+      77.38620850000001,
+      77.71600000000001
+    ],
+    "medianMs": 77.71600000000001,
+    "peakRssMiB": 87.625
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      61.5466045,
+      61.66035450000001,
+      61.07320850000002
+    ],
+    "medianMs": 61.5466045,
+    "peakRssMiB": 79.546875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      83.405021,
+      77.79624999999999,
+      78.3872915
+    ],
+    "medianMs": 78.3872915,
+    "peakRssMiB": 88.484375
+  },
+  {
+    "round": 4,
+    "variant": "manual",
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      49.036083500000004,
+      49.14904150000001,
+      55.87137499999997
+    ],
+    "medianMs": 49.14904150000001,
+    "peakRssMiB": 101.9375
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      47.68862499999999,
+      46.55347949999998,
+      47.677437499999996
+    ],
+    "medianMs": 47.677437499999996,
+    "peakRssMiB": 100.5
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      84.31172900000001,
+      83.17741650000002,
+      83.03079150000002
+    ],
+    "medianMs": 83.17741650000002,
+    "peakRssMiB": 99.890625
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      69.16481249999998,
+      69.15143749999999,
+      70.74114600000001
+    ],
+    "medianMs": 69.16481249999998,
+    "peakRssMiB": 90.828125
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      84.37131250000002,
+      108.04004149999997,
+      82.33625
+    ],
+    "medianMs": 84.37131250000002,
+    "peakRssMiB": 99.828125
+  },
+  {
+    "round": 4,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      47.03533350000001,
+      45.5401875,
+      50.546062500000005
+    ],
+    "medianMs": 47.03533350000001,
+    "peakRssMiB": 138.375
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.6028125,
+      37.0748545,
+      37.26849999999999
+    ],
+    "medianMs": 37.26849999999999,
+    "peakRssMiB": 167.90625
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      61.36935399999999,
+      178.629875,
+      134.435792
+    ],
+    "medianMs": 134.435792,
+    "peakRssMiB": 112.515625
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      72.0615,
+      66.00008350000002,
+      63.98052050000001
+    ],
+    "medianMs": 66.00008350000002,
+    "peakRssMiB": 116.6875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      63.287125,
+      60.8046875,
+      59.37697899999998
+    ],
+    "medianMs": 60.8046875,
+    "peakRssMiB": 113.453125
+  },
+  {
+    "round": 4,
+    "variant": "manual",
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      111.061521,
+      106.71337499999998,
+      104.8058125
+    ],
+    "medianMs": 106.71337499999998,
+    "peakRssMiB": 123.03125
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      105.18197949999998,
+      103.89637499999998,
+      116.56506249999995
+    ],
+    "medianMs": 105.18197949999998,
+    "peakRssMiB": 150.046875
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      107.47837500000003,
+      106.735771,
+      111.09056250000003
+    ],
+    "medianMs": 107.47837500000003,
+    "peakRssMiB": 118.359375
+  },
+  {
+    "round": 4,
+    "variant": "sqlite",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      105.74112499999998,
+      106.12591649999996,
+      106.6191665
+    ],
+    "medianMs": 106.12591649999996,
+    "peakRssMiB": 109.765625
+  },
+  {
+    "round": 4,
+    "variant": "javascript",
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      105.72022900000002,
+      106.5159375,
+      104.35810450000002
+    ],
+    "medianMs": 105.72022900000002,
+    "peakRssMiB": 119.34375
+  }
+]
