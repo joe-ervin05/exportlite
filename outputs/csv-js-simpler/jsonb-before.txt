@@ -1,0 +1,191 @@
+
+ RUN  v5.0.5 /Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite
+
+ ❯ tests/csv.test.ts (40 tests | 4 failed | 36 skipped) 58ms
+   × rejects JSONB as raw CSV through native, plain and ZIP 22ms
+   × rejects JSONB as raw CSV through drizzle, plain and ZIP 3ms
+   × rejects JSONB as raw CSV through turso, plain and ZIP 25ms
+   × rejects JSONB as raw CSV through drizzle-turso, plain and ZIP 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/csv.test.ts > rejects JSONB as raw CSV through native, plain and ZIP
+ FAIL  tests/csv.test.ts > rejects JSONB as raw CSV through drizzle, plain and ZIP
+ FAIL  tests/csv.test.ts > rejects JSONB as raw CSV through turso, plain and ZIP
+ FAIL  tests/csv.test.ts > rejects JSONB as raw CSV through drizzle-turso, plain and ZIP
+AssertionError: promise resolved "" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
+- }
++ ArrayBuffer [
++   34,
++   117,
++   115,
++   101,
++   114,
++   73,
++   100,
++   34,
++   44,
++   34,
++   108,
++   97,
++   98,
++   101,
++   108,
++   34,
++   44,
++   34,
++   112,
++   97,
++   121,
++   108,
++   111,
++   97,
++   100,
++   34,
++   44,
++   34,
++   97,
++   99,
++   116,
++   105,
++   118,
++   101,
++   34,
++   13,
++   10,
++   45,
++   51,
++   44,
++   110,
++   117,
++   108,
++   108,
++   44,
++   34,
++   61,
++   49,
++   43,
++   49,
++   34,
++   44,
++   34,
++   116,
++   114,
++   117,
++   101,
++   34,
++   13,
++   10,
++   56,
++   44,
++   34,
++   34,
++   44,
++   44,
++   34,
++   102,
++   97,
++   108,
++   115,
++   101,
++   34,
++   13,
++   10,
++   49,
++   57,
++   44,
++   44,
++   34,
++   0,
++   98,
++   101,
++   102,
++   111,
++   114,
++   101,
++   34,
++   34,
++   97,
++   102,
++   116,
++   101,
++   114,
++   0,
++   101,
++   110,
++   100,
++   34,
++   44,
++   13,
++   10,
++   57,
++   48,
++   48,
++   55,
++   49,
++   57,
++   57,
++   50,
++   53,
++   52,
++   55,
++   52,
++   48,
++   57,
++   57,
++   51,
++   44,
++   34,
++   32,
++   116,
++   101,
++   115,
++   116,
++   32,
++   34,
++   44,
++   34,
++   97,
++   44,
++   98,
++   10,
++   99,
++   13,
++   100,
++   9,
++   101,
++   110,
++   100,
++   34,
++   44,
++   34,
++   116,
++   114,
++   117,
++   101,
++   34,
++   13,
++   10,
++ ]
+
+ ❯ tests/csv.test.ts:458:55
+    456|           await Promise.all([
+    457|             expect(stream.result).rejects.toMatchObject({ code: "SQLIT…
+    458|             expect(new Response(stream).arrayBuffer()).rejects.toMatch…
+       |                                                       ^
+    459|               code: "SQLITE_ERROR",
+    460|             }),
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 36 skipped (40)
+   Start at  18:21:31
+   Duration  638ms (import 74%, transform 14%, tests 11%, worker 1%)

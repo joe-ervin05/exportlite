@@ -1,0 +1,162 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "baseline": "c2f7c513ed0958b24bf2897b6e1da1b730ca0d3a",
+  "versions": {
+    "better-sqlite3": "13.0.3",
+    "drizzle-orm": "0.45.4",
+    "zip-stream": "7.0.5",
+    "tsdown": "0.23.1",
+    "typescript": "7.0.2"
+  },
+  "workers": 250,
+  "rounds": 5,
+  "cases": 50,
+  "publicDeclarationFilesIdentical": [
+    "adapter-DfuRNeZV.d.cts",
+    "adapter-DfuRNeZV.d.mts",
+    "drizzle.d.cts",
+    "drizzle.d.mts",
+    "index.d.cts",
+    "index.d.mts",
+    "turso-DCSfWAWR.d.cts",
+    "turso-DCSfWAWR.d.mts",
+    "turso.d.cts",
+    "turso.d.mts",
+    "types-DVeygu9-.d.cts",
+    "types-DVeygu9-.d.mts"
+  ],
+  "suites": {
+    "production": 473,
+    "native": 473,
+    "guarded": 473
+  },
+  "qualifiedFidelity": {
+    "exports": 168,
+    "preservingMatches": 144,
+    "unsafeRawMismatches": 24,
+    "callerSafeIntegerSettingVerified": true
+  },
+  "productionChanges": [
+    "Only CSV raw-BLOB rejection; SQLite remains the default.",
+    "No new API option, package/build configuration, batch, buffering, ZIP or driver change."
+  ],
+  "prototypeStatus": "Experimental only. Timed patches retain original BLOB guards; qualified patches add the rejection fix and regression tests. Not shipped.",
+  "patches": {
+    "native-values-timed.patch": "2515924601db41b63d2b53d13e6561eb0878a18e70100a38d72e2739f3870c4a",
+    "native-values-qualified.patch": "bbdcecd886802829f42e457d929d07badf136613eb0a473ac35984edd02be145",
+    "guarded-values-timed.patch": "5c5c880713a8b6cffb94cef709c8825749b14936e5cb405ed2d15aa8e7e828c2",
+    "guarded-values-qualified.patch": "7b89c51ff9a5499bf31d6fbab662d9a78581e0f5c5b0f0f51dc588707c1c8e0a"
+  },
+  "regression": [
+    {
+      "fixture": "narrow",
+      "compression": "none",
+      "beforeMs": 40.2584585,
+      "afterMs": 40.198312500000014,
+      "changePct": -0.1493996597012992,
+      "beforePeakMiB": 100.765625,
+      "afterPeakMiB": 100.359375
+    },
+    {
+      "fixture": "narrow",
+      "compression": "zip",
+      "beforeMs": 43.649396000000024,
+      "afterMs": 42.825728999999995,
+      "changePct": -1.8870066380758832,
+      "beforePeakMiB": 94.421875,
+      "afterPeakMiB": 93.4375
+    },
+    {
+      "fixture": "wide",
+      "compression": "none",
+      "beforeMs": 36.6869585,
+      "afterMs": 37.165604000000016,
+      "changePct": 1.3046747933601832,
+      "beforePeakMiB": 167.78125,
+      "afterPeakMiB": 166.359375
+    },
+    {
+      "fixture": "wide",
+      "compression": "zip",
+      "beforeMs": 90.8872915,
+      "afterMs": 91.5777085,
+      "changePct": 0.759640856939825,
+      "beforePeakMiB": 141.625,
+      "afterPeakMiB": 139.546875
+    }
+  ],
+  "percentages": [
+    {
+      "fixture": "narrow",
+      "compression": "none",
+      "exactTimeSavedVsOldPct": 23.917982073516853,
+      "exactExtraTimeVsManualPct": 36.76209416396936,
+      "exactExtraTimeVsSqlitePct": 45.26838379160934
+    },
+    {
+      "fixture": "narrow",
+      "compression": "zip",
+      "exactTimeSavedVsOldPct": 25.49711118446345,
+      "exactExtraTimeVsManualPct": 28.519829144434116,
+      "exactExtraTimeVsSqlitePct": 42.644572641723634
+    },
+    {
+      "fixture": "wide",
+      "compression": "none",
+      "exactTimeSavedVsOldPct": 10.262879231213073,
+      "exactExtraTimeVsManualPct": 13.742127407045345,
+      "exactExtraTimeVsSqlitePct": 39.73358847466288
+    },
+    {
+      "fixture": "wide",
+      "compression": "zip",
+      "exactTimeSavedVsOldPct": -1.0241823771782288,
+      "exactExtraTimeVsManualPct": -8.062094864334545,
+      "exactExtraTimeVsSqlitePct": 3.5803666860153127
+    },
+    {
+      "fixture": "boolean",
+      "compression": "none",
+      "exactTimeSavedVsOldPct": 46.976619215382854,
+      "exactExtraTimeVsManualPct": 47.841642665557146,
+      "exactExtraTimeVsSqlitePct": 148.8535473796889
+    },
+    {
+      "fixture": "boolean",
+      "compression": "zip",
+      "exactTimeSavedVsOldPct": 47.80242670138127,
+      "exactExtraTimeVsManualPct": 43.80998308504203,
+      "exactExtraTimeVsSqlitePct": 148.17601065109832
+    },
+    {
+      "fixture": "json",
+      "compression": "none",
+      "exactTimeSavedVsOldPct": 13.161292789668366,
+      "exactExtraTimeVsManualPct": -25.344039007901344,
+      "exactExtraTimeVsSqlitePct": 185.37344753064343
+    },
+    {
+      "fixture": "json",
+      "compression": "zip",
+      "exactTimeSavedVsOldPct": 12.93460232757938,
+      "exactExtraTimeVsManualPct": -28.1133585149654,
+      "exactExtraTimeVsSqlitePct": 184.72833566969064
+    },
+    {
+      "fixture": "many-columns",
+      "compression": "none",
+      "exactTimeSavedVsOldPct": 15.157212568561684,
+      "exactExtraTimeVsManualPct": 21.54044885322135,
+      "exactExtraTimeVsSqlitePct": 64.96885655231728
+    },
+    {
+      "fixture": "many-columns",
+      "compression": "zip",
+      "exactTimeSavedVsOldPct": 15.834133281916596,
+      "exactExtraTimeVsManualPct": 12.561635303837448,
+      "exactExtraTimeVsSqlitePct": 63.653795036750125
+    }
+  ],
+  "initialHarnessFailures": "The first native-values suite lacked two copied example files; restored, then the full 469 original tests passed. Production and both qualified candidates subsequently pass all 473 tests."
+}

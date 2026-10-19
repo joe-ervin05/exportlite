@@ -1,5 +1,7 @@
 # JS CSV encoding inside ExportLite
 
+Follow-up: the [simpler JS encoder investigation](CSV-JS-FOLLOWUP.md) separates driver normalization from delivery overhead, measures exact native-value prototypes against the current SQLite/manual paths, and fixes raw JSONB rejection. The measurements below retain the earlier implementation and ZIP checksum settings.
+
 The JS candidate reduces memory for wide exports, but does not replace SQLite batching without a speed tradeoff. Keep the current SQLite default. The candidate remains a reproducible benchmark experiment, with no new public option, dependency or runtime change in the normal package sources.
 
 Measured October 19, 2026 on Apple M1 Pro, Node **26.12.0**, SQLite **3.53.4**, using the exact Node executable and fixture hashes from the previous CSV comparison. Registry checks found the current pinned versions: better-sqlite3 13.0.3, zip-stream 7.0.5, csv-stringify 6.9.0 and csv-parse 7.0.3. No dependency updates were needed.

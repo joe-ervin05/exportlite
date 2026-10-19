@@ -1,0 +1,8 @@
+
+ RUN  v5.0.5 /Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/exportlite
+
+
+ Test Files  1 passed (1)
+      Tests  40 passed (40)
+   Start at  18:21:34
+   Duration  1.56s (tests 75%, import 22%, transform 3%)

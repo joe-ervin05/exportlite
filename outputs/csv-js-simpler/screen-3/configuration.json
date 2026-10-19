@@ -1,0 +1,175 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "rounds": 1,
+  "cases": [
+    {
+      "variant": "sqlite",
+      "method": "table"
+    },
+    {
+      "variant": "native-values",
+      "method": "table"
+    },
+    {
+      "variant": "guarded-values",
+      "method": "table"
+    },
+    {
+      "variant": "chain",
+      "method": "table"
+    },
+    {
+      "variant": "manual",
+      "method": "manual-tuned"
+    }
+  ],
+  "compressions": [
+    "none"
+  ],
+  "fixtures": [
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "path": "/Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-deep/fixtures/narrow.sqlite",
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2634697,
+      "csvSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "path": "/Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-deep/fixtures/wide.sqlite",
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14619815,
+      "csvSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "buildHashes": {
+    "sqlite": {
+      "cache-BnaEVKnc.mjs": "9f184eba0c42610a072e0052357c5ce94eb5da18f14ada950057b3893389ad81",
+      "cache-DsUispYf.cjs": "deec5c91d69f50a4a6cfefe4f5382c04a810e074a09abd0d12457e6d84532ce0",
+      "drizzle.cjs": "184bba502511700db886b43bf8908c3140c2202df0cf332e99111892e49de7c8",
+      "drizzle.mjs": "66c6cda7740123b8bb32f6e8af9d1ee20efd8f29feda7052762e1af4d2c67953",
+      "export-turso-DwJiY3TK.mjs": "e8a258ad2f930ca7aa72b108c68f0e1dde83ac26db27d0b465d005086c4fe4aa",
+      "export-turso-y854XaSg.cjs": "15082a02abcd7d614618969749873038bf3039c2b75d8105ea56df0f8b6e25a0",
+      "index.cjs": "eb761594ffbaac65c60577e3b709869ca82f42d5eb221018c36fed8f6c5790d6",
+      "index.mjs": "e35b9d4c7dc68e9507adc71832e7ab3fc83df75eb6683b1141f252a8e7335237",
+      "turso.cjs": "16f2d75ffcece65ac7476831257dfe3f5bbf121c55120d28add3f6faf75872c4",
+      "turso.mjs": "23169c83f7010fdd740e2bda61427750a8469e317d7bbb55fc6dbf11d872f327",
+      "zip-I8046YLb.cjs": "a0ae56abd563ec24e816cc15a94c048279e6dc870c2a117ae2eb126c58a4945b",
+      "zip-stream-BC0ajz0_.mjs": "877e6cf9bb1ade9131dd8d667e188f92768264b5b32ddc374c3d32e26fbdf88d",
+      "zip-stream-Bx89vtj0.cjs": "bdf8f07423beb53a8821e988df1b8347463d9b3ac013574fca10af9ffdda27dc",
+      "zip-zEC71qRI.mjs": "bc81d60b3fd0ba8d922033fc0d14d83b8c0f410953505fe765d5809d072b794c"
+    },
+    "native-values": {
+      "cache-Bx2yTxMX.cjs": "33c8164445ddb2a5288195726827b95362f72036899a43892252af061e7ad64d",
+      "cache-a4kkGk9K.mjs": "5e9904509970062b22a3a0d50c098f30c410f0ab8ba49264729f2b5671aa4a7d",
+      "drizzle.cjs": "ac8148091c35e01faed906f2061535b597a3bea491de3be93cb08fbee01f715f",
+      "drizzle.mjs": "1fbe277bc91dec085af883f7423c9284347c61c0ce66d9439627dd4504604677",
+      "export-turso-DDewojr4.cjs": "84ffac267176e7e17ed388eb8985440e8cc8266ccc1e42bc242834e9209fbfd6",
+      "export-turso-S4NXtxuW.mjs": "5e1795c5607ab09471274e4678aef7698df7d9eab4e4296bda867007f7857e87",
+      "index.cjs": "f7b06cd1bdc6ab327b05176b6379efa16bd0a40d08e9789abdc963375cf660da",
+      "index.mjs": "730a62de42cda99fac8f8654eaa77ae7b400d13c3cc2f0b266e0ce281258ec44",
+      "turso.cjs": "74392af45183fe44aecc966827c1b17c72d3e29adbaedf0be63ce7edf5a31bb5",
+      "turso.mjs": "119667d77df67046505d03f0f3984463ab16c3ac42c7582550c4550c06041798",
+      "zip-FBfnLx8P.cjs": "2c64c571052648fce05afc2c0a46fd834141971a2e9b66053dc418a0eeec2e12",
+      "zip-bLLvTRW4.mjs": "86044dadabc19f6edef655c869fc7f37d49136876b5e67ebafbe7c48084fe71c",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e"
+    },
+    "guarded-values": {
+      "cache-BX8PSCsP.mjs": "729768dba6b88033fb1dc8f936c0919e32de2dc2d641d8daaf1b3ae800d0be97",
+      "cache-Lh5RwzmF.cjs": "28080c833337eac7c6a8dfc32d18c23da091164c9c3b423449d85b63eda36d34",
+      "drizzle.cjs": "c325ead2b40fcc3fb85b0f6d3ad8df34b02d69fe7b09eae848f99c1823fca482",
+      "drizzle.mjs": "fa6d7e6ed64284c41b299bdc4b3fa125b7599a8945fce2e241493d72540b3cf2",
+      "export-turso-CxWIsGxs.mjs": "b2f787be7697f349ee04a87748b3b66fe8443ef8d10a0ed1a2a494659019d7b7",
+      "export-turso-DVD5PoAj.cjs": "45cbd9d6d886d052f8fb1e9d0922bd2d69bfea80b74a7fd20ccb74074b3d4c58",
+      "index.cjs": "907f3888f3563e4dd91413f604cd2160c28523b215630310299e955653b0786a",
+      "index.mjs": "fc1fe91cebb65747583d1d3f1e852310c7876c1981355878b62edac6b744705f",
+      "turso.cjs": "8960a5fd3077735675fcfb7b9b18a06b63df054591ed9a98c8f6bb81d1544bf8",
+      "turso.mjs": "71561a070e4cb386ad89030bd137dd47453f1a2474e509938d390823e3eb1445",
+      "zip-CCUb7C--.mjs": "98efede2950ff5f3a8d05382000b3cea3808748fdcc1cf104e0d7205fec29b62",
+      "zip-UpBm9mob.cjs": "9950e5b98eecde41ef9a8b06ca89d1389805d5dcdc5e0507ba6da24096700339",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e"
+    },
+    "chain": {
+      "cache-CV3O5JKu.mjs": "a4915e842b42a4e95810993318a535e6dfe27618c8fda847e95fecece3c4f30e",
+      "cache-CwK0tsNJ.cjs": "297df48b238a0464d06841f0d56f42cd4d298c010400c392e1547e749bf5a104",
+      "drizzle.cjs": "6369616c1eb124010da52001854cce5fa0932ae8a5f57687b82f143b685cf096",
+      "drizzle.mjs": "0ebe649b882ae1c1b244655a9333c8a1b80f5428dfd1ac4193c4ad5fcdd2a460",
+      "export-turso-DDewojr4.cjs": "84ffac267176e7e17ed388eb8985440e8cc8266ccc1e42bc242834e9209fbfd6",
+      "export-turso-S4NXtxuW.mjs": "5e1795c5607ab09471274e4678aef7698df7d9eab4e4296bda867007f7857e87",
+      "index.cjs": "0a194c0764bdf972f186bd4be16a35b908132bc78901298198031ef1fc8cbeae",
+      "index.mjs": "c4d103254b584136c6373a79ec0d3e9c11d7a5259868cef593628100d0617187",
+      "turso.cjs": "74392af45183fe44aecc966827c1b17c72d3e29adbaedf0be63ce7edf5a31bb5",
+      "turso.mjs": "119667d77df67046505d03f0f3984463ab16c3ac42c7582550c4550c06041798",
+      "zip-FBfnLx8P.cjs": "2c64c571052648fce05afc2c0a46fd834141971a2e9b66053dc418a0eeec2e12",
+      "zip-bLLvTRW4.mjs": "86044dadabc19f6edef655c869fc7f37d49136876b5e67ebafbe7c48084fe71c",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e"
+    },
+    "manual": {
+      "cache-BnaEVKnc.mjs": "9f184eba0c42610a072e0052357c5ce94eb5da18f14ada950057b3893389ad81",
+      "cache-DsUispYf.cjs": "deec5c91d69f50a4a6cfefe4f5382c04a810e074a09abd0d12457e6d84532ce0",
+      "drizzle.cjs": "184bba502511700db886b43bf8908c3140c2202df0cf332e99111892e49de7c8",
+      "drizzle.mjs": "66c6cda7740123b8bb32f6e8af9d1ee20efd8f29feda7052762e1af4d2c67953",
+      "export-turso-DwJiY3TK.mjs": "e8a258ad2f930ca7aa72b108c68f0e1dde83ac26db27d0b465d005086c4fe4aa",
+      "export-turso-y854XaSg.cjs": "15082a02abcd7d614618969749873038bf3039c2b75d8105ea56df0f8b6e25a0",
+      "index.cjs": "eb761594ffbaac65c60577e3b709869ca82f42d5eb221018c36fed8f6c5790d6",
+      "index.mjs": "e35b9d4c7dc68e9507adc71832e7ab3fc83df75eb6683b1141f252a8e7335237",
+      "turso.cjs": "16f2d75ffcece65ac7476831257dfe3f5bbf121c55120d28add3f6faf75872c4",
+      "turso.mjs": "23169c83f7010fdd740e2bda61427750a8469e317d7bbb55fc6dbf11d872f327",
+      "zip-I8046YLb.cjs": "a0ae56abd563ec24e816cc15a94c048279e6dc870c2a117ae2eb126c58a4945b",
+      "zip-stream-BC0ajz0_.mjs": "877e6cf9bb1ade9131dd8d667e188f92768264b5b32ddc374c3d32e26fbdf88d",
+      "zip-stream-Bx89vtj0.cjs": "bdf8f07423beb53a8821e988df1b8347463d9b3ac013574fca10af9ffdda27dc",
+      "zip-zEC71qRI.mjs": "bc81d60b3fd0ba8d922033fc0d14d83b8c0f410953505fe765d5809d072b794c"
+    }
+  },
+  "workerSha256": "4e09848b95f822fabc843c572c01e27e9462426eb23c3543b0103aff003d6760",
+  "protocol": "Sequential fresh workers, rotating method order. One output verification, two warmups, three timed batches (two exports for bulk data). Same Node/fixtures, natural GC, no profiling hooks or forced GC. Setup excluded from time, included in whole-process peak RSS; matched ESM Drizzle setup. API generation, UTF-8, ZIP and sink completion included; no HTTP/disk. ZIP settings and package native CRC fixed. Manual uses installed unmodified ZIP writer. Raw variant is diagnostic ONLY and does not preserve arbitrary numeric fidelity."
+}

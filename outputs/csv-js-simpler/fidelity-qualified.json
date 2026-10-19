@@ -1,0 +1,1686 @@
+{
+  "node": "v26.12.0",
+  "description": "168 actual Web-stream exports: three database encodings, two caller safe-integer defaults, table/parameterized query, plain/ZIP and seven implementations. Dynamic scalar storage, exact 64-bit extrema, REAL spellings/infinities, NULL, empty strings, leading/embedded NUL, quotes/newlines/Unicode, sparse keys and aliases. Caller safe-integer defaults are verified after every export. All preserving candidates match production bytes; raw is deliberately unsafe and must fail numeric fidelity.",
+  "all": [
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3e1fc85a13f7532c340c56732c053f4d48569b3ee60c38a8b982ec2677d9044c",
+      "matches": false
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1275,
+      "sha256": "8a7defd7cf9598c4437a4379280e8c8b000b09272c19f894ddf3a0b334313ef8",
+      "matches": false
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3e1fc85a13f7532c340c56732c053f4d48569b3ee60c38a8b982ec2677d9044c",
+      "matches": false
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1273,
+      "sha256": "2853e4e62d74073f5173ffb6d76dc243a9966a1a2cfed366f96dd79102479bcd",
+      "matches": false
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3fbeae3ce81ca9c9eb916065a1873621ba139b5e6d5401671f73bbe009080e1b",
+      "matches": false
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1285,
+      "sha256": "b67b813df369bde1b15da158dfca06f4961bd0ef0f9400bd479041d0c3b5fdc4",
+      "matches": false
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3fbeae3ce81ca9c9eb916065a1873621ba139b5e6d5401671f73bbe009080e1b",
+      "matches": false
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf8",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1283,
+      "sha256": "129c3ee43fa228bd0ae270b20e0635bfb20881622df33ba7a0e5d88915e5a869",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3e1fc85a13f7532c340c56732c053f4d48569b3ee60c38a8b982ec2677d9044c",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1275,
+      "sha256": "8a7defd7cf9598c4437a4379280e8c8b000b09272c19f894ddf3a0b334313ef8",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3e1fc85a13f7532c340c56732c053f4d48569b3ee60c38a8b982ec2677d9044c",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1273,
+      "sha256": "2853e4e62d74073f5173ffb6d76dc243a9966a1a2cfed366f96dd79102479bcd",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3fbeae3ce81ca9c9eb916065a1873621ba139b5e6d5401671f73bbe009080e1b",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1285,
+      "sha256": "b67b813df369bde1b15da158dfca06f4961bd0ef0f9400bd479041d0c3b5fdc4",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3fbeae3ce81ca9c9eb916065a1873621ba139b5e6d5401671f73bbe009080e1b",
+      "matches": false
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16le",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1283,
+      "sha256": "129c3ee43fa228bd0ae270b20e0635bfb20881622df33ba7a0e5d88915e5a869",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3e1fc85a13f7532c340c56732c053f4d48569b3ee60c38a8b982ec2677d9044c",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": false,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1275,
+      "sha256": "8a7defd7cf9598c4437a4379280e8c8b000b09272c19f894ddf3a0b334313ef8",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3e1fc85a13f7532c340c56732c053f4d48569b3ee60c38a8b982ec2677d9044c",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": false,
+      "query": true,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1273,
+      "sha256": "2853e4e62d74073f5173ffb6d76dc243a9966a1a2cfed366f96dd79102479bcd",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3fbeae3ce81ca9c9eb916065a1873621ba139b5e6d5401671f73bbe009080e1b",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1288,
+      "sha256": "77c8019371636097800e59bbafe45c3a98d88456bd27ffd2a539921d643c213f",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": false,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1285,
+      "sha256": "b67b813df369bde1b15da158dfca06f4961bd0ef0f9400bd479041d0c3b5fdc4",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "sqlite",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "buffered",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "tokens",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "native-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "guarded-values",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "chain",
+      "bytes": 3624,
+      "sha256": "e6f676ffcfcf9e2d774c7cd211ff9298e59d1d56f3a002efc0459c55d9c0fd30",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": false,
+      "variant": "raw",
+      "bytes": 3652,
+      "sha256": "3fbeae3ce81ca9c9eb916065a1873621ba139b5e6d5401671f73bbe009080e1b",
+      "matches": false
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "sqlite",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "buffered",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "tokens",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "native-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "guarded-values",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "chain",
+      "bytes": 1286,
+      "sha256": "1b45d55c2ac6d1007d86bcfe01d72ee719d6811a688bb3dc09c4fe4926584846",
+      "matches": true
+    },
+    {
+      "encoding": "utf16be",
+      "safeIntegersDefault": true,
+      "query": true,
+      "zip": true,
+      "variant": "raw",
+      "bytes": 1283,
+      "sha256": "129c3ee43fa228bd0ae270b20e0635bfb20881622df33ba7a0e5d88915e5a869",
+      "matches": false
+    }
+  ]
+}

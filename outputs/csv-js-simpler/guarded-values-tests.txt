@@ -1,0 +1,8 @@
+
+ RUN  v5.0.5 /Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-js-simpler/projects/guarded-values/exportlite
+
+
+ Test Files  12 passed (12)
+      Tests  469 passed (469)
+   Start at  18:16:15
+   Duration  7.34s (tests 80%, import 10%, transform 10%)

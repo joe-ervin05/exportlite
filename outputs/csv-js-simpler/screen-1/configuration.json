@@ -1,0 +1,216 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "rounds": 1,
+  "cases": [
+    {
+      "variant": "sqlite",
+      "method": "table"
+    },
+    {
+      "variant": "pairs",
+      "method": "table"
+    },
+    {
+      "variant": "joined",
+      "method": "table"
+    },
+    {
+      "variant": "buffered",
+      "method": "table"
+    },
+    {
+      "variant": "tokens",
+      "method": "table"
+    },
+    {
+      "variant": "raw",
+      "method": "table"
+    },
+    {
+      "variant": "manual",
+      "method": "manual-tuned"
+    }
+  ],
+  "compressions": [
+    "none",
+    "zip"
+  ],
+  "fixtures": [
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "path": "/Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-deep/fixtures/narrow.sqlite",
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2634697,
+      "csvSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "path": "/Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-deep/fixtures/wide.sqlite",
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14619815,
+      "csvSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "buildHashes": {
+    "sqlite": {
+      "cache-BnaEVKnc.mjs": "9f184eba0c42610a072e0052357c5ce94eb5da18f14ada950057b3893389ad81",
+      "cache-DsUispYf.cjs": "deec5c91d69f50a4a6cfefe4f5382c04a810e074a09abd0d12457e6d84532ce0",
+      "drizzle.cjs": "184bba502511700db886b43bf8908c3140c2202df0cf332e99111892e49de7c8",
+      "drizzle.mjs": "66c6cda7740123b8bb32f6e8af9d1ee20efd8f29feda7052762e1af4d2c67953",
+      "export-turso-DwJiY3TK.mjs": "e8a258ad2f930ca7aa72b108c68f0e1dde83ac26db27d0b465d005086c4fe4aa",
+      "export-turso-y854XaSg.cjs": "15082a02abcd7d614618969749873038bf3039c2b75d8105ea56df0f8b6e25a0",
+      "index.cjs": "eb761594ffbaac65c60577e3b709869ca82f42d5eb221018c36fed8f6c5790d6",
+      "index.mjs": "e35b9d4c7dc68e9507adc71832e7ab3fc83df75eb6683b1141f252a8e7335237",
+      "turso.cjs": "16f2d75ffcece65ac7476831257dfe3f5bbf121c55120d28add3f6faf75872c4",
+      "turso.mjs": "23169c83f7010fdd740e2bda61427750a8469e317d7bbb55fc6dbf11d872f327",
+      "zip-I8046YLb.cjs": "a0ae56abd563ec24e816cc15a94c048279e6dc870c2a117ae2eb126c58a4945b",
+      "zip-stream-BC0ajz0_.mjs": "877e6cf9bb1ade9131dd8d667e188f92768264b5b32ddc374c3d32e26fbdf88d",
+      "zip-stream-Bx89vtj0.cjs": "bdf8f07423beb53a8821e988df1b8347463d9b3ac013574fca10af9ffdda27dc",
+      "zip-zEC71qRI.mjs": "bc81d60b3fd0ba8d922033fc0d14d83b8c0f410953505fe765d5809d072b794c"
+    },
+    "pairs": {
+      "cache-C4TFQGfd.cjs": "a24f2a03ae73280e4cbbb92654912bf0eaba68c6f485afeff9de54fc01b47a4c",
+      "cache-CMO7o2mZ.mjs": "6910b4bb0571f6b7e0a6f84d7a37f1b2d4247bad0f6534ac5579e6fd45997334",
+      "drizzle.cjs": "d6b2281632d1e77dd94f90c1d983ada86815b76f2d981723cf698434605f763f",
+      "drizzle.mjs": "55dd9250d652a6d4b44de2e360c54ac63eb5e32955874f8e0c08bd1d12e9e02a",
+      "export-turso-C01Ra1JK.mjs": "d819951ec16257e2de8a29eb21978f2c9bd03bad364fc4b0178628869609a1d4",
+      "export-turso-SWdkq_gS.cjs": "e221b59462b46e1f0334b49d4b618c48096403aeee2cc120088739faad30da53",
+      "index.cjs": "30ea53c37b2bf9fea393449092d4ebca9e8f640ac8824d694d7635aa122e69fa",
+      "index.mjs": "f5266d669152be9e992042b9bef118b51cda9a96fa3c2ba80e4a97154e3b1469",
+      "turso.cjs": "e8260899d058ad59ff7c5582a5cd4d7af8ec289eeb1a43db2eac65a3b2578bb3",
+      "turso.mjs": "4465f19da9f98543bcf3360c97bb3c488ddfd2ee44f65677ed816f6aa6761a35",
+      "zip-Dc3pcXsZ.cjs": "b2d0bfc905c2f134a7a075f6b2bf23a1a49bcd7cc8ab563bc3ada65b38adb049",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e",
+      "zip-urUU5fwA.mjs": "d278b482ea7cb6a69c0a22f840be66b1c34826e4e44f1f66d4aff9f569da7107"
+    },
+    "joined": {
+      "cache-BUTWDt2q.cjs": "eed958173f97cf5d97b764e9d6c817c964a03847703ff06a5653dc77cb836607",
+      "cache-cxfrSqST.mjs": "8c710d51d5a124bea48955f064c961a46e17bb8830e011baafde6690f6c0e035",
+      "drizzle.cjs": "c56e557d6d9c806c71e9fcc3583aa782194138028904db4efed3393b7e59683e",
+      "drizzle.mjs": "32a379ca5cfc2b5432eb94cecf96477bb2c2ccbedc28211e1367961afc60993e",
+      "export-turso-C01Ra1JK.mjs": "d819951ec16257e2de8a29eb21978f2c9bd03bad364fc4b0178628869609a1d4",
+      "export-turso-SWdkq_gS.cjs": "e221b59462b46e1f0334b49d4b618c48096403aeee2cc120088739faad30da53",
+      "index.cjs": "f24bd3787ca285fd8f1cea0c46808a0818c4948adecf44fd7d1546ca2d45f8eb",
+      "index.mjs": "3f3181937a3c6a3fdf0e95ed68c997eb6cd3360bddf489731f82eab829c59107",
+      "turso.cjs": "e8260899d058ad59ff7c5582a5cd4d7af8ec289eeb1a43db2eac65a3b2578bb3",
+      "turso.mjs": "4465f19da9f98543bcf3360c97bb3c488ddfd2ee44f65677ed816f6aa6761a35",
+      "zip-Dc3pcXsZ.cjs": "b2d0bfc905c2f134a7a075f6b2bf23a1a49bcd7cc8ab563bc3ada65b38adb049",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e",
+      "zip-urUU5fwA.mjs": "d278b482ea7cb6a69c0a22f840be66b1c34826e4e44f1f66d4aff9f569da7107"
+    },
+    "buffered": {
+      "cache-BQSkwy5J.cjs": "47933d55c920765fca6fff2932093c611ed87b302a4f7b02e3b0a75b90484348",
+      "cache-DqHSfH5a.mjs": "ed49b6774fdbf531f55a80e6e03f2f79a501cabd14bb9be86c7cc184782e24a5",
+      "drizzle.cjs": "2fb53dd8af0dec0ce85a1f5638da54f66e3da5719613b6f1c4c4ca7cd998fba0",
+      "drizzle.mjs": "13b755dd8d7af60fe80e803c546a368cd09a2077e5c0980c76c0ac52a7f105a7",
+      "export-turso-C01Ra1JK.mjs": "d819951ec16257e2de8a29eb21978f2c9bd03bad364fc4b0178628869609a1d4",
+      "export-turso-SWdkq_gS.cjs": "e221b59462b46e1f0334b49d4b618c48096403aeee2cc120088739faad30da53",
+      "index.cjs": "d87eae03d835a8a10986e1e703eb508d3901bd5b6a8bde545f2229256cd29416",
+      "index.mjs": "af0bf8d027265b595ea26bdab7d3126c1583e94cf78bc79956c4f4be777c5901",
+      "turso.cjs": "e8260899d058ad59ff7c5582a5cd4d7af8ec289eeb1a43db2eac65a3b2578bb3",
+      "turso.mjs": "4465f19da9f98543bcf3360c97bb3c488ddfd2ee44f65677ed816f6aa6761a35",
+      "zip-Dc3pcXsZ.cjs": "b2d0bfc905c2f134a7a075f6b2bf23a1a49bcd7cc8ab563bc3ada65b38adb049",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e",
+      "zip-urUU5fwA.mjs": "d278b482ea7cb6a69c0a22f840be66b1c34826e4e44f1f66d4aff9f569da7107"
+    },
+    "tokens": {
+      "cache-BQidfE2Q.cjs": "881a26cb92de869782d4a374dab90663f8d2c178b834aefc3f2d16ae6b9d78e1",
+      "cache-BmgmjQt_.mjs": "f6506a90c51198bf9f7a5187b2dc8d7f35f198a48b97eaba825dfebb38fa8d4b",
+      "drizzle.cjs": "0cfb2768bb342d954dc55bd9bd844cdccf6b529adaac4b1bcb6e276c14d119ba",
+      "drizzle.mjs": "297a04b8a1e4e84459743941bc4f365c4126da664976c9d48d5e18bd87b71982",
+      "export-turso-CER0e3EJ.mjs": "80fd52b6f7e757bced931af9b29e963ea0b3748e633b3dbc00942ef58a2ef7c5",
+      "export-turso-wmcMmQzK.cjs": "09945ba1186968596be2beb7d3d75a6c967393f28a67905ec46ac00df8837e1d",
+      "index.cjs": "3aad796a0d910d89759e00af2d3691fcdfaef1976139c932a35a859af990ed6c",
+      "index.mjs": "7b4a2a15a044cad73f1465a37a99fc20824c3dba67383d2a1c5b79137fa11151",
+      "turso.cjs": "f9102c43dcdce1fd1d6c85e0c6e8036a4b7f330f8e9d6fc4a6a49be562649ec3",
+      "turso.mjs": "51a4b564af63cbc69ca3a779b2b2a0ad0665a5ab65a7860780260aca3e48f2d7",
+      "zip-BFfCezh7.cjs": "681e361da9711032267b0eae184f8a22fbfaab10b362d3adc9d44499880349a4",
+      "zip-BO-LbemI.mjs": "0aad15b3261b17d6439841def094512d989385b148d6443f417969f3c515c6f8",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e"
+    },
+    "raw": {
+      "cache-C-lGWcbu.cjs": "030bc22c99ed0697442844eef8b36211e4ac7243eae0ef291f3a8304421cac22",
+      "cache-DodpfR2k.mjs": "d7fcc51c93410d5669cab146bd827713bc12363245da5cb5b02a0509cce4893c",
+      "drizzle.cjs": "50ccb549d7b3931cf76690c352a022cb94d4007ded196829b082aafece0a26ec",
+      "drizzle.mjs": "3275daedc44ebbe4e62f9f5d57920def24337928bdfaa485ed2db4d15e70900b",
+      "export-turso-Bi5LaIEs.cjs": "83fb172fb8bf70dad3e7da8e631a19bb7946e93617889b261dcbf69cfea9f67a",
+      "export-turso-DGYWQ08e.mjs": "a65a1a215b0f9c1c6602f7935c93838a2d029f1b2d778e30911d9f4574d5feb5",
+      "index.cjs": "1938cf43771f23e655a8165b19d2082daa1a2323f4e3fa126a304e57fe47485a",
+      "index.mjs": "1aea77e5942fd03d296ab83605e79e9459e62bb7bc90d8744717dab6e7e04f13",
+      "turso.cjs": "9d93f479a31378d2b3ab9471ee7e06f5ac69653455e1c53977d213edc4308e37",
+      "turso.mjs": "bf698c4cb77eae908ef92e28296e7024816dd574b1d6970c34325474106e5cfb",
+      "zip-BzMW7riy.cjs": "0f164d8202d1e129ac43b2aac0f5b0799972a401e8c69f191ed91fd6795242f4",
+      "zip-stream-CjcNZw4p.mjs": "d80cd378593ba141116f0f251ad60e3acf11b318563881f1bfa64911fb589539",
+      "zip-stream-DJCqyBI5.cjs": "1cf5a02b93cfd8f0434aea86bd32ca6944061a8b05b74830d967692a5239c61e",
+      "zip-zgeqEhwV.mjs": "a8c8a846b38eaf64f10fc247e7d3f6800d42c810daaf05eae5a3cff348bea973"
+    },
+    "manual": {
+      "cache-BnaEVKnc.mjs": "9f184eba0c42610a072e0052357c5ce94eb5da18f14ada950057b3893389ad81",
+      "cache-DsUispYf.cjs": "deec5c91d69f50a4a6cfefe4f5382c04a810e074a09abd0d12457e6d84532ce0",
+      "drizzle.cjs": "184bba502511700db886b43bf8908c3140c2202df0cf332e99111892e49de7c8",
+      "drizzle.mjs": "66c6cda7740123b8bb32f6e8af9d1ee20efd8f29feda7052762e1af4d2c67953",
+      "export-turso-DwJiY3TK.mjs": "e8a258ad2f930ca7aa72b108c68f0e1dde83ac26db27d0b465d005086c4fe4aa",
+      "export-turso-y854XaSg.cjs": "15082a02abcd7d614618969749873038bf3039c2b75d8105ea56df0f8b6e25a0",
+      "index.cjs": "eb761594ffbaac65c60577e3b709869ca82f42d5eb221018c36fed8f6c5790d6",
+      "index.mjs": "e35b9d4c7dc68e9507adc71832e7ab3fc83df75eb6683b1141f252a8e7335237",
+      "turso.cjs": "16f2d75ffcece65ac7476831257dfe3f5bbf121c55120d28add3f6faf75872c4",
+      "turso.mjs": "23169c83f7010fdd740e2bda61427750a8469e317d7bbb55fc6dbf11d872f327",
+      "zip-I8046YLb.cjs": "a0ae56abd563ec24e816cc15a94c048279e6dc870c2a117ae2eb126c58a4945b",
+      "zip-stream-BC0ajz0_.mjs": "877e6cf9bb1ade9131dd8d667e188f92768264b5b32ddc374c3d32e26fbdf88d",
+      "zip-stream-Bx89vtj0.cjs": "bdf8f07423beb53a8821e988df1b8347463d9b3ac013574fca10af9ffdda27dc",
+      "zip-zEC71qRI.mjs": "bc81d60b3fd0ba8d922033fc0d14d83b8c0f410953505fe765d5809d072b794c"
+    }
+  },
+  "workerSha256": "4e09848b95f822fabc843c572c01e27e9462426eb23c3543b0103aff003d6760",
+  "protocol": "Sequential fresh workers, rotating method order. One output verification, two warmups, three timed batches (two exports for bulk data). Same Node/fixtures, natural GC, no profiling hooks or forced GC. Setup excluded from time, included in whole-process peak RSS; matched ESM Drizzle setup. API generation, UTF-8, ZIP and sink completion included; no HTTP/disk. ZIP settings and package native CRC fixed. Manual uses installed unmodified ZIP writer. Raw variant is diagnostic ONLY and does not preserve arbitrary numeric fidelity."
+}

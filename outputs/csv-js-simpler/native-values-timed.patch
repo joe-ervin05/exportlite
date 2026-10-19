@@ -1,0 +1,287 @@
+diff --git a/exportlite/src/api/export-query.ts b/exportlite/src/api/export-query.ts
+index 7d05735..d18b5eb 100644
+--- a/exportlite/src/api/export-query.ts
++++ b/exportlite/src/api/export-query.ts
+@@ -59,0 +60 @@ export async function exportQuery(
++    options.format === "csv",
+diff --git a/exportlite/src/api/export-table.ts b/exportlite/src/api/export-table.ts
+index 8fda5b7..79b4c1e 100644
+--- a/exportlite/src/api/export-table.ts
++++ b/exportlite/src/api/export-table.ts
+@@ -76,0 +77 @@ export async function exportTable(
++        options.format === "csv",
+@@ -78 +79,7 @@ export async function exportTable(
+-    : cachedTablePlan(db, table, options.columns, options.format ?? "jsonl");
++    : cachedTablePlan(
++        db,
++        table,
++        options.columns,
++        options.format ?? "jsonl",
++        options.format === "csv",
++      );
+diff --git a/exportlite/src/api/export.ts b/exportlite/src/api/export.ts
+index 4467fe0..124b59e 100644
+--- a/exportlite/src/api/export.ts
++++ b/exportlite/src/api/export.ts
+@@ -3,0 +4 @@ import { jsonBatches, jsonRows } from "../database/better-sqlite3.js";
++import { csvJsRows } from "../database/csv-js.js";
+@@ -61,6 +62 @@ export async function streamExport(
+-    const suffix =
+-      json || (batched && options.format === "csv")
+-        ? ""
+-        : options.format === "csv"
+-          ? "\r\n"
+-          : "\n";
++    const suffix = json || options.format === "csv" ? "" : "\n";
+@@ -76,3 +72,6 @@ export async function streamExport(
+-    const values = batched
+-      ? jsonBatches(statement, args, options.format === "csv")
+-      : jsonRows(statement, args);
++    const values =
++      options.format === "csv"
++        ? csvJsRows(statement, args, options.bufferSize)
++        : batched
++          ? jsonBatches(statement, args)
++          : jsonRows(statement, args);
+diff --git a/exportlite/src/database/csv-js.ts b/exportlite/src/database/csv-js.ts
+new file mode 100644
+index 0000000..48b9769
+--- /dev/null
++++ b/exportlite/src/database/csv-js.ts
+@@ -0,0 +1,36 @@
++import { ExportLiteError, sqliteError } from "../errors.js";
++import type { ReadStatement } from "./adapter.js";
++
++/** Experimental JS formatting. Ownership/backpressure remain in the writer. */
++export function* csvJsRows(statement: ReadStatement, args: unknown[], target = 65_536): Generator<[Buffer, number]> {
++  let parts: string[] = [], size = 0, count = 0, total = 0;
++  try {
++    for (const row of (statement as ReadStatement & { safeIntegers(toggle: boolean): ReadStatement }).safeIntegers(true).raw().iterate(...args)) {
++      if (!Array.isArray(row) || !row.length)
++        throw new Error("Expected SQLite CSV scalars.");
++      if (Buffer.isBuffer(row[0]) && row[0].length === 1 && row[0][0] === 0)
++        throw new ExportLiteError("INVALID_OPTIONS", "The database uses UTF-16. Set encoding to utf16le or utf16be for declared table exports; exported data remains UTF-8.");
++      let line = "";
++      for (let index = 0; index < row.length; index += 1) {
++        if (index) line += ",";
++        const value = row[index];
++        if (value === null) continue;
++        if (typeof value === "string") line += '"' + value.replaceAll('"', '""') + '"';
++        else if (typeof value === "number" || typeof value === "bigint") line += String(value);
++        else if (Buffer.isBuffer(value)) line += value.toString("utf8").replaceAll("\0", "");
++        else throw new Error("Unsupported SQLite CSV value.");
++      }
++      line += "\r\n";
++      parts.push(line);
++      size += Buffer.byteLength(line);
++      count++;
++      if (++total % 2048 === 0 || size >= target) {
++        const buffer = Buffer.from(parts.join(""), "utf8");
++        parts = []; size = 0;
++        const rows = count; count = 0;
++        yield [buffer, rows];
++      }
++    }
++    if (count) yield [Buffer.from(parts.join(""), "utf8"), count];
++  } catch (error) { throw sqliteError(error); }
++}
+diff --git a/exportlite/src/drizzle.ts b/exportlite/src/drizzle.ts
+index ded68e3..1541769 100644
+--- a/exportlite/src/drizzle.ts
++++ b/exportlite/src/drizzle.ts
+@@ -143,0 +144 @@ export async function exportTable(
++    options.format === "csv",
+@@ -266,0 +268 @@ export async function exportQuery(
++    options.format === "csv",
+diff --git a/exportlite/src/planner/batches.ts b/exportlite/src/planner/batches.ts
+index 64a627c..d6564a7 100644
+--- a/exportlite/src/planner/batches.ts
++++ b/exportlite/src/planner/batches.ts
+@@ -5,0 +6 @@ import { csvHeader, csvRecord } from "./csv.js";
++import { csvJsSelection } from "./csv-js.js";
+@@ -15,0 +17 @@ export function planBatchedTable(
++    csvJS?: boolean;
+@@ -61,0 +64 @@ interface BatchedTableOptions {
++  csvJS?: boolean;
+@@ -80,0 +84,2 @@ export function batchedTableSql(options: BatchedTableOptions): string {
++        options.csvJS,
++        options.binary,
+@@ -83 +88,3 @@ export function batchedTableSql(options: BatchedTableOptions): string {
+-      ? csvRecord(options.columns.map(identifier))
++      ? options.csvJS
++        ? csvJsSelection(options.columns.map(identifier), options.binary)
++        : csvRecord(options.columns.map(identifier))
+@@ -84,0 +92,6 @@ export function batchedTableSql(options: BatchedTableOptions): string {
++  if (options.csvJS) {
++    const filter = options.declared
++      ? `CASE WHEN ${key} IS NULL THEN json('ExportLite: primary key must not be null') ELSE 1 END`
++      : "1";
++    return `SELECT ${object} FROM (SELECT ${columns} FROM ${table} WHERE ${filter} ORDER BY ${key} LIMIT -1 OFFSET 0)`;
++  }
+diff --git a/exportlite/src/planner/cache.ts b/exportlite/src/planner/cache.ts
+index f722b53..bdc8012 100644
+--- a/exportlite/src/planner/cache.ts
++++ b/exportlite/src/planner/cache.ts
+@@ -61,0 +62 @@ export function cachedDeclaredTablePlan(
++  csvJS = false,
+@@ -68,2 +69,2 @@ export function cachedDeclaredTablePlan(
+-      JSON.stringify(["declared", table, columns, format, encoding]),
+-      () => planDeclaredTable(db, table, columns, format, encoding),
++      JSON.stringify(["declared", table, columns, format, encoding, csvJS]),
++      () => planDeclaredTable(db, table, columns, format, encoding, csvJS),
+@@ -80,0 +82 @@ export function cachedTablePlan(
++  csvJS = false,
+@@ -91 +93 @@ export function cachedTablePlan(
+-    const key = JSON.stringify([table, columns ?? null, format]);
++    const key = JSON.stringify([table, columns ?? null, format, csvJS]);
+@@ -93 +95 @@ export function cachedTablePlan(
+-      planTable(db, table, columns, format),
++      planTable(db, table, columns, format, csvJS),
+@@ -106,0 +109 @@ export function cachedSelectedTablePlan(
++  csvJS = false,
+@@ -113,2 +116,19 @@ export function cachedSelectedTablePlan(
+-      JSON.stringify(["selected", table, fields, format, encoding, primaryKey]),
+-      () => planSelectedTable(db, table, fields, format, encoding, primaryKey),
++      JSON.stringify([
++        "selected",
++        table,
++        fields,
++        format,
++        encoding,
++        primaryKey,
++        csvJS,
++      ]),
++      () =>
++        planSelectedTable(
++          db,
++          table,
++          fields,
++          format,
++          encoding,
++          primaryKey,
++          csvJS,
++        ),
+diff --git a/exportlite/src/planner/columns.ts b/exportlite/src/planner/columns.ts
+index d2f21fa..2530324 100644
+--- a/exportlite/src/planner/columns.ts
++++ b/exportlite/src/planner/columns.ts
+@@ -4,0 +5 @@ import { csvRecord } from "./csv.js";
++import { csvJsSelection } from "./csv-js.js";
+@@ -49,0 +51,2 @@ export function selectedObject(
++  csvJS = false,
++  utf8Guard = false,
+@@ -51,5 +54,4 @@ export function selectedObject(
+-  if (format === "csv")
+-    return csvRecord(
+-      fields.map((field, index) => reference(field, index)),
+-      fields,
+-    );
++  if (format === "csv" && !csvJS)
++    return csvRecord(fields.map((field, index) => reference(field, index)), fields);
++  if (format === "csv" && csvJS)
++    return csvJsSelection(fields.map((field, index) => reference(field, index)), utf8Guard, fields);
+@@ -67,0 +70,2 @@ export function selectedObject(
++  if (format === "csv")
++    return csvJS ? csvJsSelection(values, utf8Guard) : csvRecord(values);
+diff --git a/exportlite/src/planner/csv-js.ts b/exportlite/src/planner/csv-js.ts
+new file mode 100644
+index 0000000..e9c301c
+--- /dev/null
++++ b/exportlite/src/planner/csv-js.ts
+@@ -0,0 +1,15 @@
++import type { SelectedField } from "./columns.js";
++/** One result value per cell. Numeric tokens preserve SQLite spelling. */
++export function csvJsSelection(values: readonly string[], utf8Guard = false, fields?: readonly SelectedField[]) {
++  return values.map((value, index) => {
++    const field = fields?.[index];
++    let cell: string;
++    if (field?.kind === "boolean")
++      cell = `CASE ${value} WHEN 0 THEN 'false' WHEN 1 THEN 'true' ELSE CASE WHEN ${value} IS NULL THEN NULL ELSE json('ExportLite: expected boolean 0 or 1') END END`;
++    else if (field?.kind === "json") cell = `json(${value})`;
++    else cell = `CASE typeof(${value}) WHEN 'real' THEN CAST(CAST(${value} AS TEXT) AS BLOB) WHEN 'blob' THEN json_quote(${value}) ELSE ${value} END`;
++    return utf8Guard && index === 0
++      ? `CASE WHEN length(CAST(char(13, 10) AS BLOB)) = 2 THEN ${cell} ELSE X'00' END`
++      : cell;
++  }).join(", ");
++}
+diff --git a/exportlite/src/planner/declared.ts b/exportlite/src/planner/declared.ts
+index 128a193..37af023 100644
+--- a/exportlite/src/planner/declared.ts
++++ b/exportlite/src/planner/declared.ts
+@@ -20,0 +21 @@ export function planDeclaredTable(
++  csvJS = false,
+@@ -22 +23,7 @@ export function planDeclaredTable(
+-  const plan = declaredTableSql(table, columns, format, encoding === "utf8");
++  const plan = declaredTableSql(
++    table,
++    columns,
++    format,
++    encoding === "utf8",
++    csvJS,
++  );
+@@ -30,0 +38 @@ export function declaredTableSql(
++  csvJS = false,
+@@ -40 +48 @@ export function declaredTableSql(
+-  return selectedTableSql(table, fields, format, binary, key);
++  return selectedTableSql(table, fields, format, binary, key, csvJS);
+@@ -50,0 +59 @@ export function planSelectedTable(
++  csvJS = false,
+@@ -57,0 +67 @@ export function planSelectedTable(
++    csvJS,
+@@ -67,0 +78 @@ export function selectedTableSql(
++  csvJS = false,
+@@ -80,0 +92 @@ export function selectedTableSql(
++      csvJS,
+@@ -82 +94 @@ export function selectedTableSql(
+-    return { sql, batched: true, header };
++    return { sql, batched: !csvJS, header };
+@@ -88,0 +101 @@ export function selectedTableSql(
++    csvJS,
+diff --git a/exportlite/src/planner/json.ts b/exportlite/src/planner/json.ts
+index 97e99c3..084846f 100644
+--- a/exportlite/src/planner/json.ts
++++ b/exportlite/src/planner/json.ts
+@@ -25,0 +26 @@ export function planTable(
++  csvJS = false,
+@@ -67,0 +69 @@ export function planTable(
++      csvJS,
+@@ -69 +71 @@ export function planTable(
+-    if (batched) return { ...batched, batched: true };
++    if (batched) return { ...batched, batched: !csvJS };
+@@ -80 +82,8 @@ export function planTable(
+-      const plan = selectedTableSql(found.name, csvFields, format, false);
++      const plan = selectedTableSql(
++        found.name,
++        csvFields,
++        format,
++        false,
++        undefined,
++        csvJS,
++      );
+@@ -104,0 +114 @@ export function planQuery(
++  csvJS = false,
+@@ -109 +119 @@ export function planQuery(
+-    return planSelectedQuery(db, sql, fields, false, format);
++    return planSelectedQuery(db, sql, fields, false, format, csvJS);
+@@ -122 +132 @@ export function planQuery(
+-  return planSelectedQuery(db, sql, fields, true, format);
++  return planSelectedQuery(db, sql, fields, true, format, csvJS);
+@@ -131,0 +142 @@ export function planSelectedQuery(
++  csvJS = false,
+@@ -136 +147 @@ export function planSelectedQuery(
+-      selectedQuerySql(sql, fields, positional, format),
++      selectedQuerySql(sql, fields, positional, format, csvJS),
+@@ -149,0 +161 @@ export function selectedQuerySql(
++  csvJS = false,
+@@ -162,0 +175 @@ export function selectedQuerySql(
++    csvJS,
+diff --git a/exportlite/tests/csv.test.ts b/exportlite/tests/csv.test.ts
+index efcc247..1a7a766 100644
+--- a/exportlite/tests/csv.test.ts
++++ b/exportlite/tests/csv.test.ts
+@@ -190 +190 @@ it.each([0, 1, 255, 256, 257, 513])(
+-    expect(statements[0]).toContain('WITH RECURSIVE "__exportlite_batches"');
++    expect(statements[0]).toContain("SELECT CASE WHEN");
+@@ -589 +589 @@ it.each([false, true])(
+-      expect(stopped).toBeLessThan(8);
++      expect(stopped).toBeLessThan(2048);

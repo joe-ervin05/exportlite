@@ -1,0 +1,849 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "protocol": "Diagnostic only. Three rotated rounds of fresh workers. Prepared raw iterator consumption: count rows/slots, no CSV encoding or writes. Two warmups, five batches of three consumes; natural GC. No per-record timing hooks. Figures cannot be subtracted from full delivery medians to assign exact costs.",
+  "all": [
+    {
+      "round": 0,
+      "fixture": "narrow",
+      "variant": "direct",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 25.017958333333336,
+      "samplesMs": [
+        25.26795833333333,
+        25.081360999999998,
+        24.97245833333334,
+        25.017958333333336,
+        24.99251400000001
+      ],
+      "queryPlan": [
+        {
+          "id": 3,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN data"
+        }
+      ]
+    },
+    {
+      "round": 0,
+      "fixture": "narrow",
+      "variant": "fenced",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 27.339055666666667,
+      "samplesMs": [
+        27.339055666666667,
+        27.474055666666658,
+        27.277194666666674,
+        27.27673600000001,
+        29.155111333333327
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 9,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN data"
+        },
+        {
+          "id": 20,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 0,
+      "fixture": "narrow",
+      "variant": "pairs",
+      "rows": 50000,
+      "slots": 400000,
+      "medianMs": 52.83938866666667,
+      "samplesMs": [
+        52.83938866666667,
+        53.17637500000001,
+        52.75550000000002,
+        53.20941666666666,
+        52.834055666666664
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 0,
+      "fixture": "narrow",
+      "variant": "native-values",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 40.46141666666667,
+      "samplesMs": [
+        40.724694333333325,
+        40.46141666666667,
+        41.11716666666666,
+        40.353625,
+        40.10934699999999
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 0,
+      "fixture": "wide",
+      "variant": "direct",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 21.846166666666665,
+      "samplesMs": [
+        22.191041666666663,
+        21.930555666666663,
+        21.81316666666666,
+        21.739597000000003,
+        21.846166666666665
+      ],
+      "queryPlan": [
+        {
+          "id": 3,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN data"
+        }
+      ]
+    },
+    {
+      "round": 0,
+      "fixture": "wide",
+      "variant": "fenced",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 24.155903,
+      "samplesMs": [
+        24.155903,
+        24.20306933333333,
+        24.300166666666673,
+        23.964624999999995,
+        24.028624999999995
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 9,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN data"
+        },
+        {
+          "id": 20,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 0,
+      "fixture": "wide",
+      "variant": "pairs",
+      "rows": 15000,
+      "slots": 120000,
+      "medianMs": 32.198416666666674,
+      "samplesMs": [
+        32.145333333333326,
+        32.198416666666674,
+        32.52919433333333,
+        32.071333333333335,
+        32.38826399999997
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 0,
+      "fixture": "wide",
+      "variant": "native-values",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 27.780013999999994,
+      "samplesMs": [
+        27.77977766666667,
+        27.728986000000003,
+        27.816485999999998,
+        27.780013999999994,
+        27.939249999999998
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "narrow",
+      "variant": "fenced",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 27.930319333333347,
+      "samplesMs": [
+        28.063208333333332,
+        27.99608333333333,
+        27.866124999999993,
+        27.930319333333347,
+        27.749221999999993
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 9,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN data"
+        },
+        {
+          "id": 20,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "narrow",
+      "variant": "pairs",
+      "rows": 50000,
+      "slots": 400000,
+      "medianMs": 52.69741666666666,
+      "samplesMs": [
+        52.576875,
+        52.69741666666666,
+        52.72165299999998,
+        52.546930666666675,
+        52.730944333333355
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "narrow",
+      "variant": "native-values",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 40.119194333333326,
+      "samplesMs": [
+        40.15683333333334,
+        40.119194333333326,
+        40.15347199999999,
+        40.090222000000004,
+        39.94006966666666
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "narrow",
+      "variant": "direct",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 25.007888999999995,
+      "samplesMs": [
+        25.136444333333333,
+        24.874596999999994,
+        25.022180333333335,
+        25.002805333333338,
+        25.007888999999995
+      ],
+      "queryPlan": [
+        {
+          "id": 3,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN data"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "wide",
+      "variant": "fenced",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 24.151430333333337,
+      "samplesMs": [
+        24.31952766666667,
+        24.151430333333337,
+        24.227194666666662,
+        23.397777666666684,
+        24.006694666666665
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 9,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN data"
+        },
+        {
+          "id": 20,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "wide",
+      "variant": "pairs",
+      "rows": 15000,
+      "slots": 120000,
+      "medianMs": 32.82602799999999,
+      "samplesMs": [
+        32.25990266666667,
+        32.17463866666666,
+        32.886610999999995,
+        32.82602799999999,
+        32.934472333333325
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "wide",
+      "variant": "native-values",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 27.675847333333326,
+      "samplesMs": [
+        27.599860999999994,
+        27.58722233333334,
+        27.77013866666668,
+        28.40463866666668,
+        27.675847333333326
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "fixture": "wide",
+      "variant": "direct",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 21.975430666666664,
+      "samplesMs": [
+        22.116152666666668,
+        21.975430666666664,
+        22.12856933333333,
+        21.770111000000004,
+        21.841361000000006
+      ],
+      "queryPlan": [
+        {
+          "id": 3,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN data"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "narrow",
+      "variant": "pairs",
+      "rows": 50000,
+      "slots": 400000,
+      "medianMs": 53.11605566666666,
+      "samplesMs": [
+        52.51606933333333,
+        53.372749999999996,
+        53.11605566666666,
+        53.013374999999996,
+        65.60774999999997
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "narrow",
+      "variant": "native-values",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 40.218514000000006,
+      "samplesMs": [
+        40.05245833333333,
+        40.218514000000006,
+        51.850944333333324,
+        40.793930666666675,
+        40.149472333333314
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "narrow",
+      "variant": "direct",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 23.88329166666666,
+      "samplesMs": [
+        24.1095,
+        23.88329166666666,
+        23.83316666666668,
+        23.874583333333344,
+        24.409597
+      ],
+      "queryPlan": [
+        {
+          "id": 3,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN data"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "narrow",
+      "variant": "fenced",
+      "rows": 50000,
+      "slots": 200000,
+      "medianMs": 27.942694666666664,
+      "samplesMs": [
+        28.069277666666668,
+        27.817596999999996,
+        27.993055666666674,
+        27.942694666666664,
+        27.927305666666673
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 9,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN data"
+        },
+        {
+          "id": 20,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "wide",
+      "variant": "pairs",
+      "rows": 15000,
+      "slots": 120000,
+      "medianMs": 32.73712499999999,
+      "samplesMs": [
+        32.32083333333333,
+        33.168944666666675,
+        32.630125,
+        32.790639,
+        32.73712499999999
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "wide",
+      "variant": "native-values",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 27.787833333333328,
+      "samplesMs": [
+        28.15097233333334,
+        27.75015266666666,
+        27.787833333333328,
+        27.76615266666668,
+        28.052833333333336
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 17,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 28,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "wide",
+      "variant": "direct",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 22.054013999999995,
+      "samplesMs": [
+        21.927791666666664,
+        22.23220833333333,
+        22.697749999999996,
+        21.820902666666655,
+        22.054013999999995
+      ],
+      "queryPlan": [
+        {
+          "id": 3,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN data"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "fixture": "wide",
+      "variant": "fenced",
+      "rows": 15000,
+      "slots": 60000,
+      "medianMs": 23.87033333333333,
+      "samplesMs": [
+        24.22127766666667,
+        23.87033333333333,
+        24.126653000000005,
+        23.711180333333328,
+        23.650971999999985
+      ],
+      "queryPlan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 9,
+          "parent": 2,
+          "notused": 216,
+          "detail": "SCAN data"
+        },
+        {
+          "id": 20,
+          "parent": 0,
+          "notused": 216,
+          "detail": "SCAN (subquery-1)"
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "fixture": "narrow",
+      "variant": "direct",
+      "medianMs": 25.007888999999995,
+      "minMs": 23.88329166666666,
+      "maxMs": 25.017958333333336,
+      "rows": 50000,
+      "slots": 200000
+    },
+    {
+      "fixture": "narrow",
+      "variant": "fenced",
+      "medianMs": 27.930319333333347,
+      "minMs": 27.339055666666667,
+      "maxMs": 27.942694666666664,
+      "rows": 50000,
+      "slots": 200000
+    },
+    {
+      "fixture": "narrow",
+      "variant": "pairs",
+      "medianMs": 52.83938866666667,
+      "minMs": 52.69741666666666,
+      "maxMs": 53.11605566666666,
+      "rows": 50000,
+      "slots": 400000
+    },
+    {
+      "fixture": "narrow",
+      "variant": "native-values",
+      "medianMs": 40.218514000000006,
+      "minMs": 40.119194333333326,
+      "maxMs": 40.46141666666667,
+      "rows": 50000,
+      "slots": 200000
+    },
+    {
+      "fixture": "wide",
+      "variant": "direct",
+      "medianMs": 21.975430666666664,
+      "minMs": 21.846166666666665,
+      "maxMs": 22.054013999999995,
+      "rows": 15000,
+      "slots": 60000
+    },
+    {
+      "fixture": "wide",
+      "variant": "fenced",
+      "medianMs": 24.151430333333337,
+      "minMs": 23.87033333333333,
+      "maxMs": 24.155903,
+      "rows": 15000,
+      "slots": 60000
+    },
+    {
+      "fixture": "wide",
+      "variant": "pairs",
+      "medianMs": 32.73712499999999,
+      "minMs": 32.198416666666674,
+      "maxMs": 32.82602799999999,
+      "rows": 15000,
+      "slots": 120000
+    },
+    {
+      "fixture": "wide",
+      "variant": "native-values",
+      "medianMs": 27.780013999999994,
+      "minMs": 27.675847333333326,
+      "maxMs": 27.787833333333328,
+      "rows": 15000,
+      "slots": 60000
+    }
+  ]
+}

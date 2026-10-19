@@ -1,0 +1,116 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "rounds": 5,
+  "cases": [
+    {
+      "variant": "before",
+      "method": "table"
+    },
+    {
+      "variant": "sqlite",
+      "method": "table"
+    }
+  ],
+  "compressions": [
+    "none",
+    "zip"
+  ],
+  "fixtures": [
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "path": "/Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-deep/fixtures/narrow.sqlite",
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2634697,
+      "csvSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer"
+        }
+      ],
+      "iterations": 2,
+      "path": "/Users/joeervin/.codex/.chatgpt-projects/g-p-6ad0e54a81648191a9c1d8c0160dbf90/outputs/csv-deep/fixtures/wide.sqlite",
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14619815,
+      "csvSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "buildHashes": {
+    "before": {
+      "cache-BE62GRUl.mjs": "27141deba3341d053200486fe99905a1c135e30365c448a0d1acd47744e140b1",
+      "cache-K6b6zaNi.cjs": "c60900a778fa2104e5930e424bdb175250c92161d056f34bf8c753c81a8030e2",
+      "drizzle.cjs": "05896337640a8ffbdb634303250ff504501833d4a8feb8d6c161723dfa5d8626",
+      "drizzle.mjs": "2285796e23778058ffada264125e677a702131522f28db0a6827432865cc5aae",
+      "export-turso-BcxDm2BQ.cjs": "a3250c3e961254e3a4241f55cadc864a980e62996878129f9dd169f71307c4ae",
+      "export-turso-BxpQF-QO.mjs": "957b85b6f7150007af7f29b5ad6d2bbed43907e48247b5c51bebb221ead44f05",
+      "index.cjs": "c077cd856f9ea224d6816d5056ab02f4e3080da79042f19da8551f85e6462217",
+      "index.mjs": "239b29a482af29bed587fd73d699e964fd4a746636a83805ea302903e7db7ff1",
+      "turso.cjs": "80f2fecf627008226d7b2a53486fccfbb69b9a790a77901043bb0d0e6aa780d4",
+      "turso.mjs": "dcffac83b475622193550da6f9913553db5ffcb14730baa35ddcd48859b87fa5",
+      "zip-BKawjb7b.cjs": "dbfeebc038a1d4aff98febeaec211fef7f609ff5d79590288e3e254807e79681",
+      "zip-EADINBtn.mjs": "95061a481a4d356877ccae1f603f7d3d7eb86a5b832c0fa70a4966ced4b4060b",
+      "zip-stream-DercyR3a.cjs": "7522569011d60b72145e4cd0d35f4ae520e0e7b0ee5b75cf8be4406fab32c4ef",
+      "zip-stream-Dwn-vZDc.mjs": "466ef5dfdfc9d1be61090376b18af12ff556f5c35a91a0f8382406dc0d5f8247"
+    },
+    "sqlite": {
+      "cache-CSUi6Wex.cjs": "514f0d37f516e1479d139fb3e9377d0ff08ee9ed6cda7bb86c8bda5f9f6caebe",
+      "cache-d7Swcoh3.mjs": "872f2fd647292ee1626b2f7eb13fb1a9fff0e6f9d45dc11f8220fa69ef388a83",
+      "drizzle.cjs": "9be62daedfe7668d0091e06f486369b4d519c29df549f8e1c3b3e09b41e47e98",
+      "drizzle.mjs": "898fa4ef4ceb53707c96a840938e74ab45288bc00ed0f7da91a743ed43f49dac",
+      "export-turso-C5jG0TPx.mjs": "913d47b57b654afdfec4854183c9e53075c9abc4a10a6116e44bc8a1cca420ae",
+      "export-turso-CmT_kbFk.cjs": "9a02f014ae3b3a7ee3993282ad1eb4106186dc90bc591f24fb15fa3114fc053e",
+      "index.cjs": "7f71d24bb61320e5e0d4eaca4549bc86daf5dcb4838bdcc8297a52cd7cceda17",
+      "index.mjs": "4abe8c74e4b4bfac43cb64827a7d0d7a0bd9648080d016821dd4b0cff1265602",
+      "turso.cjs": "1a3d9b21a9803e302283f9bb5b1d67ebbbc4fd3148a527856f0d21060e4261c3",
+      "turso.mjs": "add9a2527a0b7e8e91c5dc783066291474222e4cadef4e62a0903556b7e12521",
+      "zip-C-qzn8FE.cjs": "0b6adc0b009267bb2ae0cb20dbf3a0f3e85b46150fd815d7aa128e2b45df3949",
+      "zip-UA6CJ69N.mjs": "1e4cd63e9a461063e5ac526d69f2554a3b9c2dd3704315a7a7568a2143cb801c",
+      "zip-stream-BC0ajz0_.mjs": "877e6cf9bb1ade9131dd8d667e188f92768264b5b32ddc374c3d32e26fbdf88d",
+      "zip-stream-Bx89vtj0.cjs": "bdf8f07423beb53a8821e988df1b8347463d9b3ac013574fca10af9ffdda27dc"
+    }
+  },
+  "workerSha256": "4e09848b95f822fabc843c572c01e27e9462426eb23c3543b0103aff003d6760",
+  "protocol": "Sequential fresh workers, rotating method order. One output verification, two warmups, three timed batches (two exports for bulk data). Same Node/fixtures, natural GC, no profiling hooks or forced GC. Setup excluded from time, included in whole-process peak RSS; matched ESM Drizzle setup. API generation, UTF-8, ZIP and sink completion included; no HTTP/disk. ZIP settings and package native CRC fixed. Manual uses installed unmodified ZIP writer. Raw variant is diagnostic ONLY and does not preserve arbitrary numeric fidelity."
+}
