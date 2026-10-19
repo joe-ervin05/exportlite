@@ -387,6 +387,8 @@ it.each([false, true])(
   async (zip) => {
     for (const invalid of [
       "UPDATE users SET name=x'00FF' WHERE id=-3",
+      `UPDATE users SET name=jsonb('{"a":1,"b":2}') WHERE id=-3`,
+      "UPDATE users SET name=jsonb('null') WHERE id=-3",
       "UPDATE users SET name='ok',active=2 WHERE id=-3",
     ]) {
       db.exec(invalid);
@@ -401,6 +403,76 @@ it.each([false, true])(
       ).rejects.toMatchObject({ code: "SQLITE_ERROR" });
       expect(await readdir(directory)).toEqual([]);
     }
+  },
+);
+
+it.each(["native", "drizzle", "turso", "drizzle-turso"])(
+  "rejects JSONB as raw CSV through %s, plain and ZIP",
+  async (mode) => {
+    const remoteMode = mode.includes("turso");
+    const adapterMode = mode.includes("drizzle");
+    const orm = remoteMode ? remoteDrizzle(client) : drizzle(db);
+    for (const value of [
+      "null",
+      "true",
+      "123",
+      '"text"',
+      '{"a":1,"b":2}',
+      "[1,2]",
+    ]) {
+      db.prepare("UPDATE users SET name=jsonb(?) WHERE id=-3").run(value);
+      for (const zip of [false, true])
+        for (const query of [false, true]) {
+          const options = { format: "csv" as const, zip };
+          const stream = adapterMode
+            ? query
+              ? await adapter.exportQuery(
+                  orm,
+                  orm.select().from(table).orderBy(table.userId),
+                  options,
+                )
+              : await adapter.exportTable(orm, table, options)
+            : remoteMode
+              ? query
+                ? await remote.exportQuery(client, {
+                    ...options,
+                    sql: "SELECT * FROM users ORDER BY id",
+                    columns: selection,
+                  })
+                : await remote.exportTable(client, "users", {
+                    ...options,
+                    columns: selection,
+                  })
+              : query
+                ? await exportQuery(db, {
+                    ...options,
+                    sql: "SELECT * FROM users ORDER BY id",
+                    columns: selection,
+                  })
+                : await exportTable(db, "users", {
+                    ...options,
+                    columns: selection,
+                  });
+          await Promise.all([
+            expect(stream.result).rejects.toMatchObject({
+              code: "SQLITE_ERROR",
+            }),
+            expect(new Response(stream).arrayBuffer()).rejects.toMatchObject({
+              code: "SQLITE_ERROR",
+            }),
+          ]);
+        }
+    }
+    if (remoteMode) {
+      const next = await remote.exportQuery(client, {
+        sql: "SELECT 'ready' AS note",
+        columns: { note: text() },
+        format: "csv",
+      });
+      expect(await new Response(next).text()).toBe('"note"\r\n"ready"\r\n');
+      await next.result;
+    }
+    db.prepare("SELECT 1").get();
   },
 );
 

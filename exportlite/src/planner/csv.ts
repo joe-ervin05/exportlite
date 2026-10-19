@@ -23,7 +23,8 @@ export function csvRecord(
         field?.dataType === "integer" || field?.dataType === "real"
           ? ` WHEN '${field.dataType}' THEN CAST(${value} AS TEXT)`
           : "";
-      return `CASE typeof(${value}) WHEN 'null' THEN ''${numeric} WHEN 'text' THEN '"' || replace(${value}, '"', '""') || '"' WHEN 'blob' THEN json_quote(${value}) ELSE CAST(${value} AS TEXT) END`;
+      // json_quote accepts valid JSONB BLOBs, so it cannot enforce rejection.
+      return `CASE typeof(${value}) WHEN 'null' THEN ''${numeric} WHEN 'text' THEN '"' || replace(${value}, '"', '""') || '"' WHEN 'blob' THEN json('ExportLite: BLOB values require an explicit conversion') ELSE CAST(${value} AS TEXT) END`;
     })
     .join(", ");
   return `concat_ws(',', ${cells})`;
