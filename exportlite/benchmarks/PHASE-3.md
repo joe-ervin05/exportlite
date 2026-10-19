@@ -1,6 +1,6 @@
 # Phase 3 compatibility and packaging validation
 
-This phase adds qualification checks and packaging documentation without changing `src/`, SQL generation, streaming, batching, buffering or compression. ESM runtime bundle hashes match the memory-optimized candidate recorded in the wide-query investigation. Runtime peers and dependency pins remain unchanged. The Node engine range now identifies only the intended supported majors: 22.18.0+, 24.11.0+ and 26.x.
+This phase adds qualification checks and packaging documentation without changing `src/`, SQL generation, streaming, batching, buffering or compression. Locally rebuilt ESM runtime bundle hashes match the memory-optimized candidate recorded in the wide-query investigation. Runtime peers and dependency pins remain unchanged. The Node engine range now identifies only the intended supported majors: 22.18.0+, 24.11.0+ and 26.x.
 
 ## Local validation
 
@@ -17,7 +17,20 @@ On macOS arm64, Node **26.12.0**:
 
 The [compatibility workflow](https://github.com/joe-ervin05/exportlite/actions/workflows/ci.yml) is configured for Ubuntu at exact Node 22.18.0 and current 22/24/26 patches, plus macOS and Windows at current Node 24. Every job runs a frozen install, build, type checks, lint, the full suite and the packed consumers. Directory-link test fixtures use Windows-compatible junctions. ZIP64 additionally runs on manual workflow dispatch and does not publish anything.
 
-The [initial hosted run](https://github.com/joe-ervin05/exportlite/actions/runs/39189813018) passed Ubuntu at Node 22.18.0, current 22 and 26, and macOS at Node 24, including packed consumers. Windows formatting exposed CRLF checkout conversion; Ubuntu/Node 24 exposed two tests that sampled ZIP backpressure after a fixed short delay while compressor queues were still filling. LF checkout attributes and sustained-stall observation replace those platform/timing assumptions. Existing upper bounds and cancellation/cleanup assertions remain. The runtime implementation is unchanged. The corrected matrix is awaiting qualification.
+The [initial hosted run](https://github.com/joe-ervin05/exportlite/actions/runs/39189813018) passed Ubuntu at Node 22.18.0, current 22 and 26, and macOS at Node 24, including packed consumers. Windows formatting exposed CRLF checkout conversion; Ubuntu/Node 24 exposed two tests that sampled ZIP backpressure after a fixed short delay while compressor queues were still filling. LF checkout attributes and sustained-stall observation replace those platform/timing assumptions. Existing upper bounds and cancellation/cleanup assertions remain. The runtime implementation is unchanged.
+
+The [corrected matrix passed all six jobs](https://github.com/joe-ervin05/exportlite/actions/runs/39190023200) at commit `4023ba719b2d07200e1a33d7bde9558d9d8c2efd`:
+
+| Platform | Architecture | Actual Node | Reliability suite | Packed consumers |
+| --- | --- | --- | --- | --- |
+| Ubuntu | x64 | 22.18.0 | 378 pass | All 5 pass |
+| Ubuntu | x64 | 22.23.3 | 378 pass | All 5 pass |
+| Ubuntu | x64 | 24.22.0 | 378 pass | All 5 pass |
+| Ubuntu | x64 | 26.12.0 | 378 pass | All 5 pass |
+| macOS | arm64 | 24.22.0 | 378 pass | All 5 pass |
+| Windows | x64 | 24.22.0 | 378 pass | All 5 pass |
+
+All jobs also passed frozen installation, build, public type consumers and lint. Across the matrix, 30 clean tarball projects passed both ESM/CommonJS runtime and type checks. Each audited artifact has 42 files; per-job archive hashes and actual Node/platform details are in the [CI record](../../outputs/phase3/ci.json). The [local validation record](../../outputs/phase3/local.json) describes the initial local working candidate; its archive hash is separate from these later CI artifacts. The manual-only hosted ZIP64 job was skipped on this push; the actual >4-GiB check passed locally as recorded above.
 
 ## Scope
 

@@ -75,16 +75,18 @@ The subsequent [wide-query investigation](benchmarks/WIDE-QUERY-MEMORY.md) reduc
 ## Stage 3 Validate compatibility and the published artifact
 
 - [x] Establish the source repository at https://github.com/joe-ervin05/exportlite and preserve the implementation milestones and benchmark evidence.
-- [ ] Add reproducible CI workflows to the source repository before claiming the compatibility matrix is complete.
-- [ ] Define an explicit supported Node-major matrix and align engines, README and CI. Start with the currently intended 22, 24 and 26 majors, verifying their support status before release. Exercise the advertised minimum Node 22.18.0 and current patches of supported majors.
-- [ ] Run the full suite on Linux across supported Node majors. Run installation, files, streams, ZIP and adapter checks on macOS and Windows using one supported major initially. Do not claim an untested platform as supported.
-- [ ] Build ESM, CommonJS and both declaration formats, then test a real packed tarball installed into clean consumer projects. Verify imports, require(), inferred row types and each public entry point.
-- [ ] Verify optional peer combinations: native-only, Turso-only, Drizzle plus native, and Drizzle plus Turso. Unused drivers must not be required at import time.
-- [ ] Check archive contents and package metadata. Exclude fixtures, benchmark histories, generated downloads and credentials. Ensure README links resolve from the installed/published package, rather than pointing only to unshipped local reports.
-- [ ] Keep Drizzle compatibility within the tested range and add compatibility checks before widening it, because the adapter uses some runtime metadata outside public typings.
-- [ ] Retain independent ZIP decoding and CRC checks. Run the existing greater-than-4-GiB ZIP64 validation for a release candidate; it need not run for every documentation change.
+- [x] Add reproducible CI workflows to the source repository before claiming the compatibility matrix is complete.
+- [x] Define an explicit supported Node-major matrix and align engines, README and CI. Start with the currently intended 22, 24 and 26 majors, verifying their support status before release. Exercise the advertised minimum Node 22.18.0 and current patches of supported majors.
+- [x] Run the full suite on Linux across supported Node majors. Run installation, files, streams, ZIP and adapter checks on macOS and Windows using one supported major initially. Do not claim an untested platform as supported.
+- [x] Build ESM, CommonJS and both declaration formats, then test a real packed tarball installed into clean consumer projects. Verify imports, require(), inferred row types and each public entry point.
+- [x] Verify optional peer combinations: native-only, Turso-only, Drizzle plus native, and Drizzle plus Turso. Unused drivers must not be required at import time.
+- [x] Check archive contents and package metadata. Exclude fixtures, benchmark histories, generated downloads and credentials. Ensure README links resolve from the installed/published package, rather than pointing only to unshipped local reports.
+- [x] Keep Drizzle compatibility within the tested range and add compatibility checks before widening it, because the adapter uses some runtime metadata outside public typings.
+- [x] Retain independent ZIP decoding and CRC checks. Run the existing greater-than-4-GiB ZIP64 validation for a release candidate; it need not run for every documentation change.
 
 Done when a consumer can install only the peers needed for its documented example and use the actual release tarball successfully on the claimed matrix.
+
+Completed October 18, 2026: the [phase 3 validation report](benchmarks/PHASE-3.md) records all six hosted compatibility jobs passing: Ubuntu on Node 22.18.0, 22.23.3, 24.22.0 and 26.12.0; macOS arm64 and Windows x64 on Node 24.22.0. Each job passes 378 tests, build, public types, lint and five clean npm tarball consumers using both module formats. Package contents and documentation links are audited; the actual greater-than-4-GiB ZIP64 check passes locally. Runtime code and dependency pins are unchanged. The package remains private, and live Turso qualification remains stage T.
 
 ## Stage 4 Establish the release performance baseline
 

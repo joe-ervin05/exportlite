@@ -1,0 +1,157 @@
+{
+  "headSha": "4023ba719b2d07200e1a33d7bde9558d9d8c2efd",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/joe-ervin05/exportlite/actions/runs/39190023200",
+  "jobs": [
+    {
+      "name": "windows-latest / Node 24.x",
+      "jobId": 117860566339,
+      "url": "https://github.com/joe-ervin05/exportlite/actions/runs/39190023200/job/117860566339",
+      "conclusion": "success",
+      "testsPassed": 378,
+      "packedConsumerChecks": {
+        "node": "v24.22.0",
+        "platform": "win32",
+        "arch": "x64",
+        "package": "exportlite@0.0.0-prototype.1",
+        "files": 42,
+        "packedBytes": 125247,
+        "sha256": "a04be65778422cd1f6fd469fd2471efc09d28f42db84c3ffef4a9c06be50841e",
+        "modes": [
+          "bare",
+          "native",
+          "turso",
+          "drizzle-native",
+          "drizzle-turso"
+        ],
+        "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+      }
+    },
+    {
+      "name": "ubuntu-latest / Node 26.x",
+      "jobId": 117860566450,
+      "url": "https://github.com/joe-ervin05/exportlite/actions/runs/39190023200/job/117860566450",
+      "conclusion": "success",
+      "testsPassed": 378,
+      "packedConsumerChecks": {
+        "node": "v26.12.0",
+        "platform": "linux",
+        "arch": "x64",
+        "package": "exportlite@0.0.0-prototype.1",
+        "files": 42,
+        "packedBytes": 125247,
+        "sha256": "a04be65778422cd1f6fd469fd2471efc09d28f42db84c3ffef4a9c06be50841e",
+        "modes": [
+          "bare",
+          "native",
+          "turso",
+          "drizzle-native",
+          "drizzle-turso"
+        ],
+        "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+      }
+    },
+    {
+      "name": "ubuntu-latest / Node 22.x",
+      "jobId": 117860566478,
+      "url": "https://github.com/joe-ervin05/exportlite/actions/runs/39190023200/job/117860566478",
+      "conclusion": "success",
+      "testsPassed": 378,
+      "packedConsumerChecks": {
+        "node": "v22.23.3",
+        "platform": "linux",
+        "arch": "x64",
+        "package": "exportlite@0.0.0-prototype.1",
+        "files": 42,
+        "packedBytes": 125247,
+        "sha256": "a04be65778422cd1f6fd469fd2471efc09d28f42db84c3ffef4a9c06be50841e",
+        "modes": [
+          "bare",
+          "native",
+          "turso",
+          "drizzle-native",
+          "drizzle-turso"
+        ],
+        "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+      }
+    },
+    {
+      "name": "macos-latest / Node 24.x",
+      "jobId": 117860566479,
+      "url": "https://github.com/joe-ervin05/exportlite/actions/runs/39190023200/job/117860566479",
+      "conclusion": "success",
+      "testsPassed": 378,
+      "packedConsumerChecks": {
+        "node": "v24.22.0",
+        "platform": "darwin",
+        "arch": "arm64",
+        "package": "exportlite@0.0.0-prototype.1",
+        "files": 42,
+        "packedBytes": 125247,
+        "sha256": "a04be65778422cd1f6fd469fd2471efc09d28f42db84c3ffef4a9c06be50841e",
+        "modes": [
+          "bare",
+          "native",
+          "turso",
+          "drizzle-native",
+          "drizzle-turso"
+        ],
+        "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+      }
+    },
+    {
+      "name": "ubuntu-latest / Node 22.18.0",
+      "jobId": 117860566540,
+      "url": "https://github.com/joe-ervin05/exportlite/actions/runs/39190023200/job/117860566540",
+      "conclusion": "success",
+      "testsPassed": 378,
+      "packedConsumerChecks": {
+        "node": "v22.18.0",
+        "platform": "linux",
+        "arch": "x64",
+        "package": "exportlite@0.0.0-prototype.1",
+        "files": 42,
+        "packedBytes": 125247,
+        "sha256": "a04be65778422cd1f6fd469fd2471efc09d28f42db84c3ffef4a9c06be50841e",
+        "modes": [
+          "bare",
+          "native",
+          "turso",
+          "drizzle-native",
+          "drizzle-turso"
+        ],
+        "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+      }
+    },
+    {
+      "name": "ubuntu-latest / Node 24.x",
+      "jobId": 117860566615,
+      "url": "https://github.com/joe-ervin05/exportlite/actions/runs/39190023200/job/117860566615",
+      "conclusion": "success",
+      "testsPassed": 378,
+      "packedConsumerChecks": {
+        "node": "v24.22.0",
+        "platform": "linux",
+        "arch": "x64",
+        "package": "exportlite@0.0.0-prototype.1",
+        "files": 42,
+        "packedBytes": 125247,
+        "sha256": "a04be65778422cd1f6fd469fd2471efc09d28f42db84c3ffef4a9c06be50841e",
+        "modes": [
+          "bare",
+          "native",
+          "turso",
+          "drizzle-native",
+          "drizzle-turso"
+        ],
+        "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+      }
+    },
+    {
+      "name": "zip64",
+      "conclusion": "skipped",
+      "reason": "ZIP64 is manual-dispatch only; the local actual >4-GiB check passed."
+    }
+  ]
+}
