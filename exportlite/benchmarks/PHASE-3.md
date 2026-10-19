@@ -17,7 +17,7 @@ On macOS arm64, Node **26.12.0**:
 
 The [compatibility workflow](https://github.com/joe-ervin05/exportlite/actions/workflows/ci.yml) is configured for Ubuntu at exact Node 22.18.0 and current 22/24/26 patches, plus macOS and Windows at current Node 24. Every job runs a frozen install, build, type checks, lint, the full suite and the packed consumers. Directory-link test fixtures use Windows-compatible junctions. ZIP64 additionally runs on manual workflow dispatch and does not publish anything.
 
-Cross-platform results are pending the first pushed workflow run. This configuration alone is not evidence that all jobs passed. Completion results will be recorded here after qualification.
+The [initial hosted run](https://github.com/joe-ervin05/exportlite/actions/runs/39189813018) passed Ubuntu at Node 22.18.0, current 22 and 26, and macOS at Node 24, including packed consumers. Windows formatting exposed CRLF checkout conversion; Ubuntu/Node 24 exposed two tests that sampled ZIP backpressure after a fixed short delay while compressor queues were still filling. LF checkout attributes and sustained-stall observation replace those platform/timing assumptions. Existing upper bounds and cancellation/cleanup assertions remain. The runtime implementation is unchanged. The corrected matrix is awaiting qualification.
 
 ## Scope
 

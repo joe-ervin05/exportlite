@@ -29,6 +29,7 @@ import {
   exportTable,
   type TursoClient,
 } from "../src/turso.js";
+import { stalledProduction } from "./helpers/production.js";
 import { tursoServer } from "./helpers/turso-server.js";
 
 async function consume(stream: Awaited<ReturnType<typeof exportTable>>) {
@@ -767,10 +768,7 @@ it.each([false, true])(
     const failure = expect(pending).rejects.toMatchObject({ code: "ABORTED" });
     try {
       await until(() => release !== undefined);
-      await new Promise((resolve) => setTimeout(resolve, 80));
-      const produced = server.produced;
-      await new Promise((resolve) => setTimeout(resolve, 40));
-      expect(server.produced).toBe(produced);
+      const produced = await stalledProduction(() => server.produced);
       expect(produced).toBeLessThan(64);
     } finally {
       controller.abort();

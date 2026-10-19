@@ -1,6 +1,6 @@
 # API and data contracts
 
-This is the supported API contract for the current prototype. Release qualification, platform CI and live Turso verification remain separate work. The public API stays small: `exportTable()`, `exportQuery()`, column declarations and the optional adapters.
+This is the supported API contract for the current prototype. See the [compatibility checks](compatibility.md) for Node/platform qualification. Release qualification and live Turso verification remain separate work. The public API stays small: `exportTable()`, `exportQuery()`, column declarations and the optional adapters.
 
 ## Entry points and execution
 
@@ -10,7 +10,7 @@ This is the supported API contract for the current prototype. Release qualificat
 | `exportlite/drizzle` | `drizzle-orm/better-sqlite3`, or the registered Turso client through `drizzle-orm/libsql/http` / `drizzle-orm/libsql` | Existing SQLite table, optionally selected/renamed schema columns | Unexecuted flat select builder, or raw `sql` with explicit schema-column metadata |
 | `exportlite/turso` **experimental** | Client created by `createClient()` from this entry point | Required ExportLite declarations | Required SQL and ExportLite declarations |
 
-Other Drizzle drivers, nested selections and the relational query API are unsupported. The Drizzle adapter targets 0.45.x and is tested with 0.45.4; wider compatibility is not established. Its export path bypasses Drizzle row decoders, result caching and query logging hooks. Select filters still use Drizzle's SQL and parameter encoders. A cached SQL plan never caches exported rows.
+Other Drizzle drivers, nested selections and the relational query API are unsupported. The Drizzle adapter targets `>=0.45.4 <0.46.0` and is tested with 0.45.4; wider compatibility is not established. Its export path bypasses Drizzle row decoders, result caching and query logging hooks. Select filters still use Drizzle's SQL and parameter encoders. A cached SQL plan never caches exported rows.
 
 | Selection | Metadata work before the data statement |
 | --- | --- |

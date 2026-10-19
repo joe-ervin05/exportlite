@@ -22,6 +22,7 @@ import {
 import { afterEach, beforeEach, expect, it } from "vitest";
 import { fromBufferPromise } from "yauzl";
 import { exportQuery, exportTable } from "../src/drizzle.js";
+import { stalledProduction } from "./helpers/production.js";
 
 const users = sqliteTable("users", {
   id: integer().primaryKey(),
@@ -493,11 +494,7 @@ it.each([false, true])(
     });
     await blocked;
     try {
-      // ZIP may emit its header before filling the bounded compression buffers.
-      await new Promise((resolve) => setTimeout(resolve, 30));
-      const produced = trace.rows();
-      await new Promise((resolve) => setTimeout(resolve, 30));
-      expect(trace.rows()).toBe(produced);
+      const produced = await stalledProduction(() => trace.rows());
       expect(produced).toBeLessThan(32);
     } finally {
       controller.abort();
