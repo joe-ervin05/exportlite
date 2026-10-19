@@ -36,7 +36,8 @@ The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (Common
 | `output` | Optional new file path or byte-mode Node writable; omit to receive a Web `ExportStream` |
 | `format` | `"jsonl"` (default) or `"json"` |
 | `zip` | `true` streams a ZIP containing one exported file; default `false` |
-| `columns` | Optional exact column names for `exportTable()` |
+| `columns` | Optional column-name list for tables, or an object of typed column selections for tables and queries |
+| `encoding` | Declared table database encoding: `"utf8"` (default), `"utf16le"` or `"utf16be"`; output remains UTF-8 |
 | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
 | `signal` | Optional `AbortSignal` |
 | `end` | With `output` only: end a caller-provided writable when done; default `false` |
@@ -45,6 +46,55 @@ The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (Common
 Batch size is internal. Earlier `batchSize`, `targetBatchBytes` and `batchEstimator` options are absent from the types and rejected at runtime.
 
 TypeScript infers the return type from whether `output` is present. `TableStreamOptions` and `QueryStreamOptions` describe readable calls; the existing destination option types retain a required `output`.
+
+## Declared columns and aliases
+
+Use the small, Drizzle-style builders to declare a projection without repeating types at every call. Object keys become JSON keys; an optional builder argument supplies a different source column name. These are ExportLite builders for reading an existing database, with no Drizzle dependency or schema-creation behavior.
+
+```ts
+import { exportTable, integer, text, type ExportRow } from "exportlite";
+
+const columns = {
+  id: integer().primaryKey(),
+  displayName: text("name").notNull(),
+  email: text(),
+};
+
+const stream = await exportTable(db, "users", {
+  columns,
+  format: "json",
+});
+
+type User = ExportRow<typeof stream>;
+// { id: number; displayName: string; email: string | null }
+
+return new Response(stream, {
+  headers: { "Content-Type": "application/json" },
+});
+```
+
+`integer()`, `real()` and `text()` describe numbers and strings. Fields are nullable by default; `.notNull()` declares that the source cannot be null. `.primaryKey()` also makes the selected type non-null and declares an existing unique, non-null key. These declarations never create or change database constraints. `integer({ mode: "boolean" })` encodes SQLite 0/1 values as JSON false/true, preserving nulls and rejecting other representations. Text and numeric values pass through unchanged: these declarations are type contracts, without per-record JavaScript validation or coercion, and must match stored values.
+
+Declared tables use one data SELECT with no schema, schema-version, capability or column-discovery preflight queries, including on the first call. One `integer().primaryKey()` field enables the existing 256-row indexed batching algorithm using that source column. The key must already be unique and non-null and should be indexed; uniqueness is a caller-supplied contract, not verified by a separate scan. This also works with an integer key on a WITHOUT ROWID table and tables shadowing SQLite's rowid aliases. Missing, text, boolean, real or multiple declared key fields use the row-streaming fallback without preflight queries. A null integer key fails instead of producing an empty export.
+
+`encoding` describes the SQLite database encoding, not HTTP or file encoding. It defaults to `"utf8"`, matching Node's default string-to-byte encoding. UTF-8 keeps the native batch-buffer path. For `"utf16le"` or `"utf16be"`, the driver returns text and the writer produces UTF-8 output. If the UTF-8 path receives UTF-16 batch bytes, it rejects them before copying batch payload; no encoding probe or retry is issued. This is a handled failure with the usual partial-file cleanup. JavaScript strings themselves use UTF-16. See [Node's encoding documentation](https://nodejs.org/api/buffer.html#buffers-and-character-encodings).
+
+`InferColumns<typeof columns>` also gives the selected row type directly. `ExportRow<typeof stream>` retains the selected type through the export call, including renamed fields. The readable still contains bytes; these types do not make `Response.json()` or a framework client infer the body type automatically. ZIP streams describe the rows inside the archive.
+
+Declared queries select named fields from their SQL result, with normal parameter binding:
+
+```ts
+const stream = await exportQuery(db, {
+  sql: "SELECT id, name, email FROM users WHERE active = ? ORDER BY id",
+  params: [1],
+  columns,
+  format: "json",
+});
+```
+
+With declared query columns, ExportLite prepares only the final JSON SELECT. There are no separate schema, schema-version, capability or output-column-discovery queries. SQLite validates the statement and its named result columns; a missing field fails during preparation. Query result aliases should be unique under SQLite's case-insensitive name resolution. Added, unselected columns do not change the projection. Renaming happens inside `json_object()`, with no JavaScript row objects or JSON parsing.
+
+Declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Remote database adapters are not implemented. Run `node examples/declared-columns.mjs` for a working example.
 
 ## Readable streams and API responses
 
@@ -100,7 +150,7 @@ Keep that connection open until `stream.result` settles. Read or pipe the stream
 
 Row-time SQLite and ZIP failures reach both the readable and `.result`. Cancel unused streams with `await stream.cancel()`; when a reader holds the stream's lock, use `await reader.cancel()` instead. The package observes its internal completion rejection so applications that only consume the body do not acquire an unhandled promise rejection. `end` applies only to a provided destination and is rejected when `output` is omitted. Run `node examples/readable.mjs` for a ZIP response consumed through a file pipeline.
 
-Frameworks that accept Web `Response` objects can use these examples directly, provided the route runs in Node with access to the SQLite connection. For tRPC applications, use a normal authenticated download route for the export bytes; a typed tRPC procedure can return its URL and filename. tRPC's [`httpBatchStreamLink`](https://trpc.io/docs/client/links/httpBatchStreamLink) streams values through its own JSON protocol rather than serving the raw ZIP or JSON download. ExportLite returns bytes and does not infer TypeScript row types from SQLite schemas or SQL strings.
+Frameworks that accept Web `Response` objects can use these examples directly, provided the route runs in Node with access to the SQLite connection. For tRPC applications, use a normal authenticated download route for the export bytes; a typed tRPC procedure can return its URL and filename. tRPC's [`httpBatchStreamLink`](https://trpc.io/docs/client/links/httpBatchStreamLink) streams values through its own JSON protocol rather than serving the raw ZIP or JSON download. ExportLite returns bytes; its optional column declarations describe TypeScript row types, while SQLite schemas and SQL strings alone do not provide inferred row types.
 
 ## ZIP downloads
 
@@ -127,17 +177,17 @@ The [naive JavaScript comparison](benchmarks/NAIVE.md) adds `all()` followed by 
 
 ## Fixed batching and streaming fallbacks
 
-Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those fragments directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. SQLite version and JSON capability checks run once after the first successful check on each connection.
+Automatically discovered tables use 256-row batches when a usable rowid exists. Declared tables use the same batching algorithm when one integer primary key is supplied. One recursive export statement finds indexed key ranges and builds a JSON array or LF-separated objects per range. JavaScript joins those fragments directly. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. For exports using discovery, SQLite version and JSON capability checks run once after the first successful check per connection. Declared tables and queries rely on preparing the final JSON statement, without preflight probes.
 
-Repeated table exports reuse validated column selections and generated SQL, with at most **16 cached plans per connection**. A schema-version check invalidates these plans after schema changes. Each export prepares an independent data statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are always read and generated afresh. Custom queries discover their output columns on every call.
+Repeated table exports reuse generated SQL, with at most 16 cached plans per connection shared by declared and discovered plans. A schema-version check invalidates discovered plans after schema changes; declared plans depend only on the request. Each export prepares an independent statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are generated afresh. Custom queries discover their output columns unless `columns` is declared.
 
 Each range starts with an indexed seek and locates its 256th existing key using a constant `OFFSET 255`. That offset stays fixed for every batch; it does not grow with the export. Bounds remain SQLite integers, and only a short final batch needs a separate count inside the same statement.
 
 For UTF-8 databases, batch JSON stays as UTF-8 bytes from SQLite through the writer, avoiding conversion to JavaScript text and back. UTF-16 databases retain the text path and still produce UTF-8 output. This is internal; the stream and file APIs are unchanged.
 
-Views, virtual tables, WITHOUT ROWID tables, and tables shadowing all three rowid aliases automatically use the row-streaming path. Custom queries always stream individual SQLite-generated JSON records. Both paths share the same output loop, backpressure, cancellation and cleanup behavior. An execution failure never retries through a different path after writing partial data.
+With automatic discovery, views, virtual tables, WITHOUT ROWID tables and tables shadowing all three rowid aliases use row streaming. Declared selections choose batching from the declared key, without storage discovery. Custom queries always stream individual SQLite-generated JSON records. Both paths share the output loop, backpressure, cancellation and cleanup. An execution failure never retries another path after writing partial data.
 
-Batched tables are exported in ascending rowid order. Fallback table order follows SQLite; use a query with `ORDER BY` when ordering is essential. The active statement preserves one read snapshot while waiting for output. ExportLite does not manage caller transactions, and it never opens or closes the connection.
+Batched tables are exported in ascending key order: the declared integer key, or the discovered rowid. Fallback order follows SQLite; use a query with ORDER BY when ordering is essential. The active statement preserves one read snapshot while waiting for output. ExportLite does not manage caller transactions or open/close the connection.
 
 **256 rows is not a byte or RAM limit.** Large records, SQLite working memory, JS string copies and downstream buffers still consume memory. The library avoids retaining the complete export. Cancellation is checked between rows/batches and during output waits; an individual synchronous SQLite operation cannot be interrupted. The loop yields to the event loop after at least 2,048 rows.
 
@@ -184,7 +234,7 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 189 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 249 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 

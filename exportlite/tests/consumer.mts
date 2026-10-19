@@ -2,11 +2,17 @@ import type { Writable } from "node:stream";
 import type Database from "better-sqlite3";
 import {
   type ExportResult,
+  type ExportRow,
   type ExportStream,
   exportQuery,
   exportTable,
+  type InferColumns,
+  integer,
+  real,
   type SQLiteConnection,
+  text,
 } from "exportlite";
+import { expectTypeOf } from "vitest";
 
 declare const db: Database.Database;
 declare const output: Writable;
@@ -61,3 +67,48 @@ exportTable(db, "users", { output, batchEstimator: "p95" });
 
 // @ts-expect-error ZIP is a boolean switch.
 exportTable(db, "users", { output, zip: "true" });
+
+const selection = {
+  userId: integer("id").primaryKey(),
+  displayName: text("name").notNull(),
+  email: text(),
+  active: integer({ mode: "boolean" }).notNull(),
+  score: real(),
+};
+type User = {
+  userId: number;
+  displayName: string;
+  email: string | null;
+  active: boolean;
+  score: number | null;
+};
+expectTypeOf<InferColumns<typeof selection>>().toEqualTypeOf<User>();
+const typedTable = exportTable(db, "users", { columns: selection });
+const typedQuery = exportQuery(db, {
+  sql: "SELECT id, name, email, active, score FROM users",
+  columns: selection,
+});
+expectTypeOf<ExportRow<typeof typedTable>>().toEqualTypeOf<User>();
+expectTypeOf<ExportRow<typeof typedQuery>>().toEqualTypeOf<User>();
+const inline = exportTable(db, "users", {
+  columns: { id: integer().notNull(), renamed: text("name") },
+});
+exportTable(db, "users", { columns: selection, encoding: "utf16be" });
+// @ts-expect-error Encoding describes SQLite's supported database encodings.
+exportTable(db, "users", { columns: selection, encoding: "latin1" });
+expectTypeOf<ExportRow<typeof inline>>().toEqualTypeOf<{
+  id: number;
+  renamed: string | null;
+}>();
+const typedDestination = exportQuery(db, {
+  sql: "SELECT 1 AS n",
+  columns: { n: integer() },
+  output,
+});
+expectTypeOf(typedDestination).toEqualTypeOf<Promise<ExportResult>>();
+// @ts-expect-error Selected types come from column builders.
+exportTable(db, "users", { columns: { id: "number" } });
+// @ts-expect-error Type declarations use builders rather than configuration records.
+exportQuery(db, { sql: "SELECT 1 AS id", columns: { id: { type: "number" } } });
+// @ts-expect-error Only number and boolean integer modes are supported.
+integer({ mode: "timestamp" });

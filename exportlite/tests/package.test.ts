@@ -71,6 +71,33 @@ it.each(["esm", "cjs"])(
         zipFile.close();
       }
       expect((await zipped.result).bytesWritten).toBe(zipBytes.length);
+      const declared = await built.exportQuery(db, {
+        sql: "SELECT 1 AS id, '雪' AS name",
+        columns: {
+          userId: built.integer("id").notNull(),
+          displayName: built.text("name"),
+        },
+        format: "json",
+      });
+      expect(await new Response(declared).json()).toEqual([
+        { userId: 1, displayName: "雪" },
+      ]);
+      await declared.result;
+      db.exec(
+        "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT); INSERT INTO users VALUES(1,'雪')",
+      );
+      const table = await built.exportTable(db, "users", {
+        columns: {
+          userId: built.integer("id").primaryKey(),
+          label: built.text("name"),
+        },
+        format: "json",
+        encoding: "utf8",
+      });
+      expect(await new Response(table).json()).toEqual([
+        { userId: 1, label: "雪" },
+      ]);
+      await table.result;
     } finally {
       db.close();
     }

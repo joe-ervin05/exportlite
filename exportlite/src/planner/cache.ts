@@ -1,12 +1,15 @@
+import type { SelectedColumns } from "../columns.js";
 import type { ReadStatement, SQLiteConnection } from "../database/adapter.js";
 import { readStatement } from "../database/better-sqlite3.js";
 import { sqliteError } from "../errors.js";
+import type { DatabaseEncoding, TableColumns } from "../types.js";
+import { planDeclaredTable } from "./declared.js";
 import { identifier } from "./identifiers.js";
 import { planTable } from "./json.js";
 
 type CachedPlan = Pick<ReturnType<typeof planTable>, "sql" | "batched">;
 interface Cache {
-  schema: ReadStatement;
+  schema?: ReadStatement;
   version?: string;
   plans: Map<string, CachedPlan>;
 }
@@ -14,39 +17,73 @@ interface Cache {
 // Bound retained metadata/SQL. Every export gets an independent statement.
 const caches = new WeakMap<SQLiteConnection, Cache>();
 
+function cacheFor(db: SQLiteConnection): Cache {
+  let cache = caches.get(db);
+  if (!cache) {
+    cache = { plans: new Map() };
+    caches.set(db, cache);
+  }
+  return cache;
+}
+
+function cachedPlan(
+  db: SQLiteConnection,
+  cache: Cache,
+  key: string,
+  build: () => ReturnType<typeof planTable>,
+): ReturnType<typeof planTable> {
+  const cached = cache.plans.get(key);
+  const plan = cached
+    ? { ...cached, statement: readStatement(db, cached.sql) }
+    : build();
+  cache.plans.delete(key);
+  cache.plans.set(key, { sql: plan.sql, batched: plan.batched });
+  if (cache.plans.size > 16) {
+    const oldest = cache.plans.keys().next().value;
+    if (oldest !== undefined) cache.plans.delete(oldest);
+  }
+  return plan;
+}
+
+export function cachedDeclaredTablePlan(
+  db: SQLiteConnection,
+  table: string,
+  columns: SelectedColumns,
+  format: "json" | "jsonl",
+  encoding: DatabaseEncoding,
+): ReturnType<typeof planTable> {
+  identifier(table);
+  try {
+    return cachedPlan(
+      db,
+      cacheFor(db),
+      JSON.stringify(["declared", table, columns, format, encoding]),
+      () => planDeclaredTable(db, table, columns, format, encoding),
+    );
+  } catch (error) {
+    throw sqliteError(error);
+  }
+}
+
 export function cachedTablePlan(
   db: SQLiteConnection,
   table: string,
-  columns: readonly string[] | undefined,
+  columns: TableColumns | undefined,
   format: "json" | "jsonl",
 ): ReturnType<typeof planTable> {
   identifier(table);
   try {
-    let cache = caches.get(db);
-    if (!cache) {
-      cache = {
-        schema: db.prepare("PRAGMA main.schema_version").pluck(),
-        plans: new Map(),
-      };
-      caches.set(db, cache);
-    }
+    const cache = cacheFor(db);
+    cache.schema ??= db.prepare("PRAGMA main.schema_version").pluck();
     const version = String(cache.schema.get());
     if (version !== cache.version) {
       cache.plans.clear();
       cache.version = version;
     }
     const key = JSON.stringify([table, columns ?? null, format]);
-    const cached = cache.plans.get(key);
-    const plan = cached
-      ? { ...cached, statement: readStatement(db, cached.sql) }
-      : planTable(db, table, columns, format);
-    cache.plans.delete(key);
-    cache.plans.set(key, { sql: plan.sql, batched: plan.batched });
-    if (cache.plans.size > 16) {
-      const oldest = cache.plans.keys().next().value;
-      if (oldest !== undefined) cache.plans.delete(oldest);
-    }
-    return plan;
+    return cachedPlan(db, cache, key, () =>
+      planTable(db, table, columns, format),
+    );
   } catch (error) {
     throw sqliteError(error);
   }

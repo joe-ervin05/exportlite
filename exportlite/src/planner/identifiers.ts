@@ -32,7 +32,7 @@ export function uniqueColumns(names: readonly string[]): void {
   }
 }
 
-/** The driver validates the single statement first. Only strip its final delimiter/comments. */
+/** Strip only the final delimiter/comments; the enclosing statement is driver-validated. */
 export function subquerySource(sql: string): string {
   let last = -1;
   for (let i = 0; i < sql.length; i++) {

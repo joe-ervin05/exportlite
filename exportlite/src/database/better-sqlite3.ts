@@ -82,6 +82,14 @@ export function* jsonBatches(
       ) {
         throw new Error("Expected a SQLite JSON batch and positive row count");
       }
+      // Every batch begins with ASCII JSON framing. UTF-16 bytes have a NUL
+      // in one of these positions; reject a wrong UTF-8 declaration before
+      // copying any batch payload to the output. No database probe is needed.
+      if (Buffer.isBuffer(value[0]) && (value[0][0] === 0 || value[0][1] === 0))
+        throw new ExportLiteError(
+          "INVALID_OPTIONS",
+          "The database uses UTF-16. Set encoding to utf16le or utf16be for declared table exports; exported JSON remains UTF-8.",
+        );
       yield value as [string | Buffer, number | bigint];
     }
   } catch (error) {

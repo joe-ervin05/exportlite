@@ -1,7 +1,10 @@
+import type { SelectedColumns } from "../columns.js";
 import type { SQLiteConnection } from "../database/adapter.js";
 import { readStatement } from "../database/better-sqlite3.js";
 import { ExportLiteError, sqliteError } from "../errors.js";
+import type { TableColumns } from "../types.js";
 import { planBatchedTable } from "./batches.js";
+import { selectedFields, selectedObject } from "./columns.js";
 import {
   identifier,
   literal,
@@ -12,11 +15,15 @@ import {
 export function planTable(
   db: SQLiteConnection,
   table: string,
-  requested?: readonly string[],
+  requested?: TableColumns,
   format: "json" | "jsonl" = "jsonl",
 ) {
   identifier(table);
   try {
+    const fields =
+      requested !== undefined && !Array.isArray(requested)
+        ? selectedFields(requested as SelectedColumns)
+        : undefined;
     const found = db
       .prepare(
         "SELECT name FROM main.sqlite_schema WHERE name = ? COLLATE NOCASE AND type IN ('table', 'view')",
@@ -33,11 +40,12 @@ export function planTable(
     const available = new Set(
       metadata.filter((c) => Number(c.hidden) !== 1).map((c) => c.name),
     );
-    const columns =
-      requested === undefined
+    const columns = fields
+      ? fields.map((field) => field.column)
+      : requested === undefined
         ? metadata.filter((c) => Number(c.hidden) === 0).map((c) => c.name)
-        : [...requested];
-    uniqueColumns(columns);
+        : [...(requested as readonly string[])];
+    if (!fields) uniqueColumns(columns);
     for (const column of columns) {
       if (!available.has(column))
         throw new ExportLiteError(
@@ -49,13 +57,16 @@ export function planTable(
       table: found.name,
       columnNames: metadata.map((column) => column.name),
       columns,
+      ...(fields ? { fields } : {}),
       format,
     });
     if (batched) return { ...batched, batched: true };
     const pairs = columns
       .map((c) => `${literal(c)}, ${identifier(c)}`)
       .join(", ");
-    const sql = `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`;
+    const sql = fields
+      ? `SELECT ${selectedObject(fields, (field) => `"__exportlite_source".${identifier(field.column)}`)} FROM main.${identifier(found.name)} AS "__exportlite_source"`
+      : `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`;
     return {
       statement: readStatement(db, sql),
       sql,
@@ -66,7 +77,11 @@ export function planTable(
   }
 }
 
-export function planQuery(db: SQLiteConnection, sql: string) {
+export function planQuery(
+  db: SQLiteConnection,
+  sql: string,
+  declared?: SelectedColumns,
+) {
   if (typeof sql !== "string" || !sql.trim())
     throw new ExportLiteError(
       "INVALID_QUERY",
@@ -81,6 +96,20 @@ export function planQuery(db: SQLiteConnection, sql: string) {
       "Only SELECT and WITH queries are supported.",
     );
   }
+  let name = "__exportlite_source";
+  while (sql.toLowerCase().includes(name)) name += "_";
+  const sourceName = identifier(name);
+  if (declared !== undefined) {
+    const fields = selectedFields(declared);
+    const object = selectedObject(
+      fields,
+      (field) => `${sourceName}.${identifier(field.column)}`,
+    );
+    return readStatement(
+      db,
+      `WITH ${sourceName} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${sourceName}`,
+    );
+  }
   const source = readStatement(db, sql);
   const columns = source.columns().map((c) => c.name);
   uniqueColumns(columns);
@@ -89,9 +118,6 @@ export function planQuery(db: SQLiteConnection, sql: string) {
   const pairs = columns
     .map((c, i) => `${literal(c)}, ${aliases[i]}`)
     .join(", ");
-  let name = "__exportlite_source";
-  while (sql.toLowerCase().includes(name)) name += "_";
-  const sourceName = identifier(name);
   return readStatement(
     db,
     `WITH ${sourceName}(${aliases.join(", ")}) AS (\n${subquerySource(sql)}\n) SELECT json_object(${pairs}) FROM ${sourceName}`,
