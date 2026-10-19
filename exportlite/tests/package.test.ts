@@ -1,9 +1,79 @@
+import { execFile } from "node:child_process";
+import { cp, mkdir, mkdtemp, realpath, rm, symlink } from "node:fs/promises";
 import { createRequire } from "node:module";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
 import { Writable } from "node:stream";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { promisify } from "node:util";
 import { crc32 } from "node:zlib";
 import Database from "better-sqlite3";
 import { expect, it } from "vitest";
 import { fromBufferPromise } from "yauzl";
+
+it.each([
+  ["Turso", ["@libsql/client"]],
+  ["Drizzle", ["drizzle-orm"]],
+  ["Turso with Drizzle", ["@libsql/client", "drizzle-orm"]],
+] as const)(
+  "loads %s entries without the native SQLite peer",
+  async (_, peers) => {
+    const folder = await mkdtemp(join(tmpdir(), "exportlite-remote-peers-"));
+    try {
+      await cp(
+        fileURLToPath(new URL("../dist", import.meta.url)),
+        join(folder, "dist"),
+        {
+          recursive: true,
+        },
+      );
+      for (const name of ["zip-stream", ...peers]) {
+        const target = join(folder, "node_modules", name);
+        await mkdir(dirname(target), { recursive: true });
+        await symlink(
+          await realpath(
+            fileURLToPath(new URL(`../node_modules/${name}`, import.meta.url)),
+          ),
+          target,
+        );
+      }
+      const entries = [
+        "index",
+        ...(peers.some((name) => name === "@libsql/client") ? ["turso"] : []),
+        ...(peers.some((name) => name === "drizzle-orm") ? ["drizzle"] : []),
+      ];
+      const esm = pathToFileURL(join(folder, "dist/index.mjs")).href;
+      const script = `
+      import { createRequire } from 'node:module';
+      const require = createRequire(${JSON.stringify(esm)});
+      for (const peer of ${JSON.stringify(["better-sqlite3", ...["@libsql/client", "drizzle-orm"].filter((name) => !peers.some((peer) => peer === name))])}) {
+        let missing = false;
+        try { require.resolve(peer); } catch { missing = true; }
+        if (!missing) throw Error('Unexpected installed peer: ' + peer);
+      }
+      for (const name of ${JSON.stringify(entries)}) {
+        for (const entry of [await import(new URL(name + '.mjs', ${JSON.stringify(esm)})), require('./' + name + '.cjs')]) {
+          if (typeof entry.exportTable !== 'function') throw Error('Missing export');
+          if (name === 'turso') {
+            const client = entry.createClient({url: 'https://example.invalid'});
+            if (client.closed) throw Error('Unexpected closed client');
+            client.close();
+          }
+        }
+      }
+      process.stdout.write('ok');
+    `;
+      const { stdout } = await promisify(execFile)(process.execPath, [
+        "--input-type=module",
+        "--eval",
+        script,
+      ]);
+      expect(stdout).toBe("ok");
+    } finally {
+      await rm(folder, { recursive: true, force: true });
+    }
+  },
+);
 
 it.each(["esm", "cjs"])(
   "decodes a ZIP from the built %s entry point",

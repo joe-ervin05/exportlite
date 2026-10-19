@@ -19,6 +19,16 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./turso": {
+      "import": {
+        "types": "./dist/turso.d.mts",
+        "default": "./dist/turso.mjs"
+      },
+      "require": {
+        "types": "./dist/turso.d.cts",
+        "default": "./dist/turso.cjs"
+      }
+    },
     "./drizzle": {
       "import": {
         "types": "./dist/drizzle.d.mts",
@@ -50,15 +60,23 @@
     "example": "node examples/basic.mjs"
   },
   "peerDependencies": {
+    "@libsql/client": "^0.18.0",
     "better-sqlite3": "^13.0.3",
     "drizzle-orm": "^0.45.4"
   },
   "peerDependenciesMeta": {
+    "@libsql/client": {
+      "optional": true
+    },
+    "better-sqlite3": {
+      "optional": true
+    },
     "drizzle-orm": {
       "optional": true
     }
   },
   "devDependencies": {
+    "@libsql/client": "0.18.0",
     "@biomejs/biome": "2.5.15",
     "@types/better-sqlite3": "9.6.0",
     "@types/node": "22.20.5",

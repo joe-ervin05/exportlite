@@ -122,6 +122,14 @@ export function planSelectedQuery(
   fields: SelectedField[],
   positional: boolean,
 ) {
+  return readStatement(db, selectedQuerySql(sql, fields, positional));
+}
+
+export function selectedQuerySql(
+  sql: string,
+  fields: SelectedField[],
+  positional: boolean,
+): string {
   validateQuery(sql);
   let name = "__exportlite_source";
   while (sql.toLowerCase().includes(name)) name += "_";
@@ -134,10 +142,7 @@ export function planSelectedQuery(
     (field, i) =>
       `${source}.${identifier(positional ? `c${i}` : field.column)}`,
   );
-  return readStatement(
-    db,
-    `WITH ${source}${aliases} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${source}`,
-  );
+  return `WITH ${source}${aliases} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${source}`;
 }
 
 function validateQuery(sql: string) {

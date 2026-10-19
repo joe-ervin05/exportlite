@@ -4,6 +4,7 @@ export type ExportErrorCode =
   | "INVALID_SCHEMA"
   | "UNSUPPORTED_SQLITE"
   | "SQLITE_ERROR"
+  | "REMOTE_ERROR"
   | "OUTPUT_ERROR"
   | "ABORTED";
 

@@ -34,16 +34,24 @@ export function planBatchedTable(
 /** Both planners share the same fixed-size, indexed-seek export statement. */
 export function prepareBatchedTable(
   db: SQLiteConnection,
-  options: {
-    table: string;
-    key: string;
-    columns: readonly string[];
-    fields?: readonly SelectedField[];
-    format: "json" | "jsonl";
-    binary: boolean;
-    declared?: boolean;
-  },
+  options: BatchedTableOptions,
 ) {
+  const sql = batchedTableSql(options);
+  return { statement: readStatement(db, sql), sql };
+}
+
+interface BatchedTableOptions {
+  table: string;
+  key: string;
+  columns: readonly string[];
+  fields?: readonly SelectedField[];
+  format: "json" | "jsonl";
+  binary: boolean;
+  declared?: boolean;
+}
+
+/** SQL construction is shared by local prepared statements and remote cursors. */
+export function batchedTableSql(options: BatchedTableOptions): string {
   const key = options.key;
   const table = `main.${identifier(options.table)} AS "__exportlite_source"`;
   const columns = options.fields
@@ -100,5 +108,5 @@ export function prepareBatchedTable(
     (SELECT count(*) FROM ${table} WHERE ${key} >= ${first}) END
   FROM "__exportlite_batches"
   WHERE ${first} IS NOT NULL`;
-  return { statement: readStatement(db, sql), sql };
+  return sql;
 }

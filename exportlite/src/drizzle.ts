@@ -1,4 +1,3 @@
-import type Database from "better-sqlite3";
 import {
   type GetColumnData,
   getTableColumns,
@@ -6,22 +5,25 @@ import {
   type Query,
   SQL,
 } from "drizzle-orm";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import {
+  BaseSQLiteDatabase,
   getTableConfig,
   SQLiteColumn,
   type SQLiteSyncDialect,
   SQLiteTable,
 } from "drizzle-orm/sqlite-core";
 import { streamExport } from "./api/export.js";
-import type { ReadStatement } from "./database/adapter.js";
+import { deliverTursoExport } from "./api/export-turso.js";
+import type { ReadStatement, SQLiteConnection } from "./database/adapter.js";
+import { getTurso, type TursoConnection } from "./database/turso.js";
 import { ExportLiteError } from "./errors.js";
 import { createReadableExport } from "./output/readable.js";
 import { checkAborted, validateOptions } from "./output/writer.js";
 import { cachedSelectedTablePlan } from "./planner/cache.js";
 import type { SelectedField } from "./planner/columns.js";
+import { selectedTableSql } from "./planner/declared.js";
 import { identifier, uniqueColumns } from "./planner/identifiers.js";
-import { planSelectedQuery } from "./planner/json.js";
+import { planSelectedQuery, selectedQuerySql } from "./planner/json.js";
 import type {
   ExportOptions,
   ExportResult,
@@ -31,9 +33,9 @@ import type {
   TableStreamOptions,
 } from "./types.js";
 
-/** The $client exposed by drizzle-orm/better-sqlite3. Caller retains ownership. */
+/** A native or registered Turso $client. Caller retains ownership. */
 export interface DrizzleSQLiteDatabase {
-  readonly $client: Database.Database;
+  readonly $client: SQLiteConnection | TursoConnection;
 }
 
 export type DrizzleColumns = Readonly<Record<string, SQLiteColumn>>;
@@ -84,7 +86,7 @@ export async function exportTable(
   const started = performance.now();
   validateOptions(options);
   checkAborted(options.signal);
-  const { client, dialect } = connection(db);
+  const { client, dialect, remote } = connection(db);
   if (!is(table, SQLiteTable)) invalid("Pass a Drizzle SQLite table.");
   if (
     options.encoding !== undefined &&
@@ -109,8 +111,26 @@ export async function exportTable(
     keys.length === 1 && keys[0]?.columnType === "SQLiteInteger"
       ? dialect.casing.getColumnCasing(keys[0])
       : undefined;
+  if (remote) {
+    const plan = selectedTableSql(
+      config.name,
+      fields,
+      options.format ?? "jsonl",
+      false,
+      key,
+    );
+    return deliverTursoExport(
+      client as TursoConnection,
+      plan.sql,
+      undefined,
+      options,
+      started,
+      plan.batched,
+      config.name,
+    );
+  }
   const plan = cachedSelectedTablePlan(
-    client,
+    client as SQLiteConnection,
     config.name,
     fields,
     options.format ?? "jsonl",
@@ -167,7 +187,7 @@ export async function exportQuery(
   const started = performance.now();
   validateOptions(options);
   checkAborted(options.signal);
-  const { client, dialect } = connection(db);
+  const { client, dialect, remote } = connection(db);
   const raw = is(query, SQL);
   let compiled: Query;
   let selection: Record<string, unknown>;
@@ -207,7 +227,20 @@ export async function exportQuery(
     ),
   );
   // Positional CTE names preserve repeated sources and Drizzle's JS aliases.
-  const statement = planSelectedQuery(client, compiled.sql, fields, !raw);
+  if (remote)
+    return deliverTursoExport(
+      client as TursoConnection,
+      selectedQuerySql(compiled.sql, fields, !raw),
+      compiled.params,
+      options,
+      started,
+    );
+  const statement = planSelectedQuery(
+    client as SQLiteConnection,
+    compiled.sql,
+    fields,
+    !raw,
+  );
   return deliver(statement, compiled.params, options, started);
 }
 
@@ -267,18 +300,24 @@ function entries(value: unknown): [string, unknown][] {
 }
 
 function connection(db: DrizzleSQLiteDatabase) {
+  const remote = getTurso(db?.$client);
   if (
-    !is(db, BetterSQLite3Database) ||
-    typeof db.$client?.prepare !== "function"
+    !is(db, BaseSQLiteDatabase) ||
+    (!remote &&
+      !(
+        db.$client &&
+        "prepare" in db.$client &&
+        typeof db.$client.prepare === "function"
+      ))
   )
     invalid(
-      "The Drizzle adapter requires drizzle-orm/better-sqlite3 with a live $client; buffered/remote drivers are not supported.",
+      "The Drizzle adapter requires drizzle-orm/better-sqlite3 with a live $client, or a Turso client created by exportlite/turso.",
     );
   // Drizzle does not expose its configured casing/dialect in public typings.
   // Reuse it so automatic casing and sql template bindings match the caller.
   const dialect = (
     db as unknown as {
-      dialect: SQLiteSyncDialect & {
+      dialect: Pick<SQLiteSyncDialect, "sqlToQuery"> & {
         casing: { getColumnCasing(column: SQLiteColumn): string };
       };
     }
@@ -287,7 +326,7 @@ function connection(db: DrizzleSQLiteDatabase) {
     invalid(
       "Unsupported Drizzle dialect. This adapter supports Drizzle 0.45.x.",
     );
-  return { client: db.$client, dialect };
+  return { client: db.$client, dialect, remote: remote !== undefined };
 }
 
 function deliver(

@@ -1,6 +1,6 @@
 # ExportLite — v0
 
-Export SQLite tables and read-only queries to JSON or JSONL through an existing `better-sqlite3` connection. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes JSON fragments without parsing them or constructing row objects. This is a local, private prototype.
+Export SQLite tables and read-only queries to JSON or JSONL through `better-sqlite3` or Turso/libSQL HTTP, directly or using a Drizzle schema. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes JSON fragments without parsing the exported records or constructing row objects. This is a private prototype.
 
 ## Usage
 
@@ -27,7 +27,7 @@ try {
 }
 ```
 
-The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (CommonJS), with declarations for both formats. It uses `zip-stream` for ZIP output; the caller supplies `better-sqlite3` as a peer dependency. Nothing has been published to npm.
+The local checkout builds ESM and CommonJS entry points with declarations for both formats. It uses `zip-stream` for ZIP output. Install `better-sqlite3` for local connections, `@libsql/client` for Turso, and `drizzle-orm` when using the Drizzle adapter; these driver peers are optional so unused drivers need not be installed. Nothing has been published to npm.
 
 ## Small API
 
@@ -37,7 +37,7 @@ The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (Common
 | `format` | `"jsonl"` (default) or `"json"` |
 | `zip` | `true` streams a ZIP containing one exported file; default `false` |
 | `columns` | Optional column-name list for tables, or an object of typed column selections for tables and queries |
-| `encoding` | Declared table database encoding: `"utf8"` (default), `"utf16le"` or `"utf16be"`; output remains UTF-8 |
+| `encoding` | Local declared table database encoding: `"utf8"` (default), `"utf16le"` or `"utf16be"`; output remains UTF-8 |
 | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
 | `signal` | Optional `AbortSignal` |
 | `end` | With `output` only: end a caller-provided writable when done; default `false` |
@@ -94,11 +94,11 @@ const stream = await exportQuery(db, {
 
 With declared query columns, ExportLite prepares only the final JSON SELECT. There are no separate schema, schema-version, capability or output-column-discovery queries. SQLite validates the statement and its named result columns; a missing field fails during preparation. Query result aliases should be unique under SQLite's case-insensitive name resolution. Added, unselected columns do not change the projection. Renaming happens inside `json_object()`, with no JavaScript row objects or JSON parsing.
 
-Declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Remote database adapters are not implemented. Run `node examples/declared-columns.mjs` for a working example.
+Local declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original local table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Run `node examples/declared-columns.mjs` for a working example.
 
 ## Drizzle adapter
 
-The optional `exportlite/drizzle` entry point accepts a Drizzle database and existing SQLite schemas. It supports **Drizzle ORM 0.45.x, tested with 0.45.4**, using `drizzle-orm/better-sqlite3`. Drizzle is an optional peer dependency; the main `exportlite` entry does not import it. Stable-version documentation uses `getTableColumns()`; the newer `getColumns()` name belongs to Drizzle v1.
+The optional `exportlite/drizzle` entry point accepts a Drizzle database and existing SQLite schemas. It supports **Drizzle ORM 0.45.x, tested with 0.45.4**, using `drizzle-orm/better-sqlite3` or a registered Turso client with `drizzle-orm/libsql/http` (also usable with `drizzle-orm/libsql`). Drizzle is an optional peer dependency; the main `exportlite` entry does not import it. Stable-version documentation uses `getTableColumns()`; the newer `getColumns()` name belongs to Drizzle v1.
 
 ```ts
 import { eq, sql } from "drizzle-orm";
@@ -127,7 +127,7 @@ const query = db.select({ id: users.id, label: users.name })
 const stream = await exportQuery(db, query, { format: "json", zip: true });
 ```
 
-The adapter compiles `.toSQL()` and reads selection metadata; it never awaits the query or calls Drizzle's `.all()`. Select queries retain their inferred row contract, including nullable columns from flat left joins. Give computed SQL expressions an `.as("alias")` alias. Ordinary select queries use the existing row-streaming query path; the integer-key table batching optimization applies to `exportTable()`. Drizzle's built-in query-result cache and row logging/mapping hooks are bypassed because ExportLite executes the generated JSON statement through the same native `$client` cursor. No export result is cached.
+The adapter compiles `.toSQL()` and reads selection metadata; it never awaits the query or calls Drizzle's `.all()`. Select queries retain their inferred row contract, including nullable columns from flat left joins. Give computed SQL expressions an `.as("alias")` alias. Ordinary select queries use the existing row-streaming query path; the integer-key table batching optimization applies to `exportTable()`. Drizzle's built-in query-result cache and row logging/mapping hooks are bypassed because ExportLite executes the generated JSON statement through a native cursor or the Turso streaming transport. No export result is cached.
 
 Raw Drizzle `sql` templates also work. Supply the schema columns corresponding to the raw query's result column names; these fields supply output names and decoding metadata without a discovery query:
 
@@ -143,11 +143,61 @@ Supported schema values are plain `integer`, `real`, `text` (including enums), b
 
 Date/timestamp modes, numeric modes, BLOB/bigint columns, custom column decoders and `.mapWith()` are rejected explicitly rather than silently skipping their conversions. Convert such fields to a supported scalar in an aliased SQL expression when appropriate. Unbound `sql.placeholder()` values are not supported; bind actual values in the query before exporting. The adapter reads a few runtime metadata properties that Drizzle marks internal, including configured casing, selection fields and SQL decoders; compatibility tests cover the pinned version and upgrades should rerun them.
 
-`zip`, `signal`, `output`, `end`, `bufferSize`, table `encoding` and `.result` work as in the core API, using the same writer and ZIP implementation. The caller owns the connection and any surrounding native transaction. Drizzle transaction-wrapper objects do not expose the required `$client`; pass the original database while its native transaction remains open for the entire export consumption.
+`zip`, `signal`, `output`, `end`, `bufferSize` and `.result` work as in the core API, using the same writer and ZIP implementation. Table `encoding` applies to native connections; remote exports always receive UTF-8 protocol text. The caller owns the connection. Drizzle transaction-wrapper objects do not expose the required `$client`; for local connections, pass the original database while its native transaction remains open for the entire export consumption. Remote exports use independent read sessions and cannot join a caller's transaction.
 
-Remote libSQL/Turso and other Drizzle drivers are not supported by this adapter. Drizzle's libSQL execution path returns a buffered result, so using its raw execution API alone would not preserve bounded streaming. A remote adapter needs a streaming transport in addition to Drizzle's schema/compiler support. Run `node examples/drizzle.mjs` for table, select and raw SQL examples.
+For Turso, create the client using `exportlite/turso` as shown below. Other Drizzle drivers are not supported. Run `node examples/drizzle.mjs` for local table, select and raw SQL examples.
 
 The [Drizzle adapter benchmark](benchmarks/DRIZZLE-ADAPTER.md) compares total JSON generation/UTF-8 output time and whole-process peak memory against direct ExportLite and normal Drizzle queries plus `JSON.stringify()`, using the existing fixtures and Node 26.12.0. It includes separate select-builder and Drizzle-loaded application controls.
+
+## Turso / libSQL HTTP
+
+Use the `exportlite/turso` client factory for both direct exports and Drizzle. It returns an ordinary official `@libsql/client/http` client, retaining the transport configuration needed for streaming exports. Existing applications can change their client factory import; an already-created SDK client does not expose that configuration publicly.
+
+```ts
+import { integer, text } from "exportlite";
+import { createClient, exportTable, exportQuery } from "exportlite/turso";
+
+const client = createClient({
+  url: process.env.TURSO_DATABASE_URL!,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
+
+const stream = await exportTable(client, "users", {
+  columns: { id: integer().primaryKey(), displayName: text("name") },
+  format: "json",
+  zip: true,
+});
+// Keep client open until consumption and stream.result have completed.
+return new Response(stream, { headers: { "Content-Type": "application/zip" } });
+```
+
+Direct remote exports require a typed `columns` object, for both tables and queries. Queries accept the same `sql` and positional/named `params` as local exports. A single declared integer primary key enables 256-row table batches; other keys and queries use row streaming. Files and Node writable destinations work with `output` as usual.
+
+Drizzle supplies the column declarations and primary-key metadata:
+
+```ts
+import { drizzle } from "drizzle-orm/libsql/http";
+import { exportTable, exportQuery } from "exportlite/drizzle";
+import { createClient } from "exportlite/turso";
+import { users } from "./schema";
+
+const client = createClient(config);
+const db = drizzle(client);
+const stream = await exportTable(db, users, { format: "json" });
+// exportQuery(db, db.select(...).from(users), options) also works.
+```
+
+Each export sends **one SQL statement, with no schema, version, column-discovery or capability preflight**. It uses a streaming [`/v3/cursor` request](https://github.com/tursodatabase/libsql/blob/main/docs/HRANA_3_SPEC.md), then a separate `/v3/pipeline` request to close the server session. The close request runs no SQL; it is awaited before completion and has a five-second timeout. This is normally two HTTP requests, with no extra round trip before the first data request. An execution failure never retries the query. SDK `execute()` and Drizzle result buffering are bypassed.
+
+The current [Turso HTTP protocol](https://github.com/tursodatabase/turso/blob/main/serverless/PROTOCOL.md#43-stream-retention) retains cursor sessions until explicitly closed or expired and has no close-after-cursor request option. A pipeline can combine execution and closing, but the published [libSQL server implementation](https://github.com/tursodatabase/libsql/blob/main/libsql-server/src/hrana/http/mod.rs) collects and serializes its complete pipeline response before sending it. Parsing that response incrementally in the client would not preserve database-to-client incremental streaming. ExportLite therefore keeps the explicit, awaited close request.
+
+Every export owns an independent remote read session. Backpressure pauses cursor consumption; cancellation aborts pending HTTP reads, cancels the response body and attempts session cleanup. Closing or reconnecting the caller's SDK client cancels its active exports. ExportLite does not close that client automatically. A failed cleanup after otherwise successful streaming is reported as a handled failure; owned partial files are removed. On a broken network, server-side session expiry remains the final cleanup mechanism.
+
+Protocol JSON is decoded one frame at a time; exported JSON fragments are not parsed into records. The remote path uses text rather than base64-encoded SQLite BLOBs, so no database-encoding probe or hint is needed, including for UTF-16 source databases. Output is always UTF-8. As with local batches, unusually large records can require substantial memory; network, server and stream buffers also contribute. SDK `intMode` changes ordinary SDK reads, not SQLite's JSON integer literals.
+
+Remote options and bindings are checked before returning a readable. SQLite validates the actual statement when consumption starts, so missing columns and SQL errors reach the body and `.result` with `SQLITE_ERROR`. HTTP, malformed-protocol and session-close failures use `REMOTE_ERROR`; cancellation uses `ABORTED`. The shared ZIP settings, output ownership and failure cleanup apply unchanged. This adapter runs in Node; it does not add browser or edge-runtime support.
+
+Tested with `@libsql/client` **0.18.0**, the current npm version checked October 18, 2026. Local protocol tests use a real HTTP server backed by SQLite and cover both direct and Drizzle exports. **Live Turso Cloud compatibility and remote performance have not been verified.** Run `node examples/turso.mjs` against an existing database containing `users(id, name, active)`, with `TURSO_DATABASE_URL` and optional `TURSO_AUTH_TOKEN` in its environment. The example only reads that database.
 
 ## Readable streams and API responses
 
@@ -197,7 +247,7 @@ const stats = await exportTable(db, "users", {
 await exportTable(db, "users", { output: "users.jsonl" });
 ```
 
-Options, schema and SQL are validated before the readable is returned. The export data statement starts when reading begins, and backpressure pauses further rows/batches. The read snapshot starts with consumption. Cancelling the stream or its reader, stopping async iteration, or aborting `signal` cancels production and releases the statement and owned ZIP stages. `await stream.cancel()` waits for that cleanup. For a Node pipeline, use Node's built-in `Readable.fromWeb(stream)` adapter; it forwards failures and cancellation between the two stream interfaces. The caller retains ownership of the SQLite connection.
+Options are validated before the readable is returned. Local connections also prepare and validate SQL at that point; remote SQLite validation occurs when consumption starts. The export data statement starts when reading begins, and backpressure pauses further rows/batches. The read snapshot starts with consumption. Cancelling the stream or its reader, stopping async iteration, or aborting `signal` cancels production and releases the statement or remote cursor and owned ZIP stages. `await stream.cancel()` waits for that cleanup. For a Node pipeline, use Node's built-in `Readable.fromWeb(stream)` adapter; it forwards failures and cancellation between the two stream interfaces. The caller retains ownership of the database client.
 
 Keep that connection open until `stream.result` settles. Read or pipe the stream before awaiting `.result`; the promise waits for consumption and export cleanup. Statistics count the exported bytes, including ZIP headers/trailer when enabled, and do not mean an HTTP client has received them. For readables, `durationMs` includes elapsed time waiting for consumption. If using a connection per request, close it from the completion callbacks rather than immediately after returning the `Response`.
 
@@ -230,13 +280,13 @@ The [naive JavaScript comparison](benchmarks/NAIVE.md) adds `all()` followed by 
 
 ## Fixed batching and streaming fallbacks
 
-Automatically discovered tables use 256-row batches when a usable rowid exists. Declared tables use the same batching algorithm when one integer primary key is supplied. One recursive export statement finds indexed key ranges and builds a JSON array or LF-separated objects per range. JavaScript joins those fragments directly. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. For exports using discovery, SQLite version and JSON capability checks run once after the first successful check per connection. Declared tables and queries rely on preparing the final JSON statement, without preflight probes.
+Automatically discovered local tables use 256-row batches when a usable rowid exists. Declared tables use the same batching algorithm when one integer primary key is supplied. One recursive export statement finds indexed key ranges and builds a JSON array or LF-separated objects per range. JavaScript joins those fragments directly. There are no SQL callbacks, sizing estimators or pagination queries. Native exports use the supplied connection; Turso exports open independent remote read sessions. For local exports using discovery, SQLite version and JSON capability checks run once after the first successful check per connection. Declared tables and queries rely on the final JSON statement, without preflight probes.
 
 Repeated table exports reuse generated SQL, with at most 16 cached plans per connection shared by declared and discovered plans. A schema-version check invalidates discovered plans after schema changes; declared plans depend only on the request. Each export prepares an independent statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are generated afresh. Custom queries discover their output columns unless `columns` is declared.
 
 Each range starts with an indexed seek and locates its 256th existing key using a constant `OFFSET 255`. That offset stays fixed for every batch; it does not grow with the export. Bounds remain SQLite integers, and only a short final batch needs a separate count inside the same statement.
 
-For UTF-8 databases, batch JSON stays as UTF-8 bytes from SQLite through the writer, avoiding conversion to JavaScript text and back. UTF-16 databases retain the text path and still produce UTF-8 output. This is internal; the stream and file APIs are unchanged.
+For local UTF-8 databases, batch JSON stays as UTF-8 bytes from SQLite through the writer, avoiding conversion to JavaScript text and back. Local UTF-16 databases and remote connections use text and still produce UTF-8 output. This is internal; the stream and file APIs are unchanged.
 
 With automatic discovery, views, virtual tables, WITHOUT ROWID tables and tables shadowing all three rowid aliases use row streaming. Declared selections choose batching from the declared key, without storage discovery. Custom queries always stream individual SQLite-generated JSON records. Both paths share the output loop, backpressure, cancellation and cleanup. An execution failure never retries another path after writing partial data.
 
@@ -267,16 +317,16 @@ Caller-provided streams remain open unless `end: true` is supplied. Exports hono
 ## Data and query behavior
 
 - Main-schema tables/views are validated and identifiers quoted. Ordinary non-hidden columns are selected by default; generated columns can be selected explicitly.
-- Query parameters are bound. Writes, PRAGMAs, multiple statements and duplicate output aliases are rejected before opening output. Query SQL is trusted application code, not a sandbox for functions with side effects.
+- Query parameters are bound. Local writes, PRAGMAs, multiple statements and duplicate output aliases are rejected before opening output. Remote queries wrap the supplied SELECT/CTE inside the final JSON SELECT; server-side validation happens during consumption. Query SQL is trusted application code, not a sandbox for functions with side effects.
 - SQLite constructs strings, NULLs and numeric literals. JSON stored as TEXT stays a string. Exact signed 64-bit integer literals are preserved, including with a BigInt-configured connection; ordinary `JSON.parse()` consumers can still lose precision. REAL formatting remains SQLite's own.
 - BLOBs fail with a descriptive error. Select other columns or use an explicit query with `hex()`/`CAST()`.
 - Empty JSON is `[]`; empty JSONL is zero bytes. Export failures are `ExportLiteError` instances with a `code` and original cause where available.
 
-SQLite >=3.45.1 with JSON support is checked on the first export for each connection; failed checks are retried on later calls. Do not close or mutate the same connection while an export is running. Queries may sort/materialize data within SQLite; long read snapshots can affect writers and WAL growth.
+SQLite >=3.45.1 with JSON support is required. Automatic local discovery checks this on the first export per connection; declared and remote exports skip capability probes and rely on the final statement. Do not close or mutate the same connection while an export is running. Queries may sort/materialize data within SQLite; long read snapshots can affect writers and WAL growth.
 
 ## Development and validation
 
-Use Node.js 22.18+, 24.11+, or 26+ for the development tools and pnpm 12.14.0. Tested on Node 24.19.0. Dependency versions were checked on October 17, 2026; `better-sqlite3` remains 13.0.3. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
+Use Node.js 22.18+, 24.11+, or 26+ for the development tools and pnpm 12.14.0. Tested on Node 24.19.0. Existing dependency versions were checked on October 17, 2026; `better-sqlite3` remains 13.0.3 and Drizzle remains 0.45.4. The added `@libsql/client` 0.18.0 was checked October 18. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -287,7 +337,7 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 283 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 338 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session cleanup, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 
@@ -300,6 +350,8 @@ node benchmarks/report.mjs
 ```
 
 [Measured results and limitations](benchmarks/REPORT.md).
+
+The [Turso latency comparison](benchmarks/TURSO.md) compares direct ExportLite and the Drizzle adapter with ordinary Turso/Drizzle queries plus `JSON.stringify()`, using the same varied fixtures and Node 26.12.0. It measures total export time and client-process peak memory with 0, 25 and 100 ms added per HTTP request, including ExportLite's session-close request. This uses a local protocol server with SQLite; it is not a live Turso Cloud benchmark.
 
 The [matched API comparison](benchmarks/MATCHED-API.md) reruns the original users/posts/comments fixture on Node 26.12.0, separating JSON generation/pipeline work from UTF-8 response-body encoding for full SQLite aggregation, ExportLite batching, manual JS and Drizzle. It includes actual public Node writable/Web stream controls. Nested and limited-root cases use a benchmark-only adapter around the existing planner/producer; they do not add public relationship support.
 
