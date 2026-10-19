@@ -32,6 +32,8 @@ The [corrected matrix passed all six jobs](https://github.com/joe-ervin05/export
 
 All jobs also passed frozen installation, build, public type consumers and lint. Across the matrix, 30 clean tarball projects passed both ESM/CommonJS runtime and type checks. Each audited artifact has 42 files; per-job archive hashes and actual Node/platform details are in the [CI record](../../outputs/phase3/ci.json). The [local validation record](../../outputs/phase3/local.json) describes the initial local working candidate; its archive hash is separate from these later CI artifacts. The manual-only hosted ZIP64 job was skipped on this push; the actual >4-GiB check passed locally as recorded above.
 
+A subsequent documentation-commit run exposed a race in the minimum-Node shutdown fault-injection test: observing the server's cursor request did not prove that the client had received a session token. An early cancellation can legitimately finish without a close request, so the injected close failure was not always exercised. The test now establishes a reusable session before starting the held cursor and injecting shutdown failure. This only changes the test's precondition; cancellation, cleanup and runtime code are unchanged.
+
 ## Scope
 
 The package remains private and unpublished. Drizzle stays within `>=0.45.4 <0.46.0`, tested at 0.45.4. Turso retains its experimental label: these are local protocol tests, not live Turso qualification. The compatibility matrix covers the selected hosted runner architectures; it does not qualify every CPU, libc or custom SQLite build. Candidate performance consolidation and real application pilots remain later phases.

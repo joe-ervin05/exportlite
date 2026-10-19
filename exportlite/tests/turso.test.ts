@@ -359,12 +359,14 @@ it("closes an unused client without network I/O", async () => {
 });
 
 it("reports a cleanup failure during active client shutdown", async () => {
+  // A close request requires a session token already received by the client.
+  await consume(await exportTable(client, "users", { columns }));
   server.mode.hold = "body";
   const stream = await exportTable(client, "users", { columns });
   const body = expect(new Response(stream).text()).rejects.toMatchObject({
     code: "ABORTED",
   });
-  await until(() => server.cursors === 1);
+  await until(() => server.cursors === 2);
   server.mode.closeError = true;
   await expect(client.close()).rejects.toMatchObject({ code: "REMOTE_ERROR" });
   await body;

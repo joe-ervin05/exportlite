@@ -10,7 +10,7 @@ The [compatibility workflow](https://github.com/joe-ervin05/exportlite/actions/w
 | macOS | Latest 24.x | Same checks |
 | Windows | Latest 24.x | Same checks |
 
-The workflow selects the runner's native architecture. This is not qualification for every architecture, Linux libc, Node patch or native SQLite build. The latest verified run and exact runtime versions are recorded in the repository's [phase 3 validation report](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/PHASE-3.md). A configured job alone is not a passing compatibility claim.
+The workflow selects the runner's native architecture. This is not qualification for every architecture, Linux libc, Node patch or native SQLite build. Qualification evidence and exact tested runtime versions are recorded in the repository's [phase 3 validation report](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/PHASE-3.md). A configured job alone is not a passing compatibility claim.
 
 ## Packed consumers
 
