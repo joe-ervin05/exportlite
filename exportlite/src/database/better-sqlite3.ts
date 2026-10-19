@@ -1,6 +1,8 @@
 import { ExportLiteError, sqliteError } from "../errors.js";
 import type { ReadStatement, SQLiteConnection } from "./adapter.js";
 
+const capable = new WeakSet<SQLiteConnection>();
+
 export function readStatement(
   db: SQLiteConnection,
   sql: string,
@@ -25,6 +27,7 @@ export function readStatement(
 }
 
 export function checkCapabilities(db: SQLiteConnection): void {
+  if (capable.has(db)) return;
   try {
     const version = db.prepare("SELECT sqlite_version()").pluck().get();
     const parts = String(version).split(".").map(Number);
@@ -38,6 +41,7 @@ export function checkCapabilities(db: SQLiteConnection): void {
     const probe = db.prepare("SELECT json_object('ok', 1)").pluck().get();
     if (probe !== '{"ok":1}')
       throw new Error("SQLite JSON functions are unavailable");
+    capable.add(db);
   } catch (cause) {
     if (cause instanceof ExportLiteError) throw cause;
     throw new ExportLiteError(

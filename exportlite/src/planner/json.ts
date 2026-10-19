@@ -51,15 +51,14 @@ export function planTable(
       columns,
       format,
     });
-    if (batched) return { statement: batched, batched: true };
+    if (batched) return { ...batched, batched: true };
     const pairs = columns
       .map((c) => `${literal(c)}, ${identifier(c)}`)
       .join(", ");
+    const sql = `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`;
     return {
-      statement: readStatement(
-        db,
-        `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`,
-      ),
+      statement: readStatement(db, sql),
+      sql,
       batched: false,
     };
   } catch (error) {

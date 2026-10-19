@@ -55,7 +55,7 @@ export class ZipOutput {
       const { default: Archive } = await import("zip-stream");
       archive = new Archive({
         forceZip64: true,
-        zlib: { level: 1, chunkSize: 262_144 },
+        zlib: { level: 1, chunkSize: 262_144, memLevel: 9 },
       });
       const sink = new Writable({
         highWaterMark: 65_536,

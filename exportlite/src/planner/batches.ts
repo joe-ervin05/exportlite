@@ -61,5 +61,5 @@ export function planBatchedTable(
     (SELECT count(*) FROM ${table} WHERE ${key} >= ${first}) END
   FROM "__exportlite_batches"
   WHERE ${first} IS NOT NULL`;
-  return readStatement(db, sql);
+  return { statement: readStatement(db, sql), sql };
 }

@@ -2,7 +2,7 @@ import type { SQLiteConnection } from "../database/adapter.js";
 import { checkCapabilities } from "../database/better-sqlite3.js";
 import { createReadableExport } from "../output/readable.js";
 import { checkAborted, validateOptions } from "../output/writer.js";
-import { planTable } from "../planner/json.js";
+import { cachedTablePlan } from "../planner/cache.js";
 import type {
   ExportResult,
   ExportStream,
@@ -35,7 +35,7 @@ export async function exportTable(
   validateOptions(options);
   checkAborted(options.signal);
   checkCapabilities(db);
-  const { statement, batched } = planTable(
+  const { statement, batched } = cachedTablePlan(
     db,
     table,
     options.columns,
