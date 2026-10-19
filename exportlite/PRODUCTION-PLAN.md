@@ -13,14 +13,14 @@ The primary user is a Node.js developer exporting large SQLite datasets to a fil
 | Local SQLite | Stable support through better-sqlite3 on the tested Node and platform matrix |
 | Drizzle | Stable adapter for the tested SQLite drivers, supported field modes and documented version range |
 | Turso HTTP | Experimental until the live qualification gate passes; local release can proceed independently |
-| Formats | JSON, JSONL and one exported file inside a streaming ZIP |
+| Formats | JSON, JSONL, CSV and one exported file inside a streaming ZIP |
 | Destinations | Web readable by default; existing file paths and Node writable options retained |
 | Execution | Fixed 256-row batches for eligible tables; row streaming for other tables and queries |
 | Ownership | Caller owns database clients and supplied destinations; package owns its created files and internal stages |
 
 Keep one package with optional driver peers and the existing core, Drizzle and Turso entry points. Preserve both ESM and CommonJS. Keep automatic local column discovery alongside declared columns. Do not rename or redesign the public API without a concrete pilot integration requiring it.
 
-Defer CSV, relationship builders, generic JS row transformations, arbitrary-query batching, adaptive batch sizing, connection pools, automatic heartbeats, multiple ZIP entries, compression controls and browser or edge runtime support. Compression for ordinary HTTP responses stays in the application or server.
+Defer relationship builders, generic JS row transformations, arbitrary-query batching, adaptive batch sizing, connection pools, automatic heartbeats, multiple ZIP entries, compression controls and browser or edge runtime support. CSV was added at the user's request after stage 3, with the same streaming contracts. Compression for ordinary HTTP responses stays in the application or server.
 
 ## Starting evidence
 
@@ -87,6 +87,8 @@ The subsequent [wide-query investigation](benchmarks/WIDE-QUERY-MEMORY.md) reduc
 Done when a consumer can install only the peers needed for its documented example and use the actual release tarball successfully on the claimed matrix.
 
 Completed October 18, 2026: the [phase 3 validation report](benchmarks/PHASE-3.md) records all six hosted compatibility jobs passing: Ubuntu on Node 22.18.0, 22.23.3, 24.22.0 and 26.12.0; macOS arm64 and Windows x64 on Node 24.22.0. Each job passes 378 tests, build, public types, lint and five clean npm tarball consumers using both module formats. Package contents and documentation links are audited; the actual greater-than-4-GiB ZIP64 check passes locally. Runtime code and dependency pins are unchanged. The package remains private, and live Turso qualification remains stage T.
+
+CSV added October 18, 2026 at the user's request: `format: "csv"` works across native, Drizzle and experimental Turso exports, including ZIP, fixed batching and streaming fallbacks. The [CSV comparison](benchmarks/CSV.md) records performance, memory, independent parsing and the existing JSON regression checks. The complete suite now has 405 tests; no runtime dependency was added. This does not complete the wider stage 4 qualification.
 
 ## Stage 4 Establish the release performance baseline
 

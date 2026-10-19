@@ -28,6 +28,7 @@ export function deliverTursoExport(
   started: number,
   batched = false,
   name = "export",
+  header?: string,
 ): Promise<ExportResult | ExportStream> {
   validateOptions(options);
   checkAborted(options.signal);
@@ -71,6 +72,11 @@ export function deliverTursoExport(
           ? await ZipOutput.create(settings, name)
           : await OutputWriter.create(settings);
         const json = options.format === "json";
+        const suffix = json ? "" : options.format === "csv" ? "\r\n" : "\n";
+        if (header !== undefined) {
+          const wait = output.write(header);
+          if (wait) await wait;
+        }
         if (json) {
           const wait = output.write("[");
           if (wait) await wait;
@@ -85,7 +91,6 @@ export function deliverTursoExport(
           output.check();
           const content = json && batched ? text.slice(1, -1) : text;
           const prefix = json && rowsExported > 0 ? "," : "";
-          const suffix = json ? "" : "\n";
           const wait = output.write(`${prefix}${content}${suffix}`);
           if (wait) await wait;
           rowsExported += count;

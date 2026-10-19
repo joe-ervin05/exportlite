@@ -60,8 +60,8 @@ export async function webResponse(request: Request) {
 exportTable(db, "users", { end: true });
 // @ts-expect-error A query still requires SQL when output is omitted.
 exportQuery(db, { zip: true });
-// @ts-expect-error CSV is deliberately outside the prototype API.
-exportTable(db, "users", { format: "csv", output });
+// @ts-expect-error Unsupported formats remain outside the public API.
+exportTable(db, "users", { format: "xml", output });
 // @ts-expect-error Batch sizing is internal to v0.
 exportTable(db, "users", { output, batchSize: 256 });
 // @ts-expect-error Adaptive tuning is outside the v0 API.

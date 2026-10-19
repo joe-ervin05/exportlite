@@ -1,6 +1,8 @@
 import type { SQLiteConnection } from "../database/adapter.js";
 import { readStatement } from "../database/better-sqlite3.js";
+import type { ExportFormat } from "../types.js";
 import { type SelectedField, selectedObject } from "./columns.js";
+import { csvHeader, csvRecord } from "./csv.js";
 import { identifier, literal } from "./identifiers.js";
 
 export function planBatchedTable(
@@ -10,7 +12,7 @@ export function planBatchedTable(
     columnNames: readonly string[];
     columns: readonly string[];
     fields?: readonly SelectedField[];
-    format: "json" | "jsonl";
+    format: ExportFormat;
   },
 ) {
   const info = db
@@ -37,7 +39,16 @@ export function prepareBatchedTable(
   options: BatchedTableOptions,
 ) {
   const sql = batchedTableSql(options);
-  return { statement: readStatement(db, sql), sql };
+  return {
+    statement: readStatement(db, sql),
+    sql,
+    header:
+      options.format === "csv"
+        ? csvHeader(
+            options.fields?.map((field) => field.key) ?? options.columns,
+          )
+        : undefined,
+  };
 }
 
 interface BatchedTableOptions {
@@ -45,7 +56,7 @@ interface BatchedTableOptions {
   key: string;
   columns: readonly string[];
   fields?: readonly SelectedField[];
-  format: "json" | "jsonl";
+  format: ExportFormat;
   binary: boolean;
   declared?: boolean;
 }
@@ -63,17 +74,24 @@ export function batchedTableSql(options: BatchedTableOptions): string {
         .join(", ")
     : options.columns.map(identifier).join(", ");
   const object = options.fields
-    ? selectedObject(options.fields, (_field, i) =>
-        identifier(`__exportlite_c${i}`),
+    ? selectedObject(
+        options.fields,
+        (_field, i) => identifier(`__exportlite_c${i}`),
+        options.format,
       )
-    : `json_object(${options.columns.map((column) => `${literal(column)}, ${identifier(column)}`).join(", ")})`;
+    : options.format === "csv"
+      ? csvRecord(options.columns.map(identifier))
+      : `json_object(${options.columns.map((column) => `${literal(column)}, ${identifier(column)}`).join(", ")})`;
   const aggregate =
     options.format === "json"
       ? `json_group_array(${object})`
-      : `group_concat(${object}, char(10))`;
-  // CAST uses the database encoding. Keep UTF-16 databases on the text path;
-  // UTF-8 databases can deliver JSON bytes without decoding and re-encoding.
-  const payload = options.binary ? `CAST(${aggregate} AS BLOB)` : aggregate;
+      : `group_concat(${object}, ${options.format === "csv" ? "char(13, 10)" : "char(10)"})`;
+  // CAST uses the database encoding. CSV's temporary ASCII prefix makes a
+  // wrong UTF-8 claim distinguishable from a valid record beginning with NUL.
+  // The adapter removes the prefix without copying the native buffer.
+  const binaryValue =
+    options.format === "csv" ? `char(13, 10) || ${aggregate}` : aggregate;
+  const payload = options.binary ? `CAST(${binaryValue} AS BLOB)` : aggregate;
   const first = '"__exportlite_batches"."first"';
   const last = '"__exportlite_batches"."last"';
   // A declared key must be non-null. Empty tables still return no boundary.

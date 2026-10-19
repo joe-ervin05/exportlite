@@ -15,15 +15,15 @@ await exportTable(db, "users", {
 });
 ```
 
-UTF-8 keeps native batch JSON as bytes. For UTF-16 databases the driver returns text, and the writer encodes it as UTF-8. If declared UTF-8 batching receives UTF-16 bytes, it rejects them before copying that batch payload. There is no encoding probe or retry; earlier output may already exist, with the usual failure cleanup.
+UTF-8 keeps native batches as bytes. For UTF-16 databases the driver returns text, and the writer encodes it as UTF-8. If declared UTF-8 batching receives UTF-16 bytes, it rejects them before copying that batch payload. There is no encoding probe or retry; earlier output may already exist, with the usual failure cleanup.
 
-Automatic local discovery obtains the database encoding itself. Queries and Turso exports receive JSON text and always produce UTF-8; the remote path needs no encoding hint. The option applies to native Drizzle table exports as well.
+Automatic local discovery obtains the database encoding itself. Queries and Turso exports receive text and always produce UTF-8; the remote path needs no encoding hint. The option applies to native Drizzle table exports as well.
 
 Node's default string-to-byte encoding is UTF-8; JavaScript strings themselves use UTF-16. See [Node's encoding reference](https://nodejs.org/api/buffer.html#buffers-and-character-encodings).
 
 ## Output flush target
 
-`bufferSize` is a target for flushing uncompressed UTF-8 bytes. It defaults to **65,536 bytes (64 KiB)** and accepts integers from 1 to 16,777,216 (16 MiB), inclusive. It applies to file, Node writable and Web-stream exports, including the JSON/JSONL input to ZIP.
+`bufferSize` is a target for flushing uncompressed UTF-8 bytes. It defaults to **65,536 bytes (64 KiB)** and accepts integers from 1 to 16,777,216 (16 MiB), inclusive. It applies to file, Node writable and Web-stream exports, including the JSON/JSONL/CSV input to ZIP.
 
 ```ts
 await exportTable(db, "users", {

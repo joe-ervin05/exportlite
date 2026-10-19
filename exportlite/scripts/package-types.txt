@@ -9,6 +9,8 @@ const stream = exportQuery(connection, {
   format: "json",
 });
 type Row = Expect<Equal<ExportRow<typeof stream>, { userId: number; label: string | null }>>;
+const csv = exportQuery(connection, {sql: "SELECT id,name FROM users", columns: {userId:integer("id"), label:text("name")}, format:"csv"});
+type CsvRow = Expect<Equal<ExportRow<typeof csv>,{userId:string;label:string}>>;
 const saved: Promise<ExportResult> = exportQuery(connection, { sql: "SELECT 1", output: new Writable() });
 // @ts-expect-error Internal batching must stay outside the public API.
 exportQuery(connection, { sql: "SELECT 1", batchSize: 256 });

@@ -3,6 +3,12 @@ import type { SelectedColumns } from "./columns.js";
 
 export type TableColumns = readonly string[] | SelectedColumns;
 export type DatabaseEncoding = "utf8" | "utf16le" | "utf16be";
+export type ExportFormat = "json" | "jsonl" | "csv";
+
+/** CSV cells have string wire values, including empty cells for NULL. */
+export type OutputRow<Row, Format> = Format extends "csv"
+  ? { [K in keyof Row]: string }
+  : Row;
 
 export type SqlValue = null | string | number | bigint | Buffer;
 export type QueryParameters =
@@ -11,8 +17,8 @@ export type QueryParameters =
 
 export interface ExportOptions {
   /** JSONL by default. */
-  format?: "json" | "jsonl";
-  /** Stream one JSON/JSONL file in a ZIP archive. Default: false. */
+  format?: ExportFormat;
+  /** Stream one exported file in a ZIP archive. Default: false. */
   zip?: boolean;
   /** Paths must not already exist. Caller streams remain open by default. */
   output: string | Writable;

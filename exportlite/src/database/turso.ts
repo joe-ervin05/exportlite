@@ -219,7 +219,7 @@ export class TursoTransport {
   async *iterate(
     statement: TursoStatement,
     batched: boolean,
-    format: "json" | "jsonl",
+    format: "json" | "jsonl" | "csv",
     signal: AbortSignal,
   ): AsyncGenerator<JsonFragment> {
     this.checkOpen();
@@ -312,7 +312,7 @@ export class TursoTransport {
             remote("Invalid Turso cursor row.");
           const payload = record(entry.row[0]);
           if (payload.type !== "text" || typeof payload.value !== "string")
-            remote("Expected JSON text from Turso.");
+            remote("Expected formatted text from Turso.");
           let count = 1;
           if (batched) {
             const value = record(entry.row[1]);

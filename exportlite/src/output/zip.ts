@@ -24,7 +24,7 @@ function entryName(name: string, format: ExportOptions["format"]): string {
       .slice(0, 80)
       .join("") || "export";
   if (/^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i.test(stem)) stem = `_${stem}`;
-  return `${stem}.${format === "json" ? "json" : "jsonl"}`;
+  return `${stem}.${format ?? "jsonl"}`;
 }
 
 export class ZipOutput {

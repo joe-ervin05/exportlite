@@ -19,17 +19,26 @@ export function deliverLocalExport(
   started: number,
   batched = false,
   name = "export",
+  header?: string,
 ): Promise<ExportResult | ExportStream> {
   if (options.output === undefined)
     return Promise.resolve(
       createReadableExport(
         options,
         (destination) =>
-          streamExport(statement, args, destination, started, batched, name),
+          streamExport(
+            statement,
+            args,
+            destination,
+            started,
+            batched,
+            name,
+            header,
+          ),
         started,
       ),
     );
-  return streamExport(statement, args, options, started, batched, name);
+  return streamExport(statement, args, options, started, batched, name, header);
 }
 
 export async function streamExport(
@@ -39,6 +48,7 @@ export async function streamExport(
   started: number,
   batched = false,
   name = "export",
+  header?: string,
 ): Promise<ExportResult> {
   const output = options.zip
     ? await ZipOutput.create(options, name)
@@ -48,13 +58,18 @@ export async function streamExport(
   let success = false;
   try {
     const json = options.format === "json";
+    const suffix = json ? "" : options.format === "csv" ? "\r\n" : "\n";
+    if (header !== undefined) {
+      const wait = output.write(header);
+      if (wait) await wait;
+    }
     if (json) {
       const wait = output.write("[");
       if (wait) await wait;
     }
     output.check();
     const values = batched
-      ? jsonBatches(statement, args)
+      ? jsonBatches(statement, args, options.format === "csv")
       : jsonRows(statement, args);
     for (const value of values) {
       output.check();
@@ -67,13 +82,12 @@ export async function streamExport(
             : text.subarray(1, -1)
           : text;
       const prefix = json && rowsExported > 0 ? "," : "";
-      const suffix = json ? "" : "\n";
       const bytes =
         (typeof text === "string" ? Buffer.byteLength(text) : text.length) -
         (json && batched ? 2 : 0) +
         prefix.length +
         suffix.length;
-      // Stitch SQLite JSON directly; never parse it or construct JS row objects.
+      // Stitch SQLite output directly; never parse it or construct JS row objects.
       const wait =
         typeof content === "string"
           ? output.write(`${prefix}${content}${suffix}`, bytes)

@@ -1,5 +1,7 @@
 import { Column, type SelectedColumns } from "../columns.js";
 import { ExportLiteError } from "../errors.js";
+import type { ExportFormat } from "../types.js";
+import { csvRecord } from "./csv.js";
 import { identifier, literal, uniqueColumns } from "./identifiers.js";
 
 export interface SelectedField {
@@ -44,8 +46,9 @@ export function selectedFields(columns: SelectedColumns): SelectedField[] {
 export function selectedObject(
   fields: readonly SelectedField[],
   reference: (field: SelectedField, index: number) => string,
+  format: ExportFormat = "json",
 ): string {
-  const pairs = fields.map((field, index) => {
+  const values = fields.map((field, index) => {
     const value = reference(field, index);
     // Keep booleans native JSON. Reject values outside the declared SQLite 0/1
     // representation instead of silently treating arbitrary values as truthy.
@@ -55,7 +58,11 @@ export function selectedObject(
         : field.kind === "json"
           ? `json(${value})`
           : value;
-    return `${literal(field.key)}, ${jsonValue}`;
+    return jsonValue;
   });
+  if (format === "csv") return csvRecord(values);
+  const pairs = fields.map(
+    (field, index) => `${literal(field.key)}, ${values[index]}`,
+  );
   return `json_object(${pairs.join(", ")})`;
 }

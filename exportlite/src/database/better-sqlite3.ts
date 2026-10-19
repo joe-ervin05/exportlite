@@ -58,8 +58,7 @@ export function* jsonRows(
 ): Generator<string> {
   try {
     for (const value of statement.pluck().iterate(...args)) {
-      if (typeof value !== "string")
-        throw new Error("Expected SQLite JSON text");
+      if (typeof value !== "string") throw new Error("Expected SQLite text");
       yield value;
     }
   } catch (error) {
@@ -70,6 +69,7 @@ export function* jsonRows(
 export function* jsonBatches(
   statement: ReadStatement,
   args: unknown[],
+  csv = false,
 ): Generator<[string | Buffer, number | bigint]> {
   try {
     for (const value of statement.raw().iterate(...args)) {
@@ -80,16 +80,17 @@ export function* jsonBatches(
         !Number.isSafeInteger(Number(value[1])) ||
         Number(value[1]) < 1
       ) {
-        throw new Error("Expected a SQLite JSON batch and positive row count");
+        throw new Error("Expected a SQLite text batch and positive row count");
       }
-      // Every batch begins with ASCII JSON framing. UTF-16 bytes have a NUL
+      // Every nonempty batch begins with ASCII framing. UTF-16 bytes have a NUL
       // in one of these positions; reject a wrong UTF-8 declaration before
       // copying any batch payload to the output. No database probe is needed.
       if (Buffer.isBuffer(value[0]) && (value[0][0] === 0 || value[0][1] === 0))
         throw new ExportLiteError(
           "INVALID_OPTIONS",
-          "The database uses UTF-16. Set encoding to utf16le or utf16be for declared table exports; exported JSON remains UTF-8.",
+          "The database uses UTF-16. Set encoding to utf16le or utf16be for declared table exports; exported data remains UTF-8.",
         );
+      if (csv && Buffer.isBuffer(value[0])) value[0] = value[0].subarray(2);
       yield value as [string | Buffer, number | bigint];
     }
   } catch (error) {

@@ -294,8 +294,8 @@ describe("validation and failures", () => {
     ).rejects.toHaveProperty("code", "INVALID_SCHEMA");
     await expect(
       exportTable(db, "users", {
-        format: "csv" as "json",
-        output: join(directory, "bad.csv"),
+        format: "xml" as "json",
+        output: join(directory, "bad.xml"),
       }),
     ).rejects.toHaveProperty("code", "INVALID_OPTIONS");
     expect(await readdir(directory)).toEqual([]);

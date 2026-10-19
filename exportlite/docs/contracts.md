@@ -15,7 +15,7 @@ Other Drizzle drivers, nested selections and the relational query API are unsupp
 | Selection | Metadata work before the data statement |
 | --- | --- |
 | Automatic local table or column-name list | Initial SQLite/JSON capability checks; table/storage/encoding discovery on a plan miss; schema-version checks for invalidation |
-| Automatic local query | Initial capability checks and preparation of the source SELECT to discover result columns; then preparation of the JSON statement |
+| Automatic local query | Initial capability checks and preparation of the source SELECT to discover result columns; then preparation of the formatted data statement |
 | Declared local table/query or either Drizzle adapter | Zero schema, schema-version, capability or result-discovery preflight queries; prepare the final data statement locally |
 | Direct Turso | Zero metadata preflight requests; send the final data statement when consumed |
 
@@ -29,15 +29,15 @@ Both APIs return promises. Omitting `output` resolves to `ExportStream<Row>`, a 
 
 | Option | Contract |
 | --- | --- |
-| `format` | `"jsonl"` by default; `"json"` emits one array |
-| `zip` | `false` by default; `true` emits one JSON/JSONL file inside a streaming ZIP |
+| `format` | `"jsonl"` by default; `"json"` emits one array; `"csv"` emits a header and records |
+| `zip` | `false` by default; `true` emits one JSON/JSONL/CSV file inside a streaming ZIP |
 | `output` | Omit for a Web stream; supply an exclusive new path or caller-owned Node writable |
 | `signal` | Cancels production, queued remote work and output waits; use an application deadline if needed |
 | `end` | Only with a supplied destination; caller writables stay open by default |
 
 The existing `encoding` and `bufferSize` options are described in [advanced options](advanced.md). Encoding describes the SQLite database; buffer size is an output flush target.
 
-`ExportResult` contains `rowsExported`, `bytesWritten` and `durationMs`. Bytes count actual output, including ZIP headers/trailer, and do not establish delivery to an HTTP client. For Web streams, duration includes waiting for consumption. ZIP table entries use a sanitized table name; query entries use `export.json` or `export.jsonl`.
+`ExportResult` contains `rowsExported`, `bytesWritten` and `durationMs`. Bytes count actual output, including ZIP headers/trailer, and do not establish delivery to an HTTP client. For Web streams, duration includes waiting for consumption. ZIP table entries use a sanitized table name; query entries use `export.json`, `export.jsonl` or `export.csv`. CSV headers count toward bytes, but not rows.
 
 1. Column builders can throw while declarations are created. Await the export call to validate options, selections and bindings. Local calls also prepare SQL and detect preparation errors. Remote statement validation happens at the server during consumption.
 2. Consume or pipe the returned stream **before awaiting `.result`**. The data statement starts on the first read, not when the readable is returned. In autocommit mode its read snapshot starts then; a caller's existing local transaction can already have a snapshot.
@@ -92,6 +92,26 @@ SQLite has flexible storage types. `text()` does not cast a stored number to a s
 JavaScript `JSON.parse()` can round integer literals outside the safe integer range even when their digits were exported exactly. `CAST(id AS TEXT)` preserves signed 64-bit identifiers as strings. A Drizzle `blob({ mode: "bigint" })` has a different storage representation: casting its bytes is not a generic bigint decoder. Choose a conversion that matches the actual stored format.
 
 JSON has strings, numbers, booleans, null, arrays and objects; it has no Date or BigInt value. `string | null` is a TypeScript contract allowing either JSON representation. An ISO timestamp's wire type is `string`, not `Date`. `ExportRow<typeof stream>` / `InferColumns` describe these row contracts; the stream still contains bytes, including archive bytes for ZIP. Neither `Response` nor tRPC automatically inherits that row type. A client needs an explicit shared HTTP contract or validation, and `response.json()` still materializes the full body.
+
+## CSV
+
+All entry points support `format: "csv"`, including query bindings, column aliases and `zip: true`. Headers follow selection order and use output keys. Empty results still include the header. There are no delimiter, header, BOM or formatting options in this version.
+
+| Value | CSV representation |
+| --- | --- |
+| Header / TEXT | Double-quoted; every `"` is doubled, commas and embedded CR/LF are preserved |
+| SQL NULL | Unquoted empty cell |
+| Empty TEXT | `""` |
+| INTEGER / REAL | SQLite `CAST(value AS TEXT)` representation; exact integer digits |
+| Declared boolean | `true`, `false`, or empty for NULL; invalid stored values fail |
+| Drizzle JSON-mode TEXT | Canonical SQLite JSON text inside a quoted cell; malformed JSON fails |
+| BLOB | Rejected; select an explicit SQL conversion |
+
+Records end with CRLF, including the final record. Output is UTF-8 without a BOM. A normal CSV parser returns string cells and treats both NULL and empty text as an empty string; CSV does not retain JSON's typed-null distinction. SQLite REAL formatting can differ from JavaScript number formatting. `ExportRow<typeof csvStream>` maps selected fields to strings, including nullable numbers and booleans; `InferColumns` continues to describe the source/JSON contract. Streams with undiscovered row types stay unknown.
+
+Text is exported unchanged, including formula-looking cells. Quoting handles CSV syntax; applications that need modified spreadsheet cell contents should select those contents deliberately in SQL. No JavaScript per-row transformations or new runtime dependencies are added.
+
+CSV uses the existing fixed table batches and writer, including native UTF-8 byte batches. Query/fallback records have a streaming SQL boundary so inspecting and escaping computed values does not reevaluate the source expressions. Source queries can still sort or materialize internally as described under streaming limits. Backpressure, cancellation, snapshots, exclusive files, error cleanup and remote session ownership have the same contracts as JSON/JSONL.
 
 ## SQL conversion recipes
 

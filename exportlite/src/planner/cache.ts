@@ -2,13 +2,16 @@ import type { SelectedColumns } from "../columns.js";
 import type { ReadStatement, SQLiteConnection } from "../database/adapter.js";
 import { readStatement } from "../database/better-sqlite3.js";
 import { sqliteError } from "../errors.js";
-import type { DatabaseEncoding, TableColumns } from "../types.js";
+import type { DatabaseEncoding, ExportFormat, TableColumns } from "../types.js";
 import type { SelectedField } from "./columns.js";
 import { planDeclaredTable, planSelectedTable } from "./declared.js";
 import { identifier } from "./identifiers.js";
 import { planTable } from "./json.js";
 
-type CachedPlan = Pick<ReturnType<typeof planTable>, "sql" | "batched">;
+type CachedPlan = Pick<
+  ReturnType<typeof planTable>,
+  "sql" | "batched" | "header"
+>;
 interface Cache {
   schema?: ReadStatement;
   version?: string;
@@ -38,7 +41,11 @@ function cachedPlan(
     ? { ...cached, statement: readStatement(db, cached.sql) }
     : build();
   cache.plans.delete(key);
-  cache.plans.set(key, { sql: plan.sql, batched: plan.batched });
+  cache.plans.set(key, {
+    sql: plan.sql,
+    batched: plan.batched,
+    header: plan.header,
+  });
   if (cache.plans.size > 16) {
     const oldest = cache.plans.keys().next().value;
     if (oldest !== undefined) cache.plans.delete(oldest);
@@ -50,7 +57,7 @@ export function cachedDeclaredTablePlan(
   db: SQLiteConnection,
   table: string,
   columns: SelectedColumns,
-  format: "json" | "jsonl",
+  format: ExportFormat,
   encoding: DatabaseEncoding,
 ): ReturnType<typeof planTable> {
   identifier(table);
@@ -70,7 +77,7 @@ export function cachedTablePlan(
   db: SQLiteConnection,
   table: string,
   columns: TableColumns | undefined,
-  format: "json" | "jsonl",
+  format: ExportFormat,
 ): ReturnType<typeof planTable> {
   identifier(table);
   try {
@@ -94,7 +101,7 @@ export function cachedSelectedTablePlan(
   db: SQLiteConnection,
   table: string,
   fields: SelectedField[],
-  format: "json" | "jsonl",
+  format: ExportFormat,
   encoding: DatabaseEncoding,
   primaryKey?: string,
 ): ReturnType<typeof planTable> {

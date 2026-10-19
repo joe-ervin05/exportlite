@@ -1,13 +1,14 @@
 import type { SelectedColumns } from "../columns.js";
 import type { SQLiteConnection } from "../database/adapter.js";
 import { readStatement } from "../database/better-sqlite3.js";
-import type { DatabaseEncoding } from "../types.js";
+import type { DatabaseEncoding, ExportFormat } from "../types.js";
 import { batchedTableSql } from "./batches.js";
 import {
   type SelectedField,
   selectedFields,
   selectedObject,
 } from "./columns.js";
+import { csvHeader, csvSource } from "./csv.js";
 import { identifier } from "./identifiers.js";
 
 /** The request supplies the projection and key; no database metadata is read. */
@@ -15,7 +16,7 @@ export function planDeclaredTable(
   db: SQLiteConnection,
   table: string,
   columns: SelectedColumns,
-  format: "json" | "jsonl",
+  format: ExportFormat,
   encoding: DatabaseEncoding,
 ) {
   const plan = declaredTableSql(table, columns, format, encoding === "utf8");
@@ -25,7 +26,7 @@ export function planDeclaredTable(
 export function declaredTableSql(
   table: string,
   columns: SelectedColumns,
-  format: "json" | "jsonl",
+  format: ExportFormat,
   binary: boolean,
 ) {
   const fields = selectedFields(columns);
@@ -44,7 +45,7 @@ export function planSelectedTable(
   db: SQLiteConnection,
   table: string,
   fields: SelectedField[],
-  format: "json" | "jsonl",
+  format: ExportFormat,
   encoding: DatabaseEncoding,
   key?: string,
 ) {
@@ -61,11 +62,13 @@ export function planSelectedTable(
 export function selectedTableSql(
   table: string,
   fields: SelectedField[],
-  format: "json" | "jsonl",
+  format: ExportFormat,
   binary: boolean,
   key?: string,
 ) {
   const name = identifier(table);
+  const header =
+    format === "csv" ? csvHeader(fields.map((field) => field.key)) : undefined;
   if (key !== undefined) {
     const sql = batchedTableSql({
       table,
@@ -76,12 +79,25 @@ export function selectedTableSql(
       binary,
       declared: true,
     });
-    return { sql, batched: true };
+    return { sql, batched: true, header };
   }
   const object = selectedObject(
     fields,
-    (field) => `"__exportlite_source".${identifier(field.column)}`,
+    (field, i) =>
+      `"__exportlite_source".${identifier(format === "csv" ? `__exportlite_c${i}` : field.column)}`,
+    format,
   );
-  const sql = `SELECT ${object} FROM main.${name} AS "__exportlite_source"`;
-  return { sql, batched: false };
+  let source = `main.${name}`;
+  if (format === "csv") {
+    const projection = fields
+      .map(
+        (field, i) =>
+          `"__exportlite_source".${identifier(field.column)} AS ${identifier(`__exportlite_c${i}`)}`,
+      )
+      .join(", ");
+    source = `(${csvSource(`SELECT ${projection} FROM main.${name} AS "__exportlite_source"`)})`;
+  }
+  const sql = `SELECT ${object} FROM ${source} AS "__exportlite_source"`;
+
+  return { sql, batched: false, header };
 }

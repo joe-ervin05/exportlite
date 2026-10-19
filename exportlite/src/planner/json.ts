@@ -2,13 +2,15 @@ import type { SelectedColumns } from "../columns.js";
 import type { SQLiteConnection } from "../database/adapter.js";
 import { readStatement } from "../database/better-sqlite3.js";
 import { ExportLiteError, sqliteError } from "../errors.js";
-import type { TableColumns } from "../types.js";
+import type { ExportFormat, TableColumns } from "../types.js";
 import { planBatchedTable } from "./batches.js";
 import {
   type SelectedField,
   selectedFields,
   selectedObject,
 } from "./columns.js";
+import { csvHeader, csvSource } from "./csv.js";
+import { selectedTableSql } from "./declared.js";
 import {
   identifier,
   literal,
@@ -20,7 +22,7 @@ export function planTable(
   db: SQLiteConnection,
   table: string,
   requested?: TableColumns,
-  format: "json" | "jsonl" = "jsonl",
+  format: ExportFormat = "jsonl",
 ) {
   identifier(table);
   try {
@@ -65,6 +67,19 @@ export function planTable(
       format,
     });
     if (batched) return { ...batched, batched: true };
+    if (format === "csv") {
+      const csvFields =
+        fields ??
+        columns.map((column) => ({
+          key: column,
+          column,
+          kind: "value" as const,
+          dataType: "text" as const,
+          primary: false,
+        }));
+      const plan = selectedTableSql(found.name, csvFields, format, false);
+      return { ...plan, statement: readStatement(db, plan.sql) };
+    }
     const pairs = columns
       .map((c) => `${literal(c)}, ${identifier(c)}`)
       .join(", ");
@@ -75,6 +90,7 @@ export function planTable(
       statement: readStatement(db, sql),
       sql,
       batched: false,
+      header: undefined,
     };
   } catch (error) {
     throw sqliteError(error);
@@ -85,34 +101,25 @@ export function planQuery(
   db: SQLiteConnection,
   sql: string,
   declared?: SelectedColumns,
+  format: ExportFormat = "jsonl",
 ) {
   validateQuery(sql);
-  let name = "__exportlite_source";
-  while (sql.toLowerCase().includes(name)) name += "_";
-  const sourceName = identifier(name);
   if (declared !== undefined) {
     const fields = selectedFields(declared);
-    const object = selectedObject(
-      fields,
-      (field) => `${sourceName}.${identifier(field.column)}`,
-    );
-    return readStatement(
-      db,
-      `WITH ${sourceName} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${sourceName}`,
-    );
+    return planSelectedQuery(db, sql, fields, false, format);
   }
-  const source = readStatement(db, sql);
-  const columns = source.columns().map((c) => c.name);
+  const columns = readStatement(db, sql)
+    .columns()
+    .map((column) => column.name);
   uniqueColumns(columns);
-  // Positional CTE aliases preserve even case-distinct or punctuation-heavy labels.
-  const aliases = columns.map((_, i) => identifier(`c${i}`));
-  const pairs = columns
-    .map((c, i) => `${literal(c)}, ${aliases[i]}`)
-    .join(", ");
-  return readStatement(
-    db,
-    `WITH ${sourceName}(${aliases.join(", ")}) AS (\n${subquerySource(sql)}\n) SELECT json_object(${pairs}) FROM ${sourceName}`,
-  );
+  const fields = columns.map((key) => ({
+    key,
+    column: key,
+    kind: "value" as const,
+    dataType: "text" as const,
+    primary: false,
+  }));
+  return planSelectedQuery(db, sql, fields, true, format);
 }
 
 /** Drizzle supplies selection order; no result metadata or rows are fetched. */
@@ -121,14 +128,25 @@ export function planSelectedQuery(
   sql: string,
   fields: SelectedField[],
   positional: boolean,
+  format: ExportFormat = "jsonl",
 ) {
-  return readStatement(db, selectedQuerySql(sql, fields, positional));
+  return {
+    statement: readStatement(
+      db,
+      selectedQuerySql(sql, fields, positional, format),
+    ),
+    header:
+      format === "csv"
+        ? csvHeader(fields.map((field) => field.key))
+        : undefined,
+  };
 }
 
 export function selectedQuerySql(
   sql: string,
   fields: SelectedField[],
   positional: boolean,
+  format: ExportFormat = "jsonl",
 ): string {
   validateQuery(sql);
   let name = "__exportlite_source";
@@ -141,8 +159,10 @@ export function selectedQuerySql(
     fields,
     (field, i) =>
       `${source}.${identifier(positional ? `c${i}` : field.column)}`,
+    format,
   );
-  return `WITH ${source}${aliases} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${source}`;
+  const input = subquerySource(sql);
+  return `WITH ${source}${aliases} AS (\n${format === "csv" ? csvSource(input) : input}\n) SELECT ${object} FROM ${source}`;
 }
 
 function validateQuery(sql: string) {

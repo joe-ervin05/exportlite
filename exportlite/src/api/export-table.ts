@@ -5,8 +5,10 @@ import { ExportLiteError } from "../errors.js";
 import { checkAborted, validateOptions } from "../output/writer.js";
 import { cachedDeclaredTablePlan, cachedTablePlan } from "../planner/cache.js";
 import type {
+  ExportFormat,
   ExportResult,
   ExportStream,
+  OutputRow,
   TableExportOptions,
   TableStreamOptions,
 } from "../types.js";
@@ -17,21 +19,30 @@ export function exportTable(
   table: string,
   options: TableExportOptions,
 ): Promise<ExportResult>;
-export function exportTable<const C extends SelectedColumns>(
+export function exportTable<
+  const C extends SelectedColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   db: SQLiteConnection,
   table: string,
-  options: TableStreamOptions & { columns: C },
-): Promise<ExportStream<InferColumns<C>>>;
+  options: TableStreamOptions & { columns: C; format?: F },
+): Promise<ExportStream<OutputRow<InferColumns<C>, F>>>;
 export function exportTable(
   db: SQLiteConnection,
   table: string,
   options?: TableStreamOptions,
 ): Promise<ExportStream>;
-export function exportTable<const C extends SelectedColumns>(
+export function exportTable<
+  const C extends SelectedColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   db: SQLiteConnection,
   table: string,
-  options: (TableExportOptions | TableStreamOptions) & { columns: C },
-): Promise<ExportResult | ExportStream<InferColumns<C>>>;
+  options: (TableExportOptions | TableStreamOptions) & {
+    columns: C;
+    format?: F;
+  },
+): Promise<ExportResult | ExportStream<OutputRow<InferColumns<C>, F>>>;
 export function exportTable(
   db: SQLiteConnection,
   table: string,
@@ -56,7 +67,7 @@ export async function exportTable(
   const declared =
     options.columns !== undefined && !Array.isArray(options.columns);
   if (!declared) checkCapabilities(db);
-  const { statement, batched } = declared
+  const { statement, batched, header } = declared
     ? cachedDeclaredTablePlan(
         db,
         table,
@@ -65,5 +76,13 @@ export async function exportTable(
         options.encoding ?? "utf8",
       )
     : cachedTablePlan(db, table, options.columns, options.format ?? "jsonl");
-  return deliverLocalExport(statement, [], options, started, batched, table);
+  return deliverLocalExport(
+    statement,
+    [],
+    options,
+    started,
+    batched,
+    table,
+    header,
+  );
 }

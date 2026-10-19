@@ -9,11 +9,14 @@ import { registerTurso, type TursoConnection } from "./database/turso.js";
 import { ExportLiteError } from "./errors.js";
 import { checkAborted, validateOptions } from "./output/writer.js";
 import { selectedFields } from "./planner/columns.js";
+import { csvHeader } from "./planner/csv.js";
 import { declaredTableSql } from "./planner/declared.js";
 import { selectedQuerySql } from "./planner/json.js";
 import type {
+  ExportFormat,
   ExportResult,
   ExportStream,
+  OutputRow,
   QueryExportOptions,
   QueryStreamOptions,
   TableExportOptions,
@@ -104,16 +107,22 @@ export function exportTable(
   table: string,
   options: TableDestination,
 ): Promise<ExportResult>;
-export function exportTable<const C extends SelectedColumns>(
+export function exportTable<
+  const C extends SelectedColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   client: TursoConnection,
   table: string,
-  options: TableReadable<C>,
-): Promise<ExportStream<InferColumns<C>>>;
-export function exportTable<const C extends SelectedColumns>(
+  options: TableReadable<C> & { format?: F },
+): Promise<ExportStream<OutputRow<InferColumns<C>, F>>>;
+export function exportTable<
+  const C extends SelectedColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   client: TursoConnection,
   table: string,
-  options: TableDestination<C> | TableReadable<C>,
-): Promise<ExportResult | ExportStream<InferColumns<C>>>;
+  options: (TableDestination<C> | TableReadable<C>) & { format?: F },
+): Promise<ExportResult | ExportStream<OutputRow<InferColumns<C>, F>>>;
 export async function exportTable(
   client: TursoConnection,
   table: string,
@@ -137,6 +146,7 @@ export async function exportTable(
     started,
     plan.batched,
     table,
+    plan.header,
   );
 }
 
@@ -144,14 +154,20 @@ export function exportQuery(
   client: TursoConnection,
   options: QueryDestination,
 ): Promise<ExportResult>;
-export function exportQuery<const C extends SelectedColumns>(
+export function exportQuery<
+  const C extends SelectedColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   client: TursoConnection,
-  options: QueryReadable<C>,
-): Promise<ExportStream<InferColumns<C>>>;
-export function exportQuery<const C extends SelectedColumns>(
+  options: QueryReadable<C> & { format?: F },
+): Promise<ExportStream<OutputRow<InferColumns<C>, F>>>;
+export function exportQuery<
+  const C extends SelectedColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   client: TursoConnection,
-  options: QueryDestination<C> | QueryReadable<C>,
-): Promise<ExportResult | ExportStream<InferColumns<C>>>;
+  options: (QueryDestination<C> | QueryReadable<C>) & { format?: F },
+): Promise<ExportResult | ExportStream<OutputRow<InferColumns<C>, F>>>;
 export async function exportQuery(
   client: TursoConnection,
   options: QueryDestination | QueryReadable<SelectedColumns>,
@@ -164,8 +180,20 @@ export async function exportQuery(
     options.sql,
     selectedFields(options.columns),
     false,
+    options.format,
   );
-  return deliverTursoExport(client, sql, options.params, options, started);
+  return deliverTursoExport(
+    client,
+    sql,
+    options.params,
+    options,
+    started,
+    false,
+    "export",
+    options.format === "csv"
+      ? csvHeader(Object.keys(options.columns))
+      : undefined,
+  );
 }
 
 function requireColumns(

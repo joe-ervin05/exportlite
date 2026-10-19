@@ -17,11 +17,12 @@ export function validateOptions(
   if (
     options.format !== undefined &&
     options.format !== "json" &&
-    options.format !== "jsonl"
+    options.format !== "jsonl" &&
+    options.format !== "csv"
   ) {
     throw new ExportLiteError(
       "INVALID_OPTIONS",
-      "This prototype supports only json and jsonl.",
+      "format must be json, jsonl or csv.",
     );
   }
   const size = options.bufferSize ?? 65_536;

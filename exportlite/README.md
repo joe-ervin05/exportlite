@@ -1,6 +1,6 @@
 # ExportLite — v0
 
-Export SQLite tables and read-only queries to JSON or JSONL through `better-sqlite3` or Turso/libSQL HTTP, directly or using a Drizzle schema. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes JSON fragments without parsing the exported records or constructing row objects. This is a private prototype.
+Export SQLite tables and read-only queries to JSON, JSONL or CSV through `better-sqlite3` or Turso/libSQL HTTP, directly or using a Drizzle schema. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the records; JavaScript writes fragments without parsing the exported records or constructing row objects. This is a private prototype.
 
 The [API and data contracts](docs/contracts.md) define supported drivers and field modes, validation and stream lifetime, SQL conversion recipes, transaction boundaries, and remote queue ownership. Turso support is experimental until live qualification. The existing API and JSONL default are retained.
 
@@ -36,7 +36,7 @@ The local checkout builds ESM and CommonJS entry points with declarations for bo
 | Option | Meaning |
 | --- | --- |
 | `output` | Optional new file path or byte-mode Node writable; omit to receive a Web `ExportStream` |
-| `format` | `"jsonl"` (default) or `"json"` |
+| `format` | `"jsonl"` (default), `"json"` or `"csv"` |
 | `zip` | `true` streams a ZIP containing one exported file; default `false` |
 | `columns` | Optional column-name list for tables, or an object of typed column selections for tables and queries |
 | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
@@ -51,7 +51,7 @@ TypeScript infers the return type from whether `output` is present. `TableStream
 
 ## Declared columns and aliases
 
-Use the small, Drizzle-style builders to declare a projection without repeating types at every call. Object keys become JSON keys; an optional builder argument supplies a different source column name. These are ExportLite builders for reading an existing database, with no Drizzle dependency or schema-creation behavior.
+Use the small, Drizzle-style builders to declare a projection without repeating types at every call. Object keys become JSON keys or CSV headers; an optional builder argument supplies a different source column name. These are ExportLite builders for reading an existing database, with no Drizzle dependency or schema-creation behavior.
 
 ```ts
 import { exportTable, integer, text, type ExportRow } from "exportlite";
@@ -97,6 +97,31 @@ const stream = await exportQuery(db, {
 With declared query columns, ExportLite prepares only the final JSON SELECT. There are no separate schema, schema-version, capability or output-column-discovery queries. SQLite validates the statement and its named result columns; a missing field fails during preparation. Query result aliases should be unique under SQLite's case-insensitive name resolution. Added, unselected columns do not change the projection. Renaming happens inside `json_object()`, with no JavaScript row objects or JSON parsing.
 
 Local declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original local table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Run `node examples/declared-columns.mjs` for a working example.
+
+## CSV exports
+
+Use the same table, query and adapter APIs with `format: "csv"`. Eligible tables retain 256-row SQLite batches; other sources stream records. The existing file, Node writable, cancellation and completion options also apply.
+
+```ts
+import { exportTable, integer, text } from "exportlite";
+
+const stream = await exportTable(db, "users", {
+  columns: { userId: integer("id").primaryKey(), name: text() },
+  format: "csv",
+  signal: request.signal,
+});
+void stream.result.catch(console.error);
+return new Response(stream, {
+  headers: {
+    "Content-Type": "text/csv; charset=utf-8",
+    "Content-Disposition": 'attachment; filename="users.csv"',
+  },
+});
+```
+
+CSV always includes a header, including for empty results. It uses commas, CRLF record endings and UTF-8 without a BOM. Text cells are quoted, with embedded quotes doubled; NULL becomes an unquoted empty cell and empty text becomes `""`. Numeric text uses SQLite's formatting, preserving integer digits. Declared booleans become `true`/`false`, and Drizzle JSON-mode cells contain JSON text. Text is preserved exactly, including spreadsheet formulas. [CSV contracts](docs/contracts.md#csv) describe the details.
+
+Add `zip: true` for a streaming ZIP containing `users.csv` (or `export.csv` for queries). `ExportRow<typeof stream>` describes CSV cells as strings with the selected keys; a normal CSV parser reads both NULL and empty text as an empty string. JSON/JSONL types and the JSONL default are unchanged.
 
 ## Drizzle adapter
 
@@ -207,7 +232,7 @@ Tested with `@libsql/client` **0.18.0**, the current npm version checked October
 
 ## Readable streams and API responses
 
-Omitting `output` returns a `Promise<ExportStream>`. The resolved value is a Web `ReadableStream<Uint8Array>` that works directly as a `Response` body, with `.result` for completion statistics. It supports plain JSON/JSONL and `zip: true` with the same options as destination exports. There is no `toWeb()` helper.
+Omitting `output` returns a `Promise<ExportStream>`. The resolved value is a Web `ReadableStream<Uint8Array>` that works directly as a `Response` body, with `.result` for completion statistics. It supports plain JSON/JSONL/CSV and `zip: true` with the same options as destination exports. There is no `toWeb()` helper.
 
 ```js
 // In an API handler with an open db connection:
@@ -274,7 +299,7 @@ await exportTable(db, "users", {
 
 ZIP bytes flow directly to the destination as the query runs. For an HTTP download, pass the response as `output`, set `end: true`, and set `Content-Type: application/zip` and `Content-Disposition: attachment; filename="users.zip"` in the application. Do not set `Content-Encoding: gzip` for a ZIP download. No complete export or archive is collected in memory.
 
-The entry name is the table name with a `.json` or `.jsonl` extension; query exports use `export.json` or `export.jsonl`. Table names are sanitized to a single filename, limited to 80 characters before the extension, with path characters and Windows device names handled. ZIP metadata uses a fixed neutral timestamp. The download filename is still chosen by the output path or HTTP headers.
+The entry name is the table name with a `.json`, `.jsonl` or `.csv` extension; query exports use `export.json`, `export.jsonl` or `export.csv`. Table names are sanitized to a single filename, limited to 80 characters before the extension, with path characters and Windows device names handled. ZIP metadata uses a fixed neutral timestamp. The download filename is still chosen by the output path or HTTP headers.
 
 Internally, ZIP uses one continuous DEFLATE stream, compression level **1**, `memLevel: 9`, a **256 KiB zlib output buffer**, and ZIP64 support. These settings prioritize export speed and keep the API small. `bufferSize` still controls the uncompressed UTF-8 flush target; it does not configure compression or cap memory. The archive adds bounded stream buffers and checksum work. Empty exports still produce a valid archive containing `[]` or an empty JSONL file.
 
@@ -326,7 +351,7 @@ Caller-provided streams remain open unless `end: true` is supplied. Exports hono
 - Query parameters are bound. Local writes, PRAGMAs, multiple statements and duplicate output aliases are rejected before opening output. Remote queries wrap the supplied SELECT/CTE inside the final JSON SELECT; server-side validation happens during consumption. Query SQL is trusted application code, not a sandbox for functions with side effects.
 - SQLite constructs strings, NULLs and numeric literals. JSON stored as TEXT stays a string. Exact signed 64-bit integer literals are preserved, including with a BigInt-configured connection; ordinary `JSON.parse()` consumers can still lose precision. REAL formatting remains SQLite's own.
 - BLOBs fail with a descriptive error. Select other columns or use an explicit query with `hex()`/`CAST()`.
-- Empty JSON is `[]`; empty JSONL is zero bytes. Export failures are `ExportLiteError` instances with a `code` and original cause where available.
+- Empty JSON is `[]`; empty JSONL is zero bytes; empty CSV contains its header. Export failures are `ExportLiteError` instances with a `code` and original cause where available.
 
 SQLite >=3.45.1 with JSON support is required. Automatic local discovery checks this on the first export per connection; declared and remote exports skip capability probes and rely on the final statement. Do not close or mutate the same connection while an export is running. Queries may sort/materialize data within SQLite; long read snapshots can affect writers and WAL growth.
 
@@ -344,9 +369,11 @@ pnpm example
 npm run test:package
 ```
 
-Local checks cover 378 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. The [compatibility workflow](https://github.com/joe-ervin05/exportlite/actions/workflows/ci.yml) checks the full suite and packed consumers across the documented [Node/platform matrix](docs/compatibility.md). Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 405 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. The [compatibility workflow](https://github.com/joe-ervin05/exportlite/actions/workflows/ci.yml) checks the full suite and packed consumers across the documented [Node/platform matrix](docs/compatibility.md). Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
+
+The [CSV comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/CSV.md) measures batched tables and query streaming against buffered manual JS and `csv-stringify`, with plain and ZIP output. It also records JSON regression checks for this change.
 
 The [phase 2 regression checks](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/PHASE-2.md) cover the shared delivery refactor, plain/ZIP output hashes, targeted timing rechecks and the observed wide-query peak-RSS shift.
 
@@ -372,7 +399,7 @@ The [varied-data comparison](https://github.com/joe-ervin05/exportlite/blob/main
 
 The [compression-buffer investigation](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/GZIP-INVESTIGATION.md) tests why large-record compression can hide ExportLite's speed advantage. Using `createGzip({ level: 1, chunkSize: 256 * 1024 })` improved the tested streaming pipeline without changing the export engine or compression ratio. This is the compressor's output-buffer size, separate from `bufferSize` and the stream's queue threshold. The report includes paired comparisons, rejected alternatives and limitations.
 
-Benchmark tools and results are not shipped in the npm payload. CSV, relationship nesting, extra drivers and additional sizing controls are outside v0.
+Benchmark tools and results are not shipped in the npm payload. Relationship nesting, extra drivers and additional sizing controls are outside v0.
 
 MIT licensed.
 

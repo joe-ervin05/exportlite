@@ -4,6 +4,7 @@ import { createRequire } from "node:module";
 import { Writable } from "node:stream";
 import { fileURLToPath } from "node:url";
 import { crc32 } from "node:zlib";
+import { parse } from "csv-parse/sync";
 import { fromBufferPromise } from "yauzl";
 
 const [mode, url] = process.argv.slice(2);
@@ -23,18 +24,20 @@ const expected = [
   { id: 1, name: "Jóe 雪" },
   { id: 2, name: null },
 ];
-async function unzip(bytes) {
+async function unzip(bytes, format = "json") {
   const archive = await fromBufferPromise(bytes);
   try {
     assert.equal(archive.entryCount, 1);
     for await (const entry of archive.eachEntry()) {
-      assert.equal(entry.fileName, "export.json");
+      assert.equal(entry.fileName, `export.${format}`);
       const chunks = [];
       for await (const chunk of await archive.openReadStreamPromise(entry))
         chunks.push(chunk);
       const json = Buffer.concat(chunks);
       assert.equal(crc32(json), entry.crc32);
-      return JSON.parse(json.toString("utf8"));
+      return format === "csv"
+        ? parse(json, { columns: true })
+        : JSON.parse(json.toString("utf8"));
     }
   } finally {
     archive.close();
@@ -101,6 +104,19 @@ for (const format of ["import", "require"]) {
     assert.deepEqual(await unzip(zip), expected);
     assert.equal(stats.bytesWritten, zip.length);
     assert(output.writableFinished);
+    const csvExpected = [
+      { id: "1", name: "Jóe 雪" },
+      { id: "2", name: "" },
+    ];
+    for (const zip of [false, true]) {
+      const csv = await query({ format: "csv", zip });
+      const bytes = Buffer.from(await new Response(csv).arrayBuffer());
+      assert.deepEqual(
+        zip ? await unzip(bytes, "csv") : parse(bytes, { columns: true }),
+        csvExpected,
+      );
+      assert.equal((await csv.result).rowsExported, 2);
+    }
     const path = new URL(`./${format}.json`, import.meta.url);
     await query({ output: fileURLToPath(path), format: "json" });
     assert.deepEqual(JSON.parse(await readFile(path, "utf8")), expected);

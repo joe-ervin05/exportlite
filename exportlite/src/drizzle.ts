@@ -20,13 +20,16 @@ import { ExportLiteError } from "./errors.js";
 import { checkAborted, validateOptions } from "./output/writer.js";
 import { cachedSelectedTablePlan } from "./planner/cache.js";
 import type { SelectedField } from "./planner/columns.js";
+import { csvHeader } from "./planner/csv.js";
 import { selectedTableSql } from "./planner/declared.js";
 import { identifier, uniqueColumns } from "./planner/identifiers.js";
 import { planSelectedQuery, selectedQuerySql } from "./planner/json.js";
 import type {
+  ExportFormat,
   ExportOptions,
   ExportResult,
   ExportStream,
+  OutputRow,
   StreamExportOptions,
   TableExportOptions,
   TableStreamOptions,
@@ -64,19 +67,21 @@ export function exportTable(
 export function exportTable<
   T extends SQLiteTable,
   const C extends DrizzleColumns = T["_"]["columns"],
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
 >(
   db: DrizzleSQLiteDatabase,
   table: T,
-  options?: TableReadable<C>,
-): Promise<ExportStream<InferDrizzleColumns<C>>>;
+  options?: TableReadable<C> & { format?: F },
+): Promise<ExportStream<OutputRow<InferDrizzleColumns<C>, F>>>;
 export function exportTable<
   T extends SQLiteTable,
   const C extends DrizzleColumns = T["_"]["columns"],
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
 >(
   db: DrizzleSQLiteDatabase,
   table: T,
-  options: TableReadable<C> | TableDestination<C>,
-): Promise<ExportResult | ExportStream<InferDrizzleColumns<C>>>;
+  options: (TableReadable<C> | TableDestination<C>) & { format?: F },
+): Promise<ExportResult | ExportStream<OutputRow<InferDrizzleColumns<C>, F>>>;
 export async function exportTable(
   db: DrizzleSQLiteDatabase,
   table: SQLiteTable,
@@ -126,6 +131,7 @@ export async function exportTable(
       started,
       plan.batched,
       config.name,
+      plan.header,
     );
   }
   const plan = cachedSelectedTablePlan(
@@ -143,6 +149,7 @@ export async function exportTable(
     started,
     plan.batched,
     config.name,
+    plan.header,
   );
 }
 
@@ -151,31 +158,43 @@ export function exportQuery<Q extends DrizzleSelectQuery>(
   query: Q,
   options: ExportOptions,
 ): Promise<ExportResult>;
-export function exportQuery<Q extends DrizzleSelectQuery>(
+export function exportQuery<
+  Q extends DrizzleSelectQuery,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   db: DrizzleSQLiteDatabase,
   query: Q,
-  options?: StreamExportOptions,
-): Promise<ExportStream<Q["_"]["result"][number]>>;
-export function exportQuery<Q extends DrizzleSelectQuery>(
+  options?: StreamExportOptions & { format?: F },
+): Promise<ExportStream<OutputRow<Q["_"]["result"][number], F>>>;
+export function exportQuery<
+  Q extends DrizzleSelectQuery,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   db: DrizzleSQLiteDatabase,
   query: Q,
-  options: ExportOptions | StreamExportOptions,
-): Promise<ExportResult | ExportStream<Q["_"]["result"][number]>>;
+  options: (ExportOptions | StreamExportOptions) & { format?: F },
+): Promise<ExportResult | ExportStream<OutputRow<Q["_"]["result"][number], F>>>;
 export function exportQuery(
   db: DrizzleSQLiteDatabase,
   query: SQL,
   options: ExportOptions & { columns: DrizzleColumns },
 ): Promise<ExportResult>;
-export function exportQuery<const C extends DrizzleColumns>(
+export function exportQuery<
+  const C extends DrizzleColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   db: DrizzleSQLiteDatabase,
   query: SQL,
-  options: StreamExportOptions & { columns: C },
-): Promise<ExportStream<InferDrizzleColumns<C>>>;
-export function exportQuery<const C extends DrizzleColumns>(
+  options: StreamExportOptions & { columns: C; format?: F },
+): Promise<ExportStream<OutputRow<InferDrizzleColumns<C>, F>>>;
+export function exportQuery<
+  const C extends DrizzleColumns,
+  const F extends ExportFormat | undefined = "json" | "jsonl" | undefined,
+>(
   db: DrizzleSQLiteDatabase,
   query: SQL,
-  options: (StreamExportOptions | ExportOptions) & { columns: C },
-): Promise<ExportResult | ExportStream<InferDrizzleColumns<C>>>;
+  options: (StreamExportOptions | ExportOptions) & { columns: C; format?: F },
+): Promise<ExportResult | ExportStream<OutputRow<InferDrizzleColumns<C>, F>>>;
 export async function exportQuery(
   db: DrizzleSQLiteDatabase,
   query: DrizzleSelectQuery | SQL,
@@ -229,18 +248,32 @@ export async function exportQuery(
   if (remote)
     return deliverTursoExport(
       client as TursoConnection,
-      selectedQuerySql(compiled.sql, fields, !raw),
+      selectedQuerySql(compiled.sql, fields, !raw, options.format),
       compiled.params,
       options,
       started,
+      false,
+      "export",
+      options.format === "csv"
+        ? csvHeader(fields.map((field) => field.key))
+        : undefined,
     );
-  const statement = planSelectedQuery(
+  const { statement, header } = planSelectedQuery(
     client as SQLiteConnection,
     compiled.sql,
     fields,
     !raw,
+    options.format,
   );
-  return deliverLocalExport(statement, compiled.params, options, started);
+  return deliverLocalExport(
+    statement,
+    compiled.params,
+    options,
+    started,
+    false,
+    "export",
+    header,
+  );
 }
 
 function field(key: string, value: unknown, name: string): SelectedField {

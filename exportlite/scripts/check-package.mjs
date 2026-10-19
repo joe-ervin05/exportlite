@@ -113,6 +113,7 @@ try {
       "typescript",
       "@types/node",
       "yauzl",
+      "csv-parse",
       ...(peers.includes("better-sqlite3") ? ["@types/better-sqlite3"] : []),
     ];
     const versions = [...peers, ...tools].map(
@@ -151,6 +152,8 @@ const schema = sqliteTable("users", { id: int().primaryKey(), name: str() });
 const orm = drizzle(client);
 const selected = adapterQuery(orm, orm.select({ userId: schema.id, label: schema.name }).from(schema));
 type AdapterRow = Expect<Equal<ExportRow<typeof selected>, { userId: number; label: string | null }>>;
+const adapterCsv = adapterQuery(orm, orm.select({ userId: schema.id, label: schema.name }).from(schema), {format:"csv"});
+type AdapterCsv = Expect<Equal<ExportRow<typeof adapterCsv>, {userId:string;label:string}>>;
 type TableRow = Expect<Equal<ExportRow<ReturnType<typeof table>>, typeof schema.$inferSelect>>;
 function table() { return adapterTable(orm, schema); }
 `
@@ -158,7 +161,7 @@ function table() { return adapterTable(orm, schema); }
     const driver = peers.includes("better-sqlite3")
       ? 'import Database from "better-sqlite3"; const client = new Database(":memory:");'
       : peers.includes("@libsql/client")
-        ? 'import { createClient, exportQuery as remoteQuery } from "exportlite/turso"; const client = createClient({url:"https://example.invalid"}); const remote = remoteQuery(client, {sql:"SELECT 1 AS id", columns: {id:integer().notNull()}}); type RemoteRow = Expect<Equal<ExportRow<typeof remote>, {id:number}>>; const closing: Promise<void> = client.close();'
+        ? 'import { createClient, exportQuery as remoteQuery } from "exportlite/turso"; const client = createClient({url:"https://example.invalid"}); const remote = remoteQuery(client, {sql:"SELECT 1 AS id", columns: {id:integer().notNull()}}); type RemoteRow = Expect<Equal<ExportRow<typeof remote>, {id:number}>>; const remoteCsv = remoteQuery(client, {sql:"SELECT 1 AS id",columns:{id:integer()},format:"csv"}); type RemoteCsv = Expect<Equal<ExportRow<typeof remoteCsv>,{id:string}>>; const closing: Promise<void> = client.close();'
         : "";
     for (const extension of ["mts", "cts"])
       await writeFile(
