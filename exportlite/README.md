@@ -2,6 +2,8 @@
 
 Export SQLite tables and read-only queries to JSON or JSONL through `better-sqlite3` or Turso/libSQL HTTP, directly or using a Drizzle schema. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes JSON fragments without parsing the exported records or constructing row objects. This is a private prototype.
 
+The [API and data contracts](docs/contracts.md) define supported drivers and field modes, validation and stream lifetime, SQL conversion recipes, transaction boundaries, and remote queue ownership. Turso support is experimental until live qualification. The existing API and JSONL default are retained.
+
 ## Usage
 
 ```ts
@@ -330,7 +332,7 @@ SQLite >=3.45.1 with JSON support is required. Automatic local discovery checks 
 
 ## Development and validation
 
-Use Node.js 22.18+, 24.11+, or 26+ for the development tools and pnpm 12.14.0. Tested on Node 24.19.0 and 26.12.0. Existing dependency versions were checked on October 17, 2026; `better-sqlite3` remains 13.0.3 and Drizzle remains 0.45.4. The added `@libsql/client` 0.18.0 was checked October 18. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
+Use Node.js 22.18+, 24.11+, or 26+ for the development tools and pnpm 12.14.0. Tested on Node 24.19.0 and 26.12.0. Dependency versions were rechecked on October 18, 2026: `better-sqlite3` 13.0.3, Drizzle 0.45.4, `@libsql/client` 0.18.0 and `zip-stream` 7.0.5 remain current. Node typings stay on the pinned 22.x line to match the intended minimum runtime. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -341,7 +343,7 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 363 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 368 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 

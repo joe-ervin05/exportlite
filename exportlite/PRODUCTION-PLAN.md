@@ -46,15 +46,17 @@ Run stage T alongside local readiness when access is available. It does not dela
 
 ## Stage 1 Freeze the API and data contracts
 
-- [ ] Preserve exportTable(), exportQuery(), Web stream defaults, output, signal, end, zip and completion statistics. Keep JSONL as the existing default and make JSON examples specify format explicitly.
-- [ ] Specify when validation occurs, when consumption starts the read snapshot, and how callers consume or cancel a stream before awaiting its result. Explain errors that occur after HTTP headers or bytes have been sent.
-- [ ] Document zero metadata preflights for declared and Drizzle exports, and the discovery/schema-version work for automatic local exports. State that primaryKey() declares an existing unique, non-null key; it does not create or verify a database constraint.
-- [ ] Publish a compact field-mode matrix. Cover nullable text, numbers, booleans, Drizzle JSON text, dates/timestamps, large integers, BLOBs and custom decoders. Provide SQL conversion recipes for unsupported modes; declarations remain contracts rather than per-record JS validation.
-- [ ] Keep wire types honest. Dates represented as ISO strings have string contracts. Exact integer digits in JSON do not guarantee precision after a JavaScript client parses them; document string casts for large identifiers.
-- [ ] State driver and transaction boundaries: supported Drizzle adapters, required Turso factory, bypassed Drizzle row mapping/cache hooks, and inability of remote exports to join caller transactions.
-- [ ] Document the remote queue: one export session per client, ownership through output completion, independent clients for concurrency, queued cancellation, expiry recovery and awaitable close. Show application-level admission limits and AbortSignal usage without adding a library pool or timeout option.
+- [x] Preserve exportTable(), exportQuery(), Web stream defaults, output, signal, end, zip and completion statistics. Keep JSONL as the existing default and make JSON examples specify format explicitly.
+- [x] Specify when validation occurs, when consumption starts the read snapshot, and how callers consume or cancel a stream before awaiting its result. Explain errors that occur after HTTP headers or bytes have been sent.
+- [x] Document zero metadata preflights for declared and Drizzle exports, and the discovery/schema-version work for automatic local exports. State that primaryKey() declares an existing unique, non-null key; it does not create or verify a database constraint.
+- [x] Publish a compact field-mode matrix. Cover nullable text, numbers, booleans, Drizzle JSON text, dates/timestamps, large integers, BLOBs and custom decoders. Provide SQL conversion recipes for unsupported modes; declarations remain contracts rather than per-record JS validation.
+- [x] Keep wire types honest. Dates represented as ISO strings have string contracts. Exact integer digits in JSON do not guarantee precision after a JavaScript client parses them; document string casts for large identifiers.
+- [x] State driver and transaction boundaries: supported Drizzle adapters, required Turso factory, bypassed Drizzle row mapping/cache hooks, and inability of remote exports to join caller transactions.
+- [x] Document the remote queue: one export session per client, ownership through output completion, independent clients for concurrency, queued cancellation, expiry recovery and awaitable close. Show application-level admission limits and AbortSignal usage without adding a library pool or timeout option.
 
 Done when examples and type consumers cover each supported API form, unsupported modes fail clearly, and the README does not promise end-to-end framework type inference or a hard memory cap.
+
+Completed October 18, 2026: the [API and data contracts](docs/contracts.md) define the supported forms and field modes. The build, public type consumers, lint, 368 tests and seven local examples pass; the suite also exercises the Turso example against the local protocol server. The export engine and public API are unchanged. Live Turso qualification remains stage T.
 
 ## Stage 2 Simplify delivery and improve diagnostics
 
