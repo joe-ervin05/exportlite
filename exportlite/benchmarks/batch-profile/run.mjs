@@ -3,9 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { cpus, platform, release, totalmem } from "node:os";
 
-const node26 =
-  process.env.BENCH_NODE ??
-  "<node-26.12.0>";
+const node26 = process.env.BENCH_NODE ?? "<node-26.12.0>";
 const directory = "benchmarks/results/batch-profile";
 mkdirSync(`${directory}/raw`, { recursive: true });
 const variants = [

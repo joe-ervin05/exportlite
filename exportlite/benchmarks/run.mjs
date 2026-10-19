@@ -159,9 +159,11 @@ async function execute(
 }
 // Validate completed large files outside the timed worker, without loading the
 // full JSON into memory. Gunzip also verifies each compressed stream's trailer.
-async function fingerprint(path, compression) {
+async function fingerprint(path, compression, method) {
   if (compression === "zip") {
-    const { sha256, bytes } = await readZip(path);
+    const { sha256, bytes } = await readZip(path, {
+      name: method === "exportlite-query" ? "export.json" : "data.json",
+    });
     return { sha256, bytes };
   }
   const hash = createHash("sha256");
@@ -212,7 +214,15 @@ try {
     const encoded = await readFile(outputPath);
     assert.deepEqual(
       compression === "zip"
-        ? JSON.parse((await readZip(outputPath, { collect: true })).text)
+        ? JSON.parse(
+            (
+              await readZip(outputPath, {
+                name:
+                  method === "exportlite-query" ? "export.json" : "data.json",
+                collect: true,
+              })
+            ).text,
+          )
         : JSON.parse(
             (compression === "none" ? encoded : gunzipSync(encoded)).toString(
               "utf8",
@@ -254,7 +264,7 @@ try {
           assert.equal(metrics.rows, rows);
           if (destination === "file") {
             assert.equal((await stat(outputPath)).size, metrics.bytes);
-            const actual = await fingerprint(outputPath, compression);
+            const actual = await fingerprint(outputPath, compression, method);
             assert.equal(actual.bytes, metrics.rawBytes);
             metrics.verifiedDecodedSha256 = actual.sha256;
             // CLI whitespace can differ. All Node methods produce identical
