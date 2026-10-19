@@ -26,6 +26,7 @@ const client = createClient({
 });
 const ordinary: Client = client;
 void ordinary;
+expectTypeOf(client.close()).toEqualTypeOf<Promise<void>>();
 const direct = exportTable(client, "users", {
   columns: { id: integer().primaryKey(), name: text() },
   format: "json",

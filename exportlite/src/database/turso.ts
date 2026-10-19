@@ -93,12 +93,17 @@ function encodeValue(value: unknown): Value {
   );
 }
 
-/** One independent read cursor per export; never shares the SDK's transaction. */
+/** One serialized export session per client, separate from SDK transactions. */
 export class TursoTransport {
   private readonly base: string;
   private readonly fetch: typeof globalThis.fetch;
   private readonly headers: Headers;
-  private readonly active = new Set<AbortController>();
+  private session: { baton: string; base: string } | undefined;
+  private lifecycle = new AbortController();
+  private tail: Promise<void> = Promise.resolve();
+  private readonly jobs = new Set<Promise<void>>();
+  private stopping: Promise<void> | undefined;
+  private shutdownFailure: unknown;
 
   constructor(
     config: TursoConfig,
@@ -127,11 +132,88 @@ export class TursoTransport {
     }
   }
 
-  cancel(): void {
-    for (const request of this.active)
-      request.abort(
-        new ExportLiteError("ABORTED", "Turso client closed or reconnected."),
+  async run<T>(
+    signal: AbortSignal | undefined,
+    work: (signal: AbortSignal) => Promise<T>,
+  ): Promise<T> {
+    this.checkOpen();
+    const combined = AbortSignal.any([
+      this.lifecycle.signal,
+      ...(signal ? [signal] : []),
+    ]);
+    const job = deferred<void>();
+    this.jobs.add(job.promise);
+    let release: (() => void) | undefined;
+    try {
+      release = await this.acquire(combined);
+      this.checkOpen();
+      return await work(combined);
+    } catch (cause) {
+      if (release)
+        await this.discard().catch((error: unknown) => {
+          if (this.stopping) this.shutdownFailure ??= error;
+        });
+      if (combined.aborted) throw aborted(combined.reason);
+      throw cause;
+    } finally {
+      release?.();
+      this.jobs.delete(job.promise);
+      job.resolve();
+    }
+  }
+
+  close(): Promise<void> {
+    if (this.stopping) return this.stopping;
+    this.lifecycle.abort(
+      new ExportLiteError("ABORTED", "Turso client closed or reconnected."),
+    );
+    this.stopping = (async () => {
+      await Promise.all([...this.jobs]);
+      await this.discard();
+      if (this.shutdownFailure !== undefined) throw this.shutdownFailure;
+    })();
+    void this.stopping.catch(() => {});
+    return this.stopping;
+  }
+
+  reopen(): void {
+    this.lifecycle = new AbortController();
+    this.stopping = undefined;
+    this.shutdownFailure = undefined;
+  }
+
+  private checkOpen(): void {
+    if (this.closed() || this.stopping)
+      throw new ExportLiteError(
+        "INVALID_OPTIONS",
+        "The Turso client is closed or reconnecting.",
       );
+  }
+
+  private async acquire(signal: AbortSignal): Promise<() => void> {
+    const previous = this.tail;
+    const lease = deferred<void>();
+    this.tail = previous.then(() => lease.promise);
+    const cancelled = deferred<never>();
+    const onAbort = () => cancelled.reject(aborted(signal.reason));
+    signal.addEventListener("abort", onAbort, { once: true });
+    try {
+      signal.throwIfAborted();
+      await Promise.race([previous, cancelled.promise]);
+      signal.throwIfAborted();
+      return lease.resolve;
+    } catch (cause) {
+      lease.resolve();
+      throw cause;
+    } finally {
+      signal.removeEventListener("abort", onAbort);
+    }
+  }
+
+  private async discard(): Promise<void> {
+    const session = this.session;
+    this.session = undefined;
+    if (session) await this.closeCursor(session.base, session.baton);
   }
 
   async *iterate(
@@ -140,32 +222,37 @@ export class TursoTransport {
     format: "json" | "jsonl",
     signal: AbortSignal,
   ): AsyncGenerator<JsonFragment> {
-    if (this.closed())
-      throw new ExportLiteError(
-        "INVALID_OPTIONS",
-        "The Turso client is closed.",
-      );
+    this.checkOpen();
     const request = new AbortController();
-    this.active.add(request);
     const combined = AbortSignal.any([signal, request.signal]);
-    let baton: string | null = null;
-    let closeUrl = this.base;
+    let base = this.session?.base ?? this.base;
     let response: Response | undefined;
     let entries: AsyncGenerator<Record<string, unknown>> | undefined;
-    let completed = false;
     let failure: unknown;
     try {
       combined.throwIfAborted();
-      response = await this.fetch(`${this.base}/v3/cursor`, {
-        method: "POST",
-        headers: this.headers,
-        redirect: "error",
-        signal: combined,
-        body: JSON.stringify({
-          baton: null,
-          batch: { steps: [{ stmt: statement }] },
-        }),
-      });
+      for (let attempt = 0; attempt < 2; attempt++) {
+        const reused = this.session !== undefined;
+        response = await this.fetch(`${base}/v3/cursor`, {
+          method: "POST",
+          headers: this.headers,
+          redirect: "error",
+          signal: combined,
+          body: JSON.stringify({
+            baton: this.session?.baton ?? null,
+            batch: { steps: [{ stmt: statement }] },
+          }),
+        });
+        // A rejected old baton has not started a new cursor. Never replay a
+        // network failure, SQL error, or any response that began streaming.
+        if (attempt === 0 && reused && (await expired(response))) {
+          this.session = undefined;
+          base = this.base;
+          continue;
+        }
+        break;
+      }
+      if (!response) remote("Turso returned no cursor response.");
       if (!response.ok)
         remote(`Turso cursor request failed (HTTP ${response.status}).`);
       if (!response.body) remote("Turso returned no cursor body.");
@@ -175,18 +262,22 @@ export class TursoTransport {
       const header = first.value;
       if (header.baton !== null && typeof header.baton !== "string")
         remote("Invalid Turso cursor header.");
-      baton = header.baton;
+      this.session =
+        header.baton === null ? undefined : { baton: header.baton, base };
       if (header.base_url !== undefined && header.base_url !== null) {
         if (typeof header.base_url !== "string")
           remote("Invalid Turso cursor base URL.");
-        const redirected = new URL(header.base_url, this.base);
+        const redirected = new URL(header.base_url, base);
         if (this.base.startsWith("https:") && redirected.protocol !== "https:")
           remote("Turso cursor attempted to downgrade HTTPS.");
-        closeUrl = baseUrl(redirected);
+        base = baseUrl(redirected);
+        if (this.session) this.session.base = base;
       }
       let began = false;
       let ended = false;
+      let terminated = false;
       for await (const entry of entries) {
+        if (terminated) remote("Turso sent data after cursor termination.");
         if (entry.type === "error" || entry.type === "step_error") {
           const detail = record(entry.error);
           throw new ExportLiteError(
@@ -238,17 +329,15 @@ export class TursoTransport {
           if (!began || ended || (entry.step !== undefined && entry.step !== 0))
             remote("Invalid Turso cursor completion.");
           ended = true;
+        } else if (entry.type === "replication_index") {
+          if (!ended)
+            remote("Turso cursor terminated before statement completion.");
+          terminated = true;
         } else remote("Unexpected Turso cursor entry.");
       }
       if (!ended) remote("Turso cursor ended before statement completion.");
-      completed = true;
     } catch (cause) {
-      if (combined.aborted)
-        failure = isExportError(combined.reason)
-          ? combined.reason
-          : new ExportLiteError("ABORTED", "Export aborted.", {
-              cause: combined.reason,
-            });
+      if (combined.aborted) failure = aborted(combined.reason);
       else if (isExportError(cause)) failure = cause;
       else
         failure = new ExportLiteError(
@@ -260,15 +349,6 @@ export class TursoTransport {
       await entries?.return(undefined).catch(() => {});
       if (response?.body && !response.body.locked)
         await response.body.cancel().catch(() => {});
-      try {
-        if (baton !== null) await this.closeCursor(closeUrl, baton);
-      } catch (cause) {
-        // Preserve an original cancellation/query/output failure. A close error
-        // after an otherwise successful export is still a handled failure.
-        if (completed && !signal.aborted) failure ??= cause;
-      } finally {
-        this.active.delete(request);
-      }
     }
     if (failure !== undefined) throw failure;
   }
@@ -282,6 +362,7 @@ export class TursoTransport {
         signal: AbortSignal.timeout(5_000),
         body: JSON.stringify({ baton, requests: [{ type: "close" }] }),
       });
+      if (await expired(response)) return;
       if (!response.ok) {
         await response.body?.cancel();
         remote("Could not close the Turso export session.");
@@ -359,4 +440,52 @@ function isExportError(value: unknown): value is ExportLiteError {
     value.name === "ExportLiteError" &&
     typeof Reflect.get(value, "code") === "string"
   );
+}
+
+function aborted(reason: unknown): ExportLiteError {
+  return isExportError(reason)
+    ? reason
+    : new ExportLiteError("ABORTED", "Export aborted.", { cause: reason });
+}
+
+function deferred<T>() {
+  let resolve!: (value: T | PromiseLike<T>) => void;
+  let reject!: (reason: unknown) => void;
+  const promise = new Promise<T>((yes, no) => {
+    resolve = yes;
+    reject = no;
+  });
+  return { promise, resolve, reject };
+}
+
+/** Modern unknown/expired batons use 404; legacy libSQL names expiry in a 400. */
+async function expired(response: Response): Promise<boolean> {
+  if (response.status === 404) {
+    await response.body?.cancel().catch(() => {});
+    return true;
+  }
+  if (response.status !== 400 || !response.body) return false;
+  const reader = response.body.getReader();
+  const parts: Uint8Array[] = [];
+  let bytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      bytes += value.length;
+      if (bytes > 4096) return false;
+      parts.push(value);
+    }
+    const error: unknown = JSON.parse(Buffer.concat(parts).toString("utf8"));
+    return (
+      error !== null &&
+      typeof error === "object" &&
+      Reflect.get(error, "code") === "STREAM_EXPIRED"
+    );
+  } catch {
+    return false;
+  } finally {
+    await reader.cancel().catch(() => {});
+    reader.releaseLock();
+  }
 }

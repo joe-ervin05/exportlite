@@ -39,86 +39,85 @@ export function deliverTursoExport(
     );
   // Validate bindings before creating a file, returning a stream or doing I/O.
   const statement = tursoStatement(sql, params);
-  const produce = async (destination: ExportOptions): Promise<ExportResult> => {
-    const controller = new AbortController();
-    const signal = destination.signal
-      ? AbortSignal.any([destination.signal, controller.signal])
-      : controller.signal;
-    const outputError = (cause: Error) =>
-      controller.abort(
-        new ExportLiteError(
-          "OUTPUT_ERROR",
-          "Output failed during Turso export.",
-          { cause },
-        ),
-      );
-    const outputClose = () => {
-      if (
-        typeof destination.output !== "string" &&
-        !destination.output.writableFinished
-      )
-        outputError(new Error("Output closed before completion."));
-    };
-    if (typeof destination.output !== "string") {
-      destination.output.on("error", outputError);
-      destination.output.on("close", outputClose);
-    }
-    let output: OutputWriter | ZipOutput | undefined;
-    let rowsExported = 0;
-    let success = false;
-    try {
-      const settings = { ...destination, signal };
-      output = settings.zip
-        ? await ZipOutput.create(settings, name)
-        : await OutputWriter.create(settings);
-      const json = options.format === "json";
-      if (json) {
-        const wait = output.write("[");
-        if (wait) await wait;
-      }
-      output.check();
-      for await (const [text, count] of transport.iterate(
-        statement,
-        batched,
-        options.format ?? "jsonl",
-        signal,
-      )) {
-        output.check();
-        const content = json && batched ? text.slice(1, -1) : text;
-        const prefix = json && rowsExported > 0 ? "," : "";
-        const suffix = json ? "" : "\n";
-        const wait = output.write(`${prefix}${content}${suffix}`);
-        if (wait) await wait;
-        rowsExported += count;
-      }
-      if (json) {
-        const wait = output.write("]");
-        if (wait) await wait;
-      }
-      await output.complete();
-      success = true;
-      return {
-        rowsExported,
-        bytesWritten: output.bytesWritten,
-        durationMs: performance.now() - started,
+  const produce = (destination: ExportOptions): Promise<ExportResult> =>
+    transport.run(destination.signal, async (clientSignal) => {
+      const controller = new AbortController();
+      const signal = AbortSignal.any([clientSignal, controller.signal]);
+      const outputError = (cause: Error) =>
+        controller.abort(
+          new ExportLiteError(
+            "OUTPUT_ERROR",
+            "Output failed during Turso export.",
+            { cause },
+          ),
+        );
+      const outputClose = () => {
+        if (
+          typeof destination.output !== "string" &&
+          !destination.output.writableFinished
+        )
+          outputError(new Error("Output closed before completion."));
       };
-    } catch (cause) {
-      // Aborting a pending read also wakes the writer; preserve the original
-      // destination failure rather than reporting that wake-up as cancellation.
-      if (controller.signal.aborted) throw controller.signal.reason;
-      throw cause;
-    } finally {
-      controller.abort();
+      if (typeof destination.output !== "string") {
+        destination.output.on("error", outputError);
+        destination.output.on("close", outputClose);
+      }
+      let output: OutputWriter | ZipOutput | undefined;
+      let rowsExported = 0;
+      let success = false;
       try {
-        await output?.dispose(success);
+        const settings = { ...destination, signal };
+        output = settings.zip
+          ? await ZipOutput.create(settings, name)
+          : await OutputWriter.create(settings);
+        const json = options.format === "json";
+        if (json) {
+          const wait = output.write("[");
+          if (wait) await wait;
+        }
+        output.check();
+        for await (const [text, count] of transport.iterate(
+          statement,
+          batched,
+          options.format ?? "jsonl",
+          signal,
+        )) {
+          output.check();
+          const content = json && batched ? text.slice(1, -1) : text;
+          const prefix = json && rowsExported > 0 ? "," : "";
+          const suffix = json ? "" : "\n";
+          const wait = output.write(`${prefix}${content}${suffix}`);
+          if (wait) await wait;
+          rowsExported += count;
+        }
+        if (json) {
+          const wait = output.write("]");
+          if (wait) await wait;
+        }
+        await output.complete();
+        success = true;
+        return {
+          rowsExported,
+          bytesWritten: output.bytesWritten,
+          durationMs: performance.now() - started,
+        };
+      } catch (cause) {
+        // Aborting a pending read also wakes the writer; preserve the original
+        // destination failure rather than reporting that wake-up as cancellation.
+        if (controller.signal.aborted) throw controller.signal.reason;
+        throw cause;
       } finally {
-        if (typeof destination.output !== "string") {
-          destination.output.off("error", outputError);
-          destination.output.off("close", outputClose);
+        controller.abort();
+        try {
+          await output?.dispose(success);
+        } finally {
+          if (typeof destination.output !== "string") {
+            destination.output.off("error", outputError);
+            destination.output.off("close", outputClose);
+          }
         }
       }
-    }
-  };
+    });
   return options.output === undefined
     ? Promise.resolve(createReadableExport(options, produce, started))
     : produce(options);

@@ -24,7 +24,8 @@ export type { TursoConnection } from "./database/turso.js";
 export interface TursoClientConfig extends Omit<Config, "fetch"> {
   fetch?: typeof globalThis.fetch;
 }
-export type TursoClient = Client & TursoConnection;
+export type TursoClient = Omit<Client, "close"> &
+  TursoConnection & { close(): Promise<void> };
 
 /** An ordinary official HTTP client, also registered for streaming exports. */
 export function createClient(config: TursoClientConfig): TursoClient {
@@ -39,14 +40,47 @@ export function createClient(config: TursoClientConfig): TursoClient {
   }
   const transport = registerTurso(client, config, () => client.closed);
   const close = client.close.bind(client);
-  client.close = () => {
-    transport.cancel();
-    close();
-  };
   const reconnect = client.reconnect.bind(client);
-  client.reconnect = async () => {
-    transport.cancel();
-    await reconnect();
+  let closing: Promise<void> | undefined;
+  let reconnecting: Promise<void> | undefined;
+  let revision = 0;
+  client.close = () => {
+    if (closing) return closing;
+    const current = ++revision;
+    const pendingReconnect = reconnecting;
+    close();
+    closing = (async () => {
+      try {
+        await transport.close();
+      } finally {
+        await pendingReconnect?.catch(() => {});
+        if (current === revision) close();
+      }
+    })();
+    void closing.catch(() => {});
+    return closing;
+  };
+  client.reconnect = () => {
+    if (reconnecting) return reconnecting;
+    const current = ++revision;
+    closing = undefined;
+    const stopped = transport.close();
+    reconnecting = (async () => {
+      await stopped;
+      await reconnect();
+      if (current !== revision) {
+        close();
+        return;
+      }
+      transport.reopen();
+    })();
+    const task = reconnecting;
+    void task
+      .finally(() => {
+        if (reconnecting === task) reconnecting = undefined;
+      })
+      .catch(() => {});
+    return task;
   };
   return client as TursoClient;
 }

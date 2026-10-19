@@ -43,5 +43,5 @@ try {
   console.log(await new Response(selected).text());
   await selected.result;
 } finally {
-  client.close();
+  await client.close();
 }

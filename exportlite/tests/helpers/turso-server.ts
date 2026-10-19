@@ -21,6 +21,9 @@ export interface ServerMode {
   closeError?: boolean;
   fragment?: number;
   rowError?: number;
+  legacyExpiry?: boolean;
+  closeWait?: Promise<void>;
+  terminator?: boolean;
 }
 
 /** Real HTTP, actual SQLite execution, and explicit v3 cursor/session framing. */
@@ -34,6 +37,7 @@ export async function tursoServer(db: Database.Database) {
   const statements: string[] = [];
   const batches: number[] = [];
   const sessions = new Map<string, () => void>();
+  const busy = new Set<string>();
   const mode: ServerMode = {};
   let produced = 0;
   let cursors = 0;
@@ -49,11 +53,18 @@ export async function tursoServer(db: Database.Database) {
         encryption: req.headers["x-turso-encryption-key"],
       });
       if (req.url === "/v3/pipeline") {
+        await mode.closeWait;
         if (mode.closeError) {
           res.writeHead(500).end("close failed");
           return;
         }
         const close = sessions.get(String(body.baton));
+        if (!close) {
+          res
+            .writeHead(mode.legacyExpiry ? 400 : 404)
+            .end(JSON.stringify({ code: "STREAM_EXPIRED" }));
+          return;
+        }
         close?.();
         sessions.delete(String(body.baton));
         res.setHeader("Content-Type", "application/json");
@@ -75,6 +86,19 @@ export async function tursoServer(db: Database.Database) {
         res.writeHead(mode.status).end("sensitive-token-in-error-body");
         return;
       }
+      if (typeof body.baton === "string") {
+        if (!sessions.has(body.baton)) {
+          res
+            .writeHead(mode.legacyExpiry ? 400 : 404)
+            .end(JSON.stringify({ code: "STREAM_EXPIRED" }));
+          return;
+        }
+        if (busy.has(body.baton)) {
+          res.writeHead(409).end("Session is busy");
+          return;
+        }
+        sessions.delete(body.baton);
+      }
       if (mode.hold === "headers") {
         await once(res, "close");
         return;
@@ -94,6 +118,7 @@ export async function tursoServer(db: Database.Database) {
         iterator?.return?.();
       };
       sessions.set(baton, close);
+      busy.add(baton);
       res.on("close", close);
       const write = async (value: unknown) => {
         if (stopped) return;
@@ -157,6 +182,8 @@ export async function tursoServer(db: Database.Database) {
             affected_row_count: 0,
             last_insert_rowid: null,
           });
+        if (!mode.truncate && !stopped && mode.terminator)
+          await write({ type: "replication_index", replication_index: null });
       } catch {
         if (!stopped)
           await write({
@@ -166,6 +193,7 @@ export async function tursoServer(db: Database.Database) {
           });
       } finally {
         iterator?.return?.();
+        busy.delete(baton);
         res.end();
       }
     } catch {
@@ -191,6 +219,10 @@ export async function tursoServer(db: Database.Database) {
     },
     get sessions() {
       return sessions.size;
+    },
+    expireSessions() {
+      for (const close of sessions.values()) close();
+      sessions.clear();
     },
     async close() {
       for (const close of sessions.values()) close();

@@ -30,6 +30,12 @@ import {
 } from "../src/turso.js";
 import { tursoServer } from "./helpers/turso-server.js";
 
+async function consume(stream: Awaited<ReturnType<typeof exportTable>>) {
+  const body = await new Response(stream as ReadableStream<Uint8Array>).text();
+  await (stream as import("../src/types.js").ExportStream).result;
+  return body;
+}
+
 const table = sqliteTable("users", {
   id: int().primaryKey(),
   name: str().notNull(),
@@ -67,7 +73,7 @@ beforeEach(async () => {
   });
 });
 afterEach(async () => {
-  client?.close();
+  await client?.close().catch(() => {});
   await server?.close();
   native?.close();
 });
@@ -91,7 +97,6 @@ it.each(["json", "jsonl"] as const)(
     expect((await stream.result).rowsExported).toBe(513);
     expect(server.requests.map((request) => request.path)).toEqual([
       "/v3/cursor",
-      "/v3/pipeline",
     ]);
     expect(server.statements).toHaveLength(1);
     expect(server.statements[0]).not.toMatch(
@@ -100,8 +105,10 @@ it.each(["json", "jsonl"] as const)(
     expect(server.statements[0]).not.toMatch(/AS BLOB/i);
     expect(server.requests[0]?.authorization).toBe("Bearer test-token");
     expect(server.requests[0]?.encryption).toBe("test-encryption-key");
-    expect(server.sessions).toBe(0);
+    expect(server.sessions).toBe(1);
     expect(client.closed).toBe(false);
+    await client.close();
+    expect(server.sessions).toBe(0);
   },
 );
 
@@ -141,6 +148,384 @@ it("reuses Drizzle schema JSON/boolean modes and an unselected primary key", asy
   await stream.result;
   expect(server.batches).toEqual([256, 256, 1]);
   expect(server.statements).toHaveLength(1);
+});
+
+it("reuses one rotating session for direct and Drizzle table/query exports", async () => {
+  const db = drizzle(client);
+  await consume(
+    await exportTable(client, "users", { columns, format: "json" }),
+  );
+  await consume(await drizzleTable(db, table, { format: "json" }));
+  await consume(
+    await exportQuery(client, {
+      sql: "SELECT id FROM users LIMIT 1",
+      columns: { id: integer() },
+      format: "json",
+    }),
+  );
+  await consume(
+    await drizzleQuery(db, db.select({ id: table.id }).from(table).limit(1), {
+      format: "json",
+    }),
+  );
+  expect(server.requests.map((r) => r.path)).toEqual(
+    Array(4).fill("/v3/cursor"),
+  );
+  expect(server.requests[0]?.body.baton).toBe(null);
+  const batons = server.requests.slice(1).map((r) => r.body.baton);
+  expect(batons.every((b) => typeof b === "string")).toBe(true);
+  expect(new Set(batons).size).toBe(3);
+  expect(server.sessions).toBe(1);
+  expect(server.statements).toHaveLength(4);
+  await client.close();
+  expect(server.sessions).toBe(0);
+  expect(server.requests[4]?.path).toBe("/v3/pipeline");
+});
+
+it("serializes complete exports, including a slow destination", async () => {
+  let release: (() => void) | undefined;
+  const output = new Writable({
+    highWaterMark: 1,
+    write(_chunk, _encoding, callback) {
+      if (!release) release = callback;
+      else callback();
+    },
+  });
+  const first = exportTable(client, "users", {
+    columns,
+    output,
+    bufferSize: 1,
+  });
+  await until(() => release !== undefined);
+  const stream = await drizzleTable(drizzle(client), table, { format: "json" });
+  const second = consume(stream);
+  await new Promise((resolve) => setTimeout(resolve, 30));
+  expect(server.cursors).toBe(1);
+  release?.();
+  await first;
+  expect(JSON.parse(await second)).toHaveLength(513);
+  expect(server.cursors).toBe(2);
+  expect(server.requests[1]?.body.baton).toBeTypeOf("string");
+});
+
+it.each([false, true])(
+  "cancels a queued readable without disturbing the active export (zip=%s)",
+  async (zip) => {
+    let release: (() => void) | undefined;
+    const output = new Writable({
+      highWaterMark: 1,
+      write(_chunk, _encoding, callback) {
+        if (!release) release = callback;
+        else callback();
+      },
+    });
+    const first = exportTable(client, "users", {
+      columns,
+      output,
+      bufferSize: 1,
+    });
+    await until(() => release !== undefined);
+    const queued = await exportTable(client, "users", { columns, zip });
+    const reader = queued.getReader();
+    const read = reader.read();
+    await reader.cancel("skip queued export");
+    await read;
+    await expect(queued.result).rejects.toMatchObject({ code: "ABORTED" });
+    expect(server.cursors).toBe(1);
+    release?.();
+    await first;
+    await consume(await exportTable(client, "users", { columns }));
+    expect(server.requests[1]?.body.baton).toBeTypeOf("string");
+  },
+);
+
+it("closes active and queued exports while a destination is blocked", async () => {
+  let release: (() => void) | undefined;
+  const output = new Writable({
+    highWaterMark: 1,
+    write(_chunk, _encoding, callback) {
+      release = callback;
+    },
+  });
+  const active = exportTable(client, "users", {
+    columns,
+    output,
+    bufferSize: 1,
+  });
+  const failed = expect(active).rejects.toMatchObject({ code: "ABORTED" });
+  await until(() => release !== undefined);
+  const queued = await exportTable(client, "users", { columns });
+  const queuedBody = expect(new Response(queued).text()).rejects.toMatchObject({
+    code: "ABORTED",
+  });
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  const closing = client.close();
+  expect(client.closed).toBe(true);
+  expect(client.close()).toBe(closing);
+  try {
+    await closing;
+    await failed;
+    await queuedBody;
+    await expect(queued.result).rejects.toMatchObject({ code: "ABORTED" });
+  } finally {
+    release?.();
+  }
+  expect(server.sessions).toBe(0);
+  expect(server.cursors).toBe(1);
+  expect(output.destroyed).toBe(false);
+});
+
+it("does not create a queued output file before acquiring the session", async () => {
+  const folder = await mkdtemp(join(tmpdir(), "exportlite-queued-"));
+  let release: (() => void) | undefined;
+  const output = new Writable({
+    highWaterMark: 1,
+    write(_chunk, _encoding, callback) {
+      if (!release) release = callback;
+      else callback();
+    },
+  });
+  const active = exportTable(client, "users", {
+    columns,
+    output,
+    bufferSize: 1,
+  });
+  await until(() => release !== undefined);
+  const abort = new AbortController();
+  const queued = exportTable(client, "users", {
+    columns,
+    output: join(folder, "queued.zip"),
+    zip: true,
+    signal: abort.signal,
+  });
+  const failure = expect(queued).rejects.toMatchObject({ code: "ABORTED" });
+  abort.abort();
+  await failure;
+  expect(await readdir(folder)).toEqual([]);
+  release?.();
+  await active;
+  await rm(folder, { recursive: true, force: true });
+});
+
+it("waits for an acknowledged idle-session close and closes only once", async () => {
+  await consume(await exportTable(client, "users", { columns }));
+  let release!: () => void;
+  server.mode.closeWait = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let settled = false;
+  const closing = client.close();
+  void closing.then(() => {
+    settled = true;
+  });
+  await until(() => server.requests.length === 2);
+  expect(settled).toBe(false);
+  expect(server.sessions).toBe(1);
+  release();
+  await closing;
+  await client.close();
+  expect(server.requests).toHaveLength(2);
+  expect(server.sessions).toBe(0);
+});
+
+it("reports shutdown failures without deleting a completed export", async () => {
+  const folder = await mkdtemp(join(tmpdir(), "exportlite-close-error-"));
+  try {
+    await exportTable(client, "users", {
+      columns,
+      output: join(folder, "users.zip"),
+      zip: true,
+    });
+    server.mode.closeError = true;
+    await expect(client.close()).rejects.toMatchObject({
+      code: "REMOTE_ERROR",
+    });
+    expect(await readdir(folder)).toEqual(["users.zip"]);
+    expect(client.closed).toBe(true);
+  } finally {
+    await rm(folder, { recursive: true, force: true });
+  }
+});
+
+it("closes an unused client without network I/O", async () => {
+  await client.close();
+  expect(server.requests).toHaveLength(0);
+});
+
+it("reports a cleanup failure during active client shutdown", async () => {
+  server.mode.hold = "body";
+  const stream = await exportTable(client, "users", { columns });
+  const body = expect(new Response(stream).text()).rejects.toMatchObject({
+    code: "ABORTED",
+  });
+  await until(() => server.cursors === 1);
+  server.mode.closeError = true;
+  await expect(client.close()).rejects.toMatchObject({ code: "REMOTE_ERROR" });
+  await body;
+  await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
+});
+
+it.each([false, true])(
+  "recovers an expired cached session once before execution (legacy=%s)",
+  async (legacy) => {
+    await consume(await exportTable(client, "users", { columns }));
+    server.mode.legacyExpiry = legacy;
+    server.expireSessions();
+    await consume(await exportTable(client, "users", { columns }));
+    expect(server.cursors).toBe(3);
+    expect(server.statements).toHaveLength(2);
+    expect(server.requests[1]?.body.baton).toBeTypeOf("string");
+    expect(server.requests[2]?.body.baton).toBe(null);
+    expect(server.sessions).toBe(1);
+  },
+);
+
+it.each([false, true])(
+  "treats an expired idle session as already closed (legacy=%s)",
+  async (legacy) => {
+    await consume(await exportTable(client, "users", { columns }));
+    server.mode.legacyExpiry = legacy;
+    server.expireSessions();
+    await expect(client.close()).resolves.toBeUndefined();
+    expect(server.requests).toHaveLength(2);
+  },
+);
+
+it("never retries a missing endpoint for a fresh session", async () => {
+  server.mode.status = 404;
+  await expect(
+    consume(await exportTable(client, "users", { columns })),
+  ).rejects.toMatchObject({ code: "REMOTE_ERROR" });
+  expect(server.cursors).toBe(1);
+});
+
+it("limits stale-session recovery to one fresh request", async () => {
+  await consume(await exportTable(client, "users", { columns }));
+  server.expireSessions();
+  server.mode.status = 404;
+  await expect(
+    consume(await exportTable(client, "users", { columns })),
+  ).rejects.toMatchObject({ code: "REMOTE_ERROR" });
+  expect(server.cursors).toBe(3);
+  expect(server.statements).toHaveLength(1);
+});
+
+it.each([400, 401, 500])(
+  "does not replay HTTP %i errors from a reused session",
+  async (status) => {
+    await consume(await exportTable(client, "users", { columns }));
+    server.mode.status = status;
+    await expect(
+      consume(await exportTable(client, "users", { columns })),
+    ).rejects.toMatchObject({ code: "REMOTE_ERROR" });
+    expect(server.cursors).toBe(2);
+    expect(server.sessions).toBe(0);
+    delete server.mode.status;
+    await consume(await exportTable(client, "users", { columns }));
+    expect(server.requests.at(-1)?.body.baton).toBe(null);
+  },
+);
+
+it.each(["truncate", "sql-error"])(
+  "discards a reused session after %s without replay",
+  async (kind) => {
+    await consume(await exportTable(client, "users", { columns }));
+    if (kind === "truncate") server.mode.truncate = true;
+    else server.mode.rowError = 1;
+    await expect(
+      consume(await exportTable(client, "users", { columns })),
+    ).rejects.toMatchObject({
+      code: kind === "truncate" ? "REMOTE_ERROR" : "SQLITE_ERROR",
+    });
+    expect(server.cursors).toBe(2);
+    expect(server.statements).toHaveLength(2);
+    expect(server.sessions).toBe(0);
+    delete server.mode.truncate;
+    delete server.mode.rowError;
+    await consume(await exportTable(client, "users", { columns }));
+    expect(server.requests.at(-1)?.body.baton).toBe(null);
+  },
+);
+
+it("does not replay network failures on a cached session", async () => {
+  let cursors = 0;
+  const peer = createClient({
+    url: server.url,
+    fetch: async (input, init) => {
+      if (String(input).endsWith("/cursor") && ++cursors === 2)
+        throw new Error("network lost");
+      return fetch(input, init);
+    },
+  });
+  try {
+    await consume(await exportTable(peer, "users", { columns }));
+    await expect(
+      consume(await exportTable(peer, "users", { columns })),
+    ).rejects.toMatchObject({ code: "REMOTE_ERROR" });
+    expect(cursors).toBe(2);
+    expect(server.sessions).toBe(0);
+  } finally {
+    await peer.close();
+  }
+});
+
+it("accepts the modern cursor terminator and reuses its session", async () => {
+  server.mode.terminator = true;
+  await consume(await exportTable(client, "users", { columns }));
+  await consume(await exportTable(client, "users", { columns }));
+  expect(server.sessions).toBe(1);
+  expect(server.cursors).toBe(2);
+});
+
+it("keeps different clients independent", async () => {
+  let release: (() => void) | undefined;
+  const output = new Writable({
+    highWaterMark: 1,
+    write(_chunk, _encoding, callback) {
+      if (!release) release = callback;
+      else callback();
+    },
+  });
+  const first = exportTable(client, "users", {
+    columns,
+    output,
+    bufferSize: 1,
+  });
+  await until(() => release !== undefined);
+  const peer = createClient({ url: server.url });
+  try {
+    await consume(await exportTable(peer, "users", { columns }));
+    expect(server.sessions).toBe(2);
+  } finally {
+    release?.();
+    await first;
+    await peer.close();
+  }
+});
+
+it("reconnects after close with a fresh export session", async () => {
+  await consume(await exportTable(client, "users", { columns }));
+  await client.close();
+  await client.reconnect();
+  expect(client.closed).toBe(false);
+  await consume(await exportTable(client, "users", { columns }));
+  expect(server.requests.at(-1)?.body.baton).toBe(null);
+});
+
+it("lets close win over an in-flight reconnect", async () => {
+  await consume(await exportTable(client, "users", { columns }));
+  let release!: () => void;
+  server.mode.closeWait = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const reconnect = client.reconnect();
+  await until(() => server.requests.length === 2);
+  const closing = client.close();
+  release();
+  await reconnect;
+  await closing;
+  expect(client.closed).toBe(true);
+  expect(server.sessions).toBe(0);
 });
 
 it("compiles Drizzle selects with bindings without running its buffered executor", async () => {
@@ -287,7 +672,7 @@ it.each([false, true])(
       archive.close();
     }
     expect((await stream.result).bytesWritten).toBe(bytes.length);
-    expect(server.sessions).toBe(0);
+    expect(server.sessions).toBe(1);
   },
 );
 
@@ -421,12 +806,11 @@ it("cancels active exports when the caller closes the official client", async ()
   await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
 });
 
-it.each(["truncate", "close-error", "sql-error", "http-error"])(
+it.each(["truncate", "sql-error", "http-error"])(
   "cleans up owned files on %s",
   async (kind) => {
     const folder = await mkdtemp(join(tmpdir(), "exportlite-turso-"));
     if (kind === "truncate") server.mode.truncate = true;
-    if (kind === "close-error") server.mode.closeError = true;
     if (kind === "sql-error") server.mode.rowError = 1;
     if (kind === "http-error") server.mode.status = 401;
     try {
@@ -538,7 +922,7 @@ it.each(["esm", "cjs"])(
       );
       await remote.result;
     } finally {
-      peer.close();
+      await peer.close();
     }
   },
 );
@@ -625,7 +1009,7 @@ it("runs the public API example against the local protocol server", async () => 
 it.each(["UTF-16le", "UTF-16be"])(
   "exports a %s source through UTF-8 protocol text without probing encoding",
   async (encoding) => {
-    client.close();
+    await client.close();
     await server.close();
     native.close();
     native = new Database(":memory:");
@@ -701,7 +1085,7 @@ it.each(["duplicate-step", "bad-count", "invalid-utf8", "row-after-end"])(
         code: "REMOTE_ERROR",
       });
     } finally {
-      peer.close();
+      await peer.close();
     }
   },
 );

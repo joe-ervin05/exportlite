@@ -2,7 +2,7 @@
   "name": "exportlite",
   "version": "0.0.0-prototype.1",
   "private": true,
-  "description": "SQLite-native streaming JSON exports — experimental prototype",
+  "description": "SQLite-native streaming JSON exports \u2014 experimental prototype",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
