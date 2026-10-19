@@ -1,0 +1,17 @@
+[
+  {
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "compression": "zip",
+    "beforeMs": 0.6953616699999998,
+    "afterMs": 0.6568225000000006,
+    "timeChangePercent": -5.542320156933467,
+    "beforeRssMiB": 225.71875,
+    "afterRssMiB": 227.203125,
+    "rssChangePercent": 0.6576214869167929,
+    "maxBeforeRssMiB": 234.4375,
+    "maxAfterRssMiB": 232.5625,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35"
+  }
+]

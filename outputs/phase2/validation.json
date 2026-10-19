@@ -1,0 +1,14 @@
+{
+  "baselineCommit": "95a1a448ec12741281f1570fbf8d4931dc9ae52e",
+  "candidateCommit": "9a55f2aea53675ae9e6320d5ad86ca7c357dddc0",
+  "tests": 378,
+  "workers": 164,
+  "timedExports": 18036,
+  "hashVerifications": 164,
+  "allComparedOutputHashesMatch": true,
+  "typecheck": "passed",
+  "build": "passed",
+  "lint": "passed",
+  "wideQueryMedianRssChangePercent": 12.87295000987947,
+  "wideQueryMaxRssChangePercent": 0.9920134510298384
+}

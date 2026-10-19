@@ -1,0 +1,27 @@
+{
+  "commit": "95a1a448ec12741281f1570fbf8d4931dc9ae52e",
+  "sourceHashes": {
+    "src/errors.ts": "9f5f2ae17017b08b5fd364ce0f43fc1454ced93acc28ebe7d3d502807c42eed9",
+    "src/columns.ts": "d7911c1f1a2885ad49a549d7babe431dbcf937acde0770816fad41b6dd951e72",
+    "src/types.ts": "f8147e1e800c304c10562ad13f9c7546768b170c5789b9f14f108e34142629cb",
+    "src/turso.ts": "f5518238ccb6a697271fb38da6700621cd51f62f064517beea8c47510045c9af",
+    "src/index.ts": "165cfd8b50950d780c1ce3baa308666b5e257a8172f3d44d6b44dbdcaeaccea0",
+    "src/drizzle.ts": "dac92149afa9cc6551d5c41a8e5dcd9bfaf019b48f77fcac6828f407418bcaf7",
+    "src/database/turso.ts": "f87feda3eec100b8b8cbbafa4c445af9d065a149f1e950cbfc1725c656030c2c",
+    "src/database/adapter.ts": "2698794cf15a8451cec1d5e5b1259dd0044af384abe42e28832f8a32f53885b4",
+    "src/database/better-sqlite3.ts": "f04918f627065fe60d9a07e306023112172b20bb33f734264f6430b81c452a44",
+    "src/planner/json.ts": "281b4c54e66c632fd9f96f9dbdcee3cbb4ca3113cfba76e10c6d6dbf531be258",
+    "src/planner/batches.ts": "5d68ff208aafbf0319777c46e9c7d85c780b4f23d691b5fef92cd73007d8a6cf",
+    "src/planner/columns.ts": "c659aff772ce0eaaac973a6629290ce3524eea4f378a3536562f894dc1d78734",
+    "src/planner/cache.ts": "0ddde54b0625251e257c80ab8eb37f11a60de030f27585c9718287b357ce8eb5",
+    "src/planner/declared.ts": "08d66ab37459e2a030b6f26cb668e161531414d2c37d3a4725d80b159724e2f3",
+    "src/planner/identifiers.ts": "0e299324ee95ddeca97ba7705aea3392dd917b81774a45e81fc52255e01d557f",
+    "src/output/readable.ts": "ba147d73004283d33606450d62a613cc37aa3c53ee48d8ea54d60f11121a0ffc",
+    "src/output/writer.ts": "3154845387d523ea134752d60864d26e81bccae8503d9df17aaad4a3d7fc87cb",
+    "src/output/zip.ts": "17166eed24440dfc6a0ec48a31ec65d5c854eaf47612a48b2010e02970e60cfb",
+    "src/api/export-table.ts": "0d32c48953aeaad5152106779ef35d6358ad4966dbf91f6be8ebda4f33f32113",
+    "src/api/export.ts": "c0aefb40f5008f70c6e1f0831db3774e974db90103596cddf6428e7b705951fc",
+    "src/api/export-turso.ts": "4799f480e4ab5a893002612f11741d774d7de393b9a51dee63b48ecc69008996",
+    "src/api/export-query.ts": "6b5172dc859b94c7394d05a877881038df50fbe3e98c7ef776f1adc8c9b702b8"
+  }
+}

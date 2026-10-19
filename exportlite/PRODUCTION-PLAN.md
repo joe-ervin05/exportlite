@@ -60,13 +60,15 @@ Completed October 18, 2026: the [API and data contracts](docs/contracts.md) defi
 
 ## Stage 2 Simplify delivery and improve diagnostics
 
-- [ ] Extract repeated local delivery setup shared by table, query and Drizzle entry points. Keep the synchronous local producer efficient; retain separate local and remote loops where a common async abstraction would add per-record overhead.
-- [ ] Preserve useful original causes, HTTP status and provider error codes in remote failures. Add focused assertions for those diagnostics and prevent credentials or full request bodies from appearing in errors.
-- [ ] Keep fixed batches, bounded SQL-plan caching, ordering, UTF-8 byte handling, cooperative yields and the tested writer/ZIP lifecycle. Avoid broad refactoring of working cancellation or client-close logic.
-- [ ] For a touched failure path, verify that cleanup does not silently replace the primary failure. Preserve owned-file cleanup and successful completed files when later client shutdown fails.
-- [ ] Leave encoding and bufferSize available, but move them into advanced documentation. Explain that encoding describes the SQLite database and bufferSize is a flush target.
+- [x] Extract repeated local delivery setup shared by table, query and Drizzle entry points. Keep the synchronous local producer efficient; retain separate local and remote loops where a common async abstraction would add per-record overhead.
+- [x] Preserve useful original causes, HTTP status and provider error codes in remote failures. Add focused assertions for those diagnostics and prevent credentials or full request bodies from appearing in errors.
+- [x] Keep fixed batches, bounded SQL-plan caching, ordering, UTF-8 byte handling, cooperative yields and the tested writer/ZIP lifecycle. Avoid broad refactoring of working cancellation or client-close logic.
+- [x] For a touched failure path, verify that cleanup does not silently replace the primary failure. Preserve owned-file cleanup and successful completed files when later client shutdown fails.
+- [x] Leave encoding and bufferSize available, but move them into advanced documentation. Explain that encoding describes the SQLite database and bufferSize is a flush target.
 
 Done when the existing suite, build, public types and lint pass; affected output hashes match; and any repeatable performance change is explained. Run only relevant extra benchmarks for changes in the affected paths.
+
+Completed October 18, 2026: shared local delivery setup, safe remote diagnostics and primary-error preservation are implemented. The build, public types, lint and 378 tests pass. [Paired regression checks](benchmarks/PHASE-2.md) cover 164 fresh workers with matching output hashes. Bulk timings remain within about 3% in the initial matrix; a tiny ZIP timing outlier did not repeat. A wide-query recheck showed +12.9% median peak RSS and +1.0% highest observed RSS; retain that case for stage 4 memory measurements.
 
 ## Stage 3 Validate compatibility and the published artifact
 

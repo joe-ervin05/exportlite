@@ -16,5 +16,6 @@ Compiled snapshots, local databases, dependency installations, generated downloa
 - `zip-direct/`, `zip-framed/`, `zip-batch-sizing/`, `zip-running-average/` and `zip-memory/`: buffering and batch-size experiments, including alternatives that were not adopted.
 - `drizzle-adapter/` and `drizzle-adapter-benchmark/`: schema integration, output validation and measured adapter overhead.
 - `turso-adapter/`, `turso-benchmark/`, `turso-session-reuse/` and `turso-concurrency/`: local HTTP protocol verification, simulated latency, session lifetime and concurrent exports.
+- `phase2/`: paired delivery-refactor regression checks against the phase 1 build, including targeted timing and peak-memory rechecks.
 
 The Turso comparisons use a local SQLite-backed protocol server. They do not establish live Turso Cloud compatibility or production scaling. Compression in Node reduces the download size after data reaches the application; it does not itself compress database-to-application traffic.

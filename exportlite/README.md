@@ -39,11 +39,11 @@ The local checkout builds ESM and CommonJS entry points with declarations for bo
 | `format` | `"jsonl"` (default) or `"json"` |
 | `zip` | `true` streams a ZIP containing one exported file; default `false` |
 | `columns` | Optional column-name list for tables, or an object of typed column selections for tables and queries |
-| `encoding` | Local declared table database encoding: `"utf8"` (default), `"utf16le"` or `"utf16be"`; output remains UTF-8 |
 | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
 | `signal` | Optional `AbortSignal` |
 | `end` | With `output` only: end a caller-provided writable when done; default `false` |
-| `bufferSize` | Output flush target in UTF-8 bytes, 1 to 16 MiB; default 64 KiB |
+
+The existing `encoding` and `bufferSize` options remain available under [advanced options](docs/advanced.md). Encoding describes the SQLite database; buffer size is a flush target.
 
 Batch size is internal. Earlier `batchSize`, `targetBatchBytes` and `batchEstimator` options are absent from the types and rejected at runtime.
 
@@ -79,7 +79,7 @@ return new Response(stream, {
 
 Declared tables use one data SELECT with no schema, schema-version, capability or column-discovery preflight queries, including on the first call. One `integer().primaryKey()` field enables the existing 256-row indexed batching algorithm using that source column. The key must already be unique and non-null and should be indexed; uniqueness is a caller-supplied contract, not verified by a separate scan. This also works with an integer key on a WITHOUT ROWID table and tables shadowing SQLite's rowid aliases. Missing, text, boolean, real or multiple declared key fields use the row-streaming fallback without preflight queries. A null integer key fails instead of producing an empty export.
 
-`encoding` describes the SQLite database encoding, not HTTP or file encoding. It defaults to `"utf8"`, matching Node's default string-to-byte encoding. UTF-8 keeps the native batch-buffer path. For `"utf16le"` or `"utf16be"`, the driver returns text and the writer produces UTF-8 output. If the UTF-8 path receives UTF-16 batch bytes, it rejects them before copying batch payload; no encoding probe or retry is issued. This is a handled failure with the usual partial-file cleanup. JavaScript strings themselves use UTF-16. See [Node's encoding documentation](https://nodejs.org/api/buffer.html#buffers-and-character-encodings).
+For declared local tables in UTF-16 databases, set the matching [database encoding](docs/advanced.md#sqlite-database-encoding). Output remains UTF-8, without an encoding preflight query.
 
 `InferColumns<typeof columns>` also gives the selected row type directly. `ExportRow<typeof stream>` retains the selected type through the export call, including renamed fields. The readable still contains bytes; these types do not make `Response.json()` or a framework client infer the body type automatically. ZIP streams describe the rows inside the archive.
 
@@ -343,9 +343,11 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 368 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 378 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
+
+The [phase 2 regression checks](benchmarks/PHASE-2.md) cover the shared delivery refactor, plain/ZIP output hashes, targeted timing rechecks and the observed wide-query peak-RSS shift.
 
 Build first, then compare the public table/query APIs with JS object streaming and full SQLite aggregation:
 

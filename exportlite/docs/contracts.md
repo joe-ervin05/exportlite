@@ -34,8 +34,8 @@ Both APIs return promises. Omitting `output` resolves to `ExportStream<Row>`, a 
 | `output` | Omit for a Web stream; supply an exclusive new path or caller-owned Node writable |
 | `signal` | Cancels production, queued remote work and output waits; use an application deadline if needed |
 | `end` | Only with a supplied destination; caller writables stay open by default |
-| `encoding` | Declared local table's SQLite encoding; default `"utf8"`; output always UTF-8 |
-| `bufferSize` | UTF-8 flush target, default 64 KiB; not a memory limit |
+
+The existing `encoding` and `bufferSize` options are described in [advanced options](advanced.md). Encoding describes the SQLite database; buffer size is an output flush target.
 
 `ExportResult` contains `rowsExported`, `bytesWritten` and `durationMs`. Bytes count actual output, including ZIP headers/trailer, and do not establish delivery to an HTTP client. For Web streams, duration includes waiting for consumption. ZIP table entries use a sanitized table name; query entries use `export.json` or `export.jsonl`.
 
@@ -66,6 +66,10 @@ return new Response(stream, {
 Here `db` is application-owned and remains open. If the handler creates its own connection, close it in both completion callbacks; also close it if the export call rejects before a stream is returned.
 
 Errors use `ExportLiteError.code`: `INVALID_OPTIONS`, `INVALID_QUERY`, `INVALID_SCHEMA`, `UNSUPPORTED_SQLITE`, `SQLITE_ERROR`, `REMOTE_ERROR`, `OUTPUT_ERROR` or `ABORTED`. Codes distinguish categories, not an exact timing guarantee for every SQLite failure. Invalid stored booleans, malformed JSON-mode text and BLOB values can fail only when read. Never assume a returned readable guarantees that all records are valid.
+
+Remote failures also expose `status` and `providerCode` when available. Transport/response-decoding cause chains retain up to two error categories and bounded diagnostic codes, without arbitrary messages, original stacks or attached request data. HTTP error bodies and free-form provider messages are not copied into errors. Application-provided output and cancellation causes retain their existing behavior.
+
+Execution/output errors take precedence if cleanup also fails; cleanup is still attempted. A partial file can remain if the filesystem prevents its deletion. Failure to close a remote client after a successful export does not invalidate or delete that completed output.
 
 The active statement preserves its snapshot while output pauses. Local exports use the supplied connection and can run inside an already-open native transaction, which must stay open for the complete consumption. Do not return a lazy stream from a synchronous `db.transaction()` callback and consume it after that callback ends. Drizzle transaction-wrapper objects lack the required `$client`; pass the original Drizzle database while its native transaction remains open. Remote exports use a separate session and **cannot join a caller's transaction**.
 
