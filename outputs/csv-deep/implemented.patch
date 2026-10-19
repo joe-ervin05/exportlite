@@ -1,0 +1,168 @@
+diff --git a/exportlite/src/planner/columns.ts b/exportlite/src/planner/columns.ts
+index f2907c9..d2f21fa 100644
+--- a/exportlite/src/planner/columns.ts
++++ b/exportlite/src/planner/columns.ts
+@@ -48,6 +48,11 @@ export function selectedObject(
+   reference: (field: SelectedField, index: number) => string,
+   format: ExportFormat = "json",
+ ): string {
++  if (format === "csv")
++    return csvRecord(
++      fields.map((field, index) => reference(field, index)),
++      fields,
++    );
+   const values = fields.map((field, index) => {
+     const value = reference(field, index);
+     // Keep booleans native JSON. Reject values outside the declared SQLite 0/1
+@@ -60,7 +65,6 @@ export function selectedObject(
+           : value;
+     return jsonValue;
+   });
+-  if (format === "csv") return csvRecord(values);
+   const pairs = fields.map(
+     (field, index) => `${literal(field.key)}, ${values[index]}`,
+   );
+diff --git a/exportlite/src/planner/csv.ts b/exportlite/src/planner/csv.ts
+index f94463e..550c4f9 100644
+--- a/exportlite/src/planner/csv.ts
++++ b/exportlite/src/planner/csv.ts
+@@ -1,15 +1,30 @@
++import type { SelectedField } from "./columns.js";
++
+ /** Text is always quoted: one replacement pass, including embedded CR/LF. */
+ export function csvHeader(columns: readonly string[]): string {
+   return `${columns.map((name) => `"${name.replaceAll('"', '""')}"`).join(",")}\r\n`;
+ }
+ 
+ /** SQLite constructs records; values and whole exports never become JS objects. */
+-export function csvRecord(values: readonly string[]): string {
++export function csvRecord(
++  values: readonly string[],
++  fields?: readonly SelectedField[],
++): string {
+   const cells = values
+-    .map(
+-      (value) =>
+-        `CASE typeof(${value}) WHEN 'null' THEN '' WHEN 'blob' THEN json_quote(${value}) WHEN 'text' THEN '"' || replace(${value}, '"', '""') || '"' ELSE CAST(${value} AS TEXT) END`,
+-    )
++    .map((value, index) => {
++      const field = fields?.[index];
++      if (field?.kind === "boolean")
++        return `CASE ${value} WHEN 0 THEN '"false"' WHEN 1 THEN '"true"' ELSE CASE WHEN ${value} IS NULL THEN '' ELSE json('ExportLite: expected boolean 0 or 1') END END`;
++      if (field?.kind === "json")
++        return `CASE WHEN ${value} IS NULL THEN '' ELSE '"' || replace(json(${value}), '"', '""') || '"' END`;
++      // Declarations affect branch order only. SQLite's actual storage type
++      // still controls quoting, numeric spelling and BLOB rejection.
++      const numeric =
++        field?.dataType === "integer" || field?.dataType === "real"
++          ? ` WHEN '${field.dataType}' THEN CAST(${value} AS TEXT)`
++          : "";
++      return `CASE typeof(${value}) WHEN 'null' THEN ''${numeric} WHEN 'text' THEN '"' || replace(${value}, '"', '""') || '"' WHEN 'blob' THEN json_quote(${value}) ELSE CAST(${value} AS TEXT) END`;
++    })
+     .join(", ");
+   return `concat_ws(',', ${cells})`;
+ }
+diff --git a/exportlite/tests/csv.test.ts b/exportlite/tests/csv.test.ts
+index a7df20e..efcc247 100644
+--- a/exportlite/tests/csv.test.ts
++++ b/exportlite/tests/csv.test.ts
+@@ -22,6 +22,7 @@ import {
+   exportQuery,
+   exportTable,
+   integer,
++  real,
+   text,
+ } from "../src/index.js";
+ import * as remote from "../src/turso.js";
+@@ -610,3 +611,91 @@ it("keeps one empty CSV cell per NULL row across batch boundaries", async () =>
+   expect(parse(content, { columns: true })).toHaveLength(257);
+   expect((await stream.result).rowsExported).toBe(257);
+ });
++
++it.each([text, integer, real])(
++  "uses storage types rather than declaration hints for CSV cells (%#)",
++  async (declare) => {
++    db.defaultSafeIntegers(false);
++    db.exec(
++      "CREATE TABLE scalars(id INTEGER PRIMARY KEY,value); INSERT INTO scalars VALUES(1,9007199254740993),(2,9223372036854775807),(3,-9223372036854775808),(4,1.0),(5,1e100),(6,'1.0'),(7,NULL),(8,''),(9,9e999),(10,-9e999)",
++    );
++    const expected =
++      '"id","value"\r\n1,9007199254740993\r\n2,9223372036854775807\r\n3,-9223372036854775808\r\n4,1.0\r\n5,1.0e+100\r\n6,"1.0"\r\n7,\r\n8,""\r\n9,Inf\r\n10,-Inf\r\n';
++    for (const zip of [false, true])
++      for (const query of [false, true]) {
++        const options = {
++          format: "csv" as const,
++          zip,
++          columns: { id: integer().primaryKey(), value: declare() },
++        };
++        const stream = query
++          ? await exportQuery(db, {
++              ...options,
++              sql: "SELECT * FROM scalars ORDER BY id",
++            })
++          : await exportTable(db, "scalars", options);
++        const bytes = Buffer.from(await new Response(stream).arrayBuffer());
++        const content = zip
++          ? await decodeZip(bytes, query ? "export.csv" : "scalars.csv")
++          : bytes.toString("utf8");
++        expect(content).toBe(expected);
++        expect((await stream.result).rowsExported).toBe(10);
++      }
++  },
++);
++
++it("keeps JSON-mode CSV cells canonical for NULL, scalars, JSONB and exact JSON integers", async () => {
++  db.exec(
++    `CREATE TABLE documents(id INTEGER PRIMARY KEY,metadata);
++     INSERT INTO documents VALUES(1,NULL),(2,'null'),(3,'true'),(4,' { "n": 9007199254740993, "a" : [1,2] } '),(5,jsonb('{"ok":"雪"}')),(6,'"a\\u0000b"')`,
++  );
++  const schema = sqliteTable("documents", {
++    id: int().primaryKey(),
++    metadata: str({ mode: "json" }),
++  });
++  const orm = drizzle(db);
++  for (const zip of [false, true])
++    for (const query of [false, true]) {
++      const options = { format: "csv" as const, zip };
++      const stream = query
++        ? await adapter.exportQuery(
++            orm,
++            orm.select().from(schema).orderBy(schema.id),
++            options,
++          )
++        : await adapter.exportTable(orm, schema, options);
++      const bytes = Buffer.from(await new Response(stream).arrayBuffer());
++      const content = zip
++        ? await decodeZip(bytes, query ? "export.csv" : "documents.csv")
++        : bytes.toString("utf8");
++      expect(parse(content, { columns: true })).toEqual([
++        { id: "1", metadata: "" },
++        { id: "2", metadata: "null" },
++        { id: "3", metadata: "true" },
++        { id: "4", metadata: '{"n":9007199254740993,"a":[1,2]}' },
++        { id: "5", metadata: '{"ok":"雪"}' },
++        { id: "6", metadata: '"a\\u0000b"' },
++      ]);
++      expect((await stream.result).rowsExported).toBe(6);
++    }
++});
++
++it.each([false, true])(
++  "cleans owned CSV output after invalid JSON-mode values (zip=%s)",
++  async (zip) => {
++    const schema = sqliteTable("users", {
++      id: int().primaryKey(),
++      note: str({ mode: "json" }),
++    });
++    await expect(
++      adapter.exportTable(drizzle(db), schema, {
++        format: "csv",
++        output: join(directory, "failed.csv"),
++        bufferSize: 1,
++        zip,
++      }),
++    ).rejects.toMatchObject({ code: "SQLITE_ERROR" });
++    expect(await readdir(directory)).toEqual([]);
++    db.prepare("SELECT 1").get();
++  },
++);

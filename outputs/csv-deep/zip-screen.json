@@ -1,0 +1,578 @@
+[
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7744258200000002,
+      0.5865533199999998,
+      0.5899966800000004
+    ],
+    "medianMs": 0.5899966800000004,
+    "peakRssMiB": 105.140625
+  },
+  {
+    "round": 0,
+    "variant": "zip256k",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8136916599999998,
+      0.6146008400000003,
+      0.7016633199999995
+    ],
+    "medianMs": 0.7016633199999995,
+    "peakRssMiB": 103.9375
+  },
+  {
+    "round": 0,
+    "variant": "zip1m",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.76898582,
+      0.6610858199999998,
+      0.6955958199999998
+    ],
+    "medianMs": 0.6955958199999998,
+    "peakRssMiB": 101.28125
+  },
+  {
+    "round": 0,
+    "variant": "zip4m",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.80366332,
+      0.6340183400000001,
+      0.6437433399999998
+    ],
+    "medianMs": 0.6437433399999998,
+    "peakRssMiB": 100.75
+  },
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      50.982521000000006,
+      47.826104000000015,
+      47.47018750000001
+    ],
+    "medianMs": 47.826104000000015,
+    "peakRssMiB": 100.09375
+  },
+  {
+    "round": 0,
+    "variant": "zip256k",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      51.033458499999995,
+      49.363541999999995,
+      50.344104000000016
+    ],
+    "medianMs": 50.344104000000016,
+    "peakRssMiB": 100.640625
+  },
+  {
+    "round": 0,
+    "variant": "zip1m",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      57.816166499999994,
+      57.20583349999998,
+      54.893479499999984
+    ],
+    "medianMs": 57.20583349999998,
+    "peakRssMiB": 102.9375
+  },
+  {
+    "round": 0,
+    "variant": "zip4m",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      69.36818749999999,
+      56.291499999999985,
+      55.83491699999999
+    ],
+    "medianMs": 56.291499999999985,
+    "peakRssMiB": 100.828125
+  },
+  {
+    "round": 0,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      105.78347900000003,
+      105.9796045,
+      109.46093749999994
+    ],
+    "medianMs": 105.9796045,
+    "peakRssMiB": 150.078125
+  },
+  {
+    "round": 0,
+    "variant": "zip256k",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      105.97268750000003,
+      104.06956250000002,
+      106.04358300000001
+    ],
+    "medianMs": 105.97268750000003,
+    "peakRssMiB": 146.25
+  },
+  {
+    "round": 0,
+    "variant": "zip1m",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      106.72889599999999,
+      105.13460400000002,
+      107.27179149999995
+    ],
+    "medianMs": 106.72889599999999,
+    "peakRssMiB": 145.25
+  },
+  {
+    "round": 0,
+    "variant": "zip4m",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      120.869021,
+      114.08720799999998,
+      111.95510400000006
+    ],
+    "medianMs": 114.08720799999998,
+    "peakRssMiB": 157.46875
+  },
+  {
+    "round": 1,
+    "variant": "zip256k",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7997525000000002,
+      0.6205275000000003,
+      0.7965474999999997
+    ],
+    "medianMs": 0.7965474999999997,
+    "peakRssMiB": 104.421875
+  },
+  {
+    "round": 1,
+    "variant": "zip1m",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.8828550000000002,
+      0.6407175000000004,
+      0.7032458399999996
+    ],
+    "medianMs": 0.7032458399999996,
+    "peakRssMiB": 101.15625
+  },
+  {
+    "round": 1,
+    "variant": "zip4m",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.9045316600000001,
+      0.7205391599999998,
+      0.6795541800000001
+    ],
+    "medianMs": 0.7205391599999998,
+    "peakRssMiB": 106.71875
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.86588334,
+      0.6839816599999997,
+      0.6841916600000002
+    ],
+    "medianMs": 0.6841916600000002,
+    "peakRssMiB": 102.28125
+  },
+  {
+    "round": 1,
+    "variant": "zip256k",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      52.9158125,
+      50.023854,
+      49.645646
+    ],
+    "medianMs": 50.023854,
+    "peakRssMiB": 100.765625
+  },
+  {
+    "round": 1,
+    "variant": "zip1m",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      57.447625000000016,
+      56.40572950000001,
+      56.378333
+    ],
+    "medianMs": 56.40572950000001,
+    "peakRssMiB": 99.359375
+  },
+  {
+    "round": 1,
+    "variant": "zip4m",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      59.07043749999998,
+      57.69381250000001,
+      58.81058350000001
+    ],
+    "medianMs": 58.81058350000001,
+    "peakRssMiB": 100.640625
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.968333500000014,
+      47.84383349999999,
+      47.16116649999998
+    ],
+    "medianMs": 47.84383349999999,
+    "peakRssMiB": 100.515625
+  },
+  {
+    "round": 1,
+    "variant": "zip256k",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      106.50589550000004,
+      173.0429375,
+      112.07237499999997
+    ],
+    "medianMs": 112.07237499999997,
+    "peakRssMiB": 152.140625
+  },
+  {
+    "round": 1,
+    "variant": "zip1m",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      125.15445849999998,
+      115.3482295,
+      113.48706250000004
+    ],
+    "medianMs": 115.3482295,
+    "peakRssMiB": 150.875
+  },
+  {
+    "round": 1,
+    "variant": "zip4m",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      115.00200000000001,
+      127.48529149999996,
+      113.30637499999995
+    ],
+    "medianMs": 115.00200000000001,
+    "peakRssMiB": 157.53125
+  },
+  {
+    "round": 1,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      111.51504200000002,
+      107.86639600000001,
+      110.68756250000001
+    ],
+    "medianMs": 110.68756250000001,
+    "peakRssMiB": 147.046875
+  },
+  {
+    "round": 2,
+    "variant": "zip1m",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.9162491600000001,
+      0.6527558400000001,
+      0.6925141600000001
+    ],
+    "medianMs": 0.6925141600000001,
+    "peakRssMiB": 101.71875
+  },
+  {
+    "round": 2,
+    "variant": "zip4m",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.81976082,
+      1.0484175000000002,
+      1.6536200000000003
+    ],
+    "medianMs": 1.0484175000000002,
+    "peakRssMiB": 100.9375
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.9903875,
+      0.7531216799999999,
+      0.6925233399999996
+    ],
+    "medianMs": 0.7531216799999999,
+    "peakRssMiB": 97.984375
+  },
+  {
+    "round": 2,
+    "variant": "zip256k",
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.85503334,
+      0.68042668,
+      1.09023166
+    ],
+    "medianMs": 0.85503334,
+    "peakRssMiB": 101.140625
+  },
+  {
+    "round": 2,
+    "variant": "zip1m",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      65.311125,
+      74.8680415,
+      58.58239599999996
+    ],
+    "medianMs": 65.311125,
+    "peakRssMiB": 102.75
+  },
+  {
+    "round": 2,
+    "variant": "zip4m",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      59.20293749999999,
+      58.30583300000001,
+      57.724770999999976
+    ],
+    "medianMs": 58.30583300000001,
+    "peakRssMiB": 97.84375
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      50.7823545,
+      49.742604,
+      51.031041500000015
+    ],
+    "medianMs": 50.7823545,
+    "peakRssMiB": 95.34375
+  },
+  {
+    "round": 2,
+    "variant": "zip256k",
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      51.98304150000001,
+      50.253646,
+      50.137396000000024
+    ],
+    "medianMs": 50.253646,
+    "peakRssMiB": 100.28125
+  },
+  {
+    "round": 2,
+    "variant": "zip1m",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      109.83658350000002,
+      108.66870849999998,
+      107.83664599999997
+    ],
+    "medianMs": 108.66870849999998,
+    "peakRssMiB": 146.625
+  },
+  {
+    "round": 2,
+    "variant": "zip4m",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      114.22189599999999,
+      114.64239550000002,
+      115.241896
+    ],
+    "medianMs": 114.64239550000002,
+    "peakRssMiB": 149.703125
+  },
+  {
+    "round": 2,
+    "variant": "baseline",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      106.25716649999998,
+      105.32985400000001,
+      110.81772950000004
+    ],
+    "medianMs": 106.25716649999998,
+    "peakRssMiB": 146.109375
+  },
+  {
+    "round": 2,
+    "variant": "zip256k",
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      116.26341650000003,
+      105.51122950000001,
+      108.48031249999997
+    ],
+    "medianMs": 108.48031249999997,
+    "peakRssMiB": 146.84375
+  }
+]

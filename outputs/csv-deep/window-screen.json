@@ -1,0 +1,1258 @@
+[
+  {
+    "fixture": "narrow",
+    "variant": "baseline",
+    "bytes": 2634668,
+    "count": 50000,
+    "sha256": "83ab81ff7d8d8a608712203845e372401d33a8d8052ae28c8d71fddf29e7bb78",
+    "medianMs": 62.63295850000003,
+    "samplesMs": [
+      62.28902049999999,
+      63.299271000000005,
+      62.63295850000003
+    ],
+    "peakRssMiB": 73.34375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 9,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 20,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      }
+    ]
+  },
+  {
+    "fixture": "narrow",
+    "variant": "8",
+    "bytes": 2634668,
+    "count": 50000,
+    "sha256": "83ab81ff7d8d8a608712203845e372401d33a8d8052ae28c8d71fddf29e7bb78",
+    "medianMs": 99.16047950000001,
+    "samplesMs": [
+      99.4979375,
+      99.16047950000001,
+      98.98639600000001
+    ],
+    "peakRssMiB": 75.125,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "narrow",
+    "variant": "32",
+    "bytes": 2634668,
+    "count": 50000,
+    "sha256": "83ab81ff7d8d8a608712203845e372401d33a8d8052ae28c8d71fddf29e7bb78",
+    "medianMs": 105.50983350000001,
+    "samplesMs": [
+      105.53325000000001,
+      105.50983350000001,
+      104.63427050000001
+    ],
+    "peakRssMiB": 82.078125,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "narrow",
+    "variant": "64",
+    "bytes": 2634668,
+    "count": 50000,
+    "sha256": "83ab81ff7d8d8a608712203845e372401d33a8d8052ae28c8d71fddf29e7bb78",
+    "medianMs": 190.55293749999998,
+    "samplesMs": [
+      176.54225000000002,
+      190.55293749999998,
+      191.9731455
+    ],
+    "peakRssMiB": 89.375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "narrow",
+    "variant": "text32",
+    "bytes": 2634668,
+    "count": 50000,
+    "sha256": "83ab81ff7d8d8a608712203845e372401d33a8d8052ae28c8d71fddf29e7bb78",
+    "medianMs": 115.819792,
+    "samplesMs": [
+      110.70374999999996,
+      115.819792,
+      130.24837499999995
+    ],
+    "peakRssMiB": 77.359375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "wide",
+    "variant": "baseline",
+    "bytes": 14619786,
+    "count": 15000,
+    "sha256": "096593eca3941a2ba5857be0b1900546426cdcd665a91248e9f5b0376a5e2b22",
+    "medianMs": 62.40685400000001,
+    "samplesMs": [
+      59.98502099999999,
+      73.60243749999998,
+      62.40685400000001
+    ],
+    "peakRssMiB": 100.09375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 9,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 20,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      }
+    ]
+  },
+  {
+    "fixture": "wide",
+    "variant": "8",
+    "bytes": 14619786,
+    "count": 15000,
+    "sha256": "096593eca3941a2ba5857be0b1900546426cdcd665a91248e9f5b0376a5e2b22",
+    "medianMs": 118.08500000000004,
+    "samplesMs": [
+      118.08500000000004,
+      134.16568750000005,
+      117.7996875
+    ],
+    "peakRssMiB": 136.765625,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "wide",
+    "variant": "32",
+    "bytes": 14619786,
+    "count": 15000,
+    "sha256": "096593eca3941a2ba5857be0b1900546426cdcd665a91248e9f5b0376a5e2b22",
+    "medianMs": 215.53033350000004,
+    "samplesMs": [
+      215.53033350000004,
+      214.69935450000003,
+      260.9834374999999
+    ],
+    "peakRssMiB": 172.34375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "wide",
+    "variant": "64",
+    "bytes": 14619786,
+    "count": 15000,
+    "sha256": "096593eca3941a2ba5857be0b1900546426cdcd665a91248e9f5b0376a5e2b22",
+    "medianMs": 342.34806249999997,
+    "samplesMs": [
+      342.34806249999997,
+      403.2701875,
+      339.77610400000003
+    ],
+    "peakRssMiB": 174.375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "wide",
+    "variant": "text32",
+    "bytes": 14619786,
+    "count": 15000,
+    "sha256": "096593eca3941a2ba5857be0b1900546426cdcd665a91248e9f5b0376a5e2b22",
+    "medianMs": 234.67308349999996,
+    "samplesMs": [
+      234.67308349999996,
+      232.62535449999996,
+      278.61729149999996
+    ],
+    "peakRssMiB": 110.578125,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "quote-heavy",
+    "variant": "baseline",
+    "bytes": 15903589,
+    "count": 15000,
+    "sha256": "747660815523638a2f02a6738469225786a46cec7c494dd608a43f8cb72afb33",
+    "medianMs": 97.68237499999998,
+    "samplesMs": [
+      104.35870799999998,
+      97.68237499999998,
+      93.16033299999998
+    ],
+    "peakRssMiB": 95.953125,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 9,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 20,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      }
+    ]
+  },
+  {
+    "fixture": "quote-heavy",
+    "variant": "8",
+    "bytes": 15903589,
+    "count": 15000,
+    "sha256": "747660815523638a2f02a6738469225786a46cec7c494dd608a43f8cb72afb33",
+    "medianMs": 111.73695800000002,
+    "samplesMs": [
+      114.39589599999996,
+      111.73695800000002,
+      111.10679149999999
+    ],
+    "peakRssMiB": 176.125,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "quote-heavy",
+    "variant": "32",
+    "bytes": 15903589,
+    "count": 15000,
+    "sha256": "747660815523638a2f02a6738469225786a46cec7c494dd608a43f8cb72afb33",
+    "medianMs": 212.26860399999998,
+    "samplesMs": [
+      217.8842085,
+      212.26860399999998,
+      211.87352049999993
+    ],
+    "peakRssMiB": 192.0625,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "quote-heavy",
+    "variant": "64",
+    "bytes": 15903589,
+    "count": 15000,
+    "sha256": "747660815523638a2f02a6738469225786a46cec7c494dd608a43f8cb72afb33",
+    "medianMs": 345.874271,
+    "samplesMs": [
+      345.874271,
+      347.117875,
+      344.93768750000004
+    ],
+    "peakRssMiB": 175.4375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "quote-heavy",
+    "variant": "text32",
+    "bytes": 15903589,
+    "count": 15000,
+    "sha256": "747660815523638a2f02a6738469225786a46cec7c494dd608a43f8cb72afb33",
+    "medianMs": 250.14860450000003,
+    "samplesMs": [
+      250.14860450000003,
+      248.92812500000002,
+      250.68543750000015
+    ],
+    "peakRssMiB": 109.203125,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "null-heavy",
+    "variant": "baseline",
+    "bytes": 611680,
+    "count": 50000,
+    "sha256": "3a4e7e0447442ae326b78f939f4fa3629237be9c70fb1974205ede9a3cdc2419",
+    "medianMs": 38.357312500000006,
+    "samplesMs": [
+      37.644062500000004,
+      38.357312500000006,
+      38.431749999999994
+    ],
+    "peakRssMiB": 70.859375,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 9,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 20,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      }
+    ]
+  },
+  {
+    "fixture": "null-heavy",
+    "variant": "8",
+    "bytes": 611680,
+    "count": 50000,
+    "sha256": "3a4e7e0447442ae326b78f939f4fa3629237be9c70fb1974205ede9a3cdc2419",
+    "medianMs": 71.21516650000001,
+    "samplesMs": [
+      71.352521,
+      70.77656250000001,
+      71.21516650000001
+    ],
+    "peakRssMiB": 71.1875,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "null-heavy",
+    "variant": "32",
+    "bytes": 611680,
+    "count": 50000,
+    "sha256": "3a4e7e0447442ae326b78f939f4fa3629237be9c70fb1974205ede9a3cdc2419",
+    "medianMs": 71.31022899999999,
+    "samplesMs": [
+      72.5039375,
+      71.2656045,
+      71.31022899999999
+    ],
+    "peakRssMiB": 72.8125,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "null-heavy",
+    "variant": "64",
+    "bytes": 611680,
+    "count": 50000,
+    "sha256": "3a4e7e0447442ae326b78f939f4fa3629237be9c70fb1974205ede9a3cdc2419",
+    "medianMs": 72.13295849999997,
+    "samplesMs": [
+      71.91704199999998,
+      72.20335400000002,
+      72.13295849999997
+    ],
+    "peakRssMiB": 75,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  },
+  {
+    "fixture": "null-heavy",
+    "variant": "text32",
+    "bytes": 611680,
+    "count": 50000,
+    "sha256": "3a4e7e0447442ae326b78f939f4fa3629237be9c70fb1974205ede9a3cdc2419",
+    "medianMs": 70.93477100000001,
+    "samplesMs": [
+      70.6707705,
+      71.076,
+      70.93477100000001
+    ],
+    "peakRssMiB": 72.46875,
+    "queryPlan": [
+      {
+        "id": 2,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CO-ROUTINE __csv_windows"
+      },
+      {
+        "id": 5,
+        "parent": 2,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-6)"
+      },
+      {
+        "id": 9,
+        "parent": 5,
+        "notused": 0,
+        "detail": "CO-ROUTINE (subquery-7)"
+      },
+      {
+        "id": 11,
+        "parent": 9,
+        "notused": 0,
+        "detail": "CO-ROUTINE __exportlite_source"
+      },
+      {
+        "id": 18,
+        "parent": 11,
+        "notused": 216,
+        "detail": "SCAN data"
+      },
+      {
+        "id": 29,
+        "parent": 9,
+        "notused": 216,
+        "detail": "SCAN __exportlite_source"
+      },
+      {
+        "id": 123,
+        "parent": 5,
+        "notused": 216,
+        "detail": "SCAN (subquery-7)"
+      },
+      {
+        "id": 190,
+        "parent": 2,
+        "notused": 216,
+        "detail": "SCAN (subquery-6)"
+      },
+      {
+        "id": 227,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN __csv_windows"
+      }
+    ]
+  }
+]

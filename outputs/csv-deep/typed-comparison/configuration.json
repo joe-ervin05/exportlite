@@ -1,0 +1,113 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "sourceCommit": "e601d1a61121c8a4eb27092f3869808b50aca412",
+  "rounds": 5,
+  "cases": [
+    [
+      "before",
+      "table"
+    ],
+    [
+      "after",
+      "table"
+    ],
+    [
+      "before",
+      "query"
+    ],
+    [
+      "after",
+      "query"
+    ],
+    [
+      "control",
+      "manual-tuned"
+    ]
+  ],
+  "fixtures": [
+    {
+      "name": "narrow-typed",
+      "source": "narrow",
+      "rows": 50000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497",
+      "bytes": 2898750,
+      "csvSha256": "c4aca5daee319d261c89c9eb05e44dcc074485f790c62a91f8779db31281361c",
+      "sqliteVersion": "3.53.4"
+    },
+    {
+      "name": "wide-typed",
+      "source": "wide",
+      "rows": 15000,
+      "columns": [
+        {
+          "key": "id",
+          "type": "integer",
+          "primary": true
+        },
+        {
+          "key": "name",
+          "type": "text"
+        },
+        {
+          "key": "note",
+          "type": "text"
+        },
+        {
+          "key": "active",
+          "type": "integer",
+          "mode": "boolean"
+        }
+      ],
+      "iterations": 2,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149",
+      "bytes": 14699096,
+      "csvSha256": "fcc01dab8d9a42fc7ce3535214480cd2e65b7a2f6f66437e28e4165b2fdf8b4c",
+      "sqliteVersion": "3.53.4"
+    }
+  ],
+  "builds": {
+    "before": {
+      "cache-B_CjOPl_.mjs": "954efa9e712b85aa226a84d0c2ee313b5a84115143e7540c3f16be8bbcc0c3e6",
+      "drizzle.mjs": "8f4da1d07d347ac1c8e3cd0ffe7aebdcea77f3b36bdbf8cd83d605970d063108",
+      "export-turso-BniKjpsc.mjs": "beb286dbef86d4bd8af261c3cbbdc76f724d5fe0c427780000103957972de1fc",
+      "index.mjs": "accc7751b044d7fc3522a9cd9b48c24d83ee41cf20394871ca71be979837ff0a",
+      "turso.mjs": "2eab0bb37adf22d4aa5837f7973d98f04a148b6cf9db7a85e422451cb773a2d5",
+      "zip-B0YRWi0I.mjs": "754c2bad844af7500b8fd7c68011e1fc7c7e9df5125d41a3522323308e917cf5"
+    },
+    "after": {
+      "cache-BBnKhIys.mjs": "833a6a383e7b77711abbad5edc1d8a5731efc4e1d7298fea3a7e72bb007a675b",
+      "drizzle.mjs": "bf31a69237998c76ce1f66d21e38f018d8e22f5bd8c45cf81fe2039759cf141e",
+      "export-turso-D9ZYLNcT.mjs": "5daba04f90718e300d31fb312979e211668f4886323c7f4b139c9d41e3009ec8",
+      "index.mjs": "21afeb704ead0423d28518ee94a417cdfe69fec91e81715590d52a0e51016160",
+      "turso.mjs": "68a784ee7337a6d5c37839518b648c72d237611ee8f101b6dd7892ff652c1bfd",
+      "zip-Lf1sKYUH.mjs": "00238818647441a87108be9f9b7c3b7e4a7431e33f498b7c0b7a60c9a419814b"
+    }
+  },
+  "protocol": "Sequential fresh workers, rotating five-case order. One output verification, two warmups, three timed batches; two exports per bulk batch, 50 tiny. Natural GC, no profiling/forced GC. Counting Node writable; planning, generation, encoding/ZIP and completion included; imports/connection excluded from time. Peak RSS is whole-process including imports/warmups/repeated exports. Fixed 256-row SQL batches, 64 KiB writer and yields every 2048 rows. ZIP level 1, memLevel 9, 256 KiB compression output chunks, unchanged library/CRC. Plain bytes independently match csv-stringify and parse to original fixture values. All before/after and same-name manual archive hashes match. JSON-mode uses Drizzle metadata and manual JS parses/stringifies JSON to match native canonical cells. CPU usage includes process threads.",
+  "control": "Per-column encoders chosen once; only active is a boolean declaration. Physical databases match the original narrow/wide fixture hashes.",
+  "afterCommit": "69bbef4a9bd0b5fd27eac852af18757fd8330372",
+  "runtimePatchSha256": "3a3a9af33bb972873dc232aaa2a2620dafe861170677c4cf0db8f44b2661e0f3"
+}

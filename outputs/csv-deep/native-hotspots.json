@@ -1,0 +1,461 @@
+{
+  "node": "v26.12.0",
+  "protocol": "macOS sample of this benchmark's own long-running baseline serialization worker; 3 seconds, requested 1 ms interval, native symbols resolved. Wait counts include idle background threads; do not divide by all-thread counts or use these as timing benchmarks. V8 --prof was also tried but had too many unaccounted native ticks; native sampling is the usable profile.",
+  "profiles": [
+    {
+      "fixture": "narrow",
+      "exclusiveHotspots": [
+        {
+          "symbol": "__psynch_cvwait",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 8309
+        },
+        {
+          "symbol": "kevent",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 2082
+        },
+        {
+          "symbol": "semaphore_wait_trap",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 2080
+        },
+        {
+          "symbol": "sqlite3VdbeExec",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 514
+        },
+        {
+          "symbol": "_platform_memmove",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 417
+        },
+        {
+          "symbol": "replaceFunc",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 99
+        },
+        {
+          "symbol": "_xzm_xzone_malloc_tiny",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 91
+        },
+        {
+          "symbol": "sqlite3VdbeMemGrow",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 89
+        },
+        {
+          "symbol": "setResultStrOrError",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 60
+        },
+        {
+          "symbol": "sqlite3MemCompare",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 58
+        },
+        {
+          "symbol": "sqlite3BlobCompare",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 54
+        },
+        {
+          "symbol": "sqlite3VdbeMemSetText",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 53
+        },
+        {
+          "symbol": "DYLD-STUB$$memcpy",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 48
+        },
+        {
+          "symbol": "_platform_memcmp",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 43
+        },
+        {
+          "symbol": "_xzm_free",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 39
+        },
+        {
+          "symbol": "concatFuncCore",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 36
+        },
+        {
+          "symbol": "sqlite3VdbeMemMakeWriteable",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 32
+        },
+        {
+          "symbol": "vdbeMemRenderNum",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 30
+        },
+        {
+          "symbol": "sqlite3DbFreeNN",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 28
+        },
+        {
+          "symbol": "_malloc_zone_malloc",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 27
+        },
+        {
+          "symbol": "_platform_strlen",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 22
+        },
+        {
+          "symbol": "vdbeMemAddTerminator",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 21
+        },
+        {
+          "symbol": "<deduplicated_symbol>",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 19
+        },
+        {
+          "symbol": "sqlite3BtreeNext",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 19
+        },
+        {
+          "symbol": "sqlite3VdbeMemCast",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 19
+        },
+        {
+          "symbol": "DYLD-STUB$$memcmp",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 17
+        },
+        {
+          "symbol": "vdbeClrCopy",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 16
+        },
+        {
+          "symbol": "_platform_memset",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 15
+        },
+        {
+          "symbol": "malloc_zone_free",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 15
+        },
+        {
+          "symbol": "sqlite3DbMallocRawNN",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 15
+        },
+        {
+          "symbol": "_xzm_xzone_malloc",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 13
+        },
+        {
+          "symbol": "sqlite3_result_text64",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 13
+        },
+        {
+          "symbol": "groupConcatStep",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 12
+        },
+        {
+          "symbol": "DYLD-STUB$$strlen",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 11
+        },
+        {
+          "symbol": "sqlite3Malloc",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 10
+        },
+        {
+          "symbol": "vdbeMemClear",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 10
+        },
+        {
+          "symbol": "getCellInfo",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 9
+        },
+        {
+          "symbol": "vdbeMemClearExternAndSetNull",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 9
+        },
+        {
+          "symbol": "default_zone_free",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 7
+        },
+        {
+          "symbol": "btreeParseCellPtr",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 6
+        },
+        {
+          "symbol": "sqlite3MemMalloc",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 6
+        },
+        {
+          "symbol": "__bzero",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 5
+        },
+        {
+          "symbol": "_xzm_free_outlined",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 5
+        }
+      ]
+    },
+    {
+      "fixture": "wide",
+      "exclusiveHotspots": [
+        {
+          "symbol": "__psynch_cvwait",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 9445
+        },
+        {
+          "symbol": "kevent",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 2380
+        },
+        {
+          "symbol": "semaphore_wait_trap",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 2380
+        },
+        {
+          "symbol": "replaceFunc",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 800
+        },
+        {
+          "symbol": "_platform_memmove",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 377
+        },
+        {
+          "symbol": "pread",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 341
+        },
+        {
+          "symbol": "sqlite3VdbeExec",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 193
+        },
+        {
+          "symbol": "_xzm_free",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 47
+        },
+        {
+          "symbol": "sqlite3VdbeMemGrow",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 47
+        },
+        {
+          "symbol": "_platform_memcmp",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 35
+        },
+        {
+          "symbol": "v8::internal::ConcurrentMarking::RunMajor(v8::JobDelegate*, v8::base::EnumSet<v8::internal::CodeFlushMode, int>, unsigned int, bool)",
+          "image": "node",
+          "exclusiveSamples": 35
+        },
+        {
+          "symbol": "sqlite3BlobCompare",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 28
+        },
+        {
+          "symbol": "sqlite3MemCompare",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 26
+        },
+        {
+          "symbol": "setResultStrOrError",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 25
+        },
+        {
+          "symbol": "_xzm_xzone_malloc_tiny",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 24
+        },
+        {
+          "symbol": "mach_absolute_time",
+          "image": "libsystem_kernel.dylib",
+          "exclusiveSamples": 20
+        },
+        {
+          "symbol": "xzm_malloc_zone_size",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 20
+        },
+        {
+          "symbol": "sqlite3VdbeMemSetText",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 19
+        },
+        {
+          "symbol": "DYLD-STUB$$memcpy",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 18
+        },
+        {
+          "symbol": "_malloc_zone_realloc",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 17
+        },
+        {
+          "symbol": "sqlite3DbFreeNN",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 17
+        },
+        {
+          "symbol": "concatFuncCore",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 15
+        },
+        {
+          "symbol": "vdbeMemRenderNum",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 15
+        },
+        {
+          "symbol": "malloc_zone_free",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 14
+        },
+        {
+          "symbol": "_malloc_zone_malloc",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 12
+        },
+        {
+          "symbol": "_platform_memset",
+          "image": "libsystem_platform.dylib",
+          "exclusiveSamples": 12
+        },
+        {
+          "symbol": "btreeParseCellPtr",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 12
+        },
+        {
+          "symbol": "sqlite3DbMallocRawNN",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 12
+        },
+        {
+          "symbol": "<deduplicated_symbol>",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 10
+        },
+        {
+          "symbol": "sqlite3BtreeNext",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 10
+        },
+        {
+          "symbol": "sqlite3VdbeMemMakeWriteable",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 10
+        },
+        {
+          "symbol": "v8::internal::MarkingVisitorBase<v8::internal::ConcurrentMarkingVisitor>::ProcessStrongHeapObject<v8::internal::FullHeapObjectSlot>(v8::internal::Tagged<v8::internal::HeapObject>, v8::internal::FullHeapObjectSlot, v8::internal::Tagged<v8::internal::HeapObject>)",
+          "image": "node",
+          "exclusiveSamples": 10
+        },
+        {
+          "symbol": "xzm_realloc",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 10
+        },
+        {
+          "symbol": "_xzm_xzone_malloc",
+          "image": "libsystem_malloc.dylib",
+          "exclusiveSamples": 8
+        },
+        {
+          "symbol": "sha256_block_armv8",
+          "image": "node",
+          "exclusiveSamples": 8
+        },
+        {
+          "symbol": "v8::internal::HeapObject::SizeFromMap(v8::internal::Tagged<v8::internal::Map>) const",
+          "image": "node",
+          "exclusiveSamples": 8
+        },
+        {
+          "symbol": "sqlite3_result_text64",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 7
+        },
+        {
+          "symbol": "DYLD-STUB$$memcmp",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 6
+        },
+        {
+          "symbol": "sqlite3Malloc",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 6
+        },
+        {
+          "symbol": "vdbeMemAddTerminator",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 6
+        },
+        {
+          "symbol": "DYLD-STUB$$malloc_zone_free",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 5
+        },
+        {
+          "symbol": "DYLD-STUB$$strlen",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 5
+        },
+        {
+          "symbol": "getCellInfo",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 5
+        },
+        {
+          "symbol": "groupConcatStep",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 5
+        },
+        {
+          "symbol": "sqlite3BtreeTableMoveto",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 5
+        },
+        {
+          "symbol": "vdbeClrCopy",
+          "image": "darwin-arm64.node",
+          "exclusiveSamples": 5
+        }
+      ]
+    }
+  ]
+}

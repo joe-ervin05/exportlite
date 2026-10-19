@@ -1,0 +1,464 @@
+[
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      62.65656250000001,
+      61.249708,
+      62.745604000000014
+    ],
+    "medianMs": 62.65656250000001,
+    "cpuSamplesMs": [
+      62.12,
+      61.784,
+      62.7125
+    ],
+    "medianCpuMs": 62.12,
+    "peakRssMiB": 79.328125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      71.92125000000001,
+      71.159333,
+      71.55204149999997
+    ],
+    "medianMs": 71.55204149999997,
+    "cpuSamplesMs": [
+      72.4685,
+      73.3975,
+      71.6115
+    ],
+    "medianCpuMs": 72.4685,
+    "peakRssMiB": 88.609375
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "narrow",
+    "method": "manual-tuned",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      47.03635399999999,
+      47.58364550000002,
+      48.584333000000015
+    ],
+    "medianMs": 47.58364550000002,
+    "cpuSamplesMs": [
+      60.897,
+      48.2625,
+      48.95
+    ],
+    "medianCpuMs": 48.95,
+    "peakRssMiB": 102.234375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      64.80893750000001,
+      64.20052099999998,
+      62.496125000000006
+    ],
+    "medianMs": 64.20052099999998,
+    "cpuSamplesMs": [
+      65.6615,
+      71.173,
+      62.6935
+    ],
+    "medianCpuMs": 65.6615,
+    "peakRssMiB": 117.796875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      57.432771,
+      58.30908299999999,
+      57.168083499999995
+    ],
+    "medianMs": 57.432771,
+    "cpuSamplesMs": [
+      59.6445,
+      64.5935,
+      57.882
+    ],
+    "medianCpuMs": 59.6445,
+    "peakRssMiB": 112.1875
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "wide",
+    "method": "manual-tuned",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      46.144041499999986,
+      47.61708300000001,
+      48.893208500000014
+    ],
+    "medianMs": 47.61708300000001,
+    "cpuSamplesMs": [
+      54.8685,
+      54.2345,
+      56.232
+    ],
+    "medianCpuMs": 54.8685,
+    "peakRssMiB": 144.5
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "null-heavy",
+    "method": "query",
+    "compression": "none",
+    "bytes": 611709,
+    "sha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+    "samplesMs": [
+      40.557208,
+      40.301417,
+      40.046167
+    ],
+    "medianMs": 40.301417,
+    "cpuSamplesMs": [
+      40.55,
+      40.1955,
+      40.2065
+    ],
+    "medianCpuMs": 40.2065,
+    "peakRssMiB": 76.65625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "null-heavy",
+    "method": "query",
+    "compression": "none",
+    "bytes": 611709,
+    "sha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+    "samplesMs": [
+      46.99772900000001,
+      47.887624999999986,
+      46.53491650000001
+    ],
+    "medianMs": 46.99772900000001,
+    "cpuSamplesMs": [
+      47.7425,
+      49.18,
+      46.4875
+    ],
+    "medianCpuMs": 47.7425,
+    "peakRssMiB": 84.96875
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "null-heavy",
+    "method": "manual-tuned",
+    "compression": "none",
+    "bytes": 611709,
+    "sha256": "b75aebad10a3b0b10ab42d90b0b5f80f09948ff0375a079b01633a3ac8799fe7",
+    "samplesMs": [
+      30.22114599999999,
+      29.21995799999999,
+      29.050416999999996
+    ],
+    "medianMs": 29.21995799999999,
+    "cpuSamplesMs": [
+      42.92,
+      29.161,
+      29.123
+    ],
+    "medianCpuMs": 29.161,
+    "peakRssMiB": 83.953125
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "quote-heavy",
+    "method": "query",
+    "compression": "none",
+    "bytes": 15903618,
+    "sha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+    "samplesMs": [
+      97.7485835,
+      97.16499999999996,
+      95.91820849999999
+    ],
+    "medianMs": 97.16499999999996,
+    "cpuSamplesMs": [
+      98.985,
+      104.4265,
+      96.3475
+    ],
+    "medianCpuMs": 98.985,
+    "peakRssMiB": 109.59375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "quote-heavy",
+    "method": "query",
+    "compression": "none",
+    "bytes": 15903618,
+    "sha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+    "samplesMs": [
+      210.70808349999993,
+      213.22410450000007,
+      213.83872899999994
+    ],
+    "medianMs": 213.22410450000007,
+    "cpuSamplesMs": [
+      213.302,
+      218.8575,
+      213.042
+    ],
+    "medianCpuMs": 213.302,
+    "peakRssMiB": 125.015625
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "quote-heavy",
+    "method": "manual-tuned",
+    "compression": "none",
+    "bytes": 15903618,
+    "sha256": "f1223b0e115c0aba1f95a00e4fcd1624985d056136435411d3db85ba0aa051d1",
+    "samplesMs": [
+      258.6101665,
+      280.67100000000005,
+      238.5567709999999
+    ],
+    "medianMs": 258.6101665,
+    "cpuSamplesMs": [
+      223.6445,
+      246.1625,
+      215.733
+    ],
+    "medianCpuMs": 223.6445,
+    "peakRssMiB": 165.390625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "boolean",
+    "method": "query",
+    "compression": "none",
+    "bytes": 1304409,
+    "sha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+    "samplesMs": [
+      46.383770999999996,
+      45.4029165,
+      40.77472950000001
+    ],
+    "medianMs": 45.4029165,
+    "cpuSamplesMs": [
+      43.13,
+      43.263,
+      40.999
+    ],
+    "medianCpuMs": 43.13,
+    "peakRssMiB": 77.3125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "boolean",
+    "method": "query",
+    "compression": "none",
+    "bytes": 1304409,
+    "sha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+    "samplesMs": [
+      45.79418749999999,
+      44.69608299999999,
+      44.476979
+    ],
+    "medianMs": 44.69608299999999,
+    "cpuSamplesMs": [
+      46.9455,
+      46.6875,
+      45.154
+    ],
+    "medianCpuMs": 46.6875,
+    "peakRssMiB": 83.6875
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "boolean",
+    "method": "manual-tuned",
+    "compression": "none",
+    "bytes": 1304409,
+    "sha256": "00ff0ed47b4eba3593c9779e96e66e56d656a3a80e4d18d347c97cac57b8a512",
+    "samplesMs": [
+      33.421291499999995,
+      31.94012499999998,
+      32.50550000000001
+    ],
+    "medianMs": 32.50550000000001,
+    "cpuSamplesMs": [
+      34.0365,
+      31.9845,
+      32.9115
+    ],
+    "medianCpuMs": 32.9115,
+    "peakRssMiB": 86.1875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "json",
+    "method": "query",
+    "compression": "none",
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      73.71562500000005,
+      72.85649999999998,
+      71.98777099999995
+    ],
+    "medianMs": 72.85649999999998,
+    "cpuSamplesMs": [
+      75.081,
+      79.782,
+      72.497
+    ],
+    "medianCpuMs": 75.081,
+    "peakRssMiB": 215.546875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "json",
+    "method": "query",
+    "compression": "none",
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      126.601271,
+      126.28133350000002,
+      125.31945800000005
+    ],
+    "medianMs": 126.28133350000002,
+    "cpuSamplesMs": [
+      128.7515,
+      132.437,
+      125.993
+    ],
+    "medianCpuMs": 128.7515,
+    "peakRssMiB": 222
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "json",
+    "method": "manual-tuned",
+    "compression": "none",
+    "bytes": 11902550,
+    "sha256": "4e61fa7bceba63cebf17c1924198118e26a95ba359acab0f10b7b815ad246e34",
+    "samplesMs": [
+      167.11620850000003,
+      171.018083,
+      166.13631250000003
+    ],
+    "medianMs": 167.11620850000003,
+    "cpuSamplesMs": [
+      177.436,
+      183.249,
+      171.3445
+    ],
+    "medianCpuMs": 177.436,
+    "peakRssMiB": 161.6875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "many-columns",
+    "method": "query",
+    "compression": "none",
+    "bytes": 9288713,
+    "sha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+    "samplesMs": [
+      116.88929199999998,
+      116.9740205,
+      115.63866650000006
+    ],
+    "medianMs": 116.88929199999998,
+    "cpuSamplesMs": [
+      120.129,
+      123.5115,
+      115.6855
+    ],
+    "medianCpuMs": 120.129,
+    "peakRssMiB": 99.296875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "many-columns",
+    "method": "query",
+    "compression": "none",
+    "bytes": 9288713,
+    "sha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+    "samplesMs": [
+      160.48687500000005,
+      160.5853335,
+      181.15093750000005
+    ],
+    "medianMs": 160.5853335,
+    "cpuSamplesMs": [
+      165.5755,
+      167.2775,
+      165.1265
+    ],
+    "medianCpuMs": 165.5755,
+    "peakRssMiB": 116.109375
+  },
+  {
+    "round": 0,
+    "variant": "control",
+    "fixture": "many-columns",
+    "method": "manual-tuned",
+    "compression": "none",
+    "bytes": 9288713,
+    "sha256": "7e2936853743c09ee02952e6a00c5d5a2e44bbf401a89510dfd76c054440941f",
+    "samplesMs": [
+      188.02885449999997,
+      136.15414549999997,
+      139.74841700000002
+    ],
+    "medianMs": 139.74841700000002,
+    "cpuSamplesMs": [
+      148.337,
+      144.108,
+      149.0585
+    ],
+    "medianCpuMs": 148.337,
+    "peakRssMiB": 177.609375
+  }
+]

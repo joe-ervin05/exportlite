@@ -1,0 +1,22 @@
+Passed packed consumer: bare (runtime and inferred types, ESM/CJS)
+Passed packed consumer: native (runtime and inferred types, ESM/CJS)
+Passed packed consumer: turso (runtime and inferred types, ESM/CJS)
+Passed packed consumer: drizzle-native (runtime and inferred types, ESM/CJS)
+Passed packed consumer: drizzle-turso (runtime and inferred types, ESM/CJS)
+{
+  "node": "v26.12.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "package": "exportlite@0.0.0-prototype.1",
+  "files": 42,
+  "packedBytes": 133517,
+  "sha256": "781eaed607354f9252f31d3850272815318c5567335ca92c81081e47a9ff06cb",
+  "modes": [
+    "bare",
+    "native",
+    "turso",
+    "drizzle-native",
+    "drizzle-turso"
+  ],
+  "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+}

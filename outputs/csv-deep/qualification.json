@@ -1,0 +1,52 @@
+{
+  "node": "v26.12.0",
+  "buildNode": "v24.19.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "testsPassed": 414,
+  "testFiles": 11,
+  "typecheck": "passed",
+  "lint": "passed after removing an extra blank line",
+  "build": "passed",
+  "publicDeclarationsByteIdentical": [
+    "adapter-DfuRNeZV.d.cts",
+    "adapter-DfuRNeZV.d.mts",
+    "drizzle.d.cts",
+    "drizzle.d.mts",
+    "index.d.cts",
+    "index.d.mts",
+    "turso-DCSfWAWR.d.cts",
+    "turso-DCSfWAWR.d.mts",
+    "turso.d.cts",
+    "turso.d.mts",
+    "types-DVeygu9-.d.cts",
+    "types-DVeygu9-.d.mts"
+  ],
+  "csvEquivalenceCases": 40,
+  "identicalJsonAndJsonlPlans": 40,
+  "oneStatementPerDeclaredExport": true,
+  "plainCsvChunkBoundariesIdentical": true,
+  "timedRuntimeRebuiltByteIdentically": true,
+  "baselinePreparerReproducesTimedBuild": true,
+  "csvCliSmoke": {
+    "workers": 6,
+    "fixtures": [
+      "tiny"
+    ],
+    "passed": true,
+    "usedForTimingClaims": false
+  },
+  "packedConsumersPassed": [
+    "bare",
+    "native",
+    "turso",
+    "drizzle-native",
+    "drizzle-turso"
+  ],
+  "packageSha256": "781eaed607354f9252f31d3850272815318c5567335ca92c81081e47a9ff06cb",
+  "runtimeAndTypesEsmAndCommonJS": true,
+  "packageArchiveDeletedAfterCheck": true,
+  "implementedPatchSha256": "11b9699426141e680b4d7e17874681c72b132fc61f6c94d82edd3a34f2392c79",
+  "scope": "No public API, dependencies, batch sizes, buffers, compression parameters or output bytes changed. Local reliability and protocol tests pass; live Turso Cloud is not tested. Actual ZIP64 >4 GiB was not rerun because archive implementation is unchanged. Native CRC, JS callbacks/encoders, packed bytes and SQL-window strategies remain isolated experiments.",
+  "implementedCommit": "69bbef4a9bd0b5fd27eac852af18757fd8330372"
+}

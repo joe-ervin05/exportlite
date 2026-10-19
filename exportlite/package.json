@@ -59,6 +59,7 @@
     "check": "biome check .",
     "format": "biome check --write .",
     "bench": "node benchmarks/run.mjs",
+    "bench:csv": "node benchmarks/csv-performance/run.mjs",
     "example": "node examples/basic.mjs"
   },
   "peerDependencies": {
