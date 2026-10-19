@@ -11,6 +11,7 @@ const result: Promise<exportlite.ExportResult> = exportlite.exportTable(
   {
     output,
     format: "jsonl",
+    zip: true,
   },
 );
 export = result;

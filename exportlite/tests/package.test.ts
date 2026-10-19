@@ -1,0 +1,54 @@
+import { createRequire } from "node:module";
+import { Writable } from "node:stream";
+import { crc32 } from "node:zlib";
+import Database from "better-sqlite3";
+import { expect, it } from "vitest";
+import { fromBufferPromise } from "yauzl";
+
+it.each(["esm", "cjs"])(
+  "decodes a ZIP from the built %s entry point",
+  async (format) => {
+    const built: typeof import("../src/index.js") =
+      format === "esm"
+        ? await import("../dist/index.mjs")
+        : createRequire(import.meta.url)("../dist/index.cjs");
+    const db = new Database(":memory:");
+    const chunks: Buffer[] = [];
+    const output = new Writable({
+      write(chunk, _encoding, callback) {
+        chunks.push(Buffer.from(chunk));
+        callback();
+      },
+    });
+    try {
+      const result = await built.exportQuery(db, {
+        sql: "SELECT ? AS name",
+        params: ["雪"],
+        zip: true,
+        format: "json",
+        output,
+        end: true,
+      });
+      const bytes = Buffer.concat(chunks);
+      expect(result.bytesWritten).toBe(bytes.length);
+      expect(output.writableFinished).toBe(true);
+      const archive = await fromBufferPromise(bytes);
+      try {
+        expect(archive.entryCount).toBe(1);
+        for await (const entry of archive.eachEntry()) {
+          expect(entry.fileName).toBe("export.json");
+          const parts: Buffer[] = [];
+          for await (const chunk of await archive.openReadStreamPromise(entry))
+            parts.push(chunk);
+          const text = Buffer.concat(parts);
+          expect(crc32(text)).toBe(entry.crc32);
+          expect(JSON.parse(text.toString("utf8"))).toEqual([{ name: "雪" }]);
+        }
+      } finally {
+        archive.close();
+      }
+    } finally {
+      db.close();
+    }
+  },
+);

@@ -47,6 +47,8 @@ export function validateOptions(options: ExportOptions): void {
   }
   if (options.end !== undefined && typeof options.end !== "boolean")
     throw new ExportLiteError("INVALID_OPTIONS", "end must be a boolean.");
+  if (options.zip !== undefined && typeof options.zip !== "boolean")
+    throw new ExportLiteError("INVALID_OPTIONS", "zip must be a boolean.");
 }
 
 export function checkAborted(signal?: AbortSignal): void {
@@ -155,6 +157,17 @@ export class OutputWriter {
     const bytes = this.buffered;
     this.parts = [];
     this.buffered = 0;
+    await this.send(text, bytes);
+  }
+
+  /** Used by the archive adapter; binary bytes must never pass through UTF-8. */
+  async writeBytes(chunk: Buffer): Promise<void> {
+    this.check();
+    await this.send(chunk, chunk.length);
+  }
+
+  private async send(text: string | Buffer, bytes: number): Promise<void> {
+    this.check();
     await new Promise<void>((resolve, reject) => {
       let callbackDone = false;
       let drained = false;

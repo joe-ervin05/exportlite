@@ -18,11 +18,13 @@ export const tableResult: Promise<ExportResult> = exportTable(
 export const batchedResult: Promise<ExportResult> = exportTable(db, "users", {
   output,
   format: "json",
+  zip: true,
 });
 export const queryResult: Promise<ExportResult> = exportQuery(db, {
   sql: "SELECT ? AS n",
   params: [1n],
   format: "json",
+  zip: true,
   output,
 });
 // @ts-expect-error CSV is deliberately outside the prototype API.
@@ -33,3 +35,6 @@ exportTable(db, "users", { output, batchSize: 256 });
 exportTable(db, "users", { output, targetBatchBytes: 262_144 });
 // @ts-expect-error Percentile tuning is outside the v0 API.
 exportTable(db, "users", { output, batchEstimator: "p95" });
+
+// @ts-expect-error ZIP is a boolean switch.
+exportTable(db, "users", { output, zip: "true" });

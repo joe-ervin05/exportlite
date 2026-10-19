@@ -6,6 +6,7 @@
       "!dist",
       "!node_modules",
       "!benchmarks/results",
+      "!benchmarks/baselines",
       "!examples/output"
     ]
   },

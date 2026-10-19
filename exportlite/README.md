@@ -15,7 +15,7 @@ try {
     format: "json",
     output: "users.json",
   });
-  console.log(stats); // rowsExported, bytesWritten (UTF-8), durationMs
+  console.log(stats); // rowsExported, bytesWritten, durationMs
 
   await exportQuery(db, {
     sql: "SELECT id, name FROM users WHERE active = ? ORDER BY id DESC",
@@ -27,7 +27,7 @@ try {
 }
 ```
 
-The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (CommonJS), with declarations for both formats. It has no runtime package imports; the caller supplies `better-sqlite3` as a peer dependency. Nothing has been published to npm.
+The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (CommonJS), with declarations for both formats. It uses `zip-stream` for ZIP output; the caller supplies `better-sqlite3` as a peer dependency. Nothing has been published to npm.
 
 ## Small API
 
@@ -35,6 +35,7 @@ The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (Common
 | --- | --- |
 | `output` | Required: a new file path or a byte-mode Node writable |
 | `format` | `"jsonl"` (default) or `"json"` |
+| `zip` | `true` streams a ZIP containing one exported file; default `false` |
 | `columns` | Optional exact column names for `exportTable()` |
 | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
 | `signal` | Optional `AbortSignal` |
@@ -42,6 +43,27 @@ The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (Common
 | `bufferSize` | Output flush target in UTF-8 bytes, 1 to 16 MiB; default 64 KiB |
 
 Batch size is internal. Earlier `batchSize`, `targetBatchBytes` and `batchEstimator` options are absent from the types and rejected at runtime.
+
+## ZIP downloads
+
+```ts
+await exportTable(db, "users", {
+  format: "json",
+  zip: true,
+  output: "users.zip",
+});
+// The ZIP contains users.json.
+```
+
+ZIP bytes flow directly to the destination as the query runs. For an HTTP download, pass the response as `output`, set `end: true`, and set `Content-Type: application/zip` and `Content-Disposition: attachment; filename="users.zip"` in the application. Do not set `Content-Encoding: gzip` for a ZIP download. No complete export or archive is collected in memory.
+
+The entry name is the table name with a `.json` or `.jsonl` extension; query exports use `export.json` or `export.jsonl`. Table names are sanitized to a single filename, limited to 80 characters before the extension, with path characters and Windows device names handled. ZIP metadata uses a fixed neutral timestamp. The download filename is still chosen by the output path or HTTP headers.
+
+Internally, ZIP uses one continuous DEFLATE stream, compression level **1**, a **256 KiB zlib output buffer**, and ZIP64 support. These settings prioritize export speed and keep the API small. `bufferSize` still controls the uncompressed UTF-8 flush target; it does not configure compression or cap memory. The archive adds bounded stream buffers and checksum work. Empty exports still produce a valid archive containing `[]` or an empty JSONL file.
+
+`bytesWritten` counts the complete ZIP file, including its headers, checksum descriptors and directory. Completion waits for the directory and last destination write, plus stream finalization when `end: true` is requested. Backpressure, cancellation, output ownership and partial-file cleanup follow the same rules as plain exports. A cancelled or failed archive is incomplete; caller streams can already contain ZIP bytes. Files created by the package are removed on handled failure.
+
+Run `node examples/zip.mjs` for a working ZIP export. The [actual ZIP benchmarks](benchmarks/ZIP.md) compare the public option with JS object streaming using the same ZIP writer and settings.
 
 ## Fixed batching and streaming fallbacks
 
@@ -96,7 +118,7 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 79 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 122 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 
@@ -108,6 +130,14 @@ pnpm bench --rows=100000 --width=1024 --repeats=3 --warmups=1 --methods=exportli
 node benchmarks/report.mjs
 ```
 
-[Measured results and limitations](benchmarks/REPORT.md). Benchmark tools and results are not shipped in the npm payload. CSV, relationship nesting, extra drivers and additional sizing controls are outside v0.
+[Measured results and limitations](benchmarks/REPORT.md).
+
+The earlier [streaming gzip comparison](benchmarks/COMPRESSION.md) measures ExportLite and JS object streaming with no compression, gzip level 1 and default gzip, including total file-completion time, encoded size and peak memory. Gzip lives entirely in that benchmark harness and uses Node's built-in `createGzip()`. Reproduction commands and raw runs are linked in that report.
+
+The [varied-data comparison](benchmarks/VARIED-COMPRESSION.md) repeats those runs with seeded synthetic business records: distinct references, international names, variable-length support notes, NULLs and occasional longer notes. It includes measured note-size distributions, distinct-value counts and sample records. The earlier repetitive fixtures remain available as a separate comparison.
+
+The [compression-buffer investigation](benchmarks/GZIP-INVESTIGATION.md) tests why large-record compression can hide ExportLite's speed advantage. Using `createGzip({ level: 1, chunkSize: 256 * 1024 })` improved the tested streaming pipeline without changing the export engine or compression ratio. This is the compressor's output-buffer size, separate from `bufferSize` and the stream's queue threshold. The report includes paired comparisons, rejected alternatives and limitations.
+
+Benchmark tools and results are not shipped in the npm payload. CSV, relationship nesting, extra drivers and additional sizing controls are outside v0.
 
 MIT licensed.

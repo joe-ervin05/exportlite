@@ -46,9 +46,15 @@
     "@biomejs/biome": "2.5.15",
     "@types/better-sqlite3": "9.6.0",
     "@types/node": "22.20.5",
+    "@types/yauzl": "3.4.0",
+    "@types/zip-stream": "7.0.0",
     "better-sqlite3": "13.0.3",
     "tsdown": "0.23.1",
     "typescript": "7.0.2",
-    "vitest": "5.0.5"
+    "vitest": "5.0.5",
+    "yauzl": "3.4.0"
+  },
+  "dependencies": {
+    "zip-stream": "7.0.5"
   }
 }

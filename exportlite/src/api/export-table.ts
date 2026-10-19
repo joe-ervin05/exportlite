@@ -20,5 +20,5 @@ export async function exportTable(
     options.columns,
     options.format ?? "jsonl",
   );
-  return streamExport(statement, [], options, started, batched);
+  return streamExport(statement, [], options, started, batched, table);
 }

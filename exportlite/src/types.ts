@@ -8,6 +8,8 @@ export type QueryParameters =
 export interface ExportOptions {
   /** JSONL by default. */
   format?: "json" | "jsonl";
+  /** Stream one JSON/JSONL file in a ZIP archive. Default: false. */
+  zip?: boolean;
   /** Paths must not already exist. Caller streams remain open by default. */
   output: string | Writable;
   /** End a caller-provided stream after exporting. Default: false. */
@@ -30,7 +32,7 @@ export interface QueryExportOptions extends ExportOptions {
 
 export interface ExportResult {
   rowsExported: number;
-  /** UTF-8 bytes accepted and flushed by the destination writable. */
+  /** Actual destination bytes, including the complete archive when zip is true. */
   bytesWritten: number;
   durationMs: number;
 }

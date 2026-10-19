@@ -2,6 +2,7 @@ import { setImmediate } from "node:timers/promises";
 import type { ReadStatement } from "../database/adapter.js";
 import { jsonBatches, jsonRows } from "../database/better-sqlite3.js";
 import { OutputWriter } from "../output/writer.js";
+import { ZipOutput } from "../output/zip.js";
 import type { ExportOptions, ExportResult } from "../types.js";
 
 export async function streamExport(
@@ -10,8 +11,11 @@ export async function streamExport(
   options: ExportOptions,
   started: number,
   batched = false,
+  name = "export",
 ): Promise<ExportResult> {
-  const output = await OutputWriter.create(options);
+  const output = options.zip
+    ? await ZipOutput.create(options, name)
+    : await OutputWriter.create(options);
   let rowsExported = 0;
   let sinceYield = 0;
   let success = false;
