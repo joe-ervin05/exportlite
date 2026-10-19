@@ -22,5 +22,5 @@ export interface SQLiteConnection {
 
 export function bindings(params: QueryParameters | undefined): unknown[] {
   if (params === undefined) return [];
-  return Array.isArray(params) ? [...params] : [params];
+  return Array.isArray(params) ? [...params] : [{ ...params }];
 }

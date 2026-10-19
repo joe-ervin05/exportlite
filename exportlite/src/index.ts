@@ -5,8 +5,12 @@ export { type ExportErrorCode, ExportLiteError } from "./errors.js";
 export type {
   ExportOptions,
   ExportResult,
+  ExportStream,
   QueryExportOptions,
   QueryParameters,
+  QueryStreamOptions,
   SqlValue,
+  StreamExportOptions,
   TableExportOptions,
+  TableStreamOptions,
 } from "./types.js";

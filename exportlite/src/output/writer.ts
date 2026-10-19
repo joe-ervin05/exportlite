@@ -2,9 +2,11 @@ import { open, unlink } from "node:fs/promises";
 import { finished as onFinished, type Writable } from "node:stream";
 import { finished } from "node:stream/promises";
 import { ExportLiteError } from "../errors.js";
-import type { ExportOptions } from "../types.js";
+import type { ExportOptions, StreamExportOptions } from "../types.js";
 
-export function validateOptions(options: ExportOptions): void {
+export function validateOptions(
+  options: ExportOptions | StreamExportOptions,
+): void {
   for (const key of ["batchSize", "targetBatchBytes", "batchEstimator"]) {
     if (key in options && Reflect.get(options, key) !== undefined)
       throw new ExportLiteError(
@@ -29,7 +31,13 @@ export function validateOptions(options: ExportOptions): void {
       "bufferSize must be an integer from 1 to 16777216 bytes.",
     );
   }
-  if (typeof options.output === "string") {
+  if (options.output === undefined) {
+    if (options.end !== undefined)
+      throw new ExportLiteError(
+        "INVALID_OPTIONS",
+        "end is only available when an output destination is provided.",
+      );
+  } else if (typeof options.output === "string") {
     if (!options.output || options.output.includes("\0"))
       throw new ExportLiteError(
         "INVALID_OPTIONS",

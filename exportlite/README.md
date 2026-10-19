@@ -1,6 +1,6 @@
 # ExportLite — v0
 
-Export SQLite tables and read-only queries to JSON or JSONL through an existing `better-sqlite3` connection. SQLite constructs the JSON; JavaScript writes the strings without parsing them or constructing row objects. This is a local, private prototype.
+Export SQLite tables and read-only queries to JSON or JSONL through an existing `better-sqlite3` connection. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes the strings without parsing them or constructing row objects. This is a local, private prototype.
 
 ## Usage
 
@@ -33,16 +33,74 @@ The local checkout builds to `dist/index.mjs` (ESM) and `dist/index.cjs` (Common
 
 | Option | Meaning |
 | --- | --- |
-| `output` | Required: a new file path or a byte-mode Node writable |
+| `output` | Optional new file path or byte-mode Node writable; omit to receive a Web `ExportStream` |
 | `format` | `"jsonl"` (default) or `"json"` |
 | `zip` | `true` streams a ZIP containing one exported file; default `false` |
 | `columns` | Optional exact column names for `exportTable()` |
 | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
 | `signal` | Optional `AbortSignal` |
-| `end` | End a caller-provided writable when done; default `false` |
+| `end` | With `output` only: end a caller-provided writable when done; default `false` |
 | `bufferSize` | Output flush target in UTF-8 bytes, 1 to 16 MiB; default 64 KiB |
 
 Batch size is internal. Earlier `batchSize`, `targetBatchBytes` and `batchEstimator` options are absent from the types and rejected at runtime.
+
+TypeScript infers the return type from whether `output` is present. `TableStreamOptions` and `QueryStreamOptions` describe readable calls; the existing destination option types retain a required `output`.
+
+## Readable streams and API responses
+
+Omitting `output` returns a `Promise<ExportStream>`. The resolved value is a Web `ReadableStream<Uint8Array>` that works directly as a `Response` body, with `.result` for completion statistics. It supports plain JSON/JSONL and `zip: true` with the same options as destination exports. There is no `toWeb()` helper.
+
+```js
+// In an API handler with an open db connection:
+export async function GET(request) {
+  const stream = await exportTable(db, "users", {
+    columns: ["id", "name", "email"],
+    format: "json",
+    zip: true,
+    signal: request.signal,
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "application/zip",
+      "Content-Disposition": 'attachment; filename="users.zip"',
+    },
+  });
+}
+```
+
+Query exports can return a readable in the same way:
+
+```js
+const stream = await exportQuery(db, {
+  sql: "SELECT id, name FROM users WHERE active = @active ORDER BY id",
+  params: { active: 1 },
+  format: "json",
+});
+
+return new Response(stream, {
+  headers: { "Content-Type": "application/json" },
+});
+```
+
+For Node HTTP responses or files, the existing `output` option still works:
+
+```js
+const stats = await exportTable(db, "users", {
+  output: res, // JSONL by default
+  end: true,
+});
+
+await exportTable(db, "users", { output: "users.jsonl" });
+```
+
+Options, schema and SQL are validated before the readable is returned. The export data statement starts when reading begins, and backpressure pauses further rows/batches. The read snapshot starts with consumption. Cancelling the stream or its reader, stopping async iteration, or aborting `signal` cancels production and releases the statement and owned ZIP stages. `await stream.cancel()` waits for that cleanup. For a Node pipeline, use Node's built-in `Readable.fromWeb(stream)` adapter; it forwards failures and cancellation between the two stream interfaces. The caller retains ownership of the SQLite connection.
+
+Keep that connection open until `stream.result` settles. Read or pipe the stream before awaiting `.result`; the promise waits for consumption and export cleanup. Statistics count the exported bytes, including ZIP headers/trailer when enabled, and do not mean an HTTP client has received them. For readables, `durationMs` includes elapsed time waiting for consumption. If using a connection per request, close it from the completion callbacks rather than immediately after returning the `Response`.
+
+Row-time SQLite and ZIP failures reach both the readable and `.result`. Cancel unused streams with `await stream.cancel()`; when a reader holds the stream's lock, use `await reader.cancel()` instead. The package observes its internal completion rejection so applications that only consume the body do not acquire an unhandled promise rejection. `end` applies only to a provided destination and is rejected when `output` is omitted. Run `node examples/readable.mjs` for a ZIP response consumed through a file pipeline.
+
+Frameworks that accept Web `Response` objects can use these examples directly, provided the route runs in Node with access to the SQLite connection. For tRPC applications, use a normal authenticated download route for the export bytes; a typed tRPC procedure can return its URL and filename. tRPC's [`httpBatchStreamLink`](https://trpc.io/docs/client/links/httpBatchStreamLink) streams values through its own JSON protocol rather than serving the raw ZIP or JSON download. ExportLite returns bytes and does not infer TypeScript row types from SQLite schemas or SQL strings.
 
 ## ZIP downloads
 
@@ -64,6 +122,8 @@ Internally, ZIP uses one continuous DEFLATE stream, compression level **1**, a *
 `bytesWritten` counts the complete ZIP file, including its headers, checksum descriptors and directory. Completion waits for the directory and last destination write, plus stream finalization when `end: true` is requested. Backpressure, cancellation, output ownership and partial-file cleanup follow the same rules as plain exports. A cancelled or failed archive is incomplete; caller streams can already contain ZIP bytes. Files created by the package are removed on handled failure.
 
 Run `node examples/zip.mjs` for a working ZIP export. The [actual ZIP benchmarks](benchmarks/ZIP.md) compare the public option with JS object streaming using the same ZIP writer and settings.
+
+The [naive JavaScript comparison](benchmarks/NAIVE.md) adds `all()` followed by `JSON.stringify()` of the complete row array, with plain JSON and ZIP output. It measures total time, encoded size and peak memory alongside both streaming implementations on the same varied fixtures.
 
 ## Fixed batching and streaming fallbacks
 
@@ -118,7 +178,7 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 122 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 168 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 

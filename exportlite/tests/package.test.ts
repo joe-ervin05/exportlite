@@ -47,6 +47,30 @@ it.each(["esm", "cjs"])(
       } finally {
         archive.close();
       }
+      const stream = await built.exportQuery(db, {
+        sql: "SELECT ? AS name",
+        params: ["雪"],
+        format: "json",
+      });
+      expect(stream).toBeInstanceOf(ReadableStream);
+      expect("toWeb" in stream).toBe(false);
+      const response = new Response(stream);
+      expect(await response.json()).toEqual([{ name: "雪" }]);
+      expect((await stream.result).rowsExported).toBe(1);
+      const zipped = await built.exportQuery(db, {
+        sql: "SELECT 1 AS id",
+        format: "json",
+        zip: true,
+      });
+      const zippedResponse = new Response(zipped);
+      const zipBytes = Buffer.from(await zippedResponse.arrayBuffer());
+      const zipFile = await fromBufferPromise(zipBytes);
+      try {
+        expect(zipFile.entryCount).toBe(1);
+      } finally {
+        zipFile.close();
+      }
+      expect((await zipped.result).bytesWritten).toBe(zipBytes.length);
     } finally {
       db.close();
     }
