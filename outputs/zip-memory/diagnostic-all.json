@@ -1,0 +1,416 @@
+[
+  {
+    "dataset": "narrow",
+    "method": "exportlite",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 598.9475420000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 547.7518749999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 544.5922910000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 552.08475,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 547.7518749999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 174.453125,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 19535,
+        "nativeBytes": 416868765,
+        "joinedBuffers": 4885,
+        "joinedBytes": 416849235,
+        "encodedBuffers": 0,
+        "encodedBytes": 0,
+        "firstStacks": [
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-memory/diagnose.mjs:74:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/dist/index.mjs:645:108)\n    at async run (file://<workspace>/outputs/zip-memory/diagnose.mjs:190:20)\n    at async file://<workspace>/outputs/zip-memory/diagnose.mjs:227:22",
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-memory/diagnose.mjs:74:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/dist/index.mjs:645:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async run (file://<workspace>/outputs/zip-memory/diagnose.mjs:190:20)\n    at async file://<workspace>/outputs/zip-memory/diagnose.mjs:227:22"
+        ]
+      },
+      "peaks": {
+        "rss": 182894592,
+        "heapUsed": 11441368,
+        "external": 67486430,
+        "arrayBuffers": 64697290
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 73580544,
+          "heapTotal": 11419648,
+          "heapUsed": 7566440,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 182894592,
+          "heapTotal": 15876096,
+          "heapUsed": 8103192,
+          "external": 67239512,
+          "arrayBuffers": 539115
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 182894592,
+          "heapTotal": 15876096,
+          "heapUsed": 7738240,
+          "external": 3328255,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 34,
+        "durationMs": 7.568169116973877
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), fixed 256-row batches"
+  },
+  {
+    "dataset": "narrow",
+    "method": "objects",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 988.3098330000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 929.5162090000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 924.296542,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 920.6737080000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 924.296542,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 133.25,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "joinedBuffers": 0,
+        "joinedBytes": 0,
+        "encodedBuffers": 6360,
+        "encodedBytes": 416849235,
+        "firstStacks": []
+      },
+      "peaks": {
+        "rss": 139689984,
+        "heapUsed": 23015152,
+        "external": 11603818,
+        "arrayBuffers": 8618229
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 73793536,
+          "heapTotal": 11419648,
+          "heapUsed": 7588144,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 139640832,
+          "heapTotal": 39469056,
+          "heapUsed": 13813344,
+          "external": 5771585,
+          "arrayBuffers": 2982445
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 139689984,
+          "heapTotal": 39469056,
+          "heapUsed": 7644984,
+          "external": 5771585,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 309,
+        "durationMs": 33.39292001724243
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid"
+  },
+  {
+    "dataset": "wide",
+    "method": "exportlite",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 760.0414169999999,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 726.1133750000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 713.9806250000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 719.119166,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 719.119166,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 186.015625,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 1955,
+        "nativeBytes": 504604350,
+        "joinedBuffers": 1955,
+        "joinedBytes": 504602395,
+        "encodedBuffers": 0,
+        "encodedBytes": 0,
+        "firstStacks": [
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-memory/diagnose.mjs:74:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/dist/index.mjs:645:108)\n    at async run (file://<workspace>/outputs/zip-memory/diagnose.mjs:190:20)\n    at async file://<workspace>/outputs/zip-memory/diagnose.mjs:227:22",
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-memory/diagnose.mjs:74:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/dist/index.mjs:645:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async run (file://<workspace>/outputs/zip-memory/diagnose.mjs:190:20)\n    at async file://<workspace>/outputs/zip-memory/diagnose.mjs:227:22"
+        ]
+      },
+      "peaks": {
+        "rss": 195002368,
+        "heapUsed": 9062616,
+        "external": 72754151,
+        "arrayBuffers": 69965011
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 73351168,
+          "heapTotal": 11419648,
+          "heapUsed": 7571088,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 194936832,
+          "heapTotal": 12468224,
+          "heapUsed": 7251088,
+          "external": 30157790,
+          "arrayBuffers": 27378816
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 195002368,
+          "heapTotal": 12468224,
+          "heapUsed": 6511992,
+          "external": 30157790,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 33,
+        "durationMs": 25.554542064666748
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), fixed 256-row batches"
+  },
+  {
+    "dataset": "wide",
+    "method": "objects",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 794.5875840000001,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 764.579125,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 755.8093329999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 780.5522499999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 764.579125,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 173.734375,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 0,
+        "nativeBytes": 0,
+        "joinedBuffers": 0,
+        "joinedBytes": 0,
+        "encodedBuffers": 7590,
+        "encodedBytes": 504602400,
+        "firstStacks": []
+      },
+      "peaks": {
+        "rss": 181977088,
+        "heapUsed": 43690176,
+        "external": 10380978,
+        "arrayBuffers": 7262146
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 73662464,
+          "heapTotal": 11419648,
+          "heapUsed": 7575272,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 180224000,
+          "heapTotal": 72089600,
+          "heapUsed": 29802120,
+          "external": 7512744,
+          "arrayBuffers": 4723604
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 179175424,
+          "heapTotal": 66732032,
+          "heapUsed": 7627608,
+          "external": 7512744,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 231,
+        "durationMs": 31.96167278289795
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid"
+  }
+]

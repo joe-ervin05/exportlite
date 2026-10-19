@@ -1,0 +1,423 @@
+--- before/README.md
++++ after/README.md
+@@ -127,7 +127,9 @@
+ 
+ ## Fixed batching and streaming fallbacks
+ 
+-Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those fragments directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. Schema and capability checks still use their small metadata queries.
++Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those fragments directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. SQLite version and JSON capability checks run once after the first successful check on each connection.
++
++Repeated table exports reuse validated column selections and generated SQL, with at most **16 cached plans per connection**. A schema-version check invalidates these plans after schema changes. Each export prepares an independent data statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are always read and generated afresh. Custom queries discover their output columns on every call.
+ 
+ Each range starts with an indexed seek and locates its 256th existing key using a constant `OFFSET 255`. That offset stays fixed for every batch; it does not grow with the export. Bounds remain SQLite integers, and only a short final batch needs a separate count inside the same statement.
+ 
+@@ -167,7 +169,7 @@
+ - BLOBs fail with a descriptive error. Select other columns or use an explicit query with `hex()`/`CAST()`.
+ - Empty JSON is `[]`; empty JSONL is zero bytes. Export failures are `ExportLiteError` instances with a `code` and original cause where available.
+ 
+-SQLite >=3.45.1 with JSON support is checked before exporting. Do not close or mutate the same connection while an export is running. Queries may sort/materialize data within SQLite; long read snapshots can affect writers and WAL growth.
++SQLite >=3.45.1 with JSON support is checked on the first export for each connection; failed checks are retried on later calls. Do not close or mutate the same connection while an export is running. Queries may sort/materialize data within SQLite; long read snapshots can affect writers and WAL growth.
+ 
+ ## Development and validation
+ 
+@@ -182,7 +184,7 @@
+ pnpm example
+ ```
+ 
+-Local checks cover 180 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
++Local checks cover 189 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+ 
+ ## Benchmarks
+ 
+--- before/src/api/export-table.ts
++++ after/src/api/export-table.ts
+@@ -2,7 +2,7 @@
+ import { checkCapabilities } from "../database/better-sqlite3.js";
+ import { createReadableExport } from "../output/readable.js";
+ import { checkAborted, validateOptions } from "../output/writer.js";
+-import { planTable } from "../planner/json.js";
++import { cachedTablePlan } from "../planner/cache.js";
+ import type {
+   ExportResult,
+   ExportStream,
+@@ -35,7 +35,7 @@
+   validateOptions(options);
+   checkAborted(options.signal);
+   checkCapabilities(db);
+-  const { statement, batched } = planTable(
++  const { statement, batched } = cachedTablePlan(
+     db,
+     table,
+     options.columns,
+--- before/src/database/better-sqlite3.ts
++++ after/src/database/better-sqlite3.ts
+@@ -1,5 +1,7 @@
+ import { ExportLiteError, sqliteError } from "../errors.js";
+ import type { ReadStatement, SQLiteConnection } from "./adapter.js";
++
++const capable = new WeakSet<SQLiteConnection>();
+ 
+ export function readStatement(
+   db: SQLiteConnection,
+@@ -25,6 +27,7 @@
+ }
+ 
+ export function checkCapabilities(db: SQLiteConnection): void {
++  if (capable.has(db)) return;
+   try {
+     const version = db.prepare("SELECT sqlite_version()").pluck().get();
+     const parts = String(version).split(".").map(Number);
+@@ -38,6 +41,7 @@
+     const probe = db.prepare("SELECT json_object('ok', 1)").pluck().get();
+     if (probe !== '{"ok":1}')
+       throw new Error("SQLite JSON functions are unavailable");
++    capable.add(db);
+   } catch (cause) {
+     if (cause instanceof ExportLiteError) throw cause;
+     throw new ExportLiteError(
+--- before/src/planner/batches.ts
++++ after/src/planner/batches.ts
+@@ -61,5 +61,5 @@
+     (SELECT count(*) FROM ${table} WHERE ${key} >= ${first}) END
+   FROM "__exportlite_batches"
+   WHERE ${first} IS NOT NULL`;
+-  return readStatement(db, sql);
++  return { statement: readStatement(db, sql), sql };
+ }
+--- before/src/planner/cache.ts
++++ after/src/planner/cache.ts
+@@ -0,0 +1,53 @@
++import type { ReadStatement, SQLiteConnection } from "../database/adapter.js";
++import { readStatement } from "../database/better-sqlite3.js";
++import { sqliteError } from "../errors.js";
++import { identifier } from "./identifiers.js";
++import { planTable } from "./json.js";
++
++type CachedPlan = Pick<ReturnType<typeof planTable>, "sql" | "batched">;
++interface Cache {
++  schema: ReadStatement;
++  version?: string;
++  plans: Map<string, CachedPlan>;
++}
++
++// Bound retained metadata/SQL. Every export gets an independent statement.
++const caches = new WeakMap<SQLiteConnection, Cache>();
++
++export function cachedTablePlan(
++  db: SQLiteConnection,
++  table: string,
++  columns: readonly string[] | undefined,
++  format: "json" | "jsonl",
++): ReturnType<typeof planTable> {
++  identifier(table);
++  try {
++    let cache = caches.get(db);
++    if (!cache) {
++      cache = {
++        schema: db.prepare("PRAGMA main.schema_version").pluck(),
++        plans: new Map(),
++      };
++      caches.set(db, cache);
++    }
++    const version = String(cache.schema.get());
++    if (version !== cache.version) {
++      cache.plans.clear();
++      cache.version = version;
++    }
++    const key = JSON.stringify([table, columns ?? null, format]);
++    const cached = cache.plans.get(key);
++    const plan = cached
++      ? { ...cached, statement: readStatement(db, cached.sql) }
++      : planTable(db, table, columns, format);
++    cache.plans.delete(key);
++    cache.plans.set(key, { sql: plan.sql, batched: plan.batched });
++    if (cache.plans.size > 16) {
++      const oldest = cache.plans.keys().next().value;
++      if (oldest !== undefined) cache.plans.delete(oldest);
++    }
++    return plan;
++  } catch (error) {
++    throw sqliteError(error);
++  }
++}
+--- before/src/planner/json.ts
++++ after/src/planner/json.ts
+@@ -51,15 +51,14 @@
+       columns,
+       format,
+     });
+-    if (batched) return { statement: batched, batched: true };
++    if (batched) return { ...batched, batched: true };
+     const pairs = columns
+       .map((c) => `${literal(c)}, ${identifier(c)}`)
+       .join(", ");
++    const sql = `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`;
+     return {
+-      statement: readStatement(
+-        db,
+-        `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`,
+-      ),
++      statement: readStatement(db, sql),
++      sql,
+       batched: false,
+     };
+   } catch (error) {
+--- before/tests/cache.test.ts
++++ after/tests/cache.test.ts
+@@ -0,0 +1,256 @@
++import { mkdtemp, rm } from "node:fs/promises";
++import { tmpdir } from "node:os";
++import { join } from "node:path";
++import { Writable } from "node:stream";
++import Database from "better-sqlite3";
++import { expect, it } from "vitest";
++import { exportQuery, exportTable } from "../src/index.js";
++
++async function table(
++  db: Parameters<typeof exportTable>[0],
++  name = "data",
++  columns?: readonly string[],
++) {
++  const options = columns
++    ? { format: "json" as const, columns }
++    : { format: "json" as const };
++  const stream = await exportTable(db, name, options);
++  const rows = await new Response(stream).json();
++  await stream.result;
++  return rows;
++}
++
++it("reuses a table plan but still sees data changes and distinct column projections", async () => {
++  const db = new Database(":memory:");
++  const prepared: string[] = [];
++  const connection = {
++    prepare(sql: string) {
++      prepared.push(sql);
++      return db.prepare(sql);
++    },
++  };
++  try {
++    db.exec(
++      "CREATE TABLE data(id INTEGER PRIMARY KEY,name TEXT); INSERT INTO data VALUES(1,'first')",
++    );
++    expect(await table(connection)).toEqual([{ id: 1, name: "first" }]);
++    db.exec("UPDATE data SET name='changed'; INSERT INTO data VALUES(2,'new')");
++    expect(await table(connection)).toEqual([
++      { id: 1, name: "changed" },
++      { id: 2, name: "new" },
++    ]);
++    expect(
++      prepared.filter((sql) =>
++        sql.startsWith("SELECT name FROM main.sqlite_schema"),
++      ),
++    ).toHaveLength(1);
++    expect(
++      prepared.filter((sql) => sql === "SELECT sqlite_version()"),
++    ).toHaveLength(1);
++    expect(await table(connection, "data", ["name"])).toEqual([
++      { name: "changed" },
++      { name: "new" },
++    ]);
++    expect(
++      prepared.filter((sql) =>
++        sql.startsWith("SELECT name FROM main.sqlite_schema"),
++      ),
++    ).toHaveLength(2);
++  } finally {
++    db.close();
++  }
++});
++
++it("invalidates table metadata after external schema changes, including switching to a fallback", async () => {
++  const directory = await mkdtemp(join(tmpdir(), "exportlite-cache-schema-"));
++  const writer = new Database(join(directory, "data.db"));
++  writer.pragma("journal_mode=WAL");
++  writer.exec(
++    "CREATE TABLE data(id INTEGER PRIMARY KEY,name TEXT); INSERT INTO data VALUES(1,'first')",
++  );
++  const reader = new Database(join(directory, "data.db"));
++  try {
++    expect(await table(reader)).toEqual([{ id: 1, name: "first" }]);
++    writer.exec("ALTER TABLE data ADD COLUMN active INTEGER DEFAULT 1");
++    expect(await table(reader)).toEqual([{ id: 1, name: "first", active: 1 }]);
++    writer.exec(
++      "DROP TABLE data; CREATE TABLE data(id TEXT PRIMARY KEY,note TEXT) WITHOUT ROWID; INSERT INTO data VALUES('b','new schema')",
++    );
++    expect(await table(reader)).toEqual([{ id: "b", note: "new schema" }]);
++    writer.exec("ALTER TABLE data RENAME TO moved");
++    await expect(table(reader)).rejects.toHaveProperty(
++      "code",
++      "INVALID_SCHEMA",
++    );
++    expect(await table(reader, "moved")).toEqual([
++      { id: "b", note: "new schema" },
++    ]);
++  } finally {
++    reader.close();
++    writer.close();
++    await rm(directory, { recursive: true, force: true });
++  }
++});
++
++it("invalidates plans across rolled-back schema changes and preserves caller transactions", async () => {
++  const db = new Database(":memory:");
++  try {
++    db.exec(
++      "CREATE TABLE data(id INTEGER PRIMARY KEY); INSERT INTO data VALUES(1)",
++    );
++    expect(await table(db)).toEqual([{ id: 1 }]);
++    db.exec("BEGIN; ALTER TABLE data ADD COLUMN note TEXT DEFAULT 'temporary'");
++    expect(await table(db)).toEqual([{ id: 1, note: "temporary" }]);
++    expect(db.inTransaction).toBe(true);
++    db.exec("ROLLBACK");
++    expect(await table(db)).toEqual([{ id: 1 }]);
++  } finally {
++    db.close();
++  }
++});
++
++it("keeps overlapping lazy streams independent and continues after cancellation", async () => {
++  const db = new Database(":memory:");
++  const prepared: string[] = [];
++  const connection = {
++    prepare(sql: string) {
++      prepared.push(sql);
++      return db.prepare(sql);
++    },
++  };
++  try {
++    db.exec("CREATE TABLE data(id INTEGER PRIMARY KEY,note TEXT)");
++    const insert = db.prepare("INSERT INTO data VALUES(?,?)");
++    db.transaction(() => {
++      for (let id = 1; id <= 1024; id++) insert.run(id, "x".repeat(1024));
++    })();
++    const first = await exportTable(connection, "data", { format: "json" });
++    const second = await exportTable(connection, "data", { format: "json" });
++    const reader = first.getReader();
++    try {
++      expect((await reader.read()).done).toBe(false);
++      expect(await new Response(second).json()).toHaveLength(1024);
++      await second.result;
++      await reader.cancel();
++      await expect(first.result).rejects.toHaveProperty("code", "ABORTED");
++      expect(await table(connection)).toHaveLength(1024);
++      expect(
++        prepared.filter((sql) =>
++          sql.startsWith("SELECT name FROM main.sqlite_schema"),
++        ),
++      ).toHaveLength(1);
++      db.exec("DROP TABLE data");
++    } finally {
++      await reader.cancel().catch(() => {});
++    }
++  } finally {
++    db.close();
++  }
++});
++
++it("holds no statement lease for a stream cancelled before consumption", async () => {
++  const db = new Database(":memory:");
++  try {
++    db.exec("CREATE TABLE data(id); INSERT INTO data VALUES(1)");
++    const stream = await exportTable(db, "data", { format: "json" });
++    await stream.cancel();
++    await expect(stream.result).rejects.toHaveProperty("code", "ABORTED");
++    expect(await table(db)).toEqual([{ id: 1 }]);
++  } finally {
++    db.close();
++  }
++});
++
++it("supports another export after an output failure", async () => {
++  const db = new Database(":memory:");
++  try {
++    db.exec("CREATE TABLE data(id); INSERT INTO data VALUES(1)");
++    const output = new Writable({
++      write(_chunk, _encoding, callback) {
++        callback(new Error("disk full"));
++      },
++    });
++    await expect(
++      exportTable(db, "data", { format: "json", output }),
++    ).rejects.toHaveProperty("code", "OUTPUT_ERROR");
++    expect(await table(db)).toEqual([{ id: 1 }]);
++    db.exec("DROP TABLE data");
++  } finally {
++    db.close();
++  }
++});
++
++it("bounds retained plans and rebuilds an evicted plan", async () => {
++  const db = new Database(":memory:");
++  let metadataPrepares = 0;
++  const connection = {
++    prepare(sql: string) {
++      if (sql.startsWith("SELECT name FROM main.sqlite_schema"))
++        metadataPrepares++;
++      return db.prepare(sql);
++    },
++  };
++  try {
++    for (let i = 0; i < 18; i++)
++      db.exec(`CREATE TABLE t${i}(id); INSERT INTO t${i} VALUES(${i})`);
++    for (let i = 0; i < 18; i++)
++      expect(await table(connection, `t${i}`)).toEqual([{ id: i }]);
++    expect(metadataPrepares).toBe(18);
++    expect(await table(connection, "t0")).toEqual([{ id: 0 }]);
++    expect(metadataPrepares).toBe(19);
++  } finally {
++    db.close();
++  }
++});
++
++it("does not cache a failed capability probe or missing table", async () => {
++  const db = new Database(":memory:");
++  let old = true;
++  const connection = {
++    prepare(sql: string) {
++      return db.prepare(
++        old ? sql.replace("sqlite_version()", "'3.44.0'") : sql,
++      );
++    },
++  };
++  try {
++    await expect(table(connection)).rejects.toHaveProperty(
++      "code",
++      "UNSUPPORTED_SQLITE",
++    );
++    old = false;
++    await expect(table(connection)).rejects.toHaveProperty(
++      "code",
++      "INVALID_SCHEMA",
++    );
++    db.exec("CREATE TABLE data(id); INSERT INTO data VALUES(1)");
++    expect(await table(connection)).toEqual([{ id: 1 }]);
++  } finally {
++    db.close();
++  }
++});
++
++it("refreshes custom query column metadata after main and temporary schema changes", async () => {
++  const db = new Database(":memory:");
++  const query = async () => {
++    const stream = await exportQuery(db, {
++      sql: "SELECT * FROM data",
++      format: "json",
++    });
++    const result = await new Response(stream).json();
++    await stream.result;
++    return result;
++  };
++  try {
++    db.exec("CREATE TABLE data(id); INSERT INTO data VALUES(1)");
++    expect(await query()).toEqual([{ id: 1 }]);
++    db.exec("ALTER TABLE data ADD COLUMN name TEXT DEFAULT 'main'");
++    expect(await query()).toEqual([{ id: 1, name: "main" }]);
++    db.exec(
++      "CREATE TEMP TABLE data(note TEXT); INSERT INTO temp.data VALUES('temporary')",
++    );
++    expect(await query()).toEqual([{ note: "temporary" }]);
++  } finally {
++    db.close();
++  }
++});

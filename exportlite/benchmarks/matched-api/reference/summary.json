@@ -1,0 +1,1006 @@
+{
+  "fixture": {
+    "users": 1000000,
+    "posts": 2000000,
+    "comments": 4000000,
+    "fanout": 2,
+    "indexes": [
+      {
+        "name": "comments_post_id",
+        "sql": "CREATE INDEX comments_post_id ON comments(post_id)"
+      },
+      {
+        "name": "posts_user_id",
+        "sql": "CREATE INDEX posts_user_id ON posts(user_id)"
+      }
+    ],
+    "bytes": 258387968
+  },
+  "environment": {
+    "node": "v26.12.0",
+    "v8": "14.6.202.34-node.39",
+    "sqlite": "3.53.4",
+    "driver": "better-sqlite3 13.0.3",
+    "drizzle": "0.45.4",
+    "cpu": "Apple M1 Pro",
+    "platform": "darwin 25.4.0 arm64",
+    "physical_memory_bytes": 34359738368,
+    "sqlite_cache_size": -16000,
+    "node_flags": []
+  },
+  "methodology": {
+    "sizes": [
+      1,
+      10,
+      100,
+      1000,
+      10000,
+      100000,
+      1000000
+    ],
+    "depths": [
+      0,
+      1,
+      2
+    ],
+    "fanout": 2,
+    "fresh_processes_per_method_case": 3,
+    "method_order": "Rotated across repeats; workers run sequentially",
+    "cache": "Warm repeated-read workload; SQLite default page cache, warm OS cache",
+    "gc": "Natural automatic garbage collection, no explicit GC",
+    "includes": "Query execution, driver conversion, nested object/array mapping, complete JSON string generation",
+    "excludes": "Query construction/preparation, correctness hashing, fixture setup, HTTP, UTF-8 encoding and network writes",
+    "statements": "Prepared once per worker",
+    "metric": "Median of three fresh-process median batch means; min/max show process variation, not confidence intervals or latency percentiles",
+    "small_cases": "Adaptive iteration count targets 40 ms per batch; seven timed batches below 100,000 roots",
+    "large_cases": "Three timed batches at 100,000 and 1,000,000 roots; at least one response per batch",
+    "correctness": "Exact SHA-256 equality of complete JSON across all methods/repeats in every case; structural checks at up to 1,000 roots; separate empty relationship/escaping tests"
+  },
+  "cases": [
+    {
+      "roots": 1,
+      "depth": 0,
+      "total_records": 1,
+      "response_bytes": 25,
+      "sha256": "58730285eee7bfd39385d38d8a5bd509f0c9b249eae3ebc7ae3b1b4f7d4bf763",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.011617920444033304,
+          "min_ms": 0.011464829096477806,
+          "max_ms": 0.011728283036263065,
+          "process_medians_ms": [
+            0.011464829096477806,
+            0.011728283036263065,
+            0.011617920444033304
+          ],
+          "median_peak_rss_mib": 215.46875,
+          "timed_responses": 68334
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.006980606223175968,
+          "min_ms": 0.006909451842546068,
+          "max_ms": 0.007031779583333334,
+          "process_medians_ms": [
+            0.007031779583333334,
+            0.006980606223175968,
+            0.006909451842546068
+          ],
+          "median_peak_rss_mib": 215.484375,
+          "timed_responses": 99652
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.007848952546045491,
+          "min_ms": 0.00781856223175966,
+          "max_ms": 0.008017261026102614,
+          "process_medians_ms": [
+            0.008017261026102614,
+            0.007848952546045491,
+            0.00781856223175966
+          ],
+          "median_peak_rss_mib": 215.546875,
+          "timed_responses": 96033
+        }
+      }
+    },
+    {
+      "roots": 1,
+      "depth": 1,
+      "total_records": 3,
+      "response_bytes": 85,
+      "sha256": "ead22f2f69ef77edaaa0f9f0a2d74df4e505fa4bd5e667bf4d58ea3d97525e3d",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.01979319586563306,
+          "min_ms": 0.019743161946259975,
+          "max_ms": 0.020162115364982115,
+          "process_medians_ms": [
+            0.019743161946259975,
+            0.020162115364982115,
+            0.01979319586563306
+          ],
+          "median_peak_rss_mib": 215.46875,
+          "timed_responses": 36897
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.018765994321408266,
+          "min_ms": 0.018690267866596097,
+          "max_ms": 0.01921957364341084,
+          "process_medians_ms": [
+            0.018690267866596097,
+            0.01921957364341084,
+            0.018765994321408266
+          ],
+          "median_peak_rss_mib": 215.609375,
+          "timed_responses": 39095
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.02125635197174807,
+          "min_ms": 0.021157868161925598,
+          "max_ms": 0.02169489729431258,
+          "process_medians_ms": [
+            0.02169489729431258,
+            0.02125635197174807,
+            0.021157868161925598
+          ],
+          "median_peak_rss_mib": 215.796875,
+          "timed_responses": 37366
+        }
+      }
+    },
+    {
+      "roots": 1,
+      "depth": 2,
+      "total_records": 7,
+      "response_bytes": 219,
+      "sha256": "0f046375870296b9be1c2b326cdc3871de7c0154082b06a622b29ca6e808024e",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.0281587950401167,
+          "min_ms": 0.027788270729978738,
+          "max_ms": 0.02818769362920538,
+          "process_medians_ms": [
+            0.0281587950401167,
+            0.02818769362920538,
+            0.027788270729978738
+          ],
+          "median_peak_rss_mib": 216.171875,
+          "timed_responses": 29253
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.03151282051282054,
+          "min_ms": 0.030929374900714866,
+          "max_ms": 0.03160718623481781,
+          "process_medians_ms": [
+            0.030929374900714866,
+            0.03151282051282054,
+            0.03160718623481781
+          ],
+          "median_peak_rss_mib": 215.6875,
+          "timed_responses": 26194
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.02753494724943483,
+          "min_ms": 0.027492169373549875,
+          "max_ms": 0.028035997120230347,
+          "process_medians_ms": [
+            0.027492169373549875,
+            0.028035997120230347,
+            0.02753494724943483
+          ],
+          "median_peak_rss_mib": 215.921875,
+          "timed_responses": 28063
+        }
+      }
+    },
+    {
+      "roots": 10,
+      "depth": 0,
+      "total_records": 10,
+      "response_bytes": 241,
+      "sha256": "ae5248d8a806aadcf96cd80d608f52b308889ebb1ecde011f3970c4c1d824611",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.013163680366847823,
+          "min_ms": 0.012945712776831335,
+          "max_ms": 0.013347698709239141,
+          "process_medians_ms": [
+            0.012945712776831335,
+            0.013163680366847823,
+            0.013347698709239141
+          ],
+          "median_peak_rss_mib": 215.171875,
+          "timed_responses": 61761
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.01071950181928443,
+          "min_ms": 0.01047037325581395,
+          "max_ms": 0.010918081867798666,
+          "process_medians_ms": [
+            0.01047037325581395,
+            0.01071950181928443,
+            0.010918081867798666
+          ],
+          "median_peak_rss_mib": 215.296875,
+          "timed_responses": 70252
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.01005582735182165,
+          "min_ms": 0.009843922289314778,
+          "max_ms": 0.010156493358129633,
+          "process_medians_ms": [
+            0.009843922289314778,
+            0.010156493358129633,
+            0.01005582735182165
+          ],
+          "median_peak_rss_mib": 215.9375,
+          "timed_responses": 78757
+        }
+      }
+    },
+    {
+      "roots": 10,
+      "depth": 1,
+      "total_records": 30,
+      "response_bytes": 841,
+      "sha256": "d97dd875e201c6a7b83157a9ff0d9b5cbb9a15e6bcab575f601f1658f8a41b1f",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.02911645347985341,
+          "min_ms": 0.02864234734337827,
+          "max_ms": 0.03034980349013656,
+          "process_medians_ms": [
+            0.02864234734337827,
+            0.03034980349013656,
+            0.02911645347985341
+          ],
+          "median_peak_rss_mib": 216,
+          "timed_responses": 27608
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.038001181357649544,
+          "min_ms": 0.03780352976190475,
+          "max_ms": 0.038180768916155385,
+          "process_medians_ms": [
+            0.038001181357649544,
+            0.03780352976190475,
+            0.038180768916155385
+          ],
+          "median_peak_rss_mib": 215.578125,
+          "timed_responses": 20811
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.03203823594615994,
+          "min_ms": 0.03109086385350326,
+          "max_ms": 0.1209853230890467,
+          "process_medians_ms": [
+            0.03109086385350326,
+            0.1209853230890467,
+            0.03203823594615994
+          ],
+          "median_peak_rss_mib": 215.46875,
+          "timed_responses": 26516
+        }
+      }
+    },
+    {
+      "roots": 10,
+      "depth": 2,
+      "total_records": 70,
+      "response_bytes": 2181,
+      "sha256": "0c82d4bc0722911cf511d32e1e4128861f098556736ffe42be299379436f8168",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.053099350205198376,
+          "min_ms": 0.053014782191780796,
+          "max_ms": 0.05409284864864864,
+          "process_medians_ms": [
+            0.053014782191780796,
+            0.05409284864864864,
+            0.053099350205198376
+          ],
+          "median_peak_rss_mib": 215.640625,
+          "timed_responses": 15407
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.0822587618025751,
+          "min_ms": 0.0815359279661017,
+          "max_ms": 0.08246870600858353,
+          "process_medians_ms": [
+            0.0815359279661017,
+            0.08246870600858353,
+            0.0822587618025751
+          ],
+          "median_peak_rss_mib": 215.625,
+          "timed_responses": 9828
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.0518430633245383,
+          "min_ms": 0.05177781413612564,
+          "max_ms": 0.05190932245430809,
+          "process_medians_ms": [
+            0.05177781413612564,
+            0.0518430633245383,
+            0.05190932245430809
+          ],
+          "median_peak_rss_mib": 215.5625,
+          "timed_responses": 16016
+        }
+      }
+    },
+    {
+      "roots": 100,
+      "depth": 0,
+      "total_records": 100,
+      "response_bytes": 2401,
+      "sha256": "6b5574077c985f333cbdb86f4bb8f7076cedf1f5eb6e3d15823a09f1518e3d67",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.02486112858052195,
+          "min_ms": 0.024568309252217972,
+          "max_ms": 0.02520381034482764,
+          "process_medians_ms": [
+            0.02486112858052195,
+            0.024568309252217972,
+            0.02520381034482764
+          ],
+          "median_peak_rss_mib": 215.234375,
+          "timed_responses": 33005
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.04032824748040314,
+          "min_ms": 0.040225702882483394,
+          "max_ms": 0.040420185810810874,
+          "process_medians_ms": [
+            0.040420185810810874,
+            0.040225702882483394,
+            0.04032824748040314
+          ],
+          "median_peak_rss_mib": 215.640625,
+          "timed_responses": 18781
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.026017782321899722,
+          "min_ms": 0.02541270242656449,
+          "max_ms": 0.026049542580645176,
+          "process_medians_ms": [
+            0.026017782321899722,
+            0.02541270242656449,
+            0.026049542580645176
+          ],
+          "median_peak_rss_mib": 215.671875,
+          "timed_responses": 32424
+        }
+      }
+    },
+    {
+      "roots": 100,
+      "depth": 1,
+      "total_records": 300,
+      "response_bytes": 8401,
+      "sha256": "d9db702e251d9a2777bfac5e78f2102957fe9ad2a4a977e952e98dabc0296e5f",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.1146656929824563,
+          "min_ms": 0.11458631805157583,
+          "max_ms": 0.11570749856733521,
+          "process_medians_ms": [
+            0.11570749856733521,
+            0.11458631805157583,
+            0.1146656929824563
+          ],
+          "median_peak_rss_mib": 215.3125,
+          "timed_responses": 7280
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.2233639502762428,
+          "min_ms": 0.2231800983606556,
+          "max_ms": 0.22341460989011008,
+          "process_medians_ms": [
+            0.2233639502762428,
+            0.2231800983606556,
+            0.22341460989011008
+          ],
+          "median_peak_rss_mib": 215.609375,
+          "timed_responses": 3822
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.12181473088685014,
+          "min_ms": 0.12129933742331292,
+          "max_ms": 0.1218773148148148,
+          "process_medians_ms": [
+            0.12129933742331292,
+            0.12181473088685014,
+            0.1218773148148148
+          ],
+          "median_peak_rss_mib": 216.03125,
+          "timed_responses": 6839
+        }
+      }
+    },
+    {
+      "roots": 100,
+      "depth": 2,
+      "total_records": 700,
+      "response_bytes": 21801,
+      "sha256": "f67138e0a8e10f5f7ae9cd5e1ee165d740f0fce5177e5c5ba5b942e7e9c21f5a",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.304493681818182,
+          "min_ms": 0.30267231355932195,
+          "max_ms": 0.3107000610687027,
+          "process_medians_ms": [
+            0.3107000610687027,
+            0.304493681818182,
+            0.30267231355932195
+          ],
+          "median_peak_rss_mib": 215.234375,
+          "timed_responses": 2667
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.5877383529411756,
+          "min_ms": 0.5837346764705875,
+          "max_ms": 0.5927187500000005,
+          "process_medians_ms": [
+            0.5877383529411756,
+            0.5837346764705875,
+            0.5927187500000005
+          ],
+          "median_peak_rss_mib": 215.5625,
+          "timed_responses": 1428
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.28699430215827326,
+          "min_ms": 0.28448214285714274,
+          "max_ms": 0.2908596014492753,
+          "process_medians_ms": [
+            0.28448214285714274,
+            0.2908596014492753,
+            0.28699430215827326
+          ],
+          "median_peak_rss_mib": 215.734375,
+          "timed_responses": 2919
+        }
+      }
+    },
+    {
+      "roots": 1000,
+      "depth": 0,
+      "total_records": 1000,
+      "response_bytes": 24001,
+      "sha256": "b0af7a6d927f61647222aa814123eb8df5aa79d4173f9a6d969deefd84419550",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.13527020202020185,
+          "min_ms": 0.13520326689189194,
+          "max_ms": 0.1367554713804714,
+          "process_medians_ms": [
+            0.13520326689189194,
+            0.13527020202020185,
+            0.1367554713804714
+          ],
+          "median_peak_rss_mib": 215.578125,
+          "timed_responses": 6230
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 0.3359638429752063,
+          "min_ms": 0.331114495652174,
+          "max_ms": 0.3403816470588233,
+          "process_medians_ms": [
+            0.3359638429752063,
+            0.3403816470588233,
+            0.331114495652174
+          ],
+          "median_peak_rss_mib": 215.59375,
+          "timed_responses": 2485
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 0.1888650138248847,
+          "min_ms": 0.1867341805555556,
+          "max_ms": 0.18937539712918655,
+          "process_medians_ms": [
+            0.1888650138248847,
+            0.18937539712918655,
+            0.1867341805555556
+          ],
+          "median_peak_rss_mib": 215.84375,
+          "timed_responses": 4494
+        }
+      }
+    },
+    {
+      "roots": 1000,
+      "depth": 1,
+      "total_records": 3000,
+      "response_bytes": 84001,
+      "sha256": "156e875c336a67d00b949cc149d11743e283e90b35af7ca37dd59274dc5b3d4b",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 0.9799837317073181,
+          "min_ms": 0.9798506097560992,
+          "max_ms": 0.9856768292682945,
+          "process_medians_ms": [
+            0.9856768292682945,
+            0.9799837317073181,
+            0.9798506097560992
+          ],
+          "median_peak_rss_mib": 215.5,
+          "timed_responses": 861
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 2.050925421052631,
+          "min_ms": 2.0506469473684175,
+          "max_ms": 2.0689824736842146,
+          "process_medians_ms": [
+            2.0506469473684175,
+            2.0689824736842146,
+            2.050925421052631
+          ],
+          "median_peak_rss_mib": 215.75,
+          "timed_responses": 399
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 1.0149017179487163,
+          "min_ms": 1.0107625000000013,
+          "max_ms": 1.0424775641025632,
+          "process_medians_ms": [
+            1.0424775641025632,
+            1.0107625000000013,
+            1.0149017179487163
+          ],
+          "median_peak_rss_mib": 215.96875,
+          "timed_responses": 826
+        }
+      }
+    },
+    {
+      "roots": 1000,
+      "depth": 2,
+      "total_records": 7000,
+      "response_bytes": 218001,
+      "sha256": "ded92637072354dd61b30a0916224fc14d56a53694c8926c0455425687c9b709",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 2.882929538461536,
+          "min_ms": 2.834637769230767,
+          "max_ms": 2.9021934285714304,
+          "process_medians_ms": [
+            2.9021934285714304,
+            2.834637769230767,
+            2.882929538461536
+          ],
+          "median_peak_rss_mib": 215.140625,
+          "timed_responses": 280
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 5.712118999999997,
+          "min_ms": 5.652779714285738,
+          "max_ms": 5.838928571428563,
+          "process_medians_ms": [
+            5.838928571428563,
+            5.652779714285738,
+            5.712118999999997
+          ],
+          "median_peak_rss_mib": 215.625,
+          "timed_responses": 147
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 2.7425654999999955,
+          "min_ms": 2.7212738571428514,
+          "max_ms": 2.7470446428571416,
+          "process_medians_ms": [
+            2.7212738571428514,
+            2.7470446428571416,
+            2.7425654999999955
+          ],
+          "median_peak_rss_mib": 215.75,
+          "timed_responses": 294
+        }
+      }
+    },
+    {
+      "roots": 10000,
+      "depth": 0,
+      "total_records": 10000,
+      "response_bytes": 240001,
+      "sha256": "d6af35c7d722fa1b725723a74647bebb5e28c0efcb3141df813664964c82a866",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 1.3040497096774197,
+          "min_ms": 1.2665375000000003,
+          "max_ms": 1.3044556451612908,
+          "process_medians_ms": [
+            1.2665375000000003,
+            1.3040497096774197,
+            1.3044556451612908
+          ],
+          "median_peak_rss_mib": 215.75,
+          "timed_responses": 644
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 3.433829545454547,
+          "min_ms": 3.387977272727271,
+          "max_ms": 3.530958363636366,
+          "process_medians_ms": [
+            3.530958363636366,
+            3.387977272727271,
+            3.433829545454547
+          ],
+          "median_peak_rss_mib": 215.765625,
+          "timed_responses": 231
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 1.871307523809524,
+          "min_ms": 1.870507952380952,
+          "max_ms": 1.8965791499999967,
+          "process_medians_ms": [
+            1.870507952380952,
+            1.871307523809524,
+            1.8965791499999967
+          ],
+          "median_peak_rss_mib": 215.59375,
+          "timed_responses": 434
+        }
+      }
+    },
+    {
+      "roots": 10000,
+      "depth": 1,
+      "total_records": 30000,
+      "response_bytes": 840001,
+      "sha256": "0a44a6086285625279d0cc80e6dc9a1402da54dfcb28b6b38218d43889f98658",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 9.824843749999985,
+          "min_ms": 9.614156249999994,
+          "max_ms": 46.00408300000004,
+          "process_medians_ms": [
+            9.614156249999994,
+            46.00408300000004,
+            9.824843749999985
+          ],
+          "median_peak_rss_mib": 215.703125,
+          "timed_responses": 63
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 20.57549999999992,
+          "min_ms": 20.404250000000047,
+          "max_ms": 21.393374999999992,
+          "process_medians_ms": [
+            20.57549999999992,
+            20.404250000000047,
+            21.393374999999992
+          ],
+          "median_peak_rss_mib": 215.59375,
+          "timed_responses": 21
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 10.922555666666673,
+          "min_ms": 10.87137500000002,
+          "max_ms": 13.449791499999947,
+          "process_medians_ms": [
+            10.922555666666673,
+            10.87137500000002,
+            13.449791499999947
+          ],
+          "median_peak_rss_mib": 215.4375,
+          "timed_responses": 56
+        }
+      }
+    },
+    {
+      "roots": 10000,
+      "depth": 2,
+      "total_records": 70000,
+      "response_bytes": 2180001,
+      "sha256": "6bcb7d60e62b2ba42e6369867db0bb7e94eb3b0b3a0f46d541e5e3fd7faf2a0c",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 27.94758300000001,
+          "min_ms": 27.792416000000003,
+          "max_ms": 28.144709000000034,
+          "process_medians_ms": [
+            27.94758300000001,
+            28.144709000000034,
+            27.792416000000003
+          ],
+          "median_peak_rss_mib": 219.46875,
+          "timed_responses": 21
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 56.529124999999794,
+          "min_ms": 56.26145799999995,
+          "max_ms": 56.994042000000036,
+          "process_medians_ms": [
+            56.26145799999995,
+            56.994042000000036,
+            56.529124999999794
+          ],
+          "median_peak_rss_mib": 215.640625,
+          "timed_responses": 21
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 28.281499999999937,
+          "min_ms": 28.235333999999966,
+          "max_ms": 28.663583000000017,
+          "process_medians_ms": [
+            28.235333999999966,
+            28.281499999999937,
+            28.663583000000017
+          ],
+          "median_peak_rss_mib": 215.5,
+          "timed_responses": 21
+        }
+      }
+    },
+    {
+      "roots": 100000,
+      "depth": 0,
+      "total_records": 100000,
+      "response_bytes": 2400001,
+      "sha256": "c22672e8500f4684d85e6424eba3c03473e10964f128927ec26b34484cf7ce4c",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 12.572082999999992,
+          "min_ms": 12.569375000000008,
+          "max_ms": 12.680812500000002,
+          "process_medians_ms": [
+            12.680812500000002,
+            12.569375000000008,
+            12.572082999999992
+          ],
+          "median_peak_rss_mib": 215.375,
+          "timed_responses": 18
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 40.35895900000003,
+          "min_ms": 40.291375000000016,
+          "max_ms": 40.44037499999996,
+          "process_medians_ms": [
+            40.35895900000003,
+            40.291375000000016,
+            40.44037499999996
+          ],
+          "median_peak_rss_mib": 215.625,
+          "timed_responses": 9
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 18.24362499999998,
+          "min_ms": 17.99070800000004,
+          "max_ms": 19.519708000000037,
+          "process_medians_ms": [
+            19.519708000000037,
+            18.24362499999998,
+            17.99070800000004
+          ],
+          "median_peak_rss_mib": 215,
+          "timed_responses": 12
+        }
+      }
+    },
+    {
+      "roots": 100000,
+      "depth": 1,
+      "total_records": 300000,
+      "response_bytes": 8400001,
+      "sha256": "eeec7257c6c3be3a303a9449afd53c5c3fee35ae050eba33154d98afbdb9241f",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 98.22762499999999,
+          "min_ms": 97.48075,
+          "max_ms": 99.21770800000002,
+          "process_medians_ms": [
+            97.48075,
+            98.22762499999999,
+            99.21770800000002
+          ],
+          "median_peak_rss_mib": 264.796875,
+          "timed_responses": 9
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 222.70779100000004,
+          "min_ms": 220.97958400000005,
+          "max_ms": 222.787416,
+          "process_medians_ms": [
+            222.787416,
+            222.70779100000004,
+            220.97958400000005
+          ],
+          "median_peak_rss_mib": 330.984375,
+          "timed_responses": 9
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 125.364959,
+          "min_ms": 123.52520900000002,
+          "max_ms": 126.66412500000001,
+          "process_medians_ms": [
+            125.364959,
+            123.52520900000002,
+            126.66412500000001
+          ],
+          "median_peak_rss_mib": 345.875,
+          "timed_responses": 9
+        }
+      }
+    },
+    {
+      "roots": 100000,
+      "depth": 2,
+      "total_records": 700000,
+      "response_bytes": 21800001,
+      "sha256": "119860706d1fd330476f2270c14c46a9f83f32dfa606286ceb145764d3c8f77a",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 291.86245899999994,
+          "min_ms": 288.622209,
+          "max_ms": 292.640541,
+          "process_medians_ms": [
+            288.622209,
+            291.86245899999994,
+            292.640541
+          ],
+          "median_peak_rss_mib": 365.96875,
+          "timed_responses": 9
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 623.8680830000001,
+          "min_ms": 610.7921670000001,
+          "max_ms": 626.0971249999998,
+          "process_medians_ms": [
+            626.0971249999998,
+            610.7921670000001,
+            623.8680830000001
+          ],
+          "median_peak_rss_mib": 558.34375,
+          "timed_responses": 9
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 340.2237080000001,
+          "min_ms": 339.179541,
+          "max_ms": 351.7175829999999,
+          "process_medians_ms": [
+            351.7175829999999,
+            339.179541,
+            340.2237080000001
+          ],
+          "median_peak_rss_mib": 670.90625,
+          "timed_responses": 9
+        }
+      }
+    },
+    {
+      "roots": 1000000,
+      "depth": 0,
+      "total_records": 1000000,
+      "response_bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 131.44504200000006,
+          "min_ms": 130.85345799999993,
+          "max_ms": 132.81900000000007,
+          "process_medians_ms": [
+            131.44504200000006,
+            130.85345799999993,
+            132.81900000000007
+          ],
+          "median_peak_rss_mib": 384.4375,
+          "timed_responses": 9
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 467.74366699999996,
+          "min_ms": 464.3276249999999,
+          "max_ms": 495.6224999999997,
+          "process_medians_ms": [
+            467.74366699999996,
+            495.6224999999997,
+            464.3276249999999
+          ],
+          "median_peak_rss_mib": 792.1875,
+          "timed_responses": 9
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 210.410083,
+          "min_ms": 204.561375,
+          "max_ms": 214.97333400000002,
+          "process_medians_ms": [
+            210.410083,
+            204.561375,
+            214.97333400000002
+          ],
+          "median_peak_rss_mib": 456.671875,
+          "timed_responses": 9
+        }
+      }
+    },
+    {
+      "roots": 1000000,
+      "depth": 1,
+      "total_records": 3000000,
+      "response_bytes": 84000001,
+      "sha256": "bbff14e90c1433ade43eb8a1b9b684654debcc5422c1c2883089b070c1f618c1",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 1023.9266249999996,
+          "min_ms": 1017.7514580000002,
+          "max_ms": 1113.4678750000003,
+          "process_medians_ms": [
+            1023.9266249999996,
+            1017.7514580000002,
+            1113.4678750000003
+          ],
+          "median_peak_rss_mib": 758.859375,
+          "timed_responses": 9
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 2494.6333750000003,
+          "min_ms": 2451.5814580000006,
+          "max_ms": 2560.4303339999997,
+          "process_medians_ms": [
+            2560.4303339999997,
+            2451.5814580000006,
+            2494.6333750000003
+          ],
+          "median_peak_rss_mib": 1621.03125,
+          "timed_responses": 9
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 1487.989167,
+          "min_ms": 1460.7195,
+          "max_ms": 1532.7750840000003,
+          "process_medians_ms": [
+            1532.7750840000003,
+            1487.989167,
+            1460.7195
+          ],
+          "median_peak_rss_mib": 1791,
+          "timed_responses": 9
+        }
+      }
+    },
+    {
+      "roots": 1000000,
+      "depth": 2,
+      "total_records": 7000000,
+      "response_bytes": 218000001,
+      "sha256": "79f54165534313adfbadbc159214903ef59269cca1fd19c4eae23ebeeefb1c41",
+      "methods": {
+        "revised_sql_direct": {
+          "median_ms": 2972.112249999999,
+          "min_ms": 2962.433708999999,
+          "max_ms": 3066.544458,
+          "process_medians_ms": [
+            3066.544458,
+            2972.112249999999,
+            2962.433708999999
+          ],
+          "median_peak_rss_mib": 1653.140625,
+          "timed_responses": 9
+        },
+        "drizzle_relational_stringify": {
+          "median_ms": 6766.693541999997,
+          "min_ms": 6718.41575,
+          "max_ms": 6771.576874999999,
+          "process_medians_ms": [
+            6718.41575,
+            6771.576874999999,
+            6766.693541999997
+          ],
+          "median_peak_rss_mib": 2309.375,
+          "timed_responses": 9
+        },
+        "js_rows_group_stringify": {
+          "median_ms": 4517.0480830000015,
+          "min_ms": 4486.758459,
+          "max_ms": 5071.5921659999985,
+          "process_medians_ms": [
+            5071.5921659999985,
+            4517.0480830000015,
+            4486.758459
+          ],
+          "median_peak_rss_mib": 3438.828125,
+          "timed_responses": 9
+        }
+      }
+    }
+  ]
+}

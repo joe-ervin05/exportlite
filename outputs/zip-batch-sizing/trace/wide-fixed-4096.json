@@ -1,0 +1,100 @@
+{
+  "dataset": "wide",
+  "variant": "fixed-4096",
+  "note": "Untimed instrumented diagnostic; throughput/RSS measured separately.",
+  "dataStatements": 1,
+  "executions": 1,
+  "callbacks": 0,
+  "batches": 25,
+  "zipInputChunks": 26,
+  "zipInputBytes": 100920480,
+  "batchRows": {
+    "min": 1696,
+    "max": 4096,
+    "mean": 4000,
+    "p50": 4096,
+    "p95": 4096
+  },
+  "batchBytes": {
+    "min": 1698867,
+    "max": 4253331,
+    "mean": 4036819.16,
+    "p50": 4120898,
+    "p95": 4223927
+  },
+  "firstBatches": [
+    {
+      "rows": 4096,
+      "bytes": 4132236
+    },
+    {
+      "rows": 4096,
+      "bytes": 4156748
+    },
+    {
+      "rows": 4096,
+      "bytes": 4085654
+    },
+    {
+      "rows": 4096,
+      "bytes": 4151590
+    },
+    {
+      "rows": 4096,
+      "bytes": 4074153
+    },
+    {
+      "rows": 4096,
+      "bytes": 4215608
+    },
+    {
+      "rows": 4096,
+      "bytes": 4104627
+    },
+    {
+      "rows": 4096,
+      "bytes": 4106951
+    },
+    {
+      "rows": 4096,
+      "bytes": 4087216
+    },
+    {
+      "rows": 4096,
+      "bytes": 4173833
+    },
+    {
+      "rows": 4096,
+      "bytes": 4142105
+    },
+    {
+      "rows": 4096,
+      "bytes": 4120898
+    }
+  ],
+  "lastBatches": [
+    {
+      "rows": 4096,
+      "bytes": 4176714
+    },
+    {
+      "rows": 4096,
+      "bytes": 4186394
+    },
+    {
+      "rows": 4096,
+      "bytes": 4111412
+    },
+    {
+      "rows": 4096,
+      "bytes": 4057458
+    },
+    {
+      "rows": 1696,
+      "bytes": 1698867
+    }
+  ],
+  "targetBytes": null,
+  "batchesOver256KiB": 25,
+  "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+}

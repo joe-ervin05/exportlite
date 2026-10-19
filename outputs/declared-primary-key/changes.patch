@@ -1,0 +1,1027 @@
+--- baseline/README.md
++++ README.md
+@@ -37,6 +37,7 @@
+ | `format` | `"jsonl"` (default) or `"json"` |
+ | `zip` | `true` streams a ZIP containing one exported file; default `false` |
+ | `columns` | Optional column-name list for tables, or an object of typed column selections for tables and queries |
++| `encoding` | Declared table database encoding: `"utf8"` (default), `"utf16le"` or `"utf16be"`; output remains UTF-8 |
+ | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
+ | `signal` | Optional `AbortSignal` |
+ | `end` | With `output` only: end a caller-provided writable when done; default `false` |
+@@ -54,7 +55,7 @@
+ import { exportTable, integer, text, type ExportRow } from "exportlite";
+ 
+ const columns = {
+-  id: integer().notNull(),
++  id: integer().primaryKey(),
+   displayName: text("name").notNull(),
+   email: text(),
+ };
+@@ -72,7 +73,11 @@
+ });
+ ```
+ 
+-`integer()`, `real()` and `text()` describe numbers and strings. Fields are nullable by default; `.notNull()` declares that the source cannot be null. `integer({ mode: "boolean" })` and `integer("is_active", { mode: "boolean" })` encode SQLite 0/1 values as JSON `false`/`true`, preserving nulls and rejecting other representations. Declared text and numeric values pass through unchanged: these declarations and `.notNull()` are type contracts, without per-record JavaScript validation or coercion. They must match the stored values. `.notNull()` never changes the database constraint.
++`integer()`, `real()` and `text()` describe numbers and strings. Fields are nullable by default; `.notNull()` declares that the source cannot be null. `.primaryKey()` also makes the selected type non-null and declares an existing unique, non-null key. These declarations never create or change database constraints. `integer({ mode: "boolean" })` encodes SQLite 0/1 values as JSON false/true, preserving nulls and rejecting other representations. Text and numeric values pass through unchanged: these declarations are type contracts, without per-record JavaScript validation or coercion, and must match stored values.
++
++Declared tables use one data SELECT with no schema, schema-version, capability or column-discovery preflight queries, including on the first call. One `integer().primaryKey()` field enables the existing 256-row indexed batching algorithm using that source column. The key must already be unique and non-null and should be indexed; uniqueness is a caller-supplied contract, not verified by a separate scan. This also works with an integer key on a WITHOUT ROWID table and tables shadowing SQLite's rowid aliases. Missing, text, boolean, real or multiple declared key fields use the row-streaming fallback without preflight queries. A null integer key fails instead of producing an empty export.
++
++`encoding` describes the SQLite database encoding, not HTTP or file encoding. It defaults to `"utf8"`, matching Node's default string-to-byte encoding. UTF-8 keeps the native batch-buffer path. For `"utf16le"` or `"utf16be"`, the driver returns text and the writer produces UTF-8 output. If the UTF-8 path receives UTF-16 batch bytes, it rejects them before copying batch payload; no encoding probe or retry is issued. This is a handled failure with the usual partial-file cleanup. JavaScript strings themselves use UTF-16. See [Node's encoding documentation](https://nodejs.org/api/buffer.html#buffers-and-character-encodings).
+ 
+ `InferColumns<typeof columns>` also gives the selected row type directly. `ExportRow<typeof stream>` retains the selected type through the export call, including renamed fields. The readable still contains bytes; these types do not make `Response.json()` or a framework client infer the body type automatically. ZIP streams describe the rows inside the archive.
+ 
+@@ -89,7 +94,7 @@
+ 
+ With declared query columns, ExportLite prepares only the final JSON SELECT. There are no separate schema, schema-version, capability or output-column-discovery queries. SQLite validates the statement and its named result columns; a missing field fails during preparation. Query result aliases should be unique under SQLite's case-insensitive name resolution. Added, unselected columns do not change the projection. Renaming happens inside `json_object()`, with no JavaScript row objects or JSON parsing.
+ 
+-Table exports retain their existing 256-row batching and storage-metadata checks, including schema-version invalidation. A declared projection alone does not describe the table's rowid behavior or database encoding, so table exports still have those local metadata queries. Remote database adapters are not implemented. The original table `columns: ["id", "name"]` and automatic discovery remain available. Run `node examples/declared-columns.mjs` for a working example.
++Declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Remote database adapters are not implemented. Run `node examples/declared-columns.mjs` for a working example.
+ 
+ ## Readable streams and API responses
+ 
+@@ -172,17 +177,17 @@
+ 
+ ## Fixed batching and streaming fallbacks
+ 
+-Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those fragments directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. For table exports and queries using column discovery, SQLite version and JSON capability checks run once after the first successful check on each connection. Declared queries rely on SQLite preparing their final JSON statement, with no preflight probes.
+-
+-Repeated table exports reuse validated column selections and generated SQL, with at most **16 cached plans per connection**. A schema-version check invalidates these plans after schema changes. Each export prepares an independent data statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are always read and generated afresh. Custom queries discover their output columns on every call unless `columns` is declared.
++Automatically discovered tables use 256-row batches when a usable rowid exists. Declared tables use the same batching algorithm when one integer primary key is supplied. One recursive export statement finds indexed key ranges and builds a JSON array or LF-separated objects per range. JavaScript joins those fragments directly. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. For exports using discovery, SQLite version and JSON capability checks run once after the first successful check per connection. Declared tables and queries rely on preparing the final JSON statement, without preflight probes.
++
++Repeated table exports reuse generated SQL, with at most 16 cached plans per connection shared by declared and discovered plans. A schema-version check invalidates discovered plans after schema changes; declared plans depend only on the request. Each export prepares an independent statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are generated afresh. Custom queries discover their output columns unless `columns` is declared.
+ 
+ Each range starts with an indexed seek and locates its 256th existing key using a constant `OFFSET 255`. That offset stays fixed for every batch; it does not grow with the export. Bounds remain SQLite integers, and only a short final batch needs a separate count inside the same statement.
+ 
+ For UTF-8 databases, batch JSON stays as UTF-8 bytes from SQLite through the writer, avoiding conversion to JavaScript text and back. UTF-16 databases retain the text path and still produce UTF-8 output. This is internal; the stream and file APIs are unchanged.
+ 
+-Views, virtual tables, WITHOUT ROWID tables, and tables shadowing all three rowid aliases automatically use the row-streaming path. Custom queries always stream individual SQLite-generated JSON records. Both paths share the same output loop, backpressure, cancellation and cleanup behavior. An execution failure never retries through a different path after writing partial data.
+-
+-Batched tables are exported in ascending rowid order. Fallback table order follows SQLite; use a query with `ORDER BY` when ordering is essential. The active statement preserves one read snapshot while waiting for output. ExportLite does not manage caller transactions, and it never opens or closes the connection.
++With automatic discovery, views, virtual tables, WITHOUT ROWID tables and tables shadowing all three rowid aliases use row streaming. Declared selections choose batching from the declared key, without storage discovery. Custom queries always stream individual SQLite-generated JSON records. Both paths share the output loop, backpressure, cancellation and cleanup. An execution failure never retries another path after writing partial data.
++
++Batched tables are exported in ascending key order: the declared integer key, or the discovered rowid. Fallback order follows SQLite; use a query with ORDER BY when ordering is essential. The active statement preserves one read snapshot while waiting for output. ExportLite does not manage caller transactions or open/close the connection.
+ 
+ **256 rows is not a byte or RAM limit.** Large records, SQLite working memory, JS string copies and downstream buffers still consume memory. The library avoids retaining the complete export. Cancellation is checked between rows/batches and during output waits; an individual synchronous SQLite operation cannot be interrupted. The loop yields to the event loop after at least 2,048 rows.
+ 
+@@ -229,7 +234,7 @@
+ pnpm example
+ ```
+ 
+-Local checks cover 212 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
++Local checks cover 249 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+ 
+ ## Benchmarks
+ 
+--- baseline/benchmarks/DECLARED-TABLES.md
++++ benchmarks/DECLARED-TABLES.md
+@@ -0,0 +1,47 @@
++# Declared table exports: primary keys and encoding
++
++Measured October 18, 2026. Compared the immediately preceding typed-column implementation (saved baseline) with the new declared-table path. Same original varied fixture files, exact Node 26.12.0, better-sqlite3 13.0.3, SQLite 3.53.4, Apple M1 Pro. No HTTP or remote database latency is included.
++
++The baseline receives the same typed field selection with id.notNull(); the new path receives id.primaryKey(), with encoding defaulting to utf8. Both prepare fresh data statements and use fixed 256-row batches, a 64 KiB output flush target, ZIP level 1, memLevel 9, and a 256 KiB zlib output buffer. These fixtures use an INTEGER PRIMARY KEY alias of rowid; other index layouts can have different costs.
++
++## Results
++
++| Case | Old time (ms) | New time (ms) | Change | Output (MiB) | Median peak RSS, old → new (MiB) | Highest observed RSS, old → new (MiB) |
++| --- | ---: | ---: | ---: | ---: | ---: | ---: |
++| table-1 | 0.1435 | 0.1463 | +1.95% | 0.000073 | 107.6 → 108.4 | 107.9 → 108.7 |
++| cold-table-1 | 0.3745 | 0.2509 | -33.00% | 0.000073 | 82.8 → 80.2 | 82.9 → 80.5 |
++| table-10 | 0.1461 | 0.1490 | +2.00% | 0.000782 | 108.2 → 109.1 | 108.4 → 109.3 |
++| table-1000 | 0.5900 | 0.6015 | +1.95% | 0.076696 | 115.6 → 114.3 | 119.2 → 116.8 |
++| narrow-plain | 370.4014 | 370.5000 | +0.03% | 79.507682 | 153.2 → 152.1 | 156.2 → 157.7 |
++| narrow-zip | 554.0801 | 558.5930 | +0.81% | 20.344024 | 147.2 → 147.5 | 176.7 → 152.6 |
++| wide-plain | 146.1532 | 149.8442 | +2.53% | 96.245270 | 207.5 → 195.5 | 228.6 → 237.4 |
++| wide-zip | 678.0447 | 679.5999 | +0.23% | 25.829152 | 193.4 → 189.4 | 198.6 → 197.2 |
++
++Time is the median of five independent worker medians. Every worker warms up, then measures three request batches; each batch contains 200 requests for 1/10-row warm cases, 50 for the 1,000-row and cold cases, or one complete bulk export. Methods run sequentially, alternating order by round. Small exports consume Web streams through Response.arrayBuffer; bulk exports use a counting Node writable. Connection opening/closing is outside the cold-request timer. Natural garbage collection; no forced GC.
++
++RSS is a whole-process high-water mark including module imports, correctness verification, warmup and repeated measurements, captured before separate query-count diagnostics. It is not incremental per-request memory. Both median worker peaks and the highest observed worker peak are reported because GC variation was substantial. Narrow JSON is 79.51 MiB, wide JSON 96.25 MiB; ZIP outputs are 20.34 MiB and 25.83 MiB.
++
++## Interpretation
++
++- Cold first exports are 33% faster: 0.3745 → 0.2509 ms, with non-overlapping observed worker timing ranges.
++- Warm local exports are about 2% slower in median, a difference of roughly 3–11 microseconds, with overlapping worker ranges.
++- Bulk JSON/ZIP median changes range from +0.03% to +2.53%, with overlapping ranges. There is no demonstrated bulk throughput improvement.
++- Memory remains similar and variable. In particular, wide JSON has a lower median worker peak but a higher worst observed peak (228.6 → 237.4 MiB); this is not a consistent memory reduction.
++- The main improvement is removal of metadata SQL operations: tracing a fresh connection records six preflight executions plus one data statement before, versus one data statement after. Warm connections record one schema-version check plus one data statement before, versus only the data statement after. This is SQL-operation counting, not a measurement of Turso HTTP requests.
++
++## Correctness and reliability
++
++All 80 workers verified encoded byte length and SHA-256. All 20 actual ZIP validation archives were independently decoded and checked against the original JSON digest and length; the independent reader checks CRC-32. Output bytes, including ZIP bytes, are identical between methods. There were 15,120 timed exports in the full comparison. A separate six-worker smoke run also passed before the full comparison.
++
++249 tests pass, including cold declared exports with a prepare/iterate-only connection that rejects all metadata reads; 256-row boundaries; sparse and 64-bit keys; WITHOUT ROWID and rowid-shadowing tables; secondary unique integer keys; UTF-16LE/BE JSON/JSONL and ZIP output; wrong UTF-8 declaration failures; missing columns; independent lazy streams; cancellation/backpressure; and partial-file cleanup. ESM/CJS builds, type consumers, typecheck and full lint pass.
++
++primaryKey() is a declaration of an existing unique, non-null key, not a schema migration or a uniqueness check. A single non-boolean integer key enables batching. Other declared projections use row streaming without preflight queries. The database encoding option selects native UTF-8 bytes or driver text conversion for UTF-16 databases; output always remains UTF-8.
++
++Declared SQL plans depend only on the request and are bounded to 16 cached plans per connection, shared with discovered plans. A fresh statement is prepared every export. Missing columns therefore fail against the current schema, and data is never cached. Automatic discovery and column-name arrays retain the previous schema-version validation and storage fallbacks.
++
++## Artifacts
++
++- [Summary CSV](../../outputs/declared-primary-key/comparison/summary.csv)
++- [Raw workers](../../outputs/declared-primary-key/comparison/all.json)
++- [Configuration and fingerprints](../../outputs/declared-primary-key/comparison/configuration.json)
++- [Validation](../../outputs/declared-primary-key/comparison/validation.json)
+--- baseline/examples/declared-columns.mjs
++++ examples/declared-columns.mjs
+@@ -0,0 +1,26 @@
++import Database from "better-sqlite3";
++import { exportTable, integer, text } from "../dist/index.mjs";
++
++const db = new Database(":memory:");
++try {
++  db.exec(`
++    CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT);
++    INSERT INTO users VALUES(1, 'Joe', 'joe@example.com'), (2, '雪', NULL);
++  `);
++  const columns = {
++    id: integer().primaryKey(),
++    displayName: text("name").notNull(),
++    email: text(),
++  };
++  const stream = await exportTable(db, "users", {
++    columns,
++    format: "json",
++  });
++  const response = new Response(stream, {
++    headers: { "Content-Type": "application/json" },
++  });
++  console.log(await response.text());
++  console.log(await stream.result);
++} finally {
++  db.close();
++}
+--- baseline/src/api/export-table.ts
++++ src/api/export-table.ts
+@@ -1,9 +1,10 @@
+ import type { InferColumns, SelectedColumns } from "../columns.js";
+ import type { SQLiteConnection } from "../database/adapter.js";
+ import { checkCapabilities } from "../database/better-sqlite3.js";
++import { ExportLiteError } from "../errors.js";
+ import { createReadableExport } from "../output/readable.js";
+ import { checkAborted, validateOptions } from "../output/writer.js";
+-import { cachedTablePlan } from "../planner/cache.js";
++import { cachedDeclaredTablePlan, cachedTablePlan } from "../planner/cache.js";
+ import type {
+   ExportResult,
+   ExportStream,
+@@ -45,13 +46,26 @@
+   const started = performance.now();
+   validateOptions(options);
+   checkAborted(options.signal);
+-  checkCapabilities(db);
+-  const { statement, batched } = cachedTablePlan(
+-    db,
+-    table,
+-    options.columns,
+-    options.format ?? "jsonl",
+-  );
++  if (
++    options.encoding !== undefined &&
++    !["utf8", "utf16le", "utf16be"].includes(options.encoding)
++  )
++    throw new ExportLiteError(
++      "INVALID_OPTIONS",
++      "encoding must be utf8, utf16le or utf16be (the SQLite database encoding).",
++    );
++  const declared =
++    options.columns !== undefined && !Array.isArray(options.columns);
++  if (!declared) checkCapabilities(db);
++  const { statement, batched } = declared
++    ? cachedDeclaredTablePlan(
++        db,
++        table,
++        options.columns as SelectedColumns,
++        options.format ?? "jsonl",
++        options.encoding ?? "utf8",
++      )
++    : cachedTablePlan(db, table, options.columns, options.format ?? "jsonl");
+   if (options.output === undefined)
+     return createReadableExport(
+       options,
+--- baseline/src/columns.ts
++++ src/columns.ts
+@@ -8,6 +8,8 @@
+     readonly name: string | undefined,
+     readonly kind: "value" | "boolean",
+     readonly required: Required,
++    readonly dataType: "text" | "integer" | "real",
++    readonly primary = false,
+   ) {
+     if (
+       name !== undefined &&
+@@ -18,7 +20,12 @@
+   }
+ 
+   notNull(): Column<T, true> {
+-    return new Column(this.name, this.kind, true);
++    return new Column(this.name, this.kind, true, this.dataType, this.primary);
++  }
++
++  /** Declares an existing unique, non-null key; never changes the database. */
++  primaryKey(): Column<T, true> {
++    return new Column(this.name, this.kind, true, this.dataType, true);
+   }
+ }
+ 
+@@ -35,12 +42,12 @@
+ 
+ /** A text value; nullable unless .notNull() is specified. */
+ export function text(name?: string): Column<string> {
+-  return new Column(name, "value", false);
++  return new Column(name, "value", false, "text");
+ }
+ 
+ /** A floating-point value; nullable unless .notNull() is specified. */
+ export function real(name?: string): Column<number> {
+-  return new Column(name, "value", false);
++  return new Column(name, "value", false, "real");
+ }
+ 
+ /** Integer values, or SQLite 0/1 values encoded as JSON booleans. */
+@@ -66,5 +73,10 @@
+       "INVALID_OPTIONS",
+       "integer mode must be number or boolean.",
+     );
+-  return new Column(name, mode === "boolean" ? "boolean" : "value", false);
++  return new Column(
++    name,
++    mode === "boolean" ? "boolean" : "value",
++    false,
++    "integer",
++  );
+ }
+--- baseline/src/database/better-sqlite3.ts
++++ src/database/better-sqlite3.ts
+@@ -82,6 +82,14 @@
+       ) {
+         throw new Error("Expected a SQLite JSON batch and positive row count");
+       }
++      // Every batch begins with ASCII JSON framing. UTF-16 bytes have a NUL
++      // in one of these positions; reject a wrong UTF-8 declaration before
++      // copying any batch payload to the output. No database probe is needed.
++      if (Buffer.isBuffer(value[0]) && (value[0][0] === 0 || value[0][1] === 0))
++        throw new ExportLiteError(
++          "INVALID_OPTIONS",
++          "The database uses UTF-16. Set encoding to utf16le or utf16be for declared table exports; exported JSON remains UTF-8.",
++        );
+       yield value as [string | Buffer, number | bigint];
+     }
+   } catch (error) {
+--- baseline/src/index.ts
++++ src/index.ts
+@@ -11,6 +11,7 @@
+ export type { SQLiteConnection } from "./database/adapter.js";
+ export { type ExportErrorCode, ExportLiteError } from "./errors.js";
+ export type {
++  DatabaseEncoding,
+   ExportOptions,
+   ExportResult,
+   ExportRow,
+--- baseline/src/planner/batches.ts
++++ src/planner/batches.ts
+@@ -24,7 +24,27 @@
+   const names = new Set(options.columnNames.map((name) => name.toLowerCase()));
+   const rowid = ["rowid", "_rowid_", "oid"].find((name) => !names.has(name));
+   if (!rowid) return undefined;
+-  const key = identifier(rowid);
++  return prepareBatchedTable(db, {
++    ...options,
++    key: identifier(rowid),
++    binary: info.encoding === "UTF-8",
++  });
++}
++
++/** Both planners share the same fixed-size, indexed-seek export statement. */
++export function prepareBatchedTable(
++  db: SQLiteConnection,
++  options: {
++    table: string;
++    key: string;
++    columns: readonly string[];
++    fields?: readonly SelectedField[];
++    format: "json" | "jsonl";
++    binary: boolean;
++    declared?: boolean;
++  },
++) {
++  const key = options.key;
+   const table = `main.${identifier(options.table)} AS "__exportlite_source"`;
+   const columns = options.fields
+     ? options.fields
+@@ -45,20 +65,26 @@
+       : `group_concat(${object}, char(10))`;
+   // CAST uses the database encoding. Keep UTF-16 databases on the text path;
+   // UTF-8 databases can deliver JSON bytes without decoding and re-encoding.
+-  const payload =
+-    info.encoding === "UTF-8" ? `CAST(${aggregate} AS BLOB)` : aggregate;
++  const payload = options.binary ? `CAST(${aggregate} AS BLOB)` : aggregate;
+   const first = '"__exportlite_batches"."first"';
+   const last = '"__exportlite_batches"."last"';
++  // A declared key must be non-null. Empty tables still return no boundary.
++  const firstKey = options.declared
++    ? `CASE WHEN ${key} IS NULL THEN json('ExportLite: primary key must not be null') ELSE ${key} END`
++    : key;
++  const upper = options.declared
++    ? `(SELECT ${key} FROM ${table} ORDER BY ${key} DESC LIMIT 1)`
++    : "9223372036854775807";
+   // Seek the first and 256th existing keys without per-key min/max/count work.
+   // OFFSET is always 255 within the next range, never a growing page offset.
+   // Keep integer bounds in SQLite; only a short final batch needs counting.
+   const sql = `WITH RECURSIVE "__exportlite_batches"("first", "last") AS (
+     SELECT
+-      (SELECT ${key} FROM ${table} ORDER BY ${key} LIMIT 1),
++      (SELECT ${firstKey} FROM ${table} ORDER BY ${key} LIMIT 1),
+       (SELECT ${key} FROM ${table} ORDER BY ${key} LIMIT 1 OFFSET 255)
+     UNION ALL
+     SELECT
+-      (SELECT ${key} FROM ${table}
++      (SELECT ${firstKey} FROM ${table}
+         WHERE ${key} > ${last} ORDER BY ${key} LIMIT 1),
+       (SELECT ${key} FROM ${table}
+         WHERE ${key} > ${last} ORDER BY ${key} LIMIT 1 OFFSET 255)
+@@ -68,7 +94,7 @@
+   SELECT (
+     SELECT ${payload}
+     FROM (SELECT ${columns} FROM ${table}
+-      WHERE ${key} BETWEEN ${first} AND coalesce(${last}, 9223372036854775807)
++      WHERE ${key} BETWEEN ${first} AND coalesce(${last}, ${upper})
+       ORDER BY ${key})
+   ), CASE WHEN ${last} IS NOT NULL THEN 256 ELSE
+     (SELECT count(*) FROM ${table} WHERE ${key} >= ${first}) END
+--- baseline/src/planner/cache.ts
++++ src/planner/cache.ts
+@@ -1,19 +1,69 @@
++import type { SelectedColumns } from "../columns.js";
+ import type { ReadStatement, SQLiteConnection } from "../database/adapter.js";
+ import { readStatement } from "../database/better-sqlite3.js";
+ import { sqliteError } from "../errors.js";
+-import type { TableColumns } from "../types.js";
++import type { DatabaseEncoding, TableColumns } from "../types.js";
++import { planDeclaredTable } from "./declared.js";
+ import { identifier } from "./identifiers.js";
+ import { planTable } from "./json.js";
+ 
+ type CachedPlan = Pick<ReturnType<typeof planTable>, "sql" | "batched">;
+ interface Cache {
+-  schema: ReadStatement;
++  schema?: ReadStatement;
+   version?: string;
+   plans: Map<string, CachedPlan>;
+ }
+ 
+ // Bound retained metadata/SQL. Every export gets an independent statement.
+ const caches = new WeakMap<SQLiteConnection, Cache>();
++
++function cacheFor(db: SQLiteConnection): Cache {
++  let cache = caches.get(db);
++  if (!cache) {
++    cache = { plans: new Map() };
++    caches.set(db, cache);
++  }
++  return cache;
++}
++
++function cachedPlan(
++  db: SQLiteConnection,
++  cache: Cache,
++  key: string,
++  build: () => ReturnType<typeof planTable>,
++): ReturnType<typeof planTable> {
++  const cached = cache.plans.get(key);
++  const plan = cached
++    ? { ...cached, statement: readStatement(db, cached.sql) }
++    : build();
++  cache.plans.delete(key);
++  cache.plans.set(key, { sql: plan.sql, batched: plan.batched });
++  if (cache.plans.size > 16) {
++    const oldest = cache.plans.keys().next().value;
++    if (oldest !== undefined) cache.plans.delete(oldest);
++  }
++  return plan;
++}
++
++export function cachedDeclaredTablePlan(
++  db: SQLiteConnection,
++  table: string,
++  columns: SelectedColumns,
++  format: "json" | "jsonl",
++  encoding: DatabaseEncoding,
++): ReturnType<typeof planTable> {
++  identifier(table);
++  try {
++    return cachedPlan(
++      db,
++      cacheFor(db),
++      JSON.stringify(["declared", table, columns, format, encoding]),
++      () => planDeclaredTable(db, table, columns, format, encoding),
++    );
++  } catch (error) {
++    throw sqliteError(error);
++  }
++}
+ 
+ export function cachedTablePlan(
+   db: SQLiteConnection,
+@@ -23,31 +73,17 @@
+ ): ReturnType<typeof planTable> {
+   identifier(table);
+   try {
+-    let cache = caches.get(db);
+-    if (!cache) {
+-      cache = {
+-        schema: db.prepare("PRAGMA main.schema_version").pluck(),
+-        plans: new Map(),
+-      };
+-      caches.set(db, cache);
+-    }
++    const cache = cacheFor(db);
++    cache.schema ??= db.prepare("PRAGMA main.schema_version").pluck();
+     const version = String(cache.schema.get());
+     if (version !== cache.version) {
+       cache.plans.clear();
+       cache.version = version;
+     }
+     const key = JSON.stringify([table, columns ?? null, format]);
+-    const cached = cache.plans.get(key);
+-    const plan = cached
+-      ? { ...cached, statement: readStatement(db, cached.sql) }
+-      : planTable(db, table, columns, format);
+-    cache.plans.delete(key);
+-    cache.plans.set(key, { sql: plan.sql, batched: plan.batched });
+-    if (cache.plans.size > 16) {
+-      const oldest = cache.plans.keys().next().value;
+-      if (oldest !== undefined) cache.plans.delete(oldest);
+-    }
+-    return plan;
++    return cachedPlan(db, cache, key, () =>
++      planTable(db, table, columns, format),
++    );
+   } catch (error) {
+     throw sqliteError(error);
+   }
+--- baseline/src/planner/columns.ts
++++ src/planner/columns.ts
+@@ -6,6 +6,8 @@
+   key: string;
+   column: string;
+   kind: "value" | "boolean";
++  dataType: "text" | "integer" | "real";
++  primary: boolean;
+ }
+ 
+ export function selectedFields(columns: SelectedColumns): SelectedField[] {
+@@ -27,7 +29,13 @@
+       );
+     const column = declaration.name ?? key;
+     identifier(column);
+-    return { key, column, kind: declaration.kind };
++    return {
++      key,
++      column,
++      kind: declaration.kind,
++      dataType: declaration.dataType,
++      primary: declaration.primary,
++    };
+   });
+   uniqueColumns(fields.map((field) => field.key));
+   return fields;
+--- baseline/src/planner/declared.ts
++++ src/planner/declared.ts
+@@ -0,0 +1,42 @@
++import type { SelectedColumns } from "../columns.js";
++import type { SQLiteConnection } from "../database/adapter.js";
++import { readStatement } from "../database/better-sqlite3.js";
++import type { DatabaseEncoding } from "../types.js";
++import { prepareBatchedTable } from "./batches.js";
++import { selectedFields, selectedObject } from "./columns.js";
++import { identifier } from "./identifiers.js";
++
++/** The request supplies the projection and key; no database metadata is read. */
++export function planDeclaredTable(
++  db: SQLiteConnection,
++  table: string,
++  columns: SelectedColumns,
++  format: "json" | "jsonl",
++  encoding: DatabaseEncoding,
++) {
++  const name = identifier(table);
++  const fields = selectedFields(columns);
++  const keys = fields.filter((field) => field.primary);
++  if (
++    keys.length === 1 &&
++    keys[0]?.dataType === "integer" &&
++    keys[0].kind === "value"
++  ) {
++    const batch = prepareBatchedTable(db, {
++      table,
++      key: `"__exportlite_source".${identifier(keys[0].column)}`,
++      columns: fields.map((field) => field.column),
++      fields,
++      format,
++      binary: encoding === "utf8",
++      declared: true,
++    });
++    return { ...batch, batched: true };
++  }
++  const object = selectedObject(
++    fields,
++    (field) => `"__exportlite_source".${identifier(field.column)}`,
++  );
++  const sql = `SELECT ${object} FROM main.${name} AS "__exportlite_source"`;
++  return { sql, statement: readStatement(db, sql), batched: false };
++}
+--- baseline/src/types.ts
++++ src/types.ts
+@@ -2,6 +2,7 @@
+ import type { SelectedColumns } from "./columns.js";
+ 
+ export type TableColumns = readonly string[] | SelectedColumns;
++export type DatabaseEncoding = "utf8" | "utf16le" | "utf16be";
+ 
+ export type SqlValue = null | string | number | bigint | Buffer;
+ export type QueryParameters =
+@@ -25,6 +26,8 @@
+ export interface TableExportOptions extends ExportOptions {
+   /** Exact column names; default: ordinary, non-hidden columns of a main-schema table/view. */
+   columns?: TableColumns;
++  /** Declared table's SQLite database encoding. Default: utf8. Output stays UTF-8. */
++  encoding?: DatabaseEncoding;
+ }
+ 
+ export interface QueryExportOptions extends ExportOptions {
+@@ -44,6 +47,7 @@
+ 
+ export interface TableStreamOptions extends StreamExportOptions {
+   columns?: TableColumns;
++  encoding?: DatabaseEncoding;
+ }
+ 
+ export interface QueryStreamOptions extends StreamExportOptions {
+--- baseline/tests/columns.test.ts
++++ tests/columns.test.ts
+@@ -15,7 +15,7 @@
+ 
+ let db: Database.Database;
+ const columns = {
+-  userId: integer("id").notNull(),
++  userId: integer("id").primaryKey(),
+   displayName: text("name").notNull(),
+   email: text(),
+   enabled: integer("active", { mode: "boolean" }),
+@@ -153,7 +153,7 @@
+   await stream.result;
+   db.exec("ALTER TABLE users RENAME COLUMN name TO renamed");
+   await expect(exportTable(db, "users", { columns })).rejects.toMatchObject({
+-    code: "INVALID_SCHEMA",
++    code: "INVALID_QUERY",
+   });
+ });
+ 
+@@ -172,7 +172,7 @@
+   ).rejects.toMatchObject({ code: "INVALID_QUERY" });
+   await expect(
+     exportTable(db, "users", { columns: { renamed: text("absent") } }),
+-  ).rejects.toMatchObject({ code: "INVALID_SCHEMA" });
++  ).rejects.toMatchObject({ code: "INVALID_QUERY" });
+ });
+ 
+ it("quotes source names and output keys, including case-distinct aliases and repeated sources", async () => {
+--- baseline/tests/consumer.cts
++++ tests/consumer.cts
+@@ -17,7 +17,7 @@
+ void response;
+ const declared = exportlite.exportTable(db, "users", {
+   columns: {
+-    userId: exportlite.integer("id").notNull(),
++    userId: exportlite.integer("id").primaryKey(),
+     name: exportlite.text(),
+   },
+ });
+--- baseline/tests/consumer.mts
++++ tests/consumer.mts
+@@ -69,7 +69,7 @@
+ exportTable(db, "users", { output, zip: "true" });
+ 
+ const selection = {
+-  userId: integer("id").notNull(),
++  userId: integer("id").primaryKey(),
+   displayName: text("name").notNull(),
+   email: text(),
+   active: integer({ mode: "boolean" }).notNull(),
+@@ -93,6 +93,9 @@
+ const inline = exportTable(db, "users", {
+   columns: { id: integer().notNull(), renamed: text("name") },
+ });
++exportTable(db, "users", { columns: selection, encoding: "utf16be" });
++// @ts-expect-error Encoding describes SQLite's supported database encodings.
++exportTable(db, "users", { columns: selection, encoding: "latin1" });
+ expectTypeOf<ExportRow<typeof inline>>().toEqualTypeOf<{
+   id: number;
+   renamed: string | null;
+--- baseline/tests/package.test.ts
++++ tests/package.test.ts
+@@ -83,6 +83,21 @@
+         { userId: 1, displayName: "雪" },
+       ]);
+       await declared.result;
++      db.exec(
++        "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT); INSERT INTO users VALUES(1,'雪')",
++      );
++      const table = await built.exportTable(db, "users", {
++        columns: {
++          userId: built.integer("id").primaryKey(),
++          label: built.text("name"),
++        },
++        format: "json",
++        encoding: "utf8",
++      });
++      expect(await new Response(table).json()).toEqual([
++        { userId: 1, label: "雪" },
++      ]);
++      await table.result;
+     } finally {
+       db.close();
+     }
+--- baseline/tests/primary-key.test.ts
++++ tests/primary-key.test.ts
+@@ -0,0 +1,379 @@
++import { mkdtemp, readdir, rm } from "node:fs/promises";
++import { tmpdir } from "node:os";
++import { join } from "node:path";
++import { Writable } from "node:stream";
++import { setImmediate } from "node:timers/promises";
++import Database from "better-sqlite3";
++import { afterEach, beforeEach, expect, it } from "vitest";
++import { fromBufferPromise } from "yauzl";
++import {
++  type DatabaseEncoding,
++  exportTable,
++  integer,
++  type SQLiteConnection,
++  text,
++} from "../src/index.js";
++
++let db: Database.Database;
++beforeEach(() => {
++  db = new Database(":memory:");
++});
++afterEach(() => db.close());
++const columns = { key: integer("id").primaryKey(), label: text("name") };
++
++function seed(connection: Database.Database, count: number) {
++  connection.exec("CREATE TABLE data(id INTEGER PRIMARY KEY,name TEXT)");
++  const insert = connection.prepare("INSERT INTO data VALUES(?, ?)");
++  connection.transaction(() => {
++    for (let i = 0; i < count; i++) insert.run(i * 3 - 10, `雪 🦦 "${i}"\n`);
++  })();
++}
++
++function track(connection: Database.Database) {
++  const prepared: string[] = [];
++  const batchSizes: number[] = [];
++  let executions = 0;
++  const adapter: SQLiteConnection = {
++    prepare(sql) {
++      prepared.push(sql);
++      expect(sql).not.toMatch(/pragma|sqlite_schema|sqlite_version/);
++      const statement = connection.prepare(sql);
++      statement.columns = () => {
++        throw new Error("No column metadata reads");
++      };
++      statement.get = () => {
++        throw new Error("No preflight get");
++      };
++      statement.all = () => {
++        throw new Error("No preflight all");
++      };
++      const iterate = statement.iterate.bind(statement);
++      statement.iterate = function* (...params) {
++        executions++;
++        for (const value of iterate(...params)) {
++          if (Array.isArray(value)) batchSizes.push(Number(value[1]));
++          yield value;
++        }
++      };
++      return statement;
++    },
++  };
++  return { adapter, prepared, batchSizes, executions: () => executions };
++}
++
++it.each(
++  [0, 1, 255, 256, 257, 512, 513].flatMap((count) =>
++    (["json", "jsonl"] as const).map((format) => ({ count, format })),
++  ),
++)(
++  "executes one cold statement for $count rows of $format without preflight queries",
++  async ({ count, format }) => {
++    seed(db, count);
++    const tracked = track(db);
++    const stream = await exportTable(tracked.adapter, "data", {
++      columns,
++      format,
++    });
++    expect(tracked.prepared).toHaveLength(1);
++    expect(tracked.executions()).toBe(0);
++    const body = await new Response(stream).text();
++    const rows =
++      format === "json"
++        ? JSON.parse(body)
++        : body
++          ? body
++              .trimEnd()
++              .split("\n")
++              .map((line) => JSON.parse(line))
++          : [];
++    expect(rows).toEqual(
++      db.prepare("SELECT id AS key,name AS label FROM data ORDER BY id").all(),
++    );
++    expect((await stream.result).rowsExported).toBe(count);
++    expect(tracked.executions()).toBe(1);
++    expect(tracked.batchSizes.filter((size) => size > 0)).toEqual(
++      Array.from({ length: Math.ceil(count / 256) }, (_, i) =>
++        Math.min(256, count - i * 256),
++      ),
++    );
++    const again = await exportTable(tracked.adapter, "data", {
++      columns,
++      format,
++    });
++    expect(await new Response(again).text()).toBe(body);
++    await again.result;
++    expect(tracked.prepared).toHaveLength(2);
++  },
++);
++
++it.each(["rowid-shadowed", "without-rowid", "secondary-key"])(
++  "uses the declared integer key on a %s table",
++  async (kind) => {
++    if (kind === "rowid-shadowed")
++      db.exec(
++        "CREATE TABLE data(id INTEGER PRIMARY KEY,name TEXT,rowid TEXT,_rowid_ TEXT,oid TEXT)",
++      );
++    else if (kind === "without-rowid")
++      db.exec(
++        "CREATE TABLE data(id INTEGER PRIMARY KEY,name TEXT) WITHOUT ROWID",
++      );
++    else
++      db.exec(
++        "CREATE TABLE data(internal INTEGER PRIMARY KEY,id INTEGER UNIQUE NOT NULL,name TEXT)",
++      );
++    const insert = db.prepare("INSERT INTO data(id,name) VALUES(?, ?)");
++    db.transaction(() => {
++      for (let i = 0; i < 513; i++) insert.run(i * 9 - 1000, `雪 ${i}`);
++    })();
++    const tracked = track(db);
++    const stream = await exportTable(tracked.adapter, "data", {
++      columns,
++      format: "json",
++    });
++    expect(await new Response(stream).json()).toEqual(
++      db.prepare("SELECT id AS key,name AS label FROM data ORDER BY id").all(),
++    );
++    await stream.result;
++    expect(tracked.batchSizes).toEqual([256, 256, 1]);
++  },
++);
++
++it("preserves 64-bit key boundaries and BigInt-configured connections", async () => {
++  seed(db, 256);
++  db.exec(
++    "INSERT INTO data VALUES(-9223372036854775808,'min'),(9223372036854775807,'max')",
++  );
++  db.defaultSafeIntegers(true);
++  const stream = await exportTable(track(db).adapter, "data", {
++    columns,
++    format: "json",
++  });
++  const body = await new Response(stream).text();
++  expect(body).toBe(
++    db
++      .prepare(
++        "SELECT json_group_array(json_object('key',id,'label',name)) FROM (SELECT id,name FROM data ORDER BY id)",
++      )
++      .pluck()
++      .get(),
++  );
++  expect(body).toContain("-9223372036854775808");
++  expect(body).toContain("9223372036854775807");
++  expect((await stream.result).rowsExported).toBe(258);
++});
++
++it.each(["missing-key", "text-key", "composite-key"])(
++  "keeps row streaming without preflight reads for a %s declaration",
++  async (kind) => {
++    seed(db, 3);
++    const selection =
++      kind === "missing-key"
++        ? { key: integer("id"), label: text("name") }
++        : kind === "text-key"
++          ? { key: integer("id"), label: text("name").primaryKey() }
++          : {
++              key: integer("id").primaryKey(),
++              label: text("name").primaryKey(),
++            };
++    const tracked = track(db);
++    const stream = await exportTable(tracked.adapter, "data", {
++      columns: selection,
++      format: "json",
++    });
++    expect(await new Response(stream).json()).toEqual(
++      db.prepare("SELECT id AS key,name AS label FROM data").all(),
++    );
++    await stream.result;
++    expect(tracked.prepared).toHaveLength(1);
++    expect(tracked.prepared[0]).not.toContain("WITH RECURSIVE");
++  },
++);
++
++it.each(
++  (["utf16le", "utf16be"] as const).flatMap((encoding) =>
++    (["json", "jsonl"] as const).flatMap((format) =>
++      [false, true].map((zip) => ({ encoding, format, zip })),
++    ),
++  ),
++)(
++  "streams correct UTF-8 from a $encoding database, $format, zip=$zip",
++  async ({ encoding, format, zip }) => {
++    db.pragma(`encoding='${encoding === "utf16le" ? "UTF-16le" : "UTF-16be"}'`);
++    seed(db, 257);
++    const tracked = track(db);
++    const stream = await exportTable(tracked.adapter, "data", {
++      columns,
++      format,
++      zip,
++      encoding,
++    });
++    const bytes = Buffer.from(await new Response(stream).arrayBuffer());
++    let body = bytes.toString("utf8");
++    if (zip) {
++      const archive = await fromBufferPromise(bytes);
++      try {
++        for await (const entry of archive.eachEntry()) {
++          const parts: Buffer[] = [];
++          for await (const part of await archive.openReadStreamPromise(entry))
++            parts.push(part);
++          body = Buffer.concat(parts).toString("utf8");
++        }
++      } finally {
++        archive.close();
++      }
++    }
++    const rows =
++      format === "json"
++        ? JSON.parse(body)
++        : body
++            .trimEnd()
++            .split("\n")
++            .map((line) => JSON.parse(line));
++    expect(rows).toEqual(
++      db.prepare("SELECT id AS key,name AS label FROM data ORDER BY id").all(),
++    );
++    await stream.result;
++    expect(tracked.prepared).toHaveLength(1);
++    expect(tracked.batchSizes).toEqual([256, 1]);
++  },
++);
++
++it.each(["UTF-16le", "UTF-16be"])(
++  "rejects the UTF-8 default on a %s database without returning corrupt JSON",
++  async (encoding) => {
++    db.pragma(`encoding='${encoding}'`);
++    seed(db, 1);
++    const tracked = track(db);
++    const stream = await exportTable(tracked.adapter, "data", {
++      columns,
++      format: "json",
++    });
++    await expect(new Response(stream).text()).rejects.toThrow(/encoding/);
++    await expect(stream.result).rejects.toMatchObject({
++      code: "INVALID_OPTIONS",
++    });
++    expect(tracked.prepared).toHaveLength(1);
++  },
++);
++
++it("reuses independent cached plans across data and schema changes", async () => {
++  seed(db, 257);
++  const tracked = track(db);
++  const first = await exportTable(tracked.adapter, "data", {
++    columns,
++    format: "json",
++  });
++  const second = await exportTable(tracked.adapter, "data", {
++    columns,
++    format: "json",
++  });
++  await first.cancel();
++  expect(((await new Response(second).json()) as unknown[]).length).toBe(257);
++  await second.result;
++  db.exec(
++    "DROP TABLE data; CREATE TABLE data(id INTEGER PRIMARY KEY,name TEXT) WITHOUT ROWID; INSERT INTO data VALUES(7,'new')",
++  );
++  const rebuilt = await exportTable(tracked.adapter, "data", {
++    columns,
++    format: "json",
++  });
++  expect(await new Response(rebuilt).json()).toEqual([
++    { key: 7, label: "new" },
++  ]);
++  await rebuilt.result;
++  db.exec("ALTER TABLE data RENAME COLUMN id TO renamed");
++  await expect(
++    exportTable(tracked.adapter, "data", { columns }),
++  ).rejects.toHaveProperty("code");
++});
++
++it("rejects a nullable declared key instead of silently skipping rows", async () => {
++  db.exec(
++    "CREATE TABLE data(id INT PRIMARY KEY,name TEXT); INSERT INTO data VALUES(NULL,'bad'),(1,'valid')",
++  );
++  const stream = await exportTable(db, "data", { columns, format: "json" });
++  await expect(new Response(stream).text()).rejects.toThrow();
++  await expect(stream.result).rejects.toMatchObject({ code: "SQLITE_ERROR" });
++});
++
++it.each([false, true])(
++  "removes a failed declared export file, zip=%s",
++  async (zip) => {
++    seed(db, 513);
++    db.function("fail_later", (value) => {
++      if (Number(value) > 800) throw new Error("late failure");
++      return value;
++    });
++    db.exec("CREATE VIEW broken AS SELECT id,fail_later(id) AS name FROM data");
++    const directory = await mkdtemp(
++      join(tmpdir(), "exportlite-declared-failure-"),
++    );
++    try {
++      await expect(
++        exportTable(db, "broken", {
++          columns,
++          zip,
++          format: "json",
++          output: join(directory, zip ? "bad.zip" : "bad.json"),
++          bufferSize: 1,
++        }),
++      ).rejects.toHaveProperty("code");
++      expect(await readdir(directory)).toEqual([]);
++      expect(db.prepare("SELECT 1").pluck().get()).toBe(1);
++    } finally {
++      await rm(directory, { recursive: true, force: true });
++    }
++  },
++);
++
++it("preserves backpressure and cancellation on declared batches", async () => {
++  seed(db, 513);
++  const tracked = track(db);
++  const controller = new AbortController();
++  let writes = 0;
++  const output = new Writable({
++    highWaterMark: 1,
++    write(_chunk, _encoding, callback) {
++      writes++;
++      setImmediate().then(() => {
++        if (writes === 2) controller.abort();
++        callback();
++      });
++    },
++  });
++  await expect(
++    exportTable(tracked.adapter, "data", {
++      columns,
++      output,
++      format: "json",
++      bufferSize: 1,
++      signal: controller.signal,
++    }),
++  ).rejects.toMatchObject({ code: "ABORTED" });
++  expect(tracked.batchSizes).toEqual([256]);
++  expect(output.writableEnded).toBe(false);
++  expect(output.listenerCount("error")).toBe(0);
++  output.destroy();
++  expect(db.prepare("SELECT 1").pluck().get()).toBe(1);
++});
++
++it("declares primary keys immutably and validates encoding before touching the database", async () => {
++  const original = integer("id");
++  const primary = original.primaryKey();
++  expect(original.primary).toBe(false);
++  expect(original.required).toBe(false);
++  expect(primary.primary).toBe(true);
++  expect(primary.notNull().primary).toBe(true);
++  expect(primary.required).toBe(true);
++  const forbidden: SQLiteConnection = {
++    prepare() {
++      throw new Error("Must not access database");
++    },
++  };
++  await expect(
++    exportTable(forbidden, "data", {
++      columns,
++      encoding: "latin1" as DatabaseEncoding,
++    }),
++  ).rejects.toMatchObject({ code: "INVALID_OPTIONS" });
++});

@@ -1,0 +1,105 @@
+{
+  "dataset": "narrow",
+  "method": "exportlite",
+  "mode": "zip-output",
+  "bufferSize": 65536,
+  "expected": {
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+  },
+  "entryName": "data.json",
+  "verification": {
+    "totalMs": 598.9475420000001,
+    "bytes": 21360051,
+    "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+  },
+  "samples": [
+    {
+      "totalMs": 547.7518749999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    {
+      "totalMs": 544.5922910000002,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    {
+      "totalMs": 552.08475,
+      "bytes": 21360051,
+      "archiveSha256": null
+    }
+  ],
+  "median": {
+    "totalMs": 547.7518749999999,
+    "bytes": 21360051,
+    "archiveSha256": null
+  },
+  "peakRssMiB": 174.453125,
+  "diagnostic": {
+    "allocations": {
+      "nativeBatches": 19535,
+      "nativeBytes": 416868765,
+      "joinedBuffers": 4885,
+      "joinedBytes": 416849235,
+      "encodedBuffers": 0,
+      "encodedBytes": 0,
+      "firstStacks": [
+        "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-memory/diagnose.mjs:74:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/dist/index.mjs:645:108)\n    at async run (file://<workspace>/outputs/zip-memory/diagnose.mjs:190:20)\n    at async file://<workspace>/outputs/zip-memory/diagnose.mjs:227:22",
+        "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-memory/diagnose.mjs:74:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/dist/index.mjs:645:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async run (file://<workspace>/outputs/zip-memory/diagnose.mjs:190:20)\n    at async file://<workspace>/outputs/zip-memory/diagnose.mjs:227:22"
+      ]
+    },
+    "peaks": {
+      "rss": 182894592,
+      "heapUsed": 11441368,
+      "external": 67486430,
+      "arrayBuffers": 64697290
+    },
+    "snapshots": [
+      {
+        "label": "start",
+        "rss": 73580544,
+        "heapTotal": 11419648,
+        "heapUsed": 7566440,
+        "external": 3018211,
+        "arrayBuffers": 229111
+      },
+      {
+        "label": "after-natural-GC-runs",
+        "rss": 182894592,
+        "heapTotal": 15876096,
+        "heapUsed": 8103192,
+        "external": 67239512,
+        "arrayBuffers": 539115
+      },
+      {
+        "label": "after-diagnostic-GC",
+        "rss": 182894592,
+        "heapTotal": 15876096,
+        "heapUsed": 7738240,
+        "external": 3328255,
+        "arrayBuffers": 229075
+      }
+    ],
+    "naturalGc": {
+      "count": 34,
+      "durationMs": 7.568169116973877
+    }
+  },
+  "environment": {
+    "node": "v26.12.0",
+    "v8": "14.6.202.34-node.39",
+    "sqlite": "3.53.4",
+    "driver": "13.0.3",
+    "zipStream": "7.0.5",
+    "zlib": "1.3.2.1-motley-456ae73"
+  },
+  "zip": {
+    "level": 1,
+    "chunkSize": 262144,
+    "forceZip64": true,
+    "entryName": "data.json",
+    "continuous": true
+  },
+  "sql": "Public exportTable(), fixed 256-row batches"
+}

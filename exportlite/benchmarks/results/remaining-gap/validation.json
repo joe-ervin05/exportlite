@@ -1,0 +1,159 @@
+{
+  "node": "v26.12.0",
+  "nested": [
+    {
+      "depth": 0,
+      "roots": 0,
+      "batches": 0,
+      "matches": true
+    },
+    {
+      "depth": 0,
+      "roots": 1,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 0,
+      "roots": 255,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 0,
+      "roots": 256,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 0,
+      "roots": 257,
+      "batches": 2,
+      "matches": true
+    },
+    {
+      "depth": 0,
+      "roots": 513,
+      "batches": 3,
+      "matches": true
+    },
+    {
+      "depth": 0,
+      "roots": 10000,
+      "batches": 40,
+      "matches": true
+    },
+    {
+      "depth": 1,
+      "roots": 0,
+      "batches": 0,
+      "matches": true
+    },
+    {
+      "depth": 1,
+      "roots": 1,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 1,
+      "roots": 255,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 1,
+      "roots": 256,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 1,
+      "roots": 257,
+      "batches": 2,
+      "matches": true
+    },
+    {
+      "depth": 1,
+      "roots": 513,
+      "batches": 3,
+      "matches": true
+    },
+    {
+      "depth": 1,
+      "roots": 10000,
+      "batches": 40,
+      "matches": true
+    },
+    {
+      "depth": 2,
+      "roots": 0,
+      "batches": 0,
+      "matches": true
+    },
+    {
+      "depth": 2,
+      "roots": 1,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 2,
+      "roots": 255,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 2,
+      "roots": 256,
+      "batches": 1,
+      "matches": true
+    },
+    {
+      "depth": 2,
+      "roots": 257,
+      "batches": 2,
+      "matches": true
+    },
+    {
+      "depth": 2,
+      "roots": 513,
+      "batches": 3,
+      "matches": true
+    },
+    {
+      "depth": 2,
+      "roots": 10000,
+      "batches": 40,
+      "matches": true
+    }
+  ],
+  "zip": [
+    {
+      "dataset": "narrow",
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21359843,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      },
+      "encodedBytes": 21360051
+    },
+    {
+      "dataset": "wide",
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27133731,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      },
+      "encodedBytes": 27133939
+    }
+  ]
+}

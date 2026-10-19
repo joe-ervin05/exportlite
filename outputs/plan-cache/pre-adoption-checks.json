@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "sourceBuildFingerprints": "All baseline/prototype runner fingerprints verified before adoption; current package still exactly matches memLevel9 baseline.",
+  "tests": {
+    "adopted_mem9": 180,
+    "statement_reuse_prototype": 189,
+    "metadata_only_prototype": 189,
+    "capabilities_only_control": 181
+  },
+  "counts": {
+    "statement-reuse/": {
+      "freshWorkers": 100,
+      "timedRequests": 42060,
+      "verifiedResponses": 100,
+      "independentlyDecodedZipArchives": 10
+    },
+    "metadata-comparison/": {
+      "freshWorkers": 50,
+      "timedRequests": 19560,
+      "verifiedResponses": 50,
+      "independentlyDecodedZipArchives": 10
+    },
+    "capabilities-comparison/": {
+      "freshWorkers": 40,
+      "timedRequests": 18060,
+      "verifiedResponses": 40,
+      "independentlyDecodedZipArchives": 10
+    },
+    "cold-comparison/": {
+      "freshWorkers": 10,
+      "timedRequests": 1500,
+      "verifiedResponses": 10,
+      "independentlyDecodedZipArchives": 0
+    }
+  }
+}

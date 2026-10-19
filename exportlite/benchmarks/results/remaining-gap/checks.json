@@ -1,0 +1,20 @@
+{
+  "tests": 180,
+  "testFiles": 5,
+  "unitTestNode": "24.19.0",
+  "testsPassed": true,
+  "typecheck": "passed",
+  "build": "passed",
+  "lint": "passed",
+  "baselineManifestVerified": true,
+  "workerSourceFingerprintsVerified": true,
+  "unchanged": [
+    "public declarations",
+    "readable lifecycle adapter",
+    "writer send/completion/disposal methods"
+  ],
+  "latestRuntimeDependenciesChecked": {
+    "better-sqlite3": "13.0.3",
+    "zip-stream": "7.0.5"
+  }
+}

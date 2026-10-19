@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-10-17T21:32:10.443Z",
+  "node": "v24.19.0",
+  "result": {
+    "rowsExported": 4097,
+    "bytesWritten": 18791543,
+    "durationMs": 7386.443083
+  },
+  "decoded": {
+    "sha256": "1506550c44dc773a5c88ef45a30fea4b707cbd28535938bf9fde699b513d0916",
+    "bytes": 4296065036,
+    "entry": {
+      "fileName": "export.jsonl",
+      "compressedSize": 18791293,
+      "uncompressedSize": 4296065036,
+      "crc32": 3066974917,
+      "versionNeededToExtract": 45
+    }
+  },
+  "peakRssMiB": 250.609375,
+  "verification": "An actual entry larger than 4 GiB was streamed, then fully decoded with yauzl; declared sizes and CRC-32 matched. The complete export was never retained in memory."
+}

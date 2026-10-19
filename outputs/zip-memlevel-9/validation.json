@@ -1,0 +1,572 @@
+[
+  {
+    "dataset": "matched",
+    "method": "current",
+    "repeat": 0,
+    "encodedBytes": 2685110,
+    "encodedSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2684900,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "mem9",
+    "repeat": 0,
+    "encodedBytes": 2697449,
+    "encodedSha256": "127612b5214af82c0ca8cf527800d3fff094090428386930bf23e7e74d039b59",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2697239,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "current",
+    "repeat": 0,
+    "encodedBytes": 21360051,
+    "encodedSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21359843,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "mem9",
+    "repeat": 0,
+    "encodedBytes": 21332255,
+    "encodedSha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21332047,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "current",
+    "repeat": 0,
+    "encodedBytes": 27133939,
+    "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27133731,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "mem9",
+    "repeat": 0,
+    "encodedBytes": 27083829,
+    "encodedSha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27083621,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "mem9",
+    "repeat": 1,
+    "encodedBytes": 2697449,
+    "encodedSha256": "127612b5214af82c0ca8cf527800d3fff094090428386930bf23e7e74d039b59",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2697239,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "current",
+    "repeat": 1,
+    "encodedBytes": 2685110,
+    "encodedSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2684900,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "mem9",
+    "repeat": 1,
+    "encodedBytes": 21332255,
+    "encodedSha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21332047,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "current",
+    "repeat": 1,
+    "encodedBytes": 21360051,
+    "encodedSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21359843,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "mem9",
+    "repeat": 1,
+    "encodedBytes": 27083829,
+    "encodedSha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27083621,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "current",
+    "repeat": 1,
+    "encodedBytes": 27133939,
+    "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27133731,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "current",
+    "repeat": 2,
+    "encodedBytes": 2685110,
+    "encodedSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2684900,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "mem9",
+    "repeat": 2,
+    "encodedBytes": 2697449,
+    "encodedSha256": "127612b5214af82c0ca8cf527800d3fff094090428386930bf23e7e74d039b59",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2697239,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "current",
+    "repeat": 2,
+    "encodedBytes": 21360051,
+    "encodedSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21359843,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "mem9",
+    "repeat": 2,
+    "encodedBytes": 21332255,
+    "encodedSha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21332047,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "current",
+    "repeat": 2,
+    "encodedBytes": 27133939,
+    "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27133731,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "mem9",
+    "repeat": 2,
+    "encodedBytes": 27083829,
+    "encodedSha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27083621,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "mem9",
+    "repeat": 3,
+    "encodedBytes": 2697449,
+    "encodedSha256": "127612b5214af82c0ca8cf527800d3fff094090428386930bf23e7e74d039b59",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2697239,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "current",
+    "repeat": 3,
+    "encodedBytes": 2685110,
+    "encodedSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2684900,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "mem9",
+    "repeat": 3,
+    "encodedBytes": 21332255,
+    "encodedSha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21332047,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "current",
+    "repeat": 3,
+    "encodedBytes": 21360051,
+    "encodedSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21359843,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "mem9",
+    "repeat": 3,
+    "encodedBytes": 27083829,
+    "encodedSha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27083621,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "current",
+    "repeat": 3,
+    "encodedBytes": 27133939,
+    "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27133731,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "current",
+    "repeat": 4,
+    "encodedBytes": 2685110,
+    "encodedSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2684900,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "matched",
+    "method": "mem9",
+    "repeat": 4,
+    "encodedBytes": 2697449,
+    "encodedSha256": "127612b5214af82c0ca8cf527800d3fff094090428386930bf23e7e74d039b59",
+    "decoded": {
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "bytes": 24000001,
+      "entry": {
+        "fileName": "users.json",
+        "compressedSize": 2697239,
+        "uncompressedSize": 24000001,
+        "crc32": 732969009,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "current",
+    "repeat": 4,
+    "encodedBytes": 21360051,
+    "encodedSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21359843,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "narrow",
+    "method": "mem9",
+    "repeat": 4,
+    "encodedBytes": 21332255,
+    "encodedSha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+    "decoded": {
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "bytes": 83369847,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 21332047,
+        "uncompressedSize": 83369847,
+        "crc32": 3978534339,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "current",
+    "repeat": 4,
+    "encodedBytes": 27133939,
+    "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27133731,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  },
+  {
+    "dataset": "wide",
+    "method": "mem9",
+    "repeat": 4,
+    "encodedBytes": 27083829,
+    "encodedSha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+    "decoded": {
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "bytes": 100920480,
+      "entry": {
+        "fileName": "data.json",
+        "compressedSize": 27083621,
+        "uncompressedSize": 100920480,
+        "crc32": 1007474548,
+        "versionNeededToExtract": 20
+      }
+    },
+    "passed": true
+  }
+]

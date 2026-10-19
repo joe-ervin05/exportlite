@@ -1,0 +1,4722 @@
+[
+  {
+    "name": "table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 34.275458
+    },
+    "samples": [
+      {
+        "totalMs": 42.316046000000085,
+        "perRequestMs": 0.21158023000000042,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.694413000000083,
+        "perRequestMs": 0.14347206500000043,
+        "requests": 200
+      },
+      {
+        "totalMs": 27.67999799999984,
+        "perRequestMs": 0.1383999899999992,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 28.694413000000083,
+      "perRequestMs": 0.14347206500000043,
+      "requests": 200
+    },
+    "peakRssMiB": 107.578125,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "SELECT sqlite_version()",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT json_object('ok', 1)",
+          "method": "get"
+        },
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name FROM main.sqlite_schema WHERE name = ? COLLATE NOCASE AND type IN ('table', 'view')",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name, hidden FROM pragma_table_xinfo(?, 'main')",
+          "method": "all"
+        },
+        {
+          "sql": "SELECT type, wr, (SELECT encoding FROM pragma_encoding) AS encoding FROM pragma_table_list WHERE schema = 'main' AND name = ?",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.464750000000002
+    },
+    "samples": [
+      {
+        "totalMs": 35.16162899999994,
+        "perRequestMs": 0.1758081449999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.835834999999946,
+        "perRequestMs": 0.14417917499999974,
+        "requests": 200
+      },
+      {
+        "totalMs": 25.682382999999803,
+        "perRequestMs": 0.12841191499999902,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 28.835834999999946,
+      "perRequestMs": 0.14417917499999974,
+      "requests": 200
+    },
+    "peakRssMiB": 108.703125,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.15625
+    },
+    "samples": [
+      {
+        "totalMs": 22.37520699999999,
+        "perRequestMs": 0.4475041399999998,
+        "requests": 50
+      },
+      {
+        "totalMs": 19.53103999999996,
+        "perRequestMs": 0.3906207999999992,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.695371999999963,
+        "perRequestMs": 0.37390743999999926,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 19.53103999999996,
+      "perRequestMs": 0.3906207999999992,
+      "requests": 50
+    },
+    "peakRssMiB": 82.875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.302540999999998
+    },
+    "samples": [
+      {
+        "totalMs": 17.487916999999996,
+        "perRequestMs": 0.34975833999999995,
+        "requests": 50
+      },
+      {
+        "totalMs": 13.998790999999969,
+        "perRequestMs": 0.2799758199999994,
+        "requests": 50
+      },
+      {
+        "totalMs": 10.99737399999998,
+        "perRequestMs": 0.21994747999999958,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 13.998790999999969,
+      "perRequestMs": 0.2799758199999994,
+      "requests": 50
+    },
+    "peakRssMiB": 80.46875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "table-10",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 18.756415999999994
+    },
+    "samples": [
+      {
+        "totalMs": 36.537052000000024,
+        "perRequestMs": 0.18268526000000013,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.21708099999998,
+        "perRequestMs": 0.1460854049999999,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.181586000000024,
+        "perRequestMs": 0.14590793000000013,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.21708099999998,
+      "perRequestMs": 0.1460854049999999,
+      "requests": 200
+    },
+    "peakRssMiB": 108.21875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "table-10",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 16.759959000000002
+    },
+    "samples": [
+      {
+        "totalMs": 37.79807800000007,
+        "perRequestMs": 0.18899039000000034,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.3697199999999,
+        "perRequestMs": 0.1468485999999995,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.690832000000086,
+        "perRequestMs": 0.14345416000000044,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.3697199999999,
+      "perRequestMs": 0.1468485999999995,
+      "requests": 200
+    },
+    "peakRssMiB": 109.0625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "table-1000",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 17.678458
+    },
+    "samples": [
+      {
+        "totalMs": 32.98345999999998,
+        "perRequestMs": 0.6596691999999996,
+        "requests": 50
+      },
+      {
+        "totalMs": 32.46866700000007,
+        "perRequestMs": 0.6493733400000014,
+        "requests": 50
+      },
+      {
+        "totalMs": 29.984998999999874,
+        "perRequestMs": 0.5996999799999975,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 32.46866700000007,
+      "perRequestMs": 0.6493733400000014,
+      "requests": 50
+    },
+    "peakRssMiB": 114.046875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "table-1000",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 18.090917000000005
+    },
+    "samples": [
+      {
+        "totalMs": 31.604124999999954,
+        "perRequestMs": 0.6320824999999991,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.190752000000046,
+        "perRequestMs": 0.5638150400000009,
+        "requests": 50
+      },
+      {
+        "totalMs": 30.146876000000134,
+        "perRequestMs": 0.6029375200000027,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 30.146876000000134,
+      "perRequestMs": 0.6029375200000027,
+      "requests": 50
+    },
+    "peakRssMiB": 116.765625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 478.016209
+    },
+    "samples": [
+      {
+        "totalMs": 370.40141600000004,
+        "perRequestMs": 370.40141600000004,
+        "requests": 1
+      },
+      {
+        "totalMs": 368.44100000000003,
+        "perRequestMs": 368.44100000000003,
+        "requests": 1
+      },
+      {
+        "totalMs": 376.41116599999987,
+        "perRequestMs": 376.41116599999987,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 370.40141600000004,
+      "perRequestMs": 370.40141600000004,
+      "requests": 1
+    },
+    "peakRssMiB": 153.546875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 440.729583
+    },
+    "samples": [
+      {
+        "totalMs": 370.62024999999994,
+        "perRequestMs": 370.62024999999994,
+        "requests": 1
+      },
+      {
+        "totalMs": 364.72533299999986,
+        "perRequestMs": 364.72533299999986,
+        "requests": 1
+      },
+      {
+        "totalMs": 367.04383299999995,
+        "perRequestMs": 367.04383299999995,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 367.04383299999995,
+      "perRequestMs": 367.04383299999995,
+      "requests": 1
+    },
+    "peakRssMiB": 147.921875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 626.709292
+    },
+    "samples": [
+      {
+        "totalMs": 545.823709,
+        "perRequestMs": 545.823709,
+        "requests": 1
+      },
+      {
+        "totalMs": 559.757333,
+        "perRequestMs": 559.757333,
+        "requests": 1
+      },
+      {
+        "totalMs": 557.9475830000001,
+        "perRequestMs": 557.9475830000001,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 557.9475830000001,
+      "perRequestMs": 557.9475830000001,
+      "requests": 1
+    },
+    "peakRssMiB": 146.1875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 660.290125
+    },
+    "samples": [
+      {
+        "totalMs": 558.5929999999998,
+        "perRequestMs": 558.5929999999998,
+        "requests": 1
+      },
+      {
+        "totalMs": 556.1646250000001,
+        "perRequestMs": 556.1646250000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 563.467083,
+        "perRequestMs": 563.467083,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 558.5929999999998,
+      "perRequestMs": 558.5929999999998,
+      "requests": 1
+    },
+    "peakRssMiB": 145.375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "wide-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 1682.207458
+    },
+    "samples": [
+      {
+        "totalMs": 179.19845899999996,
+        "perRequestMs": 179.19845899999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 152.40733299999965,
+        "perRequestMs": 152.40733299999965,
+        "requests": 1
+      },
+      {
+        "totalMs": 151.2840839999999,
+        "perRequestMs": 151.2840839999999,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 152.40733299999965,
+      "perRequestMs": 152.40733299999965,
+      "requests": 1
+    },
+    "peakRssMiB": 210.484375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "wide-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 243.399875
+    },
+    "samples": [
+      {
+        "totalMs": 149.84425,
+        "perRequestMs": 149.84425,
+        "requests": 1
+      },
+      {
+        "totalMs": 169.720375,
+        "perRequestMs": 169.720375,
+        "requests": 1
+      },
+      {
+        "totalMs": 147.326417,
+        "perRequestMs": 147.326417,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 149.84425,
+      "perRequestMs": 149.84425,
+      "requests": 1
+    },
+    "peakRssMiB": 237.390625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "wide-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 732.819917
+    },
+    "samples": [
+      {
+        "totalMs": 673.3205419999999,
+        "perRequestMs": 673.3205419999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 684.7255829999999,
+        "perRequestMs": 684.7255829999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 671.791291,
+        "perRequestMs": 671.791291,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 673.3205419999999,
+      "perRequestMs": 673.3205419999999,
+      "requests": 1
+    },
+    "peakRssMiB": 189.34375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "wide-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 740.728458
+    },
+    "samples": [
+      {
+        "totalMs": 680.8306249999998,
+        "perRequestMs": 680.8306249999998,
+        "requests": 1
+      },
+      {
+        "totalMs": 695.7659999999996,
+        "perRequestMs": 695.7659999999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 669.7931249999997,
+        "perRequestMs": 669.7931249999997,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 680.8306249999998,
+      "perRequestMs": 680.8306249999998,
+      "requests": 1
+    },
+    "peakRssMiB": 182.046875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 0
+  },
+  {
+    "name": "table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.679375
+    },
+    "samples": [
+      {
+        "totalMs": 37.60608600000006,
+        "perRequestMs": 0.1880304300000003,
+        "requests": 200
+      },
+      {
+        "totalMs": 30.447080999999997,
+        "perRequestMs": 0.152235405,
+        "requests": 200
+      },
+      {
+        "totalMs": 27.597171999999915,
+        "perRequestMs": 0.13798585999999957,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 30.447080999999997,
+      "perRequestMs": 0.152235405,
+      "requests": 200
+    },
+    "peakRssMiB": 108.703125,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 19.496084000000003
+    },
+    "samples": [
+      {
+        "totalMs": 36.328656999999936,
+        "perRequestMs": 0.18164328499999968,
+        "requests": 200
+      },
+      {
+        "totalMs": 31.75537599999994,
+        "perRequestMs": 0.1587768799999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.41082700000021,
+        "perRequestMs": 0.14205413500000105,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 31.75537599999994,
+      "perRequestMs": 0.1587768799999997,
+      "requests": 200
+    },
+    "peakRssMiB": 107.125,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "SELECT sqlite_version()",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT json_object('ok', 1)",
+          "method": "get"
+        },
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name FROM main.sqlite_schema WHERE name = ? COLLATE NOCASE AND type IN ('table', 'view')",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name, hidden FROM pragma_table_xinfo(?, 'main')",
+          "method": "all"
+        },
+        {
+          "sql": "SELECT type, wr, (SELECT encoding FROM pragma_encoding) AS encoding FROM pragma_table_list WHERE schema = 'main' AND name = ?",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.357167000000004
+    },
+    "samples": [
+      {
+        "totalMs": 15.87812700000002,
+        "perRequestMs": 0.3175625400000004,
+        "requests": 50
+      },
+      {
+        "totalMs": 12.545917000000003,
+        "perRequestMs": 0.2509183400000001,
+        "requests": 50
+      },
+      {
+        "totalMs": 11.048460999999989,
+        "perRequestMs": 0.22096921999999977,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 12.545917000000003,
+      "perRequestMs": 0.2509183400000001,
+      "requests": 50
+    },
+    "peakRssMiB": 80.09375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.556042000000005
+    },
+    "samples": [
+      {
+        "totalMs": 23.017326999999987,
+        "perRequestMs": 0.46034653999999975,
+        "requests": 50
+      },
+      {
+        "totalMs": 19.843291000000022,
+        "perRequestMs": 0.3968658200000004,
+        "requests": 50
+      },
+      {
+        "totalMs": 19.807581000000013,
+        "perRequestMs": 0.39615162000000026,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 19.843291000000022,
+      "perRequestMs": 0.3968658200000004,
+      "requests": 50
+    },
+    "peakRssMiB": 82.828125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "table-10",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 17.862625
+    },
+    "samples": [
+      {
+        "totalMs": 38.24683000000006,
+        "perRequestMs": 0.1912341500000003,
+        "requests": 200
+      },
+      {
+        "totalMs": 31.372170999999966,
+        "perRequestMs": 0.15686085499999983,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.689751999999828,
+        "perRequestMs": 0.14844875999999915,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 31.372170999999966,
+      "perRequestMs": 0.15686085499999983,
+      "requests": 200
+    },
+    "peakRssMiB": 108.84375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "table-10",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 23.073041999999994
+    },
+    "samples": [
+      {
+        "totalMs": 47.633416,
+        "perRequestMs": 0.23816707999999998,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.46928700000001,
+        "perRequestMs": 0.14734643500000005,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.053797999999915,
+        "perRequestMs": 0.14026898999999957,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.46928700000001,
+      "perRequestMs": 0.14734643500000005,
+      "requests": 200
+    },
+    "peakRssMiB": 108.375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "table-1000",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 18.592917
+    },
+    "samples": [
+      {
+        "totalMs": 33.55195599999996,
+        "perRequestMs": 0.6710391199999992,
+        "requests": 50
+      },
+      {
+        "totalMs": 30.934041000000022,
+        "perRequestMs": 0.6186808200000005,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.519082999999796,
+        "perRequestMs": 0.5703816599999959,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 30.934041000000022,
+      "perRequestMs": 0.6186808200000005,
+      "requests": 50
+    },
+    "peakRssMiB": 113.984375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "table-1000",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 18.028749999999995
+    },
+    "samples": [
+      {
+        "totalMs": 31.584957000000045,
+        "perRequestMs": 0.6316991400000009,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.76620800000002,
+        "perRequestMs": 0.5753241600000004,
+        "requests": 50
+      },
+      {
+        "totalMs": 29.498913999999942,
+        "perRequestMs": 0.5899782799999989,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 29.498913999999942,
+      "perRequestMs": 0.5899782799999989,
+      "requests": 50
+    },
+    "peakRssMiB": 114.65625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 474.28925000000004
+    },
+    "samples": [
+      {
+        "totalMs": 402.033459,
+        "perRequestMs": 402.033459,
+        "requests": 1
+      },
+      {
+        "totalMs": 405.223209,
+        "perRequestMs": 405.223209,
+        "requests": 1
+      },
+      {
+        "totalMs": 370.25704199999996,
+        "perRequestMs": 370.25704199999996,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 402.033459,
+      "perRequestMs": 402.033459,
+      "requests": 1
+    },
+    "peakRssMiB": 157.734375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 439.177416
+    },
+    "samples": [
+      {
+        "totalMs": 375.56620799999996,
+        "perRequestMs": 375.56620799999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 380.165125,
+        "perRequestMs": 380.165125,
+        "requests": 1
+      },
+      {
+        "totalMs": 370.4118330000001,
+        "perRequestMs": 370.4118330000001,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 375.56620799999996,
+      "perRequestMs": 375.56620799999996,
+      "requests": 1
+    },
+    "peakRssMiB": 153.171875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 631.634
+    },
+    "samples": [
+      {
+        "totalMs": 561.4093330000001,
+        "perRequestMs": 561.4093330000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 565.8957499999999,
+        "perRequestMs": 565.8957499999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 555.2014590000003,
+        "perRequestMs": 555.2014590000003,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 561.4093330000001,
+      "perRequestMs": 561.4093330000001,
+      "requests": 1
+    },
+    "peakRssMiB": 147.53125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 633.469041
+    },
+    "samples": [
+      {
+        "totalMs": 548.254625,
+        "perRequestMs": 548.254625,
+        "requests": 1
+      },
+      {
+        "totalMs": 550.4155830000002,
+        "perRequestMs": 550.4155830000002,
+        "requests": 1
+      },
+      {
+        "totalMs": 554.6364589999998,
+        "perRequestMs": 554.6364589999998,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 550.4155830000002,
+      "perRequestMs": 550.4155830000002,
+      "requests": 1
+    },
+    "peakRssMiB": 176.6875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "wide-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 250.25100000000003
+    },
+    "samples": [
+      {
+        "totalMs": 144.35670799999997,
+        "perRequestMs": 144.35670799999997,
+        "requests": 1
+      },
+      {
+        "totalMs": 149.49962499999992,
+        "perRequestMs": 149.49962499999992,
+        "requests": 1
+      },
+      {
+        "totalMs": 141.04775000000006,
+        "perRequestMs": 141.04775000000006,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 144.35670799999997,
+      "perRequestMs": 144.35670799999997,
+      "requests": 1
+    },
+    "peakRssMiB": 186.53125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "wide-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 293.28579199999996
+    },
+    "samples": [
+      {
+        "totalMs": 220.812541,
+        "perRequestMs": 220.812541,
+        "requests": 1
+      },
+      {
+        "totalMs": 513.9246659999999,
+        "perRequestMs": 513.9246659999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 183.87587499999995,
+        "perRequestMs": 183.87587499999995,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 220.812541,
+      "perRequestMs": 220.812541,
+      "requests": 1
+    },
+    "peakRssMiB": 228.5625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "wide-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 776.80175
+    },
+    "samples": [
+      {
+        "totalMs": 690.3936659999999,
+        "perRequestMs": 690.3936659999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 686.855916,
+        "perRequestMs": 686.855916,
+        "requests": 1
+      },
+      {
+        "totalMs": 706.04225,
+        "perRequestMs": 706.04225,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 690.3936659999999,
+      "perRequestMs": 690.3936659999999,
+      "requests": 1
+    },
+    "peakRssMiB": 197.15625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "wide-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 767.0515409999999
+    },
+    "samples": [
+      {
+        "totalMs": 685.9209580000002,
+        "perRequestMs": 685.9209580000002,
+        "requests": 1
+      },
+      {
+        "totalMs": 674.8702499999999,
+        "perRequestMs": 674.8702499999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 678.0446669999997,
+        "perRequestMs": 678.0446669999997,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 678.0446669999997,
+      "perRequestMs": 678.0446669999997,
+      "requests": 1
+    },
+    "peakRssMiB": 197.265625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 1
+  },
+  {
+    "name": "table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.93575
+    },
+    "samples": [
+      {
+        "totalMs": 34.753088000000034,
+        "perRequestMs": 0.17376544000000016,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.910654000000108,
+        "perRequestMs": 0.14955327000000054,
+        "requests": 200
+      },
+      {
+        "totalMs": 26.5197850000001,
+        "perRequestMs": 0.13259892500000048,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.910654000000108,
+      "perRequestMs": 0.14955327000000054,
+      "requests": 200
+    },
+    "peakRssMiB": 107.578125,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "SELECT sqlite_version()",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT json_object('ok', 1)",
+          "method": "get"
+        },
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name FROM main.sqlite_schema WHERE name = ? COLLATE NOCASE AND type IN ('table', 'view')",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name, hidden FROM pragma_table_xinfo(?, 'main')",
+          "method": "all"
+        },
+        {
+          "sql": "SELECT type, wr, (SELECT encoding FROM pragma_encoding) AS encoding FROM pragma_table_list WHERE schema = 'main' AND name = ?",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.734667
+    },
+    "samples": [
+      {
+        "totalMs": 36.00324699999994,
+        "perRequestMs": 0.1800162349999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 30.772167999999994,
+        "perRequestMs": 0.15386083999999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.68774500000002,
+        "perRequestMs": 0.1434387250000001,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 30.772167999999994,
+      "perRequestMs": 0.15386083999999997,
+      "requests": 200
+    },
+    "peakRssMiB": 108.171875,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.951417
+    },
+    "samples": [
+      {
+        "totalMs": 22.648252000000078,
+        "perRequestMs": 0.45296504000000154,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.72650200000004,
+        "perRequestMs": 0.3745300400000008,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.134543000000036,
+        "perRequestMs": 0.3626908600000007,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 18.72650200000004,
+      "perRequestMs": 0.3745300400000008,
+      "requests": 50
+    },
+    "peakRssMiB": 82.53125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.244750000000003
+    },
+    "samples": [
+      {
+        "totalMs": 17.338839000000036,
+        "perRequestMs": 0.34677678000000073,
+        "requests": 50
+      },
+      {
+        "totalMs": 15.036831999999947,
+        "perRequestMs": 0.30073663999999894,
+        "requests": 50
+      },
+      {
+        "totalMs": 15.012831999999989,
+        "perRequestMs": 0.3002566399999998,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 15.036831999999947,
+      "perRequestMs": 0.30073663999999894,
+      "requests": 50
+    },
+    "peakRssMiB": 80.046875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "table-10",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 18.072249999999997
+    },
+    "samples": [
+      {
+        "totalMs": 38.056459999999944,
+        "perRequestMs": 0.1902822999999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.307867,
+        "perRequestMs": 0.14653933500000002,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.04320700000028,
+        "perRequestMs": 0.1452160350000014,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.307867,
+      "perRequestMs": 0.14653933500000002,
+      "requests": 200
+    },
+    "peakRssMiB": 108.15625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "table-10",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 19.768042
+    },
+    "samples": [
+      {
+        "totalMs": 35.78187200000009,
+        "perRequestMs": 0.17890936000000046,
+        "requests": 200
+      },
+      {
+        "totalMs": 30.216376000000025,
+        "perRequestMs": 0.1510818800000001,
+        "requests": 200
+      },
+      {
+        "totalMs": 27.867001000000045,
+        "perRequestMs": 0.13933500500000023,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 30.216376000000025,
+      "perRequestMs": 0.1510818800000001,
+      "requests": 200
+    },
+    "peakRssMiB": 109.296875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "table-1000",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 20.198916999999994
+    },
+    "samples": [
+      {
+        "totalMs": 31.476205999999948,
+        "perRequestMs": 0.6295241199999989,
+        "requests": 50
+      },
+      {
+        "totalMs": 30.635041,
+        "perRequestMs": 0.61270082,
+        "requests": 50
+      },
+      {
+        "totalMs": 30.714789999999937,
+        "perRequestMs": 0.6142957999999987,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 30.714789999999937,
+      "perRequestMs": 0.6142957999999987,
+      "requests": 50
+    },
+    "peakRssMiB": 115.625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "table-1000",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 17.264415999999997
+    },
+    "samples": [
+      {
+        "totalMs": 31.811749999999975,
+        "perRequestMs": 0.6362349999999996,
+        "requests": 50
+      },
+      {
+        "totalMs": 30.07324599999997,
+        "perRequestMs": 0.6014649199999994,
+        "requests": 50
+      },
+      {
+        "totalMs": 27.695624999999865,
+        "perRequestMs": 0.5539124999999973,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 30.07324599999997,
+      "perRequestMs": 0.6014649199999994,
+      "requests": 50
+    },
+    "peakRssMiB": 114.25,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 442.758125
+    },
+    "samples": [
+      {
+        "totalMs": 385.44216700000004,
+        "perRequestMs": 385.44216700000004,
+        "requests": 1
+      },
+      {
+        "totalMs": 379.08912499999997,
+        "perRequestMs": 379.08912499999997,
+        "requests": 1
+      },
+      {
+        "totalMs": 371.30224999999996,
+        "perRequestMs": 371.30224999999996,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 379.08912499999997,
+      "perRequestMs": 379.08912499999997,
+      "requests": 1
+    },
+    "peakRssMiB": 156.25,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 437.813333
+    },
+    "samples": [
+      {
+        "totalMs": 370.5,
+        "perRequestMs": 370.5,
+        "requests": 1
+      },
+      {
+        "totalMs": 372.3667499999999,
+        "perRequestMs": 372.3667499999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 368.050125,
+        "perRequestMs": 368.050125,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 370.5,
+      "perRequestMs": 370.5,
+      "requests": 1
+    },
+    "peakRssMiB": 152.421875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 621.21525
+    },
+    "samples": [
+      {
+        "totalMs": 561.5759170000001,
+        "perRequestMs": 561.5759170000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 707.464667,
+        "perRequestMs": 707.464667,
+        "requests": 1
+      },
+      {
+        "totalMs": 696.1602090000001,
+        "perRequestMs": 696.1602090000001,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 696.1602090000001,
+      "perRequestMs": 696.1602090000001,
+      "requests": 1
+    },
+    "peakRssMiB": 149.515625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 679.41925
+    },
+    "samples": [
+      {
+        "totalMs": 1018.571375,
+        "perRequestMs": 1018.571375,
+        "requests": 1
+      },
+      {
+        "totalMs": 571.6330409999996,
+        "perRequestMs": 571.6330409999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 554.1714999999999,
+        "perRequestMs": 554.1714999999999,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 571.6330409999996,
+      "perRequestMs": 571.6330409999996,
+      "requests": 1
+    },
+    "peakRssMiB": 152.640625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "wide-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 363.23745799999995
+    },
+    "samples": [
+      {
+        "totalMs": 145.397375,
+        "perRequestMs": 145.397375,
+        "requests": 1
+      },
+      {
+        "totalMs": 145.68624999999997,
+        "perRequestMs": 145.68624999999997,
+        "requests": 1
+      },
+      {
+        "totalMs": 144.82233299999996,
+        "perRequestMs": 144.82233299999996,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 145.397375,
+      "perRequestMs": 145.397375,
+      "requests": 1
+    },
+    "peakRssMiB": 179.546875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "wide-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 285.671291
+    },
+    "samples": [
+      {
+        "totalMs": 175.14662499999997,
+        "perRequestMs": 175.14662499999997,
+        "requests": 1
+      },
+      {
+        "totalMs": 163.89920800000004,
+        "perRequestMs": 163.89920800000004,
+        "requests": 1
+      },
+      {
+        "totalMs": 153.350417,
+        "perRequestMs": 153.350417,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 163.89920800000004,
+      "perRequestMs": 163.89920800000004,
+      "requests": 1
+    },
+    "peakRssMiB": 206.03125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "wide-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 810.447917
+    },
+    "samples": [
+      {
+        "totalMs": 713.0248750000001,
+        "perRequestMs": 713.0248750000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 726.2213750000001,
+        "perRequestMs": 726.2213750000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 757.7563329999998,
+        "perRequestMs": 757.7563329999998,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 726.2213750000001,
+      "perRequestMs": 726.2213750000001,
+      "requests": 1
+    },
+    "peakRssMiB": 198.578125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "wide-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 730.723041
+    },
+    "samples": [
+      {
+        "totalMs": 680.455375,
+        "perRequestMs": 680.455375,
+        "requests": 1
+      },
+      {
+        "totalMs": 666.5768330000001,
+        "perRequestMs": 666.5768330000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 679.5998750000003,
+        "perRequestMs": 679.5998750000003,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 679.5998750000003,
+      "perRequestMs": 679.5998750000003,
+      "requests": 1
+    },
+    "peakRssMiB": 189.359375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 2
+  },
+  {
+    "name": "table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.154000000000003
+    },
+    "samples": [
+      {
+        "totalMs": 37.23145799999999,
+        "perRequestMs": 0.18615728999999995,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.25375399999993,
+        "perRequestMs": 0.14626876999999966,
+        "requests": 200
+      },
+      {
+        "totalMs": 26.96912100000003,
+        "perRequestMs": 0.13484560500000015,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.25375399999993,
+      "perRequestMs": 0.14626876999999966,
+      "requests": 200
+    },
+    "peakRssMiB": 108.34375,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.841375
+    },
+    "samples": [
+      {
+        "totalMs": 35.32641399999998,
+        "perRequestMs": 0.1766320699999999,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.404794999999908,
+        "perRequestMs": 0.14202397499999952,
+        "requests": 200
+      },
+      {
+        "totalMs": 25.393835999999737,
+        "perRequestMs": 0.12696917999999868,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 28.404794999999908,
+      "perRequestMs": 0.14202397499999952,
+      "requests": 200
+    },
+    "peakRssMiB": 107.65625,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "SELECT sqlite_version()",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT json_object('ok', 1)",
+          "method": "get"
+        },
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name FROM main.sqlite_schema WHERE name = ? COLLATE NOCASE AND type IN ('table', 'view')",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name, hidden FROM pragma_table_xinfo(?, 'main')",
+          "method": "all"
+        },
+        {
+          "sql": "SELECT type, wr, (SELECT encoding FROM pragma_encoding) AS encoding FROM pragma_table_list WHERE schema = 'main' AND name = ?",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 16.954957999999998
+    },
+    "samples": [
+      {
+        "totalMs": 15.362755999999926,
+        "perRequestMs": 0.30725511999999855,
+        "requests": 50
+      },
+      {
+        "totalMs": 11.976455999999985,
+        "perRequestMs": 0.2395291199999997,
+        "requests": 50
+      },
+      {
+        "totalMs": 11.168081999999984,
+        "perRequestMs": 0.2233616399999997,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 11.976455999999985,
+      "perRequestMs": 0.2395291199999997,
+      "requests": 50
+    },
+    "peakRssMiB": 80.203125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.000124999999997
+    },
+    "samples": [
+      {
+        "totalMs": 22.825002000000012,
+        "perRequestMs": 0.4565000400000002,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.322626999999997,
+        "perRequestMs": 0.36645253999999994,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.47062299999999,
+        "perRequestMs": 0.34941245999999976,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 18.322626999999997,
+      "perRequestMs": 0.36645253999999994,
+      "requests": 50
+    },
+    "peakRssMiB": 82.53125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "table-10",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 17.223458
+    },
+    "samples": [
+      {
+        "totalMs": 35.582749000000106,
+        "perRequestMs": 0.17791374500000054,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.293080999999944,
+        "perRequestMs": 0.1414654049999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 27.726497999999964,
+        "perRequestMs": 0.13863248999999983,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 28.293080999999944,
+      "perRequestMs": 0.1414654049999997,
+      "requests": 200
+    },
+    "peakRssMiB": 108.59375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "table-10",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 17.4255
+    },
+    "samples": [
+      {
+        "totalMs": 35.733293999999894,
+        "perRequestMs": 0.17866646999999947,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.00634000000005,
+        "perRequestMs": 0.14503170000000026,
+        "requests": 200
+      },
+      {
+        "totalMs": 27.388538999999994,
+        "perRequestMs": 0.13694269499999998,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.00634000000005,
+      "perRequestMs": 0.14503170000000026,
+      "requests": 200
+    },
+    "peakRssMiB": 107.828125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "table-1000",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 19.280834
+    },
+    "samples": [
+      {
+        "totalMs": 30.052671999999973,
+        "perRequestMs": 0.6010534399999995,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.245374000000012,
+        "perRequestMs": 0.5649074800000002,
+        "requests": 50
+      },
+      {
+        "totalMs": 27.761668,
+        "perRequestMs": 0.55523336,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 28.245374000000012,
+      "perRequestMs": 0.5649074800000002,
+      "requests": 50
+    },
+    "peakRssMiB": 114.34375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "table-1000",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 18.132792000000002
+    },
+    "samples": [
+      {
+        "totalMs": 29.550709000000055,
+        "perRequestMs": 0.591014180000001,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.162125000000017,
+        "perRequestMs": 0.5632425000000003,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.616793000000072,
+        "perRequestMs": 0.5723358600000015,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 28.616793000000072,
+      "perRequestMs": 0.5723358600000015,
+      "requests": 50
+    },
+    "peakRssMiB": 116.890625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 435.145583
+    },
+    "samples": [
+      {
+        "totalMs": 371.23825,
+        "perRequestMs": 371.23825,
+        "requests": 1
+      },
+      {
+        "totalMs": 367.69733399999996,
+        "perRequestMs": 367.69733399999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 366.87633299999993,
+        "perRequestMs": 366.87633299999993,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 367.69733399999996,
+      "perRequestMs": 367.69733399999996,
+      "requests": 1
+    },
+    "peakRssMiB": 146.4375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 444.274
+    },
+    "samples": [
+      {
+        "totalMs": 368.333083,
+        "perRequestMs": 368.333083,
+        "requests": 1
+      },
+      {
+        "totalMs": 368.93045800000004,
+        "perRequestMs": 368.93045800000004,
+        "requests": 1
+      },
+      {
+        "totalMs": 373.32837500000005,
+        "perRequestMs": 373.32837500000005,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 368.93045800000004,
+      "perRequestMs": 368.93045800000004,
+      "requests": 1
+    },
+    "peakRssMiB": 149.0625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 623.752375
+    },
+    "samples": [
+      {
+        "totalMs": 558.4419170000001,
+        "perRequestMs": 558.4419170000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 553.9025000000001,
+        "perRequestMs": 553.9025000000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 571.682542,
+        "perRequestMs": 571.682542,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 558.4419170000001,
+      "perRequestMs": 558.4419170000001,
+      "requests": 1
+    },
+    "peakRssMiB": 150.640625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 618.413125
+    },
+    "samples": [
+      {
+        "totalMs": 564.311917,
+        "perRequestMs": 564.311917,
+        "requests": 1
+      },
+      {
+        "totalMs": 549.3207499999999,
+        "perRequestMs": 549.3207499999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 550.1874579999999,
+        "perRequestMs": 550.1874579999999,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 550.1874579999999,
+      "perRequestMs": 550.1874579999999,
+      "requests": 1
+    },
+    "peakRssMiB": 145.34375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "wide-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 217.86766699999998
+    },
+    "samples": [
+      {
+        "totalMs": 147.42395799999997,
+        "perRequestMs": 147.42395799999997,
+        "requests": 1
+      },
+      {
+        "totalMs": 166.911875,
+        "perRequestMs": 166.911875,
+        "requests": 1
+      },
+      {
+        "totalMs": 152.44858399999998,
+        "perRequestMs": 152.44858399999998,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 152.44858399999998,
+      "perRequestMs": 152.44858399999998,
+      "requests": 1
+    },
+    "peakRssMiB": 175.15625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "wide-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 224.379333
+    },
+    "samples": [
+      {
+        "totalMs": 145.82474999999994,
+        "perRequestMs": 145.82474999999994,
+        "requests": 1
+      },
+      {
+        "totalMs": 142.01350000000002,
+        "perRequestMs": 142.01350000000002,
+        "requests": 1
+      },
+      {
+        "totalMs": 143.32329200000004,
+        "perRequestMs": 143.32329200000004,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 143.32329200000004,
+      "perRequestMs": 143.32329200000004,
+      "requests": 1
+    },
+    "peakRssMiB": 207.515625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "wide-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 942.8697080000001
+    },
+    "samples": [
+      {
+        "totalMs": 680.3931670000002,
+        "perRequestMs": 680.3931670000002,
+        "requests": 1
+      },
+      {
+        "totalMs": 676.095292,
+        "perRequestMs": 676.095292,
+        "requests": 1
+      },
+      {
+        "totalMs": 674.7570409999998,
+        "perRequestMs": 674.7570409999998,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 676.095292,
+      "perRequestMs": 676.095292,
+      "requests": 1
+    },
+    "peakRssMiB": 194.671875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "wide-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 751.212291
+    },
+    "samples": [
+      {
+        "totalMs": 673.281583,
+        "perRequestMs": 673.281583,
+        "requests": 1
+      },
+      {
+        "totalMs": 682.048542,
+        "perRequestMs": 682.048542,
+        "requests": 1
+      },
+      {
+        "totalMs": 674.2721669999996,
+        "perRequestMs": 674.2721669999996,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 674.2721669999996,
+      "perRequestMs": 674.2721669999996,
+      "requests": 1
+    },
+    "peakRssMiB": 193.40625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 3
+  },
+  {
+    "name": "table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.473958000000003
+    },
+    "samples": [
+      {
+        "totalMs": 34.61937999999999,
+        "perRequestMs": 0.17309689999999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 28.541537000000105,
+        "perRequestMs": 0.14270768500000053,
+        "requests": 200
+      },
+      {
+        "totalMs": 24.89992600000005,
+        "perRequestMs": 0.12449963000000025,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 28.541537000000105,
+      "perRequestMs": 0.14270768500000053,
+      "requests": 200
+    },
+    "peakRssMiB": 107.859375,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "SELECT sqlite_version()",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT json_object('ok', 1)",
+          "method": "get"
+        },
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name FROM main.sqlite_schema WHERE name = ? COLLATE NOCASE AND type IN ('table', 'view')",
+          "method": "get"
+        },
+        {
+          "sql": "SELECT name, hidden FROM pragma_table_xinfo(?, 'main')",
+          "method": "all"
+        },
+        {
+          "sql": "SELECT type, wr, (SELECT encoding FROM pragma_encoding) AS encoding FROM pragma_table_list WHERE schema = 'main' AND name = ?",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "PRAGMA main.schema_version",
+          "method": "get"
+        },
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 16.840084
+    },
+    "samples": [
+      {
+        "totalMs": 36.28487899999993,
+        "perRequestMs": 0.18142439499999966,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.101507000000083,
+        "perRequestMs": 0.1455075350000004,
+        "requests": 200
+      },
+      {
+        "totalMs": 26.903413999999884,
+        "perRequestMs": 0.13451706999999943,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.101507000000083,
+      "perRequestMs": 0.1455075350000004,
+      "requests": 200
+    },
+    "peakRssMiB": 108.359375,
+    "queryCounts": {
+      "cold": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ],
+      "warm": [
+        {
+          "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT CASE WHEN \"__exportlite_source\".\"id\" IS NULL THEN json('ExportLite: primary key must not be null') ELSE \"__exportlite_source\".\"id\" END FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1),\n      (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\"\n        WHERE \"__exportlite_source\".\"id\" > \"__exportlite_batches\".\"last\" ORDER BY \"__exportlite_source\".\"id\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"__exportlite_c0\", 'name', \"__exportlite_c1\", 'note', \"__exportlite_c2\", 'active', \"__exportlite_c3\")) AS BLOB)\n    FROM (SELECT \"__exportlite_source\".\"id\" AS \"__exportlite_c0\", \"__exportlite_source\".\"name\" AS \"__exportlite_c1\", \"__exportlite_source\".\"note\" AS \"__exportlite_c2\", \"__exportlite_source\".\"active\" AS \"__exportlite_c3\" FROM main.\"data1\" AS \"__exportlite_source\"\n      WHERE \"__exportlite_source\".\"id\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", (SELECT \"__exportlite_source\".\"id\" FROM main.\"data1\" AS \"__exportlite_source\" ORDER BY \"__exportlite_source\".\"id\" DESC LIMIT 1))\n      ORDER BY \"__exportlite_source\".\"id\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data1\" AS \"__exportlite_source\" WHERE \"__exportlite_source\".\"id\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+          "method": "iterate"
+        }
+      ]
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 16.837458999999996
+    },
+    "samples": [
+      {
+        "totalMs": 24.995751000000013,
+        "perRequestMs": 0.49991502000000027,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.08291899999996,
+        "perRequestMs": 0.3616583799999992,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.276499000000044,
+        "perRequestMs": 0.3455299800000009,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 18.08291899999996,
+      "perRequestMs": 0.3616583799999992,
+      "requests": 50
+    },
+    "peakRssMiB": 82.84375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "variant",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.703000000000003
+    },
+    "samples": [
+      {
+        "totalMs": 14.794414999999972,
+        "perRequestMs": 0.29588829999999944,
+        "requests": 50
+      },
+      {
+        "totalMs": 12.004623999999978,
+        "perRequestMs": 0.24009247999999958,
+        "requests": 50
+      },
+      {
+        "totalMs": 11.128372999999954,
+        "perRequestMs": 0.22256745999999908,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 12.004623999999978,
+      "perRequestMs": 0.24009247999999958,
+      "requests": 50
+    },
+    "peakRssMiB": 80.21875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "table-10",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 18.014042000000003
+    },
+    "samples": [
+      {
+        "totalMs": 35.534499000000025,
+        "perRequestMs": 0.17767249500000012,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.15974700000004,
+        "perRequestMs": 0.14579873500000018,
+        "requests": 200
+      },
+      {
+        "totalMs": 27.603127999999842,
+        "perRequestMs": 0.13801563999999922,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.15974700000004,
+      "perRequestMs": 0.14579873500000018,
+      "requests": 200
+    },
+    "peakRssMiB": 108.140625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "table-10",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-10",
+      "api": "table",
+      "rows": 10,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data10",
+      "expected": {
+        "bytes": 820,
+        "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+      },
+      "iterations": 200,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 820,
+      "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5",
+      "totalMs": 17.199542
+    },
+    "samples": [
+      {
+        "totalMs": 37.423582999999994,
+        "perRequestMs": 0.18711791499999997,
+        "requests": 200
+      },
+      {
+        "totalMs": 29.799992000000017,
+        "perRequestMs": 0.1489999600000001,
+        "requests": 200
+      },
+      {
+        "totalMs": 26.045742999999888,
+        "perRequestMs": 0.13022871499999944,
+        "requests": 200
+      }
+    ],
+    "median": {
+      "totalMs": 29.799992000000017,
+      "perRequestMs": 0.1489999600000001,
+      "requests": 200
+    },
+    "peakRssMiB": 109.15625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "table-1000",
+    "variant": "baseline",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 19.082082999999997
+    },
+    "samples": [
+      {
+        "totalMs": 30.277957000000015,
+        "perRequestMs": 0.6055591400000003,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.62941900000004,
+        "perRequestMs": 0.5725883800000008,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.040042999999798,
+        "perRequestMs": 0.560800859999996,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 28.62941900000004,
+      "perRequestMs": 0.5725883800000008,
+      "requests": 50
+    },
+    "peakRssMiB": 119.21875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "table-1000",
+    "variant": "variant",
+    "fixture": {
+      "name": "table-1000",
+      "api": "table",
+      "rows": 1000,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1000",
+      "expected": {
+        "bytes": 80422,
+        "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+      },
+      "iterations": 50,
+      "warmups": 20,
+      "cold": false,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 80422,
+      "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609",
+      "totalMs": 17.898292000000005
+    },
+    "samples": [
+      {
+        "totalMs": 32.237875999999986,
+        "perRequestMs": 0.6447575199999998,
+        "requests": 50
+      },
+      {
+        "totalMs": 29.469335000000058,
+        "perRequestMs": 0.5893867000000012,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.346961999999962,
+        "perRequestMs": 0.5669392399999993,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 29.469335000000058,
+      "perRequestMs": 0.5893867000000012,
+      "requests": 50
+    },
+    "peakRssMiB": 114.515625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 439.976334
+    },
+    "samples": [
+      {
+        "totalMs": 371.81937500000004,
+        "perRequestMs": 371.81937500000004,
+        "requests": 1
+      },
+      {
+        "totalMs": 365.9028329999999,
+        "perRequestMs": 365.9028329999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 365.94054099999994,
+        "perRequestMs": 365.94054099999994,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 365.94054099999994,
+      "perRequestMs": 365.94054099999994,
+      "requests": 1
+    },
+    "peakRssMiB": 148.1875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "narrow-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-plain",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc"
+    },
+    "verification": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832",
+      "totalMs": 437.114667
+    },
+    "samples": [
+      {
+        "totalMs": 365.68562499999996,
+        "perRequestMs": 365.68562499999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 370.8766660000001,
+        "perRequestMs": 370.8766660000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 375.69333300000017,
+        "perRequestMs": 375.69333300000017,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 370.8766660000001,
+      "perRequestMs": 370.8766660000001,
+      "requests": 1
+    },
+    "peakRssMiB": 152.109375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 624.135333
+    },
+    "samples": [
+      {
+        "totalMs": 555.4323750000001,
+        "perRequestMs": 555.4323750000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 545.3721250000001,
+        "perRequestMs": 545.3721250000001,
+        "requests": 1
+      },
+      {
+        "totalMs": 554.080125,
+        "perRequestMs": 554.080125,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 554.080125,
+      "perRequestMs": 554.080125,
+      "requests": 1
+    },
+    "peakRssMiB": 147.21875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "narrow-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "narrow-zip",
+      "api": "table",
+      "rows": 1000000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "table": "data",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expectedZip": {
+        "bytes": 21332255,
+        "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90"
+      }
+    },
+    "verification": {
+      "bytes": 21332255,
+      "sha256": "1b3a5a551e15e5bb6a369922285f19f92e8819ccab5a1a0a860215e880279a90",
+      "totalMs": 627.05725
+    },
+    "samples": [
+      {
+        "totalMs": 552.7043329999999,
+        "perRequestMs": 552.7043329999999,
+        "requests": 1
+      },
+      {
+        "totalMs": 549.4581669999998,
+        "perRequestMs": 549.4581669999998,
+        "requests": 1
+      },
+      {
+        "totalMs": 554.0288340000002,
+        "perRequestMs": 554.0288340000002,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 552.7043329999999,
+      "perRequestMs": 552.7043329999999,
+      "requests": 1
+    },
+    "peakRssMiB": 145.0625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "wide-plain",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 236.115542
+    },
+    "samples": [
+      {
+        "totalMs": 156.76487499999996,
+        "perRequestMs": 156.76487499999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 146.15324999999996,
+        "perRequestMs": 146.15324999999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 142.96387500000003,
+        "perRequestMs": 142.96387500000003,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 146.15324999999996,
+      "perRequestMs": 146.15324999999996,
+      "requests": 1
+    },
+    "peakRssMiB": 190.796875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "wide-plain",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-plain",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": false,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d"
+    },
+    "verification": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5",
+      "totalMs": 222.301167
+    },
+    "samples": [
+      {
+        "totalMs": 144.69174999999996,
+        "perRequestMs": 144.69174999999996,
+        "requests": 1
+      },
+      {
+        "totalMs": 143.51862500000004,
+        "perRequestMs": 143.51862500000004,
+        "requests": 1
+      },
+      {
+        "totalMs": 143.42954200000008,
+        "perRequestMs": 143.42954200000008,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 143.51862500000004,
+      "perRequestMs": 143.51862500000004,
+      "requests": 1
+    },
+    "peakRssMiB": 195.53125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "wide-zip",
+    "variant": "baseline",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 736.4565829999999
+    },
+    "samples": [
+      {
+        "totalMs": 670.096458,
+        "perRequestMs": 670.096458,
+        "requests": 1
+      },
+      {
+        "totalMs": 699.8468750000002,
+        "perRequestMs": 699.8468750000002,
+        "requests": 1
+      },
+      {
+        "totalMs": 682.2616669999998,
+        "perRequestMs": 682.2616669999998,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 682.2616669999998,
+      "perRequestMs": 682.2616669999998,
+      "requests": 1
+    },
+    "peakRssMiB": 191.25,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  },
+  {
+    "name": "wide-zip",
+    "variant": "variant",
+    "fixture": {
+      "name": "wide-zip",
+      "api": "table",
+      "rows": 100000,
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "table": "data",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      },
+      "iterations": 1,
+      "warmups": 1,
+      "cold": false,
+      "zip": true,
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expectedZip": {
+        "bytes": 27083829,
+        "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+      }
+    },
+    "verification": {
+      "bytes": 27083829,
+      "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e",
+      "totalMs": 734.969833
+    },
+    "samples": [
+      {
+        "totalMs": 670.0593750000003,
+        "perRequestMs": 670.0593750000003,
+        "requests": 1
+      },
+      {
+        "totalMs": 664.1986669999997,
+        "perRequestMs": 664.1986669999997,
+        "requests": 1
+      },
+      {
+        "totalMs": 664.7626250000003,
+        "perRequestMs": 664.7626250000003,
+        "requests": 1
+      }
+    ],
+    "median": {
+      "totalMs": 664.7626250000003,
+      "perRequestMs": 664.7626250000003,
+      "requests": 1
+    },
+    "peakRssMiB": 181.453125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network. Baseline uses typed columns with notNull(), variant declares id.primaryKey() and defaults encoding to utf8. Query-count diagnostics run after the memory snapshot.",
+    "repeat": 4
+  }
+]

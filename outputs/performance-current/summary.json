@@ -1,0 +1,101 @@
+[
+  {
+    "dataset": "matched",
+    "method": "full-blob",
+    "workers": 5,
+    "totalMs": 128.630042,
+    "minMs": 127.64254199999999,
+    "maxMs": 130.149,
+    "peakRssMiB": 222.546875,
+    "bytes": 24000001,
+    "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+  },
+  {
+    "dataset": "matched",
+    "method": "after",
+    "workers": 5,
+    "totalMs": 169.42529100000002,
+    "minMs": 165.58066599999995,
+    "maxMs": 171.64520799999997,
+    "peakRssMiB": 116.390625,
+    "bytes": 24000001,
+    "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+  },
+  {
+    "dataset": "matched",
+    "method": "objects",
+    "workers": 5,
+    "totalMs": 563.0104589999999,
+    "minMs": 525.4833330000001,
+    "maxMs": 573.8630410000001,
+    "peakRssMiB": 117,
+    "bytes": 24000001,
+    "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+  },
+  {
+    "dataset": "narrow",
+    "method": "full-blob",
+    "workers": 5,
+    "totalMs": 333.8710839999999,
+    "minMs": 329.47066699999993,
+    "maxMs": 354.176459,
+    "peakRssMiB": 562.171875,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+  },
+  {
+    "dataset": "narrow",
+    "method": "after",
+    "workers": 5,
+    "totalMs": 368.997208,
+    "minMs": 366.8945000000001,
+    "maxMs": 396.08345900000006,
+    "peakRssMiB": 147.671875,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+  },
+  {
+    "dataset": "narrow",
+    "method": "objects",
+    "workers": 5,
+    "totalMs": 841.5427500000003,
+    "minMs": 824.7106249999997,
+    "maxMs": 856.3397920000002,
+    "peakRssMiB": 119.59375,
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-blob",
+    "workers": 5,
+    "totalMs": 139.64816600000006,
+    "minMs": 136.07766600000002,
+    "maxMs": 155.878291,
+    "peakRssMiB": 662.3125,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+  },
+  {
+    "dataset": "wide",
+    "method": "after",
+    "workers": 5,
+    "totalMs": 144.078708,
+    "minMs": 142.1395,
+    "maxMs": 148.91037500000004,
+    "peakRssMiB": 195.734375,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+  },
+  {
+    "dataset": "wide",
+    "method": "objects",
+    "workers": 5,
+    "totalMs": 400.42712499999993,
+    "minMs": 396.1284159999999,
+    "maxMs": 409.30049999999983,
+    "peakRssMiB": 194.40625,
+    "bytes": 100920480,
+    "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+  }
+]

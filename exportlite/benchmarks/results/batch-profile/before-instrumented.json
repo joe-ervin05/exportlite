@@ -1,0 +1,74 @@
+{
+  "dataset": "matched",
+  "method": "before",
+  "mode": "output",
+  "expected": {
+    "bytes": 24000001,
+    "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+  },
+  "verification": {
+    "totalMs": 243.223167,
+    "encodingMs": 3.73974100000018,
+    "sqliteAndDriverMs": 204.2814309999992,
+    "batches": 3907,
+    "bytes": 24000001,
+    "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+  },
+  "samples": [
+    {
+      "totalMs": 239.62770800000004,
+      "encodingMs": 4.1400750000007065,
+      "sqliteAndDriverMs": 207.96803900000089,
+      "batches": 3907,
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    {
+      "totalMs": 242.43062499999996,
+      "encodingMs": 4.113379999999552,
+      "sqliteAndDriverMs": 214.87528999999438,
+      "batches": 3907,
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    {
+      "totalMs": 226.577541,
+      "encodingMs": 3.641570000003753,
+      "sqliteAndDriverMs": 204.57221700000434,
+      "batches": 3907,
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    {
+      "totalMs": 216.92062499999997,
+      "encodingMs": 3.3351219999974546,
+      "sqliteAndDriverMs": 198.71850900000595,
+      "batches": 3907,
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    {
+      "totalMs": 217.2738330000002,
+      "encodingMs": 3.4308399999999892,
+      "sqliteAndDriverMs": 199.11140399999977,
+      "batches": 3907,
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    }
+  ],
+  "median": {
+    "totalMs": 226.577541,
+    "encodingMs": 3.641570000003753,
+    "sqliteAndDriverMs": 204.57221700000434,
+    "batches": 3907,
+    "bytes": 24000001,
+    "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+  },
+  "peakRssMiB": 96.265625,
+  "environment": {
+    "node": "v26.12.0",
+    "v8": "14.6.202.34-node.39",
+    "sqlite": "3.53.4"
+  },
+  "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"bounds\") AS (\n    SELECT json_array(min(\"key\"), max(\"key\"), count(*))\n    FROM (SELECT \"rowid\" AS \"key\" FROM main.\"users\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 256)\n    UNION ALL\n    SELECT (\n      SELECT json_array(min(\"key\"), max(\"key\"), count(*))\n      FROM (SELECT \"rowid\" AS \"key\" FROM main.\"users\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > json_extract(\"__exportlite_batches\".\"bounds\", '$[1]')\n        ORDER BY \"rowid\" LIMIT 256)\n    )\n    FROM \"__exportlite_batches\"\n    WHERE json_extract(\"bounds\", '$[2]') > 0\n  )\n  SELECT (\n    SELECT json_group_array(json_object('name', \"name\"))\n    FROM (SELECT \"name\" FROM main.\"users\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN json_extract(\"__exportlite_batches\".\"bounds\", '$[0]')\n        AND json_extract(\"__exportlite_batches\".\"bounds\", '$[1]')\n      ORDER BY \"rowid\")\n  ), json_extract(\"bounds\", '$[2]')\n  FROM \"__exportlite_batches\"\n  WHERE json_extract(\"bounds\", '$[2]') > 0"
+}

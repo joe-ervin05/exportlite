@@ -1,0 +1,23 @@
+{
+  "prototype": {
+    "tests": 193,
+    "testFiles": 5,
+    "types": "passed",
+    "lint": "passed",
+    "esmAndCommonJsBuild": "passed",
+    "publicDeclarations": "byte-identical",
+    "writerCallbackDrainAbortChecks": "byte-identical",
+    "readableLifecycle": "byte-identical",
+    "zipCompletionCleanup": "byte-identical"
+  },
+  "defaultPackage": "Source, build and ZIP tests match original baseline exactly; prototype remains isolated",
+  "benchmark": {
+    "node": "v26.12.0",
+    "freshWorkers": 45,
+    "timedExports": 135,
+    "verifiedArchives": 45,
+    "zip": "bit-identical per fixture; decoded SHA-256 and CRC-32 verified"
+  },
+  "timingLimits": "Fresh-process timings showed substantial host variation. All observations retained. Separate timing-only controls alternate six adjacent pairs in one process per fixture; these are not isolated-memory measurements. No speed win is established for the larger-record fixture because fresh-process and paired controls differ.",
+  "allocationDiagnostic": "No large joining-buffer allocations in framed variant; each native SQLite batch is sent in one ZIP-input write, plus the closing JSON bracket."
+}

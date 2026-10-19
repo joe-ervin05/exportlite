@@ -1,0 +1,730 @@
+{
+  "date": "2026-10-18T03:38:24.090Z",
+  "node": "<node-26.12.0>",
+  "cpu": "Apple M1 Pro",
+  "loadavg": [
+    6.5947265625,
+    5.8916015625,
+    6.009765625
+  ],
+  "fixtures": {
+    "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+    "sha256": "dc969db78afcb2b1ed394345ec51879ad618b2732df0c80857d7be7ba78afb43",
+    "sourceFixture": {
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "rows": 1000000,
+      "width": 32,
+      "profile": "varied",
+      "seed": 20261017,
+      "metadata": {
+        "expectedJsonBytes": 83369847,
+        "firstRecordBytes": 76,
+        "sqliteVersion": "3.53.4",
+        "statistics": {
+          "distinctNames": 114980,
+          "distinctNonNullNotes": 857142,
+          "nullNotes": 142857,
+          "noteUtf8Bytes": {
+            "min": 23,
+            "mean": 30.018205830299028,
+            "p50": 29,
+            "p95": 39,
+            "max": 44
+          },
+          "samples": [
+            {
+              "id": 1,
+              "name": "Kai Ali",
+              "note": "0q3ca6l: call Mei after 8:00.",
+              "active": 1
+            },
+            {
+              "id": 2,
+              "name": "Daniel L. Singh",
+              "note": "Order 1yh8o3j: resolved during the call.",
+              "active": 1
+            },
+            {
+              "id": 3,
+              "name": "Fatima Ruiz",
+              "note": "2026-09-25 credit $653.71 (1m9nl7n).",
+              "active": 0
+            }
+          ]
+        }
+      },
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      }
+    },
+    "cases": [
+      {
+        "name": "table-1",
+        "api": "table",
+        "rows": 1,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1",
+        "expected": {
+          "bytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "iterations": 300,
+        "warmups": 20,
+        "cold": false,
+        "zip": false
+      },
+      {
+        "name": "query-1",
+        "api": "query",
+        "rows": 1,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1",
+        "expected": {
+          "bytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "iterations": 300,
+        "warmups": 20,
+        "cold": false,
+        "zip": false
+      },
+      {
+        "name": "cold-table-1",
+        "api": "table",
+        "rows": 1,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1",
+        "expected": {
+          "bytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "iterations": 50,
+        "warmups": 2,
+        "cold": true,
+        "zip": false
+      },
+      {
+        "name": "cold-query-1",
+        "api": "query",
+        "rows": 1,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1",
+        "expected": {
+          "bytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "iterations": 50,
+        "warmups": 2,
+        "cold": true,
+        "zip": false
+      },
+      {
+        "name": "table-10",
+        "api": "table",
+        "rows": 10,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data10",
+        "expected": {
+          "bytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "iterations": 300,
+        "warmups": 20,
+        "cold": false,
+        "zip": false
+      },
+      {
+        "name": "query-10",
+        "api": "query",
+        "rows": 10,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data10",
+        "expected": {
+          "bytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "iterations": 300,
+        "warmups": 20,
+        "cold": false,
+        "zip": false
+      },
+      {
+        "name": "table-1000",
+        "api": "table",
+        "rows": 1000,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1000",
+        "expected": {
+          "bytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "iterations": 50,
+        "warmups": 20,
+        "cold": false,
+        "zip": false
+      },
+      {
+        "name": "query-1000",
+        "api": "query",
+        "rows": 1000,
+        "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+        "table": "data1000",
+        "expected": {
+          "bytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "iterations": 50,
+        "warmups": 20,
+        "cold": false,
+        "zip": false
+      },
+      {
+        "name": "bulk-plain",
+        "api": "table",
+        "rows": 1000000,
+        "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+        "table": "data",
+        "expected": {
+          "bytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "iterations": 1,
+        "warmups": 1,
+        "cold": false,
+        "zip": false
+      },
+      {
+        "name": "bulk-zip",
+        "api": "table",
+        "rows": 100000,
+        "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+        "table": "data",
+        "expected": {
+          "bytes": 100920480,
+          "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+        },
+        "expectedZip": {
+          "bytes": 27083829,
+          "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+        },
+        "iterations": 1,
+        "warmups": 1,
+        "cold": false,
+        "zip": true
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "name": "table-1",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "table-1",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "query-1",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "query-1",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "cold-table-1",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "cold-table-1",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "cold-query-1",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "cold-query-1",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "table-10",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "table-10",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "query-10",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "query-10",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "table-1000",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "query-1000",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "query-1000",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "bulk-plain",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "bulk-plain",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "bulk-zip",
+      "method": "baseline",
+      "repeat": 0
+    },
+    {
+      "name": "bulk-zip",
+      "method": "variant",
+      "repeat": 0
+    },
+    {
+      "name": "table-1",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "table-1",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "query-1",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "query-1",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "cold-table-1",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "cold-table-1",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "cold-query-1",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "cold-query-1",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "table-10",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "table-10",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "query-10",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "query-10",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "table-1000",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "query-1000",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "query-1000",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "bulk-plain",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "bulk-plain",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "bulk-zip",
+      "method": "variant",
+      "repeat": 1
+    },
+    {
+      "name": "bulk-zip",
+      "method": "baseline",
+      "repeat": 1
+    },
+    {
+      "name": "table-1",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "table-1",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "query-1",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "query-1",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "cold-table-1",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "cold-table-1",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "cold-query-1",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "cold-query-1",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "table-10",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "table-10",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "query-10",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "query-10",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "table-1000",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "query-1000",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "query-1000",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "bulk-plain",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "bulk-plain",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "bulk-zip",
+      "method": "baseline",
+      "repeat": 2
+    },
+    {
+      "name": "bulk-zip",
+      "method": "variant",
+      "repeat": 2
+    },
+    {
+      "name": "table-1",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "table-1",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "query-1",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "query-1",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "cold-table-1",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "cold-table-1",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "cold-query-1",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "cold-query-1",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "table-10",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "table-10",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "query-10",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "query-10",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "table-1000",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "table-1000",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "query-1000",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "query-1000",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "bulk-plain",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "bulk-plain",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "bulk-zip",
+      "method": "variant",
+      "repeat": 3
+    },
+    {
+      "name": "bulk-zip",
+      "method": "baseline",
+      "repeat": 3
+    },
+    {
+      "name": "table-1",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "table-1",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "query-1",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "query-1",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "cold-table-1",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "cold-table-1",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "cold-query-1",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "cold-query-1",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "table-10",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "table-10",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "query-10",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "query-10",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "table-1000",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "table-1000",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "query-1000",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "query-1000",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "bulk-plain",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "bulk-plain",
+      "method": "variant",
+      "repeat": 4
+    },
+    {
+      "name": "bulk-zip",
+      "method": "baseline",
+      "repeat": 4
+    },
+    {
+      "name": "bulk-zip",
+      "method": "variant",
+      "repeat": 4
+    }
+  ],
+  "fingerprints": {
+    "exportlite/dist/index.mjs": "4b6e2a40ecb54a826bbe62bbfc05d38f3e3421b7a7a9d30da8cc79d9cee116c7",
+    "exportlite/src/output/zip.ts": "17166eed24440dfc6a0ec48a31ec65d5c854eaf47612a48b2010e02970e60cfb",
+    "outputs/plan-cache/baseline/dist/index.mjs": "4b6e2a40ecb54a826bbe62bbfc05d38f3e3421b7a7a9d30da8cc79d9cee116c7",
+    "outputs/plan-cache/variant/dist/index.mjs": "69944dfeff1b787252caf234f557439582534d0fa93da02276e7f1d56ae6db51",
+    "outputs/plan-cache/worker.mjs": "1c4be4b20ec047539ba9b51d27c71ea12d156a53801b99b401df3b5725bcfe13",
+    "outputs/plan-cache/run.mjs": "8c7431afdfdb5e43b640ea5691aa2268852eaf17481020e749e4578650ca7711"
+  },
+  "schedule": "Sequential fresh workers, alternating baseline/cache order by round. Every worker verifies output SHA-256 and bytes, warms then measures three batches of requests. Warm cases reuse a connection; cold cases create a new connection before each request timer. Opening/closing connections excluded. Web Response body collection included for small cases; bulk controls use a counting Node writable. Natural GC. RSS is whole-worker high-water across verification, warmup and timed requests. Both versions use fixed 256-row batches, default 64 KiB output flush target, and memLevel 9 ZIP settings. No data or complete-response cache. Query exports cache only successful capability probes, always refreshing query column metadata."
+}

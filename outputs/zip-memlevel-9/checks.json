@@ -1,0 +1,19 @@
+{
+  "prototype": {
+    "tests": 180,
+    "testFiles": 5,
+    "types": "passed",
+    "lint": "passed",
+    "esmAndCommonJsBuild": "passed",
+    "sourceChange": "Only adds memLevel:9 to ZIP zlib options. Fixed 256-row batching, 64 KiB output flush target, buffer joins, callback/drain checks, cancellation and cleanup unchanged."
+  },
+  "defaultPackage": "Source, build, tests and public declarations unchanged; SHA-256 fingerprints verified.",
+  "benchmark": {
+    "node": "v26.12.0",
+    "sqlite": "3.53.4",
+    "freshWorkers": 30,
+    "timedExports": 90,
+    "verifiedArchives": 30,
+    "validation": "All actual ZIP verification archives independently decoded and checked for JSON SHA-256, decoded byte count, entry metadata and CRC-32. Encoded digest consistent per setting and fixture. Timed outputs checked for expected encoded size. Current setting also matches previous encoded archive hashes."
+  }
+}

@@ -1,0 +1,3 @@
+# Preserve generated vector data and archived diff context.
+*.svg -whitespace
+*.patch -whitespace

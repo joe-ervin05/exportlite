@@ -1,0 +1,532 @@
+{
+  "date": "2026-10-18T03:06:58.780Z",
+  "node": "<node-26.12.0>",
+  "cpu": "Apple M1 Pro",
+  "logicalCpus": 10,
+  "loadavg": [
+    7.47509765625,
+    7.56689453125,
+    7.93994140625
+  ],
+  "fingerprints": {
+    "exportlite/dist/index.mjs": "3d9bb7d5e816d299e07bafa6a59a51f464baf74ec2ab32f305aacfee555d5560",
+    "exportlite/src/output/writer.ts": "3154845387d523ea134752d60864d26e81bccae8503d9df17aaad4a3d7fc87cb",
+    "exportlite/src/output/zip.ts": "19a712860fb9b7742437f10da1c056b1e619d4f6b060b1e97509d7fe77fab180",
+    "exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs": "3d9bb7d5e816d299e07bafa6a59a51f464baf74ec2ab32f305aacfee555d5560",
+    "outputs/zip-batch-sizing/variants/fixed-256/dist/index.mjs": "15d585799c2fefd0cecd8ccca4355a38ef57d1a1e01638305b2c59f864526ac1",
+    "outputs/zip-batch-sizing/variants/fixed-1024/dist/index.mjs": "02852dd51e9110ce81b7dd2b22f9c9984ec308eb9043e35346450ce0f1f47a18",
+    "outputs/zip-batch-sizing/variants/fixed-4096/dist/index.mjs": "9c95635b36c6f22ef64a47962fa8bdb0840de193fd88798d86353aeda688739c",
+    "outputs/zip-batch-sizing/variants/adaptive-p95/dist/index.mjs": "dd6bd6afc021f9ccad39097e7de44bb140e6b6dc375a09468c6e2b618195c0b8",
+    "outputs/zip-batch-sizing/worker.mjs": "c24e97ad30f6cdcb72f7787d67967b5327a6cd944afc003b1407003734b01500",
+    "outputs/zip-batch-sizing/run.mjs": "5ad14e7fcc78d4985701b2578e1a60ee996253c6a31a3c8fd5b1fef852c9f674"
+  },
+  "fixtures": {
+    "matched": {
+      "path": "<temporary>/exportlite-matched-api-20261017/fixture.db",
+      "rows": 1000000,
+      "width": null,
+      "profile": "original ASCII labels",
+      "seed": null,
+      "fixtureSha256": "2932e4b4087e24ba2d4d6ba12d8ce0aff08f50b4640f0a240683d82d92c9e364",
+      "expected": {
+        "bytes": 24000001,
+        "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+      }
+    },
+    "narrow": {
+      "path": "<temporary>/exportlite-batch-profile-20261017/narrow.db",
+      "rows": 1000000,
+      "width": 32,
+      "profile": "varied",
+      "seed": 20261017,
+      "metadata": {
+        "expectedJsonBytes": 83369847,
+        "firstRecordBytes": 76,
+        "sqliteVersion": "3.53.4",
+        "statistics": {
+          "distinctNames": 114980,
+          "distinctNonNullNotes": 857142,
+          "nullNotes": 142857,
+          "noteUtf8Bytes": {
+            "min": 23,
+            "mean": 30.018205830299028,
+            "p50": 29,
+            "p95": 39,
+            "max": 44
+          },
+          "samples": [
+            {
+              "id": 1,
+              "name": "Kai Ali",
+              "note": "0q3ca6l: call Mei after 8:00.",
+              "active": 1
+            },
+            {
+              "id": 2,
+              "name": "Daniel L. Singh",
+              "note": "Order 1yh8o3j: resolved during the call.",
+              "active": 1
+            },
+            {
+              "id": 3,
+              "name": "Fatima Ruiz",
+              "note": "2026-09-25 credit $653.71 (1m9nl7n).",
+              "active": 0
+            }
+          ]
+        }
+      },
+      "fixtureSha256": "987e66da806e84828f95d1e5158e63e16972c3ddae7017444d0d8a4d077c6afc",
+      "expected": {
+        "bytes": 83369847,
+        "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+      }
+    },
+    "wide": {
+      "path": "<temporary>/exportlite-batch-profile-20261017/wide.db",
+      "rows": 100000,
+      "width": 1024,
+      "profile": "varied",
+      "seed": 20261017,
+      "metadata": {
+        "expectedJsonBytes": 100920480,
+        "firstRecordBytes": 1197,
+        "sqliteVersion": "3.53.4",
+        "statistics": {
+          "distinctNames": 27738,
+          "distinctNonNullNotes": 85715,
+          "nullNotes": 14285,
+          "noteUtf8Bytes": {
+            "min": 512,
+            "mean": 1105.4699644169632,
+            "p50": 1035,
+            "p95": 1504,
+            "max": 18555
+          },
+          "samples": [
+            {
+              "id": 1,
+              "name": "Kai Ali",
+              "note": "0zlrohn address update:  Tracking https://example.com/track/04445wn026l91a?shipment=0u53dks was updated on 2026-08-10. Follow-up 2026-01-21 for Rafael Ruiz: confirm the window blind replacement and quote 1qd6yyd-1p6ej8x. Inventory lot 1m9nl7n-1r0vvvn has 105 units available; next review 2026-06-03. Tracking https://example.com/track/1km4vp717njohg?shipment=1q1q295 was updated on 2026-02-10. Follow-up 2026-08-19 for Camila Cohen: confirm the door handle replacement and quote 1a19okr-1oqz2vu. \nInventory lot 1tqao2v-0l4rt96 has 54 units available; next review 2026-04-18. Size L was exchanged for S; adjustment $1101.13 and handling fee $14.00. Invoice INV-04yb8uk totals $702.14; payment reference 1lbsius1twkcp8. Tracking https://example.com/track/0ebk5b306yojly?shipment=0tc99rj was updated on 2026-06-18. \nAgent Grace Evans checked ticket 0hi3xaz; label sent. Notes from 2026-03-27: \"Packaging must stay sealed\"; carrier investigation open. Invoice INV-1x26y62 totals $939.91; payment reference 0i92pzk0f76qrp. The headphones arrived 11 days after dispatch; condition recorded as \"incorrect size\". Notes from 2026-01-27: \"A gift receipt",
+              "active": 0
+            },
+            {
+              "id": 2,
+              "name": "Amelia Rodriguez",
+              "note": "0exoel7 address update:  Size XL was exchanged for XL; adjustment $813.05 and handling fee $4.00. \nAudit event 0aig5nb12kozww0cfcr3m: source=phone; session=12j7cmo0jh7ihw; status=awaiting customer reply. 2026-09-16: customer requested billing question for order 0ypniu8-0u4m6a3. \nCustomer reported a loose connector after 86 days of use. \nFollow-up 2026-10-09 for Oscar Young: confirm the backpack replacement and quote 04hnris-1svgyah. Inventory lot 0112m43-0tsak1o has 144 units available; next review 2026-02-27. Agent Zoe Edwards checked ticket 0xj4alt; awaiting customer r",
+              "active": 1
+            },
+            {
+              "id": 3,
+              "name": "Quinn Morgan",
+              "note": "1mgiyci missing item:  Invoice INV-12a3rcx totals $651.68; payment reference 060utyw1gp77iv. Tracking https://example.com/track/1gk5kkz0r9ppqz?shipment=1o59rqz was updated on 2026-06-01. \nInvoice INV-09ersj7 totals $272.02; payment reference 1g6qu640vtrg5s. Size S was exchanged for XL; adjustment $268.30 and handling fee $0.00. Size L was exchanged for XL; adjustment $491.25 and handling fee $12.00. Inventory lot 1jftdkc-1f4mkk7 has 116 units available; next review 2026-08-25. \nThe linen duvet arrived 8 days after dispatch; condition recorded as \"unopened\". Tracking https://example.com/track/0xmzpru1qd50h9?shipment=0qxfstl was updated on 2026-09-16. \nAudit event 0naprq00wb59nw0707mwb: source=portal; session=1nl4ju40iz60yh; status=resolved during the call. Notes from 2026-08-23: \"A gift receipt is required\"; new tracking supplied. \nTracking https://example.com/track/0cpxlox1e62ulj?shipment=0twmqrp was updated on 2026-02-25. Requested a silver water filter with scheduled delivery to Victoria. Inventory lot 0wxvcin-09zs9ok has 72 units available; next review 2026-03-01. Agent Louis Moore checked ticket 1dujt0u; follow-up scheduled. Notes from 2026-07-16: \"Please ring the bell twice\"; escalated for review. Notes from 2026-03-26: \"Please ring the bell twice\"; new tracking supplied. Contact 18mpd9s@example.com after",
+              "active": 1
+            }
+          ]
+        }
+      },
+      "fixtureSha256": "7fe61165414838520bc5723c3e07bd8ed440aac7ede4ae92b805381bd955189d",
+      "expected": {
+        "bytes": 100920480,
+        "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+      }
+    }
+  },
+  "jobs": [
+    {
+      "dataset": "matched",
+      "method": "buffered",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-256",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-1024",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-4096",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "adaptive-p95",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "buffered",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-256",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-1024",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-4096",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "adaptive-p95",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "buffered",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-256",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-1024",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-4096",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "adaptive-p95",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-256",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-1024",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-4096",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "adaptive-p95",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "buffered",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-256",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-1024",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-4096",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "adaptive-p95",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "buffered",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-256",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-1024",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-4096",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "adaptive-p95",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "buffered",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-1024",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-4096",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "adaptive-p95",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "buffered",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-256",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-1024",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-4096",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "adaptive-p95",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "buffered",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-256",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-1024",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-4096",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "adaptive-p95",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "buffered",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-256",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-4096",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "adaptive-p95",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "buffered",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-256",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-1024",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-4096",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "adaptive-p95",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "buffered",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-256",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-1024",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-4096",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "adaptive-p95",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "buffered",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-256",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-1024",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "adaptive-p95",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "buffered",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-256",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-1024",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "fixed-4096",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "adaptive-p95",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "buffered",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-256",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-1024",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "fixed-4096",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "adaptive-p95",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "buffered",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-256",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-1024",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "fixed-4096",
+      "repeat": 4
+    }
+  ],
+  "samplesPerWorker": 3,
+  "zip": {
+    "level": 1,
+    "chunkSize": 262144,
+    "forceZip64": true,
+    "timestamp": "1980-01-01T00:00:00.000Z",
+    "entries": 1
+  },
+  "schedule": "Sequential fresh workers with rotating method order. Each verifies an actual ZIP, warms once and measures three complete ZIP exports. Same fixtures, Node 26.12.0, compression and unchanged callback/drain/cancellation lifecycle. Timings include planning, JSON generation, encoding, compression, ZIP finalization and destination completion, excluding process/module startup, verification, disk, HTTP and network. Natural GC. RSS is whole-process high-water including verification, warmup and timed samples. Buffered = unchanged 256-row default; fixed variants feed SQL-framed native batches directly to ZIP; adaptive = historical p95 of last 64 total batch byte sizes, target 256 KiB with 10% headroom, initial 64 rows, at most doubling, 1–65536 rows. Active adaptive state is scoped to the iterator. Plain output and prepare-only adapter fallbacks retain 256 rows.",
+  "packageVersionCheck": {
+    "checked": "2026-10-18T03:06:58.782Z",
+    "betterSqlite3": "13.0.3",
+    "zipStream": "7.0.5",
+    "yauzl": "3.4.0",
+    "sources": [
+      "https://registry.npmjs.org/better-sqlite3/latest",
+      "https://www.npmjs.com/package/zip-stream",
+      "https://www.npmjs.com/package/yauzl?activeTab=versions"
+    ]
+  }
+}

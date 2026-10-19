@@ -1,0 +1,444 @@
+[
+  {
+    "dataset": "narrow",
+    "method": "exportlite",
+    "variant": "before",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 3738.7687910000004,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 882.9135410000008,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 1037.383417,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 1060.738625,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 1037.383417,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 146.34375,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 19535,
+        "nativeBytes": 416868765,
+        "joinedBuffers": 4885,
+        "joinedBytes": 416849235,
+        "encodedBuffers": 0,
+        "encodedBytes": 0,
+        "firstStacks": [
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-framed/diagnose.mjs:91:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:645:108)\n    at async run (file://<workspace>/outputs/zip-framed/diagnose.mjs:207:20)\n    at async file://<workspace>/outputs/zip-framed/diagnose.mjs:244:22",
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-framed/diagnose.mjs:91:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:645:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async run (file://<workspace>/outputs/zip-framed/diagnose.mjs:207:20)\n    at async file://<workspace>/outputs/zip-framed/diagnose.mjs:244:22"
+        ]
+      },
+      "peaks": {
+        "rss": 153419776,
+        "heapUsed": 9938688,
+        "external": 35930701,
+        "arrayBuffers": 33141561
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 74219520,
+          "heapTotal": 11681792,
+          "heapUsed": 7659152,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 153403392,
+          "heapTotal": 13254656,
+          "heapUsed": 9140464,
+          "external": 20777065,
+          "arrayBuffers": 17987925
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 153419776,
+          "heapTotal": 13254656,
+          "heapUsed": 7865296,
+          "external": 20777065,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 41,
+        "durationMs": 20.35266399383545
+      },
+      "zipInput": {
+        "chunks": 4885,
+        "bytes": 416849235,
+        "tinyChunks": 0,
+        "maximumChunk": 85894
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), fixed 256-row batches"
+  },
+  {
+    "dataset": "narrow",
+    "method": "exportlite",
+    "variant": "framed",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 1155.0368330000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 1536.6063750000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 1623.2229590000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 1192.1942920000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 1536.6063750000003,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 128.71875,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 19535,
+        "nativeBytes": 416849230,
+        "joinedBuffers": 0,
+        "joinedBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0,
+        "firstStacks": []
+      },
+      "peaks": {
+        "rss": 134938624,
+        "heapUsed": 11537744,
+        "external": 26175038,
+        "arrayBuffers": 23385898
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 73498624,
+          "heapTotal": 11419648,
+          "heapUsed": 7657240,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 134889472,
+          "heapTotal": 16138240,
+          "heapUsed": 9525792,
+          "external": 11044602,
+          "arrayBuffers": 8255462
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 134938624,
+          "heapTotal": 16138240,
+          "heapUsed": 7872072,
+          "external": 11044602,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 44,
+        "durationMs": 9.248334407806396
+      },
+      "zipInput": {
+        "chunks": 19540,
+        "bytes": 416849235,
+        "tinyChunks": 5,
+        "maximumChunk": 21626
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), fixed 256-row batches"
+  },
+  {
+    "dataset": "wide",
+    "method": "exportlite",
+    "variant": "before",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 1262.08975,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 1124.0097919999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 931.2022910000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 945.280041,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 945.280041,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 212.6875,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 1955,
+        "nativeBytes": 504604350,
+        "joinedBuffers": 1955,
+        "joinedBytes": 504602395,
+        "encodedBuffers": 0,
+        "encodedBytes": 0,
+        "firstStacks": [
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-framed/diagnose.mjs:91:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:645:108)\n    at async run (file://<workspace>/outputs/zip-framed/diagnose.mjs:207:20)\n    at async file://<workspace>/outputs/zip-framed/diagnose.mjs:244:22",
+          "Error\n    at Buffer.concat (file://<workspace>/outputs/zip-framed/diagnose.mjs:91:74)\n    at OutputWriter.flush (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:278:100)\n    at OutputWriter.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:272:72)\n    at ZipOutput.write (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:596:20)\n    at streamExport (file://<workspace>/exportlite/benchmarks/baselines/pre-direct-zip/dist/index.mjs:645:108)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async run (file://<workspace>/outputs/zip-framed/diagnose.mjs:207:20)\n    at async file://<workspace>/outputs/zip-framed/diagnose.mjs:244:22"
+        ]
+      },
+      "peaks": {
+        "rss": 223002624,
+        "heapUsed": 9316992,
+        "external": 72059328,
+        "arrayBuffers": 69280354
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 73433088,
+          "heapTotal": 11419648,
+          "heapUsed": 7652232,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 222937088,
+          "heapTotal": 12730368,
+          "heapUsed": 7286544,
+          "external": 29644538,
+          "arrayBuffers": 26865564
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 223002624,
+          "heapTotal": 12730368,
+          "heapUsed": 6576416,
+          "external": 29644538,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 33,
+        "durationMs": 28.21191644668579
+      },
+      "zipInput": {
+        "chunks": 1960,
+        "bytes": 504602400,
+        "tinyChunks": 5,
+        "maximumChunk": 304126
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), fixed 256-row batches"
+  },
+  {
+    "dataset": "wide",
+    "method": "exportlite",
+    "variant": "framed",
+    "mode": "zip-output",
+    "bufferSize": 65536,
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 923.586209,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 1083.2042500000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 952.6287499999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 857.6054999999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 952.6287499999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 192.765625,
+    "diagnostic": {
+      "allocations": {
+        "nativeBatches": 1955,
+        "nativeBytes": 504602395,
+        "joinedBuffers": 0,
+        "joinedBytes": 0,
+        "encodedBuffers": 0,
+        "encodedBytes": 0,
+        "firstStacks": []
+      },
+      "peaks": {
+        "rss": 202096640,
+        "heapUsed": 10355240,
+        "external": 70262042,
+        "arrayBuffers": 67472902
+      },
+      "snapshots": [
+        {
+          "label": "start",
+          "rss": 74530816,
+          "heapTotal": 11419648,
+          "heapUsed": 7652232,
+          "external": 3018211,
+          "arrayBuffers": 229111
+        },
+        {
+          "label": "after-natural-GC-runs",
+          "rss": 202096640,
+          "heapTotal": 13254656,
+          "heapUsed": 9373208,
+          "external": 49619609,
+          "arrayBuffers": 46830469
+        },
+        {
+          "label": "after-diagnostic-GC",
+          "rss": 202096640,
+          "heapTotal": 13254656,
+          "heapUsed": 7739760,
+          "external": 49619609,
+          "arrayBuffers": 229075
+        }
+      ],
+      "naturalGc": {
+        "count": 17,
+        "durationMs": 7.768916130065918
+      },
+      "zipInput": {
+        "chunks": 1960,
+        "bytes": 504602400,
+        "tinyChunks": 5,
+        "maximumChunk": 304126
+      }
+    },
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), fixed 256-row batches"
+  }
+]

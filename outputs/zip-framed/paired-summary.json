@@ -1,0 +1,212 @@
+[
+  {
+    "dataset": "matched",
+    "node": "v26.12.0",
+    "note": "Timing-only supporting control: both methods share one process; six adjacent pairs with alternating order, natural GC and no explicit collection. Not an isolated RSS comparison. Each method independently verifies its complete ZIP hash before warmup.",
+    "pairs": [
+      {
+        "repeat": 0,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 314.687625,
+        "framed": 614.4679999999998,
+        "ratio": 1.9526284200085713
+      },
+      {
+        "repeat": 1,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 1981.1660829999996,
+        "before": 1016.2832079999998,
+        "ratio": 1.949423219241068
+      },
+      {
+        "repeat": 2,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 459.878291,
+        "framed": 801.5855419999998,
+        "ratio": 1.7430384466658806
+      },
+      {
+        "repeat": 3,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 659.8060000000005,
+        "before": 292.9427080000005,
+        "ratio": 2.252338023720322
+      },
+      {
+        "repeat": 4,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 263.39250000000175,
+        "framed": 390.95258300000023,
+        "ratio": 1.4842965650122826
+      },
+      {
+        "repeat": 5,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 484.33029200000055,
+        "before": 277.8869589999995,
+        "ratio": 1.7429039986003858
+      }
+    ],
+    "medianBeforeMs": 303.81516650000026,
+    "medianFramedMs": 637.1370000000002,
+    "medianPairedRatio": 1.8462308329534745
+  },
+  {
+    "dataset": "narrow",
+    "node": "v26.12.0",
+    "note": "Timing-only supporting control: both methods share one process; six adjacent pairs with alternating order, natural GC and no explicit collection. Not an isolated RSS comparison. Each method independently verifies its complete ZIP hash before warmup.",
+    "pairs": [
+      {
+        "repeat": 0,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 736.7855,
+        "framed": 1036.6582090000002,
+        "ratio": 1.407001371498218
+      },
+      {
+        "repeat": 1,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 981.191667,
+        "before": 1140.1515,
+        "ratio": 0.8605800781738218
+      },
+      {
+        "repeat": 2,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 946.2942499999999,
+        "framed": 1612.6017499999998,
+        "ratio": 1.704122951185638
+      },
+      {
+        "repeat": 3,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 1322.191999999999,
+        "before": 864.3417079999999,
+        "ratio": 1.5297098216623364
+      },
+      {
+        "repeat": 4,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 921.126166,
+        "framed": 2169.789584,
+        "ratio": 2.3555834847492543
+      },
+      {
+        "repeat": 5,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 1240.7767920000006,
+        "before": 1052.9015830000026,
+        "ratio": 1.1784356791113282
+      }
+    ],
+    "medianBeforeMs": 933.710208,
+    "medianFramedMs": 1281.4843959999998,
+    "medianPairedRatio": 1.468355596580277
+  },
+  {
+    "dataset": "wide",
+    "node": "v26.12.0",
+    "note": "Timing-only supporting control: both methods share one process; six adjacent pairs with alternating order, natural GC and no explicit collection. Not an isolated RSS comparison. Each method independently verifies its complete ZIP hash before warmup.",
+    "pairs": [
+      {
+        "repeat": 0,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 1407.9932080000008,
+        "framed": 908.9876659999991,
+        "ratio": 0.6455909452085926
+      },
+      {
+        "repeat": 1,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 893.7670419999995,
+        "before": 1491.9957079999986,
+        "ratio": 0.5990412956335397
+      },
+      {
+        "repeat": 2,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 1237.096958,
+        "framed": 1061.5480420000004,
+        "ratio": 0.8580960733394676
+      },
+      {
+        "repeat": 3,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 1513.086625,
+        "before": 1536.0138750000006,
+        "ratio": 0.9850735397816633
+      },
+      {
+        "repeat": 4,
+        "order": [
+          "before",
+          "framed"
+        ],
+        "before": 1852.9557920000025,
+        "framed": 1166.7760420000013,
+        "ratio": 0.629683690802268
+      },
+      {
+        "repeat": 5,
+        "order": [
+          "framed",
+          "before"
+        ],
+        "framed": 1504.541874999999,
+        "before": 1882.6413749999992,
+        "ratio": 0.7991654146026614
+      }
+    ],
+    "medianBeforeMs": 1514.0047914999996,
+    "medianFramedMs": 1114.1620420000008,
+    "medianPairedRatio": 0.722378179905627
+  }
+]

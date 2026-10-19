@@ -1,0 +1,109 @@
+{
+  "dataset": "narrow",
+  "method": "exportlite",
+  "variant": "framed",
+  "mode": "zip-output",
+  "bufferSize": 65536,
+  "expected": {
+    "bytes": 83369847,
+    "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+  },
+  "entryName": "data.json",
+  "verification": {
+    "totalMs": 1155.0368330000001,
+    "bytes": 21360051,
+    "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+  },
+  "samples": [
+    {
+      "totalMs": 1536.6063750000003,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    {
+      "totalMs": 1623.2229590000002,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    {
+      "totalMs": 1192.1942920000001,
+      "bytes": 21360051,
+      "archiveSha256": null
+    }
+  ],
+  "median": {
+    "totalMs": 1536.6063750000003,
+    "bytes": 21360051,
+    "archiveSha256": null
+  },
+  "peakRssMiB": 128.71875,
+  "diagnostic": {
+    "allocations": {
+      "nativeBatches": 19535,
+      "nativeBytes": 416849230,
+      "joinedBuffers": 0,
+      "joinedBytes": 0,
+      "encodedBuffers": 0,
+      "encodedBytes": 0,
+      "firstStacks": []
+    },
+    "peaks": {
+      "rss": 134938624,
+      "heapUsed": 11537744,
+      "external": 26175038,
+      "arrayBuffers": 23385898
+    },
+    "snapshots": [
+      {
+        "label": "start",
+        "rss": 73498624,
+        "heapTotal": 11419648,
+        "heapUsed": 7657240,
+        "external": 3018211,
+        "arrayBuffers": 229111
+      },
+      {
+        "label": "after-natural-GC-runs",
+        "rss": 134889472,
+        "heapTotal": 16138240,
+        "heapUsed": 9525792,
+        "external": 11044602,
+        "arrayBuffers": 8255462
+      },
+      {
+        "label": "after-diagnostic-GC",
+        "rss": 134938624,
+        "heapTotal": 16138240,
+        "heapUsed": 7872072,
+        "external": 11044602,
+        "arrayBuffers": 229075
+      }
+    ],
+    "naturalGc": {
+      "count": 44,
+      "durationMs": 9.248334407806396
+    },
+    "zipInput": {
+      "chunks": 19540,
+      "bytes": 416849235,
+      "tinyChunks": 5,
+      "maximumChunk": 21626
+    }
+  },
+  "environment": {
+    "node": "v26.12.0",
+    "v8": "14.6.202.34-node.39",
+    "sqlite": "3.53.4",
+    "driver": "13.0.3",
+    "zipStream": "7.0.5",
+    "zlib": "1.3.2.1-motley-456ae73"
+  },
+  "zip": {
+    "level": 1,
+    "chunkSize": 262144,
+    "forceZip64": true,
+    "entryName": "data.json",
+    "continuous": true
+  },
+  "sql": "Public exportTable(), fixed 256-row batches"
+}

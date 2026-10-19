@@ -1,0 +1,18 @@
+{
+  "cases": 21,
+  "freshWorkers": 267,
+  "mainWorkers": 252,
+  "controlWorkers": 15,
+  "timedResponses": 542286,
+  "allValidationDigestsMatchOriginal": true,
+  "allTimedResponseByteCountsVerified": true,
+  "phaseAccountingVerified": true,
+  "fixtureCopyIdenticalToOriginal": true,
+  "timedSourcesUnchanged": true,
+  "productionSourceAndBuildUnchanged": true,
+  "typecheck": "passed",
+  "packageTests": 168,
+  "lint": "passed",
+  "figureVisuallyInspected": true,
+  "matplotlib": "3.11.2"
+}

@@ -1,0 +1,680 @@
+{
+  "selected": "metadata-only: bounded generated-SQL cache, fresh statement per export, successful capability probes cached once per connection",
+  "comparisons": {
+    "statement_reuse": [
+      {
+        "case": "table-1",
+        "baseline": {
+          "name": "table-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.22917475333333442,
+          "minMs": 0.2275384966666664,
+          "maxMs": 0.23478305999999957,
+          "peakRssMiB": 138.8125,
+          "minRssMiB": 138.234375,
+          "maxRssMiB": 138.859375,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "table-1",
+          "method": "variant",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.0845562366666661,
+          "minMs": 0.07842496666666623,
+          "maxMs": 0.11192579000000052,
+          "peakRssMiB": 103.171875,
+          "minRssMiB": 103.109375,
+          "maxRssMiB": 103.25,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": -63.10403504888728
+      },
+      {
+        "case": "query-1",
+        "baseline": {
+          "name": "query-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.133449433333333,
+          "minMs": 0.1288530699999995,
+          "maxMs": 0.13722902666666675,
+          "peakRssMiB": 121.796875,
+          "minRssMiB": 121.75,
+          "maxRssMiB": 121.875,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "query-1",
+          "method": "variant",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.11333484333333284,
+          "minMs": 0.10950651666666616,
+          "maxMs": 0.12400696999999994,
+          "peakRssMiB": 115.15625,
+          "minRssMiB": 114.9375,
+          "maxRssMiB": 115.609375,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": -15.072817843862618
+      },
+      {
+        "case": "cold-table-1",
+        "baseline": {
+          "name": "cold-table-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.3630540600000009,
+          "minMs": 0.34490170000000037,
+          "maxMs": 0.8612816199999986,
+          "peakRssMiB": 81.078125,
+          "minRssMiB": 80.921875,
+          "maxRssMiB": 81.34375,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "cold-table-1",
+          "method": "variant",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.37098996000000084,
+          "minMs": 0.35322584000000035,
+          "maxMs": 0.4690583400000014,
+          "peakRssMiB": 81.65625,
+          "minRssMiB": 81.390625,
+          "maxRssMiB": 81.765625,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": 2.185872814643619
+      },
+      {
+        "case": "cold-query-1",
+        "baseline": {
+          "name": "cold-query-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.22959591999999987,
+          "minMs": 0.21909660000000059,
+          "maxMs": 0.3824092200000004,
+          "peakRssMiB": 79.90625,
+          "minRssMiB": 79.578125,
+          "maxRssMiB": 80.203125,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "cold-query-1",
+          "method": "variant",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.22866741999999987,
+          "minMs": 0.2157100399999993,
+          "maxMs": 0.35595411999999954,
+          "peakRssMiB": 79.984375,
+          "minRssMiB": 79.640625,
+          "maxRssMiB": 80.109375,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": -0.4044061410150457
+      },
+      {
+        "case": "table-10",
+        "baseline": {
+          "name": "table-10",
+          "method": "baseline",
+          "rows": 10,
+          "workers": 5,
+          "perRequestMs": 0.25186817000000017,
+          "minMs": 0.23196346666666556,
+          "maxMs": 0.2715973366666671,
+          "peakRssMiB": 138.640625,
+          "minRssMiB": 138.40625,
+          "maxRssMiB": 138.875,
+          "outputBytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "optimized": {
+          "name": "table-10",
+          "method": "variant",
+          "rows": 10,
+          "workers": 5,
+          "perRequestMs": 0.0825751233333332,
+          "minMs": 0.07763623666666651,
+          "maxMs": 0.08418806333333304,
+          "peakRssMiB": 104.015625,
+          "minRssMiB": 103.953125,
+          "maxRssMiB": 104.046875,
+          "outputBytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "elapsedChangePct": -67.21494290710368
+      },
+      {
+        "case": "query-10",
+        "baseline": {
+          "name": "query-10",
+          "method": "baseline",
+          "rows": 10,
+          "workers": 5,
+          "perRequestMs": 0.1381372433333339,
+          "minMs": 0.13248137333333326,
+          "maxMs": 0.15160347666666657,
+          "peakRssMiB": 121.703125,
+          "minRssMiB": 121.5625,
+          "maxRssMiB": 121.78125,
+          "outputBytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "optimized": {
+          "name": "query-10",
+          "method": "variant",
+          "rows": 10,
+          "workers": 5,
+          "perRequestMs": 0.1203126299999999,
+          "minMs": 0.11892915666666734,
+          "maxMs": 0.1252262333333328,
+          "peakRssMiB": 116.484375,
+          "minRssMiB": 116.390625,
+          "maxRssMiB": 116.671875,
+          "outputBytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "elapsedChangePct": -12.90355367112842
+      },
+      {
+        "case": "table-1000",
+        "baseline": {
+          "name": "table-1000",
+          "method": "baseline",
+          "rows": 1000,
+          "workers": 5,
+          "perRequestMs": 0.6923874800000004,
+          "minMs": 0.6608341799999983,
+          "maxMs": 0.7473291599999976,
+          "peakRssMiB": 113.625,
+          "minRssMiB": 110.109375,
+          "maxRssMiB": 114.921875,
+          "outputBytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "optimized": {
+          "name": "table-1000",
+          "method": "variant",
+          "rows": 1000,
+          "workers": 5,
+          "perRequestMs": 0.5298233199999999,
+          "minMs": 0.4939266199999986,
+          "maxMs": 0.5677925399999978,
+          "peakRssMiB": 113.671875,
+          "minRssMiB": 112.578125,
+          "maxRssMiB": 118.09375,
+          "outputBytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "elapsedChangePct": -23.47878387402389
+      },
+      {
+        "case": "query-1000",
+        "baseline": {
+          "name": "query-1000",
+          "method": "baseline",
+          "rows": 1000,
+          "workers": 5,
+          "perRequestMs": 0.9799999800000012,
+          "minMs": 0.9599957999999964,
+          "maxMs": 1.0188124200000006,
+          "peakRssMiB": 92.328125,
+          "minRssMiB": 91.59375,
+          "maxRssMiB": 93.734375,
+          "outputBytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "optimized": {
+          "name": "query-1000",
+          "method": "variant",
+          "rows": 1000,
+          "workers": 5,
+          "perRequestMs": 0.9595858799999979,
+          "minMs": 0.9312841600000007,
+          "maxMs": 0.9971765400000003,
+          "peakRssMiB": 91.71875,
+          "minRssMiB": 91.234375,
+          "maxRssMiB": 93.140625,
+          "outputBytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "elapsedChangePct": -2.083071471083431
+      },
+      {
+        "case": "bulk-plain",
+        "baseline": {
+          "name": "bulk-plain",
+          "method": "baseline",
+          "rows": 1000000,
+          "workers": 5,
+          "perRequestMs": 372.90858300000014,
+          "minMs": 366.24199999999996,
+          "maxMs": 387.9566659999998,
+          "peakRssMiB": 154.78125,
+          "minRssMiB": 151.828125,
+          "maxRssMiB": 158.421875,
+          "outputBytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "optimized": {
+          "name": "bulk-plain",
+          "method": "variant",
+          "rows": 1000000,
+          "workers": 5,
+          "perRequestMs": 392.3957499999999,
+          "minMs": 366.04095800000005,
+          "maxMs": 406.5563339999999,
+          "peakRssMiB": 156.140625,
+          "minRssMiB": 151.140625,
+          "maxRssMiB": 161.09375,
+          "outputBytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "elapsedChangePct": 5.225722305243852
+      },
+      {
+        "case": "bulk-zip",
+        "baseline": {
+          "name": "bulk-zip",
+          "method": "baseline",
+          "rows": 100000,
+          "workers": 5,
+          "perRequestMs": 673.0575409999997,
+          "minMs": 669.4085829999999,
+          "maxMs": 776.3035419999997,
+          "peakRssMiB": 193.140625,
+          "minRssMiB": 180.65625,
+          "maxRssMiB": 214.40625,
+          "outputBytes": 27083829,
+          "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+        },
+        "optimized": {
+          "name": "bulk-zip",
+          "method": "variant",
+          "rows": 100000,
+          "workers": 5,
+          "perRequestMs": 678.5487910000002,
+          "minMs": 668.7474159999997,
+          "maxMs": 697.0073339999999,
+          "peakRssMiB": 184.890625,
+          "minRssMiB": 184.59375,
+          "maxRssMiB": 209.140625,
+          "outputBytes": 27083829,
+          "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+        },
+        "elapsedChangePct": 0.8158663510168473
+      }
+    ],
+    "metadata_only": [
+      {
+        "case": "table-1",
+        "baseline": {
+          "name": "table-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.2334145933333349,
+          "minMs": 0.22774153333333402,
+          "maxMs": 0.24507387666666658,
+          "peakRssMiB": 138.65625,
+          "minRssMiB": 138.203125,
+          "maxRssMiB": 138.703125,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "table-1",
+          "method": "metadata-only",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.13588801333333256,
+          "minMs": 0.134199726666667,
+          "maxMs": 0.13682528999999827,
+          "peakRssMiB": 121.484375,
+          "minRssMiB": 120.515625,
+          "maxRssMiB": 121.6875,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": -41.78255464118582
+      },
+      {
+        "case": "table-10",
+        "baseline": {
+          "name": "table-10",
+          "method": "baseline",
+          "rows": 10,
+          "workers": 5,
+          "perRequestMs": 0.24686832999999977,
+          "minMs": 0.2329437466666667,
+          "maxMs": 0.31863594999999995,
+          "peakRssMiB": 138.5625,
+          "minRssMiB": 138,
+          "maxRssMiB": 139.40625,
+          "outputBytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "optimized": {
+          "name": "table-10",
+          "method": "metadata-only",
+          "rows": 10,
+          "workers": 5,
+          "perRequestMs": 0.1340366466666667,
+          "minMs": 0.1334030633333335,
+          "maxMs": 0.1404354733333335,
+          "peakRssMiB": 122.265625,
+          "minRssMiB": 121.09375,
+          "maxRssMiB": 122.515625,
+          "outputBytes": 820,
+          "sha256": "1556d6d165386ff1b57d0269e1705519a30b1cd08c771fc6b3434bac2999efd5"
+        },
+        "elapsedChangePct": -45.705207846358086
+      },
+      {
+        "case": "table-1000",
+        "baseline": {
+          "name": "table-1000",
+          "method": "baseline",
+          "rows": 1000,
+          "workers": 5,
+          "perRequestMs": 0.7179882800000007,
+          "minMs": 0.6692942000000005,
+          "maxMs": 0.7276042000000024,
+          "peakRssMiB": 114.078125,
+          "minRssMiB": 111.125,
+          "maxRssMiB": 118.390625,
+          "outputBytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "optimized": {
+          "name": "table-1000",
+          "method": "metadata-only",
+          "rows": 1000,
+          "workers": 5,
+          "perRequestMs": 0.5853483800000007,
+          "minMs": 0.5670742599999999,
+          "maxMs": 0.5992325400000005,
+          "peakRssMiB": 116.515625,
+          "minRssMiB": 114.734375,
+          "maxRssMiB": 119.015625,
+          "outputBytes": 80422,
+          "sha256": "77689b66945dbe7ca7628082a2a003021431a63f72bb4ad1f90986af66023609"
+        },
+        "elapsedChangePct": -18.473825227342132
+      },
+      {
+        "case": "bulk-plain",
+        "baseline": {
+          "name": "bulk-plain",
+          "method": "baseline",
+          "rows": 1000000,
+          "workers": 5,
+          "perRequestMs": 375.8024579999999,
+          "minMs": 366.962583,
+          "maxMs": 408.3337080000001,
+          "peakRssMiB": 155.859375,
+          "minRssMiB": 153.328125,
+          "maxRssMiB": 164.1875,
+          "outputBytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "optimized": {
+          "name": "bulk-plain",
+          "method": "metadata-only",
+          "rows": 1000000,
+          "workers": 5,
+          "perRequestMs": 374.287417,
+          "minMs": 367.77129200000013,
+          "maxMs": 403.2337910000001,
+          "peakRssMiB": 152.46875,
+          "minRssMiB": 150.265625,
+          "maxRssMiB": 158.515625,
+          "outputBytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "elapsedChangePct": -0.403148241249629
+      },
+      {
+        "case": "bulk-zip",
+        "baseline": {
+          "name": "bulk-zip",
+          "method": "baseline",
+          "rows": 100000,
+          "workers": 5,
+          "perRequestMs": 671.0909580000002,
+          "minMs": 664.9357500000001,
+          "maxMs": 692.1964590000002,
+          "peakRssMiB": 185.15625,
+          "minRssMiB": 180.703125,
+          "maxRssMiB": 205.46875,
+          "outputBytes": 27083829,
+          "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+        },
+        "optimized": {
+          "name": "bulk-zip",
+          "method": "metadata-only",
+          "rows": 100000,
+          "workers": 5,
+          "perRequestMs": 670.3615840000002,
+          "minMs": 667.1813750000001,
+          "maxMs": 679.8637079999999,
+          "peakRssMiB": 184.84375,
+          "minRssMiB": 180.75,
+          "maxRssMiB": 202.75,
+          "outputBytes": 27083829,
+          "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+        },
+        "elapsedChangePct": -0.10868482003895119
+      }
+    ],
+    "capabilities_only": [
+      {
+        "case": "table-1",
+        "baseline": {
+          "name": "table-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.22896777000000137,
+          "minMs": 0.22545135999999993,
+          "maxMs": 0.24026127000000022,
+          "peakRssMiB": 138.390625,
+          "minRssMiB": 138.25,
+          "maxRssMiB": 138.890625,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "table-1",
+          "method": "capabilities-only",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.21967300000000042,
+          "minMs": 0.20775238000000107,
+          "maxMs": 0.2285830866666662,
+          "peakRssMiB": 132.375,
+          "minRssMiB": 131.65625,
+          "maxRssMiB": 132.8125,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": -4.05942286113058
+      },
+      {
+        "case": "query-1",
+        "baseline": {
+          "name": "query-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.13174666666666687,
+          "minMs": 0.1313651600000002,
+          "maxMs": 0.1389280400000003,
+          "peakRssMiB": 121.625,
+          "minRssMiB": 121.375,
+          "maxRssMiB": 121.671875,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "query-1",
+          "method": "capabilities-only",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.11347376000000012,
+          "minMs": 0.11056319666666663,
+          "maxMs": 0.1156757133333332,
+          "peakRssMiB": 115.109375,
+          "minRssMiB": 115.015625,
+          "maxRssMiB": 115.21875,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": -13.869729784434814
+      },
+      {
+        "case": "bulk-plain",
+        "baseline": {
+          "name": "bulk-plain",
+          "method": "baseline",
+          "rows": 1000000,
+          "workers": 5,
+          "perRequestMs": 370.95670800000016,
+          "minMs": 366.8882080000001,
+          "maxMs": 391.40108399999986,
+          "peakRssMiB": 152.390625,
+          "minRssMiB": 147.28125,
+          "maxRssMiB": 155.515625,
+          "outputBytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "optimized": {
+          "name": "bulk-plain",
+          "method": "capabilities-only",
+          "rows": 1000000,
+          "workers": 5,
+          "perRequestMs": 368.76129200000014,
+          "minMs": 365.39474999999993,
+          "maxMs": 390.770084,
+          "peakRssMiB": 150.9375,
+          "minRssMiB": 147.59375,
+          "maxRssMiB": 161.359375,
+          "outputBytes": 83369847,
+          "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+        },
+        "elapsedChangePct": -0.5918253943530294
+      },
+      {
+        "case": "bulk-zip",
+        "baseline": {
+          "name": "bulk-zip",
+          "method": "baseline",
+          "rows": 100000,
+          "workers": 5,
+          "perRequestMs": 672.121333,
+          "minMs": 669.926125,
+          "maxMs": 683.8969999999999,
+          "peakRssMiB": 189,
+          "minRssMiB": 180.6875,
+          "maxRssMiB": 192.484375,
+          "outputBytes": 27083829,
+          "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+        },
+        "optimized": {
+          "name": "bulk-zip",
+          "method": "capabilities-only",
+          "rows": 100000,
+          "workers": 5,
+          "perRequestMs": 669.4374590000002,
+          "minMs": 667.624667,
+          "maxMs": 676.3815,
+          "peakRssMiB": 184.59375,
+          "minRssMiB": 182.453125,
+          "maxRssMiB": 185.375,
+          "outputBytes": 27083829,
+          "sha256": "43f4727d3e7940e7d85dedb6faaae42e5b96c81bef4cd18359066f2d8c57082e"
+        },
+        "elapsedChangePct": -0.399313913757271
+      }
+    ],
+    "cold_metadata_only": [
+      {
+        "case": "cold-table-1",
+        "baseline": {
+          "name": "cold-table-1",
+          "method": "baseline",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.35462000000000016,
+          "minMs": 0.3353758600000012,
+          "maxMs": 0.49041488000000116,
+          "peakRssMiB": 81.265625,
+          "minRssMiB": 80.734375,
+          "maxRssMiB": 81.578125,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "optimized": {
+          "name": "cold-table-1",
+          "method": "metadata-only",
+          "rows": 1,
+          "workers": 5,
+          "perRequestMs": 0.3750907799999999,
+          "minMs": 0.3541200199999997,
+          "maxMs": 0.43846250000000025,
+          "peakRssMiB": 81.515625,
+          "minRssMiB": 81.3125,
+          "maxRssMiB": 81.75,
+          "outputBytes": 77,
+          "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+        },
+        "elapsedChangePct": 5.772596018273002
+      }
+    ]
+  },
+  "counts": {
+    "statement-reuse/": {
+      "freshWorkers": 100,
+      "timedRequests": 42060,
+      "verifiedResponses": 100,
+      "independentlyDecodedZipArchives": 10
+    },
+    "metadata-comparison/": {
+      "freshWorkers": 50,
+      "timedRequests": 19560,
+      "verifiedResponses": 50,
+      "independentlyDecodedZipArchives": 10
+    },
+    "capabilities-comparison/": {
+      "freshWorkers": 40,
+      "timedRequests": 18060,
+      "verifiedResponses": 40,
+      "independentlyDecodedZipArchives": 10
+    },
+    "cold-comparison/": {
+      "freshWorkers": 10,
+      "timedRequests": 1500,
+      "verifiedResponses": 10,
+      "independentlyDecodedZipArchives": 0
+    }
+  },
+  "limits": "Small cases are repeated public Web streams consumed through Response.arrayBuffer; times include body collection, exclude HTTP/network and connection opening/closing. RSS is whole-worker high-water including verification/warmup and repeated samples. Cold cases create a fresh connection for every timed request. Bulk controls show host variation; retained all observations and separate paired statement-reuse controls."
+}

@@ -1,0 +1,650 @@
+[
+  {
+    "dataset": "narrow",
+    "method": "full-blob",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 898.579625,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 833.075041,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 862.294292,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 824.2309999999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 833.075041,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 441.640625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "narrow",
+    "method": "full-sliced",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 912.0332080000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 847.4097079999997,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 849.776417,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 871.4167080000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 849.776417,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 500.140625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-blob",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 884.372959,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 840.977958,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 879.1240830000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 838.9571659999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 840.977958,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 611.90625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-sliced",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 918.692708,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 858.4326250000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 853.7864159999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 863.1582079999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 858.4326250000001,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 586.515625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "narrow",
+    "method": "full-sliced",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 912.2855420000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 852.1726249999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 845.5052500000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 855.2929590000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 852.1726249999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 503.109375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "narrow",
+    "method": "full-blob",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 872.647416,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 837.0417909999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 858.1997080000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 818.2732499999997,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 837.0417909999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 520.171875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-sliced",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 918.3892920000001,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 858.9558749999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 859.7745830000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 859.3594579999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 859.3594579999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 588.265625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-blob",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 885.969875,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 837.1571669999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 871.063459,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 840.0832499999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 840.0832499999997,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 609.203125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "narrow",
+    "method": "full-blob",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 896.70325,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 877.5095840000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 872.8147079999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 843.5466250000004,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 872.8147079999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 601.46875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "narrow",
+    "method": "full-sliced",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 906.790667,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 850.4384589999997,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 849.473375,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 840.2983749999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 849.473375,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 502.421875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-blob",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 877.676875,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 887.2981250000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 845.4877500000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 849.9613329999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 849.9613329999997,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 612.796875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-sliced",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 911.449916,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 871.9864580000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 856.5897500000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 856.8915000000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 856.8915000000002,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 586.40625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "SELECT CAST(json_group_array(json_object('id', \"id\",'name', \"name\",'note', \"note\",'active', \"active\")) AS BLOB) FROM (SELECT \"id\",\"name\",\"note\",\"active\" FROM main.\"data\" ORDER BY rowid)"
+  }
+]

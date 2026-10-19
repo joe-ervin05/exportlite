@@ -1,0 +1,141 @@
+{
+  "criterion": "Consistently reasonable memory, lower observed peak memory or faster exports; no requirement to minimize every fixture separately.",
+  "memoryMeaning": "RSS is the high-water mark of the whole worker, including verification, warmup and three timed exports. Highest observed is the maximum of 15 workers per method across these fixtures, not a guaranteed bound.",
+  "methods": [
+    {
+      "method": "buffered",
+      "highestObservedPeakRssMiB": 205.984375,
+      "cases": [
+        {
+          "dataset": "matched",
+          "totalMs": 186.73370800000004,
+          "medianPeakRssMiB": 119.078125,
+          "maxPeakRssMiB": 122.109375,
+          "elapsedRatioToBuffered": 1
+        },
+        {
+          "dataset": "narrow",
+          "totalMs": 559.319125,
+          "medianPeakRssMiB": 152.6875,
+          "maxPeakRssMiB": 181.25,
+          "elapsedRatioToBuffered": 1
+        },
+        {
+          "dataset": "wide",
+          "totalMs": 713.7167919999997,
+          "medianPeakRssMiB": 185.15625,
+          "maxPeakRssMiB": 205.984375,
+          "elapsedRatioToBuffered": 1
+        }
+      ]
+    },
+    {
+      "method": "fixed-1024",
+      "highestObservedPeakRssMiB": 214.828125,
+      "cases": [
+        {
+          "dataset": "matched",
+          "totalMs": 204.54845800000004,
+          "medianPeakRssMiB": 106.265625,
+          "maxPeakRssMiB": 107.71875,
+          "elapsedRatioToBuffered": 1.095401897122934
+        },
+        {
+          "dataset": "narrow",
+          "totalMs": 546.1994589999999,
+          "medianPeakRssMiB": 137.1875,
+          "maxPeakRssMiB": 166.390625,
+          "elapsedRatioToBuffered": 0.9765435054630037
+        },
+        {
+          "dataset": "wide",
+          "totalMs": 718.2689580000001,
+          "medianPeakRssMiB": 204.40625,
+          "maxPeakRssMiB": 214.828125,
+          "elapsedRatioToBuffered": 1.0063781125104878
+        }
+      ]
+    },
+    {
+      "method": "fixed-4096",
+      "highestObservedPeakRssMiB": 227.578125,
+      "cases": [
+        {
+          "dataset": "matched",
+          "totalMs": 178.08691700000003,
+          "medianPeakRssMiB": 124.765625,
+          "maxPeakRssMiB": 127.15625,
+          "elapsedRatioToBuffered": 0.9536945359645511
+        },
+        {
+          "dataset": "narrow",
+          "totalMs": 563.6800420000002,
+          "medianPeakRssMiB": 181.796875,
+          "maxPeakRssMiB": 184.34375,
+          "elapsedRatioToBuffered": 1.007796831549431
+        },
+        {
+          "dataset": "wide",
+          "totalMs": 773.8063339999999,
+          "medianPeakRssMiB": 215.390625,
+          "maxPeakRssMiB": 227.578125,
+          "elapsedRatioToBuffered": 1.0841924173195019
+        }
+      ]
+    },
+    {
+      "method": "adaptive-p95",
+      "highestObservedPeakRssMiB": 179.578125,
+      "cases": [
+        {
+          "dataset": "matched",
+          "totalMs": 171.17333300000007,
+          "medianPeakRssMiB": 136.609375,
+          "maxPeakRssMiB": 143.96875,
+          "elapsedRatioToBuffered": 0.9166707759051196
+        },
+        {
+          "dataset": "narrow",
+          "totalMs": 549.0008750000002,
+          "medianPeakRssMiB": 154.15625,
+          "maxPeakRssMiB": 161.265625,
+          "elapsedRatioToBuffered": 0.9815521237540379
+        },
+        {
+          "dataset": "wide",
+          "totalMs": 717.4622920000002,
+          "medianPeakRssMiB": 166.671875,
+          "maxPeakRssMiB": 179.578125,
+          "elapsedRatioToBuffered": 1.0052478798901519
+        }
+      ]
+    },
+    {
+      "method": "adaptive-mean",
+      "highestObservedPeakRssMiB": 173.5625,
+      "cases": [
+        {
+          "dataset": "matched",
+          "totalMs": 171.50958400000002,
+          "medianPeakRssMiB": 141.109375,
+          "maxPeakRssMiB": 148.21875,
+          "elapsedRatioToBuffered": 0.9184714738273178
+        },
+        {
+          "dataset": "narrow",
+          "totalMs": 549.616,
+          "medianPeakRssMiB": 162.90625,
+          "maxPeakRssMiB": 165.65625,
+          "elapsedRatioToBuffered": 0.9826518984130929
+        },
+        {
+          "dataset": "wide",
+          "totalMs": 725.5495409999999,
+          "medianPeakRssMiB": 165.40625,
+          "maxPeakRssMiB": 173.5625,
+          "elapsedRatioToBuffered": 1.016579053670353
+        }
+      ]
+    }
+  ]
+}

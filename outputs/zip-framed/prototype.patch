@@ -1,0 +1,380 @@
+--- a/src/planner/batches.ts
++++ b/src/planner/batches.ts
+@@ -9,6 +9,7 @@
+     columnNames: readonly string[];
+     columns: readonly string[];
+     format: "json" | "jsonl";
++    framed?: boolean;
+   },
+ ) {
+   const info = db
+@@ -26,10 +27,15 @@
+   const table = `main.${identifier(options.table)} AS "__exportlite_source"`;
+   const columns = options.columns.map(identifier).join(", ");
+   const object = `json_object(${options.columns.map((column) => `${literal(column)}, ${identifier(column)}`).join(", ")})`;
++  const framed = options.framed === true;
+   const aggregate =
+     options.format === "json"
+-      ? `json_group_array(${object})`
+-      : `group_concat(${object}, char(10))`;
++      ? framed
++        ? `(CASE WHEN "__exportlite_batches"."initial" THEN '[' ELSE ',' END) || group_concat(${object}, ',')`
++        : `json_group_array(${object})`
++      : framed
++        ? `group_concat(${object}, char(10)) || char(10)`
++        : `group_concat(${object}, char(10))`;
+   // CAST uses the database encoding. Keep UTF-16 databases on the text path;
+   // UTF-8 databases can deliver JSON bytes without decoding and re-encoding.
+   const payload =
+@@ -39,16 +45,16 @@
+   // Seek the first and 256th existing keys without per-key min/max/count work.
+   // OFFSET is always 255 within the next range, never a growing page offset.
+   // Keep integer bounds in SQLite; only a short final batch needs counting.
+-  const sql = `WITH RECURSIVE "__exportlite_batches"("first", "last") AS (
++  const sql = `WITH RECURSIVE "__exportlite_batches"("first", "last"${framed ? ', "initial"' : ""}) AS (
+     SELECT
+       (SELECT ${key} FROM ${table} ORDER BY ${key} LIMIT 1),
+-      (SELECT ${key} FROM ${table} ORDER BY ${key} LIMIT 1 OFFSET 255)
++      (SELECT ${key} FROM ${table} ORDER BY ${key} LIMIT 1 OFFSET 255)${framed ? ", 1" : ""}
+     UNION ALL
+     SELECT
+       (SELECT ${key} FROM ${table}
+         WHERE ${key} > ${last} ORDER BY ${key} LIMIT 1),
+       (SELECT ${key} FROM ${table}
+-        WHERE ${key} > ${last} ORDER BY ${key} LIMIT 1 OFFSET 255)
++        WHERE ${key} > ${last} ORDER BY ${key} LIMIT 1 OFFSET 255)${framed ? ", 0" : ""}
+     FROM "__exportlite_batches"
+     WHERE ${last} IS NOT NULL
+   )
+--- a/src/planner/json.ts
++++ b/src/planner/json.ts
+@@ -14,6 +14,7 @@
+   table: string,
+   requested?: readonly string[],
+   format: "json" | "jsonl" = "jsonl",
++  framed = false,
+ ) {
+   identifier(table);
+   try {
+@@ -50,8 +51,9 @@
+       columnNames: metadata.map((column) => column.name),
+       columns,
+       format,
++      framed,
+     });
+-    if (batched) return { statement: batched, batched: true };
++    if (batched) return { statement: batched, batched: true, framed };
+     const pairs = columns
+       .map((c) => `${literal(c)}, ${identifier(c)}`)
+       .join(", ");
+@@ -61,6 +63,7 @@
+         `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`,
+       ),
+       batched: false,
++      framed: false,
+     };
+   } catch (error) {
+     throw sqliteError(error);
+--- a/src/api/export-table.ts
++++ b/src/api/export-table.ts
+@@ -35,18 +35,27 @@
+   validateOptions(options);
+   checkAborted(options.signal);
+   checkCapabilities(db);
+-  const { statement, batched } = planTable(
++  const { statement, batched, framed } = planTable(
+     db,
+     table,
+     options.columns,
+     options.format ?? "jsonl",
++    options.zip === true,
+   );
+   if (options.output === undefined)
+     return createReadableExport(
+       options,
+       (destination) =>
+-        streamExport(statement, [], destination, started, batched, table),
++        streamExport(
++          statement,
++          [],
++          destination,
++          started,
++          batched,
++          table,
++          framed,
++        ),
+       started,
+     );
+-  return streamExport(statement, [], options, started, batched, table);
++  return streamExport(statement, [], options, started, batched, table, framed);
+ }
+--- a/src/api/export.ts
++++ b/src/api/export.ts
+@@ -12,6 +12,7 @@
+   started: number,
+   batched = false,
+   name = "export",
++  framed = false,
+ ): Promise<ExportResult> {
+   const output = options.zip
+     ? await ZipOutput.create(options, name)
+@@ -21,7 +22,7 @@
+   let success = false;
+   try {
+     const json = options.format === "json";
+-    if (json) {
++    if (json && !framed) {
+       const wait = output.write("[");
+       if (wait) await wait;
+     }
+@@ -34,16 +35,16 @@
+       const text = typeof value === "string" ? value : value[0];
+       const count = typeof value === "string" ? 1 : Number(value[1]);
+       const content =
+-        json && batched
++        json && batched && !framed
+           ? typeof text === "string"
+             ? text.slice(1, -1)
+             : text.subarray(1, -1)
+           : text;
+-      const prefix = json && rowsExported > 0 ? "," : "";
+-      const suffix = json ? "" : "\n";
++      const prefix = json && rowsExported > 0 && !framed ? "," : "";
++      const suffix = json || framed ? "" : "\n";
+       const bytes =
+         (typeof text === "string" ? Buffer.byteLength(text) : text.length) -
+-        (json && batched ? 2 : 0) +
++        (json && batched && !framed ? 2 : 0) +
+         prefix.length +
+         suffix.length;
+       // Stitch SQLite JSON directly; never parse it or construct JS row objects.
+@@ -62,7 +63,7 @@
+       }
+     }
+     if (json) {
+-      const wait = output.write("]");
++      const wait = output.write(framed && rowsExported === 0 ? "[]" : "]");
+       if (wait) await wait;
+     }
+     await output.complete();
+--- a/src/output/zip.ts
++++ b/src/output/zip.ts
+@@ -123,7 +123,11 @@
+     suffix = "",
+   ): Promise<void> | undefined {
+     this.check();
+-    return this.json.write(text, bytes, prefix, suffix);
++    // Byte batches already contain SQLite-generated separators. Forward them
++    // unchanged through the existing callback, drain and abort checks.
++    return typeof text === "string"
++      ? this.json.write(text, bytes, prefix, suffix)
++      : this.json.writeBytes(text);
+   }
+ 
+   async complete(): Promise<void> {
+--- a/tests/zip.test.ts
++++ b/tests/zip.test.ts
+@@ -2,7 +2,7 @@
+ import { mkdtemp, readdir, readFile, rm } from "node:fs/promises";
+ import { tmpdir } from "node:os";
+ import { join } from "node:path";
+-import { Writable } from "node:stream";
++import { PassThrough, Writable } from "node:stream";
+ import { setImmediate, setTimeout } from "node:timers/promises";
+ import { crc32 } from "node:zlib";
+ import Database from "better-sqlite3";
+@@ -15,6 +15,7 @@
+   exportTable,
+   type SQLiteConnection,
+ } from "../src/index.js";
++import { planTable } from "../src/planner/json.js";
+ 
+ async function decode(bytes: Buffer, name: string) {
+   const archive = await fromBufferPromise(bytes, { lazyEntries: true });
+@@ -75,7 +76,7 @@
+ 
+ describe("streaming ZIP", () => {
+   it.each(
+-    [0, 1, 256, 257, 513].flatMap((count) =>
++    [0, 1, 255, 256, 257, 512, 513].flatMap((count) =>
+       (["json", "jsonl"] as const).flatMap((format) =>
+         [false, true].map((query) => ({ count, format, query })),
+       ),
+@@ -142,6 +143,129 @@
+     });
+     expect(executions).toBe(1);
+     expect(counts).toEqual([256, 256, 1]);
++  });
++
++  it.each(["json", "jsonl"] as const)(
++    "passes immutable SQLite-framed batches to ZIP in one write (%s)",
++    async (format) => {
++      const batches: Buffer[] = [];
++      const originals: Buffer[] = [];
++      const connection: SQLiteConnection = {
++        prepare(sql) {
++          const statement: ReadStatement = db.prepare(sql);
++          if (sql.startsWith('WITH RECURSIVE "__exportlite_batches"')) {
++            const iterate = statement.iterate.bind(statement);
++            statement.iterate = function* (...params) {
++              for (const value of iterate(...params)) {
++                if (!Array.isArray(value) || !Buffer.isBuffer(value[0]))
++                  throw new Error("Expected native byte batches");
++                batches.push(value[0]);
++                originals.push(Buffer.from(value[0]));
++                yield value;
++              }
++            };
++          }
++          return statement;
++        },
++      };
++      const writes = vi.spyOn(PassThrough.prototype, "write");
++      const output = capture(true);
++      try {
++        await exportTable(connection, "users", {
++          format,
++          zip: true,
++          output: output.stream,
++        });
++        const chunks = writes.mock.calls.map(([chunk]) => chunk);
++        expect(batches).toHaveLength(3);
++        for (const [index, batch] of batches.entries()) {
++          expect(chunks.some((chunk) => chunk === batch)).toBe(true);
++          if (format === "json") expect(batch[0]).toBe(index === 0 ? 91 : 44);
++          else expect(batch[batch.length - 1]).toBe(10);
++          expect(batch).toEqual(originals[index]);
++        }
++      } finally {
++        writes.mockRestore();
++        output.stream.end();
++      }
++      const rows = db.prepare("SELECT * FROM users ORDER BY id").all();
++      expect(await decode(output.bytes(), `users.${format}`)).toBe(
++        format === "json"
++          ? JSON.stringify(rows)
++          : `${rows.map((row) => JSON.stringify(row)).join("\n")}\n`,
++      );
++    },
++  );
++
++  it("pauses native batches under ZIP backpressure and cancels before releasing the caller write", async () => {
++    db.exec("CREATE TABLE large(id INTEGER PRIMARY KEY, note TEXT)");
++    const payloads = Array.from({ length: 16 }, () =>
++      randomBytes(3072).toString("base64"),
++    );
++    const insert = db.prepare("INSERT INTO large VALUES (?, ?)");
++    db.transaction(() => {
++      for (let id = 1; id <= 4096; id++)
++        insert.run(id, payloads[id % payloads.length]);
++    })();
++    let batches = 0;
++    const connection: SQLiteConnection = {
++      prepare(sql) {
++        const statement: ReadStatement = db.prepare(sql);
++        if (sql.startsWith('WITH RECURSIVE "__exportlite_batches"')) {
++          const iterate = statement.iterate.bind(statement);
++          statement.iterate = function* (...params) {
++            for (const value of iterate(...params)) {
++              batches++;
++              yield value;
++            }
++          };
++        }
++        return statement;
++      },
++    };
++    const controller = new AbortController();
++    let hold = true;
++    let release: (() => void) | undefined;
++    let reached: (() => void) | undefined;
++    const blocked = new Promise<void>((resolve) => {
++      reached = resolve;
++    });
++    const output = new Writable({
++      highWaterMark: 1,
++      write(_chunk, _encoding, callback) {
++        if (hold) {
++          release = callback;
++          reached?.();
++        } else callback();
++      },
++    });
++    const pending = exportTable(connection, "large", {
++      output,
++      format: "json",
++      zip: true,
++      signal: controller.signal,
++    });
++    const assertion = expect(pending).rejects.toHaveProperty("code", "ABORTED");
++    try {
++      await blocked;
++      await setTimeout(30);
++      const paused = batches;
++      expect(paused).toBeGreaterThan(0);
++      expect(paused).toBeLessThan(16);
++      await setTimeout(30);
++      expect(batches).toBe(paused);
++      controller.abort();
++      await assertion;
++      expect(output.destroyed).toBe(false);
++      expect(output.writableEnded).toBe(false);
++      db.exec("DROP TABLE large");
++    } finally {
++      controller.abort();
++      hold = false;
++      release?.();
++      output.end();
++      await pending.catch(() => {});
++    }
+   });
+ 
+   it.each(["view", "without_rowid", "shadowed", "virtual"])(
+@@ -189,6 +313,47 @@
+     }
+   });
+ 
++  it.each(["json", "jsonl"] as const)(
++    "keeps SQL-framed %s batches ordered and streaming at 64-bit key extremes",
++    async (format) => {
++      db.exec(
++        "INSERT INTO users VALUES(-9223372036854775808,'min',NULL),(9223372036854775807,'max',NULL)",
++      );
++      db.defaultSafeIntegers(true);
++      const plan = planTable(db, "users", ["id"], format, true);
++      expect(plan.batched).toBe(true);
++      expect(plan.framed).toBe(true);
++      const statement = plan.statement as ReadStatement & { source: string };
++      const details = (
++        db.prepare(`EXPLAIN QUERY PLAN ${statement.source}`).all() as {
++          detail: string;
++        }[]
++      )
++        .map((row) => row.detail)
++        .join("\n");
++      expect(details).toMatch(/CO-ROUTINE __exportlite_batches/);
++      expect(details).toMatch(/SEARCH .* USING INTEGER PRIMARY KEY/);
++      expect(details).not.toMatch(/USE TEMP B-TREE|MATERIALIZE/i);
++      const output = capture();
++      const result = await exportTable(db, "users", {
++        output: output.stream,
++        columns: ["id"],
++        format,
++        zip: true,
++      });
++      const records = db
++        .prepare("SELECT json_object('id',id) FROM users ORDER BY rowid")
++        .pluck()
++        .all() as string[];
++      expect(await decode(output.bytes(), `users.${format}`)).toBe(
++        format === "json"
++          ? `[${records.join(",")}]`
++          : `${records.join("\n")}\n`,
++      );
++      expect(result.rowsExported).toBe(515);
++    },
++  );
++
+   it.each([
+     ["../雪\\users", "___雪_users.jsonl"],
+     ["CON", "_CON.jsonl"],

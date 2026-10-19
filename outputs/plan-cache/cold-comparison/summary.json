@@ -1,0 +1,30 @@
+[
+  {
+    "name": "cold-table-1",
+    "method": "baseline",
+    "rows": 1,
+    "workers": 5,
+    "perRequestMs": 0.35462000000000016,
+    "minMs": 0.3353758600000012,
+    "maxMs": 0.49041488000000116,
+    "peakRssMiB": 81.265625,
+    "minRssMiB": 80.734375,
+    "maxRssMiB": 81.578125,
+    "outputBytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+  },
+  {
+    "name": "cold-table-1",
+    "method": "metadata-only",
+    "rows": 1,
+    "workers": 5,
+    "perRequestMs": 0.3750907799999999,
+    "minMs": 0.3541200199999997,
+    "maxMs": 0.43846250000000025,
+    "peakRssMiB": 81.515625,
+    "minRssMiB": 81.3125,
+    "maxRssMiB": 81.75,
+    "outputBytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+  }
+]

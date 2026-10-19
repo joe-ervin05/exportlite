@@ -1,0 +1,54 @@
+[
+  {
+    "dataset": "narrow",
+    "method": "full-blob",
+    "workers": 3,
+    "totalMs": 837.0417909999999,
+    "minMs": 833.075041,
+    "maxMs": 872.8147079999999,
+    "peakRssMiB": 520.171875,
+    "zipBytes": 21360051,
+    "jsonBytes": 83369847,
+    "encodedSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5",
+    "decodedSha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+  },
+  {
+    "dataset": "narrow",
+    "method": "full-sliced",
+    "workers": 3,
+    "totalMs": 849.776417,
+    "minMs": 849.473375,
+    "maxMs": 852.1726249999999,
+    "peakRssMiB": 502.421875,
+    "zipBytes": 21360051,
+    "jsonBytes": 83369847,
+    "encodedSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5",
+    "decodedSha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-blob",
+    "workers": 3,
+    "totalMs": 840.977958,
+    "minMs": 840.0832499999997,
+    "maxMs": 849.9613329999997,
+    "peakRssMiB": 611.90625,
+    "zipBytes": 27133939,
+    "jsonBytes": 100920480,
+    "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621",
+    "decodedSha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+  },
+  {
+    "dataset": "wide",
+    "method": "full-sliced",
+    "workers": 3,
+    "totalMs": 858.4326250000001,
+    "minMs": 856.8915000000002,
+    "maxMs": 859.3594579999999,
+    "peakRssMiB": 586.515625,
+    "zipBytes": 27133939,
+    "jsonBytes": 100920480,
+    "encodedSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621",
+    "decodedSha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+  }
+]

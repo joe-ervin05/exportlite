@@ -1,0 +1,45 @@
+{
+  "prototypeVariants": {
+    "fixed-256": {
+      "tests": 193,
+      "files": 5,
+      "passed": true,
+      "types": "passed",
+      "build": "ESM and CommonJS passed"
+    },
+    "fixed-1024": {
+      "tests": 193,
+      "files": 5,
+      "passed": true,
+      "types": "passed",
+      "build": "ESM and CommonJS passed"
+    },
+    "fixed-4096": {
+      "tests": 193,
+      "files": 5,
+      "passed": true,
+      "types": "passed",
+      "build": "ESM and CommonJS passed"
+    },
+    "adaptive-p95": {
+      "tests": 196,
+      "files": 6,
+      "passed": true,
+      "types": "passed",
+      "build": "ESM and CommonJS passed"
+    }
+  },
+  "defaultPackage": "src, dist and tests unchanged; SHA-256 fingerprints verified",
+  "benchmarks": {
+    "node": "v26.12.0",
+    "sqlite": "3.53.4",
+    "freshWorkers": 75,
+    "timedExports": 225,
+    "verifiedArchives": 75,
+    "zip": "Bit-identical encoded SHA-256 per fixture; independently verified decoded SHA-256, bytes and CRC-32."
+  },
+  "diagnostics": "15 separate untimed exports; exact ZIP input bytes and encoded digest verified; one data statement/execution each",
+  "memory": "Whole-process maximum RSS including startup, verification, warmup and three timed exports; across-suite maximum is observed, not a hard bound. Natural GC; no explicit collection.",
+  "timing": "Timing medians of five fresh-worker medians, three timed exports per worker. Rotating method order; all observations retained. Small timing differences on varied fixtures overlap run-to-run variation.",
+  "adaptive": "Historical p95 of last 64 total batch byte sizes, target 256 KiB, 10% headroom, initial 64 rows, growth <=2x and 1\u201365536 rows. Controller ported to optimized SQL; callback state scoped to iterator so cancellation/completion clears it. Prepare-only adapters keep the fixed 256 fallback; no public option or declarations changed."
+}

@@ -1,0 +1,1061 @@
+{
+  "configuration": {
+    "sizes": [
+      1,
+      10,
+      100,
+      1000,
+      10000,
+      100000,
+      1000000
+    ],
+    "depths": [
+      0,
+      1,
+      2
+    ],
+    "repeats": 3,
+    "fixture": {
+      "users": 1000000,
+      "posts": 2000000,
+      "comments": 4000000,
+      "fanout": 2,
+      "indexes": [
+        {
+          "name": "comments_post_id",
+          "sql": "CREATE INDEX comments_post_id ON comments(post_id)"
+        },
+        {
+          "name": "posts_user_id",
+          "sql": "CREATE INDEX posts_user_id ON posts(user_id)"
+        }
+      ],
+      "bytes": 258387968
+    },
+    "fixtureSha256": "2932e4b4087e24ba2d4d6ba12d8ce0aff08f50b4640f0a240683d82d92c9e364",
+    "node": "v26.12.0",
+    "sources": {
+      "worker.mjs": "3905e296defe6507e3019e22715c071047a58a1dbb6851d52b1a535d6d34f6dd",
+      "run.mjs": "d0ee2ae5407886e5804b1b4091b4f97b900e8dc7ede2edfa09a175c2dc569ae7",
+      "engine-entry.ts": "dc34e13c94b564b6addf767e543d4498391c98bb858946b6f2528cf3e28e91bc",
+      "root-sql.mjs": "d8cc8e1fc415d440e99bad678aa0894079287855f730f1537ec3f4d6e95b057a",
+      "validate.mjs": "ca335ed9556e41496c8cd091d480cd85cf76fa6691c424fce7b6e75e3b5885ba",
+      "build/engine-entry.mjs": "98ab2ad2a28d4fd1a1aa48244136ec959b8cd0d82d477c22722e5ecd8617be81",
+      "reference/queries.mjs": "179e7de764a812a142bde6647cfb37be412d43301cea0d9469c37e5c26a05701",
+      "reference/schema.mjs": "6fd81771ab65f5b5ed3d5154acd2b1e15574190b05fc4130a4addaaad20d1506",
+      "reference/summary.json": "7b29baf76c9edefa1db4c14fe83f5eadc3d08baad2d9d4f4ce119756acbee1dc",
+      "../../dist/index.mjs": "4811d1762e59d87d90d3090b5d692a2381e2bdcdd913b1f4a90aada6f4bc909b"
+    },
+    "versionsChecked": {
+      "date": "2026-10-17",
+      "betterSqlite3": "13.0.3",
+      "drizzle": "0.45.4",
+      "zipStream": "7.0.5"
+    },
+    "description": "Original seven-million-record fixture; prepared queries; JSON generation and UTF-8 response-body encoding, without network/compression/file output"
+  },
+  "fingerprint": "d17b509a5b918c1e05da0c7a9fc6ff6133f464d66c7405bbaf575ebc2e38536b",
+  "environment": {
+    "node": "v26.12.0",
+    "v8": "14.6.202.34-node.39",
+    "sqlite": "3.53.4",
+    "betterSqlite3": "13.0.3",
+    "drizzle": "0.45.4",
+    "platform": "darwin 25.4.0 arm64",
+    "cpu": "Apple M1 Pro",
+    "flags": []
+  },
+  "workers": 267,
+  "cases": [
+    {
+      "roots": 1,
+      "depth": 0,
+      "totalRecords": 1,
+      "bytes": 25,
+      "sha256": "58730285eee7bfd39385d38d8a5bd509f0c9b249eae3ebc7ae3b1b4f7d4bf763",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.016544920305676575,
+          "generationMs": 0.015844843340610402,
+          "encodingMs": 0.0007000769650661742,
+          "minMs": 0.016457839439655477,
+          "maxMs": 0.016550658931462237,
+          "peakRssMiB": 215.171875,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.018411861091426,
+          "generationMs": 0.017828007087173362,
+          "encodingMs": 0.0005838540042526377,
+          "minMs": 0.01778266714387928,
+          "maxMs": 0.018774709630702578,
+          "peakRssMiB": 215.984375,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.012595373928732294,
+          "generationMs": 0.01204247090663106,
+          "encodingMs": 0.0005529030221012341,
+          "minMs": 0.012315582318447925,
+          "maxMs": 0.012613157778756915,
+          "peakRssMiB": 215.609375,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.011716101094091937,
+          "generationMs": 0.01116176411378549,
+          "encodingMs": 0.0005543369803064459,
+          "minMs": 0.011669904453091951,
+          "maxMs": 0.011786805735430625,
+          "peakRssMiB": 215.453125,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1,
+      "depth": 1,
+      "totalRecords": 3,
+      "bytes": 85,
+      "sha256": "ead22f2f69ef77edaaa0f9f0a2d74df4e505fa4bd5e667bf4d58ea3d97525e3d",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.025347061933535593,
+          "generationMs": 0.02463276510574161,
+          "encodingMs": 0.0007142968277939823,
+          "minMs": 0.024999563622170377,
+          "maxMs": 0.025435055555556366,
+          "peakRssMiB": 215.671875,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.0196238661551569,
+          "generationMs": 0.01904277493606051,
+          "encodingMs": 0.0005810912190963907,
+          "minMs": 0.019372956388676303,
+          "maxMs": 0.019770989567808477,
+          "peakRssMiB": 215.75,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.02656961800699326,
+          "generationMs": 0.025864750000000238,
+          "encodingMs": 0.0007048680069930226,
+          "minMs": 0.025989571428571844,
+          "maxMs": 0.026633742144177904,
+          "peakRssMiB": 215.796875,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.024044120702827007,
+          "generationMs": 0.02332725744843429,
+          "encodingMs": 0.0007168632543927174,
+          "minMs": 0.023677172811059462,
+          "maxMs": 0.02409681444991757,
+          "peakRssMiB": 215.375,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1,
+      "depth": 2,
+      "totalRecords": 7,
+      "bytes": 219,
+      "sha256": "0f046375870296b9be1c2b326cdc3871de7c0154082b06a622b29ca6e808024e",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.03440060137120382,
+          "generationMs": 0.033584599412337775,
+          "encodingMs": 0.0008160019588660493,
+          "minMs": 0.03403252330097086,
+          "maxMs": 0.03446024805447599,
+          "peakRssMiB": 215.859375,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.02120594783306382,
+          "generationMs": 0.020547260834669605,
+          "encodingMs": 0.0006586869983942123,
+          "minMs": 0.02112919794952683,
+          "maxMs": 0.022437300401606103,
+          "peakRssMiB": 215.921875,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.03400116990291285,
+          "generationMs": 0.033170088349514334,
+          "encodingMs": 0.0008310815533985153,
+          "minMs": 0.032979182089551085,
+          "maxMs": 0.03449530866601717,
+          "peakRssMiB": 215.734375,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.03652581760339271,
+          "generationMs": 0.03575229162248028,
+          "encodingMs": 0.00077352598091243,
+          "minMs": 0.03573359090909081,
+          "maxMs": 0.03717626497461896,
+          "peakRssMiB": 215.46875,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 10,
+      "depth": 0,
+      "totalRecords": 10,
+      "bytes": 241,
+      "sha256": "ae5248d8a806aadcf96cd80d608f52b308889ebb1ecde011f3970c4c1d824611",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.019286885465116192,
+          "generationMs": 0.018460758720928703,
+          "encodingMs": 0.000826126744187488,
+          "minMs": 0.018196318655851137,
+          "maxMs": 0.019489571428571075,
+          "peakRssMiB": 216.03125,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.021412930739300468,
+          "generationMs": 0.020730535408561054,
+          "encodingMs": 0.0006823953307394141,
+          "minMs": 0.020548805194805467,
+          "maxMs": 0.061783922455576124,
+          "peakRssMiB": 215.65625,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.01507601550775348,
+          "generationMs": 0.014467255127564133,
+          "encodingMs": 0.0006087603801893454,
+          "minMs": 0.014903188479030063,
+          "maxMs": 0.015108313020833404,
+          "peakRssMiB": 215.375,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.01559755258855555,
+          "generationMs": 0.014990548228881625,
+          "encodingMs": 0.0006070043596739261,
+          "minMs": 0.014807345387841318,
+          "maxMs": 0.016970181182795776,
+          "peakRssMiB": 215.625,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 10,
+      "depth": 1,
+      "totalRecords": 30,
+      "bytes": 841,
+      "sha256": "d97dd875e201c6a7b83157a9ff0d9b5cbb9a15e6bcab575f601f1658f8a41b1f",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.03524106840391082,
+          "generationMs": 0.03419154614549327,
+          "encodingMs": 0.0010495222584175471,
+          "minMs": 0.03481836399604386,
+          "maxMs": 0.035410674234945094,
+          "peakRssMiB": 215.9375,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.029919433601609993,
+          "generationMs": 0.0292116136820934,
+          "encodingMs": 0.0007078199195165938,
+          "minMs": 0.02906449315068438,
+          "maxMs": 0.035009182006204,
+          "peakRssMiB": 216.203125,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.0361583760416685,
+          "generationMs": 0.03533265000000275,
+          "encodingMs": 0.000825726041665753,
+          "minMs": 0.035738872065727845,
+          "maxMs": 0.06644941746411409,
+          "peakRssMiB": 215.71875,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.042946217948718356,
+          "generationMs": 0.04213170384615567,
+          "encodingMs": 0.0008145141025626875,
+          "minMs": 0.042795142857142185,
+          "maxMs": 0.04532594095941105,
+          "peakRssMiB": 215.625,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 10,
+      "depth": 2,
+      "totalRecords": 70,
+      "bytes": 2181,
+      "sha256": "0c82d4bc0722911cf511d32e1e4128861f098556736ffe42be299379436f8168",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.05923981269841413,
+          "generationMs": 0.05770415396825629,
+          "encodingMs": 0.0015356587301578347,
+          "minMs": 0.05915599014778253,
+          "maxMs": 0.05954023547880607,
+          "peakRssMiB": 215.484375,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.049053931133430345,
+          "generationMs": 0.04822246054519461,
+          "encodingMs": 0.0008314705882357323,
+          "minMs": 0.04808584852941259,
+          "maxMs": 0.04916985652797639,
+          "peakRssMiB": 215.875,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.05686318711656265,
+          "generationMs": 0.055975828220857324,
+          "encodingMs": 0.0008873588957053268,
+          "minMs": 0.05676390895296051,
+          "maxMs": 0.05769731490015481,
+          "peakRssMiB": 215.359375,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.08863329440389271,
+          "generationMs": 0.08742078832116852,
+          "encodingMs": 0.0012125060827241937,
+          "minMs": 0.08863076904761875,
+          "maxMs": 0.0886907717121583,
+          "peakRssMiB": 215.25,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 100,
+      "depth": 0,
+      "totalRecords": 100,
+      "bytes": 2401,
+      "sha256": "6b5574077c985f333cbdb86f4bb8f7076cedf1f5eb6e3d15823a09f1518e3d67",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.03045767733564042,
+          "generationMs": 0.029169050173010438,
+          "encodingMs": 0.0012886271626299827,
+          "minMs": 0.03024642907180436,
+          "maxMs": 0.03071302003484352,
+          "peakRssMiB": 215.171875,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.039655646562121796,
+          "generationMs": 0.038836542822676,
+          "encodingMs": 0.000819103739445793,
+          "minMs": 0.03931354202192404,
+          "maxMs": 0.040228647412755295,
+          "peakRssMiB": 215.59375,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.03129166395663872,
+          "generationMs": 0.03012910298102749,
+          "encodingMs": 0.001162560975611225,
+          "minMs": 0.030317166210045446,
+          "maxMs": 0.031847385253456595,
+          "peakRssMiB": 215.375,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.046042963806970205,
+          "generationMs": 0.045142276139409625,
+          "encodingMs": 0.000900687667560574,
+          "minMs": 0.045361317006803056,
+          "maxMs": 0.04632670121130571,
+          "peakRssMiB": 215.0625,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 100,
+      "depth": 1,
+      "totalRecords": 300,
+      "bytes": 8401,
+      "sha256": "d9db702e251d9a2777bfac5e78f2102957fe9ad2a4a977e952e98dabc0296e5f",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.12518727574750835,
+          "generationMs": 0.12116221926910377,
+          "encodingMs": 0.0040250564784045885,
+          "minMs": 0.12382760383386743,
+          "maxMs": 0.12593949511400918,
+          "peakRssMiB": 215.875,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.12915354915254376,
+          "generationMs": 0.12703042711864673,
+          "encodingMs": 0.002123122033897019,
+          "minMs": 0.12811677181207948,
+          "maxMs": 0.1292214199999995,
+          "peakRssMiB": 215.21875,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.12777767105263094,
+          "generationMs": 0.12558361513157704,
+          "encodingMs": 0.0021940559210539105,
+          "minMs": 0.12748032673267395,
+          "maxMs": 0.12884614068441144,
+          "peakRssMiB": 215.578125,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.23060036931818703,
+          "generationMs": 0.22788848295455175,
+          "encodingMs": 0.002711886363635265,
+          "minMs": 0.22931296551723954,
+          "maxMs": 0.2333105142857143,
+          "peakRssMiB": 215.453125,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 100,
+      "depth": 2,
+      "totalRecords": 700,
+      "bytes": 21801,
+      "sha256": "f67138e0a8e10f5f7ae9cd5e1ee165d740f0fce5177e5c5ba5b942e7e9c21f5a",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.3191577272727264,
+          "generationMs": 0.31154132231404735,
+          "encodingMs": 0.007616404958679039,
+          "minMs": 0.31658229365079443,
+          "maxMs": 0.3192464645669293,
+          "peakRssMiB": 215.859375,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.319723696721308,
+          "generationMs": 0.315515385245899,
+          "encodingMs": 0.004208311475408999,
+          "minMs": 0.31585293913043466,
+          "maxMs": 0.3239947619047626,
+          "peakRssMiB": 215.5,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.30151733846153794,
+          "generationMs": 0.29693365384615356,
+          "encodingMs": 0.0045836846153843695,
+          "minMs": 0.2971181578947354,
+          "maxMs": 0.3066880472440955,
+          "peakRssMiB": 215.5,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.6015435147058776,
+          "generationMs": 0.5950233970588177,
+          "encodingMs": 0.006520117647059966,
+          "minMs": 0.5994074558823528,
+          "maxMs": 0.6056954705882371,
+          "peakRssMiB": 215.84375,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1000,
+      "depth": 0,
+      "totalRecords": 1000,
+      "bytes": 24001,
+      "sha256": "b0af7a6d927f61647222aa814123eb8df5aa79d4173f9a6d969deefd84419550",
+      "methods": {
+        "sqlite": {
+          "totalMs": 0.14880417110266392,
+          "generationMs": 0.1423832737642622,
+          "encodingMs": 0.006420897338401719,
+          "minMs": 0.14848306716418072,
+          "maxMs": 0.15805212345679423,
+          "peakRssMiB": 215.234375,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 0.23872529012345783,
+          "generationMs": 0.23415741975309012,
+          "encodingMs": 0.004567870370367697,
+          "minMs": 0.23559384049079785,
+          "maxMs": 0.2399038954248342,
+          "peakRssMiB": 216.046875,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 0.19896725888325018,
+          "generationMs": 0.19285940609137242,
+          "encodingMs": 0.0061078527918777634,
+          "minMs": 0.18851187203791442,
+          "maxMs": 0.19959239108910967,
+          "peakRssMiB": 215.5,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 0.35665968141592375,
+          "generationMs": 0.3508628672566344,
+          "encodingMs": 0.0057968141592893915,
+          "minMs": 0.3555338749999985,
+          "maxMs": 0.3587013482142848,
+          "peakRssMiB": 215.5625,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1000,
+      "depth": 1,
+      "totalRecords": 3000,
+      "bytes": 84001,
+      "sha256": "156e875c336a67d00b949cc149d11743e283e90b35af7ca37dd59274dc5b3d4b",
+      "methods": {
+        "sqlite": {
+          "totalMs": 1.012762846153849,
+          "generationMs": 1.0011485384615377,
+          "encodingMs": 0.011614307692311216,
+          "minMs": 1.0125790769230743,
+          "maxMs": 1.0255000512820633,
+          "peakRssMiB": 214.953125,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 1.122416750000004,
+          "generationMs": 1.0990139444444462,
+          "encodingMs": 0.023402805555557887,
+          "minMs": 1.1065195000000037,
+          "maxMs": 1.1229444166666696,
+          "peakRssMiB": 215.359375,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 1.0716520270270142,
+          "generationMs": 1.0594202432432298,
+          "encodingMs": 0.012231783783784374,
+          "minMs": 1.0696767837837848,
+          "maxMs": 1.1117059444444475,
+          "peakRssMiB": 215.5625,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 2.097364105263152,
+          "generationMs": 2.082594315789463,
+          "encodingMs": 0.014769789473689343,
+          "minMs": 2.07857884210526,
+          "maxMs": 2.184879882352949,
+          "peakRssMiB": 215.765625,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1000,
+      "depth": 2,
+      "totalRecords": 7000,
+      "bytes": 218001,
+      "sha256": "ded92637072354dd61b30a0916224fc14d56a53694c8926c0455425687c9b709",
+      "methods": {
+        "sqlite": {
+          "totalMs": 2.9206796153846164,
+          "generationMs": 2.889888153846143,
+          "encodingMs": 0.030791461538473622,
+          "minMs": 2.8628303571428546,
+          "maxMs": 3.1564415999999937,
+          "peakRssMiB": 245.21875,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 2.947692307692294,
+          "generationMs": 2.894060692307693,
+          "encodingMs": 0.05363161538460085,
+          "minMs": 2.9409936153846274,
+          "maxMs": 2.9905543846153932,
+          "peakRssMiB": 215.625,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 2.752806428571424,
+          "generationMs": 2.725425642857114,
+          "encodingMs": 0.027380785714309956,
+          "minMs": 2.7501457857142912,
+          "maxMs": 2.7581784999999934,
+          "peakRssMiB": 215.8125,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 5.657672428571426,
+          "generationMs": 5.630523714285671,
+          "encodingMs": 0.027148714285756017,
+          "minMs": 5.653113142857137,
+          "maxMs": 5.728184857142862,
+          "peakRssMiB": 215.75,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 10000,
+      "depth": 0,
+      "totalRecords": 10000,
+      "bytes": 240001,
+      "sha256": "d6af35c7d722fa1b725723a74647bebb5e28c0efcb3141df813664964c82a866",
+      "methods": {
+        "sqlite": {
+          "totalMs": 1.3277292500000044,
+          "generationMs": 1.2993422857142949,
+          "encodingMs": 0.028386964285709432,
+          "minMs": 1.3273692413793092,
+          "maxMs": 1.3323375517241398,
+          "peakRssMiB": 243.265625,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 2.264526062500014,
+          "generationMs": 2.200762812500024,
+          "encodingMs": 0.06376324999999028,
+          "minMs": 2.2621298235294023,
+          "maxMs": 2.303370117647061,
+          "peakRssMiB": 215.140625,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 1.9086521000000034,
+          "generationMs": 1.871120950000008,
+          "encodingMs": 0.03753114999999525,
+          "minMs": 1.7929940476190556,
+          "maxMs": 1.9101707000000006,
+          "peakRssMiB": 215.625,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 3.5036552727272734,
+          "generationMs": 3.473045363636366,
+          "encodingMs": 0.030609909090907713,
+          "minMs": 3.4599924545454637,
+          "maxMs": 3.5068372727272803,
+          "peakRssMiB": 215.140625,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 10000,
+      "depth": 1,
+      "totalRecords": 30000,
+      "bytes": 840001,
+      "sha256": "0a44a6086285625279d0cc80e6dc9a1402da54dfcb28b6b38218d43889f98658",
+      "methods": {
+        "sqlite": {
+          "totalMs": 9.8366355,
+          "generationMs": 9.742916499999978,
+          "encodingMs": 0.09371900000002142,
+          "minMs": 9.754708250000022,
+          "maxMs": 9.865427249999996,
+          "peakRssMiB": 234,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 10.996541666666644,
+          "generationMs": 10.783109999999965,
+          "encodingMs": 0.21343166666667912,
+          "minMs": 10.994638666666711,
+          "maxMs": 11.001458333333252,
+          "peakRssMiB": 215.375,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 10.825027666666642,
+          "generationMs": 10.71494499999998,
+          "encodingMs": 0.11008266666666107,
+          "minMs": 10.800138666666669,
+          "maxMs": 10.982542000000004,
+          "peakRssMiB": 216.0625,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 20.43937500000004,
+          "generationMs": 20.320291999999995,
+          "encodingMs": 0.11908300000004601,
+          "minMs": 20.35083300000008,
+          "maxMs": 20.689292000000023,
+          "peakRssMiB": 215.296875,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 10000,
+      "depth": 2,
+      "totalRecords": 70000,
+      "bytes": 2180001,
+      "sha256": "6bcb7d60e62b2ba42e6369867db0bb7e94eb3b0b3a0f46d541e5e3fd7faf2a0c",
+      "methods": {
+        "sqlite": {
+          "totalMs": 28.360207999999943,
+          "generationMs": 28.101499999999987,
+          "encodingMs": 0.258707999999956,
+          "minMs": 28.108416999999918,
+          "maxMs": 28.36824999999999,
+          "peakRssMiB": 247.65625,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 30.180666000000087,
+          "generationMs": 29.867497999999614,
+          "encodingMs": 0.3131680000004735,
+          "minMs": 29.760667000000012,
+          "maxMs": 30.817875000000072,
+          "peakRssMiB": 215.46875,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 28.76812499999994,
+          "generationMs": 28.51841599999989,
+          "encodingMs": 0.24970900000005258,
+          "minMs": 27.978375000000028,
+          "maxMs": 29.010625000000005,
+          "peakRssMiB": 215.296875,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 56.613500000000045,
+          "generationMs": 56.340583000000265,
+          "encodingMs": 0.27291699999977936,
+          "minMs": 56.51183400000002,
+          "maxMs": 56.637666999999965,
+          "peakRssMiB": 215.421875,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 100000,
+      "depth": 0,
+      "totalRecords": 100000,
+      "bytes": 2400001,
+      "sha256": "c22672e8500f4684d85e6424eba3c03473e10964f128927ec26b34484cf7ce4c",
+      "methods": {
+        "sqlite": {
+          "totalMs": 13.187874499999992,
+          "generationMs": 12.919103500000006,
+          "encodingMs": 0.26877099999998677,
+          "minMs": 13.027708499999989,
+          "maxMs": 13.277312499999994,
+          "peakRssMiB": 224.375,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 23.18300000000005,
+          "generationMs": 22.551703000000202,
+          "encodingMs": 0.6312969999998472,
+          "minMs": 22.97283299999998,
+          "maxMs": 23.346375000000023,
+          "peakRssMiB": 215.484375,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 19.588812500000017,
+          "generationMs": 19.08408350000002,
+          "encodingMs": 0.5047289999999975,
+          "minMs": 19.48366699999997,
+          "maxMs": 19.898520999999988,
+          "peakRssMiB": 218.859375,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 38.320041,
+          "generationMs": 38.04858200000001,
+          "encodingMs": 0.271458999999993,
+          "minMs": 38.10608400000001,
+          "maxMs": 38.916375000000016,
+          "peakRssMiB": 215.515625,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 100000,
+      "depth": 1,
+      "totalRecords": 300000,
+      "bytes": 8400001,
+      "sha256": "eeec7257c6c3be3a303a9449afd53c5c3fee35ae050eba33154d98afbdb9241f",
+      "methods": {
+        "sqlite": {
+          "totalMs": 99.147291,
+          "generationMs": 98.21962399999995,
+          "encodingMs": 0.9276670000000422,
+          "minMs": 98.61820799999998,
+          "maxMs": 99.25541700000008,
+          "peakRssMiB": 266.1875,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 110.18624999999997,
+          "generationMs": 108.92104200000051,
+          "encodingMs": 1.2652079999994612,
+          "minMs": 110.16600000000005,
+          "maxMs": 111.11145799999997,
+          "peakRssMiB": 215.390625,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 128.01829199999997,
+          "generationMs": 127.056333,
+          "encodingMs": 0.9619589999999789,
+          "minMs": 126.11649999999997,
+          "maxMs": 134.22050000000002,
+          "peakRssMiB": 302.109375,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 220.710958,
+          "generationMs": 219.79387400000007,
+          "encodingMs": 0.9170839999999316,
+          "minMs": 220.30733300000009,
+          "maxMs": 222.74624999999992,
+          "peakRssMiB": 330.25,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 100000,
+      "depth": 2,
+      "totalRecords": 700000,
+      "bytes": 21800001,
+      "sha256": "119860706d1fd330476f2270c14c46a9f83f32dfa606286ceb145764d3c8f77a",
+      "methods": {
+        "sqlite": {
+          "totalMs": 292.35958299999993,
+          "generationMs": 290.1450830000001,
+          "encodingMs": 2.2144999999998163,
+          "minMs": 292.28875000000016,
+          "maxMs": 292.50625,
+          "peakRssMiB": 345.25,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 307.16075,
+          "generationMs": 303.9375420000001,
+          "encodingMs": 3.223207999999886,
+          "minMs": 305.7857080000001,
+          "maxMs": 307.52158399999985,
+          "peakRssMiB": 217.515625,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 330.00016700000015,
+          "generationMs": 327.76425100000006,
+          "encodingMs": 2.2359160000000884,
+          "minMs": 328.2017500000002,
+          "maxMs": 331.8626670000001,
+          "peakRssMiB": 710.453125,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 618.9588749999998,
+          "generationMs": 616.4758750000001,
+          "encodingMs": 2.48299999999972,
+          "minMs": 616.8362080000002,
+          "maxMs": 646.67875,
+          "peakRssMiB": 564.796875,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1000000,
+      "depth": 0,
+      "totalRecords": 1000000,
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+      "methods": {
+        "sqlite": {
+          "totalMs": 134.16674999999998,
+          "generationMs": 131.70558400000004,
+          "encodingMs": 2.4611659999999347,
+          "minMs": 133.36262499999998,
+          "maxMs": 141.620542,
+          "peakRssMiB": 360.953125,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 215.58958300000006,
+          "generationMs": 211.84662000000105,
+          "encodingMs": 3.7429629999990084,
+          "minMs": 214.02824999999996,
+          "maxMs": 230.11316599999986,
+          "peakRssMiB": 217.5625,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 256.19733399999996,
+          "generationMs": 251.8706669999999,
+          "encodingMs": 4.326667000000043,
+          "minMs": 243.285666,
+          "maxMs": 258.819125,
+          "peakRssMiB": 435.890625,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 499.6637920000003,
+          "generationMs": 496.79820800000016,
+          "encodingMs": 2.8655840000001263,
+          "minMs": 495.76020800000015,
+          "maxMs": 502.7379169999999,
+          "peakRssMiB": 611.046875,
+          "processes": 3
+        },
+        "exportlite-rows": {
+          "totalMs": 543.255459,
+          "generationMs": 539.753177999999,
+          "encodingMs": 3.5022810000009486,
+          "minMs": 522.3090419999999,
+          "maxMs": 547.446958,
+          "peakRssMiB": 215.890625,
+          "processes": 3
+        },
+        "public-table-256": {
+          "totalMs": 216.30662499999994,
+          "generationMs": 212.5721549999996,
+          "encodingMs": 3.7344700000003286,
+          "minMs": 215.01933399999984,
+          "maxMs": 222.66274999999996,
+          "peakRssMiB": 217.5625,
+          "processes": 3
+        },
+        "public-web-table": {
+          "totalMs": 217.82574999999997,
+          "generationMs": null,
+          "encodingMs": null,
+          "minMs": 216.92829099999994,
+          "maxMs": 221.34874999999988,
+          "peakRssMiB": 219.734375,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1000000,
+      "depth": 1,
+      "totalRecords": 3000000,
+      "bytes": 84000001,
+      "sha256": "bbff14e90c1433ade43eb8a1b9b684654debcc5422c1c2883089b070c1f618c1",
+      "methods": {
+        "sqlite": {
+          "totalMs": 1044.395833,
+          "generationMs": 1030.5321670000008,
+          "encodingMs": 13.863665999999284,
+          "minMs": 1035.6317920000001,
+          "maxMs": 1047.075958,
+          "peakRssMiB": 680.578125,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 1132.1937079999998,
+          "generationMs": 1120.7307770000098,
+          "encodingMs": 11.462930999990022,
+          "minMs": 1130.884583,
+          "maxMs": 1136.814292,
+          "peakRssMiB": 221.203125,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 1656.8097910000006,
+          "generationMs": 1640.3312070000002,
+          "encodingMs": 16.47858400000041,
+          "minMs": 1655.3552080000009,
+          "maxMs": 1671.1399579999998,
+          "peakRssMiB": 1122.265625,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 2502.067541999999,
+          "generationMs": 2484.2088749999984,
+          "encodingMs": 17.858667000000423,
+          "minMs": 2468.791375,
+          "maxMs": 2507.6827089999997,
+          "peakRssMiB": 937.875,
+          "processes": 3
+        },
+        "exportlite-rows": {
+          "totalMs": 1465.1799159999996,
+          "generationMs": 1452.4936759999946,
+          "encodingMs": 12.686240000005,
+          "minMs": 1461.0093749999996,
+          "maxMs": 1478.8578340000004,
+          "peakRssMiB": 215.75,
+          "processes": 3
+        }
+      }
+    },
+    {
+      "roots": 1000000,
+      "depth": 2,
+      "totalRecords": 7000000,
+      "bytes": 218000001,
+      "sha256": "79f54165534313adfbadbc159214903ef59269cca1fd19c4eae23ebeeefb1c41",
+      "methods": {
+        "sqlite": {
+          "totalMs": 2978.830167,
+          "generationMs": 2954.1360829999994,
+          "encodingMs": 24.694084000000657,
+          "minMs": 2976.3873329999988,
+          "maxMs": 3019.407665999999,
+          "peakRssMiB": 1362.59375,
+          "processes": 3
+        },
+        "exportlite": {
+          "totalMs": 3141.2350829999996,
+          "generationMs": 3112.922010999965,
+          "encodingMs": 28.31307200003448,
+          "minMs": 3074.6905420000003,
+          "maxMs": 3332.127208,
+          "peakRssMiB": 221.8125,
+          "processes": 3
+        },
+        "manual": {
+          "totalMs": 5397.2592920000025,
+          "generationMs": 5319.987251000002,
+          "encodingMs": 77.27204100000017,
+          "minMs": 5293.884166,
+          "maxMs": 5521.8317080000015,
+          "peakRssMiB": 2648.078125,
+          "processes": 3
+        },
+        "drizzle": {
+          "totalMs": 6480.975458999999,
+          "generationMs": 6372.809083999999,
+          "encodingMs": 108.1663750000007,
+          "minMs": 6416.198583000001,
+          "maxMs": 6560.724167,
+          "peakRssMiB": 1855.328125,
+          "processes": 3
+        },
+        "exportlite-rows": {
+          "totalMs": 3444.644916000001,
+          "generationMs": 3413.5072180000043,
+          "encodingMs": 31.137697999996817,
+          "minMs": 3442.8791250000013,
+          "maxMs": 3454.739708,
+          "peakRssMiB": 221.40625,
+          "processes": 3
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "prototype": {
+    "tests": 183,
+    "typecheck": "passed",
+    "lint": "passed",
+    "esmAndCommonJsBuild": "passed",
+    "publicDeclarations": "byte-identical"
+  },
+  "default": {
+    "tests": 180,
+    "sourceBuildAndZipTests": "byte-identical to saved baseline"
+  },
+  "benchmark": {
+    "workers": 45,
+    "timedExports": 135,
+    "verifiedArchives": 45,
+    "checks": "identical encoded ZIP bytes, decoded SHA-256, CRC-32, sizes and completion statistics",
+    "node": "v26.12.0"
+  },
+  "diagnostic": "Separate from throughput measurements; large joined-buffer allocation removed, original batch views reused without mutation"
+}

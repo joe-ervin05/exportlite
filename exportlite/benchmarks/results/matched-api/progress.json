@@ -1,0 +1,11 @@
+{
+  "completed": 267,
+  "total": 267,
+  "elapsedSeconds": 657.330608125,
+  "last": {
+    "roots": 1,
+    "depth": 0,
+    "repeat": 3,
+    "method": "exportlite"
+  }
+}

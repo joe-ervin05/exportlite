@@ -1,0 +1,41 @@
+--- adaptive-p95/src/database/adaptive-batches.ts
++++ adaptive-mean/src/database/adaptive-batches.ts
+@@ -8,7 +8,7 @@
+ 
+ const registries = new WeakMap<SQLiteConnection, Registry>();
+ 
+-// Benchmark-only: the historical p95 controller, with iterator-scoped state.
++// Benchmark-only: cumulative batch averages, with iterator-scoped state.
+ // One connection-local function remains registered; completed/cancelled exports
+ // leave no active token or sample history. Prepare-only adapters keep fixed 256.
+ export function adaptiveLimit(db: SQLiteConnection) {
+@@ -44,7 +44,8 @@
+       const iterate = statement.iterate.bind(statement);
+       statement.iterate = function* (...params: unknown[]) {
+         const state = { rows: 64 };
+-        const sizes: { bytes: number; rows: number }[] = [];
++        let totalBytes = 0;
++        let totalRows = 0;
+         active.set(token, state);
+         try {
+           for (const value of iterate(...params)) {
+@@ -57,13 +58,13 @@
+                 ? Buffer.byteLength(payload)
+                 : payload.length;
+             const rows = Number(count);
+-            sizes.push({ bytes, rows });
+-            if (sizes.length > 64) sizes.shift();
+-            const ordered = [...sizes].sort((a, b) => a.bytes - b.bytes);
+-            const selected = ordered[Math.ceil(ordered.length * 0.95) - 1];
+-            if (!selected) throw new Error("Expected a batch observation.");
++            totalBytes += bytes;
++            totalRows += rows;
++            // Mean batch bytes / mean batch rows equals totalBytes / totalRows.
++            // Keep the matching row counts so changing batch sizes do not bias
++            // the running estimate. Two counters replace the p95 sample window.
+             const desired = Math.floor(
+-              (262_144 * 0.9 * selected.rows) / selected.bytes,
++              (262_144 * 0.9 * totalRows) / totalBytes,
+             );
+             state.rows = Math.max(1, Math.min(65_536, state.rows * 2, desired));
+             yield value;

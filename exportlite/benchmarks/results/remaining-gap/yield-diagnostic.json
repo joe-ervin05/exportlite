@@ -1,0 +1,106 @@
+{
+  "node": "v26.12.0",
+  "diagnosticOnly": true,
+  "observations": [
+    {
+      "method": "normal",
+      "round": 0,
+      "ms": 189.88637500000004
+    },
+    {
+      "method": "disabled",
+      "round": 0,
+      "ms": 158.3370000000001
+    },
+    {
+      "method": "disabled",
+      "round": 1,
+      "ms": 155.60354200000006
+    },
+    {
+      "method": "normal",
+      "round": 1,
+      "ms": 164.88800000000015
+    },
+    {
+      "method": "normal",
+      "round": 2,
+      "ms": 164.4297919999999
+    },
+    {
+      "method": "disabled",
+      "round": 2,
+      "ms": 155.06283399999984
+    },
+    {
+      "method": "disabled",
+      "round": 3,
+      "ms": 155.03525000000013
+    },
+    {
+      "method": "normal",
+      "round": 3,
+      "ms": 166.54929199999992
+    },
+    {
+      "method": "normal",
+      "round": 4,
+      "ms": 165.6367090000001
+    },
+    {
+      "method": "disabled",
+      "round": 4,
+      "ms": 156.37020799999982
+    },
+    {
+      "method": "disabled",
+      "round": 5,
+      "ms": 155.13800000000037
+    },
+    {
+      "method": "normal",
+      "round": 5,
+      "ms": 165.36670800000002
+    },
+    {
+      "method": "normal",
+      "round": 6,
+      "ms": 163.34325000000035
+    },
+    {
+      "method": "disabled",
+      "round": 6,
+      "ms": 156.83399999999983
+    },
+    {
+      "method": "disabled",
+      "round": 7,
+      "ms": 155.15654099999983
+    },
+    {
+      "method": "normal",
+      "round": 7,
+      "ms": 165.44312499999978
+    },
+    {
+      "method": "normal",
+      "round": 8,
+      "ms": 165.2353750000002
+    },
+    {
+      "method": "disabled",
+      "round": 8,
+      "ms": 155.9802080000004
+    },
+    {
+      "method": "disabled",
+      "round": 9,
+      "ms": 154.709875
+    },
+    {
+      "method": "normal",
+      "round": 9,
+      "ms": 164.53954199999998
+    }
+  ]
+}

@@ -1,0 +1,542 @@
+[
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 45.201167
+    },
+    "samples": [
+      {
+        "totalMs": 24.015167000000076,
+        "perRequestMs": 0.4803033400000015,
+        "requests": 50
+      },
+      {
+        "totalMs": 22.73912199999984,
+        "perRequestMs": 0.4547824399999968,
+        "requests": 50
+      },
+      {
+        "totalMs": 19.090246000000263,
+        "perRequestMs": 0.38180492000000527,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 22.73912199999984,
+      "perRequestMs": 0.4547824399999968,
+      "requests": 50
+    },
+    "peakRssMiB": 81.578125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 0
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "metadata-only",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.321334
+    },
+    "samples": [
+      {
+        "totalMs": 23.236999000000026,
+        "perRequestMs": 0.4647399800000005,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.302080999999987,
+        "perRequestMs": 0.3460416199999997,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.706000999999986,
+        "perRequestMs": 0.3541200199999997,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 17.706000999999986,
+      "perRequestMs": 0.3541200199999997,
+      "requests": 50
+    },
+    "peakRssMiB": 81.484375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 0
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "metadata-only",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.273457999999998
+    },
+    "samples": [
+      {
+        "totalMs": 28.792958,
+        "perRequestMs": 0.5758591599999999,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.68216900000006,
+        "perRequestMs": 0.3536433800000012,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.754538999999994,
+        "perRequestMs": 0.3750907799999999,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 18.754538999999994,
+      "perRequestMs": 0.3750907799999999,
+      "requests": 50
+    },
+    "peakRssMiB": 81.3125,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 1
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.958167000000003
+    },
+    "samples": [
+      {
+        "totalMs": 20.873247000000042,
+        "perRequestMs": 0.41746494000000084,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.73100000000001,
+        "perRequestMs": 0.35462000000000016,
+        "requests": 50
+      },
+      {
+        "totalMs": 16.78108300000001,
+        "perRequestMs": 0.3356216600000002,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 17.73100000000001,
+      "perRequestMs": 0.35462000000000016,
+      "requests": 50
+    },
+    "peakRssMiB": 80.734375,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 1
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.371125
+    },
+    "samples": [
+      {
+        "totalMs": 21.164121999999985,
+        "perRequestMs": 0.4232824399999997,
+        "requests": 50
+      },
+      {
+        "totalMs": 16.76879300000006,
+        "perRequestMs": 0.3353758600000012,
+        "requests": 50
+      },
+      {
+        "totalMs": 15.94662300000003,
+        "perRequestMs": 0.31893246000000064,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 16.76879300000006,
+      "perRequestMs": 0.3353758600000012,
+      "requests": 50
+    },
+    "peakRssMiB": 80.96875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 2
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "metadata-only",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.242083
+    },
+    "samples": [
+      {
+        "totalMs": 22.921877000000052,
+        "perRequestMs": 0.45843754000000103,
+        "requests": 50
+      },
+      {
+        "totalMs": 21.923125000000013,
+        "perRequestMs": 0.43846250000000025,
+        "requests": 50
+      },
+      {
+        "totalMs": 19.111704000000117,
+        "perRequestMs": 0.38223408000000236,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 21.923125000000013,
+      "perRequestMs": 0.43846250000000025,
+      "requests": 50
+    },
+    "peakRssMiB": 81.515625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 2
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "metadata-only",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 17.1145
+    },
+    "samples": [
+      {
+        "totalMs": 29.00936600000002,
+        "perRequestMs": 0.5801873200000004,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.376456000000005,
+        "perRequestMs": 0.3675291200000001,
+        "requests": 50
+      },
+      {
+        "totalMs": 18.677667000000014,
+        "perRequestMs": 0.3735533400000003,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 18.677667000000014,
+      "perRequestMs": 0.3735533400000003,
+      "requests": 50
+    },
+    "peakRssMiB": 81.546875,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 3
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 23.127125
+    },
+    "samples": [
+      {
+        "totalMs": 24.520744000000057,
+        "perRequestMs": 0.49041488000000116,
+        "requests": 50
+      },
+      {
+        "totalMs": 23.609121999999957,
+        "perRequestMs": 0.47218243999999915,
+        "requests": 50
+      },
+      {
+        "totalMs": 28.94121099999998,
+        "perRequestMs": 0.5788242199999997,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 24.520744000000057,
+      "perRequestMs": 0.49041488000000116,
+      "requests": 50
+    },
+    "peakRssMiB": 81.265625,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 3
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "baseline",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 24.096624999999996
+    },
+    "samples": [
+      {
+        "totalMs": 22.132457000000002,
+        "perRequestMs": 0.44264914000000005,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.555789999999945,
+        "perRequestMs": 0.3511157999999989,
+        "requests": 50
+      },
+      {
+        "totalMs": 17.50487600000011,
+        "perRequestMs": 0.3500975200000022,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 17.555789999999945,
+      "perRequestMs": 0.3511157999999989,
+      "requests": 50
+    },
+    "peakRssMiB": 81.5,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 4
+  },
+  {
+    "name": "cold-table-1",
+    "variant": "metadata-only",
+    "fixture": {
+      "name": "cold-table-1",
+      "api": "table",
+      "rows": 1,
+      "path": "<temporary>/exportlite-plan-cache-dqNLji/small.db",
+      "table": "data1",
+      "expected": {
+        "bytes": 77,
+        "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1"
+      },
+      "iterations": 50,
+      "warmups": 2,
+      "cold": true,
+      "zip": false
+    },
+    "verification": {
+      "bytes": 77,
+      "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+      "totalMs": 18.389457999999998
+    },
+    "samples": [
+      {
+        "totalMs": 23.453207,
+        "perRequestMs": 0.46906413999999996,
+        "requests": 50
+      },
+      {
+        "totalMs": 19.056708000000015,
+        "perRequestMs": 0.3811341600000003,
+        "requests": 50
+      },
+      {
+        "totalMs": 16.412788000000035,
+        "perRequestMs": 0.3282557600000007,
+        "requests": 50
+      }
+    ],
+    "median": {
+      "totalMs": 19.056708000000015,
+      "perRequestMs": 0.3811341600000003,
+      "requests": 50
+    },
+    "peakRssMiB": 81.75,
+    "environment": {
+      "node": "v26.12.0",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3"
+    },
+    "note": "Small cases use public Web streams consumed through Response.arrayBuffer. Bulk controls use a counting Node writable. Cold cases open a fresh connection outside each request timer; all other cases reuse one connection. Natural GC. No HTTP/network.",
+    "repeat": 4
+  }
+]

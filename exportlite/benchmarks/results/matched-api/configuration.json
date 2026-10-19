@@ -1,0 +1,56 @@
+{
+  "sizes": [
+    1,
+    10,
+    100,
+    1000,
+    10000,
+    100000,
+    1000000
+  ],
+  "depths": [
+    0,
+    1,
+    2
+  ],
+  "repeats": 3,
+  "fixture": {
+    "users": 1000000,
+    "posts": 2000000,
+    "comments": 4000000,
+    "fanout": 2,
+    "indexes": [
+      {
+        "name": "comments_post_id",
+        "sql": "CREATE INDEX comments_post_id ON comments(post_id)"
+      },
+      {
+        "name": "posts_user_id",
+        "sql": "CREATE INDEX posts_user_id ON posts(user_id)"
+      }
+    ],
+    "bytes": 258387968
+  },
+  "fixtureSha256": "2932e4b4087e24ba2d4d6ba12d8ce0aff08f50b4640f0a240683d82d92c9e364",
+  "node": "v26.12.0",
+  "sources": {
+    "worker.mjs": "3905e296defe6507e3019e22715c071047a58a1dbb6851d52b1a535d6d34f6dd",
+    "run.mjs": "d0ee2ae5407886e5804b1b4091b4f97b900e8dc7ede2edfa09a175c2dc569ae7",
+    "engine-entry.ts": "dc34e13c94b564b6addf767e543d4498391c98bb858946b6f2528cf3e28e91bc",
+    "root-sql.mjs": "d8cc8e1fc415d440e99bad678aa0894079287855f730f1537ec3f4d6e95b057a",
+    "validate.mjs": "ca335ed9556e41496c8cd091d480cd85cf76fa6691c424fce7b6e75e3b5885ba",
+    "build/engine-entry.mjs": "98ab2ad2a28d4fd1a1aa48244136ec959b8cd0d82d477c22722e5ecd8617be81",
+    "reference/queries.mjs": "179e7de764a812a142bde6647cfb37be412d43301cea0d9469c37e5c26a05701",
+    "reference/schema.mjs": "6fd81771ab65f5b5ed3d5154acd2b1e15574190b05fc4130a4addaaad20d1506",
+    "reference/summary.json": "7b29baf76c9edefa1db4c14fe83f5eadc3d08baad2d9d4f4ce119756acbee1dc",
+    "../../dist/index.mjs": "4811d1762e59d87d90d3090b5d692a2381e2bdcdd913b1f4a90aada6f4bc909b"
+  },
+  "versionsChecked": {
+    "date": "2026-10-17",
+    "betterSqlite3": "13.0.3",
+    "drizzle": "0.45.4",
+    "zipStream": "7.0.5"
+  },
+  "description": "Original seven-million-record fixture; prepared queries; JSON generation and UTF-8 response-body encoding, without network/compression/file output",
+  "fingerprint": "d17b509a5b918c1e05da0c7a9fc6ff6133f464d66c7405bbaf575ebc2e38536b"
+}

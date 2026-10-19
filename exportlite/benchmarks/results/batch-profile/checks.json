@@ -1,0 +1,18 @@
+{
+  "vitest": {
+    "files": 5,
+    "tests": 171,
+    "passed": true,
+    "node": "24.19.0"
+  },
+  "typecheck": "passed",
+  "biome": "passed",
+  "build": "passed ESM/CJS and declarations",
+  "baselineManifestVerified": true,
+  "unchanged": [
+    "src/api/export.ts",
+    "src/output/writer.ts",
+    "public type declarations"
+  ],
+  "benchmarkFingerprintsVerified": true
+}

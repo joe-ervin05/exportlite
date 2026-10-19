@@ -1,0 +1,182 @@
+[
+  {
+    "method": "before",
+    "totalMs": 4669.143,
+    "batchIteratorMs": 4185.184,
+    "batchIteratorPercent": 89.63495013967231,
+    "idleMs": 209.99,
+    "gcMs": 25.015,
+    "topFrames": [
+      {
+        "frame": "(native/anonymous) :0",
+        "ms": 4210.144
+      },
+      {
+        "frame": "(idle) :0",
+        "ms": 209.99
+      },
+      {
+        "frame": "jsonBatches file://<workspace>/exportlite/benchmarks/baselines/pre-batch-tuning/index.mjs:58",
+        "ms": 55.621
+      },
+      {
+        "frame": "(program) :0",
+        "ms": 37.62
+      },
+      {
+        "frame": "flush file://<workspace>/exportlite/benchmarks/baselines/pre-batch-tuning/index.mjs:272",
+        "ms": 27.256
+      },
+      {
+        "frame": "post node:inspector:115",
+        "ms": 27.026
+      },
+      {
+        "frame": "(garbage collector) :0",
+        "ms": 25.015
+      },
+      {
+        "frame": "streamExport file://<workspace>/exportlite/benchmarks/baselines/pre-batch-tuning/index.mjs:618",
+        "ms": 15.18
+      },
+      {
+        "frame": "createUnsafeBuffer node:internal/buffer:1108",
+        "ms": 6.995
+      },
+      {
+        "frame": "popAsyncContext node:internal/async_hooks:563",
+        "ms": 6.079
+      },
+      {
+        "frame": "arrayFactory file://<reference-workspace>/outputs/sqlite-json-drizzle-benchmark/node_modules/better-sqlite3/lib/database.js:83",
+        "ms": 4.665
+      },
+      {
+        "frame": "now :0",
+        "ms": 3.82
+      },
+      {
+        "frame": "check file://<workspace>/exportlite/benchmarks/baselines/pre-batch-tuning/index.mjs:261",
+        "ms": 2.604
+      },
+      {
+        "frame": "FastBuffer node:internal/buffer:962",
+        "ms": 2.551
+      },
+      {
+        "frame": "runMicrotasks :0",
+        "ms": 2.532
+      },
+      {
+        "frame": "processImmediate node:internal/timers:525",
+        "ms": 2.366
+      },
+      {
+        "frame": "emitAfterScript node:internal/async_hooks:527",
+        "ms": 2.266
+      },
+      {
+        "frame": "write file://<workspace>/exportlite/benchmarks/baselines/pre-batch-tuning/index.mjs:266",
+        "ms": 2.2
+      },
+      {
+        "frame": "(native/anonymous) file://<workspace>/exportlite/benchmarks/baselines/pre-batch-tuning/index.mjs:288",
+        "ms": 1.816
+      },
+      {
+        "frame": "get node:internal/util:638",
+        "ms": 1.28
+      }
+    ]
+  },
+  {
+    "method": "after",
+    "totalMs": 3406.157,
+    "batchIteratorMs": 2976.42,
+    "batchIteratorPercent": 87.38352342537353,
+    "idleMs": 186.464,
+    "gcMs": 27.509,
+    "topFrames": [
+      {
+        "frame": "(native/anonymous) :0",
+        "ms": 3010.233
+      },
+      {
+        "frame": "(idle) :0",
+        "ms": 186.464
+      },
+      {
+        "frame": "jsonBatches file://<workspace>/exportlite/dist/index.mjs:58",
+        "ms": 57.472
+      },
+      {
+        "frame": "(program) :0",
+        "ms": 27.831
+      },
+      {
+        "frame": "(garbage collector) :0",
+        "ms": 27.509
+      },
+      {
+        "frame": "flush file://<workspace>/exportlite/dist/index.mjs:272",
+        "ms": 23.838
+      },
+      {
+        "frame": "post node:inspector:115",
+        "ms": 18.115
+      },
+      {
+        "frame": "streamExport file://<workspace>/exportlite/dist/index.mjs:621",
+        "ms": 12.498
+      },
+      {
+        "frame": "arrayFactory file://<reference-workspace>/outputs/sqlite-json-drizzle-benchmark/node_modules/better-sqlite3/lib/database.js:83",
+        "ms": 5.036
+      },
+      {
+        "frame": "popAsyncContext node:internal/async_hooks:563",
+        "ms": 4.745
+      },
+      {
+        "frame": "toggleImmediateRef :0",
+        "ms": 3.546
+      },
+      {
+        "frame": "setImmediate node:timers/promises:94",
+        "ms": 2.567
+      },
+      {
+        "frame": "createFromString node:buffer:579",
+        "ms": 2.529
+      },
+      {
+        "frame": "runMicrotasks :0",
+        "ms": 2.422
+      },
+      {
+        "frame": "processImmediate node:internal/timers:525",
+        "ms": 2.418
+      },
+      {
+        "frame": "FastBuffer node:internal/buffer:962",
+        "ms": 1.891
+      },
+      {
+        "frame": "rowFactory file://<reference-workspace>/outputs/sqlite-json-drizzle-benchmark/node_modules/better-sqlite3/lib/database.js:94",
+        "ms": 1.285
+      },
+      {
+        "frame": "check file://<workspace>/exportlite/dist/index.mjs:261",
+        "ms": 1.272
+      },
+      {
+        "frame": "removeListener node:events:680",
+        "ms": 1.27
+      },
+      {
+        "frame": "recordFactory file://<reference-workspace>/outputs/sqlite-json-drizzle-benchmark/node_modules/better-sqlite3/lib/database.js:107",
+        "ms": 1.264
+      }
+    ]
+  }
+]

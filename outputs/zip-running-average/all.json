@@ -1,0 +1,4127 @@
+[
+  {
+    "dataset": "matched",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 235.54337499999997,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 201.17112499999996,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 214.14429200000006,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 182.66945800000008,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 201.17112499999996,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 122.109375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 234.060042,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 201.62533399999995,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 198.73091699999998,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 198.96295800000007,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 198.96295800000007,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 107.71875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 220.84400000000002,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 178.08691700000003,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 173.24241599999993,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 191.81150000000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 178.08691700000003,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 125.0625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 210.881625,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 190.60049999999995,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 209.857166,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 196.0685840000001,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 196.0685840000001,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 136.609375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 220.392333,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 189.37845799999997,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 174.70241700000008,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 170.27041699999995,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 174.70241700000008,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 139.3125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "narrow",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 582.274375,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 540.4101249999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 536.2590409999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 562.421292,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 540.4101249999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 152.6875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 610.092542,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 542.9393339999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 528.2223750000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 531.9710830000004,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 531.9710830000004,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 149.375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 591.28125,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 553.7464170000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 562.1832089999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 564.5932500000004,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 562.1832089999998,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 172.09375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 571.77175,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 546.652,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 547.9222910000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 535.3055829999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 546.652,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 161.265625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 575.126042,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 542.5794579999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 541.214125,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 547.5416660000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 542.5794579999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 165.65625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "wide",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 807.569958,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 731.1854999999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 716.2742079999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 721.4745000000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 721.4745000000003,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 205.984375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 748.944875,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 716.3437080000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 799.0609589999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 887.545333,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 799.0609589999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 204.40625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 835.618167,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 765.8311670000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 773.8063339999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 791.5316250000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 773.8063339999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 203.953125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 757.590958,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 717.4748750000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 728.4381250000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 719.1393329999996,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 719.1393329999996,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 149.515625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 761.494375,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 731.9772499999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 712.0634170000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 718.818542,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 718.818542,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 161.015625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 230.030291,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 204.54845800000004,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 207.53091699999993,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 200.2142080000001,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 204.54845800000004,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 106.828125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 196.972208,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 172.58908300000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 168.3983750000001,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 168.80366700000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 168.80366700000002,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 123.609375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 192.84533299999998,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 174.07162499999998,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 168.85787500000004,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 171.17333300000007,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 171.17333300000007,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 136.28125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 191.382208,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 172.12733299999996,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 170.78191700000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 168.68025,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 170.78191700000002,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 139.734375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "matched",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 214.77891599999998,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 186.013166,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 186.56266700000003,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 188.11225000000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 186.56266700000003,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 117.1875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 612.329333,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 543.752667,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 537.8621669999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 626.2797909999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 543.752667,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 137.0625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 654.728917,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 562.6643750000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 563.7991670000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 556.104417,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 562.6643750000001,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 183.96875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 596.7710000000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 617.121791,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 554.2663749999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 575.0764589999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 575.0764589999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 157.8125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 625.8982920000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 570.4755419999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 548.3415840000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 598.554709,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 570.4755419999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 162.90625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "narrow",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 589.179042,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 556.771833,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 548.6776249999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 552.4238329999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 552.4238329999998,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 139.34375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 834.526833,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 716.0610829999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 718.2689580000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 724.756625,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 718.2689580000001,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 213.703125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 814.638625,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 766.5642909999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 757.6277909999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 786.2088749999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 766.5642909999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 227.578125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 755.021583,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 713.4759999999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 711.71225,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 723.6404170000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 713.4759999999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 179.578125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 765.753458,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 725.5495409999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 705.178292,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 765.89725,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 725.5495409999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 166.578125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "wide",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 759.7635,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 721.456625,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 712.8495829999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 707.2437910000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 712.8495829999997,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 185.15625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 198.330416,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 183.09637499999997,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 173.12483400000008,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 179.78420799999992,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 179.78420799999992,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 124.6875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 195.910375,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 185.51366599999994,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 170.97033299999998,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 171.47291700000005,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 171.47291700000005,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 142.171875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 197.198041,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 172.20466600000003,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 171.425208,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 171.50958400000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 171.50958400000002,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 141.109375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "matched",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 230.00404100000003,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 185.37120800000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 183.9642500000001,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 183.8677909999999,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 183.9642500000001,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 119.078125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 232.848375,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 203.11904099999992,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 206.49908300000004,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 207.68329200000005,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 206.49908300000004,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 105.984375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 607.2085,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 557.906084,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 582.0129170000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 566.371459,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 566.371459,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 181.796875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 587.140209,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 544.6044589999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 543.2113750000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 543.8877090000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 543.8877090000001,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 144.78125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 583.7640829999999,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 561.768916,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 1274.2901250000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 586.4304590000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 586.4304590000002,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 163.8125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "narrow",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 823.906709,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 657.8963749999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 587.7429580000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 685.4208330000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 657.8963749999998,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 141.5625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 623.274334,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 567.3734999999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 561.7901669999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 548.4520000000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 561.7901669999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 137.1875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 1021.3037909999999,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 816.610792,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 792.5922500000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 784.3328339999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 792.5922500000001,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 215.390625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 772.02825,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 716.4571660000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 717.4622920000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 718.0068339999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 717.4622920000002,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 170.3125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 751.476458,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 726.4556659999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 710.9253749999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 706.2475840000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 710.9253749999998,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 163.21875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "wide",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 743.825584,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 719.051708,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 713.7167919999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 709.3670419999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 713.7167919999997,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 180.4375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 749.5626659999999,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 713.3045420000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 711.1245830000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 723.580125,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 713.3045420000001,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 214.828125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 216.83999999999997,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 171.337292,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 168.92062499999997,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 168.72733399999993,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 168.92062499999997,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 143.96875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 198.817583,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 170.94620799999996,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 173.31370900000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 172.52966700000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 172.52966700000002,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 148.21875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "matched",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 216.527417,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 187.61958299999998,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 182.71141699999998,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 193.5843329999999,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 187.61958299999998,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 121.015625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 261.316292,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 208.67875000000004,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 207.69166600000005,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 210.56945800000005,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 208.67875000000004,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 106.265625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 201.47720799999996,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 175.94399999999996,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 334.22637499999996,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 179.32029199999988,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 179.32029199999988,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 127.15625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 594.5154170000001,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 563.577125,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 560.111208,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 559.8197500000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 560.111208,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 154.15625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 598.653542,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 544.7972500000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 557.6327079999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 549.616,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 549.616,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 160.9375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "narrow",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 589.99075,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 551.061375,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 559.319125,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 563.1610000000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 559.319125,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 177.296875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 582.052708,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 542.03925,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 546.1994589999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 547.7716660000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 546.1994589999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 166.390625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 596.070625,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 563.6800420000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 561.1393330000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 576.0346669999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 563.6800420000002,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 178.875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 763.52325,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 715.115792,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 720.9745829999997,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 726.5122499999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 720.9745829999997,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 150.390625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 771.081166,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 758.637291,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 821.6042499999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 1274.1202090000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 821.6042499999999,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 173.5625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "wide",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 801.394959,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 714.9414169999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 737.263375,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 712.2023749999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 714.9414169999998,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 195.640625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 766.033417,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 715.2834169999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 723.7374169999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 733.2150839999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 723.7374169999998,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 191.578125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 835.3446670000001,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 762.134209,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 756.6081669999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 772.4710840000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 762.134209,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 220.78125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 199.150167,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 171.14925000000005,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 170.88812500000006,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 169.62,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 170.88812500000006,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 147.34375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "matched",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 212.89191700000003,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 186.73370800000004,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 183.012208,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 187.469375,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 186.73370800000004,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 117.703125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 230.36370899999997,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 211.66974999999996,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 203.27520900000002,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 202.35983299999998,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 203.27520900000002,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 105.6875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "matched",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 204.297125,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 174.17249999999996,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 172.71350000000007,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 170.89804200000003,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 172.71350000000007,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 124.765625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "matched",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 24000001,
+      "sha256": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056"
+    },
+    "entryName": "users.json",
+    "verification": {
+      "totalMs": 198.22304200000002,
+      "bytes": 2685110,
+      "archiveSha256": "daec234b1c00462384ff60cc1af13b71332afd0656f6c7ad3593478ddc753edc"
+    },
+    "samples": [
+      {
+        "totalMs": 170.62225000000007,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 171.78670799999998,
+        "bytes": 2685110,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 168.59900000000005,
+        "bytes": 2685110,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 170.62225000000007,
+      "bytes": 2685110,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 136.390625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "users.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 635.975292,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 540.6872500000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 543.9330829999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 549.6843749999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 543.9330829999999,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 158.375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "narrow",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 822.203917,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 564.1750829999999,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 544.462542,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 564.0569580000001,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 564.0569580000001,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 181.25,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 589.011792,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 555.987709,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 556.415958,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 573.1992090000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 556.415958,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 133.359375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "narrow",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 629.78725,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 603.052291,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 563.8121250000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 611.4762920000003,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 603.052291,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 184.34375,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "narrow",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 83369847,
+      "sha256": "f8314c40c3cf1829e7c940875f76b2f6b0e3d7f6201dcef7d2c2527e2bf76832"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 588.41475,
+      "bytes": 21360051,
+      "archiveSha256": "e77c39dedff1563e014e54b2b869a0d392a564eb74a5aac69d1fbf90e882a2b5"
+    },
+    "samples": [
+      {
+        "totalMs": 549.0008750000002,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 549.765375,
+        "bytes": 21360051,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 548.6648329999998,
+        "bytes": 21360051,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 549.0008750000002,
+      "bytes": 21360051,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 147.140625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-mean",
+    "variant": "adaptive-mean",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 779.537167,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 732.9322499999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 743.6495829999999,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 713.8882079999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 732.9322499999998,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 165.40625,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-mean"
+  },
+  {
+    "dataset": "wide",
+    "method": "buffered",
+    "variant": "buffered",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 762.0120000000001,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 708.7384170000003,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 711.3754170000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 707.844,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 708.7384170000003,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 183.03125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant buffered"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-1024",
+    "variant": "fixed-1024",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 749.8436670000001,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 715.3927909999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 710.0778750000004,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 720.0638749999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 715.3927909999998,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 189.828125,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-1024"
+  },
+  {
+    "dataset": "wide",
+    "method": "fixed-4096",
+    "variant": "fixed-4096",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 813.5444160000001,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 785.870625,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 768.1105830000001,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 782.4038329999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 782.4038329999998,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 210.21875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant fixed-4096"
+  },
+  {
+    "dataset": "wide",
+    "method": "adaptive-p95",
+    "variant": "adaptive-p95",
+    "mode": "zip-output",
+    "expected": {
+      "bytes": 100920480,
+      "sha256": "fb6c80c54a2e9cd590d43cd220e5e5c6a29024e7a46ea2e06a63ec40f42caaf5"
+    },
+    "entryName": "data.json",
+    "verification": {
+      "totalMs": 750.516458,
+      "bytes": 27133939,
+      "archiveSha256": "5dcf540a3a1676543025322078369d156026c95d20205c2abc68bff5d8155621"
+    },
+    "samples": [
+      {
+        "totalMs": 708.6106249999998,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 706.527583,
+        "bytes": 27133939,
+        "archiveSha256": null
+      },
+      {
+        "totalMs": 716.2217500000002,
+        "bytes": 27133939,
+        "archiveSha256": null
+      }
+    ],
+    "median": {
+      "totalMs": 708.6106249999998,
+      "bytes": 27133939,
+      "archiveSha256": null
+    },
+    "peakRssMiB": 166.671875,
+    "environment": {
+      "node": "v26.12.0",
+      "v8": "14.6.202.34-node.39",
+      "sqlite": "3.53.4",
+      "driver": "13.0.3",
+      "zipStream": "7.0.5",
+      "zlib": "1.3.2.1-motley-456ae73"
+    },
+    "zip": {
+      "level": 1,
+      "chunkSize": 262144,
+      "forceZip64": true,
+      "entryName": "data.json",
+      "continuous": true
+    },
+    "sql": "Public exportTable(), benchmark variant adaptive-p95"
+  }
+]

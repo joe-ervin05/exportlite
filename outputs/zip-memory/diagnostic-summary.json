@@ -1,0 +1,46 @@
+[
+  {
+    "dataset": "narrow",
+    "method": "exportlite",
+    "exports": 5,
+    "nativeBufferMiBPerExport": 79.51140689849854,
+    "joinedBufferMiBPerExport": 79.50768184661865,
+    "encodedBufferMiBPerExport": 0.0,
+    "sampledPeakBufferMiB": 61.700143814086914,
+    "naturalGcCount": 34,
+    "afterDiagnosticGcBufferMiB": 0.21846294403076172
+  },
+  {
+    "dataset": "narrow",
+    "method": "objects",
+    "exports": 5,
+    "nativeBufferMiBPerExport": 0.0,
+    "joinedBufferMiBPerExport": 0.0,
+    "encodedBufferMiBPerExport": 79.50768184661865,
+    "sampledPeakBufferMiB": 8.21898365020752,
+    "naturalGcCount": 309,
+    "afterDiagnosticGcBufferMiB": 0.21846294403076172
+  },
+  {
+    "dataset": "wide",
+    "method": "exportlite",
+    "exports": 5,
+    "nativeBufferMiBPerExport": 96.24564170837402,
+    "joinedBufferMiBPerExport": 96.24526882171631,
+    "encodedBufferMiBPerExport": 0.0,
+    "sampledPeakBufferMiB": 66.72383403778076,
+    "naturalGcCount": 33,
+    "afterDiagnosticGcBufferMiB": 0.21846294403076172
+  },
+  {
+    "dataset": "wide",
+    "method": "objects",
+    "exports": 5,
+    "nativeBufferMiBPerExport": 0.0,
+    "joinedBufferMiBPerExport": 0.0,
+    "encodedBufferMiBPerExport": 96.24526977539062,
+    "sampledPeakBufferMiB": 6.925722122192383,
+    "naturalGcCount": 231,
+    "afterDiagnosticGcBufferMiB": 0.21846294403076172
+  }
+]

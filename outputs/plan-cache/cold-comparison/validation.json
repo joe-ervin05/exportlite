@@ -1,0 +1,82 @@
+[
+  {
+    "name": "cold-table-1",
+    "method": "baseline",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "metadata-only",
+    "repeat": 0,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "metadata-only",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "baseline",
+    "repeat": 1,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "baseline",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "metadata-only",
+    "repeat": 2,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "metadata-only",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "baseline",
+    "repeat": 3,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "baseline",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  },
+  {
+    "name": "cold-table-1",
+    "method": "metadata-only",
+    "repeat": 4,
+    "bytes": 77,
+    "sha256": "8504f23137af23c9aefac1a5ab8f4037518df89fb268c19ec77573ae8162e9d1",
+    "passed": true
+  }
+]

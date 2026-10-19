@@ -1,0 +1,724 @@
+{
+  "created": "2026-10-18T01:04:59.765Z",
+  "node26": "<node-26.12.0>",
+  "processSamples": 3,
+  "workers": 117,
+  "warmups": "one verified response plus one untimed response per worker",
+  "memory": "whole-process max RSS; streaming workers never build full JSON for verification",
+  "cpu": "Apple M1 Pro",
+  "platform": "darwin",
+  "release": "25.4.0",
+  "ramBytes": 34359738368,
+  "files": {
+    "src/planner/batches.ts": "78a46bdfcdce3c2026fa99abdfe897a3ee8819f332f3a9f4f830750bc1dfe680",
+    "src/api/export.ts": "fbabb63e2cfa4775e7246d8a304d395bb7b82bb2253b139369559944a353d3ec",
+    "src/output/writer.ts": "879db1f976ffffd2bb7a6b8ceb3ff54cc76e5ebee10cf35c8134a69880826f7e",
+    "dist/index.mjs": "06038dfc6c8a2f7105d4b400cd1b86ed9f86c21db3a73f35689531c874d58a8e",
+    "benchmarks/baselines/pre-batch-tuning/index.mjs": "4811d1762e59d87d90d3090b5d692a2381e2bdcdd913b1f4a90aada6f4bc909b",
+    "benchmarks/batch-profile/worker.mjs": "3e3f9570014a388f961ebaadc7b4d469bd8026a3df394f9a090463d35140bfee"
+  },
+  "jobs": [
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "full",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "web",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "web",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "full",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "web",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "web",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "full",
+      "mode": "output",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "web",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "web",
+      "repeat": 0
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "full",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "web",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "web",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "full",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "web",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "web",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "full",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "web",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "web",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "output",
+      "repeat": 1
+    },
+    {
+      "dataset": "matched",
+      "method": "full",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "web",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "web",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "full",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "web",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "web",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "full",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "web",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "web",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "output",
+      "repeat": 2
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "web",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "web",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "full",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "web",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "web",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "narrow",
+      "method": "full",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "web",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "web",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "wide",
+      "method": "full",
+      "mode": "output",
+      "repeat": 3
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "web",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "web",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "after",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "full",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "matched",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "web",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "web",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "full",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "sql",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "web",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "web",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "full",
+      "mode": "output",
+      "repeat": 4
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "sql",
+      "repeat": 4
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "zip",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "zip",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "zip",
+      "repeat": 0
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "zip",
+      "repeat": 0
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "zip",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "zip",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "zip",
+      "repeat": 1
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "zip",
+      "repeat": 1
+    },
+    {
+      "dataset": "narrow",
+      "method": "before",
+      "mode": "zip",
+      "repeat": 2
+    },
+    {
+      "dataset": "narrow",
+      "method": "after",
+      "mode": "zip",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "before",
+      "mode": "zip",
+      "repeat": 2
+    },
+    {
+      "dataset": "wide",
+      "method": "after",
+      "mode": "zip",
+      "repeat": 2
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "adopted": "memLevel 9 ZIP settings plus bounded metadata/generated-SQL cache and successful per-connection capability probes. Every data statement freshly prepared; no prepared-statement leases, no cached rows/results, no new public options.",
+  "unitTests": 189,
+  "testFiles": 6,
+  "types": "passed",
+  "lint": "passed",
+  "build": "ESM and CommonJS passed",
+  "publicDeclarations": "byte-identical to cache-free memLevel9 baseline",
+  "streamingLifecycle": "writer, readable adapter, export loop and ZIP implementation byte-identical to cache-free memLevel9 baseline",
+  "mainPackage": "Adopted source and compiled entry points exactly match tested metadata-only prototype.",
+  "validation": "All 200 benchmark verification responses matched expected hashes and byte counts; 30 actual ZIP verification archives independently decoded with JSON SHA-256 and CRC-32 checks.",
+  "coldCost": "Fresh-connection first table export median 0.35462 ms to 0.375091 ms; connection opening and closing excluded.",
+  "limits": "Whole-process RSS across repeated responses; CPU host variation visible, all samples retained. No HTTP/network measurements. Earlier statement-reuse and capabilities-only controls remain isolated research."
+}

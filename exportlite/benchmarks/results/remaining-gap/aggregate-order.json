@@ -1,0 +1,905 @@
+[
+  {
+    "dataset": "matched",
+    "observations": [
+      {
+        "name": "current",
+        "round": 0,
+        "ms": 150.09362500000003
+      },
+      {
+        "name": "ordered",
+        "round": 0,
+        "ms": 274.93875
+      },
+      {
+        "name": "ordered",
+        "round": 1,
+        "ms": 273.479833
+      },
+      {
+        "name": "current",
+        "round": 1,
+        "ms": 149.24412500000017
+      },
+      {
+        "name": "current",
+        "round": 2,
+        "ms": 149.8610409999999
+      },
+      {
+        "name": "ordered",
+        "round": 2,
+        "ms": 272.96070800000007
+      },
+      {
+        "name": "ordered",
+        "round": 3,
+        "ms": 273.445792
+      },
+      {
+        "name": "current",
+        "round": 3,
+        "ms": 152.7002500000001
+      },
+      {
+        "name": "current",
+        "round": 4,
+        "ms": 149.27937500000007
+      },
+      {
+        "name": "ordered",
+        "round": 4,
+        "ms": 272.70437500000025
+      }
+    ],
+    "plans": {
+      "current": {
+        "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('name', \"name\")) AS BLOB)\n    FROM (SELECT \"name\" FROM main.\"users\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"users\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+        "plan": [
+          {
+            "id": 2,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CO-ROUTINE __exportlite_batches"
+          },
+          {
+            "id": 5,
+            "parent": 2,
+            "notused": 0,
+            "detail": "SETUP"
+          },
+          {
+            "id": 6,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCAN CONSTANT ROW"
+          },
+          {
+            "id": 9,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 1"
+          },
+          {
+            "id": 14,
+            "parent": 9,
+            "notused": 215,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 23,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 2"
+          },
+          {
+            "id": 31,
+            "parent": 23,
+            "notused": 215,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 49,
+            "parent": 2,
+            "notused": 0,
+            "detail": "RECURSIVE STEP"
+          },
+          {
+            "id": 50,
+            "parent": 49,
+            "notused": 216,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 54,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 4"
+          },
+          {
+            "id": 59,
+            "parent": 54,
+            "notused": 195,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 68,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 5"
+          },
+          {
+            "id": 76,
+            "parent": 68,
+            "notused": 195,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 90,
+            "parent": 0,
+            "notused": 215,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 96,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 8"
+          },
+          {
+            "id": 99,
+            "parent": 96,
+            "notused": 0,
+            "detail": "CO-ROUTINE (subquery-7)"
+          },
+          {
+            "id": 102,
+            "parent": 99,
+            "notused": 155,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+          },
+          {
+            "id": 116,
+            "parent": 96,
+            "notused": 203,
+            "detail": "SCAN (subquery-7)"
+          },
+          {
+            "id": 134,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 9"
+          },
+          {
+            "id": 139,
+            "parent": 134,
+            "notused": 195,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          }
+        ]
+      },
+      "ordered": {
+        "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"users\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('name', \"name\") ORDER BY \"rowid\") AS BLOB)\n    FROM main.\"users\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      \n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"users\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+        "plan": [
+          {
+            "id": 2,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CO-ROUTINE __exportlite_batches"
+          },
+          {
+            "id": 5,
+            "parent": 2,
+            "notused": 0,
+            "detail": "SETUP"
+          },
+          {
+            "id": 6,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCAN CONSTANT ROW"
+          },
+          {
+            "id": 9,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 1"
+          },
+          {
+            "id": 14,
+            "parent": 9,
+            "notused": 215,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 23,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 2"
+          },
+          {
+            "id": 31,
+            "parent": 23,
+            "notused": 215,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 49,
+            "parent": 2,
+            "notused": 0,
+            "detail": "RECURSIVE STEP"
+          },
+          {
+            "id": 50,
+            "parent": 49,
+            "notused": 216,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 54,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 4"
+          },
+          {
+            "id": 59,
+            "parent": 54,
+            "notused": 195,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 68,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 5"
+          },
+          {
+            "id": 76,
+            "parent": 68,
+            "notused": 195,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 90,
+            "parent": 0,
+            "notused": 215,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 96,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 7"
+          },
+          {
+            "id": 101,
+            "parent": 96,
+            "notused": 0,
+            "detail": "USE TEMP B-TREE FOR json_group_array(ORDER BY)"
+          },
+          {
+            "id": 103,
+            "parent": 96,
+            "notused": 155,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+          },
+          {
+            "id": 136,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 8"
+          },
+          {
+            "id": 141,
+            "parent": 136,
+            "notused": 195,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "dataset": "narrow",
+    "observations": [
+      {
+        "name": "current",
+        "round": 0,
+        "ms": 346.8394159999998
+      },
+      {
+        "name": "ordered",
+        "round": 0,
+        "ms": 505.3393750000005
+      },
+      {
+        "name": "ordered",
+        "round": 1,
+        "ms": 502.9646250000005
+      },
+      {
+        "name": "current",
+        "round": 1,
+        "ms": 348.70095800000036
+      },
+      {
+        "name": "current",
+        "round": 2,
+        "ms": 345.2553339999995
+      },
+      {
+        "name": "ordered",
+        "round": 2,
+        "ms": 510.9577079999999
+      },
+      {
+        "name": "ordered",
+        "round": 3,
+        "ms": 499.47500000000036
+      },
+      {
+        "name": "current",
+        "round": 3,
+        "ms": 344.9781659999999
+      },
+      {
+        "name": "current",
+        "round": 4,
+        "ms": 346.8132919999998
+      },
+      {
+        "name": "ordered",
+        "round": 4,
+        "ms": 502.4309579999999
+      }
+    ],
+    "plans": {
+      "current": {
+        "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"id\", 'name', \"name\", 'note', \"note\", 'active', \"active\")) AS BLOB)\n    FROM (SELECT \"id\", \"name\", \"note\", \"active\" FROM main.\"data\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+        "plan": [
+          {
+            "id": 2,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CO-ROUTINE __exportlite_batches"
+          },
+          {
+            "id": 5,
+            "parent": 2,
+            "notused": 0,
+            "detail": "SETUP"
+          },
+          {
+            "id": 6,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCAN CONSTANT ROW"
+          },
+          {
+            "id": 9,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 1"
+          },
+          {
+            "id": 14,
+            "parent": 9,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 23,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 2"
+          },
+          {
+            "id": 31,
+            "parent": 23,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 49,
+            "parent": 2,
+            "notused": 0,
+            "detail": "RECURSIVE STEP"
+          },
+          {
+            "id": 50,
+            "parent": 49,
+            "notused": 216,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 54,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 4"
+          },
+          {
+            "id": 59,
+            "parent": 54,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 68,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 5"
+          },
+          {
+            "id": 76,
+            "parent": 68,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 90,
+            "parent": 0,
+            "notused": 215,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 96,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 8"
+          },
+          {
+            "id": 99,
+            "parent": 96,
+            "notused": 0,
+            "detail": "CO-ROUTINE (subquery-7)"
+          },
+          {
+            "id": 102,
+            "parent": 99,
+            "notused": 156,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+          },
+          {
+            "id": 119,
+            "parent": 96,
+            "notused": 204,
+            "detail": "SCAN (subquery-7)"
+          },
+          {
+            "id": 140,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 9"
+          },
+          {
+            "id": 145,
+            "parent": 140,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          }
+        ]
+      },
+      "ordered": {
+        "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"id\", 'name', \"name\", 'note', \"note\", 'active', \"active\") ORDER BY \"rowid\") AS BLOB)\n    FROM main.\"data\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      \n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+        "plan": [
+          {
+            "id": 2,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CO-ROUTINE __exportlite_batches"
+          },
+          {
+            "id": 5,
+            "parent": 2,
+            "notused": 0,
+            "detail": "SETUP"
+          },
+          {
+            "id": 6,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCAN CONSTANT ROW"
+          },
+          {
+            "id": 9,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 1"
+          },
+          {
+            "id": 14,
+            "parent": 9,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 23,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 2"
+          },
+          {
+            "id": 31,
+            "parent": 23,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 49,
+            "parent": 2,
+            "notused": 0,
+            "detail": "RECURSIVE STEP"
+          },
+          {
+            "id": 50,
+            "parent": 49,
+            "notused": 216,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 54,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 4"
+          },
+          {
+            "id": 59,
+            "parent": 54,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 68,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 5"
+          },
+          {
+            "id": 76,
+            "parent": 68,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 90,
+            "parent": 0,
+            "notused": 215,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 96,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 7"
+          },
+          {
+            "id": 101,
+            "parent": 96,
+            "notused": 0,
+            "detail": "USE TEMP B-TREE FOR json_group_array(ORDER BY)"
+          },
+          {
+            "id": 103,
+            "parent": 96,
+            "notused": 156,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+          },
+          {
+            "id": 139,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 8"
+          },
+          {
+            "id": 144,
+            "parent": 139,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "dataset": "wide",
+    "observations": [
+      {
+        "name": "current",
+        "round": 0,
+        "ms": 133.10933300000033
+      },
+      {
+        "name": "ordered",
+        "round": 0,
+        "ms": 227.20324999999866
+      },
+      {
+        "name": "ordered",
+        "round": 1,
+        "ms": 229.11149999999907
+      },
+      {
+        "name": "current",
+        "round": 1,
+        "ms": 134.8904160000002
+      },
+      {
+        "name": "current",
+        "round": 2,
+        "ms": 132.8241659999985
+      },
+      {
+        "name": "ordered",
+        "round": 2,
+        "ms": 227.97720800000025
+      },
+      {
+        "name": "ordered",
+        "round": 3,
+        "ms": 226.63745899999958
+      },
+      {
+        "name": "current",
+        "round": 3,
+        "ms": 137.0920839999999
+      },
+      {
+        "name": "current",
+        "round": 4,
+        "ms": 134.23716599999898
+      },
+      {
+        "name": "ordered",
+        "round": 4,
+        "ms": 226.6335420000014
+      }
+    ],
+    "plans": {
+      "current": {
+        "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"id\", 'name', \"name\", 'note', \"note\", 'active', \"active\")) AS BLOB)\n    FROM (SELECT \"id\", \"name\", \"note\", \"active\" FROM main.\"data\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY \"rowid\")\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+        "plan": [
+          {
+            "id": 2,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CO-ROUTINE __exportlite_batches"
+          },
+          {
+            "id": 5,
+            "parent": 2,
+            "notused": 0,
+            "detail": "SETUP"
+          },
+          {
+            "id": 6,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCAN CONSTANT ROW"
+          },
+          {
+            "id": 9,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 1"
+          },
+          {
+            "id": 14,
+            "parent": 9,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 23,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 2"
+          },
+          {
+            "id": 31,
+            "parent": 23,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 49,
+            "parent": 2,
+            "notused": 0,
+            "detail": "RECURSIVE STEP"
+          },
+          {
+            "id": 50,
+            "parent": 49,
+            "notused": 216,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 54,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 4"
+          },
+          {
+            "id": 59,
+            "parent": 54,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 68,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 5"
+          },
+          {
+            "id": 76,
+            "parent": 68,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 90,
+            "parent": 0,
+            "notused": 215,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 96,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 8"
+          },
+          {
+            "id": 99,
+            "parent": 96,
+            "notused": 0,
+            "detail": "CO-ROUTINE (subquery-7)"
+          },
+          {
+            "id": 102,
+            "parent": 99,
+            "notused": 156,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+          },
+          {
+            "id": 119,
+            "parent": 96,
+            "notused": 204,
+            "detail": "SCAN (subquery-7)"
+          },
+          {
+            "id": 140,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 9"
+          },
+          {
+            "id": 145,
+            "parent": 140,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          }
+        ]
+      },
+      "ordered": {
+        "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1),\n      (SELECT \"rowid\" FROM main.\"data\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > \"__exportlite_batches\".\"last\" ORDER BY \"rowid\" LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\"\n    WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT CAST(json_group_array(json_object('id', \"id\", 'name', \"name\", 'note', \"note\", 'active', \"active\") ORDER BY \"rowid\") AS BLOB)\n    FROM main.\"data\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      \n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"data\" AS \"__exportlite_source\" WHERE \"rowid\" >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\"\n  WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+        "plan": [
+          {
+            "id": 2,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CO-ROUTINE __exportlite_batches"
+          },
+          {
+            "id": 5,
+            "parent": 2,
+            "notused": 0,
+            "detail": "SETUP"
+          },
+          {
+            "id": 6,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCAN CONSTANT ROW"
+          },
+          {
+            "id": 9,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 1"
+          },
+          {
+            "id": 14,
+            "parent": 9,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 23,
+            "parent": 5,
+            "notused": 0,
+            "detail": "SCALAR SUBQUERY 2"
+          },
+          {
+            "id": 31,
+            "parent": 23,
+            "notused": 216,
+            "detail": "SCAN __exportlite_source"
+          },
+          {
+            "id": 49,
+            "parent": 2,
+            "notused": 0,
+            "detail": "RECURSIVE STEP"
+          },
+          {
+            "id": 50,
+            "parent": 49,
+            "notused": 216,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 54,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 4"
+          },
+          {
+            "id": 59,
+            "parent": 54,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 68,
+            "parent": 49,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 5"
+          },
+          {
+            "id": 76,
+            "parent": 68,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          },
+          {
+            "id": 90,
+            "parent": 0,
+            "notused": 215,
+            "detail": "SCAN __exportlite_batches"
+          },
+          {
+            "id": 96,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 7"
+          },
+          {
+            "id": 101,
+            "parent": 96,
+            "notused": 0,
+            "detail": "USE TEMP B-TREE FOR json_group_array(ORDER BY)"
+          },
+          {
+            "id": 103,
+            "parent": 96,
+            "notused": 156,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+          },
+          {
+            "id": 139,
+            "parent": 0,
+            "notused": 0,
+            "detail": "CORRELATED SCALAR SUBQUERY 8"
+          },
+          {
+            "id": 144,
+            "parent": 139,
+            "notused": 196,
+            "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+          }
+        ]
+      }
+    }
+  }
+]

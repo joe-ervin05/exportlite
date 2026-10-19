@@ -1,0 +1,70 @@
+{
+  "dataset": "bulk-zip",
+  "node": "v26.12.0",
+  "note": "Timing-only supporting control: both methods share one process; six adjacent pairs with alternating order, natural GC and no explicit collection. Not an isolated RSS comparison. Each method independently verifies its complete output hash before warmup. Both methods use memLevel 9, fixed 256-row batches and the existing output buffering. before=cache-free baseline; framed=planning-cache prototype (inherited field names from prior timing control).",
+  "pairs": [
+    {
+      "repeat": 0,
+      "order": [
+        "before",
+        "framed"
+      ],
+      "before": 711.7427080000002,
+      "framed": 709.7824170000004,
+      "ratio": 0.9972457870267357
+    },
+    {
+      "repeat": 1,
+      "order": [
+        "framed",
+        "before"
+      ],
+      "framed": 680.8152920000002,
+      "before": 741.6009999999997,
+      "ratio": 0.918034484851019
+    },
+    {
+      "repeat": 2,
+      "order": [
+        "before",
+        "framed"
+      ],
+      "before": 694.3775829999995,
+      "framed": 696.557041,
+      "ratio": 1.0031387217176344
+    },
+    {
+      "repeat": 3,
+      "order": [
+        "framed",
+        "before"
+      ],
+      "framed": 730.2948340000003,
+      "before": 682.0306249999994,
+      "ratio": 1.0707654571962966
+    },
+    {
+      "repeat": 4,
+      "order": [
+        "before",
+        "framed"
+      ],
+      "before": 687.1222079999989,
+      "framed": 678.0374170000014,
+      "ratio": 0.9867784931206917
+    },
+    {
+      "repeat": 5,
+      "order": [
+        "framed",
+        "before"
+      ],
+      "framed": 675.1943749999991,
+      "before": 680.3501670000005,
+      "ratio": 0.9924218553179228
+    }
+  ],
+  "medianBeforeMs": 690.7498954999992,
+  "medianFramedMs": 688.6861665000001,
+  "medianPairedRatio": 0.9948338211723293
+}

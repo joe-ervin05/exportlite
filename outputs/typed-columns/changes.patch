@@ -1,0 +1,1026 @@
+--- baseline/README.md
++++ README.md
+@@ -36,7 +36,7 @@
+ | `output` | Optional new file path or byte-mode Node writable; omit to receive a Web `ExportStream` |
+ | `format` | `"jsonl"` (default) or `"json"` |
+ | `zip` | `true` streams a ZIP containing one exported file; default `false` |
+-| `columns` | Optional exact column names for `exportTable()` |
++| `columns` | Optional column-name list for tables, or an object of typed column selections for tables and queries |
+ | `sql`, `params` | A trusted single SELECT/CTE and positional/named bindings for `exportQuery()` |
+ | `signal` | Optional `AbortSignal` |
+ | `end` | With `output` only: end a caller-provided writable when done; default `false` |
+@@ -45,6 +45,51 @@
+ Batch size is internal. Earlier `batchSize`, `targetBatchBytes` and `batchEstimator` options are absent from the types and rejected at runtime.
+ 
+ TypeScript infers the return type from whether `output` is present. `TableStreamOptions` and `QueryStreamOptions` describe readable calls; the existing destination option types retain a required `output`.
++
++## Declared columns and aliases
++
++Use the small, Drizzle-style builders to declare a projection without repeating types at every call. Object keys become JSON keys; an optional builder argument supplies a different source column name. These are ExportLite builders for reading an existing database, with no Drizzle dependency or schema-creation behavior.
++
++```ts
++import { exportTable, integer, text, type ExportRow } from "exportlite";
++
++const columns = {
++  id: integer().notNull(),
++  displayName: text("name").notNull(),
++  email: text(),
++};
++
++const stream = await exportTable(db, "users", {
++  columns,
++  format: "json",
++});
++
++type User = ExportRow<typeof stream>;
++// { id: number; displayName: string; email: string | null }
++
++return new Response(stream, {
++  headers: { "Content-Type": "application/json" },
++});
++```
++
++`integer()`, `real()` and `text()` describe numbers and strings. Fields are nullable by default; `.notNull()` declares that the source cannot be null. `integer({ mode: "boolean" })` and `integer("is_active", { mode: "boolean" })` encode SQLite 0/1 values as JSON `false`/`true`, preserving nulls and rejecting other representations. Declared text and numeric values pass through unchanged: these declarations and `.notNull()` are type contracts, without per-record JavaScript validation or coercion. They must match the stored values. `.notNull()` never changes the database constraint.
++
++`InferColumns<typeof columns>` also gives the selected row type directly. `ExportRow<typeof stream>` retains the selected type through the export call, including renamed fields. The readable still contains bytes; these types do not make `Response.json()` or a framework client infer the body type automatically. ZIP streams describe the rows inside the archive.
++
++Declared queries select named fields from their SQL result, with normal parameter binding:
++
++```ts
++const stream = await exportQuery(db, {
++  sql: "SELECT id, name, email FROM users WHERE active = ? ORDER BY id",
++  params: [1],
++  columns,
++  format: "json",
++});
++```
++
++With declared query columns, ExportLite prepares only the final JSON SELECT. There are no separate schema, schema-version, capability or output-column-discovery queries. SQLite validates the statement and its named result columns; a missing field fails during preparation. Query result aliases should be unique under SQLite's case-insensitive name resolution. Added, unselected columns do not change the projection. Renaming happens inside `json_object()`, with no JavaScript row objects or JSON parsing.
++
++Table exports retain their existing 256-row batching and storage-metadata checks, including schema-version invalidation. A declared projection alone does not describe the table's rowid behavior or database encoding, so table exports still have those local metadata queries. Remote database adapters are not implemented. The original table `columns: ["id", "name"]` and automatic discovery remain available. Run `node examples/declared-columns.mjs` for a working example.
+ 
+ ## Readable streams and API responses
+ 
+@@ -100,7 +145,7 @@
+ 
+ Row-time SQLite and ZIP failures reach both the readable and `.result`. Cancel unused streams with `await stream.cancel()`; when a reader holds the stream's lock, use `await reader.cancel()` instead. The package observes its internal completion rejection so applications that only consume the body do not acquire an unhandled promise rejection. `end` applies only to a provided destination and is rejected when `output` is omitted. Run `node examples/readable.mjs` for a ZIP response consumed through a file pipeline.
+ 
+-Frameworks that accept Web `Response` objects can use these examples directly, provided the route runs in Node with access to the SQLite connection. For tRPC applications, use a normal authenticated download route for the export bytes; a typed tRPC procedure can return its URL and filename. tRPC's [`httpBatchStreamLink`](https://trpc.io/docs/client/links/httpBatchStreamLink) streams values through its own JSON protocol rather than serving the raw ZIP or JSON download. ExportLite returns bytes and does not infer TypeScript row types from SQLite schemas or SQL strings.
++Frameworks that accept Web `Response` objects can use these examples directly, provided the route runs in Node with access to the SQLite connection. For tRPC applications, use a normal authenticated download route for the export bytes; a typed tRPC procedure can return its URL and filename. tRPC's [`httpBatchStreamLink`](https://trpc.io/docs/client/links/httpBatchStreamLink) streams values through its own JSON protocol rather than serving the raw ZIP or JSON download. ExportLite returns bytes; its optional column declarations describe TypeScript row types, while SQLite schemas and SQL strings alone do not provide inferred row types.
+ 
+ ## ZIP downloads
+ 
+@@ -127,9 +172,9 @@
+ 
+ ## Fixed batching and streaming fallbacks
+ 
+-Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those fragments directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. SQLite version and JSON capability checks run once after the first successful check on each connection.
+-
+-Repeated table exports reuse validated column selections and generated SQL, with at most **16 cached plans per connection**. A schema-version check invalidates these plans after schema changes. Each export prepares an independent data statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are always read and generated afresh. Custom queries discover their output columns on every call.
++Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those fragments directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. For table exports and queries using column discovery, SQLite version and JSON capability checks run once after the first successful check on each connection. Declared queries rely on SQLite preparing their final JSON statement, with no preflight probes.
++
++Repeated table exports reuse validated column selections and generated SQL, with at most **16 cached plans per connection**. A schema-version check invalidates these plans after schema changes. Each export prepares an independent data statement, so overlapping and lazy streams keep separate iterators. Rows and response bytes are always read and generated afresh. Custom queries discover their output columns on every call unless `columns` is declared.
+ 
+ Each range starts with an indexed seek and locates its 256th existing key using a constant `OFFSET 255`. That offset stays fixed for every batch; it does not grow with the export. Bounds remain SQLite integers, and only a short final batch needs a separate count inside the same statement.
+ 
+@@ -184,7 +229,7 @@
+ pnpm example
+ ```
+ 
+-Local checks cover 189 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
++Local checks cover 212 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+ 
+ ## Benchmarks
+ 
+--- baseline/examples/declared-columns.mjs
++++ examples/declared-columns.mjs
+@@ -0,0 +1,28 @@
++import Database from "better-sqlite3";
++import { exportQuery, integer, text } from "../dist/index.mjs";
++
++const db = new Database(":memory:");
++try {
++  db.exec(`
++    CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT);
++    INSERT INTO users VALUES(1, 'Joe', 'joe@example.com'), (2, '雪', NULL);
++  `);
++  const columns = {
++    id: integer().notNull(),
++    displayName: text("name").notNull(),
++    email: text(),
++  };
++  const stream = await exportQuery(db, {
++    sql: "SELECT id, name, email FROM users WHERE id >= ? ORDER BY id",
++    params: [1],
++    columns,
++    format: "json",
++  });
++  const response = new Response(stream, {
++    headers: { "Content-Type": "application/json" },
++  });
++  console.log(await response.text());
++  console.log(await stream.result);
++} finally {
++  db.close();
++}
+--- baseline/src/api/export-query.ts
++++ src/api/export-query.ts
+@@ -1,3 +1,4 @@
++import type { InferColumns, SelectedColumns } from "../columns.js";
+ import { bindings, type SQLiteConnection } from "../database/adapter.js";
+ import { checkCapabilities } from "../database/better-sqlite3.js";
+ import { createReadableExport } from "../output/readable.js";
+@@ -15,10 +16,18 @@
+   db: SQLiteConnection,
+   options: QueryExportOptions,
+ ): Promise<ExportResult>;
++export function exportQuery<const C extends SelectedColumns>(
++  db: SQLiteConnection,
++  options: QueryStreamOptions & { columns: C },
++): Promise<ExportStream<InferColumns<C>>>;
+ export function exportQuery(
+   db: SQLiteConnection,
+   options: QueryStreamOptions,
+ ): Promise<ExportStream>;
++export function exportQuery<const C extends SelectedColumns>(
++  db: SQLiteConnection,
++  options: (QueryExportOptions | QueryStreamOptions) & { columns: C },
++): Promise<ExportResult | ExportStream<InferColumns<C>>>;
+ export function exportQuery(
+   db: SQLiteConnection,
+   options: QueryExportOptions | QueryStreamOptions,
+@@ -30,8 +39,10 @@
+   const started = performance.now();
+   validateOptions(options);
+   checkAborted(options.signal);
+-  checkCapabilities(db);
+-  const statement = planQuery(db, options.sql);
++  // A declared query needs only its final statement: SQLite validates support
++  // while preparing it, with no capability or schema preflight queries.
++  if (options.columns === undefined) checkCapabilities(db);
++  const statement = planQuery(db, options.sql, options.columns);
+   const args = bindings(options.params);
+   if (options.output === undefined)
+     return createReadableExport(
+--- baseline/src/api/export-table.ts
++++ src/api/export-table.ts
+@@ -1,3 +1,4 @@
++import type { InferColumns, SelectedColumns } from "../columns.js";
+ import type { SQLiteConnection } from "../database/adapter.js";
+ import { checkCapabilities } from "../database/better-sqlite3.js";
+ import { createReadableExport } from "../output/readable.js";
+@@ -16,11 +17,21 @@
+   table: string,
+   options: TableExportOptions,
+ ): Promise<ExportResult>;
++export function exportTable<const C extends SelectedColumns>(
++  db: SQLiteConnection,
++  table: string,
++  options: TableStreamOptions & { columns: C },
++): Promise<ExportStream<InferColumns<C>>>;
+ export function exportTable(
+   db: SQLiteConnection,
+   table: string,
+   options?: TableStreamOptions,
+ ): Promise<ExportStream>;
++export function exportTable<const C extends SelectedColumns>(
++  db: SQLiteConnection,
++  table: string,
++  options: (TableExportOptions | TableStreamOptions) & { columns: C },
++): Promise<ExportResult | ExportStream<InferColumns<C>>>;
+ export function exportTable(
+   db: SQLiteConnection,
+   table: string,
+--- baseline/src/columns.ts
++++ src/columns.ts
+@@ -0,0 +1,70 @@
++import { ExportLiteError } from "./errors.js";
++
++/** A read-only declaration; never creates a column or changes its constraints. */
++export class Column<T, Required extends boolean = false> {
++  declare readonly _: T;
++
++  constructor(
++    readonly name: string | undefined,
++    readonly kind: "value" | "boolean",
++    readonly required: Required,
++  ) {
++    if (
++      name !== undefined &&
++      (typeof name !== "string" || !name || name.includes("\0"))
++    )
++      throw new ExportLiteError("INVALID_SCHEMA", "Invalid column name.");
++    Object.freeze(this);
++  }
++
++  notNull(): Column<T, true> {
++    return new Column(this.name, this.kind, true);
++  }
++}
++
++export type SelectedColumns = Readonly<
++  Record<string, Column<unknown, boolean>>
++>;
++export type InferColumns<C extends SelectedColumns> = {
++  -readonly [K in keyof C]: C[K] extends Column<infer T, infer Required>
++    ? Required extends true
++      ? T
++      : T | null
++    : never;
++};
++
++/** A text value; nullable unless .notNull() is specified. */
++export function text(name?: string): Column<string> {
++  return new Column(name, "value", false);
++}
++
++/** A floating-point value; nullable unless .notNull() is specified. */
++export function real(name?: string): Column<number> {
++  return new Column(name, "value", false);
++}
++
++/** Integer values, or SQLite 0/1 values encoded as JSON booleans. */
++export function integer<M extends "number" | "boolean" = "number">(
++  nameOrOptions?: string | { mode: M },
++  options?: { mode: M },
++): Column<M extends "boolean" ? boolean : number> {
++  if (
++    nameOrOptions !== undefined &&
++    typeof nameOrOptions !== "string" &&
++    (!nameOrOptions || typeof nameOrOptions !== "object")
++  )
++    throw new ExportLiteError(
++      "INVALID_OPTIONS",
++      "Invalid integer declaration.",
++    );
++  const name = typeof nameOrOptions === "string" ? nameOrOptions : undefined;
++  const mode =
++    (typeof nameOrOptions === "object" ? nameOrOptions : options)?.mode ??
++    "number";
++  if (mode !== "number" && mode !== "boolean")
++    throw new ExportLiteError(
++      "INVALID_OPTIONS",
++      "integer mode must be number or boolean.",
++    );
++  return new Column(name, mode === "boolean" ? "boolean" : "value", false);
++}
+--- baseline/src/index.ts
++++ src/index.ts
+@@ -1,16 +1,26 @@
+ export { exportQuery } from "./api/export-query.js";
+ export { exportTable } from "./api/export-table.js";
++export {
++  type Column,
++  type InferColumns,
++  integer,
++  real,
++  type SelectedColumns,
++  text,
++} from "./columns.js";
+ export type { SQLiteConnection } from "./database/adapter.js";
+ export { type ExportErrorCode, ExportLiteError } from "./errors.js";
+ export type {
+   ExportOptions,
+   ExportResult,
++  ExportRow,
+   ExportStream,
+   QueryExportOptions,
+   QueryParameters,
+   QueryStreamOptions,
+   SqlValue,
+   StreamExportOptions,
++  TableColumns,
+   TableExportOptions,
+   TableStreamOptions,
+ } from "./types.js";
+--- baseline/src/planner/batches.ts
++++ src/planner/batches.ts
+@@ -1,5 +1,6 @@
+ import type { SQLiteConnection } from "../database/adapter.js";
+ import { readStatement } from "../database/better-sqlite3.js";
++import { type SelectedField, selectedObject } from "./columns.js";
+ import { identifier, literal } from "./identifiers.js";
+ 
+ export function planBatchedTable(
+@@ -8,6 +9,7 @@
+     table: string;
+     columnNames: readonly string[];
+     columns: readonly string[];
++    fields?: readonly SelectedField[];
+     format: "json" | "jsonl";
+   },
+ ) {
+@@ -24,8 +26,19 @@
+   if (!rowid) return undefined;
+   const key = identifier(rowid);
+   const table = `main.${identifier(options.table)} AS "__exportlite_source"`;
+-  const columns = options.columns.map(identifier).join(", ");
+-  const object = `json_object(${options.columns.map((column) => `${literal(column)}, ${identifier(column)}`).join(", ")})`;
++  const columns = options.fields
++    ? options.fields
++        .map(
++          (field, i) =>
++            `"__exportlite_source".${identifier(field.column)} AS ${identifier(`__exportlite_c${i}`)}`,
++        )
++        .join(", ")
++    : options.columns.map(identifier).join(", ");
++  const object = options.fields
++    ? selectedObject(options.fields, (_field, i) =>
++        identifier(`__exportlite_c${i}`),
++      )
++    : `json_object(${options.columns.map((column) => `${literal(column)}, ${identifier(column)}`).join(", ")})`;
+   const aggregate =
+     options.format === "json"
+       ? `json_group_array(${object})`
+--- baseline/src/planner/cache.ts
++++ src/planner/cache.ts
+@@ -1,6 +1,7 @@
+ import type { ReadStatement, SQLiteConnection } from "../database/adapter.js";
+ import { readStatement } from "../database/better-sqlite3.js";
+ import { sqliteError } from "../errors.js";
++import type { TableColumns } from "../types.js";
+ import { identifier } from "./identifiers.js";
+ import { planTable } from "./json.js";
+ 
+@@ -17,7 +18,7 @@
+ export function cachedTablePlan(
+   db: SQLiteConnection,
+   table: string,
+-  columns: readonly string[] | undefined,
++  columns: TableColumns | undefined,
+   format: "json" | "jsonl",
+ ): ReturnType<typeof planTable> {
+   identifier(table);
+--- baseline/src/planner/columns.ts
++++ src/planner/columns.ts
+@@ -0,0 +1,51 @@
++import { Column, type SelectedColumns } from "../columns.js";
++import { ExportLiteError } from "../errors.js";
++import { identifier, literal, uniqueColumns } from "./identifiers.js";
++
++export interface SelectedField {
++  key: string;
++  column: string;
++  kind: "value" | "boolean";
++}
++
++export function selectedFields(columns: SelectedColumns): SelectedField[] {
++  if (
++    !columns ||
++    typeof columns !== "object" ||
++    Array.isArray(columns) ||
++    ![Object.prototype, null].includes(Object.getPrototypeOf(columns))
++  )
++    throw new ExportLiteError(
++      "INVALID_OPTIONS",
++      "columns must be an object containing ExportLite column declarations.",
++    );
++  const fields = Object.entries(columns).map(([key, declaration]) => {
++    if (!(declaration instanceof Column))
++      throw new ExportLiteError(
++        "INVALID_OPTIONS",
++        "Use text(), integer() or real() to declare selected columns.",
++      );
++    const column = declaration.name ?? key;
++    identifier(column);
++    return { key, column, kind: declaration.kind };
++  });
++  uniqueColumns(fields.map((field) => field.key));
++  return fields;
++}
++
++export function selectedObject(
++  fields: readonly SelectedField[],
++  reference: (field: SelectedField, index: number) => string,
++): string {
++  const pairs = fields.map((field, index) => {
++    const value = reference(field, index);
++    // Keep booleans native JSON. Reject values outside the declared SQLite 0/1
++    // representation instead of silently treating arbitrary values as truthy.
++    const jsonValue =
++      field.kind === "boolean"
++        ? `json(CASE ${value} WHEN 0 THEN 'false' WHEN 1 THEN 'true' ELSE CASE WHEN ${value} IS NULL THEN NULL ELSE 'ExportLite: expected boolean 0 or 1' END END)`
++        : value;
++    return `${literal(field.key)}, ${jsonValue}`;
++  });
++  return `json_object(${pairs.join(", ")})`;
++}
+--- baseline/src/planner/identifiers.ts
++++ src/planner/identifiers.ts
+@@ -32,7 +32,7 @@
+   }
+ }
+ 
+-/** The driver validates the single statement first. Only strip its final delimiter/comments. */
++/** Strip only the final delimiter/comments; the enclosing statement is driver-validated. */
+ export function subquerySource(sql: string): string {
+   let last = -1;
+   for (let i = 0; i < sql.length; i++) {
+--- baseline/src/planner/json.ts
++++ src/planner/json.ts
+@@ -1,7 +1,10 @@
++import type { SelectedColumns } from "../columns.js";
+ import type { SQLiteConnection } from "../database/adapter.js";
+ import { readStatement } from "../database/better-sqlite3.js";
+ import { ExportLiteError, sqliteError } from "../errors.js";
++import type { TableColumns } from "../types.js";
+ import { planBatchedTable } from "./batches.js";
++import { selectedFields, selectedObject } from "./columns.js";
+ import {
+   identifier,
+   literal,
+@@ -12,11 +15,15 @@
+ export function planTable(
+   db: SQLiteConnection,
+   table: string,
+-  requested?: readonly string[],
++  requested?: TableColumns,
+   format: "json" | "jsonl" = "jsonl",
+ ) {
+   identifier(table);
+   try {
++    const fields =
++      requested !== undefined && !Array.isArray(requested)
++        ? selectedFields(requested as SelectedColumns)
++        : undefined;
+     const found = db
+       .prepare(
+         "SELECT name FROM main.sqlite_schema WHERE name = ? COLLATE NOCASE AND type IN ('table', 'view')",
+@@ -33,11 +40,12 @@
+     const available = new Set(
+       metadata.filter((c) => Number(c.hidden) !== 1).map((c) => c.name),
+     );
+-    const columns =
+-      requested === undefined
++    const columns = fields
++      ? fields.map((field) => field.column)
++      : requested === undefined
+         ? metadata.filter((c) => Number(c.hidden) === 0).map((c) => c.name)
+-        : [...requested];
+-    uniqueColumns(columns);
++        : [...(requested as readonly string[])];
++    if (!fields) uniqueColumns(columns);
+     for (const column of columns) {
+       if (!available.has(column))
+         throw new ExportLiteError(
+@@ -49,13 +57,16 @@
+       table: found.name,
+       columnNames: metadata.map((column) => column.name),
+       columns,
++      ...(fields ? { fields } : {}),
+       format,
+     });
+     if (batched) return { ...batched, batched: true };
+     const pairs = columns
+       .map((c) => `${literal(c)}, ${identifier(c)}`)
+       .join(", ");
+-    const sql = `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`;
++    const sql = fields
++      ? `SELECT ${selectedObject(fields, (field) => `"__exportlite_source".${identifier(field.column)}`)} FROM main.${identifier(found.name)} AS "__exportlite_source"`
++      : `SELECT json_object(${pairs}) FROM main.${identifier(found.name)}`;
+     return {
+       statement: readStatement(db, sql),
+       sql,
+@@ -66,7 +77,11 @@
+   }
+ }
+ 
+-export function planQuery(db: SQLiteConnection, sql: string) {
++export function planQuery(
++  db: SQLiteConnection,
++  sql: string,
++  declared?: SelectedColumns,
++) {
+   if (typeof sql !== "string" || !sql.trim())
+     throw new ExportLiteError(
+       "INVALID_QUERY",
+@@ -81,6 +96,20 @@
+       "Only SELECT and WITH queries are supported.",
+     );
+   }
++  let name = "__exportlite_source";
++  while (sql.toLowerCase().includes(name)) name += "_";
++  const sourceName = identifier(name);
++  if (declared !== undefined) {
++    const fields = selectedFields(declared);
++    const object = selectedObject(
++      fields,
++      (field) => `${sourceName}.${identifier(field.column)}`,
++    );
++    return readStatement(
++      db,
++      `WITH ${sourceName} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${sourceName}`,
++    );
++  }
+   const source = readStatement(db, sql);
+   const columns = source.columns().map((c) => c.name);
+   uniqueColumns(columns);
+@@ -89,9 +118,6 @@
+   const pairs = columns
+     .map((c, i) => `${literal(c)}, ${aliases[i]}`)
+     .join(", ");
+-  let name = "__exportlite_source";
+-  while (sql.toLowerCase().includes(name)) name += "_";
+-  const sourceName = identifier(name);
+   return readStatement(
+     db,
+     `WITH ${sourceName}(${aliases.join(", ")}) AS (\n${subquerySource(sql)}\n) SELECT json_object(${pairs}) FROM ${sourceName}`,
+--- baseline/src/types.ts
++++ src/types.ts
+@@ -1,4 +1,7 @@
+ import type { Writable } from "node:stream";
++import type { SelectedColumns } from "./columns.js";
++
++export type TableColumns = readonly string[] | SelectedColumns;
+ 
+ export type SqlValue = null | string | number | bigint | Buffer;
+ export type QueryParameters =
+@@ -21,13 +24,15 @@
+ 
+ export interface TableExportOptions extends ExportOptions {
+   /** Exact column names; default: ordinary, non-hidden columns of a main-schema table/view. */
+-  columns?: readonly string[];
++  columns?: TableColumns;
+ }
+ 
+ export interface QueryExportOptions extends ExportOptions {
+   /** Trusted, single, read-only SELECT/CTE, with optional trailing semicolon/comments. */
+   sql: string;
+   params?: QueryParameters;
++  /** Declared result fields and aliases; omitting this discovers all result columns. */
++  columns?: SelectedColumns;
+ }
+ 
+ /** Omit output to receive a readable; its lifecycle is managed by consumption. */
+@@ -38,18 +43,27 @@
+ }
+ 
+ export interface TableStreamOptions extends StreamExportOptions {
+-  columns?: readonly string[];
++  columns?: TableColumns;
+ }
+ 
+ export interface QueryStreamOptions extends StreamExportOptions {
+   sql: string;
+   params?: QueryParameters;
++  columns?: SelectedColumns;
+ }
+ 
+-export interface ExportStream extends ReadableStream<Uint8Array> {
++declare const rowType: unique symbol;
++
++export interface ExportStream<Row = unknown>
++  extends ReadableStream<Uint8Array> {
++  /** Type-only response contract; the stream contains bytes. */
++  readonly [rowType]?: Row;
+   /** Resolves after consumption and export cleanup; rejects on failure/cancellation. */
+   readonly result: Promise<ExportResult>;
+ }
++
++export type ExportRow<T> =
++  Awaited<T> extends ExportStream<infer Row> ? Row : never;
+ 
+ export interface ExportResult {
+   rowsExported: number;
+--- baseline/tests/columns.test.ts
++++ tests/columns.test.ts
+@@ -0,0 +1,331 @@
++import { Writable } from "node:stream";
++import Database from "better-sqlite3";
++import { afterEach, beforeEach, expect, it } from "vitest";
++import { fromBufferPromise } from "yauzl";
++import {
++  exportQuery,
++  exportTable,
++  integer,
++  real,
++  type SelectedColumns,
++  type SQLiteConnection,
++  text,
++} from "../src/index.js";
++import { planTable } from "../src/planner/json.js";
++
++let db: Database.Database;
++const columns = {
++  userId: integer("id").notNull(),
++  displayName: text("name").notNull(),
++  email: text(),
++  enabled: integer("active", { mode: "boolean" }),
++  score: real(),
++};
++beforeEach(() => {
++  db = new Database(":memory:");
++  db.exec(
++    "CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT, active INTEGER, score REAL)",
++  );
++  const insert = db.prepare("INSERT INTO users VALUES(?, ?, ?, ?, ?)");
++  db.transaction(() => {
++    for (let id = 1; id <= 513; id++)
++      insert.run(id * 3, `雪 "${id}"`, id % 2 ? null : "a@b.test", id % 2, 1.5);
++  })();
++});
++afterEach(() => db.close());
++
++it.each(["json", "jsonl"] as const)(
++  "renames and types fields across fixed %s batch boundaries",
++  async (format) => {
++    const plan = planTable(db, "users", columns, format);
++    expect(plan.batched).toBe(true);
++    const sizes = [...plan.statement.raw().iterate()].map((row) =>
++      Number((row as unknown[])[1]),
++    );
++    expect(sizes).toEqual([256, 256, 1]);
++    const stream = await exportTable(db, "users", { columns, format });
++    const body = await new Response(stream).text();
++    const rows =
++      format === "json"
++        ? JSON.parse(body)
++        : body
++            .trimEnd()
++            .split("\n")
++            .map((line) => JSON.parse(line));
++    expect(rows).toHaveLength(513);
++    expect(rows[0]).toEqual({
++      userId: 3,
++      displayName: '雪 "1"',
++      email: null,
++      enabled: true,
++      score: 1.5,
++    });
++    expect(rows[512].userId).toBe(1539);
++    expect((await stream.result).rowsExported).toBe(513);
++  },
++);
++
++it.each(["view", "without-rowid", "shadowed-rowid"])(
++  "keeps declared aliases on the %s fallback",
++  async (kind) => {
++    if (kind === "view")
++      db.exec("CREATE VIEW source AS SELECT id,name FROM users");
++    else if (kind === "without-rowid")
++      db.exec(
++        "CREATE TABLE source(id INTEGER PRIMARY KEY,name TEXT) WITHOUT ROWID; INSERT INTO source SELECT id,name FROM users",
++      );
++    else
++      db.exec(
++        "CREATE TABLE source(id INTEGER,name TEXT,rowid TEXT,_rowid_ TEXT,oid TEXT); INSERT INTO source(id,name) SELECT id,name FROM users",
++      );
++    const selection = {
++      label: text("name"),
++      first: integer("id"),
++      again: integer("id"),
++    };
++    expect(planTable(db, "source", selection).batched).toBe(false);
++    const stream = await exportTable(db, "source", {
++      columns: selection,
++      format: "json",
++    });
++    const rows = (await new Response(stream).json()) as Record<
++      string,
++      unknown
++    >[];
++    expect(rows[0]).toEqual({ label: '雪 "1"', first: 3, again: 3 });
++    await stream.result;
++  },
++);
++
++it("prepares and executes only one declared query, with no capability or schema reads", async () => {
++  const prepared: string[] = [];
++  let executions = 0;
++  const connection: SQLiteConnection = {
++    prepare(sql) {
++      prepared.push(sql);
++      const statement = db.prepare(sql);
++      statement.columns = () => {
++        throw new Error("Metadata must not be discovered");
++      };
++      const iterate = statement.iterate.bind(statement);
++      statement.iterate = function* (...params) {
++        executions++;
++        yield* iterate(...params);
++      };
++      return statement;
++    },
++  };
++  const stream = await exportQuery(connection, {
++    sql: "SELECT * FROM users WHERE id > @min ORDER BY id LIMIT 2; -- final comment",
++    params: { min: 3 },
++    columns,
++    format: "json",
++  });
++  expect(prepared).toHaveLength(1);
++  expect(prepared[0]).not.toMatch(/pragma|sqlite_schema|sqlite_version/);
++  expect(executions).toBe(0);
++  const rows = (await new Response(stream).json()) as Record<string, unknown>[];
++  expect(rows.map((row) => row.userId)).toEqual([6, 9]);
++  expect(rows[0]?.enabled).toBe(false);
++  expect(executions).toBe(1);
++  await stream.result;
++});
++
++it("keeps request aliases in cached plans and invalidates table plans after schema changes", async () => {
++  for (const key of ["first", "second", "first"]) {
++    const stream = await exportTable(db, "users", {
++      columns: { [key]: integer("id") },
++      format: "json",
++    });
++    expect(((await new Response(stream).json()) as unknown[])[0]).toEqual({
++      [key]: 3,
++    });
++    await stream.result;
++  }
++  db.exec(
++    "ALTER TABLE users ADD COLUMN extra TEXT; UPDATE users SET name='fresh' WHERE id=3",
++  );
++  const stream = await exportTable(db, "users", { columns, format: "json" });
++  expect(
++    ((await new Response(stream).json()) as Record<string, unknown>[])[0]
++      ?.displayName,
++  ).toBe("fresh");
++  await stream.result;
++  db.exec("ALTER TABLE users RENAME COLUMN name TO renamed");
++  await expect(exportTable(db, "users", { columns })).rejects.toMatchObject({
++    code: "INVALID_SCHEMA",
++  });
++});
++
++it("rejects missing declared fields during preparation instead of emitting quoted literals", async () => {
++  await expect(
++    exportQuery(db, {
++      sql: "SELECT id FROM users",
++      columns: { absent: text() },
++    }),
++  ).rejects.toMatchObject({ code: "INVALID_QUERY" });
++  await expect(
++    exportQuery(db, {
++      sql: "SELECT id FROM users",
++      columns: { renamed: text("absent") },
++    }),
++  ).rejects.toMatchObject({ code: "INVALID_QUERY" });
++  await expect(
++    exportTable(db, "users", { columns: { renamed: text("absent") } }),
++  ).rejects.toMatchObject({ code: "INVALID_SCHEMA" });
++});
++
++it("quotes source names and output keys, including case-distinct aliases and repeated sources", async () => {
++  db.exec(`CREATE TABLE odd("a""b" TEXT); INSERT INTO odd VALUES('quoted')`);
++  const selection = { "o'k": text('a"b'), A: text('a"b'), a: text('a"b') };
++  for (const stream of [
++    await exportTable(db, "odd", { columns: selection, format: "json" }),
++    await exportQuery(db, {
++      sql: "SELECT * FROM odd",
++      columns: selection,
++      format: "json",
++    }),
++  ]) {
++    expect(await new Response(stream).json()).toEqual([
++      { "o'k": "quoted", A: "quoted", a: "quoted" },
++    ]);
++    await stream.result;
++  }
++});
++
++it.each(["table", "query"])(
++  "decodes a declared %s ZIP using the same output pipeline",
++  async (kind) => {
++    const stream =
++      kind === "table"
++        ? await exportTable(db, "users", { columns, format: "json", zip: true })
++        : await exportQuery(db, {
++            sql: "SELECT * FROM users ORDER BY id",
++            columns,
++            format: "json",
++            zip: true,
++          });
++    const bytes = Buffer.from(await new Response(stream).arrayBuffer());
++    const archive = await fromBufferPromise(bytes);
++    try {
++      for await (const entry of archive.eachEntry()) {
++        const parts: Buffer[] = [];
++        for await (const part of await archive.openReadStreamPromise(entry))
++          parts.push(part);
++        expect(JSON.parse(Buffer.concat(parts).toString())[0]).toEqual({
++          userId: 3,
++          displayName: '雪 "1"',
++          email: null,
++          enabled: true,
++          score: 1.5,
++        });
++      }
++    } finally {
++      archive.close();
++    }
++    expect((await stream.result).bytesWritten).toBe(bytes.length);
++  },
++);
++
++it("forwards cancellation while a declared query waits for a slow destination", async () => {
++  const controller = new AbortController();
++  let release: (() => void) | undefined;
++  const output = new Writable({
++    highWaterMark: 1,
++    write(_chunk, _encoding, callback) {
++      release = callback;
++      controller.abort();
++    },
++  });
++  await expect(
++    exportQuery(db, {
++      sql: "SELECT * FROM users",
++      columns,
++      output,
++      signal: controller.signal,
++      bufferSize: 1,
++    }),
++  ).rejects.toMatchObject({ code: "ABORTED" });
++  release?.();
++  expect(db.prepare("SELECT 1").pluck().get()).toBe(1);
++  expect(output.listenerCount("error")).toBe(0);
++  output.destroy();
++});
++
++it("releases an unused declared readable without executing its query", async () => {
++  let executions = 0;
++  const connection: SQLiteConnection = {
++    prepare(sql) {
++      const statement = db.prepare(sql);
++      const iterate = statement.iterate.bind(statement);
++      statement.iterate = function* (...params) {
++        executions++;
++        yield* iterate(...params);
++      };
++      return statement;
++    },
++  };
++  const stream = await exportQuery(connection, {
++    sql: "SELECT * FROM users",
++    columns,
++  });
++  await stream.cancel();
++  await expect(stream.result).rejects.toMatchObject({ code: "ABORTED" });
++  expect(executions).toBe(0);
++});
++
++it.each([
++  "PRAGMA user_version=7",
++  "DELETE FROM users RETURNING id",
++  "SELECT id FROM users; SELECT 2",
++  "SELECT id FROM users) SELECT 1; DELETE FROM users; --",
++])("preserves the single read-only query restriction for %s", async (sql) => {
++  await expect(
++    exportQuery(db, { sql, columns: { id: integer() } }),
++  ).rejects.toMatchObject({ code: "INVALID_QUERY" });
++  expect(db.prepare("SELECT count(*) FROM users").pluck().get()).toBe(513);
++  expect(db.pragma("user_version", { simple: true })).toBe(0);
++});
++
++it.each([{}, { id: "number" }, { id: { type: "number" } }, [], new Map()])(
++  "rejects invalid declarations %# before preparing a query",
++  async (invalid) => {
++    const connection: SQLiteConnection = {
++      prepare() {
++        throw new Error("Must reject before prepare");
++      },
++    };
++    await expect(
++      exportQuery(connection, {
++        sql: "SELECT 1 AS id",
++        columns: invalid as SelectedColumns,
++      }),
++    ).rejects.toHaveProperty("code");
++  },
++);
++
++it("keeps nullable builders immutable and fails invalid SQLite boolean values", async () => {
++  const nullable = text("email");
++  const required = nullable.notNull();
++  expect(nullable.required).toBe(false);
++  expect(required.required).toBe(true);
++  expect(Object.isFrozen(nullable)).toBe(true);
++  expect(() => text("")).toThrow();
++  expect(() => integer({ mode: "timestamp" } as never)).toThrow();
++  expect(() => integer(null as never)).toThrow();
++  db.exec("UPDATE users SET active=NULL WHERE id=3");
++  const stream = await exportQuery(db, {
++    sql: "SELECT active FROM users WHERE id=3",
++    columns: { active: integer({ mode: "boolean" }) },
++    format: "json",
++  });
++  expect(await new Response(stream).json()).toEqual([{ active: null }]);
++  await stream.result;
++  const failed = await exportQuery(db, {
++    sql: "SELECT 2 AS active",
++    columns: { active: integer({ mode: "boolean" }) },
++    format: "json",
++  });
++  await expect(new Response(failed).text()).rejects.toThrow();
++  await expect(failed.result).rejects.toMatchObject({ code: "SQLITE_ERROR" });
++});
+--- baseline/tests/consumer.cts
++++ tests/consumer.cts
+@@ -15,6 +15,18 @@
+   (stream) => new Response(stream),
+ );
+ void response;
++const declared = exportlite.exportTable(db, "users", {
++  columns: {
++    userId: exportlite.integer("id").notNull(),
++    name: exportlite.text(),
++  },
++});
++type User = exportlite.ExportRow<typeof declared>;
++const user: User = { userId: 1, name: null };
++// @ts-expect-error The non-null integer selection remains a number.
++const invalid: User = { userId: "wrong", name: null };
++void user;
++void invalid;
+ const result: Promise<exportlite.ExportResult> = exportlite.exportTable(
+   db,
+   "users",
+--- baseline/tests/consumer.mts
++++ tests/consumer.mts
+@@ -2,11 +2,17 @@
+ import type Database from "better-sqlite3";
+ import {
+   type ExportResult,
++  type ExportRow,
+   type ExportStream,
+   exportQuery,
+   exportTable,
++  type InferColumns,
++  integer,
++  real,
+   type SQLiteConnection,
++  text,
+ } from "exportlite";
++import { expectTypeOf } from "vitest";
+ 
+ declare const db: Database.Database;
+ declare const output: Writable;
+@@ -61,3 +67,45 @@
+ 
+ // @ts-expect-error ZIP is a boolean switch.
+ exportTable(db, "users", { output, zip: "true" });
++
++const selection = {
++  userId: integer("id").notNull(),
++  displayName: text("name").notNull(),
++  email: text(),
++  active: integer({ mode: "boolean" }).notNull(),
++  score: real(),
++};
++type User = {
++  userId: number;
++  displayName: string;
++  email: string | null;
++  active: boolean;
++  score: number | null;
++};
++expectTypeOf<InferColumns<typeof selection>>().toEqualTypeOf<User>();
++const typedTable = exportTable(db, "users", { columns: selection });
++const typedQuery = exportQuery(db, {
++  sql: "SELECT id, name, email, active, score FROM users",
++  columns: selection,
++});
++expectTypeOf<ExportRow<typeof typedTable>>().toEqualTypeOf<User>();
++expectTypeOf<ExportRow<typeof typedQuery>>().toEqualTypeOf<User>();
++const inline = exportTable(db, "users", {
++  columns: { id: integer().notNull(), renamed: text("name") },
++});
++expectTypeOf<ExportRow<typeof inline>>().toEqualTypeOf<{
++  id: number;
++  renamed: string | null;
++}>();
++const typedDestination = exportQuery(db, {
++  sql: "SELECT 1 AS n",
++  columns: { n: integer() },
++  output,
++});
++expectTypeOf(typedDestination).toEqualTypeOf<Promise<ExportResult>>();
++// @ts-expect-error Selected types come from column builders.
++exportTable(db, "users", { columns: { id: "number" } });
++// @ts-expect-error Type declarations use builders rather than configuration records.
++exportQuery(db, { sql: "SELECT 1 AS id", columns: { id: { type: "number" } } });
++// @ts-expect-error Only number and boolean integer modes are supported.
++integer({ mode: "timestamp" });
+--- baseline/tests/package.test.ts
++++ tests/package.test.ts
+@@ -71,6 +71,18 @@
+         zipFile.close();
+       }
+       expect((await zipped.result).bytesWritten).toBe(zipBytes.length);
++      const declared = await built.exportQuery(db, {
++        sql: "SELECT 1 AS id, '雪' AS name",
++        columns: {
++          userId: built.integer("id").notNull(),
++          displayName: built.text("name"),
++        },
++        format: "json",
++      });
++      expect(await new Response(declared).json()).toEqual([
++        { userId: 1, displayName: "雪" },
++      ]);
++      await declared.result;
+     } finally {
+       db.close();
+     }

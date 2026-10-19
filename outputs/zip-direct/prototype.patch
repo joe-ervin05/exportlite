@@ -1,0 +1,178 @@
+--- a/src/output/writer.ts
++++ b/src/output/writer.ts
+@@ -191,6 +191,14 @@
+   async writeBytes(chunk: Buffer): Promise<void> {
+     this.check();
+     await this.send(chunk, chunk.length);
++  }
++
++  // Flush framing first; retain the caller's immutable batch until written.
++  async writeBatch(chunk: Buffer, prefix = "", suffix = ""): Promise<void> {
++    if (prefix) await this.write(prefix);
++    await this.flush();
++    await this.writeBytes(chunk);
++    if (suffix) await this.write(suffix);
+   }
+ 
+   private async send(text: string | Buffer, bytes: number): Promise<void> {
+--- a/src/output/zip.ts
++++ b/src/output/zip.ts
+@@ -123,7 +123,9 @@
+     suffix = "",
+   ): Promise<void> | undefined {
+     this.check();
+-    return this.json.write(text, bytes, prefix, suffix);
++    return typeof text === "string"
++      ? this.json.write(text, bytes, prefix, suffix)
++      : this.json.writeBatch(text, prefix, suffix);
+   }
+ 
+   async complete(): Promise<void> {
+--- a/tests/zip.test.ts
++++ b/tests/zip.test.ts
+@@ -2,7 +2,7 @@
+ import { mkdtemp, readdir, readFile, rm } from "node:fs/promises";
+ import { tmpdir } from "node:os";
+ import { join } from "node:path";
+-import { Writable } from "node:stream";
++import { PassThrough, Writable } from "node:stream";
+ import { setImmediate, setTimeout } from "node:timers/promises";
+ import { crc32 } from "node:zlib";
+ import Database from "better-sqlite3";
+@@ -144,6 +144,136 @@
+     expect(counts).toEqual([256, 256, 1]);
+   });
+ 
++  it.each(["json", "jsonl"] as const)(
++    "passes immutable SQLite batch views directly to ZIP (%s)",
++    async (format) => {
++      const batches: Buffer[] = [];
++      const originals: Buffer[] = [];
++      const connection: SQLiteConnection = {
++        prepare(sql) {
++          const statement: ReadStatement = db.prepare(sql);
++          if (sql.startsWith('WITH RECURSIVE "__exportlite_batches"')) {
++            const iterate = statement.iterate.bind(statement);
++            statement.iterate = function* (...params) {
++              for (const value of iterate(...params)) {
++                if (!Array.isArray(value) || !Buffer.isBuffer(value[0]))
++                  throw new Error("Expected native byte batches");
++                batches.push(value[0]);
++                originals.push(Buffer.from(value[0]));
++                yield value;
++              }
++            };
++          }
++          return statement;
++        },
++      };
++      const writes = vi.spyOn(PassThrough.prototype, "write");
++      const output = capture(true);
++      try {
++        await exportTable(connection, "users", {
++          format,
++          zip: true,
++          output: output.stream,
++        });
++        const chunks = writes.mock.calls.map(([chunk]) => chunk);
++        expect(batches).toHaveLength(3);
++        for (const [index, batch] of batches.entries()) {
++          const trim = format === "json" ? 1 : 0;
++          expect(
++            chunks.some(
++              (chunk) =>
++                Buffer.isBuffer(chunk) &&
++                chunk.buffer === batch.buffer &&
++                chunk.byteOffset === batch.byteOffset + trim &&
++                chunk.length === batch.length - trim * 2,
++            ),
++          ).toBe(true);
++          expect(batch).toEqual(originals[index]);
++        }
++      } finally {
++        writes.mockRestore();
++        output.stream.end();
++      }
++      const rows = db.prepare("SELECT * FROM users ORDER BY id").all();
++      expect(await decode(output.bytes(), `users.${format}`)).toBe(
++        format === "json"
++          ? JSON.stringify(rows)
++          : `${rows.map((row) => JSON.stringify(row)).join("\n")}\n`,
++      );
++    },
++  );
++
++  it("pauses native batches under ZIP backpressure and cancels before releasing the caller write", async () => {
++    db.exec("CREATE TABLE large(id INTEGER PRIMARY KEY, note TEXT)");
++    const payloads = Array.from({ length: 16 }, () =>
++      randomBytes(3072).toString("base64"),
++    );
++    const insert = db.prepare("INSERT INTO large VALUES (?, ?)");
++    db.transaction(() => {
++      for (let id = 1; id <= 4096; id++)
++        insert.run(id, payloads[id % payloads.length]);
++    })();
++    let batches = 0;
++    const connection: SQLiteConnection = {
++      prepare(sql) {
++        const statement: ReadStatement = db.prepare(sql);
++        if (sql.startsWith('WITH RECURSIVE "__exportlite_batches"')) {
++          const iterate = statement.iterate.bind(statement);
++          statement.iterate = function* (...params) {
++            for (const value of iterate(...params)) {
++              batches++;
++              yield value;
++            }
++          };
++        }
++        return statement;
++      },
++    };
++    const controller = new AbortController();
++    let hold = true;
++    let release: (() => void) | undefined;
++    let reached: (() => void) | undefined;
++    const blocked = new Promise<void>((resolve) => {
++      reached = resolve;
++    });
++    const output = new Writable({
++      highWaterMark: 1,
++      write(_chunk, _encoding, callback) {
++        if (hold) {
++          release = callback;
++          reached?.();
++        } else callback();
++      },
++    });
++    const pending = exportTable(connection, "large", {
++      output,
++      format: "json",
++      zip: true,
++      signal: controller.signal,
++    });
++    const assertion = expect(pending).rejects.toHaveProperty("code", "ABORTED");
++    try {
++      await blocked;
++      await setTimeout(30);
++      const paused = batches;
++      expect(paused).toBeGreaterThan(0);
++      expect(paused).toBeLessThan(16);
++      await setTimeout(30);
++      expect(batches).toBe(paused);
++      controller.abort();
++      await assertion;
++      expect(output.destroyed).toBe(false);
++      expect(output.writableEnded).toBe(false);
++      db.exec("DROP TABLE large");
++    } finally {
++      controller.abort();
++      hold = false;
++      release?.();
++      output.end();
++      await pending.catch(() => {});
++    }
++  });
++
+   it.each(["view", "without_rowid", "shadowed", "virtual"])(
+     "preserves the %s fallback",
+     async (kind) => {

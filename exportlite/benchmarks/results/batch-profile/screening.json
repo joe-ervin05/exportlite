@@ -1,0 +1,4746 @@
+{
+  "environment": {
+    "node": "v26.12.0",
+    "sqlite": "3.53.4"
+  },
+  "expected": "212a712f71576ae2ac615aeee1847149baa0596c3b592428b649ecff6ffae056",
+  "observations": [
+    {
+      "name": "baseline",
+      "round": 0,
+      "ms": 199.19170899999995,
+      "chars": 24003907
+    },
+    {
+      "name": "binary-bounds",
+      "round": 0,
+      "ms": 197.76579200000015,
+      "chars": 24003907
+    },
+    {
+      "name": "fixed-boundaries",
+      "round": 0,
+      "ms": 150.90358300000025,
+      "chars": 24003907
+    },
+    {
+      "name": "full",
+      "round": 0,
+      "ms": 128.7314580000002,
+      "chars": 24000001
+    },
+    {
+      "name": "binary-bounds",
+      "round": 1,
+      "ms": 209.8392920000001,
+      "chars": 24003907
+    },
+    {
+      "name": "fixed-boundaries",
+      "round": 1,
+      "ms": 149.06158300000016,
+      "chars": 24003907
+    },
+    {
+      "name": "full",
+      "round": 1,
+      "ms": 128.42641700000013,
+      "chars": 24000001
+    },
+    {
+      "name": "baseline",
+      "round": 1,
+      "ms": 204.18145800000002,
+      "chars": 24003907
+    },
+    {
+      "name": "fixed-boundaries",
+      "round": 2,
+      "ms": 149.35075000000006,
+      "chars": 24003907
+    },
+    {
+      "name": "full",
+      "round": 2,
+      "ms": 127.99495900000011,
+      "chars": 24000001
+    },
+    {
+      "name": "baseline",
+      "round": 2,
+      "ms": 199.22270800000024,
+      "chars": 24003907
+    },
+    {
+      "name": "binary-bounds",
+      "round": 2,
+      "ms": 198.34408399999984,
+      "chars": 24003907
+    },
+    {
+      "name": "full",
+      "round": 3,
+      "ms": 141.1102920000003,
+      "chars": 24000001
+    },
+    {
+      "name": "baseline",
+      "round": 3,
+      "ms": 222.2587080000003,
+      "chars": 24003907
+    },
+    {
+      "name": "binary-bounds",
+      "round": 3,
+      "ms": 203.0553749999999,
+      "chars": 24003907
+    },
+    {
+      "name": "fixed-boundaries",
+      "round": 3,
+      "ms": 150.25454100000024,
+      "chars": 24003907
+    },
+    {
+      "name": "baseline",
+      "round": 4,
+      "ms": 201.7236670000002,
+      "chars": 24003907
+    },
+    {
+      "name": "binary-bounds",
+      "round": 4,
+      "ms": 236.32074999999986,
+      "chars": 24003907
+    },
+    {
+      "name": "fixed-boundaries",
+      "round": 4,
+      "ms": 149.9650419999998,
+      "chars": 24003907
+    },
+    {
+      "name": "full",
+      "round": 4,
+      "ms": 137.64141599999948,
+      "chars": 24000001
+    }
+  ],
+  "instrumentedPublicBaseline": {
+    "totalMs": 259.17970799999966,
+    "sqliteAndDriverMs": 237.79390399999102,
+    "encodingMs": 3.5418390000004365,
+    "otherMs": 17.84396500000821,
+    "batches": 3907
+  },
+  "plans": {
+    "baseline": {
+      "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"bounds\") AS (\n    SELECT json_array(min(\"key\"), max(\"key\"), count(*))\n    FROM (SELECT \"rowid\" AS \"key\" FROM main.\"users\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 256)\n    UNION ALL\n    SELECT (\n      SELECT json_array(min(\"key\"), max(\"key\"), count(*))\n      FROM (SELECT \"rowid\" AS \"key\" FROM main.\"users\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > json_extract(\"__exportlite_batches\".\"bounds\", '$[1]')\n        ORDER BY \"rowid\" LIMIT 256)\n    )\n    FROM \"__exportlite_batches\"\n    WHERE json_extract(\"bounds\", '$[2]') > 0\n  )\n  SELECT (\n    SELECT json_group_array(json_object('name', \"name\"))\n    FROM (SELECT \"name\" FROM main.\"users\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN json_extract(\"__exportlite_batches\".\"bounds\", '$[0]')\n        AND json_extract(\"__exportlite_batches\".\"bounds\", '$[1]')\n      ORDER BY \"rowid\")\n  ), json_extract(\"bounds\", '$[2]')\n  FROM \"__exportlite_batches\"\n  WHERE json_extract(\"bounds\", '$[2]') > 0",
+      "plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE __exportlite_batches"
+        },
+        {
+          "id": 5,
+          "parent": 2,
+          "notused": 0,
+          "detail": "SETUP"
+        },
+        {
+          "id": 7,
+          "parent": 5,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 11,
+          "parent": 7,
+          "notused": 215,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 19,
+          "parent": 5,
+          "notused": 96,
+          "detail": "SCAN (subquery-1)"
+        },
+        {
+          "id": 46,
+          "parent": 2,
+          "notused": 0,
+          "detail": "RECURSIVE STEP"
+        },
+        {
+          "id": 47,
+          "parent": 46,
+          "notused": 216,
+          "detail": "SCAN __exportlite_batches"
+        },
+        {
+          "id": 52,
+          "parent": 46,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 4"
+        },
+        {
+          "id": 55,
+          "parent": 52,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-3)"
+        },
+        {
+          "id": 59,
+          "parent": 55,
+          "notused": 195,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+        },
+        {
+          "id": 70,
+          "parent": 52,
+          "notused": 96,
+          "detail": "SCAN (subquery-3)"
+        },
+        {
+          "id": 96,
+          "parent": 0,
+          "notused": 215,
+          "detail": "SCAN __exportlite_batches"
+        },
+        {
+          "id": 103,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 7"
+        },
+        {
+          "id": 106,
+          "parent": 103,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-6)"
+        },
+        {
+          "id": 109,
+          "parent": 106,
+          "notused": 155,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+        },
+        {
+          "id": 123,
+          "parent": 103,
+          "notused": 203,
+          "detail": "SCAN (subquery-6)"
+        }
+      ],
+      "bytecode": [
+        {
+          "addr": 0,
+          "opcode": "Init",
+          "p1": 0,
+          "p2": 124,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 1,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 85,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 2,
+          "opcode": "OpenPseudo",
+          "p1": 1,
+          "p2": 2,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 3,
+          "opcode": "OpenEphemeral",
+          "p1": 8,
+          "p2": 1,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 4,
+          "opcode": "InitCoroutine",
+          "p1": 3,
+          "p2": 14,
+          "p3": 5,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 5,
+          "opcode": "Noop",
+          "p1": 9,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 6,
+          "opcode": "Integer",
+          "p1": 256,
+          "p2": 4,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 7,
+          "opcode": "OpenRead",
+          "p1": 3,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 8,
+          "opcode": "Rewind",
+          "p1": 3,
+          "p2": 13,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 9,
+          "opcode": "Rowid",
+          "p1": 3,
+          "p2": 5,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 10,
+          "opcode": "Yield",
+          "p1": 3,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 11,
+          "opcode": "DecrJumpZero",
+          "p1": 4,
+          "p2": 13,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 12,
+          "opcode": "Next",
+          "p1": 3,
+          "p2": 9,
+          "p3": 0,
+          "p4": null,
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 13,
+          "opcode": "EndCoroutine",
+          "p1": 3,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 14,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 6,
+          "p3": 9,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 15,
+          "opcode": "InitCoroutine",
+          "p1": 3,
+          "p2": 0,
+          "p3": 5,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 16,
+          "opcode": "Yield",
+          "p1": 3,
+          "p2": 25,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 17,
+          "opcode": "Copy",
+          "p1": 5,
+          "p2": 10,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 18,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 19,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 10,
+          "p3": 7,
+          "p4": "min(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 20,
+          "opcode": "Copy",
+          "p1": 5,
+          "p2": 10,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 21,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 22,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 10,
+          "p3": 8,
+          "p4": "max(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 23,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 0,
+          "p3": 9,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 24,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 16,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 25,
+          "opcode": "AggFinal",
+          "p1": 7,
+          "p2": 1,
+          "p3": 0,
+          "p4": "min(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 26,
+          "opcode": "AggFinal",
+          "p1": 8,
+          "p2": 1,
+          "p3": 0,
+          "p4": "max(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 27,
+          "opcode": "AggFinal",
+          "p1": 9,
+          "p2": 0,
+          "p3": 0,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 28,
+          "opcode": "SCopy",
+          "p1": 7,
+          "p2": 12,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 29,
+          "opcode": "SCopy",
+          "p1": 8,
+          "p2": 13,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 30,
+          "opcode": "SCopy",
+          "p1": 9,
+          "p2": 14,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 31,
+          "opcode": "Function",
+          "p1": 0,
+          "p2": 12,
+          "p3": 11,
+          "p4": "json_array(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 32,
+          "opcode": "MakeRecord",
+          "p1": 11,
+          "p2": 1,
+          "p3": 10,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 33,
+          "opcode": "NewRowid",
+          "p1": 8,
+          "p2": 15,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 34,
+          "opcode": "Insert",
+          "p1": 8,
+          "p2": 10,
+          "p3": 15,
+          "p4": null,
+          "p5": 8,
+          "comment": null
+        },
+        {
+          "addr": 35,
+          "opcode": "Rewind",
+          "p1": 8,
+          "p2": 84,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 36,
+          "opcode": "NullRow",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 37,
+          "opcode": "RowData",
+          "p1": 8,
+          "p2": 2,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 38,
+          "opcode": "Delete",
+          "p1": 8,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 39,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 0,
+          "p3": 16,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 40,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 41,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 0,
+          "p3": 17,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 42,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 17,
+          "p3": 10,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 43,
+          "opcode": "Le",
+          "p1": 19,
+          "p2": 83,
+          "p3": 10,
+          "p4": null,
+          "p5": 80,
+          "comment": null
+        },
+        {
+          "addr": 44,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 20,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 45,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 21,
+          "p3": 21,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 46,
+          "opcode": "InitCoroutine",
+          "p1": 22,
+          "p2": 58,
+          "p3": 47,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 47,
+          "opcode": "Noop",
+          "p1": 10,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 48,
+          "opcode": "Integer",
+          "p1": 256,
+          "p2": 23,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 49,
+          "opcode": "OpenRead",
+          "p1": 5,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 50,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 0,
+          "p3": 24,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 51,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 24,
+          "p3": 10,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 52,
+          "opcode": "SeekGT",
+          "p1": 5,
+          "p2": 57,
+          "p3": 10,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 53,
+          "opcode": "Rowid",
+          "p1": 5,
+          "p2": 26,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 54,
+          "opcode": "Yield",
+          "p1": 22,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 55,
+          "opcode": "DecrJumpZero",
+          "p1": 23,
+          "p2": 57,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 56,
+          "opcode": "Next",
+          "p1": 5,
+          "p2": 53,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 57,
+          "opcode": "EndCoroutine",
+          "p1": 22,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 58,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 27,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 59,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 28,
+          "p3": 31,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 60,
+          "opcode": "InitCoroutine",
+          "p1": 22,
+          "p2": 0,
+          "p3": 47,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 61,
+          "opcode": "Yield",
+          "p1": 22,
+          "p2": 70,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 62,
+          "opcode": "Copy",
+          "p1": 26,
+          "p2": 32,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 63,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 64,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 32,
+          "p3": 29,
+          "p4": "min(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 65,
+          "opcode": "Copy",
+          "p1": 26,
+          "p2": 32,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 66,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 67,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 32,
+          "p3": 30,
+          "p4": "max(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 68,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 0,
+          "p3": 31,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 69,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 61,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 70,
+          "opcode": "AggFinal",
+          "p1": 29,
+          "p2": 1,
+          "p3": 0,
+          "p4": "min(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 71,
+          "opcode": "AggFinal",
+          "p1": 30,
+          "p2": 1,
+          "p3": 0,
+          "p4": "max(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 72,
+          "opcode": "AggFinal",
+          "p1": 31,
+          "p2": 0,
+          "p3": 0,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 73,
+          "opcode": "SCopy",
+          "p1": 29,
+          "p2": 33,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 74,
+          "opcode": "SCopy",
+          "p1": 30,
+          "p2": 34,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 75,
+          "opcode": "SCopy",
+          "p1": 31,
+          "p2": 35,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 76,
+          "opcode": "Function",
+          "p1": 0,
+          "p2": 33,
+          "p3": 21,
+          "p4": "json_array(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 77,
+          "opcode": "DecrJumpZero",
+          "p1": 27,
+          "p2": 78,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 78,
+          "opcode": "Return",
+          "p1": 20,
+          "p2": 45,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 79,
+          "opcode": "SCopy",
+          "p1": 21,
+          "p2": 11,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 80,
+          "opcode": "MakeRecord",
+          "p1": 11,
+          "p2": 1,
+          "p3": 36,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 81,
+          "opcode": "NewRowid",
+          "p1": 8,
+          "p2": 37,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 82,
+          "opcode": "Insert",
+          "p1": 8,
+          "p2": 36,
+          "p3": 37,
+          "p4": null,
+          "p5": 8,
+          "comment": null
+        },
+        {
+          "addr": 83,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 35,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 84,
+          "opcode": "EndCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 85,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 86,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 123,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 87,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 39,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 88,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 39,
+          "p3": 38,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 89,
+          "opcode": "Le",
+          "p1": 19,
+          "p2": 122,
+          "p3": 38,
+          "p4": null,
+          "p5": 80,
+          "comment": null
+        },
+        {
+          "addr": 90,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 43,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 91,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 44,
+          "p3": 44,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 92,
+          "opcode": "InitCoroutine",
+          "p1": 45,
+          "p2": 106,
+          "p3": 93,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 93,
+          "opcode": "Noop",
+          "p1": 11,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 94,
+          "opcode": "OpenRead",
+          "p1": 7,
+          "p2": 2,
+          "p3": 0,
+          "p4": "2",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 95,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 46,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 96,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 46,
+          "p3": 38,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 97,
+          "opcode": "SeekGE",
+          "p1": 7,
+          "p2": 105,
+          "p3": 38,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 98,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 49,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 99,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 49,
+          "p3": 48,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 100,
+          "opcode": "Rowid",
+          "p1": 7,
+          "p2": 51,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 101,
+          "opcode": "Gt",
+          "p1": 48,
+          "p2": 105,
+          "p3": 51,
+          "p4": null,
+          "p5": 83,
+          "comment": null
+        },
+        {
+          "addr": 102,
+          "opcode": "Column",
+          "p1": 7,
+          "p2": 1,
+          "p3": 52,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 103,
+          "opcode": "Yield",
+          "p1": 45,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 104,
+          "opcode": "Next",
+          "p1": 7,
+          "p2": 100,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 105,
+          "opcode": "EndCoroutine",
+          "p1": 45,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 106,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 53,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 107,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 54,
+          "p3": 55,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 108,
+          "opcode": "InitCoroutine",
+          "p1": 45,
+          "p2": 0,
+          "p3": 93,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 109,
+          "opcode": "Yield",
+          "p1": 45,
+          "p2": 114,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 110,
+          "opcode": "Copy",
+          "p1": 52,
+          "p2": 58,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 111,
+          "opcode": "Function",
+          "p1": 1,
+          "p2": 57,
+          "p3": 56,
+          "p4": "json_object(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 112,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 56,
+          "p3": 55,
+          "p4": "json_group_array(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 113,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 109,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 114,
+          "opcode": "AggFinal",
+          "p1": 55,
+          "p2": 1,
+          "p3": 0,
+          "p4": "json_group_array(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 115,
+          "opcode": "Copy",
+          "p1": 55,
+          "p2": 44,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 116,
+          "opcode": "DecrJumpZero",
+          "p1": 53,
+          "p2": 117,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 117,
+          "opcode": "Return",
+          "p1": 43,
+          "p2": 91,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 118,
+          "opcode": "Copy",
+          "p1": 44,
+          "p2": 41,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 119,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 59,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 120,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 59,
+          "p3": 42,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 121,
+          "opcode": "ResultRow",
+          "p1": 41,
+          "p2": 2,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 122,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 86,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 123,
+          "opcode": "Halt",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 124,
+          "opcode": "Transaction",
+          "p1": 0,
+          "p2": 0,
+          "p3": 7,
+          "p4": "0",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 125,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 18,
+          "p3": 0,
+          "p4": "$[2]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 126,
+          "opcode": "Integer",
+          "p1": 0,
+          "p2": 19,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 127,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 25,
+          "p3": 0,
+          "p4": "$[1]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 128,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 40,
+          "p3": 0,
+          "p4": "$[2]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 129,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 47,
+          "p3": 0,
+          "p4": "$[0]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 130,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 50,
+          "p3": 0,
+          "p4": "$[1]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 131,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 57,
+          "p3": 0,
+          "p4": "name",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 132,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 60,
+          "p3": 0,
+          "p4": "$[2]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 133,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 1,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        }
+      ]
+    },
+    "binary-bounds": {
+      "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"bounds\") AS (\n    SELECT jsonb_array(min(\"key\"), max(\"key\"), count(*))\n    FROM (SELECT \"rowid\" AS \"key\" FROM main.\"users\" AS \"__exportlite_source\" ORDER BY \"rowid\" LIMIT 256)\n    UNION ALL\n    SELECT (\n      SELECT jsonb_array(min(\"key\"), max(\"key\"), count(*))\n      FROM (SELECT \"rowid\" AS \"key\" FROM main.\"users\" AS \"__exportlite_source\"\n        WHERE \"rowid\" > json_extract(\"__exportlite_batches\".\"bounds\", '$[1]')\n        ORDER BY \"rowid\" LIMIT 256)\n    )\n    FROM \"__exportlite_batches\"\n    WHERE json_extract(\"bounds\", '$[2]') > 0\n  )\n  SELECT (\n    SELECT json_group_array(json_object('name', \"name\"))\n    FROM (SELECT \"name\" FROM main.\"users\" AS \"__exportlite_source\"\n      WHERE \"rowid\" BETWEEN json_extract(\"__exportlite_batches\".\"bounds\", '$[0]')\n        AND json_extract(\"__exportlite_batches\".\"bounds\", '$[1]')\n      ORDER BY \"rowid\")\n  ), json_extract(\"bounds\", '$[2]')\n  FROM \"__exportlite_batches\"\n  WHERE json_extract(\"bounds\", '$[2]') > 0",
+      "plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE __exportlite_batches"
+        },
+        {
+          "id": 5,
+          "parent": 2,
+          "notused": 0,
+          "detail": "SETUP"
+        },
+        {
+          "id": 7,
+          "parent": 5,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 11,
+          "parent": 7,
+          "notused": 215,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 19,
+          "parent": 5,
+          "notused": 96,
+          "detail": "SCAN (subquery-1)"
+        },
+        {
+          "id": 46,
+          "parent": 2,
+          "notused": 0,
+          "detail": "RECURSIVE STEP"
+        },
+        {
+          "id": 47,
+          "parent": 46,
+          "notused": 216,
+          "detail": "SCAN __exportlite_batches"
+        },
+        {
+          "id": 52,
+          "parent": 46,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 4"
+        },
+        {
+          "id": 55,
+          "parent": 52,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-3)"
+        },
+        {
+          "id": 59,
+          "parent": 55,
+          "notused": 195,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+        },
+        {
+          "id": 70,
+          "parent": 52,
+          "notused": 96,
+          "detail": "SCAN (subquery-3)"
+        },
+        {
+          "id": 96,
+          "parent": 0,
+          "notused": 215,
+          "detail": "SCAN __exportlite_batches"
+        },
+        {
+          "id": 103,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 7"
+        },
+        {
+          "id": 106,
+          "parent": 103,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-6)"
+        },
+        {
+          "id": 109,
+          "parent": 106,
+          "notused": 155,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+        },
+        {
+          "id": 123,
+          "parent": 103,
+          "notused": 203,
+          "detail": "SCAN (subquery-6)"
+        }
+      ],
+      "bytecode": [
+        {
+          "addr": 0,
+          "opcode": "Init",
+          "p1": 0,
+          "p2": 124,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 1,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 85,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 2,
+          "opcode": "OpenPseudo",
+          "p1": 1,
+          "p2": 2,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 3,
+          "opcode": "OpenEphemeral",
+          "p1": 8,
+          "p2": 1,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 4,
+          "opcode": "InitCoroutine",
+          "p1": 3,
+          "p2": 14,
+          "p3": 5,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 5,
+          "opcode": "Noop",
+          "p1": 9,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 6,
+          "opcode": "Integer",
+          "p1": 256,
+          "p2": 4,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 7,
+          "opcode": "OpenRead",
+          "p1": 3,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 8,
+          "opcode": "Rewind",
+          "p1": 3,
+          "p2": 13,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 9,
+          "opcode": "Rowid",
+          "p1": 3,
+          "p2": 5,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 10,
+          "opcode": "Yield",
+          "p1": 3,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 11,
+          "opcode": "DecrJumpZero",
+          "p1": 4,
+          "p2": 13,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 12,
+          "opcode": "Next",
+          "p1": 3,
+          "p2": 9,
+          "p3": 0,
+          "p4": null,
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 13,
+          "opcode": "EndCoroutine",
+          "p1": 3,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 14,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 6,
+          "p3": 9,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 15,
+          "opcode": "InitCoroutine",
+          "p1": 3,
+          "p2": 0,
+          "p3": 5,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 16,
+          "opcode": "Yield",
+          "p1": 3,
+          "p2": 25,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 17,
+          "opcode": "Copy",
+          "p1": 5,
+          "p2": 10,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 18,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 19,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 10,
+          "p3": 7,
+          "p4": "min(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 20,
+          "opcode": "Copy",
+          "p1": 5,
+          "p2": 10,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 21,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 22,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 10,
+          "p3": 8,
+          "p4": "max(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 23,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 0,
+          "p3": 9,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 24,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 16,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 25,
+          "opcode": "AggFinal",
+          "p1": 7,
+          "p2": 1,
+          "p3": 0,
+          "p4": "min(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 26,
+          "opcode": "AggFinal",
+          "p1": 8,
+          "p2": 1,
+          "p3": 0,
+          "p4": "max(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 27,
+          "opcode": "AggFinal",
+          "p1": 9,
+          "p2": 0,
+          "p3": 0,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 28,
+          "opcode": "SCopy",
+          "p1": 7,
+          "p2": 12,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 29,
+          "opcode": "SCopy",
+          "p1": 8,
+          "p2": 13,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 30,
+          "opcode": "SCopy",
+          "p1": 9,
+          "p2": 14,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 31,
+          "opcode": "Function",
+          "p1": 0,
+          "p2": 12,
+          "p3": 11,
+          "p4": "jsonb_array(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 32,
+          "opcode": "MakeRecord",
+          "p1": 11,
+          "p2": 1,
+          "p3": 10,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 33,
+          "opcode": "NewRowid",
+          "p1": 8,
+          "p2": 15,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 34,
+          "opcode": "Insert",
+          "p1": 8,
+          "p2": 10,
+          "p3": 15,
+          "p4": null,
+          "p5": 8,
+          "comment": null
+        },
+        {
+          "addr": 35,
+          "opcode": "Rewind",
+          "p1": 8,
+          "p2": 84,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 36,
+          "opcode": "NullRow",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 37,
+          "opcode": "RowData",
+          "p1": 8,
+          "p2": 2,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 38,
+          "opcode": "Delete",
+          "p1": 8,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 39,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 0,
+          "p3": 16,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 40,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 41,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 0,
+          "p3": 17,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 42,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 17,
+          "p3": 10,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 43,
+          "opcode": "Le",
+          "p1": 19,
+          "p2": 83,
+          "p3": 10,
+          "p4": null,
+          "p5": 80,
+          "comment": null
+        },
+        {
+          "addr": 44,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 20,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 45,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 21,
+          "p3": 21,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 46,
+          "opcode": "InitCoroutine",
+          "p1": 22,
+          "p2": 58,
+          "p3": 47,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 47,
+          "opcode": "Noop",
+          "p1": 10,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 48,
+          "opcode": "Integer",
+          "p1": 256,
+          "p2": 23,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 49,
+          "opcode": "OpenRead",
+          "p1": 5,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 50,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 0,
+          "p3": 24,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 51,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 24,
+          "p3": 10,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 52,
+          "opcode": "SeekGT",
+          "p1": 5,
+          "p2": 57,
+          "p3": 10,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 53,
+          "opcode": "Rowid",
+          "p1": 5,
+          "p2": 26,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 54,
+          "opcode": "Yield",
+          "p1": 22,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 55,
+          "opcode": "DecrJumpZero",
+          "p1": 23,
+          "p2": 57,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 56,
+          "opcode": "Next",
+          "p1": 5,
+          "p2": 53,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 57,
+          "opcode": "EndCoroutine",
+          "p1": 22,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 58,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 27,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 59,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 28,
+          "p3": 31,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 60,
+          "opcode": "InitCoroutine",
+          "p1": 22,
+          "p2": 0,
+          "p3": 47,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 61,
+          "opcode": "Yield",
+          "p1": 22,
+          "p2": 70,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 62,
+          "opcode": "Copy",
+          "p1": 26,
+          "p2": 32,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 63,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 64,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 32,
+          "p3": 29,
+          "p4": "min(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 65,
+          "opcode": "Copy",
+          "p1": 26,
+          "p2": 32,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 66,
+          "opcode": "CollSeq",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": "BINARY-8",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 67,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 32,
+          "p3": 30,
+          "p4": "max(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 68,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 0,
+          "p3": 31,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 69,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 61,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 70,
+          "opcode": "AggFinal",
+          "p1": 29,
+          "p2": 1,
+          "p3": 0,
+          "p4": "min(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 71,
+          "opcode": "AggFinal",
+          "p1": 30,
+          "p2": 1,
+          "p3": 0,
+          "p4": "max(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 72,
+          "opcode": "AggFinal",
+          "p1": 31,
+          "p2": 0,
+          "p3": 0,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 73,
+          "opcode": "SCopy",
+          "p1": 29,
+          "p2": 33,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 74,
+          "opcode": "SCopy",
+          "p1": 30,
+          "p2": 34,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 75,
+          "opcode": "SCopy",
+          "p1": 31,
+          "p2": 35,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 76,
+          "opcode": "Function",
+          "p1": 0,
+          "p2": 33,
+          "p3": 21,
+          "p4": "jsonb_array(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 77,
+          "opcode": "DecrJumpZero",
+          "p1": 27,
+          "p2": 78,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 78,
+          "opcode": "Return",
+          "p1": 20,
+          "p2": 45,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 79,
+          "opcode": "SCopy",
+          "p1": 21,
+          "p2": 11,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 80,
+          "opcode": "MakeRecord",
+          "p1": 11,
+          "p2": 1,
+          "p3": 36,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 81,
+          "opcode": "NewRowid",
+          "p1": 8,
+          "p2": 37,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 82,
+          "opcode": "Insert",
+          "p1": 8,
+          "p2": 36,
+          "p3": 37,
+          "p4": null,
+          "p5": 8,
+          "comment": null
+        },
+        {
+          "addr": 83,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 35,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 84,
+          "opcode": "EndCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 85,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 86,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 123,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 87,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 39,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 88,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 39,
+          "p3": 38,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 89,
+          "opcode": "Le",
+          "p1": 19,
+          "p2": 122,
+          "p3": 38,
+          "p4": null,
+          "p5": 80,
+          "comment": null
+        },
+        {
+          "addr": 90,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 43,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 91,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 44,
+          "p3": 44,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 92,
+          "opcode": "InitCoroutine",
+          "p1": 45,
+          "p2": 106,
+          "p3": 93,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 93,
+          "opcode": "Noop",
+          "p1": 11,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 94,
+          "opcode": "OpenRead",
+          "p1": 7,
+          "p2": 2,
+          "p3": 0,
+          "p4": "2",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 95,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 46,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 96,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 46,
+          "p3": 38,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 97,
+          "opcode": "SeekGE",
+          "p1": 7,
+          "p2": 105,
+          "p3": 38,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 98,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 49,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 99,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 49,
+          "p3": 48,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 100,
+          "opcode": "Rowid",
+          "p1": 7,
+          "p2": 51,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 101,
+          "opcode": "Gt",
+          "p1": 48,
+          "p2": 105,
+          "p3": 51,
+          "p4": null,
+          "p5": 83,
+          "comment": null
+        },
+        {
+          "addr": 102,
+          "opcode": "Column",
+          "p1": 7,
+          "p2": 1,
+          "p3": 52,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 103,
+          "opcode": "Yield",
+          "p1": 45,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 104,
+          "opcode": "Next",
+          "p1": 7,
+          "p2": 100,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 105,
+          "opcode": "EndCoroutine",
+          "p1": 45,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 106,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 53,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 107,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 54,
+          "p3": 55,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 108,
+          "opcode": "InitCoroutine",
+          "p1": 45,
+          "p2": 0,
+          "p3": 93,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 109,
+          "opcode": "Yield",
+          "p1": 45,
+          "p2": 114,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 110,
+          "opcode": "Copy",
+          "p1": 52,
+          "p2": 58,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 111,
+          "opcode": "Function",
+          "p1": 1,
+          "p2": 57,
+          "p3": 56,
+          "p4": "json_object(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 112,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 56,
+          "p3": 55,
+          "p4": "json_group_array(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 113,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 109,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 114,
+          "opcode": "AggFinal",
+          "p1": 55,
+          "p2": 1,
+          "p3": 0,
+          "p4": "json_group_array(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 115,
+          "opcode": "Copy",
+          "p1": 55,
+          "p2": 44,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 116,
+          "opcode": "DecrJumpZero",
+          "p1": 53,
+          "p2": 117,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 117,
+          "opcode": "Return",
+          "p1": 43,
+          "p2": 91,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 118,
+          "opcode": "Copy",
+          "p1": 44,
+          "p2": 41,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 119,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 59,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 120,
+          "opcode": "Function",
+          "p1": 2,
+          "p2": 59,
+          "p3": 42,
+          "p4": "json_extract(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 121,
+          "opcode": "ResultRow",
+          "p1": 41,
+          "p2": 2,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 122,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 86,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 123,
+          "opcode": "Halt",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 124,
+          "opcode": "Transaction",
+          "p1": 0,
+          "p2": 0,
+          "p3": 7,
+          "p4": "0",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 125,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 18,
+          "p3": 0,
+          "p4": "$[2]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 126,
+          "opcode": "Integer",
+          "p1": 0,
+          "p2": 19,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 127,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 25,
+          "p3": 0,
+          "p4": "$[1]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 128,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 40,
+          "p3": 0,
+          "p4": "$[2]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 129,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 47,
+          "p3": 0,
+          "p4": "$[0]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 130,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 50,
+          "p3": 0,
+          "p4": "$[1]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 131,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 57,
+          "p3": 0,
+          "p4": "name",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 132,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 60,
+          "p3": 0,
+          "p4": "$[2]",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 133,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 1,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        }
+      ]
+    },
+    "fixed-boundaries": {
+      "sql": "WITH RECURSIVE \"__exportlite_batches\"(\"first\", \"last\") AS (\n    SELECT\n      (SELECT rowid FROM main.\"users\" AS \"__exportlite_source\" ORDER BY rowid LIMIT 1),\n      (SELECT rowid FROM main.\"users\" AS \"__exportlite_source\" ORDER BY rowid LIMIT 1 OFFSET 255)\n    UNION ALL\n    SELECT\n      (SELECT rowid FROM main.\"users\" AS \"__exportlite_source\" WHERE rowid > \"__exportlite_batches\".\"last\" ORDER BY rowid LIMIT 1),\n      (SELECT rowid FROM main.\"users\" AS \"__exportlite_source\" WHERE rowid > \"__exportlite_batches\".\"last\" ORDER BY rowid LIMIT 1 OFFSET 255)\n    FROM \"__exportlite_batches\" WHERE \"__exportlite_batches\".\"last\" IS NOT NULL\n  )\n  SELECT (\n    SELECT json_group_array(json_object('name', \"name\"))\n    FROM (SELECT \"name\" FROM main.\"users\" AS \"__exportlite_source\"\n      WHERE rowid BETWEEN \"__exportlite_batches\".\"first\" AND coalesce(\"__exportlite_batches\".\"last\", 9223372036854775807)\n      ORDER BY rowid)\n  ), CASE WHEN \"__exportlite_batches\".\"last\" IS NOT NULL THEN 256 ELSE\n    (SELECT count(*) FROM main.\"users\" AS \"__exportlite_source\" WHERE rowid >= \"__exportlite_batches\".\"first\") END\n  FROM \"__exportlite_batches\" WHERE \"__exportlite_batches\".\"first\" IS NOT NULL",
+      "plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE __exportlite_batches"
+        },
+        {
+          "id": 5,
+          "parent": 2,
+          "notused": 0,
+          "detail": "SETUP"
+        },
+        {
+          "id": 6,
+          "parent": 5,
+          "notused": 0,
+          "detail": "SCAN CONSTANT ROW"
+        },
+        {
+          "id": 9,
+          "parent": 5,
+          "notused": 0,
+          "detail": "SCALAR SUBQUERY 1"
+        },
+        {
+          "id": 14,
+          "parent": 9,
+          "notused": 215,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 23,
+          "parent": 5,
+          "notused": 0,
+          "detail": "SCALAR SUBQUERY 2"
+        },
+        {
+          "id": 31,
+          "parent": 23,
+          "notused": 215,
+          "detail": "SCAN __exportlite_source"
+        },
+        {
+          "id": 49,
+          "parent": 2,
+          "notused": 0,
+          "detail": "RECURSIVE STEP"
+        },
+        {
+          "id": 50,
+          "parent": 49,
+          "notused": 216,
+          "detail": "SCAN __exportlite_batches"
+        },
+        {
+          "id": 54,
+          "parent": 49,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 4"
+        },
+        {
+          "id": 59,
+          "parent": 54,
+          "notused": 195,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+        },
+        {
+          "id": 68,
+          "parent": 49,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 5"
+        },
+        {
+          "id": 76,
+          "parent": 68,
+          "notused": 195,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+        },
+        {
+          "id": 90,
+          "parent": 0,
+          "notused": 215,
+          "detail": "SCAN __exportlite_batches"
+        },
+        {
+          "id": 96,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 8"
+        },
+        {
+          "id": 99,
+          "parent": 96,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-7)"
+        },
+        {
+          "id": 102,
+          "parent": 99,
+          "notused": 155,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>? AND rowid<?)"
+        },
+        {
+          "id": 116,
+          "parent": 96,
+          "notused": 203,
+          "detail": "SCAN (subquery-7)"
+        },
+        {
+          "id": 133,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CORRELATED SCALAR SUBQUERY 9"
+        },
+        {
+          "id": 138,
+          "parent": 133,
+          "notused": 195,
+          "detail": "SEARCH __exportlite_source USING INTEGER PRIMARY KEY (rowid>?)"
+        }
+      ],
+      "bytecode": [
+        {
+          "addr": 0,
+          "opcode": "Init",
+          "p1": 0,
+          "p2": 131,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 1,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 77,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 2,
+          "opcode": "OpenPseudo",
+          "p1": 1,
+          "p2": 2,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 3,
+          "opcode": "OpenEphemeral",
+          "p1": 9,
+          "p2": 2,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 4,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 5,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 5,
+          "opcode": "Once",
+          "p1": 0,
+          "p2": 14,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 6,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 6,
+          "p3": 6,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 7,
+          "opcode": "Noop",
+          "p1": 10,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 8,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 7,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 9,
+          "opcode": "OpenRead",
+          "p1": 2,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 10,
+          "opcode": "Rewind",
+          "p1": 2,
+          "p2": 14,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 11,
+          "opcode": "Rowid",
+          "p1": 2,
+          "p2": 6,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 12,
+          "opcode": "DecrJumpZero",
+          "p1": 7,
+          "p2": 14,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 13,
+          "opcode": "Next",
+          "p1": 2,
+          "p2": 11,
+          "p3": 0,
+          "p4": null,
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 14,
+          "opcode": "Return",
+          "p1": 5,
+          "p2": 5,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 15,
+          "opcode": "SCopy",
+          "p1": 6,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 16,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 8,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 17,
+          "opcode": "Once",
+          "p1": 0,
+          "p2": 30,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 18,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 9,
+          "p3": 9,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 19,
+          "opcode": "Noop",
+          "p1": 11,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 20,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 10,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 21,
+          "opcode": "Integer",
+          "p1": 255,
+          "p2": 11,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 22,
+          "opcode": "MustBeInt",
+          "p1": 11,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 23,
+          "opcode": "OffsetLimit",
+          "p1": 10,
+          "p2": 12,
+          "p3": 11,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 24,
+          "opcode": "OpenRead",
+          "p1": 3,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 25,
+          "opcode": "Rewind",
+          "p1": 3,
+          "p2": 30,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 26,
+          "opcode": "IfPos",
+          "p1": 11,
+          "p2": 29,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 27,
+          "opcode": "Rowid",
+          "p1": 3,
+          "p2": 9,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 28,
+          "opcode": "DecrJumpZero",
+          "p1": 10,
+          "p2": 30,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 29,
+          "opcode": "Next",
+          "p1": 3,
+          "p2": 26,
+          "p3": 0,
+          "p4": null,
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 30,
+          "opcode": "Return",
+          "p1": 8,
+          "p2": 17,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 31,
+          "opcode": "SCopy",
+          "p1": 9,
+          "p2": 4,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 32,
+          "opcode": "MakeRecord",
+          "p1": 3,
+          "p2": 2,
+          "p3": 13,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 33,
+          "opcode": "NewRowid",
+          "p1": 9,
+          "p2": 14,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 34,
+          "opcode": "Insert",
+          "p1": 9,
+          "p2": 13,
+          "p3": 14,
+          "p4": null,
+          "p5": 8,
+          "comment": null
+        },
+        {
+          "addr": 35,
+          "opcode": "Rewind",
+          "p1": 9,
+          "p2": 76,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 36,
+          "opcode": "NullRow",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 37,
+          "opcode": "RowData",
+          "p1": 9,
+          "p2": 2,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 38,
+          "opcode": "Delete",
+          "p1": 9,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 39,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 0,
+          "p3": 15,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 40,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 1,
+          "p3": 16,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 41,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 42,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 1,
+          "p3": 13,
+          "p4": null,
+          "p5": 128,
+          "comment": null
+        },
+        {
+          "addr": 43,
+          "opcode": "IsNull",
+          "p1": 13,
+          "p2": 75,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 44,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 17,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 45,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 18,
+          "p3": 18,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 46,
+          "opcode": "Noop",
+          "p1": 12,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 47,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 19,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 48,
+          "opcode": "OpenRead",
+          "p1": 4,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 49,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 1,
+          "p3": 13,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 50,
+          "opcode": "SeekGT",
+          "p1": 4,
+          "p2": 54,
+          "p3": 13,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 51,
+          "opcode": "Rowid",
+          "p1": 4,
+          "p2": 18,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 52,
+          "opcode": "DecrJumpZero",
+          "p1": 19,
+          "p2": 54,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 53,
+          "opcode": "Next",
+          "p1": 4,
+          "p2": 51,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 54,
+          "opcode": "Return",
+          "p1": 17,
+          "p2": 45,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 55,
+          "opcode": "SCopy",
+          "p1": 18,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 56,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 20,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 57,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 21,
+          "p3": 21,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 58,
+          "opcode": "Noop",
+          "p1": 13,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 59,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 22,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 60,
+          "opcode": "Integer",
+          "p1": 255,
+          "p2": 23,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 61,
+          "opcode": "MustBeInt",
+          "p1": 23,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 62,
+          "opcode": "OffsetLimit",
+          "p1": 22,
+          "p2": 24,
+          "p3": 23,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 63,
+          "opcode": "OpenRead",
+          "p1": 5,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 64,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 1,
+          "p3": 25,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 65,
+          "opcode": "SeekGT",
+          "p1": 5,
+          "p2": 70,
+          "p3": 25,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 66,
+          "opcode": "IfPos",
+          "p1": 23,
+          "p2": 69,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 67,
+          "opcode": "Rowid",
+          "p1": 5,
+          "p2": 21,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 68,
+          "opcode": "DecrJumpZero",
+          "p1": 22,
+          "p2": 70,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 69,
+          "opcode": "Next",
+          "p1": 5,
+          "p2": 66,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 70,
+          "opcode": "Return",
+          "p1": 20,
+          "p2": 57,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 71,
+          "opcode": "SCopy",
+          "p1": 21,
+          "p2": 4,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 72,
+          "opcode": "MakeRecord",
+          "p1": 3,
+          "p2": 2,
+          "p3": 26,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 73,
+          "opcode": "NewRowid",
+          "p1": 9,
+          "p2": 27,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 74,
+          "opcode": "Insert",
+          "p1": 9,
+          "p2": 26,
+          "p3": 27,
+          "p4": null,
+          "p5": 8,
+          "comment": null
+        },
+        {
+          "addr": 75,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 35,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 76,
+          "opcode": "EndCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 77,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 78,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 130,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 79,
+          "opcode": "Copy",
+          "p1": 15,
+          "p2": 28,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 80,
+          "opcode": "IsNull",
+          "p1": 28,
+          "p2": 129,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 81,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 31,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 82,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 32,
+          "p3": 32,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 83,
+          "opcode": "InitCoroutine",
+          "p1": 33,
+          "p2": 97,
+          "p3": 84,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 84,
+          "opcode": "Noop",
+          "p1": 14,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 85,
+          "opcode": "OpenRead",
+          "p1": 7,
+          "p2": 2,
+          "p3": 0,
+          "p4": "2",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 86,
+          "opcode": "Copy",
+          "p1": 15,
+          "p2": 28,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 87,
+          "opcode": "SeekGE",
+          "p1": 7,
+          "p2": 96,
+          "p3": 28,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 88,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 34,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 89,
+          "opcode": "NotNull",
+          "p1": 34,
+          "p2": 91,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 90,
+          "opcode": "Int64",
+          "p1": 0,
+          "p2": 34,
+          "p3": 0,
+          "p4": "9223372036854775807",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 91,
+          "opcode": "Rowid",
+          "p1": 7,
+          "p2": 35,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 92,
+          "opcode": "Gt",
+          "p1": 34,
+          "p2": 96,
+          "p3": 35,
+          "p4": null,
+          "p5": 83,
+          "comment": null
+        },
+        {
+          "addr": 93,
+          "opcode": "Column",
+          "p1": 7,
+          "p2": 1,
+          "p3": 36,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 94,
+          "opcode": "Yield",
+          "p1": 33,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 95,
+          "opcode": "Next",
+          "p1": 7,
+          "p2": 91,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 96,
+          "opcode": "EndCoroutine",
+          "p1": 33,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 97,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 37,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 98,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 38,
+          "p3": 39,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 99,
+          "opcode": "InitCoroutine",
+          "p1": 33,
+          "p2": 0,
+          "p3": 84,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 100,
+          "opcode": "Yield",
+          "p1": 33,
+          "p2": 105,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 101,
+          "opcode": "Copy",
+          "p1": 36,
+          "p2": 42,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 102,
+          "opcode": "Function",
+          "p1": 1,
+          "p2": 41,
+          "p3": 40,
+          "p4": "json_object(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 103,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 40,
+          "p3": 39,
+          "p4": "json_group_array(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 104,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 100,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 105,
+          "opcode": "AggFinal",
+          "p1": 39,
+          "p2": 1,
+          "p3": 0,
+          "p4": "json_group_array(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 106,
+          "opcode": "Copy",
+          "p1": 39,
+          "p2": 32,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 107,
+          "opcode": "DecrJumpZero",
+          "p1": 37,
+          "p2": 108,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 108,
+          "opcode": "Return",
+          "p1": 31,
+          "p2": 82,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 109,
+          "opcode": "Copy",
+          "p1": 32,
+          "p2": 29,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 110,
+          "opcode": "Copy",
+          "p1": 16,
+          "p2": 43,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 111,
+          "opcode": "IsNull",
+          "p1": 43,
+          "p2": 114,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 112,
+          "opcode": "Integer",
+          "p1": 256,
+          "p2": 30,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 113,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 128,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 114,
+          "opcode": "BeginSubrtn",
+          "p1": 0,
+          "p2": 44,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 115,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 45,
+          "p3": 45,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 116,
+          "opcode": "Integer",
+          "p1": 1,
+          "p2": 46,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 117,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 47,
+          "p3": 47,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 118,
+          "opcode": "OpenRead",
+          "p1": 8,
+          "p2": 2,
+          "p3": 0,
+          "p4": "0",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 119,
+          "opcode": "Copy",
+          "p1": 15,
+          "p2": 43,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 120,
+          "opcode": "SeekGE",
+          "p1": 8,
+          "p2": 123,
+          "p3": 43,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 121,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 0,
+          "p3": 47,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 122,
+          "opcode": "Next",
+          "p1": 8,
+          "p2": 121,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 123,
+          "opcode": "AggFinal",
+          "p1": 47,
+          "p2": 0,
+          "p3": 0,
+          "p4": "count(0)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 124,
+          "opcode": "Copy",
+          "p1": 47,
+          "p2": 45,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 125,
+          "opcode": "DecrJumpZero",
+          "p1": 46,
+          "p2": 126,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 126,
+          "opcode": "Return",
+          "p1": 44,
+          "p2": 115,
+          "p3": 1,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 127,
+          "opcode": "Copy",
+          "p1": 45,
+          "p2": 30,
+          "p3": 0,
+          "p4": null,
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 128,
+          "opcode": "ResultRow",
+          "p1": 29,
+          "p2": 2,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 129,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 78,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 130,
+          "opcode": "Halt",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 131,
+          "opcode": "Transaction",
+          "p1": 0,
+          "p2": 0,
+          "p3": 7,
+          "p4": "0",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 132,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 41,
+          "p3": 0,
+          "p4": "name",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 133,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 1,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        }
+      ]
+    },
+    "full": {
+      "sql": "SELECT json_group_array(json_object('name',name)) FROM (SELECT name FROM users ORDER BY rowid)",
+      "plan": [
+        {
+          "id": 2,
+          "parent": 0,
+          "notused": 0,
+          "detail": "CO-ROUTINE (subquery-1)"
+        },
+        {
+          "id": 5,
+          "parent": 2,
+          "notused": 215,
+          "detail": "SCAN users"
+        },
+        {
+          "id": 12,
+          "parent": 0,
+          "notused": 215,
+          "detail": "SCAN (subquery-1)"
+        }
+      ],
+      "bytecode": [
+        {
+          "addr": 0,
+          "opcode": "Init",
+          "p1": 0,
+          "p2": 20,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 1,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 9,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 2,
+          "opcode": "Noop",
+          "p1": 2,
+          "p2": 3,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 3,
+          "opcode": "OpenRead",
+          "p1": 1,
+          "p2": 2,
+          "p3": 0,
+          "p4": "2",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 4,
+          "opcode": "Rewind",
+          "p1": 1,
+          "p2": 8,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 5,
+          "opcode": "Column",
+          "p1": 1,
+          "p2": 1,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 6,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 7,
+          "opcode": "Next",
+          "p1": 1,
+          "p2": 5,
+          "p3": 0,
+          "p4": null,
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 8,
+          "opcode": "EndCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 9,
+          "opcode": "Null",
+          "p1": 0,
+          "p2": 3,
+          "p3": 4,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 10,
+          "opcode": "InitCoroutine",
+          "p1": 1,
+          "p2": 0,
+          "p3": 2,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 11,
+          "opcode": "Yield",
+          "p1": 1,
+          "p2": 16,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 12,
+          "opcode": "Copy",
+          "p1": 2,
+          "p2": 7,
+          "p3": 0,
+          "p4": null,
+          "p5": 2,
+          "comment": null
+        },
+        {
+          "addr": 13,
+          "opcode": "Function",
+          "p1": 1,
+          "p2": 6,
+          "p3": 5,
+          "p4": "json_object(-1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 14,
+          "opcode": "AggStep",
+          "p1": 0,
+          "p2": 5,
+          "p3": 4,
+          "p4": "json_group_array(1)",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 15,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 11,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 16,
+          "opcode": "AggFinal",
+          "p1": 4,
+          "p2": 1,
+          "p3": 0,
+          "p4": "json_group_array(1)",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 17,
+          "opcode": "Copy",
+          "p1": 4,
+          "p2": 8,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 18,
+          "opcode": "ResultRow",
+          "p1": 8,
+          "p2": 1,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 19,
+          "opcode": "Halt",
+          "p1": 0,
+          "p2": 0,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 20,
+          "opcode": "Transaction",
+          "p1": 0,
+          "p2": 0,
+          "p3": 7,
+          "p4": "0",
+          "p5": 1,
+          "comment": null
+        },
+        {
+          "addr": 21,
+          "opcode": "String8",
+          "p1": 0,
+          "p2": 6,
+          "p3": 0,
+          "p4": "name",
+          "p5": 0,
+          "comment": null
+        },
+        {
+          "addr": 22,
+          "opcode": "Goto",
+          "p1": 0,
+          "p2": 1,
+          "p3": 0,
+          "p4": null,
+          "p5": 0,
+          "comment": null
+        }
+      ]
+    }
+  }
+}

@@ -1,14 +1,37 @@
 import { spawn } from "node:child_process";
 import { createWriteStream } from "node:fs";
 import { PerformanceObserver } from "node:perf_hooks";
-import { Writable } from "node:stream";
+import { Transform, Writable } from "node:stream";
 import { finished, pipeline } from "node:stream/promises";
 import { setImmediate, setTimeout } from "node:timers/promises";
+import { createGzip } from "node:zlib";
 import Database from "better-sqlite3";
-import { exportQuery, exportTable } from "../dist/index.mjs";
+import ZipStream from "zip-stream";
 
-const [method, databasePath, destination, outputPath, firstRecordBytes] =
-  process.argv.slice(2);
+const [
+  method,
+  databasePath,
+  destination,
+  outputPath,
+  firstRecordBytes,
+  compression = "none",
+  expectedJsonBytes,
+] = process.argv.slice(2);
+const exporter = method.replace(
+  /-(gzip-512k|gzip-slab64k|gzip-slab256k|before)$/,
+  "",
+);
+const { exportQuery, exportTable } = await import(
+  method === "exportlite-before"
+    ? new URL("./baselines/pre-gzip-fix/index.mjs", import.meta.url).href
+    : (process.env.EXPORTLITE_BENCH_MODULE ?? "../dist/index.mjs")
+);
+if (!["none", "gzip-1", "gzip-default", "zip"].includes(compression))
+  throw new Error(`Unknown compression: ${compression}`);
+const nativeZip =
+  compression === "zip" &&
+  ["exportlite", "exportlite-query"].includes(exporter);
+const gzip = compression.startsWith("gzip-");
 const db = new Database(databasePath, { readonly: true });
 const sql = "SELECT id, name, note, active FROM data ORDER BY id";
 const memory = { peakHeapBytes: 0, peakRssBytes: 0 };
@@ -41,7 +64,14 @@ const loopInterval = setInterval(() => {
 }, 1);
 let started = 0;
 let bytes = 0;
+let rawBytes = 0;
+let rawChunks = 0;
+let maxRawChunkBytes = 0;
+let encodedChunks = 0;
 let firstRecordMs = null;
+const startedCpu = process.cpuUsage();
+started = performance.now();
+previousLoopCheck = started;
 const file =
   destination === "file"
     ? createWriteStream(outputPath, { flags: "wx" })
@@ -52,7 +82,12 @@ const sink = new Writable({
   write(chunk, _encoding, callback) {
     const done = (error) => {
       bytes += chunk.length;
-      if (firstRecordMs === null && bytes >= Number(firstRecordBytes))
+      encodedChunks++;
+      if (
+        compression === "none" &&
+        firstRecordMs === null &&
+        bytes >= Number(firstRecordBytes)
+      )
         firstRecordMs = performance.now() - started;
       sample();
       callback(error);
@@ -66,8 +101,59 @@ const sink = new Writable({
   },
 });
 const interval = setInterval(sample, 5);
+// ZIP exercises the public package API; JS uses an equivalent archive pipeline.
+// Gzip remains downstream. Streaming serializers use 64 KiB flush targets;
+// naive-all submits the entire JSON string in one write.
+const output = nativeZip
+  ? sink
+  : new Transform({
+      highWaterMark: 65_536,
+      transform(chunk, _encoding, callback) {
+        rawBytes += chunk.length;
+        rawChunks++;
+        maxRawChunkBytes = Math.max(maxRawChunkBytes, chunk.length);
+        callback(null, chunk);
+      },
+    });
+const stages = [output];
+const gzipOptions = compression === "gzip-1" ? { level: 1 } : {};
+if (method.endsWith("-gzip-512k")) gzipOptions.highWaterMark = 524_288;
+if (method.endsWith("-gzip-slab64k")) gzipOptions.chunkSize = 65_536;
+if (method.endsWith("-gzip-slab256k")) gzipOptions.chunkSize = 262_144;
+if (process.env.EXPORTLITE_BENCH_GZIP_HIGH_WATER_MARK)
+  gzipOptions.highWaterMark = Number(
+    process.env.EXPORTLITE_BENCH_GZIP_HIGH_WATER_MARK,
+  );
+let completion;
+if (nativeZip) {
+  rawBytes = Number(expectedJsonBytes);
+  if (!Number.isSafeInteger(rawBytes))
+    throw new Error("Expected byte count required for ZIP");
+  completion = finished(sink, { cleanup: true });
+} else if (compression === "zip") {
+  const archive = new ZipStream({
+    forceZip64: true,
+    zlib: { level: 1, chunkSize: 262_144, memLevel: 9 },
+  });
+  completion = pipeline(archive, sink);
+  archive.entry(
+    output,
+    { name: "data.json", date: new Date("1980-01-01T00:00:00.000Z") },
+    (error) => {
+      if (error) archive.destroy(error);
+      else archive.finalize();
+    },
+  );
+} else {
+  if (gzip) stages.push(createGzip(gzipOptions));
+  stages.push(sink);
+  completion = pipeline(stages);
+}
+// Observe failures immediately; the same promise is awaited before timing ends.
+completion.catch(() => {});
 
-// Same UTF-8 target batch size, completion semantics and yielding cadence as ExportLite.
+// Streamed baselines match ExportLite's UTF-8 flush target and yielding cadence.
+// Whole-value methods use the same writer but submit one complete JSON string.
 class BufferedBaseline {
   parts = [];
   size = 0;
@@ -87,8 +173,8 @@ class BufferedBaseline {
       let drained = false;
       let writing = true;
       const clean = () => {
-        sink.off("error", fail);
-        sink.off("drain", onDrain);
+        output.off("error", fail);
+        output.off("drain", onDrain);
       };
       const fail = (error) => {
         clean();
@@ -104,9 +190,9 @@ class BufferedBaseline {
         drained = true;
         complete();
       };
-      sink.once("error", fail);
-      sink.once("drain", onDrain);
-      const accepted = sink.write(text, (error) => {
+      output.once("error", fail);
+      output.once("drain", onDrain);
+      const accepted = output.write(text, (error) => {
         if (error) return;
         written = true;
         complete();
@@ -118,27 +204,31 @@ class BufferedBaseline {
   }
   async end() {
     await this.flush();
-    const done = finished(sink, { cleanup: true });
-    sink.end();
+    const done = finished(output, { readable: false, cleanup: true });
+    output.end();
     await done;
   }
 }
 
 let rows = 0;
-started = performance.now();
-previousLoopCheck = started;
-if (method === "exportlite") {
-  rows = (
-    await exportTable(db, "data", {
-      format: "json",
-      output: sink,
-      end: true,
-    })
-  ).rowsExported;
-} else if (method === "exportlite-query") {
-  rows = (
-    await exportQuery(db, { sql, format: "json", output: sink, end: true })
-  ).rowsExported;
+let exportResult;
+if (exporter === "exportlite") {
+  exportResult = await exportTable(db, "data", {
+    format: "json",
+    output,
+    end: true,
+    zip: nativeZip,
+  });
+  rows = exportResult.rowsExported;
+} else if (exporter === "exportlite-query") {
+  exportResult = await exportQuery(db, {
+    sql,
+    format: "json",
+    output,
+    end: true,
+    zip: nativeZip,
+  });
+  rows = exportResult.rowsExported;
 } else if (method === "sqlite-cli") {
   const child = spawn(process.env.SQLITE_BIN ?? "sqlite3", [
     "-readonly",
@@ -158,7 +248,7 @@ if (method === "exportlite") {
         : reject(new Error(`SQLite CLI exited ${code}: ${stderr}`)),
     );
   });
-  await Promise.all([pipeline(child.stdout, sink), exited]);
+  await Promise.all([pipeline(child.stdout, output), exited]);
   rows = Number(db.prepare("SELECT count(*) FROM data").pluck().get());
 } else {
   const writer = new BufferedBaseline();
@@ -207,20 +297,36 @@ if (method === "exportlite") {
   }
   await writer.end();
 }
+await completion;
+if (file) await finished(file, { cleanup: true });
 const durationMs = performance.now() - started;
+if (nativeZip && exportResult.bytesWritten !== bytes)
+  throw new Error("ZIP byte statistics mismatch");
+const cpuUsage = process.cpuUsage(startedCpu);
 sample();
 clearInterval(interval);
 await setTimeout(5);
 clearInterval(loopInterval);
 observer.disconnect();
-if (file) await finished(file, { cleanup: true });
 const cli = method === "sqlite-cli";
 const metrics = {
   method,
   destination,
+  compression,
   rows,
   bytes,
+  rawBytes,
+  rawChunks: nativeZip ? null : rawChunks,
+  meanRawChunkBytes: nativeZip ? null : rawBytes / rawChunks,
+  maxRawChunkBytes: nativeZip ? null : maxRawChunkBytes,
+  encodedChunks,
+  gzipChunkSize: !gzip ? null : (gzipOptions.chunkSize ?? 16_384),
+  gzipHighWaterMark: !gzip ? null : stages[1].writableHighWaterMark,
+  zipLevel: compression === "zip" ? 1 : null,
+  zipChunkSize: compression === "zip" ? 262_144 : null,
+  outputRatio: bytes / rawBytes,
   durationMs,
+  cpuMs: (cpuUsage.user + cpuUsage.system) / 1000,
   rowsPerSecond: rows / (durationMs / 1000),
   mibPerSecond: bytes / 1_048_576 / (durationMs / 1000),
   firstRecordMs,
