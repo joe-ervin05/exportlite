@@ -174,8 +174,10 @@ export class OutputWriter {
     this.check();
     if (this.buffered === 0) return;
     const bytes = this.buffered;
+    // Encode before awaiting the write so callbacks do not keep a large joined
+    // string alive alongside its encoded buffer. Node would encode it anyway.
     const text = this.parts.every((part) => typeof part === "string")
-      ? this.parts.join("")
+      ? Buffer.from(this.parts.join(""), "utf8")
       : Buffer.concat(
           this.parts.map((part) =>
             typeof part === "string" ? Buffer.from(part, "utf8") : part,

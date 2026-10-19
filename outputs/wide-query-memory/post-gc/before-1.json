@@ -1,0 +1,1603 @@
+{
+  "node": "v26.12.0",
+  "build": "<workspace>/outputs/wide-query-memory/current/dist",
+  "sampleWrites": false,
+  "diagnosticGC": true,
+  "times": [
+    68.617333,
+    52.490290999999985,
+    56.94341699999998,
+    51.735457999999966,
+    48.35050000000001,
+    47.80062499999997,
+    47.457790999999986,
+    49.246290999999985,
+    48.12487500000003
+  ],
+  "writes": 2043,
+  "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+  "peak": {
+    "rss": 151126016,
+    "heapTotal": 47644672,
+    "heapUsed": 36226792,
+    "external": 10093444,
+    "arrayBuffers": 7498511
+  },
+  "peakRssMiB": 144.140625,
+  "naturalEvents": [
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 56.238417,
+      "duration": 0.2201251983642578
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 59.845833,
+      "duration": 0.1296248435974121
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 63.089458,
+      "duration": 0.06641721725463867
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 66.711583,
+      "duration": 0.10375022888183594
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 70.698917,
+      "duration": 0.1174159049987793
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 74.650917,
+      "duration": 0.0943751335144043
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 77.109458,
+      "duration": 0.07462453842163086
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 80.945583,
+      "duration": 0.08474969863891602
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 84.351667,
+      "duration": 0.09604072570800781
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 90.847667,
+      "duration": 0.08300018310546875
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 98.387375,
+      "duration": 0.11641693115234375
+    },
+    {
+      "exportNumber": 0,
+      "kind": 1,
+      "startTime": 105.006542,
+      "duration": 0.4745001792907715
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 112.330667,
+      "duration": 0.1197500228881836
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 118.829125,
+      "duration": 0.09758281707763672
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 125.297167,
+      "duration": 0.14874982833862305
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 130.64325,
+      "duration": 0.15583324432373047
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 136.982125,
+      "duration": 0.1393747329711914
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 143.438292,
+      "duration": 0.12508296966552734
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 148.882167,
+      "duration": 0.08449983596801758
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 154.703375,
+      "duration": 0.11074972152709961
+    },
+    {
+      "exportNumber": 1,
+      "kind": 1,
+      "startTime": 160.348375,
+      "duration": 0.08258295059204102
+    },
+    {
+      "exportNumber": 2,
+      "kind": 1,
+      "startTime": 166.210417,
+      "duration": 0.0970001220703125
+    },
+    {
+      "exportNumber": 2,
+      "kind": 1,
+      "startTime": 172.973375,
+      "duration": 0.14183282852172852
+    },
+    {
+      "exportNumber": 2,
+      "kind": 1,
+      "startTime": 177.873,
+      "duration": 0.13358306884765625
+    },
+    {
+      "exportNumber": 2,
+      "kind": 1,
+      "startTime": 183.307667,
+      "duration": 0.17608308792114258
+    },
+    {
+      "exportNumber": 2,
+      "kind": 1,
+      "startTime": 189.44025,
+      "duration": 0.1285419464111328
+    },
+    {
+      "exportNumber": 2,
+      "kind": 8,
+      "startTime": 194.068667,
+      "duration": 0.18520784378051758
+    },
+    {
+      "exportNumber": 2,
+      "kind": 4,
+      "startTime": 211.498583,
+      "duration": 1.288583755493164
+    },
+    {
+      "exportNumber": 3,
+      "kind": 1,
+      "startTime": 225.504167,
+      "duration": 0.19208335876464844
+    },
+    {
+      "exportNumber": 3,
+      "kind": 1,
+      "startTime": 237.465083,
+      "duration": 0.2043752670288086
+    },
+    {
+      "exportNumber": 3,
+      "kind": 1,
+      "startTime": 248.218125,
+      "duration": 0.20345783233642578
+    },
+    {
+      "exportNumber": 3,
+      "kind": 1,
+      "startTime": 258.063292,
+      "duration": 0.12116622924804688
+    },
+    {
+      "exportNumber": 3,
+      "kind": 1,
+      "startTime": 269.221875,
+      "duration": 1.2575831413269043
+    },
+    {
+      "exportNumber": 4,
+      "kind": 1,
+      "startTime": 281.670292,
+      "duration": 0.1461658477783203
+    },
+    {
+      "exportNumber": 4,
+      "kind": 1,
+      "startTime": 291.247792,
+      "duration": 0.15029096603393555
+    },
+    {
+      "exportNumber": 4,
+      "kind": 1,
+      "startTime": 300.941417,
+      "duration": 0.12570810317993164
+    },
+    {
+      "exportNumber": 4,
+      "kind": 1,
+      "startTime": 312.954917,
+      "duration": 0.1478748321533203
+    },
+    {
+      "exportNumber": 5,
+      "kind": 1,
+      "startTime": 324.028958,
+      "duration": 0.12925004959106445
+    },
+    {
+      "exportNumber": 5,
+      "kind": 1,
+      "startTime": 334.575,
+      "duration": 0.1701669692993164
+    },
+    {
+      "exportNumber": 5,
+      "kind": 1,
+      "startTime": 344.849333,
+      "duration": 0.15124988555908203
+    },
+    {
+      "exportNumber": 5,
+      "kind": 1,
+      "startTime": 355.991542,
+      "duration": 0.15195798873901367
+    },
+    {
+      "exportNumber": 5,
+      "kind": 1,
+      "startTime": 366.845958,
+      "duration": 0.15304183959960938
+    },
+    {
+      "exportNumber": 6,
+      "kind": 1,
+      "startTime": 377.924125,
+      "duration": 0.1489582061767578
+    },
+    {
+      "exportNumber": 6,
+      "kind": 1,
+      "startTime": 387.532,
+      "duration": 0.16066694259643555
+    },
+    {
+      "exportNumber": 6,
+      "kind": 1,
+      "startTime": 396.926083,
+      "duration": 0.1296253204345703
+    },
+    {
+      "exportNumber": 6,
+      "kind": 1,
+      "startTime": 408.212167,
+      "duration": 0.15662479400634766
+    },
+    {
+      "exportNumber": 7,
+      "kind": 1,
+      "startTime": 419.061917,
+      "duration": 0.13545799255371094
+    },
+    {
+      "exportNumber": 7,
+      "kind": 1,
+      "startTime": 429.764,
+      "duration": 0.1636667251586914
+    },
+    {
+      "exportNumber": 7,
+      "kind": 1,
+      "startTime": 442.254708,
+      "duration": 0.17579174041748047
+    },
+    {
+      "exportNumber": 7,
+      "kind": 1,
+      "startTime": 453.155167,
+      "duration": 0.12520790100097656
+    },
+    {
+      "exportNumber": 7,
+      "kind": 1,
+      "startTime": 463.875292,
+      "duration": 0.1517500877380371
+    },
+    {
+      "exportNumber": 8,
+      "kind": 1,
+      "startTime": 474.138833,
+      "duration": 0.13154220581054688
+    },
+    {
+      "exportNumber": 8,
+      "kind": 1,
+      "startTime": 484.02025,
+      "duration": 0.1482076644897461
+    },
+    {
+      "exportNumber": 8,
+      "kind": 1,
+      "startTime": 493.600917,
+      "duration": 0.15387487411499023
+    },
+    {
+      "exportNumber": 8,
+      "kind": 1,
+      "startTime": 505.857375,
+      "duration": 0.2699580192565918
+    },
+    {
+      "exportNumber": 9,
+      "kind": 1,
+      "startTime": 517.01875,
+      "duration": 0.1293330192565918
+    }
+  ],
+  "snapshots": [
+    {
+      "label": "start",
+      "exportNumber": -1,
+      "at": 50.510292,
+      "rss": 64339968,
+      "heapTotal": 9846784,
+      "heapUsed": 5882280,
+      "external": 2673204,
+      "arrayBuffers": 144267,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 2097152,
+          "space_used_size": 299104,
+          "space_available_size": 1797920,
+          "physical_space_size": 2097152
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 4718592,
+          "space_used_size": 4231632,
+          "space_available_size": 486568,
+          "physical_space_size": 4718592
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 1048576,
+          "space_used_size": 177152,
+          "space_available_size": 871296,
+          "physical_space_size": 1048576
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1835008,
+          "space_used_size": 1055424,
+          "space_available_size": 779440,
+          "physical_space_size": 1835008
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 2097152,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 147456,
+          "space_used_size": 131088,
+          "space_available_size": 0,
+          "physical_space_size": 147456
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-0",
+      "exportNumber": 0,
+      "at": 119.8945,
+      "rss": 106119168,
+      "heapTotal": 18153472,
+      "heapUsed": 7592384,
+      "external": 2707203,
+      "arrayBuffers": 178226,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 8388608,
+          "space_used_size": 180224,
+          "space_available_size": 4013824,
+          "physical_space_size": 8388608
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 5242880,
+          "space_used_size": 4503152,
+          "space_available_size": 739272,
+          "physical_space_size": 5242880
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 1048576,
+          "space_used_size": 315584,
+          "space_available_size": 732864,
+          "physical_space_size": 1048576
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1835008,
+          "space_used_size": 1148488,
+          "space_available_size": 686376,
+          "physical_space_size": 1835008
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 4194304,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 1638400,
+          "space_used_size": 1447648,
+          "space_available_size": 0,
+          "physical_space_size": 1638400
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-1",
+      "exportNumber": 1,
+      "at": 172.481333,
+      "rss": 108134400,
+      "heapTotal": 21577728,
+      "heapUsed": 14675496,
+      "external": 4297235,
+      "arrayBuffers": 1768258,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 8388608,
+          "space_used_size": 4080768,
+          "space_available_size": 113280,
+          "physical_space_size": 8388608
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 5242880,
+          "space_used_size": 4527888,
+          "space_available_size": 714536,
+          "physical_space_size": 5242880
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 1048576,
+          "space_used_size": 370592,
+          "space_available_size": 677856,
+          "physical_space_size": 1048576
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1835008,
+          "space_used_size": 1180288,
+          "space_available_size": 654576,
+          "physical_space_size": 1835008
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 2506752,
+          "space_used_size": 2246744,
+          "space_available_size": 1947560,
+          "physical_space_size": 2506752
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 2555904,
+          "space_used_size": 2272512,
+          "space_available_size": 0,
+          "physical_space_size": 2555904
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-2",
+      "exportNumber": 2,
+      "at": 229.497167,
+      "rss": 135053312,
+      "heapTotal": 37584896,
+      "heapUsed": 26077304,
+      "external": 7960436,
+      "arrayBuffers": 5431459,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 12320768,
+          "space_used_size": 3149064,
+          "space_available_size": 5239032,
+          "physical_space_size": 12140544
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13317040,
+          "space_available_size": 1098520,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 364416,
+          "space_available_size": 159808,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1158128,
+          "space_available_size": 152456,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 1916928,
+          "space_used_size": 1717912,
+          "space_available_size": 6670696,
+          "physical_space_size": 1916928
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 7094272,
+          "space_used_size": 6376720,
+          "space_available_size": 0,
+          "physical_space_size": 7094272
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-3",
+      "exportNumber": 3,
+      "at": 281.286458,
+      "rss": 142393344,
+      "heapTotal": 45875200,
+      "heapUsed": 34828512,
+      "external": 10027488,
+      "arrayBuffers": 7498511,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 8327984,
+          "space_available_size": 60112,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13343992,
+          "space_available_size": 1071240,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 373856,
+          "space_available_size": 150368,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1168040,
+          "space_available_size": 142544,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 5160960,
+          "space_used_size": 4651880,
+          "space_available_size": 3736728,
+          "physical_space_size": 5160960
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 7684096,
+          "space_used_size": 6902944,
+          "space_available_size": 0,
+          "physical_space_size": 7684096
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-4",
+      "exportNumber": 4,
+      "at": 329.69075,
+      "rss": 144244736,
+      "heapTotal": 44400640,
+      "heapUsed": 29577248,
+      "external": 8490031,
+      "arrayBuffers": 5961054,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 4457504,
+          "space_available_size": 3930592,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13355248,
+          "space_available_size": 1059864,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 387744,
+          "space_available_size": 136480,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1174944,
+          "space_available_size": 135640,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 2654208,
+          "space_used_size": 2378688,
+          "space_available_size": 6009920,
+          "physical_space_size": 2654208
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 8716288,
+          "space_used_size": 7825536,
+          "space_available_size": 0,
+          "physical_space_size": 8716288
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-5",
+      "exportNumber": 5,
+      "at": 377.548542,
+      "rss": 147914752,
+      "heapTotal": 47349760,
+      "heapUsed": 36226792,
+      "external": 10027488,
+      "arrayBuffers": 7498511,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 8266784,
+          "space_available_size": 121312,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13362032,
+          "space_available_size": 1052688,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 414656,
+          "space_available_size": 109568,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1190672,
+          "space_available_size": 119912,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 5160960,
+          "space_used_size": 4651880,
+          "space_available_size": 3736728,
+          "physical_space_size": 5160960
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 9158656,
+          "space_used_size": 8219560,
+          "space_available_size": 0,
+          "physical_space_size": 9158656
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-6",
+      "exportNumber": 6,
+      "at": 425.063875,
+      "rss": 148520960,
+      "heapTotal": 46022656,
+      "heapUsed": 31084472,
+      "external": 8556131,
+      "arrayBuffers": 6027154,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 4457088,
+          "space_available_size": 3931008,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13370744,
+          "space_available_size": 1043752,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 415264,
+          "space_available_size": 108960,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1191248,
+          "space_available_size": 119336,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 2801664,
+          "space_used_size": 2510152,
+          "space_available_size": 5878456,
+          "physical_space_size": 2801664
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 10190848,
+          "space_used_size": 9142392,
+          "space_available_size": 0,
+          "physical_space_size": 10190848
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-7",
+      "exportNumber": 7,
+      "at": 474.385667,
+      "rss": 149471232,
+      "heapTotal": 43958272,
+      "heapUsed": 24964800,
+      "external": 10093444,
+      "arrayBuffers": 4238863,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 173088,
+          "space_available_size": 8215008,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13379776,
+          "space_available_size": 1033896,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 421728,
+          "space_available_size": 102496,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1193280,
+          "space_available_size": 117304,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 8388608,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 10928128,
+          "space_used_size": 9799544,
+          "space_available_size": 0,
+          "physical_space_size": 10928128
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "export-8",
+      "exportNumber": 8,
+      "at": 522.586083,
+      "rss": 151109632,
+      "heapTotal": 47644672,
+      "heapUsed": 32581248,
+      "external": 8556131,
+      "arrayBuffers": 6027154,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 4457000,
+          "space_available_size": 3931096,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13399176,
+          "space_available_size": 1013984,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 516608,
+          "space_available_size": 7616,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1288424,
+          "space_available_size": 22160,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 2801664,
+          "space_used_size": 2510152,
+          "space_available_size": 5878456,
+          "physical_space_size": 2801664
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 11812864,
+          "space_used_size": 10591080,
+          "space_available_size": 0,
+          "physical_space_size": 11812864
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "after-natural-runs",
+      "exportNumber": 9,
+      "at": 522.644792,
+      "rss": 151126016,
+      "heapTotal": 47644672,
+      "heapUsed": 32767120,
+      "external": 8556131,
+      "arrayBuffers": 6027154,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 4464040,
+          "space_available_size": 3924056,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 14417920,
+          "space_used_size": 13399408,
+          "space_available_size": 1013752,
+          "physical_space_size": 14417920
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 516608,
+          "space_available_size": 7616,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1288424,
+          "space_available_size": 22160,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 2801664,
+          "space_used_size": 2510152,
+          "space_available_size": 5878456,
+          "physical_space_size": 2801664
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 11812864,
+          "space_used_size": 10591080,
+          "space_available_size": 0,
+          "physical_space_size": 11812864
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    },
+    {
+      "label": "after-diagnostic-GC",
+      "exportNumber": 9,
+      "at": 525.501875,
+      "rss": 139476992,
+      "heapTotal": 26886144,
+      "heapUsed": 6248016,
+      "external": 8556131,
+      "arrayBuffers": 144231,
+      "spaces": [
+        {
+          "space_name": "read_only_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_space",
+          "space_size": 16777216,
+          "space_used_size": 6720,
+          "space_available_size": 8381376,
+          "physical_space_size": 16777216
+        },
+        {
+          "space_name": "old_space",
+          "space_size": 8126464,
+          "space_used_size": 4499488,
+          "space_available_size": 3624576,
+          "physical_space_size": 8126464
+        },
+        {
+          "space_name": "code_space",
+          "space_size": 524288,
+          "space_used_size": 429120,
+          "space_available_size": 95104,
+          "physical_space_size": 524288
+        },
+        {
+          "space_name": "shared_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_space",
+          "space_size": 1310720,
+          "space_used_size": 1184000,
+          "space_available_size": 126584,
+          "physical_space_size": 1310720
+        },
+        {
+          "space_name": "shared_trusted_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "new_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 8388608,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "large_object_space",
+          "space_size": 147456,
+          "space_used_size": 131088,
+          "space_available_size": 0,
+          "physical_space_size": 147456
+        },
+        {
+          "space_name": "code_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "shared_trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        },
+        {
+          "space_name": "trusted_large_object_space",
+          "space_size": 0,
+          "space_used_size": 0,
+          "space_available_size": 0,
+          "physical_space_size": 0
+        }
+      ]
+    }
+  ]
+}

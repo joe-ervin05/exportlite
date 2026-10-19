@@ -1,0 +1,32 @@
+[
+  {
+    "fixture": "wide",
+    "method": "query",
+    "compression": "none",
+    "beforeMs": 48.132874999999984,
+    "afterMs": 49.001187499999986,
+    "timeChangePercent": 1.8039905158376834,
+    "beforeRssMiB": 159.109375,
+    "afterRssMiB": 118.6875,
+    "rssChangePercent": -25.40508690955514,
+    "maxBeforeRssMiB": 187.703125,
+    "maxAfterRssMiB": 121.625,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523"
+  },
+  {
+    "fixture": "wide",
+    "method": "query",
+    "compression": "zip",
+    "beforeMs": 106.77304149999998,
+    "afterMs": 106.79929149999998,
+    "timeChangePercent": 0.024584857405240967,
+    "beforeRssMiB": 125.03125,
+    "afterRssMiB": 111.203125,
+    "rssChangePercent": -11.059735066233445,
+    "maxBeforeRssMiB": 128.03125,
+    "maxAfterRssMiB": 111.421875,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459"
+  }
+]

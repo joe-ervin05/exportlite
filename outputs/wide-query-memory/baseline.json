@@ -1,0 +1,19 @@
+{
+  "phase1Commit": "95a1a448ec12741281f1570fbf8d4931dc9ae52e",
+  "phase2Commit": "b45f9bb4069653f2dd22686e094d17d85d817b8b",
+  "phase2WriterSha256": "3154845387d523ea134752d60864d26e81bccae8503d9df17aaad4a3d7fc87cb",
+  "candidateWriterSha256": "1e23e104d3c372d64471d8165023e84334c94617495a4f6e18661c8f822685af",
+  "node": "v26.12.0",
+  "versions": {
+    "better-sqlite3": "13.0.3",
+    "drizzle-orm": "0.45.4",
+    "@libsql/client": "0.18.0",
+    "zip-stream": "7.0.5"
+  },
+  "diagnosticVariants": {
+    "encode-before-send": "Encode joined string with Buffer.from(text, utf8) before awaiting send; no other runtime edits.",
+    "return-send": "Diagnostic only: return this.send() from flush instead of awaiting it.",
+    "old-finally": "Diagnostic only: restore phase 1 streamExport cleanup; not a production candidate because it can mask primary failures.",
+    "four-arguments": "Diagnostic only: use the old four-argument streamExport call for unbatched query delivery."
+  }
+}

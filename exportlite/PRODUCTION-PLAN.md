@@ -70,6 +70,8 @@ Done when the existing suite, build, public types and lint pass; affected output
 
 Completed October 18, 2026: shared local delivery setup, safe remote diagnostics and primary-error preservation are implemented. The build, public types, lint and 378 tests pass. [Paired regression checks](benchmarks/PHASE-2.md) cover 164 fresh workers with matching output hashes. Bulk timings remain within about 3% in the initial matrix; a tiny ZIP timing outlier did not repeat. A wide-query recheck showed +12.9% median peak RSS and +1.0% highest observed RSS; retain that case for stage 4 memory measurements.
 
+The subsequent [wide-query investigation](benchmarks/WIDE-QUERY-MEMORY.md) reduces temporary string retention by encoding completed writer buffers before awaiting writes. Median peak RSS fell 25.4% for wide JSON queries and 11.1% for ZIP, with similar speed and all 378 tests passing. Keep the case in the stage 4 baseline alongside the broader live-memory qualification.
+
 ## Stage 3 Validate compatibility and the published artifact
 
 - [x] Establish the source repository at https://github.com/joe-ervin05/exportlite and preserve the implementation milestones and benchmark evidence.

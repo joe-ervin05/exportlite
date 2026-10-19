@@ -1,0 +1,43 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "rounds": 7,
+  "methods": [
+    "query"
+  ],
+  "compressions": [
+    "none"
+  ],
+  "builds": {
+    "before": {
+      "cache-COwSZIiy.mjs": "3c89f9c70b63ebbbfd274831a78ea620b45194bb734fe8691315767945d74dc5",
+      "declared-D9i0zhVy.mjs": "1c69f1b5cc959fb4b4ae6cfb1431a8960b1b1cf5af595bd1a999195c0502fbc0",
+      "drizzle.mjs": "9df8e60fd2a3452dffc15936702d5bf15f28b5a457b462217b92e5f19dbd17f4",
+      "export-turso-BkzamWHZ.mjs": "f1cdf854a7eb312a690016f0de93150453905b51014661dccd756de7415d5d4d",
+      "index.mjs": "ea3123498711dda7e2862cfc169da6ebfce93063177a05518acd2437dcc0c74c",
+      "turso.mjs": "db93d4e59c9835b99f6de52ea8bc5518f48cdefb9c2484795fac1b3a0231720b"
+    },
+    "after": {
+      "cache-COwSZIiy.mjs": "3c89f9c70b63ebbbfd274831a78ea620b45194bb734fe8691315767945d74dc5",
+      "declared-D9i0zhVy.mjs": "1c69f1b5cc959fb4b4ae6cfb1431a8960b1b1cf5af595bd1a999195c0502fbc0",
+      "drizzle.mjs": "9df8e60fd2a3452dffc15936702d5bf15f28b5a457b462217b92e5f19dbd17f4",
+      "export-turso-BkzamWHZ.mjs": "f1cdf854a7eb312a690016f0de93150453905b51014661dccd756de7415d5d4d",
+      "index.mjs": "ea3123498711dda7e2862cfc169da6ebfce93063177a05518acd2437dcc0c74c",
+      "turso.mjs": "db93d4e59c9835b99f6de52ea8bc5518f48cdefb9c2484795fac1b3a0231720b"
+    }
+  },
+  "fixtures": [
+    {
+      "name": "wide",
+      "rows": 15000,
+      "width": 1024,
+      "profile": "varied",
+      "iterations": 2,
+      "web": false,
+      "expectedJsonBytes": 15094262,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149"
+    }
+  ],
+  "protocol": "Sequential fresh workers; paired order alternates by round. One hash verification, two warmups, then three timed request batches per worker. Median of worker medians. Natural GC. Tiny cases consume Web streams; bulk cases drain to counting Node writables. Includes statement/query construction, execution, JSON generation, ZIP when requested, UTF-8 delivery and completion. Imports and connection/schema setup excluded from timing but included in process peak RSS. Same fixture files per pair; output bytes and SHA-256 must match. No disk output or network timing."
+}

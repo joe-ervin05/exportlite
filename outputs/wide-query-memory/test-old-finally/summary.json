@@ -1,0 +1,17 @@
+[
+  {
+    "fixture": "wide",
+    "method": "query",
+    "compression": "none",
+    "beforeMs": 47.642687499999994,
+    "afterMs": 48.3111045,
+    "timeChangePercent": 1.4029792085091808,
+    "beforeRssMiB": 158.859375,
+    "afterRssMiB": 157.6875,
+    "rssChangePercent": -0.7376807317792888,
+    "maxBeforeRssMiB": 184.46875,
+    "maxAfterRssMiB": 181.6875,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523"
+  }
+]

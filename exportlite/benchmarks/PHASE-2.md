@@ -53,6 +53,8 @@ The wide direct query with plain output showed higher median peak RSS in both ru
 | tiny / drizzle-query / zip | 0.695 | 0.657 | -5.5% | 225.7 MiB | 227.2 MiB | +0.7% |
 | wide / query / none | 49.308 | 47.722 | -3.2% | 158.2 MiB | 178.5 MiB | +12.9% |
 
+Follow-up: the [wide-query memory investigation](WIDE-QUERY-MEMORY.md) found avoidable temporary string lifetime across awaited writes. Encoding joined output to UTF-8 before entering the asynchronous send reduces median peak RSS by 25.4% for wide plain queries and 11.1% for ZIP in a seven-pair comparison, with timing around the previous speed. The historical measurements above are unchanged; the specific phase 2 edit behind their shifted median was not isolated.
+
 ## Reliability and scope
 
 The complete suite passes **378 tests**, including stream ownership, cancellation, backpressure, cache/schema behavior, declared projections, native and Drizzle APIs, independent ZIP decoding/CRC, protocol framing, session reuse/expiry, queued cancellation and awaitable shutdown. New fault-injection checks cover simultaneous primary and cleanup failures, preserved completed files after failed client close, HTTP status, bounded provider codes and sanitized transport causes. Build, ESM/CommonJS public type consumers and formatting/lint also pass.

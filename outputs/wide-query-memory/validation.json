@@ -1,0 +1,20 @@
+{
+  "node": "v26.12.0",
+  "tests": {
+    "files": 10,
+    "passed": 378,
+    "command": "node node_modules/vitest/vitest.mjs run",
+    "coverage": "Native/Drizzle, local Turso protocol tests, UTF-8 and SQLite encodings, callback and drain backpressure, Web cancellation, output ownership/cleanup, ZIP decoding and public package entrypoints."
+  },
+  "build": "passed",
+  "publicTypes": "passed; tsc --noEmit",
+  "lint": "passed; biome check .",
+  "outputEquivalence": "All compared workers have identical byte counts and encoded SHA-256 per case, including ZIP.",
+  "candidateBuild": "The matrix, recheck and final configurations record identical .mjs hashes; verified against final dist.",
+  "limitations": [
+    "No live Turso service or network measurement.",
+    "GC profiling perturbs the workload and is separate from uninstrumented performance tests.",
+    "The exact phase 2 refactor behind the median shift was not isolated.",
+    "RSS is whole-process historical peak; post-GC snapshots measure retained heap separately."
+  ]
+}

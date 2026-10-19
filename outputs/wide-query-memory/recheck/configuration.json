@@ -1,0 +1,54 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "rounds": 7,
+  "methods": [
+    "table",
+    "query"
+  ],
+  "compressions": [
+    "none"
+  ],
+  "builds": {
+    "before": {
+      "cache-D9pxAVZK.mjs": "df670008a49704db992d64725213b50839b2511b77c472e26df44728dfff8169",
+      "declared-D2-oCJ0i.mjs": "28cb78562fbb68cbaf66b316441b594029ce10ba3b221566d621f6065fc2712f",
+      "drizzle.mjs": "bbb5f8abc3c65996e67324ae3983c77e54c6cac256b22c1a08280e2ce1c833ed",
+      "export-turso-BsunGFXc.mjs": "c56b05b7dad24f552fccc78be7486a9138b579ee08e152d2d13640f5fd0dfa7c",
+      "index.mjs": "e7bdd75cebaeacee861948412067936ec0d9125fb5df4ae53cfedf2d786cd9a9",
+      "turso.mjs": "f2c27fc2f0915259ac42a214088e9db297084f47e80399470ac652b57ea99d29"
+    },
+    "after": {
+      "cache-DBiT1MOk.mjs": "ab673e00cd6a473a28f6f4445275db94cd3f74d6c30ddd4ba42a21ce2e4047d0",
+      "declared-Chfj4QBN.mjs": "fef8869f917ea2d4ac33abeda84075c3f6c357968ad0dd0dc0e57a6645d21d3b",
+      "drizzle.mjs": "1ec2634ff873107c6b1f5790c4320b0286cb0e159e047ac5d165eb3a7f295fa7",
+      "export-turso-DqfvYqCF.mjs": "a9edb580afd07a0b28cb2a1fc2b0ab882a81860bb187a5a5dce6e0d284d2b679",
+      "index.mjs": "cb2581b13ccb78e714cf8e8249f2fab36a0a76953fd9664a11f52cd778f6c315",
+      "turso.mjs": "ff7bcca1655b356d0c6c4be8dd7edb62dd365fa22b53fa3023f96b4783d7b68a"
+    }
+  },
+  "fixtures": [
+    {
+      "name": "tiny",
+      "rows": 100,
+      "width": 32,
+      "profile": "repeated",
+      "iterations": 100,
+      "web": true,
+      "expectedJsonBytes": 9721,
+      "databaseSha256": "9597a3e2e489aa1b206272471819640a7981da8d03edb8be517b4a0dd41ecbc2"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "width": 1024,
+      "profile": "varied",
+      "iterations": 2,
+      "web": false,
+      "expectedJsonBytes": 15094262,
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149"
+    }
+  ],
+  "protocol": "Sequential fresh workers; paired order alternates by round. One hash verification, two warmups, then three timed request batches per worker. Median of worker medians. Natural GC. Tiny cases consume Web streams; bulk cases drain to counting Node writables. Includes statement/query construction, execution, JSON generation, ZIP when requested, UTF-8 delivery and completion. Imports and connection/schema setup excluded from timing but included in process peak RSS. Same fixture files per pair; output bytes and SHA-256 must match. No disk output or network timing."
+}

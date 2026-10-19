@@ -1,0 +1,62 @@
+[
+  {
+    "fixture": "tiny",
+    "method": "table",
+    "compression": "none",
+    "beforeMs": 0.22178583000000004,
+    "afterMs": 0.21671875,
+    "timeChangePercent": -2.284672560009837,
+    "beforeRssMiB": 93.90625,
+    "afterRssMiB": 93.625,
+    "rssChangePercent": -0.2995008319467529,
+    "maxBeforeRssMiB": 95.53125,
+    "maxAfterRssMiB": 95.0625,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef"
+  },
+  {
+    "fixture": "tiny",
+    "method": "query",
+    "compression": "none",
+    "beforeMs": 0.22244500000000003,
+    "afterMs": 0.2264733299999999,
+    "timeChangePercent": 1.8109330396277157,
+    "beforeRssMiB": 87.421875,
+    "afterRssMiB": 87.65625,
+    "rssChangePercent": 0.2680965147453085,
+    "maxBeforeRssMiB": 87.6875,
+    "maxAfterRssMiB": 87.796875,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef"
+  },
+  {
+    "fixture": "wide",
+    "method": "table",
+    "compression": "none",
+    "beforeMs": 22.858458499999998,
+    "afterMs": 22.625208499999992,
+    "timeChangePercent": -1.0204100158372698,
+    "beforeRssMiB": 182.421875,
+    "afterRssMiB": 177.8125,
+    "rssChangePercent": -2.526766595289076,
+    "maxBeforeRssMiB": 194.40625,
+    "maxAfterRssMiB": 190.90625,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523"
+  },
+  {
+    "fixture": "wide",
+    "method": "query",
+    "compression": "none",
+    "beforeMs": 48.5745,
+    "afterMs": 48.027979500000015,
+    "timeChangePercent": -1.1251181175307767,
+    "beforeRssMiB": 156.75,
+    "afterRssMiB": 118.28125,
+    "rssChangePercent": -24.541467304625197,
+    "maxBeforeRssMiB": 238.5625,
+    "maxAfterRssMiB": 119.296875,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523"
+  }
+]
