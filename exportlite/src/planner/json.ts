@@ -4,7 +4,11 @@ import { readStatement } from "../database/better-sqlite3.js";
 import { ExportLiteError, sqliteError } from "../errors.js";
 import type { TableColumns } from "../types.js";
 import { planBatchedTable } from "./batches.js";
-import { selectedFields, selectedObject } from "./columns.js";
+import {
+  type SelectedField,
+  selectedFields,
+  selectedObject,
+} from "./columns.js";
 import {
   identifier,
   literal,
@@ -82,20 +86,7 @@ export function planQuery(
   sql: string,
   declared?: SelectedColumns,
 ) {
-  if (typeof sql !== "string" || !sql.trim())
-    throw new ExportLiteError(
-      "INVALID_QUERY",
-      "sql must be a nonempty SELECT/CTE string.",
-    );
-  // Some PRAGMAs take effect at prepare time. Reject non-queries before preparing.
-  if (
-    !/^(?:\s|--[^\n]*(?:\n|$)|\/\*[\s\S]*?\*\/)*(?:SELECT|WITH)\b/i.test(sql)
-  ) {
-    throw new ExportLiteError(
-      "INVALID_QUERY",
-      "Only SELECT and WITH queries are supported.",
-    );
-  }
+  validateQuery(sql);
   let name = "__exportlite_source";
   while (sql.toLowerCase().includes(name)) name += "_";
   const sourceName = identifier(name);
@@ -122,4 +113,46 @@ export function planQuery(
     db,
     `WITH ${sourceName}(${aliases.join(", ")}) AS (\n${subquerySource(sql)}\n) SELECT json_object(${pairs}) FROM ${sourceName}`,
   );
+}
+
+/** Drizzle supplies selection order; no result metadata or rows are fetched. */
+export function planSelectedQuery(
+  db: SQLiteConnection,
+  sql: string,
+  fields: SelectedField[],
+  positional: boolean,
+) {
+  validateQuery(sql);
+  let name = "__exportlite_source";
+  while (sql.toLowerCase().includes(name)) name += "_";
+  const source = identifier(name);
+  const aliases = positional
+    ? `(${fields.map((_, i) => identifier(`c${i}`)).join(", ")})`
+    : "";
+  const object = selectedObject(
+    fields,
+    (field, i) =>
+      `${source}.${identifier(positional ? `c${i}` : field.column)}`,
+  );
+  return readStatement(
+    db,
+    `WITH ${source}${aliases} AS (\n${subquerySource(sql)}\n) SELECT ${object} FROM ${source}`,
+  );
+}
+
+function validateQuery(sql: string) {
+  if (typeof sql !== "string" || !sql.trim())
+    throw new ExportLiteError(
+      "INVALID_QUERY",
+      "sql must be a nonempty SELECT/CTE string.",
+    );
+  // Some PRAGMAs take effect at prepare time. Reject non-queries before preparing.
+  if (
+    !/^(?:\s|--[^\n]*(?:\n|$)|\/\*[\s\S]*?\*\/)*(?:SELECT|WITH)\b/i.test(sql)
+  ) {
+    throw new ExportLiteError(
+      "INVALID_QUERY",
+      "Only SELECT and WITH queries are supported.",
+    );
+  }
 }

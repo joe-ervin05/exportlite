@@ -3,7 +3,8 @@ import type { ReadStatement, SQLiteConnection } from "../database/adapter.js";
 import { readStatement } from "../database/better-sqlite3.js";
 import { sqliteError } from "../errors.js";
 import type { DatabaseEncoding, TableColumns } from "../types.js";
-import { planDeclaredTable } from "./declared.js";
+import type { SelectedField } from "./columns.js";
+import { planDeclaredTable, planSelectedTable } from "./declared.js";
 import { identifier } from "./identifiers.js";
 import { planTable } from "./json.js";
 
@@ -83,6 +84,27 @@ export function cachedTablePlan(
     const key = JSON.stringify([table, columns ?? null, format]);
     return cachedPlan(db, cache, key, () =>
       planTable(db, table, columns, format),
+    );
+  } catch (error) {
+    throw sqliteError(error);
+  }
+}
+
+export function cachedSelectedTablePlan(
+  db: SQLiteConnection,
+  table: string,
+  fields: SelectedField[],
+  format: "json" | "jsonl",
+  encoding: DatabaseEncoding,
+  primaryKey?: string,
+): ReturnType<typeof planTable> {
+  identifier(table);
+  try {
+    return cachedPlan(
+      db,
+      cacheFor(db),
+      JSON.stringify(["selected", table, fields, format, encoding, primaryKey]),
+      () => planSelectedTable(db, table, fields, format, encoding, primaryKey),
     );
   } catch (error) {
     throw sqliteError(error);

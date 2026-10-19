@@ -96,6 +96,59 @@ With declared query columns, ExportLite prepares only the final JSON SELECT. The
 
 Declared table plans cache only request-derived SQL and batching mode. Each export prepares a fresh statement against the actual schema, so unrelated schema changes need no invalidation and missing fields fail during preparation. Rows are read afresh. The original table column-name list and automatic discovery retain their storage metadata queries and schema-version invalidation. Remote database adapters are not implemented. Run `node examples/declared-columns.mjs` for a working example.
 
+## Drizzle adapter
+
+The optional `exportlite/drizzle` entry point accepts a Drizzle database and existing SQLite schemas. It supports **Drizzle ORM 0.45.x, tested with 0.45.4**, using `drizzle-orm/better-sqlite3`. Drizzle is an optional peer dependency; the main `exportlite` entry does not import it. Stable-version documentation uses `getTableColumns()`; the newer `getColumns()` name belongs to Drizzle v1.
+
+```ts
+import { eq, sql } from "drizzle-orm";
+import { exportTable, exportQuery } from "exportlite/drizzle";
+import type { ExportRow } from "exportlite";
+import { db } from "./db";       // drizzle(client), better-sqlite3 driver
+import { users } from "./schema"; // an existing sqliteTable declaration
+
+const stream = await exportTable(db, users, {
+  columns: { userId: users.id, displayName: users.name, email: users.email },
+  format: "json",
+});
+type User = ExportRow<typeof stream>; // types and nullability from Drizzle
+return new Response(stream, {
+  headers: { "Content-Type": "application/json" },
+});
+```
+
+Omitting `columns` exports the table's declared Drizzle columns with its JavaScript property names as JSON keys. An object selection renames or repeats fields without duplicating type declarations. The adapter respects Drizzle's configured column casing. A single integer primary key from either `.primaryKey()` or table-level `primaryKey({ columns: [...] })` enables the existing 256-row batches, even when that key is excluded from the JSON projection. Composite, text and missing keys use row streaming. Both paths prepare and execute one data statement with no schema or capability preflight queries. The Drizzle schema must match the database; fresh preparation catches missing fields, and extra database columns do not change the export.
+
+Pass an unexecuted Drizzle select to reuse its filters, parameter encoders, aliases, flat joins, ordering, limits, grouping and CTEs:
+
+```ts
+const query = db.select({ id: users.id, label: users.name })
+  .from(users).where(eq(users.active, true));
+const stream = await exportQuery(db, query, { format: "json", zip: true });
+```
+
+The adapter compiles `.toSQL()` and reads selection metadata; it never awaits the query or calls Drizzle's `.all()`. Select queries retain their inferred row contract, including nullable columns from flat left joins. Give computed SQL expressions an `.as("alias")` alias. Ordinary select queries use the existing row-streaming query path; the integer-key table batching optimization applies to `exportTable()`. Drizzle's built-in query-result cache and row logging/mapping hooks are bypassed because ExportLite executes the generated JSON statement through the same native `$client` cursor. No export result is cached.
+
+Raw Drizzle `sql` templates also work. Supply the schema columns corresponding to the raw query's result column names; these fields supply output names and decoding metadata without a discovery query:
+
+```ts
+const stream = await exportQuery(
+  db,
+  sql`SELECT * FROM ${users} WHERE ${users.id} > ${100}`,
+  { columns: { id: users.id, displayName: users.name }, format: "json" },
+);
+```
+
+Supported schema values are plain `integer`, `real`, `text` (including enums), boolean integers and JSON-mode text. JSON-mode text becomes nested JSON rather than an escaped string. Boolean fields use ExportLite's strict 0/1 representation. A generic `sql<T>` annotation or `$type<T>()` is a caller-supplied type contract, not runtime validation; computed SQL selections should return JSON scalar values. To embed stored JSON objects/arrays, select the JSON-mode schema column itself. Nested selection objects and Drizzle's relational query API are outside this first adapter.
+
+Date/timestamp modes, numeric modes, BLOB/bigint columns, custom column decoders and `.mapWith()` are rejected explicitly rather than silently skipping their conversions. Convert such fields to a supported scalar in an aliased SQL expression when appropriate. Unbound `sql.placeholder()` values are not supported; bind actual values in the query before exporting. The adapter reads a few runtime metadata properties that Drizzle marks internal, including configured casing, selection fields and SQL decoders; compatibility tests cover the pinned version and upgrades should rerun them.
+
+`zip`, `signal`, `output`, `end`, `bufferSize`, table `encoding` and `.result` work as in the core API, using the same writer and ZIP implementation. The caller owns the connection and any surrounding native transaction. Drizzle transaction-wrapper objects do not expose the required `$client`; pass the original database while its native transaction remains open for the entire export consumption.
+
+Remote libSQL/Turso and other Drizzle drivers are not supported by this adapter. Drizzle's libSQL execution path returns a buffered result, so using its raw execution API alone would not preserve bounded streaming. A remote adapter needs a streaming transport in addition to Drizzle's schema/compiler support. Run `node examples/drizzle.mjs` for table, select and raw SQL examples.
+
+The [Drizzle adapter benchmark](benchmarks/DRIZZLE-ADAPTER.md) compares total JSON generation/UTF-8 output time and whole-process peak memory against direct ExportLite and normal Drizzle queries plus `JSON.stringify()`, using the existing fixtures and Node 26.12.0. It includes separate select-builder and Drizzle-loaded application controls.
+
 ## Readable streams and API responses
 
 Omitting `output` returns a `Promise<ExportStream>`. The resolved value is a Web `ReadableStream<Uint8Array>` that works directly as a `Response` body, with `.result` for completion statistics. It supports plain JSON/JSONL and `zip: true` with the same options as destination exports. There is no `toWeb()` helper.
@@ -234,7 +287,7 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 249 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 283 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 

@@ -5,7 +5,7 @@ import { identifier, literal, uniqueColumns } from "./identifiers.js";
 export interface SelectedField {
   key: string;
   column: string;
-  kind: "value" | "boolean";
+  kind: "value" | "boolean" | "json";
   dataType: "text" | "integer" | "real";
   primary: boolean;
 }
@@ -52,7 +52,9 @@ export function selectedObject(
     const jsonValue =
       field.kind === "boolean"
         ? `json(CASE ${value} WHEN 0 THEN 'false' WHEN 1 THEN 'true' ELSE CASE WHEN ${value} IS NULL THEN NULL ELSE 'ExportLite: expected boolean 0 or 1' END END)`
-        : value;
+        : field.kind === "json"
+          ? `json(${value})`
+          : value;
     return `${literal(field.key)}, ${jsonValue}`;
   });
   return `json_object(${pairs.join(", ")})`;
