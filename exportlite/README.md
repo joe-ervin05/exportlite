@@ -149,7 +149,7 @@ Date/timestamp modes, numeric modes, BLOB/bigint columns, custom column decoders
 
 For Turso, create the client using `exportlite/turso` as shown below. Other Drizzle drivers are not supported. Run `node examples/drizzle.mjs` for local table, select and raw SQL examples.
 
-The [Drizzle adapter benchmark](benchmarks/DRIZZLE-ADAPTER.md) compares total JSON generation/UTF-8 output time and whole-process peak memory against direct ExportLite and normal Drizzle queries plus `JSON.stringify()`, using the existing fixtures and Node 26.12.0. It includes separate select-builder and Drizzle-loaded application controls.
+The [Drizzle adapter benchmark](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/DRIZZLE-ADAPTER.md) compares total JSON generation/UTF-8 output time and whole-process peak memory against direct ExportLite and normal Drizzle queries plus `JSON.stringify()`, using the existing fixtures and Node 26.12.0. It includes separate select-builder and Drizzle-loaded application controls.
 
 ## Turso / libSQL HTTP
 
@@ -280,9 +280,9 @@ Internally, ZIP uses one continuous DEFLATE stream, compression level **1**, `me
 
 `bytesWritten` counts the complete ZIP file, including its headers, checksum descriptors and directory. Completion waits for the directory and last destination write, plus stream finalization when `end: true` is requested. Backpressure, cancellation, output ownership and partial-file cleanup follow the same rules as plain exports. A cancelled or failed archive is incomplete; caller streams can already contain ZIP bytes. Files created by the package are removed on handled failure.
 
-Run `node examples/zip.mjs` for a working ZIP export. The [actual ZIP benchmarks](benchmarks/ZIP.md) compare the public option with JS object streaming using the same ZIP writer and settings.
+Run `node examples/zip.mjs` for a working ZIP export. The [actual ZIP benchmarks](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/ZIP.md) compare the public option with JS object streaming using the same ZIP writer and settings.
 
-The [naive JavaScript comparison](benchmarks/NAIVE.md) adds `all()` followed by `JSON.stringify()` of the complete row array, with plain JSON and ZIP output. It measures total time, encoded size and peak memory alongside both streaming implementations on the same varied fixtures.
+The [naive JavaScript comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/NAIVE.md) adds `all()` followed by `JSON.stringify()` of the complete row array, with plain JSON and ZIP output. It measures total time, encoded size and peak memory alongside both streaming implementations on the same varied fixtures.
 
 ## Fixed batching and streaming fallbacks
 
@@ -332,7 +332,7 @@ SQLite >=3.45.1 with JSON support is required. Automatic local discovery checks 
 
 ## Development and validation
 
-Use Node.js 22.18+, 24.11+, or 26+ for the development tools and pnpm 12.14.0. Tested on Node 24.19.0 and 26.12.0. Dependency versions were rechecked on October 18, 2026: `better-sqlite3` 13.0.3, Drizzle 0.45.4, `@libsql/client` 0.18.0 and `zip-stream` 7.0.5 remain current. Node typings stay on the pinned 22.x line to match the intended minimum runtime. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
+Supported Node majors are 22 (22.18.0+), 24 (24.11.0+) and 26. Use pnpm 12.14.0 for checkout development. See the [compatibility checks](docs/compatibility.md) for tested versions, platforms and packed-consumer coverage. Dependency versions were rechecked on October 18, 2026: `better-sqlite3` 13.0.3, Drizzle 0.45.4, `@libsql/client` 0.18.0 and `zip-stream` 7.0.5 remain current. Node typings stay on the pinned 22.x line to match the intended minimum runtime. Direct development dependencies are pinned in the lockfile. tsdown warns that its TypeScript 7 compiler-API integration is experimental; declarations and typed consumers are checked locally.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -341,13 +341,14 @@ pnpm typecheck
 pnpm test
 pnpm check
 pnpm example
+npm run test:package
 ```
 
-Local checks cover 378 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 378 tests, ESM/CommonJS consumers, declared column builders and aliases, inferred row contracts, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Declared-column tests also cover one-statement queries without metadata reads, quoted and case-distinct JSON keys, repeated source columns, boolean encoding and schema changes. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. Cache tests cover data updates, schema changes from another connection, rolled-back DDL, cache eviction, overlapping lazy streams, cancellation, failed outputs and capability-check retries. Turso tests additionally cover actual local HTTP cursors, request counts, fragmented Unicode protocol frames, interrupted responses, malformed messages, session reuse and serialization, queued cancellation, expiry recovery without partial-stream replay, awaited shutdown and cleanup errors, client close/reconnect and the public example. Optional-peer tests check that unused drivers need not be installed. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. The [compatibility workflow](https://github.com/joe-ervin05/exportlite/actions/workflows/ci.yml) checks the full suite and packed consumers across the documented [Node/platform matrix](docs/compatibility.md). Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 
-The [phase 2 regression checks](benchmarks/PHASE-2.md) cover the shared delivery refactor, plain/ZIP output hashes, targeted timing rechecks and the observed wide-query peak-RSS shift.
+The [phase 2 regression checks](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/PHASE-2.md) cover the shared delivery refactor, plain/ZIP output hashes, targeted timing rechecks and the observed wide-query peak-RSS shift.
 
 Build first, then compare the public table/query APIs with JS object streaming and full SQLite aggregation:
 
@@ -357,24 +358,24 @@ pnpm bench --rows=100000 --width=1024 --repeats=3 --warmups=1 --methods=exportli
 node benchmarks/report.mjs
 ```
 
-[Measured results and limitations](benchmarks/REPORT.md).
+[Measured results and limitations](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/REPORT.md).
 
-The [reusable Turso session comparison](benchmarks/TURSO-SESSIONS.md) repeats the same varied fixtures, Node 26.12.0 and 0/25/100 ms simulated latency after adding serialized session reuse. It compares export time and client-process peak memory across all four methods, measures awaited client shutdown separately, and compares with the [previous per-export close implementation](benchmarks/TURSO.md). Both runs use a local protocol server with SQLite; live Turso Cloud performance remains unverified.
+The [reusable Turso session comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/TURSO-SESSIONS.md) repeats the same varied fixtures, Node 26.12.0 and 0/25/100 ms simulated latency after adding serialized session reuse. It compares export time and client-process peak memory across all four methods, measures awaited client shutdown separately, and compares with the [previous per-export close implementation](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/TURSO.md). Both runs use a local protocol server with SQLite; live Turso Cloud performance remains unverified.
 
-The [concurrent Turso comparison](benchmarks/TURSO-CONCURRENCY.md) measures one shared client versus separate clients at concurrency 1, 2 and 4, using those same fixtures, runtime and latency settings. It covers the direct API and Drizzle adapter, reporting throughput, per-export latency including queue wait, and whole-client-process peak memory. The report explains the local fixture server's limits on large-export parallelism.
+The [concurrent Turso comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/TURSO-CONCURRENCY.md) measures one shared client versus separate clients at concurrency 1, 2 and 4, using those same fixtures, runtime and latency settings. It covers the direct API and Drizzle adapter, reporting throughput, per-export latency including queue wait, and whole-client-process peak memory. The report explains the local fixture server's limits on large-export parallelism.
 
-The [matched API comparison](benchmarks/MATCHED-API.md) reruns the original users/posts/comments fixture on Node 26.12.0, separating JSON generation/pipeline work from UTF-8 response-body encoding for full SQLite aggregation, ExportLite batching, manual JS and Drizzle. It includes actual public Node writable/Web stream controls. Nested and limited-root cases use a benchmark-only adapter around the existing planner/producer; they do not add public relationship support.
+The [matched API comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/MATCHED-API.md) reruns the original users/posts/comments fixture on Node 26.12.0, separating JSON generation/pipeline work from UTF-8 response-body encoding for full SQLite aggregation, ExportLite batching, manual JS and Drizzle. It includes actual public Node writable/Web stream controls. Nested and limited-root cases use a benchmark-only adapter around the existing planner/producer; they do not add public relationship support.
 
-The earlier [streaming gzip comparison](benchmarks/COMPRESSION.md) measures ExportLite and JS object streaming with no compression, gzip level 1 and default gzip, including total file-completion time, encoded size and peak memory. Gzip lives entirely in that benchmark harness and uses Node's built-in `createGzip()`. Reproduction commands and raw runs are linked in that report.
+The earlier [streaming gzip comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/COMPRESSION.md) measures ExportLite and JS object streaming with no compression, gzip level 1 and default gzip, including total file-completion time, encoded size and peak memory. Gzip lives entirely in that benchmark harness and uses Node's built-in `createGzip()`. Reproduction commands and raw runs are linked in that report.
 
-The [varied-data comparison](benchmarks/VARIED-COMPRESSION.md) repeats those runs with seeded synthetic business records: distinct references, international names, variable-length support notes, NULLs and occasional longer notes. It includes measured note-size distributions, distinct-value counts and sample records. The earlier repetitive fixtures remain available as a separate comparison.
+The [varied-data comparison](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/VARIED-COMPRESSION.md) repeats those runs with seeded synthetic business records: distinct references, international names, variable-length support notes, NULLs and occasional longer notes. It includes measured note-size distributions, distinct-value counts and sample records. The earlier repetitive fixtures remain available as a separate comparison.
 
-The [compression-buffer investigation](benchmarks/GZIP-INVESTIGATION.md) tests why large-record compression can hide ExportLite's speed advantage. Using `createGzip({ level: 1, chunkSize: 256 * 1024 })` improved the tested streaming pipeline without changing the export engine or compression ratio. This is the compressor's output-buffer size, separate from `bufferSize` and the stream's queue threshold. The report includes paired comparisons, rejected alternatives and limitations.
+The [compression-buffer investigation](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/GZIP-INVESTIGATION.md) tests why large-record compression can hide ExportLite's speed advantage. Using `createGzip({ level: 1, chunkSize: 256 * 1024 })` improved the tested streaming pipeline without changing the export engine or compression ratio. This is the compressor's output-buffer size, separate from `bufferSize` and the stream's queue threshold. The report includes paired comparisons, rejected alternatives and limitations.
 
 Benchmark tools and results are not shipped in the npm payload. CSV, relationship nesting, extra drivers and additional sizing controls are outside v0.
 
 MIT licensed.
 
-The [batch profiling report](benchmarks/BATCH-PROFILE.md) measures the boundary-query optimization against the preserved implementation and full SQLite aggregation on the same Node runtime and fixtures.
+The [batch profiling report](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/BATCH-PROFILE.md) measures the boundary-query optimization against the preserved implementation and full SQLite aggregation on the same Node runtime and fixtures.
 
-The [remaining-gap investigation](benchmarks/REMAINING-GAP.md) measures the UTF-8 byte path against the previous text path and full aggregation returning either text or bytes. It also documents the higher small-record process RSS and lower large-record RSS observed with byte buffering.
+The [remaining-gap investigation](https://github.com/joe-ervin05/exportlite/blob/main/exportlite/benchmarks/REMAINING-GAP.md) measures the UTF-8 byte path against the previous text path and full aggregation returning either text or bytes. It also documents the higher small-record process RSS and lower large-record RSS observed with byte buffering.

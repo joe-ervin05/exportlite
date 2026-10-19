@@ -611,6 +611,7 @@ it("loads both core entry points without installing the optional Drizzle peer", 
     await symlink(
       dirname(require.resolve("zip-stream")),
       join(folder, "node_modules/zip-stream"),
+      "junction",
     );
     const esm = pathToFileURL(join(folder, "dist/index.mjs")).href;
     const cjs = join(folder, "dist/index.cjs");

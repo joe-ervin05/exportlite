@@ -1,0 +1,14 @@
+import { Writable } from "node:stream";
+import { exportQuery, integer, text, type ExportResult, type ExportRow, type SQLiteConnection } from "exportlite";
+type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;
+type Expect<T extends true> = T;
+declare const connection: SQLiteConnection;
+const stream = exportQuery(connection, {
+  sql: "SELECT id,name FROM users",
+  columns: { userId: integer("id").primaryKey(), label: text("name") },
+  format: "json",
+});
+type Row = Expect<Equal<ExportRow<typeof stream>, { userId: number; label: string | null }>>;
+const saved: Promise<ExportResult> = exportQuery(connection, { sql: "SELECT 1", output: new Writable() });
+// @ts-expect-error Internal batching must stay outside the public API.
+exportQuery(connection, { sql: "SELECT 1", batchSize: 256 });

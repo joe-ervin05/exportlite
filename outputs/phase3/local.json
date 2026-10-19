@@ -1,0 +1,48 @@
+{
+  "node": "v26.12.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "tests": 378,
+  "build": "pass",
+  "publicTypes": "pass",
+  "lint": "pass",
+  "packedConsumers": [
+    "bare",
+    "native",
+    "turso",
+    "drizzle-native",
+    "drizzle-turso"
+  ],
+  "moduleFormats": [
+    "ESM",
+    "CommonJS"
+  ],
+  "packedFiles": 42,
+  "packedBytes": 125229,
+  "tarballSha256": "db8105b9018231bdb0226ba6f22fb52c93a3b2cb8fb9ec99c3a975a0e5be7ea4",
+  "sourceBase": "5778736da6562963e2475f76fbcbc12523ee00bb",
+  "runtimeBundleHashes": {
+    "cache-DBiT1MOk.mjs": "ab673e00cd6a473a28f6f4445275db94cd3f74d6c30ddd4ba42a21ce2e4047d0",
+    "declared-Chfj4QBN.mjs": "fef8869f917ea2d4ac33abeda84075c3f6c357968ad0dd0dc0e57a6645d21d3b",
+    "drizzle.mjs": "1ec2634ff873107c6b1f5790c4320b0286cb0e159e047ac5d165eb3a7f295fa7",
+    "export-turso-DqfvYqCF.mjs": "a9edb580afd07a0b28cb2a1fc2b0ab882a81860bb187a5a5dce6e0d284d2b679",
+    "index.mjs": "cb2581b13ccb78e714cf8e8249f2fab36a0a76953fd9664a11f52cd778f6c315",
+    "turso.mjs": "ff7bcca1655b356d0c6c4be8dd7edb62dd365fa22b53fa3023f96b4783d7b68a"
+  },
+  "runtimeUnchanged": "ESM bundle hashes match outputs/wide-query-memory/final/configuration.json after-build hashes; src is unchanged.",
+  "latestVersionsChecked": {
+    "date": "2026-10-18",
+    "better-sqlite3": "13.0.3",
+    "drizzle-orm": "0.45.4",
+    "@libsql/client": "0.18.0",
+    "zip-stream": "7.0.5",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5",
+    "tsdown": "0.23.1",
+    "pnpm": "12.14.0",
+    "Node22": "22.23.3",
+    "Node24": "24.22.0",
+    "Node26": "26.12.0"
+  },
+  "scope": "Local HTTP protocol only; no live Turso service and no publication. Per-runtime npm tarballs can have different compression bytes; runtime contents are recorded separately."
+}

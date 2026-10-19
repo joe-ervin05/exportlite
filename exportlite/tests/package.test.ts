@@ -42,6 +42,7 @@ it.each([
             fileURLToPath(new URL(`../node_modules/${name}`, import.meta.url)),
           ),
           target,
+          "junction",
         );
       }
       const entries = [
