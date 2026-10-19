@@ -66,19 +66,19 @@ export function* jsonRows(
 export function* jsonBatches(
   statement: ReadStatement,
   args: unknown[],
-): Generator<[string, number | bigint]> {
+): Generator<[string | Buffer, number | bigint]> {
   try {
     for (const value of statement.raw().iterate(...args)) {
       if (
         !Array.isArray(value) ||
-        typeof value[0] !== "string" ||
+        (typeof value[0] !== "string" && !Buffer.isBuffer(value[0])) ||
         (typeof value[1] !== "number" && typeof value[1] !== "bigint") ||
         !Number.isSafeInteger(Number(value[1])) ||
         Number(value[1]) < 1
       ) {
         throw new Error("Expected a SQLite JSON batch and positive row count");
       }
-      yield value as [string, number | bigint];
+      yield value as [string | Buffer, number | bigint];
     }
   } catch (error) {
     throw sqliteError(error);

@@ -1,6 +1,6 @@
 # ExportLite — v0
 
-Export SQLite tables and read-only queries to JSON or JSONL through an existing `better-sqlite3` connection. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes the strings without parsing them or constructing row objects. This is a local, private prototype.
+Export SQLite tables and read-only queries to JSON or JSONL through an existing `better-sqlite3` connection. Omit `output` to receive a Web readable stream, or pass a file path/Node writable destination. SQLite constructs the JSON; JavaScript writes JSON fragments without parsing them or constructing row objects. This is a local, private prototype.
 
 ## Usage
 
@@ -127,7 +127,11 @@ The [naive JavaScript comparison](benchmarks/NAIVE.md) adds `all()` followed by 
 
 ## Fixed batching and streaming fallbacks
 
-Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those strings directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. Schema and capability checks still use their small metadata queries.
+Ordinary main-schema rowid tables use **256-row batches**. One recursive export statement finds indexed rowid ranges and builds a JSON array or LF-separated JSON objects for each range. JavaScript joins those fragments directly into the requested output. There are no SQL callbacks, sizing estimators, extra connections or pagination queries. Schema and capability checks still use their small metadata queries.
+
+Each range starts with an indexed seek and locates its 256th existing key using a constant `OFFSET 255`. That offset stays fixed for every batch; it does not grow with the export. Bounds remain SQLite integers, and only a short final batch needs a separate count inside the same statement.
+
+For UTF-8 databases, batch JSON stays as UTF-8 bytes from SQLite through the writer, avoiding conversion to JavaScript text and back. UTF-16 databases retain the text path and still produce UTF-8 output. This is internal; the stream and file APIs are unchanged.
 
 Views, virtual tables, WITHOUT ROWID tables, and tables shadowing all three rowid aliases automatically use the row-streaming path. Custom queries always stream individual SQLite-generated JSON records. Both paths share the same output loop, backpressure, cancellation and cleanup behavior. An execution failure never retries through a different path after writing partial data.
 
@@ -178,7 +182,7 @@ pnpm check
 pnpm example
 ```
 
-Local checks cover 168 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
+Local checks cover 180 tests, ESM/CommonJS consumers, 256-row boundaries, all fallback kinds, parameter binding, Unicode/NULL/integer preservation, backpressure, cancellation, finalization, partial-file cleanup and concurrent WAL snapshot consistency. Readable tests cover lazy execution, one data statement, Web `Response` bodies and writable streams, Node pipelines, cancellation/disconnects, errors and completion statistics. ZIP tests additionally decode archives with an independent reader, check CRC-32 and encoded byte statistics, and exercise footer-write errors. A separate `node benchmarks/validate-zip64.mjs` check streamed and fully decoded an actual entry larger than 4 GiB. A cross-version CI matrix has not yet been run. Run `node examples/batched.mjs` for a larger table export using the same API.
 
 ## Benchmarks
 
@@ -192,6 +196,8 @@ node benchmarks/report.mjs
 
 [Measured results and limitations](benchmarks/REPORT.md).
 
+The [matched API comparison](benchmarks/MATCHED-API.md) reruns the original users/posts/comments fixture on Node 26.12.0, separating JSON generation/pipeline work from UTF-8 response-body encoding for full SQLite aggregation, ExportLite batching, manual JS and Drizzle. It includes actual public Node writable/Web stream controls. Nested and limited-root cases use a benchmark-only adapter around the existing planner/producer; they do not add public relationship support.
+
 The earlier [streaming gzip comparison](benchmarks/COMPRESSION.md) measures ExportLite and JS object streaming with no compression, gzip level 1 and default gzip, including total file-completion time, encoded size and peak memory. Gzip lives entirely in that benchmark harness and uses Node's built-in `createGzip()`. Reproduction commands and raw runs are linked in that report.
 
 The [varied-data comparison](benchmarks/VARIED-COMPRESSION.md) repeats those runs with seeded synthetic business records: distinct references, international names, variable-length support notes, NULLs and occasional longer notes. It includes measured note-size distributions, distinct-value counts and sample records. The earlier repetitive fixtures remain available as a separate comparison.
@@ -201,3 +207,7 @@ The [compression-buffer investigation](benchmarks/GZIP-INVESTIGATION.md) tests w
 Benchmark tools and results are not shipped in the npm payload. CSV, relationship nesting, extra drivers and additional sizing controls are outside v0.
 
 MIT licensed.
+
+The [batch profiling report](benchmarks/BATCH-PROFILE.md) measures the boundary-query optimization against the preserved implementation and full SQLite aggregation on the same Node runtime and fixtures.
+
+The [remaining-gap investigation](benchmarks/REMAINING-GAP.md) measures the UTF-8 byte path against the previous text path and full aggregation returning either text or bytes. It also documents the higher small-record process RSS and lower large-record RSS observed with byte buffering.

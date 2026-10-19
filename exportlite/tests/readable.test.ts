@@ -313,10 +313,18 @@ describe("readable exports", () => {
         bufferSize: 1,
       });
       let release: (() => void) | undefined;
+      let hold = true;
+      let ready!: () => void;
+      const blocked = new Promise<void>((resolve) => {
+        ready = resolve;
+      });
       const sink = new Writable({
         highWaterMark: 1,
         write(_chunk, _encoding, callback) {
-          release = callback;
+          if (hold) {
+            release = callback;
+            ready();
+          } else callback();
         },
       });
       const pending = pipeline(asNode(stream), sink);
@@ -324,12 +332,14 @@ describe("readable exports", () => {
         "code",
         "ABORTED",
       );
-      await setTimeout(15);
+      await blocked;
       controller.abort("request disconnected");
       await expect(stream.result).rejects.toHaveProperty("code", "ABORTED");
       db.exec("DROP TABLE users");
       // A Web-to-Node adapter observes the error on its next read. A pending
-      // caller-owned write must finish before that pipeline can advance.
+      // caller-owned write must finish before that pipeline can advance. Any
+      // adapter-buffered chunks can then finish too, without a second deadlock.
+      hold = false;
       release?.();
       await rejection;
     },

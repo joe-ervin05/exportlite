@@ -68,7 +68,7 @@ export function checkAborted(signal?: AbortSignal): void {
 
 export class OutputWriter {
   bytesWritten = 0;
-  private parts: string[] = [];
+  private parts: (string | Buffer)[] = [];
   private buffered = 0;
   private failure: Error | undefined;
   private rejectPending: ((error: Error) => void) | undefined;
@@ -149,10 +149,22 @@ export class OutputWriter {
       );
   }
 
-  write(text: string, knownBytes?: number): Promise<void> | undefined {
+  // knownBytes includes framing. Store binary fragments without text conversion.
+  write(
+    text: string | Buffer,
+    knownBytes?: number,
+    prefix = "",
+    suffix = "",
+  ): Promise<void> | undefined {
     this.check();
+    if (prefix) this.parts.push(prefix);
     this.parts.push(text);
-    this.buffered += knownBytes ?? Buffer.byteLength(text);
+    if (suffix) this.parts.push(suffix);
+    this.buffered +=
+      knownBytes ??
+      (typeof text === "string" ? Buffer.byteLength(text) : text.length) +
+        Buffer.byteLength(prefix) +
+        Buffer.byteLength(suffix);
     if (this.buffered >= (this.options.bufferSize ?? 65_536))
       return this.flush();
     return undefined;
@@ -161,8 +173,15 @@ export class OutputWriter {
   private async flush(): Promise<void> {
     this.check();
     if (this.buffered === 0) return;
-    const text = this.parts.join("");
     const bytes = this.buffered;
+    const text = this.parts.every((part) => typeof part === "string")
+      ? this.parts.join("")
+      : Buffer.concat(
+          this.parts.map((part) =>
+            typeof part === "string" ? Buffer.from(part, "utf8") : part,
+          ),
+          bytes,
+        );
     this.parts = [];
     this.buffered = 0;
     await this.send(text, bytes);

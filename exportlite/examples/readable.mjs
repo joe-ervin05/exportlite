@@ -16,7 +16,7 @@ try {
     "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT); INSERT INTO users VALUES(1,'Jóe 雪'),(2,'Amelia')",
   );
   stream = await exportTable(db, "users", { format: "json", zip: true });
-  const response = new Response(stream, {
+  const response = new Response(stream.toWeb(), {
     headers: {
       "Content-Type": "application/zip",
       "Content-Disposition": 'attachment; filename="users.zip"',
@@ -32,7 +32,7 @@ try {
   );
   console.log({ output, ...(await stream.result) });
 } finally {
-  if (stream && !stream.locked) await stream.cancel().catch(() => {});
+  stream?.destroy();
   await stream?.result.catch(() => {});
   db.close();
 }

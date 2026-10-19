@@ -33,16 +33,24 @@ export async function streamExport(
       output.check();
       const text = typeof value === "string" ? value : value[0];
       const count = typeof value === "string" ? 1 : Number(value[1]);
-      const content = json && batched ? text.slice(1, -1) : text;
+      const content =
+        json && batched
+          ? typeof text === "string"
+            ? text.slice(1, -1)
+            : text.subarray(1, -1)
+          : text;
       const prefix = json && rowsExported > 0 ? "," : "";
       const suffix = json ? "" : "\n";
       const bytes =
-        Buffer.byteLength(text) -
+        (typeof text === "string" ? Buffer.byteLength(text) : text.length) -
         (json && batched ? 2 : 0) +
         prefix.length +
         suffix.length;
       // Stitch SQLite JSON directly; never parse it or construct JS row objects.
-      const wait = output.write(`${prefix}${content}${suffix}`, bytes);
+      const wait =
+        typeof content === "string"
+          ? output.write(`${prefix}${content}${suffix}`, bytes)
+          : output.write(content, bytes, prefix, suffix);
       if (wait) await wait;
       rowsExported += count;
       sinceYield += count;

@@ -60,6 +60,86 @@ function decode(text: string, format: "json" | "jsonl") {
 }
 
 describe("fixed internal SQLite batches", () => {
+  it("returns UTF-8 bytes from SQLite without mutating its batch buffers", async () => {
+    const statement = planTable(db, "users", undefined, "json").statement;
+    const iterator = statement.raw().iterate();
+    const value = iterator.next().value as [Buffer, number];
+    iterator.return?.();
+    expect(Buffer.isBuffer(value[0])).toBe(true);
+    expect(JSON.parse(value[0].toString("utf8"))).toHaveLength(256);
+    const first = Buffer.from(value[0]);
+    const connection: SQLiteConnection = {
+      prepare(sql) {
+        const prepared: ReadStatement = db.prepare(sql);
+        if (sql.startsWith('WITH RECURSIVE "__exportlite_batches"')) {
+          prepared.iterate = function* () {
+            yield value;
+          };
+        }
+        return prepared;
+      },
+    };
+    const stream = await exportTable(connection, "users", { format: "json" });
+    expect(await new Response(stream).text()).toBe(first.toString("utf8"));
+    expect((await stream.result).rowsExported).toBe(256);
+    expect(value[0]).toEqual(first);
+  });
+
+  it.each(
+    ["UTF-16le", "UTF-16be"].flatMap((encoding) =>
+      (["json", "jsonl"] as const).flatMap((format) =>
+        [false, true].map((zip) => ({ encoding, format, zip })),
+      ),
+    ),
+  )(
+    "preserves UTF-8 output for a $encoding database, $format, zip=$zip",
+    async ({ encoding, format, zip }) => {
+      const utf16 = new Database(":memory:");
+      try {
+        utf16.pragma(`encoding='${encoding}'`);
+        utf16.exec("CREATE TABLE words(id INTEGER PRIMARY KEY, text TEXT)");
+        const insert = utf16.prepare("INSERT INTO words VALUES(?, ?)");
+        const records = Array.from({ length: 257 }, (_, i) => ({
+          id: i + 1,
+          text: `雪 café 🦦 \\"${i}\\"\n`,
+        }));
+        utf16.transaction(() => {
+          for (const record of records) insert.run(record.id, record.text);
+        })();
+        const planned = planTable(utf16, "words", undefined, format);
+        expect(planned.batched).toBe(true);
+        const iterator = planned.statement.raw().iterate();
+        expect(typeof (iterator.next().value as [string, number])[0]).toBe(
+          "string",
+        );
+        iterator.return?.();
+        const stream = await exportTable(utf16, "words", { format, zip });
+        const bytes = Buffer.from(await new Response(stream).arrayBuffer());
+        expect((await stream.result).rowsExported).toBe(257);
+        if (zip) {
+          const { fromBufferPromise } = await import("yauzl");
+          const archive = await fromBufferPromise(bytes);
+          try {
+            for await (const entry of archive.eachEntry()) {
+              const parts: Buffer[] = [];
+              for await (const chunk of await archive.openReadStreamPromise(
+                entry,
+              ))
+                parts.push(chunk);
+              expect(
+                decode(Buffer.concat(parts).toString("utf8"), format),
+              ).toEqual(records);
+            }
+          } finally {
+            archive.close();
+          }
+        } else expect(decode(bytes.toString("utf8"), format)).toEqual(records);
+      } finally {
+        utf16.close();
+      }
+    },
+  );
+
   it.each(
     [0, 1, 255, 256, 257, 512, 513].flatMap((count) =>
       (["json", "jsonl"] as const).map((format) => ({ count, format })),
@@ -150,6 +230,57 @@ describe("fixed internal SQLite batches", () => {
     expect(JSON.parse(output.text())).toEqual([
       { rowid: "text", "a'b": 3, doubled: 6 },
       { rowid: "other", "a'b": 4, doubled: 8 },
+    ]);
+  });
+
+  it.each(["json", "jsonl"] as const)(
+    "keeps sparse integer bounds exact at full and partial %s batch ends",
+    async (format) => {
+      db.exec("DELETE FROM users");
+      const insert = db.prepare("INSERT INTO users VALUES (?, 'edge', NULL)");
+      const ids = Array.from(
+        { length: 512 },
+        (_, i) => -9223372036854775808n + BigInt(i) * 9007199254740993n,
+      );
+      ids[255] = -9007199254740993n;
+      for (let i = 256; i < 511; i++)
+        ids[i] = 9007199254740993n + BigInt(i - 256) * 11n;
+      ids[511] = 9223372036854775807n;
+      db.transaction(() => {
+        for (const id of ids) insert.run(id);
+      })();
+      db.defaultSafeIntegers(true);
+      for (const count of [512, 511]) {
+        const output = capture();
+        const result = await exportTable(db, "users", {
+          columns: ["id"],
+          format,
+          output: output.stream,
+        });
+        const records = db
+          .prepare("SELECT json_object('id',id) FROM users ORDER BY rowid")
+          .pluck()
+          .all() as string[];
+        expect(output.text()).toBe(
+          format === "json"
+            ? `[${records.join(",")}]`
+            : `${records.join("\n")}\n`,
+        );
+        expect(result.rowsExported).toBe(count);
+        db.prepare("DELETE FROM users WHERE id = ?").run(ids[511]);
+      }
+    },
+  );
+
+  it("qualifies batch bounds when source columns shadow both rowid aliases and bound names", async () => {
+    db.exec(
+      "CREATE TABLE aliases(rowid TEXT, _rowid_ TEXT, first TEXT, last TEXT); INSERT INTO aliases(oid,rowid,_rowid_,first,last) VALUES(-9223372036854775808,'r','s','a','b'),(9223372036854775807,'t','u','c','d')",
+    );
+    const output = capture();
+    await exportTable(db, "aliases", { output: output.stream, format: "json" });
+    expect(JSON.parse(output.text())).toEqual([
+      { rowid: "r", _rowid_: "s", first: "a", last: "b" },
+      { rowid: "t", _rowid_: "u", first: "c", last: "d" },
     ]);
   });
 

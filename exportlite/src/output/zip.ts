@@ -116,9 +116,14 @@ export class ZipOutput {
     this.json.check();
   }
 
-  write(text: string, bytes?: number): Promise<void> | undefined {
+  write(
+    text: string | Buffer,
+    bytes?: number,
+    prefix = "",
+    suffix = "",
+  ): Promise<void> | undefined {
     this.check();
-    return this.json.write(text, bytes);
+    return this.json.write(text, bytes, prefix, suffix);
   }
 
   async complete(): Promise<void> {
