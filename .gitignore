@@ -3,6 +3,7 @@
 /sources/
 /.pnpm-store/
 **/node_modules/
+**/node_modules
 **/dist/
 **/build/
 **/__pycache__/
@@ -19,3 +20,6 @@
 
 # Benchmark evidence is curated explicitly; other generated work stays local.
 /outputs/
+/exportlite/benchmarks/baselines/
+/exportlite/benchmarks/results/**/raw/
+/exportlite/benchmarks/results/*smoke*/

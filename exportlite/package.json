@@ -91,5 +91,14 @@
   },
   "dependencies": {
     "zip-stream": "7.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joe-ervin05/exportlite.git",
+    "directory": "exportlite"
+  },
+  "homepage": "https://github.com/joe-ervin05/exportlite/tree/main/exportlite#readme",
+  "bugs": {
+    "url": "https://github.com/joe-ervin05/exportlite/issues"
   }
 }
