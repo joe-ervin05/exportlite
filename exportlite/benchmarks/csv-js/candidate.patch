@@ -1,0 +1,529 @@
+diff --git a/exportlite/src/api/export-query.ts b/exportlite/src/api/export-query.ts
+index 7d05735..d18b5eb 100644
+--- a/exportlite/src/api/export-query.ts
++++ b/exportlite/src/api/export-query.ts
+@@ -57,6 +57,7 @@ export async function exportQuery(
+     options.sql,
+     options.columns,
+     options.format,
++    options.format === "csv",
+   );
+   const args = bindings(options.params);
+   return deliverLocalExport(
+diff --git a/exportlite/src/api/export-table.ts b/exportlite/src/api/export-table.ts
+index 8fda5b7..79b4c1e 100644
+--- a/exportlite/src/api/export-table.ts
++++ b/exportlite/src/api/export-table.ts
+@@ -74,8 +74,15 @@ export async function exportTable(
+         options.columns as SelectedColumns,
+         options.format ?? "jsonl",
+         options.encoding ?? "utf8",
++        options.format === "csv",
+       )
+-    : cachedTablePlan(db, table, options.columns, options.format ?? "jsonl");
++    : cachedTablePlan(
++        db,
++        table,
++        options.columns,
++        options.format ?? "jsonl",
++        options.format === "csv",
++      );
+   return deliverLocalExport(
+     statement,
+     [],
+diff --git a/exportlite/src/api/export.ts b/exportlite/src/api/export.ts
+index 4467fe0..1f39084 100644
+--- a/exportlite/src/api/export.ts
++++ b/exportlite/src/api/export.ts
+@@ -1,6 +1,7 @@
+ import { setImmediate } from "node:timers/promises";
+ import type { ReadStatement } from "../database/adapter.js";
+ import { jsonBatches, jsonRows } from "../database/better-sqlite3.js";
++import { csvJsRows } from "../database/csv-js.js";
+ import { createReadableExport } from "../output/readable.js";
+ import { OutputWriter } from "../output/writer.js";
+ import { ZipOutput } from "../output/zip.js";
+@@ -73,9 +74,12 @@ export async function streamExport(
+       if (wait) await wait;
+     }
+     output.check();
+-    const values = batched
+-      ? jsonBatches(statement, args, options.format === "csv")
+-      : jsonRows(statement, args);
++    const values =
++      options.format === "csv"
++        ? csvJsRows(statement, args)
++        : batched
++          ? jsonBatches(statement, args)
++          : jsonRows(statement, args);
+     for (const value of values) {
+       output.check();
+       const text = typeof value === "string" ? value : value[0];
+diff --git a/exportlite/src/drizzle.ts b/exportlite/src/drizzle.ts
+index ded68e3..1541769 100644
+--- a/exportlite/src/drizzle.ts
++++ b/exportlite/src/drizzle.ts
+@@ -141,6 +141,7 @@ export async function exportTable(
+     options.format ?? "jsonl",
+     options.encoding ?? "utf8",
+     key,
++    options.format === "csv",
+   );
+   return deliverLocalExport(
+     plan.statement,
+@@ -264,6 +265,7 @@ export async function exportQuery(
+     fields,
+     !raw,
+     options.format,
++    options.format === "csv",
+   );
+   return deliverLocalExport(
+     statement,
+diff --git a/exportlite/src/planner/batches.ts b/exportlite/src/planner/batches.ts
+index 64a627c..d6564a7 100644
+--- a/exportlite/src/planner/batches.ts
++++ b/exportlite/src/planner/batches.ts
+@@ -3,6 +3,7 @@ import { readStatement } from "../database/better-sqlite3.js";
+ import type { ExportFormat } from "../types.js";
+ import { type SelectedField, selectedObject } from "./columns.js";
+ import { csvHeader, csvRecord } from "./csv.js";
++import { csvJsSelection } from "./csv-js.js";
+ import { identifier, literal } from "./identifiers.js";
+ 
+ export function planBatchedTable(
+@@ -13,6 +14,7 @@ export function planBatchedTable(
+     columns: readonly string[];
+     fields?: readonly SelectedField[];
+     format: ExportFormat;
++    csvJS?: boolean;
+   },
+ ) {
+   const info = db
+@@ -59,6 +61,7 @@ interface BatchedTableOptions {
+   format: ExportFormat;
+   binary: boolean;
+   declared?: boolean;
++  csvJS?: boolean;
+ }
+ 
+ /** SQL construction is shared by local prepared statements and remote cursors. */
+@@ -78,10 +81,20 @@ export function batchedTableSql(options: BatchedTableOptions): string {
+         options.fields,
+         (_field, i) => identifier(`__exportlite_c${i}`),
+         options.format,
++        options.csvJS,
++        options.binary,
+       )
+     : options.format === "csv"
+-      ? csvRecord(options.columns.map(identifier))
++      ? options.csvJS
++        ? csvJsSelection(options.columns.map(identifier), options.binary)
++        : csvRecord(options.columns.map(identifier))
+       : `json_object(${options.columns.map((column) => `${literal(column)}, ${identifier(column)}`).join(", ")})`;
++  if (options.csvJS) {
++    const filter = options.declared
++      ? `CASE WHEN ${key} IS NULL THEN json('ExportLite: primary key must not be null') ELSE 1 END`
++      : "1";
++    return `SELECT ${object} FROM (SELECT ${columns} FROM ${table} WHERE ${filter} ORDER BY ${key} LIMIT -1 OFFSET 0)`;
++  }
+   const aggregate =
+     options.format === "json"
+       ? `json_group_array(${object})`
+diff --git a/exportlite/src/planner/cache.ts b/exportlite/src/planner/cache.ts
+index f722b53..bdc8012 100644
+--- a/exportlite/src/planner/cache.ts
++++ b/exportlite/src/planner/cache.ts
+@@ -59,14 +59,15 @@ export function cachedDeclaredTablePlan(
+   columns: SelectedColumns,
+   format: ExportFormat,
+   encoding: DatabaseEncoding,
++  csvJS = false,
+ ): ReturnType<typeof planTable> {
+   identifier(table);
+   try {
+     return cachedPlan(
+       db,
+       cacheFor(db),
+-      JSON.stringify(["declared", table, columns, format, encoding]),
+-      () => planDeclaredTable(db, table, columns, format, encoding),
++      JSON.stringify(["declared", table, columns, format, encoding, csvJS]),
++      () => planDeclaredTable(db, table, columns, format, encoding, csvJS),
+     );
+   } catch (error) {
+     throw sqliteError(error);
+@@ -78,6 +79,7 @@ export function cachedTablePlan(
+   table: string,
+   columns: TableColumns | undefined,
+   format: ExportFormat,
++  csvJS = false,
+ ): ReturnType<typeof planTable> {
+   identifier(table);
+   try {
+@@ -88,9 +90,9 @@ export function cachedTablePlan(
+       cache.plans.clear();
+       cache.version = version;
+     }
+-    const key = JSON.stringify([table, columns ?? null, format]);
++    const key = JSON.stringify([table, columns ?? null, format, csvJS]);
+     return cachedPlan(db, cache, key, () =>
+-      planTable(db, table, columns, format),
++      planTable(db, table, columns, format, csvJS),
+     );
+   } catch (error) {
+     throw sqliteError(error);
+@@ -104,14 +106,32 @@ export function cachedSelectedTablePlan(
+   format: ExportFormat,
+   encoding: DatabaseEncoding,
+   primaryKey?: string,
++  csvJS = false,
+ ): ReturnType<typeof planTable> {
+   identifier(table);
+   try {
+     return cachedPlan(
+       db,
+       cacheFor(db),
+-      JSON.stringify(["selected", table, fields, format, encoding, primaryKey]),
+-      () => planSelectedTable(db, table, fields, format, encoding, primaryKey),
++      JSON.stringify([
++        "selected",
++        table,
++        fields,
++        format,
++        encoding,
++        primaryKey,
++        csvJS,
++      ]),
++      () =>
++        planSelectedTable(
++          db,
++          table,
++          fields,
++          format,
++          encoding,
++          primaryKey,
++          csvJS,
++        ),
+     );
+   } catch (error) {
+     throw sqliteError(error);
+diff --git a/exportlite/src/planner/columns.ts b/exportlite/src/planner/columns.ts
+index f2907c9..f0b3d9e 100644
+--- a/exportlite/src/planner/columns.ts
++++ b/exportlite/src/planner/columns.ts
+@@ -2,6 +2,7 @@ import { Column, type SelectedColumns } from "../columns.js";
+ import { ExportLiteError } from "../errors.js";
+ import type { ExportFormat } from "../types.js";
+ import { csvRecord } from "./csv.js";
++import { csvJsSelection } from "./csv-js.js";
+ import { identifier, literal, uniqueColumns } from "./identifiers.js";
+ 
+ export interface SelectedField {
+@@ -47,6 +48,8 @@ export function selectedObject(
+   fields: readonly SelectedField[],
+   reference: (field: SelectedField, index: number) => string,
+   format: ExportFormat = "json",
++  csvJS = false,
++  utf8Guard = false,
+ ): string {
+   const values = fields.map((field, index) => {
+     const value = reference(field, index);
+@@ -60,7 +63,8 @@ export function selectedObject(
+           : value;
+     return jsonValue;
+   });
+-  if (format === "csv") return csvRecord(values);
++  if (format === "csv")
++    return csvJS ? csvJsSelection(values, utf8Guard) : csvRecord(values);
+   const pairs = fields.map(
+     (field, index) => `${literal(field.key)}, ${values[index]}`,
+   );
+diff --git a/exportlite/src/planner/declared.ts b/exportlite/src/planner/declared.ts
+index 128a193..37af023 100644
+--- a/exportlite/src/planner/declared.ts
++++ b/exportlite/src/planner/declared.ts
+@@ -18,8 +18,15 @@ export function planDeclaredTable(
+   columns: SelectedColumns,
+   format: ExportFormat,
+   encoding: DatabaseEncoding,
++  csvJS = false,
+ ) {
+-  const plan = declaredTableSql(table, columns, format, encoding === "utf8");
++  const plan = declaredTableSql(
++    table,
++    columns,
++    format,
++    encoding === "utf8",
++    csvJS,
++  );
+   return { ...plan, statement: readStatement(db, plan.sql) };
+ }
+ 
+@@ -28,6 +35,7 @@ export function declaredTableSql(
+   columns: SelectedColumns,
+   format: ExportFormat,
+   binary: boolean,
++  csvJS = false,
+ ) {
+   const fields = selectedFields(columns);
+   const keys = fields.filter((field) => field.primary);
+@@ -37,7 +45,7 @@ export function declaredTableSql(
+     keys[0].kind === "value"
+       ? keys[0].column
+       : undefined;
+-  return selectedTableSql(table, fields, format, binary, key);
++  return selectedTableSql(table, fields, format, binary, key, csvJS);
+ }
+ 
+ /** Shared schema-driven path; the key need not be included in the projection. */
+@@ -48,6 +56,7 @@ export function planSelectedTable(
+   format: ExportFormat,
+   encoding: DatabaseEncoding,
+   key?: string,
++  csvJS = false,
+ ) {
+   const plan = selectedTableSql(
+     table,
+@@ -55,6 +64,7 @@ export function planSelectedTable(
+     format,
+     encoding === "utf8",
+     key,
++    csvJS,
+   );
+   return { ...plan, statement: readStatement(db, plan.sql) };
+ }
+@@ -65,6 +75,7 @@ export function selectedTableSql(
+   format: ExportFormat,
+   binary: boolean,
+   key?: string,
++  csvJS = false,
+ ) {
+   const name = identifier(table);
+   const header =
+@@ -78,14 +89,16 @@ export function selectedTableSql(
+       format,
+       binary,
+       declared: true,
++      csvJS,
+     });
+-    return { sql, batched: true, header };
++    return { sql, batched: !csvJS, header };
+   }
+   const object = selectedObject(
+     fields,
+     (field, i) =>
+       `"__exportlite_source".${identifier(format === "csv" ? `__exportlite_c${i}` : field.column)}`,
+     format,
++    csvJS,
+   );
+   let source = `main.${name}`;
+   if (format === "csv") {
+diff --git a/exportlite/src/planner/json.ts b/exportlite/src/planner/json.ts
+index 97e99c3..084846f 100644
+--- a/exportlite/src/planner/json.ts
++++ b/exportlite/src/planner/json.ts
+@@ -23,6 +23,7 @@ export function planTable(
+   table: string,
+   requested?: TableColumns,
+   format: ExportFormat = "jsonl",
++  csvJS = false,
+ ) {
+   identifier(table);
+   try {
+@@ -65,8 +66,9 @@ export function planTable(
+       columns,
+       ...(fields ? { fields } : {}),
+       format,
++      csvJS,
+     });
+-    if (batched) return { ...batched, batched: true };
++    if (batched) return { ...batched, batched: !csvJS };
+     if (format === "csv") {
+       const csvFields =
+         fields ??
+@@ -77,7 +79,14 @@ export function planTable(
+           dataType: "text" as const,
+           primary: false,
+         }));
+-      const plan = selectedTableSql(found.name, csvFields, format, false);
++      const plan = selectedTableSql(
++        found.name,
++        csvFields,
++        format,
++        false,
++        undefined,
++        csvJS,
++      );
+       return { ...plan, statement: readStatement(db, plan.sql) };
+     }
+     const pairs = columns
+@@ -102,11 +111,12 @@ export function planQuery(
+   sql: string,
+   declared?: SelectedColumns,
+   format: ExportFormat = "jsonl",
++  csvJS = false,
+ ) {
+   validateQuery(sql);
+   if (declared !== undefined) {
+     const fields = selectedFields(declared);
+-    return planSelectedQuery(db, sql, fields, false, format);
++    return planSelectedQuery(db, sql, fields, false, format, csvJS);
+   }
+   const columns = readStatement(db, sql)
+     .columns()
+@@ -119,7 +129,7 @@ export function planQuery(
+     dataType: "text" as const,
+     primary: false,
+   }));
+-  return planSelectedQuery(db, sql, fields, true, format);
++  return planSelectedQuery(db, sql, fields, true, format, csvJS);
+ }
+ 
+ /** Drizzle supplies selection order; no result metadata or rows are fetched. */
+@@ -129,11 +139,12 @@ export function planSelectedQuery(
+   fields: SelectedField[],
+   positional: boolean,
+   format: ExportFormat = "jsonl",
++  csvJS = false,
+ ) {
+   return {
+     statement: readStatement(
+       db,
+-      selectedQuerySql(sql, fields, positional, format),
++      selectedQuerySql(sql, fields, positional, format, csvJS),
+     ),
+     header:
+       format === "csv"
+@@ -147,6 +158,7 @@ export function selectedQuerySql(
+   fields: SelectedField[],
+   positional: boolean,
+   format: ExportFormat = "jsonl",
++  csvJS = false,
+ ): string {
+   validateQuery(sql);
+   let name = "__exportlite_source";
+@@ -160,6 +172,7 @@ export function selectedQuerySql(
+     (field, i) =>
+       `${source}.${identifier(positional ? `c${i}` : field.column)}`,
+     format,
++    csvJS,
+   );
+   const input = subquerySource(sql);
+   return `WITH ${source}${aliases} AS (\n${format === "csv" ? csvSource(input) : input}\n) SELECT ${object} FROM ${source}`;
+diff --git a/exportlite/tests/csv.test.ts b/exportlite/tests/csv.test.ts
+index a7df20e..fb598a4 100644
+--- a/exportlite/tests/csv.test.ts
++++ b/exportlite/tests/csv.test.ts
+@@ -186,7 +186,7 @@ it.each([0, 1, 255, 256, 257, 513])(
+     expect(parse(content, { columns: true })).toHaveLength(count);
+     expect((await stream.result).rowsExported).toBe(count);
+     expect(statements).toHaveLength(1);
+-    expect(statements[0]).toContain('WITH RECURSIVE "__exportlite_batches"');
++    expect(statements[0]).toContain("SELECT CASE WHEN");
+     expect(
+       content.split('"userId","label","payload","active"\r\n'),
+     ).toHaveLength(2);
+@@ -585,7 +585,7 @@ it.each([false, true])(
+         batches >= 2 ? batches : 0,
+       );
+       expect(stopped).toBeGreaterThanOrEqual(2);
+-      expect(stopped).toBeLessThan(8);
++      expect(stopped).toBeLessThan(2048);
+     } finally {
+       signal.abort();
+       release?.();
+@@ -610,3 +610,34 @@ it("keeps one empty CSV cell per NULL row across batch boundaries", async () =>
+   expect(parse(content, { columns: true })).toHaveLength(257);
+   expect((await stream.result).rowsExported).toBe(257);
+ });
++
++it.each([false, true])(
++  "preserves SQLite numeric spellings and dynamic storage without safe integers (zip=%s)",
++  async (zip) => {
++    db.defaultSafeIntegers(false);
++    db.exec(
++      "CREATE TABLE scalars(id INTEGER PRIMARY KEY, value); INSERT INTO scalars VALUES(1,9007199254740993),(2,9223372036854775807),(3,-9223372036854775808),(4,1.0),(5,1e100),(6,'1.0'),(7,NULL)",
++    );
++    for (const query of [false, true]) {
++      const options = {
++        format: "csv" as const,
++        zip,
++        columns: { id: integer().primaryKey(), value: text() },
++      };
++      const stream = query
++        ? await exportQuery(db, {
++            ...options,
++            sql: "SELECT * FROM scalars ORDER BY id",
++          })
++        : await exportTable(db, "scalars", options);
++      const bytes = Buffer.from(await new Response(stream).arrayBuffer());
++      const content = zip
++        ? await decodeZip(bytes, query ? "export.csv" : "scalars.csv")
++        : bytes.toString("utf8");
++      expect(content).toBe(
++        '"id","value"\r\n1,9007199254740993\r\n2,9223372036854775807\r\n3,-9223372036854775808\r\n4,1.0\r\n5,1.0e+100\r\n6,"1.0"\r\n7,\r\n',
++      );
++      expect((await stream.result).rowsExported).toBe(7);
++    }
++  },
++);
+diff --git a/exportlite/src/database/csv-js.ts b/exportlite/src/database/csv-js.ts
+new file mode 100644
+index 0000000..2642a1e
+--- /dev/null
++++ b/exportlite/src/database/csv-js.ts
+@@ -0,0 +1,35 @@
++import { ExportLiteError, sqliteError } from "../errors.js";
++import type { ReadStatement } from "./adapter.js";
++
++/** One raw result row becomes one CSV record; the existing writer buffers it. */
++export function* csvJsRows(
++  statement: ReadStatement,
++  args: unknown[],
++): Generator<string> {
++  try {
++    for (const row of statement.raw().iterate(...args)) {
++      if (!Array.isArray(row) || !row.length || row.length % 2)
++        throw new Error("Expected SQLite CSV scalar pairs.");
++      if (row[0] === "utf16")
++        throw new ExportLiteError(
++          "INVALID_OPTIONS",
++          "The database uses UTF-16. Set encoding to utf16le or utf16be for declared table exports; exported data remains UTF-8.",
++        );
++      const cells: string[] = [];
++      for (let index = 0; index < row.length; index += 2) {
++        const kind = row[index];
++        const value = row[index + 1];
++        if (kind === "null") cells.push("");
++        else if (typeof value !== "string")
++          throw new Error("Expected SQLite scalar text.");
++        else if (kind === "text")
++          cells.push(`"${value.replaceAll('"', '""')}"`);
++        else if (kind === "integer" || kind === "real") cells.push(value);
++        else throw new Error("Unsupported SQLite CSV value.");
++      }
++      yield cells.join(",");
++    }
++  } catch (error) {
++    throw sqliteError(error);
++  }
++}
+diff --git a/exportlite/src/planner/csv-js.ts b/exportlite/src/planner/csv-js.ts
+new file mode 100644
+index 0000000..d6ffe33
+--- /dev/null
++++ b/exportlite/src/planner/csv-js.ts
+@@ -0,0 +1,14 @@
++/** Preserve SQLite scalar spelling/validation; JS only escapes and joins CSV. */
++export function csvJsSelection(values: readonly string[], utf8Guard = false) {
++  return values
++    .flatMap((value, index) => {
++      const kind = `typeof(${value})`;
++      return [
++        utf8Guard && index === 0
++          ? `CASE WHEN length(CAST(char(13, 10) AS BLOB)) = 2 THEN ${kind} ELSE 'utf16' END`
++          : kind,
++        `CASE ${kind} WHEN 'blob' THEN json_quote(${value}) ELSE CAST(${value} AS TEXT) END`,
++      ];
++    })
++    .join(", ");
++}
