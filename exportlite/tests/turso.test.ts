@@ -1,11 +1,11 @@
 import { execFile } from "node:child_process";
-import { mkdtemp, readdir, rm } from "node:fs/promises";
+import { mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { Writable } from "node:stream";
 import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
+import { inspect, promisify } from "node:util";
 import Database from "better-sqlite3";
 import { eq, gt, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/libsql/http";
@@ -15,13 +15,14 @@ import {
   sqliteTable,
   text as str,
 } from "drizzle-orm/sqlite-core";
-import { afterEach, beforeEach, expect, it } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { fromBufferPromise } from "yauzl";
 import {
   exportQuery as drizzleQuery,
   exportTable as drizzleTable,
 } from "../src/drizzle.js";
 import { integer, exportTable as localTable, text } from "../src/index.js";
+import { OutputWriter } from "../src/output/writer.js";
 import {
   createClient,
   exportQuery,
@@ -331,16 +332,20 @@ it("waits for an acknowledged idle-session close and closes only once", async ()
 it("reports shutdown failures without deleting a completed export", async () => {
   const folder = await mkdtemp(join(tmpdir(), "exportlite-close-error-"));
   try {
+    const path = join(folder, "users.zip");
     await exportTable(client, "users", {
       columns,
-      output: join(folder, "users.zip"),
+      output: path,
       zip: true,
     });
+    const completed = await readFile(path);
     server.mode.closeError = true;
     await expect(client.close()).rejects.toMatchObject({
       code: "REMOTE_ERROR",
+      status: 500,
     });
     expect(await readdir(folder)).toEqual(["users.zip"]);
+    expect(await readFile(path)).toEqual(completed);
     expect(client.closed).toBe(true);
   } finally {
     await rm(folder, { recursive: true, force: true });
@@ -833,12 +838,146 @@ it.each(["truncate", "sql-error", "http-error"])(
 it("does not reflect authentication error response bodies in exceptions", async () => {
   server.mode.status = 401;
   const stream = await exportTable(client, "users", { columns });
-  await expect(new Response(stream).text()).rejects.toMatchObject({
+  const error = await new Response(stream)
+    .text()
+    .catch((cause: unknown) => cause);
+  expect(error).toMatchObject({
     code: "REMOTE_ERROR",
+    status: 401,
     message: "Turso cursor request failed (HTTP 401).",
   });
+  expect(inspect(error, { depth: null })).not.toContain("sensitive-token");
   await expect(stream.result).rejects.toMatchObject({ code: "REMOTE_ERROR" });
 });
+
+it.each(["cursor", "close"])(
+  "retains safe %s transport causes without request data",
+  async (stage) => {
+    const secret = "test-token sensitive-request-body";
+    const original = new TypeError(`Request failed: ${secret}`, {
+      cause: Object.assign(new Error(secret), {
+        code: "ECONNRESET",
+        request: { authorization: secret, body: secret },
+      }),
+    });
+    const peer = createClient({
+      url: server.url,
+      authToken: "test-token",
+      fetch: async (input, init) => {
+        const request = new Request(input, init);
+        if (request.url.endsWith(stage === "cursor" ? "/cursor" : "/pipeline"))
+          throw original;
+        return fetch(input, init);
+      },
+    });
+    try {
+      const stream = await exportTable(peer, "users", { columns });
+      const error =
+        stage === "cursor"
+          ? await new Response(stream).text().catch((cause: unknown) => cause)
+          : await consume(stream).then(() =>
+              peer.close().catch((cause: unknown) => cause),
+            );
+      expect(error).toMatchObject({
+        code: "REMOTE_ERROR",
+        cause: { name: "TypeError", cause: { code: "ECONNRESET" } },
+      });
+      const diagnostic = inspect(error, { depth: null });
+      expect(diagnostic).not.toContain("test-token");
+      expect(diagnostic).not.toContain("sensitive-request-body");
+      if (stage === "cursor") await expect(stream.result).rejects.toBe(error);
+    } finally {
+      await peer.close().catch(() => {});
+    }
+  },
+);
+
+it.each(["SQLITE_BUSY", "invalid code: sensitive-request-body"])(
+  "reports a bounded provider code without free-form response data: %s",
+  async (code) => {
+    server.mode.rowError = 1;
+    server.mode.rowErrorCode = code;
+    server.mode.rowErrorMessage = "test-token sensitive-request-body";
+    const stream = await exportTable(client, "users", { columns });
+    const error = await new Response(stream)
+      .text()
+      .catch((cause: unknown) => cause);
+    expect(error).toMatchObject({
+      code: "SQLITE_ERROR",
+      status: 200,
+      providerCode: code === "SQLITE_BUSY" ? code : undefined,
+    });
+    const diagnostic = inspect(error, { depth: null });
+    expect(diagnostic).not.toContain("test-token");
+    expect(diagnostic).not.toContain("sensitive-request-body");
+    await expect(stream.result).rejects.toBe(error);
+  },
+);
+
+it("retains a provider code on a rejected session-close response", async () => {
+  const peer = createClient({
+    url: server.url,
+    fetch: async (input, init) => {
+      if (new Request(input, init).url.endsWith("/pipeline"))
+        return Response.json({
+          results: [
+            {
+              type: "error",
+              error: { code: "SQLITE_BUSY", message: "test-token" },
+            },
+          ],
+        });
+      return fetch(input, init);
+    },
+  });
+  try {
+    await consume(await exportTable(peer, "users", { columns }));
+    const error = await peer.close().catch((cause: unknown) => cause);
+    expect(error).toMatchObject({
+      code: "REMOTE_ERROR",
+      status: 200,
+      providerCode: "SQLITE_BUSY",
+    });
+    expect(inspect(error, { depth: null })).not.toContain("test-token");
+  } finally {
+    await peer.close().catch(() => {});
+  }
+});
+
+it.each([false, true])(
+  "preserves a remote SQL failure when file and session cleanup fail (zip=%s)",
+  async (zip) => {
+    const folder = await mkdtemp(join(tmpdir(), "exportlite-cleanup-error-"));
+    server.mode.rowError = 1;
+    server.mode.rowErrorCode = "SQLITE_BUSY";
+    server.mode.closeError = true;
+    const dispose = OutputWriter.prototype.dispose;
+    const spy = vi
+      .spyOn(OutputWriter.prototype, "dispose")
+      .mockImplementation(async function (this: OutputWriter, success) {
+        await dispose.call(this, success);
+        throw new Error("Injected file cleanup failure");
+      });
+    try {
+      await expect(
+        exportTable(client, "users", {
+          columns,
+          zip,
+          output: join(folder, "failed.export"),
+        }),
+      ).rejects.toMatchObject({
+        code: "SQLITE_ERROR",
+        providerCode: "SQLITE_BUSY",
+      });
+      expect(spy).toHaveBeenCalledWith(false);
+      expect(await readdir(folder)).toEqual([]);
+      expect(client.closed).toBe(false);
+    } finally {
+      spy.mockRestore();
+      await rm(folder, { recursive: true, force: true });
+    }
+  },
+);
 
 it("rejects invalid bindings and undeclared projections before network I/O", async () => {
   // @ts-expect-error Remote exports need declarations, avoiding schema queries.

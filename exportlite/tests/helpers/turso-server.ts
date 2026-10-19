@@ -21,6 +21,8 @@ export interface ServerMode {
   closeError?: boolean;
   fragment?: number;
   rowError?: number;
+  rowErrorCode?: string;
+  rowErrorMessage?: string;
   legacyExpiry?: boolean;
   closeWait?: Promise<void>;
   terminator?: boolean;
@@ -189,7 +191,10 @@ export async function tursoServer(db: Database.Database) {
           await write({
             type: "step_error",
             step: 0,
-            error: { message: "Fixture SQL failed", code: "SQLITE_ERROR" },
+            error: {
+              message: mode.rowErrorMessage ?? "Fixture SQL failed",
+              code: mode.rowErrorCode ?? "SQLITE_ERROR",
+            },
           });
       } finally {
         iterator?.return?.();

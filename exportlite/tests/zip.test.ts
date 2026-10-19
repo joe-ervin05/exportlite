@@ -15,6 +15,7 @@ import {
   exportTable,
   type SQLiteConnection,
 } from "../src/index.js";
+import { OutputWriter } from "../src/output/writer.js";
 
 async function decode(bytes: Buffer, name: string) {
   const archive = await fromBufferPromise(bytes, { lazyEntries: true });
@@ -74,6 +75,34 @@ afterEach(async () => {
 });
 
 describe("streaming ZIP", () => {
+  it("preserves an initialization failure and attempts all owned cleanup", async () => {
+    const original = new Error("Injected ZIP initialization failure");
+    const entry = vi
+      .spyOn(ZipStream.prototype, "entry")
+      .mockImplementation(() => {
+        throw original;
+      });
+    const dispose = OutputWriter.prototype.dispose;
+    const cleanup = vi
+      .spyOn(OutputWriter.prototype, "dispose")
+      .mockImplementation(async function (this: OutputWriter, success) {
+        await dispose.call(this, success);
+        throw new Error("Injected cleanup failure");
+      });
+    try {
+      await expect(
+        exportTable(db, "users", {
+          output: join(directory, "failed.zip"),
+          zip: true,
+        }),
+      ).rejects.toMatchObject({ code: "OUTPUT_ERROR", cause: original });
+      expect(await readdir(directory)).toEqual([]);
+    } finally {
+      entry.mockRestore();
+      cleanup.mockRestore();
+    }
+  });
+
   it.each(
     [0, 1, 256, 257, 513].flatMap((count) =>
       (["json", "jsonl"] as const).flatMap((format) =>

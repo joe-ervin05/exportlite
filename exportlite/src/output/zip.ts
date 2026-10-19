@@ -95,8 +95,8 @@ export class ZipOutput {
       input.compression?.destroy();
       archive?.destroy();
       await done?.catch(() => {});
-      await json?.dispose(false);
-      await destination.dispose(false);
+      await json?.dispose(false).catch(() => {});
+      await destination.dispose(false).catch(() => {});
       throw cause instanceof ExportLiteError
         ? cause
         : new ExportLiteError(

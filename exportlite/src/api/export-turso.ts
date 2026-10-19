@@ -109,7 +109,8 @@ export function deliverTursoExport(
       } finally {
         controller.abort();
         try {
-          await output?.dispose(success);
+          if (success) await output?.dispose(true);
+          else await output?.dispose(false).catch(() => {});
         } finally {
           if (typeof destination.output !== "string") {
             destination.output.off("error", outputError);

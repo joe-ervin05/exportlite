@@ -254,7 +254,9 @@ export class TursoTransport {
       }
       if (!response) remote("Turso returned no cursor response.");
       if (!response.ok)
-        remote(`Turso cursor request failed (HTTP ${response.status}).`);
+        remote(`Turso cursor request failed (HTTP ${response.status}).`, {
+          status: response.status,
+        });
       if (!response.body) remote("Turso returned no cursor body.");
       entries = cursorLines(response.body);
       const first = await entries.next();
@@ -280,9 +282,14 @@ export class TursoTransport {
         if (terminated) remote("Turso sent data after cursor termination.");
         if (entry.type === "error" || entry.type === "step_error") {
           const detail = record(entry.error);
+          const providerCode = diagnosticCode(detail.code);
           throw new ExportLiteError(
             "SQLITE_ERROR",
-            `Turso SQL execution failed (${typeof detail.code === "string" ? detail.code : "SQLITE_ERROR"}).`,
+            `Turso SQL execution failed (${providerCode ?? "SQLITE_ERROR"}).`,
+            {
+              status: response.status,
+              ...(providerCode === undefined ? {} : { providerCode }),
+            },
           );
         }
         if (entry.type === "step_begin") {
@@ -343,6 +350,7 @@ export class TursoTransport {
         failure = new ExportLiteError(
           "REMOTE_ERROR",
           "Turso cursor request or protocol failed.",
+          { cause: diagnosticCause(cause) },
         );
     } finally {
       request.abort();
@@ -364,17 +372,30 @@ export class TursoTransport {
       });
       if (await expired(response)) return;
       if (!response.ok) {
-        await response.body?.cancel();
-        remote("Could not close the Turso export session.");
+        await response.body?.cancel().catch(() => {});
+        remote("Could not close the Turso export session.", {
+          status: response.status,
+        });
       }
       const body = record(await response.json());
       if (!Array.isArray(body.results) || body.results.length !== 1)
         remote("Invalid Turso session close response.");
       const result = record(body.results[0]);
-      if (result.type !== "ok" || record(result.response).type !== "close")
-        remote("Could not close the Turso export session.");
-    } catch {
-      remote("Could not close the Turso export session.");
+      if (result.type !== "ok" || record(result.response).type !== "close") {
+        const providerCode =
+          result.type === "error"
+            ? diagnosticCode(record(result.error).code)
+            : undefined;
+        remote("Could not close the Turso export session.", {
+          status: response.status,
+          ...(providerCode === undefined ? {} : { providerCode }),
+        });
+      }
+    } catch (cause) {
+      if (isExportError(cause)) throw cause;
+      remote("Could not close the Turso export session.", {
+        cause: diagnosticCause(cause),
+      });
     }
   }
 }
@@ -430,8 +451,34 @@ function record(value: unknown): Record<string, unknown> {
   return value as Record<string, unknown>;
 }
 
-function remote(message: string): never {
-  throw new ExportLiteError("REMOTE_ERROR", message);
+function remote(
+  message: string,
+  options?: ErrorOptions & { status?: number; providerCode?: string },
+): never {
+  throw new ExportLiteError("REMOTE_ERROR", message, options);
+}
+
+function diagnosticCode(value: unknown): string | undefined {
+  return typeof value === "string" && /^[A-Z][A-Z0-9_]{0,63}$/.test(value)
+    ? value
+    : undefined;
+}
+
+/** Keep useful error categories/codes, never arbitrary fetch messages or bodies. */
+function diagnosticCause(value: unknown, depth = 0): Error | undefined {
+  if (!(value instanceof Error) || depth === 2) return undefined;
+  const code = diagnosticCode(Reflect.get(value, "code"));
+  const cause = diagnosticCause(value.cause, depth + 1);
+  const error = new Error("Turso transport or response decoding failed.", {
+    ...(cause === undefined ? {} : { cause }),
+  });
+  if (
+    ["TypeError", "SyntaxError", "RangeError", "AggregateError"].includes(
+      value.name,
+    )
+  )
+    error.name = value.name;
+  return code === undefined ? error : Object.assign(error, { code });
 }
 
 function isExportError(value: unknown): value is ExportLiteError {

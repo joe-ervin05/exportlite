@@ -1,7 +1,6 @@
 import type { InferColumns, SelectedColumns } from "../columns.js";
 import { bindings, type SQLiteConnection } from "../database/adapter.js";
 import { checkCapabilities } from "../database/better-sqlite3.js";
-import { createReadableExport } from "../output/readable.js";
 import { checkAborted, validateOptions } from "../output/writer.js";
 import { planQuery } from "../planner/json.js";
 import type {
@@ -10,7 +9,7 @@ import type {
   QueryExportOptions,
   QueryStreamOptions,
 } from "../types.js";
-import { streamExport } from "./export.js";
+import { deliverLocalExport } from "./export.js";
 
 export function exportQuery(
   db: SQLiteConnection,
@@ -44,11 +43,5 @@ export async function exportQuery(
   if (options.columns === undefined) checkCapabilities(db);
   const statement = planQuery(db, options.sql, options.columns);
   const args = bindings(options.params);
-  if (options.output === undefined)
-    return createReadableExport(
-      options,
-      (destination) => streamExport(statement, args, destination, started),
-      started,
-    );
-  return streamExport(statement, args, options, started);
+  return deliverLocalExport(statement, args, options, started);
 }

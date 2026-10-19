@@ -4,12 +4,13 @@ import { join } from "node:path";
 import { Writable } from "node:stream";
 import { setImmediate } from "node:timers/promises";
 import Database from "better-sqlite3";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   exportQuery,
   exportTable,
   type SQLiteConnection,
 } from "../src/index.js";
+import { OutputWriter } from "../src/output/writer.js";
 
 function capture(options: { highWaterMark?: number; delay?: number } = {}) {
   const chunks: Buffer[] = [];
@@ -52,6 +53,38 @@ afterEach(async () => {
 });
 
 describe("native JSON exports", () => {
+  it.each([false, true])(
+    "preserves a row failure when output cleanup also fails (zip=%s)",
+    async (zip) => {
+      const dispose = OutputWriter.prototype.dispose;
+      const cleanupError = new Error("Injected cleanup failure");
+      const spy = vi
+        .spyOn(OutputWriter.prototype, "dispose")
+        .mockImplementation(async function (this: OutputWriter, success) {
+          await dispose.call(this, success);
+          throw cleanupError;
+        });
+      try {
+        await expect(
+          exportQuery(db, {
+            sql: "SELECT x'00FF' AS payload",
+            output: join(directory, "failed.json"),
+            zip,
+          }),
+        ).rejects.toMatchObject({
+          code: "SQLITE_ERROR",
+          cause: expect.objectContaining({
+            message: expect.stringContaining("BLOB"),
+          }),
+        });
+        expect(spy).toHaveBeenCalledWith(false);
+        expect(await readdir(directory)).toEqual([]);
+      } finally {
+        spy.mockRestore();
+      }
+    },
+  );
+
   it("streams JSONL by default, preserving text, NULL, and byte statistics", async () => {
     const output = capture();
     const result = await exportTable(db, "users", { output: output.stream });

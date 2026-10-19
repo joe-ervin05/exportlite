@@ -1,9 +1,36 @@
 import { setImmediate } from "node:timers/promises";
 import type { ReadStatement } from "../database/adapter.js";
 import { jsonBatches, jsonRows } from "../database/better-sqlite3.js";
+import { createReadableExport } from "../output/readable.js";
 import { OutputWriter } from "../output/writer.js";
 import { ZipOutput } from "../output/zip.js";
-import type { ExportOptions, ExportResult } from "../types.js";
+import type {
+  ExportOptions,
+  ExportResult,
+  ExportStream,
+  StreamExportOptions,
+} from "../types.js";
+
+/** Share local delivery setup without adding work to the synchronous row loop. */
+export function deliverLocalExport(
+  statement: ReadStatement,
+  args: unknown[],
+  options: ExportOptions | StreamExportOptions,
+  started: number,
+  batched = false,
+  name = "export",
+): Promise<ExportResult | ExportStream> {
+  if (options.output === undefined)
+    return Promise.resolve(
+      createReadableExport(
+        options,
+        (destination) =>
+          streamExport(statement, args, destination, started, batched, name),
+        started,
+      ),
+    );
+  return streamExport(statement, args, options, started, batched, name);
+}
 
 export async function streamExport(
   statement: ReadStatement,
@@ -73,6 +100,8 @@ export async function streamExport(
       durationMs: performance.now() - started,
     };
   } finally {
-    await output.dispose(success);
+    // Cleanup still runs, but cannot replace an execution/output failure.
+    if (success) await output.dispose(true);
+    else await output.dispose(false).catch(() => {});
   }
 }

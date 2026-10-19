@@ -12,12 +12,11 @@ import {
   type SQLiteSyncDialect,
   SQLiteTable,
 } from "drizzle-orm/sqlite-core";
-import { streamExport } from "./api/export.js";
+import { deliverLocalExport } from "./api/export.js";
 import { deliverTursoExport } from "./api/export-turso.js";
-import type { ReadStatement, SQLiteConnection } from "./database/adapter.js";
+import type { SQLiteConnection } from "./database/adapter.js";
 import { getTurso, type TursoConnection } from "./database/turso.js";
 import { ExportLiteError } from "./errors.js";
-import { createReadableExport } from "./output/readable.js";
 import { checkAborted, validateOptions } from "./output/writer.js";
 import { cachedSelectedTablePlan } from "./planner/cache.js";
 import type { SelectedField } from "./planner/columns.js";
@@ -137,7 +136,7 @@ export async function exportTable(
     options.encoding ?? "utf8",
     key,
   );
-  return deliver(
+  return deliverLocalExport(
     plan.statement,
     [],
     options,
@@ -241,7 +240,7 @@ export async function exportQuery(
     fields,
     !raw,
   );
-  return deliver(statement, compiled.params, options, started);
+  return deliverLocalExport(statement, compiled.params, options, started);
 }
 
 function field(key: string, value: unknown, name: string): SelectedField {
@@ -327,26 +326,6 @@ function connection(db: DrizzleSQLiteDatabase) {
       "Unsupported Drizzle dialect. This adapter supports Drizzle 0.45.x.",
     );
   return { client: db.$client, dialect, remote: remote !== undefined };
-}
-
-function deliver(
-  statement: ReadStatement,
-  args: unknown[],
-  options: ExportOptions | StreamExportOptions,
-  started: number,
-  batched = false,
-  name = "export",
-): Promise<ExportResult | ExportStream> {
-  if (options.output === undefined)
-    return Promise.resolve(
-      createReadableExport(
-        options,
-        (destination) =>
-          streamExport(statement, args, destination, started, batched, name),
-        started,
-      ),
-    );
-  return streamExport(statement, args, options, started, batched, name);
 }
 
 function invalid(message: string): never {

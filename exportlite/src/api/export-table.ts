@@ -2,7 +2,6 @@ import type { InferColumns, SelectedColumns } from "../columns.js";
 import type { SQLiteConnection } from "../database/adapter.js";
 import { checkCapabilities } from "../database/better-sqlite3.js";
 import { ExportLiteError } from "../errors.js";
-import { createReadableExport } from "../output/readable.js";
 import { checkAborted, validateOptions } from "../output/writer.js";
 import { cachedDeclaredTablePlan, cachedTablePlan } from "../planner/cache.js";
 import type {
@@ -11,7 +10,7 @@ import type {
   TableExportOptions,
   TableStreamOptions,
 } from "../types.js";
-import { streamExport } from "./export.js";
+import { deliverLocalExport } from "./export.js";
 
 export function exportTable(
   db: SQLiteConnection,
@@ -66,12 +65,5 @@ export async function exportTable(
         options.encoding ?? "utf8",
       )
     : cachedTablePlan(db, table, options.columns, options.format ?? "jsonl");
-  if (options.output === undefined)
-    return createReadableExport(
-      options,
-      (destination) =>
-        streamExport(statement, [], destination, started, batched, table),
-      started,
-    );
-  return streamExport(statement, [], options, started, batched, table);
+  return deliverLocalExport(statement, [], options, started, batched, table);
 }

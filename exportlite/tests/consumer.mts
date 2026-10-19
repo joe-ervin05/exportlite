@@ -1,6 +1,7 @@
 import type { Writable } from "node:stream";
 import type Database from "better-sqlite3";
 import {
+  type ExportLiteError,
   type ExportResult,
   type ExportRow,
   type ExportStream,
@@ -16,6 +17,9 @@ import { expectTypeOf } from "vitest";
 
 declare const db: Database.Database;
 declare const output: Writable;
+declare const failure: ExportLiteError;
+expectTypeOf(failure.status).toEqualTypeOf<number | undefined>();
+expectTypeOf(failure.providerCode).toEqualTypeOf<string | undefined>();
 const connection: SQLiteConnection = db;
 export const tableResult: Promise<ExportResult> = exportTable(
   connection,

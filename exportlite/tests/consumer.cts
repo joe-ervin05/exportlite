@@ -5,6 +5,11 @@ import exportlite = require("exportlite");
 
 declare const db: Database.Database;
 declare const output: Writable;
+declare const failure: exportlite.ExportLiteError;
+const status: number | undefined = failure.status;
+const providerCode: string | undefined = failure.providerCode;
+void status;
+void providerCode;
 const readable: Promise<exportlite.ExportStream> = exportlite.exportTable(
   db,
   "users",

@@ -10,13 +10,20 @@ export type ExportErrorCode =
 
 export class ExportLiteError extends Error {
   override readonly name = "ExportLiteError";
+  /** HTTP status associated with a remote failure, when available. */
+  readonly status?: number;
+  /** Provider diagnostic code, without its free-form message or response body. */
+  readonly providerCode?: string;
 
   constructor(
     public readonly code: ExportErrorCode,
     message: string,
-    options?: ErrorOptions,
+    options?: ErrorOptions & { status?: number; providerCode?: string },
   ) {
     super(message, options);
+    if (options?.status !== undefined) this.status = options.status;
+    if (options?.providerCode !== undefined)
+      this.providerCode = options.providerCode;
   }
 }
 
