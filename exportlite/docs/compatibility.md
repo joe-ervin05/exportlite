@@ -22,6 +22,8 @@ Each project also installs pinned TypeScript, Node typings, the independent CSV 
 
 The tarball audit checks declared export targets, optional peers, metadata, an allowlist of shipped files and relative Markdown links. Benchmarks and examples remain in the source repository; README links to unshipped reports use repository URLs. The package stays private and unpublished through this phase.
 
+The lazy ZIP bundle uses Node's native `zlib.crc32`, available on every supported runtime. `zip-stream` remains a pinned build dependency; no runtime ZIP or checksum dependency is installed by consumers. Checks verify the native adapter is bundled, the JavaScript CRC implementation is absent, dependency notices are shipped, and isolated consumers can export ZIP without those packages installed. The ZIP reliability suite runs against the built ESM and CommonJS modules.
+
 ## ZIP64 release check
 
 `node benchmarks/validate-zip64.mjs` streams an actual entry larger than 4 GiB and independently decodes it with CRC and declared-size checks. It runs locally for release qualification and as an extra job on a manual compatibility workflow run. Ordinary pushes retain the smaller ZIP tests. A manual workflow does not publish anything.

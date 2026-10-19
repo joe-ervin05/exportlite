@@ -190,10 +190,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      zip-stream:
-        specifier: 7.0.5
-        version: 7.0.5
     devDependencies:
       '@biomejs/biome':
         specifier: 2.5.15
@@ -237,6 +233,9 @@ importers:
       yauzl:
         specifier: 3.4.0
         version: 3.4.0
+      zip-stream:
+        specifier: 7.0.5
+        version: 7.0.5
 
 packages:
 

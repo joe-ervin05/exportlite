@@ -44,7 +44,8 @@
     "dist",
     "docs",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "THIRD_PARTY_NOTICES"
   ],
   "sideEffects": false,
   "engines": {
@@ -92,9 +93,7 @@
     "tsdown": "0.23.1",
     "typescript": "7.0.2",
     "vitest": "5.0.5",
-    "yauzl": "3.4.0"
-  },
-  "dependencies": {
+    "yauzl": "3.4.0",
     "zip-stream": "7.0.5"
   },
   "repository": {

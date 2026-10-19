@@ -9,11 +9,12 @@ import Database from "better-sqlite3";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fromBufferPromise } from "yauzl";
 import ZipStream from "zip-stream";
+import * as cjs from "../dist/index.cjs";
+import * as esm from "../dist/index.mjs";
 import type { ReadStatement } from "../src/database/adapter.js";
 import {
-  exportQuery,
-  exportTable,
   type SQLiteConnection,
+  exportTable as sourceExportTable,
 } from "../src/index.js";
 import { OutputWriter } from "../src/output/writer.js";
 
@@ -74,34 +75,33 @@ afterEach(async () => {
   await rm(directory, { recursive: true, force: true });
 });
 
-describe("streaming ZIP", () => {
-  it("preserves an initialization failure and attempts all owned cleanup", async () => {
-    const original = new Error("Injected ZIP initialization failure");
-    const entry = vi
-      .spyOn(ZipStream.prototype, "entry")
-      .mockImplementation(() => {
-        throw original;
+describe.each([
+  ["ESM", esm],
+  ["CommonJS", cjs],
+] as const)("streaming ZIP (%s)", (_format, { exportTable, exportQuery }) => {
+  it.each(["json", "jsonl", "csv"] as const)(
+    "matches the unmodified ZIP writer byte for byte for %s",
+    async (format) => {
+      // Includes binary NULs, multibyte UTF-8 and a record spanning input writes.
+      db.prepare("UPDATE users SET name=? WHERE id=513").run(
+        `\0雪"\r\n${randomBytes(600_000).toString("base64")}`,
+      );
+      const original = capture();
+      await sourceExportTable(db, "users", {
+        format,
+        zip: true,
+        output: original.stream,
       });
-    const dispose = OutputWriter.prototype.dispose;
-    const cleanup = vi
-      .spyOn(OutputWriter.prototype, "dispose")
-      .mockImplementation(async function (this: OutputWriter, success) {
-        await dispose.call(this, success);
-        throw new Error("Injected cleanup failure");
+      const native = capture();
+      await exportTable(db, "users", {
+        format,
+        zip: true,
+        output: native.stream,
       });
-    try {
-      await expect(
-        exportTable(db, "users", {
-          output: join(directory, "failed.zip"),
-          zip: true,
-        }),
-      ).rejects.toMatchObject({ code: "OUTPUT_ERROR", cause: original });
-      expect(await readdir(directory)).toEqual([]);
-    } finally {
-      entry.mockRestore();
-      cleanup.mockRestore();
-    }
-  });
+      expect(native.bytes()).toEqual(original.bytes());
+      await decode(native.bytes(), `users.${format}`);
+    },
+  );
 
   it.each(
     [0, 1, 256, 257, 513].flatMap((count) =>
@@ -290,29 +290,6 @@ describe("streaming ZIP", () => {
     ).rejects.toHaveProperty("code", "OUTPUT_ERROR");
   });
 
-  it("wraps archive finalization failures and removes the partial file", async () => {
-    const finalize = vi
-      .spyOn(ZipStream.prototype, "finalize")
-      .mockImplementation(function (this: ZipStream) {
-        this.destroy(new Error("archive failed"));
-      });
-    try {
-      await expect(
-        exportTable(db, "users", {
-          zip: true,
-          output: join(directory, "partial.zip"),
-        }),
-      ).rejects.toMatchObject({
-        name: "ExportLiteError",
-        code: "OUTPUT_ERROR",
-        cause: expect.objectContaining({ message: "archive failed" }),
-      });
-      expect(await readdir(directory)).toEqual([]);
-    } finally {
-      finalize.mockRestore();
-    }
-  });
-
   it("cancels blocked compression, releases the query, and preserves stream ownership", async () => {
     const controller = new AbortController();
     let release: (() => void) | undefined;
@@ -489,6 +466,59 @@ describe("streaming ZIP", () => {
       await pending.catch(() => {});
       reader.close();
       writer.close();
+    }
+  });
+});
+
+describe("ZIP source fault injection", () => {
+  it("preserves an initialization failure and attempts all owned cleanup", async () => {
+    const original = new Error("Injected ZIP initialization failure");
+    const entry = vi
+      .spyOn(ZipStream.prototype, "entry")
+      .mockImplementation(() => {
+        throw original;
+      });
+    const dispose = OutputWriter.prototype.dispose;
+    const cleanup = vi
+      .spyOn(OutputWriter.prototype, "dispose")
+      .mockImplementation(async function (this: OutputWriter, success) {
+        await dispose.call(this, success);
+        throw new Error("Injected cleanup failure");
+      });
+    try {
+      await expect(
+        sourceExportTable(db, "users", {
+          output: join(directory, "failed.zip"),
+          zip: true,
+        }),
+      ).rejects.toMatchObject({ code: "OUTPUT_ERROR", cause: original });
+      expect(await readdir(directory)).toEqual([]);
+    } finally {
+      entry.mockRestore();
+      cleanup.mockRestore();
+    }
+  });
+
+  it("wraps archive finalization failures and removes the partial file", async () => {
+    const finalize = vi
+      .spyOn(ZipStream.prototype, "finalize")
+      .mockImplementation(function (this: ZipStream) {
+        this.destroy(new Error("archive failed"));
+      });
+    try {
+      await expect(
+        sourceExportTable(db, "users", {
+          zip: true,
+          output: join(directory, "partial.zip"),
+        }),
+      ).rejects.toMatchObject({
+        name: "ExportLiteError",
+        code: "OUTPUT_ERROR",
+        cause: expect.objectContaining({ message: "archive failed" }),
+      });
+      expect(await readdir(directory)).toEqual([]);
+    } finally {
+      finalize.mockRestore();
     }
   });
 });

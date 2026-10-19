@@ -61,12 +61,22 @@ try {
   const files = new Set(packed.files.map((file) => file.path));
   for (const file of files) {
     assert(
-      /^(?:package\.json|README\.md|LICENSE|docs\/[\w-]+\.md|dist\/[\w.-]+\.(?:mjs|cjs|mts|cts|map))$/.test(
+      /^(?:package\.json|README\.md|LICENSE|THIRD_PARTY_NOTICES|docs\/[\w-]+\.md|dist\/[\w.-]+\.(?:mjs|cjs|mts|cts|map))$/.test(
         file,
       ),
       `Unexpected packed file: ${file}`,
     );
   }
+  assert(files.has("THIRD_PARTY_NOTICES"));
+  assert.equal(manifest.dependencies, undefined, "The ZIP writer is bundled.");
+  const sources = [];
+  for (const file of files) {
+    if (!file.endsWith(".mjs.map")) continue;
+    const map = JSON.parse(await readFile(join(pkg, file), "utf8"));
+    sources.push(...map.sources);
+  }
+  assert(sources.some((source) => source.endsWith("/src/output/crc32.ts")));
+  assert(!sources.some((source) => source.includes("/node_modules/crc-32/")));
   assert.equal(
     manifest.private,
     true,

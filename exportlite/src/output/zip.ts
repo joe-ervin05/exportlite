@@ -51,7 +51,7 @@ export class ZipOutput {
         output: input,
         end: true,
       });
-      // Native import works in both builds with the ZIP writer's ESM export.
+      // The build privately bundles this lazy import with native CRC32 support.
       const { default: Archive } = await import("zip-stream");
       archive = new Archive({
         forceZip64: true,

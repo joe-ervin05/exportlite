@@ -12,6 +12,8 @@ const require = createRequire(import.meta.url);
 const native = mode.includes("native");
 const remote = mode.includes("turso");
 const adapter = mode.startsWith("drizzle");
+for (const name of ["zip-stream", "crc32-stream", "crc-32"])
+  assert.throws(() => require.resolve(name), { code: "MODULE_NOT_FOUND" });
 for (const [name, installed] of [
   ["better-sqlite3", native],
   ["@libsql/client", remote],
