@@ -1,0 +1,1082 @@
+[
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.27002334000000006,
+      0.25330582000000007,
+      0.27027499999999977
+    ],
+    "medianMs": 0.27002334000000006,
+    "peakRssMiB": 69.421875
+  },
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.29207083999999994,
+      0.24295915999999992,
+      0.23538831999999985
+    ],
+    "medianMs": 0.24295915999999992,
+    "peakRssMiB": 71.625
+  },
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.22002831999999997,
+      0.19164,
+      0.21160418000000006
+    ],
+    "medianMs": 0.21160418000000006,
+    "peakRssMiB": 65.5
+  },
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.66520666,
+      0.44449250000000007,
+      0.4665716599999999
+    ],
+    "medianMs": 0.4665716599999999,
+    "peakRssMiB": 83.265625
+  },
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.80996916,
+      0.6254441599999998,
+      0.6292400000000004
+    ],
+    "medianMs": 0.6292400000000004,
+    "peakRssMiB": 100.84375
+  },
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.8230350000000002,
+      0.6117208399999998,
+      0.59056916
+    ],
+    "medianMs": 0.6117208399999998,
+    "peakRssMiB": 104.453125
+  },
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.6037299999999999,
+      0.45627831999999985,
+      0.4444541799999999
+    ],
+    "medianMs": 0.45627831999999985,
+    "peakRssMiB": 102.90625
+  },
+  {
+    "round": 0,
+    "fixture": "tiny",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      1.01257916,
+      0.7012600000000003,
+      0.6811208399999998
+    ],
+    "medianMs": 0.7012600000000003,
+    "peakRssMiB": 107.921875
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.395187500000006,
+      43.131812499999995,
+      42.908270499999986
+    ],
+    "medianMs": 43.131812499999995,
+    "peakRssMiB": 98.734375
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      61.886812500000005,
+      61.96725000000001,
+      68.84883350000004
+    ],
+    "medianMs": 61.96725000000001,
+    "peakRssMiB": 79.53125
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.946562499999985,
+      43.598625,
+      43.31958350000002
+    ],
+    "medianMs": 43.598625,
+    "peakRssMiB": 89.40625
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      112.2121875,
+      103.48166650000002,
+      100.66508349999998
+    ],
+    "medianMs": 103.48166650000002,
+    "peakRssMiB": 143.015625
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      49.22464599999999,
+      46.971750000000014,
+      49.062667000000005
+    ],
+    "medianMs": 49.062667000000005,
+    "peakRssMiB": 97.65625
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      68.34937500000001,
+      67.6701875,
+      67.71420799999999
+    ],
+    "medianMs": 67.71420799999999,
+    "peakRssMiB": 90.484375
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      46.94647900000001,
+      47.25956249999999,
+      46.94304200000002
+    ],
+    "medianMs": 46.94647900000001,
+    "peakRssMiB": 104.203125
+  },
+  {
+    "round": 0,
+    "fixture": "narrow",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      104.92000000000002,
+      104.11462499999999,
+      107.02212499999996
+    ],
+    "medianMs": 104.92000000000002,
+    "peakRssMiB": 156.65625
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.067687500000005,
+      37.665437499999996,
+      38.78789600000002
+    ],
+    "medianMs": 38.067687500000005,
+    "peakRssMiB": 170.734375
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      62.13827100000002,
+      62.79177099999998,
+      60.886041500000005
+    ],
+    "medianMs": 62.13827100000002,
+    "peakRssMiB": 117.578125
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      47.28783349999999,
+      46.29897949999997,
+      51.67833350000001
+    ],
+    "medianMs": 47.28783349999999,
+    "peakRssMiB": 138.078125
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      88.0761875,
+      67.49783350000001,
+      66.5281875
+    ],
+    "medianMs": 67.49783350000001,
+    "peakRssMiB": 153.875
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      106.05962499999998,
+      102.4654165,
+      102.73325
+    ],
+    "medianMs": 102.73325,
+    "peakRssMiB": 177.671875
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      106.18868749999999,
+      106.65604199999996,
+      105.40270849999996
+    ],
+    "medianMs": 106.18868749999999,
+    "peakRssMiB": 109.65625
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      105.69910450000003,
+      105.966771,
+      114.32989599999996
+    ],
+    "medianMs": 105.966771,
+    "peakRssMiB": 123.3125
+  },
+  {
+    "round": 0,
+    "fixture": "wide",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      110.5691665,
+      109.7235,
+      112.78547950000001
+    ],
+    "medianMs": 110.5691665,
+    "peakRssMiB": 136.34375
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.2940983399999999,
+      0.25801668000000005,
+      0.2505891599999998
+    ],
+    "medianMs": 0.25801668000000005,
+    "peakRssMiB": 71.625
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.21039000000000002,
+      0.1853349999999999,
+      0.19602581999999985
+    ],
+    "medianMs": 0.19602581999999985,
+    "peakRssMiB": 65.671875
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.65651668,
+      0.46982416,
+      0.4158791599999998
+    ],
+    "medianMs": 0.46982416,
+    "peakRssMiB": 83.171875
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.25319834,
+      0.24247084000000002,
+      0.23453832000000005
+    ],
+    "medianMs": 0.24247084000000002,
+    "peakRssMiB": 69.5
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.83266168,
+      0.5706641800000003,
+      0.6247325
+    ],
+    "medianMs": 0.6247325,
+    "peakRssMiB": 108.21875
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.69158084,
+      0.42596334000000013,
+      0.4788941600000001
+    ],
+    "medianMs": 0.4788941600000001,
+    "peakRssMiB": 103
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      1.0642150000000001,
+      0.7274658399999998,
+      0.65628916
+    ],
+    "medianMs": 0.7274658399999998,
+    "peakRssMiB": 104.046875
+  },
+  {
+    "round": 1,
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7617233399999997,
+      0.5988391799999997,
+      0.5998674999999998
+    ],
+    "medianMs": 0.5998674999999998,
+    "peakRssMiB": 110.484375
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      62.645875000000004,
+      62.82820799999999,
+      62.72791649999999
+    ],
+    "medianMs": 62.72791649999999,
+    "peakRssMiB": 79.40625
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.28643749999999,
+      43.4849165,
+      43.838832999999994
+    ],
+    "medianMs": 43.838832999999994,
+    "peakRssMiB": 89.421875
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      102.52225000000001,
+      105.91775000000001,
+      101.89329150000003
+    ],
+    "medianMs": 102.52225000000001,
+    "peakRssMiB": 145.8125
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      43.00322900000002,
+      43.193521000000004,
+      42.2734375
+    ],
+    "medianMs": 43.00322900000002,
+    "peakRssMiB": 96.40625
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      68.8614585,
+      68.77141649999999,
+      68.14825000000002
+    ],
+    "medianMs": 68.77141649999999,
+    "peakRssMiB": 90.390625
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      49.400896,
+      49.09156250000001,
+      47.805375000000026
+    ],
+    "medianMs": 49.09156250000001,
+    "peakRssMiB": 100.828125
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      105.72566700000002,
+      106.38683300000002,
+      108.91077100000001
+    ],
+    "medianMs": 106.38683300000002,
+    "peakRssMiB": 158.90625
+  },
+  {
+    "round": 1,
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      49.391020999999995,
+      47.359999999999985,
+      46.46054150000003
+    ],
+    "medianMs": 47.359999999999985,
+    "peakRssMiB": 99.375
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      63.082499999999996,
+      63.43354150000002,
+      61.401770500000026
+    ],
+    "medianMs": 63.082499999999996,
+    "peakRssMiB": 118
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      46.413666500000005,
+      45.99170849999999,
+      49.12950000000001
+    ],
+    "medianMs": 46.413666500000005,
+    "peakRssMiB": 139.234375
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      74.8646875,
+      66.26197950000002,
+      69.2912705
+    ],
+    "medianMs": 69.2912705,
+    "peakRssMiB": 152.765625
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.564896000000005,
+      38.02825,
+      39.076708499999995
+    ],
+    "medianMs": 38.564896000000005,
+    "peakRssMiB": 186.578125
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      108.72585449999997,
+      114.66375,
+      106.08143750000005
+    ],
+    "medianMs": 108.72585449999997,
+    "peakRssMiB": 111.109375
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      107.6450625,
+      105.95958350000001,
+      107.232729
+    ],
+    "medianMs": 107.232729,
+    "peakRssMiB": 123.234375
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      110.59856249999999,
+      107.98839600000002,
+      107.90168749999998
+    ],
+    "medianMs": 107.98839600000002,
+    "peakRssMiB": 141.46875
+  },
+  {
+    "round": 1,
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      103.82766649999999,
+      103.64012499999995,
+      103.39354150000003
+    ],
+    "medianMs": 103.64012499999995,
+    "peakRssMiB": 173.5
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.22131417999999997,
+      0.19090834,
+      0.18435832000000005
+    ],
+    "medianMs": 0.19090834,
+    "peakRssMiB": 65.609375
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.6471658400000001,
+      0.45629999999999993,
+      0.40305915999999997
+    ],
+    "medianMs": 0.45629999999999993,
+    "peakRssMiB": 83.375
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.25290499999999994,
+      0.24537166,
+      0.23525666
+    ],
+    "medianMs": 0.24537166,
+    "peakRssMiB": 69.34375
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 6535,
+    "sha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+    "samplesMs": [
+      0.28493999999999997,
+      0.2593925,
+      0.2386666599999998
+    ],
+    "medianMs": 0.2593925,
+    "peakRssMiB": 71.609375
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.6319091799999998,
+      0.46138333999999986,
+      0.44164417999999983
+    ],
+    "medianMs": 0.46138333999999986,
+    "peakRssMiB": 99.34375
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      1.04613168,
+      0.7356024999999997,
+      0.67184166
+    ],
+    "medianMs": 0.7356024999999997,
+    "peakRssMiB": 109.140625
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 793,
+    "sha256": "dd8f9650826b8f15c5cde0689194b685450e671773e973a528afc264f8470803",
+    "samplesMs": [
+      0.7443991600000001,
+      0.5774608399999996,
+      0.6076875000000002
+    ],
+    "medianMs": 0.6076875000000002,
+    "peakRssMiB": 106.515625
+  },
+  {
+    "round": 2,
+    "fixture": "tiny",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 797,
+    "sha256": "cc4486dedff66621d61b464f20084952af92f89cd303422ea863cf0384134cf8",
+    "samplesMs": [
+      0.7677875000000001,
+      0.5736591600000003,
+      0.5790866600000004
+    ],
+    "medianMs": 0.5790866600000004,
+    "peakRssMiB": 104.03125
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      44.97149999999999,
+      44.284854499999994,
+      44.4915
+    ],
+    "medianMs": 44.4915,
+    "peakRssMiB": 89.90625
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      102.212583,
+      104.8560205,
+      103.87802049999999
+    ],
+    "medianMs": 103.87802049999999,
+    "peakRssMiB": 144.734375
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      48.95810399999999,
+      42.10906250000002,
+      42.29445849999999
+    ],
+    "medianMs": 42.29445849999999,
+    "peakRssMiB": 98.96875
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 2634697,
+    "sha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+    "samplesMs": [
+      62.27064600000001,
+      62.1163545,
+      62.53543750000003
+    ],
+    "medianMs": 62.27064600000001,
+    "peakRssMiB": 78.84375
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      47.93133350000001,
+      48.31885399999999,
+      48.236354000000006
+    ],
+    "medianMs": 48.236354000000006,
+    "peakRssMiB": 100.15625
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      107.92170850000002,
+      112.587875,
+      110.28845850000005
+    ],
+    "medianMs": 110.28845850000005,
+    "peakRssMiB": 150.34375
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 968376,
+    "sha256": "605c0f7311f359a7c1d42fa077b5fb739f23692d525a345477b6c715170d80a1",
+    "samplesMs": [
+      48.52683300000001,
+      47.25645850000001,
+      46.391479000000004
+    ],
+    "medianMs": 47.25645850000001,
+    "peakRssMiB": 100.453125
+  },
+  {
+    "round": 2,
+    "fixture": "narrow",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 968380,
+    "sha256": "d60cbb077aa359cd32280e2dadf8add6c3abf6b633a8de4239d093f29dd918b5",
+    "samplesMs": [
+      71.8299585,
+      68.27772949999999,
+      68.41708349999999
+    ],
+    "medianMs": 68.41708349999999,
+    "peakRssMiB": 89.8125
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      45.76479149999999,
+      47.149167000000006,
+      49.52795850000001
+    ],
+    "medianMs": 47.149167000000006,
+    "peakRssMiB": 140.046875
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "csv-stringify",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      75.06829150000002,
+      67.59224999999998,
+      68.212896
+    ],
+    "medianMs": 68.212896,
+    "peakRssMiB": 150.875
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      38.3023955,
+      37.512604499999995,
+      39.678729000000004
+    ],
+    "medianMs": 38.3023955,
+    "peakRssMiB": 178.671875
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "none",
+    "bytes": 14619815,
+    "sha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+    "samplesMs": [
+      62.5578125,
+      62.857,
+      61.54608350000001
+    ],
+    "medianMs": 62.5578125,
+    "peakRssMiB": 118.484375
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "js-stream",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      104.85327049999998,
+      104.57239600000003,
+      104.600458
+    ],
+    "medianMs": 104.600458,
+    "peakRssMiB": 123.84375
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "csv-stringify",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      110.09900000000002,
+      108.22412500000002,
+      109.00239600000003
+    ],
+    "medianMs": 109.00239600000003,
+    "peakRssMiB": 141.375
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "exportlite-table",
+    "compression": "zip",
+    "bytes": 3999471,
+    "sha256": "d797a07dc65363836b1de9fa68192ed0338008c47afb071cfccfd52e8f4633ed",
+    "samplesMs": [
+      103.08358350000003,
+      102.01066650000001,
+      103.1977915
+    ],
+    "medianMs": 103.08358350000003,
+    "peakRssMiB": 173.5
+  },
+  {
+    "round": 2,
+    "fixture": "wide",
+    "method": "exportlite-query",
+    "compression": "zip",
+    "bytes": 3999475,
+    "sha256": "a11fa6ddb435ef6a7e718ca97ddc7eba718c512f21781f442eee5732ddd082d6",
+    "samplesMs": [
+      106.91447900000003,
+      107.44854199999997,
+      105.37239599999992
+    ],
+    "medianMs": 106.91447900000003,
+    "peakRssMiB": 110.34375
+  }
+]

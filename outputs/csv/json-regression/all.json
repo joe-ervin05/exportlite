@@ -1,0 +1,2306 @@
+[
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.26645290999999993,
+      0.21472624999999992,
+      0.20419250000000005
+    ],
+    "medianMs": 0.21472624999999992,
+    "peakRssMiB": 94.28125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.26444458000000004,
+      0.21191625000000003,
+      0.20300207999999997
+    ],
+    "medianMs": 0.21191625000000003,
+    "peakRssMiB": 93.4375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.8788304199999999,
+      0.6282541699999998,
+      0.55061208
+    ],
+    "medianMs": 0.6282541699999998,
+    "peakRssMiB": 130.28125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.86204083,
+      0.6904962499999999,
+      0.6224712499999998
+    ],
+    "medianMs": 0.6904962499999999,
+    "peakRssMiB": 125.015625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.28726709,
+      0.22722667000000002,
+      0.2013425000000001
+    ],
+    "medianMs": 0.22722667000000002,
+    "peakRssMiB": 87.375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.2931045900000001,
+      0.24327208,
+      0.20318708000000002
+    ],
+    "medianMs": 0.24327208,
+    "peakRssMiB": 87.078125
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.83186333,
+      0.64381,
+      0.5706225000000004
+    ],
+    "medianMs": 0.64381,
+    "peakRssMiB": 132.6875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.93942625,
+      2.33236208,
+      1.4843749999999993
+    ],
+    "medianMs": 1.4843749999999993,
+    "peakRssMiB": 123.265625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.2782858299999998,
+      0.2360062499999998,
+      0.21123499999999978
+    ],
+    "medianMs": 0.2360062499999998,
+    "peakRssMiB": 215.953125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.27649833,
+      0.20883874999999988,
+      0.20508458000000018
+    ],
+    "medianMs": 0.20883874999999988,
+    "peakRssMiB": 215.75
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.80512541,
+      0.6050091700000002,
+      0.60975958
+    ],
+    "medianMs": 0.60975958,
+    "peakRssMiB": 230.734375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.8796304099999998,
+      0.5854837500000002,
+      0.6240166699999997
+    ],
+    "medianMs": 0.6240166699999997,
+    "peakRssMiB": 234.203125
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.35124167,
+      0.28160708999999995,
+      0.28929040999999983
+    ],
+    "medianMs": 0.28929040999999983,
+    "peakRssMiB": 215.390625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.3550804199999999,
+      0.2872754100000003,
+      0.26763791000000026
+    ],
+    "medianMs": 0.2872754100000003,
+    "peakRssMiB": 215.84375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8928020899999995,
+      0.68405958,
+      0.6668604200000005
+    ],
+    "medianMs": 0.68405958,
+    "peakRssMiB": 234.125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.8922325000000001,
+      0.6846308400000004,
+      0.6474654199999997
+    ],
+    "medianMs": 0.6846308400000004,
+    "peakRssMiB": 225.65625
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      19.152499999999996,
+      18.399146000000002,
+      18.761916999999997
+    ],
+    "medianMs": 18.761916999999997,
+    "peakRssMiB": 112.765625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      20.803167000000002,
+      24.912771000000006,
+      19.105625000000003
+    ],
+    "medianMs": 20.803167000000002,
+    "peakRssMiB": 115.9375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      30.828062499999987,
+      30.571812500000007,
+      29.279999999999973
+    ],
+    "medianMs": 30.571812500000007,
+    "peakRssMiB": 108.609375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      30.772853999999995,
+      29.529645999999985,
+      29.693250000000006
+    ],
+    "medianMs": 29.693250000000006,
+    "peakRssMiB": 109.359375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      40.759375000000006,
+      39.250333499999996,
+      39.16247900000002
+    ],
+    "medianMs": 39.250333499999996,
+    "peakRssMiB": 80.4375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      39.48964599999999,
+      39.0124165,
+      39.5213335
+    ],
+    "medianMs": 39.48964599999999,
+    "peakRssMiB": 81.171875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      52.505104,
+      53.5724165,
+      46.952646000000016
+    ],
+    "medianMs": 52.505104,
+    "peakRssMiB": 89.515625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      46.885187500000015,
+      47.05812499999999,
+      46.60368750000001
+    ],
+    "medianMs": 46.885187500000015,
+    "peakRssMiB": 92.21875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      20.191708000000006,
+      18.6554165,
+      19.666417000000024
+    ],
+    "medianMs": 19.666417000000024,
+    "peakRssMiB": 221.171875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      20.154708499999998,
+      18.625270999999998,
+      18.816104499999994
+    ],
+    "medianMs": 18.816104499999994,
+    "peakRssMiB": 219.75
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      29.07162500000001,
+      29.656416499999978,
+      28.310374999999965
+    ],
+    "medianMs": 29.07162500000001,
+    "peakRssMiB": 228.921875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      29.451374999999985,
+      30.2131665,
+      29.05158300000005
+    ],
+    "medianMs": 29.451374999999985,
+    "peakRssMiB": 231.96875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      39.75506250000001,
+      38.793728999999985,
+      38.870292000000006
+    ],
+    "medianMs": 38.870292000000006,
+    "peakRssMiB": 215.84375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      40.35922949999997,
+      41.457374999999956,
+      39.42154149999999
+    ],
+    "medianMs": 40.35922949999997,
+    "peakRssMiB": 216.046875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      46.95829199999997,
+      47.69912499999998,
+      46.826479000000006
+    ],
+    "medianMs": 46.95829199999997,
+    "peakRssMiB": 216.046875
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      47.183875,
+      46.59979149999998,
+      46.756854499999974
+    ],
+    "medianMs": 46.756854499999974,
+    "peakRssMiB": 215.875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      23.380646,
+      22.348666499999993,
+      22.21416699999999
+    ],
+    "medianMs": 22.348666499999993,
+    "peakRssMiB": 170.453125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      22.332103999999994,
+      22.014145999999997,
+      23.665354000000008
+    ],
+    "medianMs": 22.332103999999994,
+    "peakRssMiB": 170.421875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      103.21977100000001,
+      101.289083,
+      103.65468749999997
+    ],
+    "medianMs": 103.21977100000001,
+    "peakRssMiB": 173.125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      103.63343749999999,
+      103.16010449999999,
+      102.72591699999998
+    ],
+    "medianMs": 103.16010449999999,
+    "peakRssMiB": 169.375
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      48.933875,
+      47.592895999999996,
+      47.929854000000006
+    ],
+    "medianMs": 47.929854000000006,
+    "peakRssMiB": 119.328125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      46.91243750000001,
+      47.3021875,
+      48.64081250000001
+    ],
+    "medianMs": 47.3021875,
+    "peakRssMiB": 117.125
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      116.46741700000001,
+      124.022354,
+      115.059417
+    ],
+    "medianMs": 116.46741700000001,
+    "peakRssMiB": 112.90625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      110.28697899999997,
+      110.52585399999998,
+      110.27962499999995
+    ],
+    "medianMs": 110.28697899999997,
+    "peakRssMiB": 109.171875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      23.094333000000006,
+      22.951999999999998,
+      23.16081250000002
+    ],
+    "medianMs": 23.094333000000006,
+    "peakRssMiB": 276.59375
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      24.0499375,
+      23.33918750000001,
+      23.167167000000006
+    ],
+    "medianMs": 23.33918750000001,
+    "peakRssMiB": 269.171875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      103.72637499999996,
+      103.79004150000003,
+      102.7625415
+    ],
+    "medianMs": 103.72637499999996,
+    "peakRssMiB": 251.65625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      104.18183350000004,
+      103.93079150000005,
+      104.60362499999997
+    ],
+    "medianMs": 104.18183350000004,
+    "peakRssMiB": 251.21875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      50.75906250000003,
+      48.69016700000003,
+      48.85147899999998
+    ],
+    "medianMs": 48.85147899999998,
+    "peakRssMiB": 246.765625
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      49.758020499999986,
+      47.89104149999997,
+      47.3035835
+    ],
+    "medianMs": 47.89104149999997,
+    "peakRssMiB": 251.796875
+  },
+  {
+    "round": 0,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      109.93456250000003,
+      106.28972900000002,
+      107.01075000000003
+    ],
+    "medianMs": 107.01075000000003,
+    "peakRssMiB": 244.28125
+  },
+  {
+    "round": 0,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      112.301083,
+      108.98845800000004,
+      106.20325000000003
+    ],
+    "medianMs": 108.98845800000004,
+    "peakRssMiB": 244.265625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.27240583,
+      0.22548416000000004,
+      0.20240875000000003
+    ],
+    "medianMs": 0.22548416000000004,
+    "peakRssMiB": 94.90625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.26714250000000006,
+      0.21964791999999989,
+      0.19335750000000004
+    ],
+    "medianMs": 0.21964791999999989,
+    "peakRssMiB": 93.375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.8073670799999999,
+      0.6200520800000001,
+      0.5787233299999996
+    ],
+    "medianMs": 0.6200520800000001,
+    "peakRssMiB": 130.171875
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.8764574999999999,
+      0.7011783300000002,
+      0.67586333
+    ],
+    "medianMs": 0.7011783300000002,
+    "peakRssMiB": 126.046875
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.28954209,
+      0.22528333000000003,
+      0.21787458
+    ],
+    "medianMs": 0.22528333000000003,
+    "peakRssMiB": 87.359375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.2858195800000001,
+      0.24860957999999997,
+      0.20038750000000008
+    ],
+    "medianMs": 0.24860957999999997,
+    "peakRssMiB": 87.203125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      1.4511400000000003,
+      0.7016495799999999,
+      0.6589920799999999
+    ],
+    "medianMs": 0.7016495799999999,
+    "peakRssMiB": 134.984375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.9105708299999999,
+      0.67744291,
+      0.6434591699999999
+    ],
+    "medianMs": 0.67744291,
+    "peakRssMiB": 130.09375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.2834675000000004,
+      0.2303533299999998,
+      0.21201915999999982
+    ],
+    "medianMs": 0.2303533299999998,
+    "peakRssMiB": 215.6875
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.2778391700000003,
+      0.2322754199999997,
+      0.30512542
+    ],
+    "medianMs": 0.2778391700000003,
+    "peakRssMiB": 215.90625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      1.1189149999999994,
+      0.8775854199999997,
+      0.6382279200000005
+    ],
+    "medianMs": 0.8775854199999997,
+    "peakRssMiB": 231.5625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      1.1042700000000003,
+      0.7302354200000002,
+      0.6313204200000007
+    ],
+    "medianMs": 0.7302354200000002,
+    "peakRssMiB": 243.65625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.36065208000000043,
+      0.2848258399999997,
+      0.26559665999999993
+    ],
+    "medianMs": 0.2848258399999997,
+    "peakRssMiB": 215.90625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.3614175,
+      0.28481291999999997,
+      0.2823487500000004
+    ],
+    "medianMs": 0.28481291999999997,
+    "peakRssMiB": 216.078125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      1.16192791,
+      0.7434708300000006,
+      0.68226
+    ],
+    "medianMs": 0.7434708300000006,
+    "peakRssMiB": 223.078125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      1.2107224999999995,
+      0.7613416700000005,
+      0.8699862500000006
+    ],
+    "medianMs": 0.8699862500000006,
+    "peakRssMiB": 224.5625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      23.341208,
+      19.791021,
+      20.061208499999992
+    ],
+    "medianMs": 20.061208499999992,
+    "peakRssMiB": 114.515625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      19.163875000000004,
+      18.336292,
+      18.660521000000003
+    ],
+    "medianMs": 18.660521000000003,
+    "peakRssMiB": 112.609375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      33.167312499999994,
+      31.853687500000007,
+      30.479437500000017
+    ],
+    "medianMs": 31.853687500000007,
+    "peakRssMiB": 108.140625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      30.8591045,
+      30.034916499999994,
+      31.314062499999977
+    ],
+    "medianMs": 30.8591045,
+    "peakRssMiB": 122.28125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      41.041082999999986,
+      40.27912499999999,
+      39.98222949999999
+    ],
+    "medianMs": 40.27912499999999,
+    "peakRssMiB": 80.875
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      39.49525,
+      50.68849999999999,
+      94.3868335
+    ],
+    "medianMs": 50.68849999999999,
+    "peakRssMiB": 80.703125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      47.73872949999999,
+      48.71154149999998,
+      47.35016649999997
+    ],
+    "medianMs": 47.73872949999999,
+    "peakRssMiB": 91.4375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      48.012208000000015,
+      47.40287500000002,
+      47.228666499999974
+    ],
+    "medianMs": 47.40287500000002,
+    "peakRssMiB": 90.578125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      20.089167000000003,
+      18.86514600000001,
+      19.246770499999997
+    ],
+    "medianMs": 19.246770499999997,
+    "peakRssMiB": 218.90625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      20.826145499999996,
+      19.321167000000003,
+      20.898729499999973
+    ],
+    "medianMs": 20.826145499999996,
+    "peakRssMiB": 223.375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      31.1774585,
+      33.0521875,
+      31.3429165
+    ],
+    "medianMs": 31.3429165,
+    "peakRssMiB": 232.59375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      30.856937499999987,
+      31.601083500000016,
+      36.7781665
+    ],
+    "medianMs": 31.601083500000016,
+    "peakRssMiB": 228.9375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      43.07408350000003,
+      41.0906875,
+      40.22941700000001
+    ],
+    "medianMs": 41.0906875,
+    "peakRssMiB": 216.171875
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      40.723479499999996,
+      41.498917000000006,
+      48.586374999999975
+    ],
+    "medianMs": 41.498917000000006,
+    "peakRssMiB": 216.078125
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      48.77072949999996,
+      48.33381250000002,
+      47.93033350000002
+    ],
+    "medianMs": 48.33381250000002,
+    "peakRssMiB": 215.890625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      48.194646000000034,
+      48.18152100000003,
+      47.250125000000025
+    ],
+    "medianMs": 48.18152100000003,
+    "peakRssMiB": 215.625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      24.104333499999996,
+      28.435062499999987,
+      26.371875000000017
+    ],
+    "medianMs": 26.371875000000017,
+    "peakRssMiB": 194.09375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      23.451583499999998,
+      22.3285415,
+      26.013542000000015
+    ],
+    "medianMs": 23.451583499999998,
+    "peakRssMiB": 178.34375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      109.27533350000002,
+      102.83114599999999,
+      103.87337500000001
+    ],
+    "medianMs": 103.87337500000001,
+    "peakRssMiB": 173.390625
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      108.55252100000001,
+      108.160729,
+      123.00100000000003
+    ],
+    "medianMs": 108.55252100000001,
+    "peakRssMiB": 173.46875
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      47.840374999999995,
+      48.3289795,
+      49.73027050000002
+    ],
+    "medianMs": 48.3289795,
+    "peakRssMiB": 117.34375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      50.364354000000006,
+      49.22987499999999,
+      50.35470799999999
+    ],
+    "medianMs": 50.35470799999999,
+    "peakRssMiB": 117.015625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      121.31799999999998,
+      110.34508299999999,
+      108.61250000000007
+    ],
+    "medianMs": 110.34508299999999,
+    "peakRssMiB": 112.203125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      111.63539599999999,
+      110.44772949999998,
+      138.552771
+    ],
+    "medianMs": 111.63539599999999,
+    "peakRssMiB": 109.59375
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      23.25245849999999,
+      23.24906249999998,
+      24.889395499999978
+    ],
+    "medianMs": 23.25245849999999,
+    "peakRssMiB": 280.28125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      23.301020499999993,
+      25.16689600000001,
+      25.3236665
+    ],
+    "medianMs": 25.16689600000001,
+    "peakRssMiB": 277.625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      102.80275,
+      102.67449999999997,
+      103.36750000000006
+    ],
+    "medianMs": 102.80275,
+    "peakRssMiB": 247.078125
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      102.51175,
+      102.81845800000002,
+      105.10225000000003
+    ],
+    "medianMs": 102.81845800000002,
+    "peakRssMiB": 248.65625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      47.44595849999999,
+      47.50568750000002,
+      47.14410400000003
+    ],
+    "medianMs": 47.44595849999999,
+    "peakRssMiB": 242.9375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      47.98475000000002,
+      47.55212499999999,
+      47.260478999999975
+    ],
+    "medianMs": 47.55212499999999,
+    "peakRssMiB": 246.625
+  },
+  {
+    "round": 1,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      125.69747899999999,
+      109.8286875,
+      107.4324795
+    ],
+    "medianMs": 109.8286875,
+    "peakRssMiB": 246.375
+  },
+  {
+    "round": 1,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      106.573083,
+      111.22870850000004,
+      111.25341700000001
+    ],
+    "medianMs": 111.22870850000004,
+    "peakRssMiB": 245.015625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.27205666,
+      0.21536249999999996,
+      0.20904082999999984
+    ],
+    "medianMs": 0.21536249999999996,
+    "peakRssMiB": 95
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.27380333,
+      0.21323625000000007,
+      0.21015292000000002
+    ],
+    "medianMs": 0.21323625000000007,
+    "peakRssMiB": 92.8125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.8240212499999999,
+      0.622245,
+      0.5747816700000001
+    ],
+    "medianMs": 0.622245,
+    "peakRssMiB": 132.609375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.79694416,
+      0.6054670799999999,
+      0.5701520900000002
+    ],
+    "medianMs": 0.6054670799999999,
+    "peakRssMiB": 132.703125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.28528792,
+      0.21866833999999996,
+      0.20282583
+    ],
+    "medianMs": 0.21866833999999996,
+    "peakRssMiB": 87.671875
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.27563333,
+      0.22703958999999999,
+      0.20289666000000012
+    ],
+    "medianMs": 0.22703958999999999,
+    "peakRssMiB": 87.5
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.95671417,
+      0.7865970800000003,
+      1.059685
+    ],
+    "medianMs": 0.95671417,
+    "peakRssMiB": 126.546875
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.9148908299999999,
+      0.7650020900000001,
+      0.7055124999999998
+    ],
+    "medianMs": 0.7650020900000001,
+    "peakRssMiB": 127.015625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.2628595799999999,
+      0.21959959000000026,
+      0.2169858400000004
+    ],
+    "medianMs": 0.21959959000000026,
+    "peakRssMiB": 215.953125
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.3191558299999997,
+      0.23173666999999967,
+      0.22831582999999966
+    ],
+    "medianMs": 0.23173666999999967,
+    "peakRssMiB": 215.984375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.9125733299999996,
+      0.6563258300000001,
+      0.6244200000000001
+    ],
+    "medianMs": 0.6563258300000001,
+    "peakRssMiB": 237.40625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 910,
+    "sha256": "da3ab4a748345b9d917192039cea21f38bd324b8e5cce487846b8eb5006022b2",
+    "samplesMs": [
+      0.8595800000000002,
+      0.5900599999999997,
+      0.5782445799999993
+    ],
+    "medianMs": 0.5900599999999997,
+    "peakRssMiB": 230.890625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.3646570800000001,
+      0.29329292000000007,
+      0.2693233399999997
+    ],
+    "medianMs": 0.29329292000000007,
+    "peakRssMiB": 216.015625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 9721,
+    "sha256": "f194b4a4556e242bc40f7292d2b0e8af46024875a9615df01c119572654f76ef",
+    "samplesMs": [
+      0.37251499999999965,
+      0.28040459,
+      0.2680016599999999
+    ],
+    "medianMs": 0.28040459,
+    "peakRssMiB": 215.390625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.98634459,
+      0.7051329200000004,
+      0.6443370800000002
+    ],
+    "medianMs": 0.7051329200000004,
+    "peakRssMiB": 231.0625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "tiny",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35",
+    "samplesMs": [
+      0.9018029100000001,
+      0.6592516699999998,
+      0.66349333
+    ],
+    "medianMs": 0.66349333,
+    "peakRssMiB": 229.21875
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      19.206541499999993,
+      18.546417000000005,
+      18.96350000000001
+    ],
+    "medianMs": 18.96350000000001,
+    "peakRssMiB": 113.6875
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      18.8679165,
+      18.203146000000004,
+      18.267958500000006
+    ],
+    "medianMs": 18.267958500000006,
+    "peakRssMiB": 112.734375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      30.244771,
+      29.179604000000012,
+      28.646708000000018
+    ],
+    "medianMs": 29.179604000000012,
+    "peakRssMiB": 107.890625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      30.281999999999996,
+      28.9091875,
+      28.116145999999986
+    ],
+    "medianMs": 28.9091875,
+    "peakRssMiB": 108.28125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      41.88820849999999,
+      38.63968750000001,
+      38.14518749999999
+    ],
+    "medianMs": 38.63968750000001,
+    "peakRssMiB": 81.140625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      39.47408349999999,
+      39.19847899999999,
+      39.97441649999999
+    ],
+    "medianMs": 39.47408349999999,
+    "peakRssMiB": 80.46875
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      47.15741700000001,
+      46.6877915,
+      46.39835400000001
+    ],
+    "medianMs": 46.6877915,
+    "peakRssMiB": 90.375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      47.27274999999999,
+      47.1195625,
+      47.309270999999995
+    ],
+    "medianMs": 47.27274999999999,
+    "peakRssMiB": 90.65625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      19.426500000000004,
+      18.541729500000002,
+      19.104270500000013
+    ],
+    "medianMs": 19.104270500000013,
+    "peakRssMiB": 220.1875
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      19.751687500000003,
+      18.575166999999993,
+      19.040791499999983
+    ],
+    "medianMs": 19.040791499999983,
+    "peakRssMiB": 221.65625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      28.615771000000024,
+      30.069125000000014,
+      28.82989600000002
+    ],
+    "medianMs": 28.82989600000002,
+    "peakRssMiB": 232.390625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 1065312,
+    "sha256": "30ea94ec37eccbbf8c5de3147b4c137e8399f5f66984156490ec20d351c894e2",
+    "samplesMs": [
+      36.19902050000002,
+      33.0415625,
+      28.969250000000045
+    ],
+    "medianMs": 33.0415625,
+    "peakRssMiB": 232.890625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      39.79518749999997,
+      39.468999999999994,
+      39.72731249999998
+    ],
+    "medianMs": 39.72731249999998,
+    "peakRssMiB": 215.78125
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 4113237,
+    "sha256": "8190f9fda4038ff68c76279eaefc5e03048c9ee5431fb86a7a976b6ed95131f0",
+    "samplesMs": [
+      41.138791500000025,
+      42.422333500000036,
+      41.60985400000004
+    ],
+    "medianMs": 41.60985400000004,
+    "peakRssMiB": 215.859375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      47.71908350000001,
+      46.63012500000002,
+      46.75962500000003
+    ],
+    "medianMs": 46.75962500000003,
+    "peakRssMiB": 215.875
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "narrow",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 1065316,
+    "sha256": "8340905dc4214a2d8d2fc595587f19fd0f6d91118700cce94d6fe5d4d3fc45e4",
+    "samplesMs": [
+      47.338750000000005,
+      48.362874999999974,
+      50.402604
+    ],
+    "medianMs": 48.362874999999974,
+    "peakRssMiB": 216.0625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      24.046833499999998,
+      22.9214585,
+      21.9681875
+    ],
+    "medianMs": 22.9214585,
+    "peakRssMiB": 187.375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      22.734979000000003,
+      21.735479499999997,
+      21.835000000000008
+    ],
+    "medianMs": 21.835000000000008,
+    "peakRssMiB": 171.140625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      101.90297949999999,
+      101.85339550000003,
+      109.79320849999999
+    ],
+    "medianMs": 101.90297949999999,
+    "peakRssMiB": 177.984375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      104.52710400000004,
+      104.34585450000003,
+      111.52420849999993
+    ],
+    "medianMs": 104.52710400000004,
+    "peakRssMiB": 177.859375
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      47.5986875,
+      47.855125000000015,
+      48.065416500000026
+    ],
+    "medianMs": 47.855125000000015,
+    "peakRssMiB": 118.09375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      52.106125000000006,
+      53.15879199999998,
+      50.19704199999998
+    ],
+    "medianMs": 52.106125000000006,
+    "peakRssMiB": 119.703125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      105.47560399999998,
+      104.80099999999999,
+      104.63325000000003
+    ],
+    "medianMs": 104.80099999999999,
+    "peakRssMiB": 109.859375
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      108.43129149999999,
+      109.472667,
+      106.76974999999999
+    ],
+    "medianMs": 108.43129149999999,
+    "peakRssMiB": 110.046875
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      23.63722900000002,
+      22.84604200000001,
+      22.958958499999994
+    ],
+    "medianMs": 22.958958499999994,
+    "peakRssMiB": 277.46875
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      22.98833350000001,
+      23.366979499999985,
+      24.005499999999984
+    ],
+    "medianMs": 23.366979499999985,
+    "peakRssMiB": 291.765625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      105.35895850000003,
+      103.83450000000005,
+      104.63787500000001
+    ],
+    "medianMs": 104.63787500000001,
+    "peakRssMiB": 251.828125
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-table",
+    "zip": true,
+    "bytes": 4053325,
+    "sha256": "71fc466c66ae023443bcc5adc6f56f2ccc04bd86f0088ebf5bd32d780466b1d8",
+    "samplesMs": [
+      104.22437500000001,
+      104.74239599999999,
+      113.81675000000007
+    ],
+    "medianMs": 104.74239599999999,
+    "peakRssMiB": 247.515625
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      47.689750000000004,
+      47.10137500000002,
+      46.86568749999998
+    ],
+    "medianMs": 47.10137500000002,
+    "peakRssMiB": 251.265625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": false,
+    "bytes": 15094262,
+    "sha256": "f598791466249d06db150352ab3df936ecd19d85fe77825a448ee26c95b3c523",
+    "samplesMs": [
+      47.96531249999998,
+      47.24187499999999,
+      47.09102050000001
+    ],
+    "medianMs": 47.24187499999999,
+    "peakRssMiB": 246.703125
+  },
+  {
+    "round": 2,
+    "variant": "before",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      106.05627100000004,
+      110.45299999999997,
+      114.75847950000002
+    ],
+    "medianMs": 110.45299999999997,
+    "peakRssMiB": 247.15625
+  },
+  {
+    "round": 2,
+    "variant": "after",
+    "fixture": "wide",
+    "method": "drizzle-query",
+    "zip": true,
+    "bytes": 4053329,
+    "sha256": "035a070d5e8361bbfa9bbfd461217b85f8c6e60d8f9dd697ccaf14cc07c26459",
+    "samplesMs": [
+      107.61377100000004,
+      107.82735449999996,
+      106.66356250000001
+    ],
+    "medianMs": 107.61377100000004,
+    "peakRssMiB": 244.109375
+  }
+]

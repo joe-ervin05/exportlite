@@ -1,0 +1,63 @@
+{
+  "node": "v26.12.0",
+  "nodeSha256": "12ccc7c7d8b9b33ac0740fc7c2590d2aba14ccfa0a40f3d3f7a6c4c60c87f07c",
+  "cpu": "Apple M1 Pro",
+  "rounds": 3,
+  "methods": [
+    "exportlite-table",
+    "exportlite-query",
+    "js-stream",
+    "csv-stringify"
+  ],
+  "build": {
+    "cache-B4w5UP3z.mjs": "efb13da06ed206368ed7a52df585bba4f3712ff6757813c984545d8e5561179b",
+    "drizzle.mjs": "019000886d91e281922fe436925b9d6bd4dbbfa02bcb2ad981f4397c1c15811d",
+    "export-turso-ZnFZGoI2.mjs": "5a89fa2e51ed23cf196e48ddae2c15e46753084dfb7ea4195fbd1cf34ae79656",
+    "index.mjs": "bee5a962773975ffe0aec66093de31f5a289c64405d5154f4b808b194cc9b195",
+    "turso.mjs": "b12c315b50534a36031da9a95601e59c758f6ed1dc5e1e5720556a9b27b9eed1",
+    "zip-Cg-WVAA8.mjs": "9ab37db0528f8031b67a8cd5a8db8aa8dc3fc3f94380ea68566ef0760fb44ce8"
+  },
+  "sourceCommitBeforeCsv": "a22c0105e49429b18ac4a3881f4fdfb38e253b08",
+  "fixtures": [
+    {
+      "name": "tiny",
+      "rows": 100,
+      "width": 32,
+      "profile": "repeated",
+      "iterations": 50,
+      "expectedBytes": 6535,
+      "expectedSha256": "209a1848de1bb18f2c9ecfc4103d9b50d25d30cc1fcd090a1d1860505384c978",
+      "sqliteVersion": "3.53.4",
+      "databaseSha256": "9597a3e2e489aa1b206272471819640a7981da8d03edb8be517b4a0dd41ecbc2"
+    },
+    {
+      "name": "narrow",
+      "rows": 50000,
+      "width": 32,
+      "profile": "varied",
+      "iterations": 2,
+      "expectedBytes": 2634697,
+      "expectedSha256": "220790bb239f0129f64bff688f495f6e546eeaf6b65c14fd8301ba3eeee2b3bc",
+      "sqliteVersion": "3.53.4",
+      "databaseSha256": "eca4505d193f3e433f8d314adaee8b4edbfd6546af130d28cdd717810499a497"
+    },
+    {
+      "name": "wide",
+      "rows": 15000,
+      "width": 1024,
+      "profile": "varied",
+      "iterations": 2,
+      "expectedBytes": 14619815,
+      "expectedSha256": "c4d87ea19036317905041492482bbd6bf1b509d2482347b2268b82a60829b4a0",
+      "sqliteVersion": "3.53.4",
+      "databaseSha256": "d6cee24ee7ea0f2f998434f452a37034020b1499ea10adcc3adbd6b72635d149"
+    }
+  ],
+  "versions": {
+    "better-sqlite3": "13.0.3",
+    "csv-stringify": "6.9.0",
+    "csv-parse": "7.0.3",
+    "zip-stream": "7.0.5"
+  },
+  "protocol": "Sequential fresh workers, rotating method order. One hash verification, two warmups, three timed request batches per worker. Median of worker medians, natural GC. Counting Node writable; no disk or HTTP delivery. Whole-process peak RSS includes imports, connection setup, verification and warmups. Same 64 KiB flush target and 2048-row yields. ZIP level 1, memLevel 9, 256 KiB chunks. Plain CSV matches csv-stringify exactly and independently parses to fixture values. ZIP hashes match table/manual/library methods; query ZIP differs by entry name. Query planning and statement preparation included in time; connection/import setup excluded. Full SQLite aggregation is deliberately excluded because CSV production must remain streaming."
+}

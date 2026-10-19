@@ -1,0 +1,26 @@
+
+> exportlite@0.0.0-prototype.1 test:package
+> node scripts/check-package.mjs
+
+Passed packed consumer: bare (runtime and inferred types, ESM/CJS)
+Passed packed consumer: native (runtime and inferred types, ESM/CJS)
+Passed packed consumer: turso (runtime and inferred types, ESM/CJS)
+Passed packed consumer: drizzle-native (runtime and inferred types, ESM/CJS)
+Passed packed consumer: drizzle-turso (runtime and inferred types, ESM/CJS)
+{
+  "node": "v26.12.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "package": "exportlite@0.0.0-prototype.1",
+  "files": 42,
+  "packedBytes": 131880,
+  "sha256": "344cd229806120c0bbbb111838fda460e15994ab3357f065c4f162f186b8b061",
+  "modes": [
+    "bare",
+    "native",
+    "turso",
+    "drizzle-native",
+    "drizzle-turso"
+  ],
+  "checks": "Real npm tarball installs; optional peer absence; ESM/CJS runtime and inferred types; Web/file/Node/ZIP output; local HTTP protocol; metadata and shipped Markdown links."
+}

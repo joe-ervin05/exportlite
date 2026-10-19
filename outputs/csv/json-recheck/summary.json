@@ -1,0 +1,17 @@
+[
+  {
+    "fixture": "tiny",
+    "method": "query",
+    "compression": "zip",
+    "beforeMs": 0.7132924999999998,
+    "afterMs": 0.6590045800000002,
+    "timeChangePercent": -7.610891744971326,
+    "beforeRssMiB": 128.75,
+    "afterRssMiB": 127.4375,
+    "rssChangePercent": -1.019417475728157,
+    "maxBeforeRssMiB": 130.5,
+    "maxAfterRssMiB": 135.0625,
+    "bytes": 914,
+    "sha256": "1c602872f5ea516ae649c2fb65e98d331736d306d90fe554dc0e80b7965a2e35"
+  }
+]
